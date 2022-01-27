@@ -1,9 +1,10 @@
-package no.ntnu.appdevapi;
+package no.ntnu.appdevapi.controller;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import java.util.LinkedList;
 import java.util.List;
+import no.ntnu.appdevapi.model.Product;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

@@ -1,4 +1,4 @@
-package no.ntnu.appdevapi;
+package no.ntnu.appdevapi.model;
 
 import io.swagger.annotations.ApiModelProperty;
 
