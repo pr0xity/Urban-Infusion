@@ -43,7 +43,7 @@ public class ProductController {
    * @return The product matching the index, null otherwise.
    */
   @GetMapping("/{index}")
-  @ApiOperation(value = "Get a specific product.", notes = "Returns the product or null index is invalid.")
+  @ApiOperation(value = "Get a specific product.", notes = "Returns the product or null when index is invalid.")
   public ResponseEntity<Product> get(@ApiParam("Index of the product.") @PathVariable int index) {
     fillListWithProducts();
     ResponseEntity<Product> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -81,16 +81,15 @@ public class ProductController {
    */
   @DeleteMapping("/{index}")
   @ApiIgnore
-  ResponseEntity<String> delete(@PathVariable int index) {
+  public ResponseEntity<String> delete(@PathVariable int index) {
     fillListWithProducts();
     ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    if (index <= 0 && index < products.size()) {
+    if (index >= 0 && index < products.size()) {
       products.remove(index);
       response = new ResponseEntity<>(HttpStatus.OK);
     }
     return response;
   }
-
 
   private void fillListWithProducts() {
     if (products.isEmpty()) {

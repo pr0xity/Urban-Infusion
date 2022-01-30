@@ -7,7 +7,7 @@ public class Product {
   private String name;
   @ApiModelProperty("Price of the product, decimal in NOK.")
   private double price;
-  @ApiModelProperty("Where the product origins from.")
+  @ApiModelProperty("Where the product originates from.")
   private String origin;
   @ApiModelProperty("Some info about the product.")
   private String info;
