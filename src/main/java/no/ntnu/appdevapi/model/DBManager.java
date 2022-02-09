@@ -95,15 +95,43 @@ public class DBManager {
     }
 
     /**
-     * Queries the DB for a user by their user ID.
-     * @param userID the ID of the user.
+     * Queries the DB for a user by their email address.
+     * @param email the email of the user.
      * @return {@code User} from the search result, or {@code null} if no match was found.
      */
-    public User getUserById(int userID) {
+    public User getUserByEmail(String email) {
         User user = null;
         if (connected) {
             try (Statement statement = connection.createStatement()) {
-                ResultSet rs = statement.executeQuery("SELECT * FROM user WHERE id = " + userID + ";");
+                ResultSet rs = statement.executeQuery("SELECT * FROM user WHERE email = " + email + ";");
+                user = new User(
+                        rs.getString("firstname"),
+                        rs.getString("lastname"),
+                        rs.getString("email"),
+                        rs.getString("password"),
+                        rs.getInt("permissionid"));
+                user.setId(rs.getInt("id"));
+                user.setCreatedAt(LocalDateTime.parse(rs.getString("createdat")));
+                user.setUpdatedAt(LocalDateTime.parse(rs.getString("updatedat")));
+                user.setEnabled(rs.getBoolean("enabled"));
+            } catch (SQLException e) {
+                return user;
+            }
+        }
+        return user;
+    }
+
+    /**
+     * Queries the DB for a User having both email and password matching the input.
+     * @param email the email of the user
+     * @param password the password of the user
+     * @return {@code User} from the search result, or {@code null} if no match was found.
+     */
+    public User login(String email, String password) {
+        User user = null;
+        if (connected) {
+            try (Statement statement = connection.createStatement()) {
+                ResultSet rs = statement.executeQuery("SELECT * FROM user WHERE email = " + email + " AND password = " + password + ";");
                 user = new User(
                         rs.getString("firstname"),
                         rs.getString("lastname"),
