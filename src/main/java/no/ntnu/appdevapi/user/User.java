@@ -1,10 +1,14 @@
-package no.ntnu.appdevapi.model;
+package no.ntnu.appdevapi.user;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
-
+@Entity
+@Table(name = "users")
 public class User {
-  private Integer id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private int id;
   private String firstName;
   private String lastName;
   private String email;

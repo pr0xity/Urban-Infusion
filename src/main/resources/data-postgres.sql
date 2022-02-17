@@ -1,0 +1,2 @@
+INSERT INTO users(first_name, last_name, email, password, created_at, updated_at, permission_id, enabled) VALUES('Espen', 'Otlo', 'espenotl@stud.ntnu.no', 'dugjetterdetaldri69', '2017-03-31 9:30:20', '2017-03-31 9:30:20', 1, 1);
+INSERT INTO users(first_name, last_name, email, password, created_at, updated_at, permission_id, enabled) VALUES('Sakarias', 'Sæterstøl', 'sakkis@stud.ntnu.no', 'hemmelig', '2017-03-31 9:30:20', '2017-03-31 9:30:20', 1, 1);
