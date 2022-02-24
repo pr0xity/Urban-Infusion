@@ -1,8 +1,10 @@
 package no.ntnu.appdevapi.product;
 
 import io.swagger.annotations.ApiModelProperty;
+import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "products")
@@ -13,17 +15,82 @@ public class Product {
   private int id;
   @ApiModelProperty("Name of the product.")
   private String name;
-  @ApiModelProperty("Price of the product, decimal in NOK.")
-  private double price;
+  @ApiModelProperty("Some info about the product.")
+  private String description;
   @ApiModelProperty("Where the product originates from.")
   private String origin;
-  @ApiModelProperty("Some info about the product.")
-  private String info;
+  @ApiModelProperty("Price of the product, decimal in NOK.")
+  private double price;
+  @ApiModelProperty("Category id of the product.")
+  private int categoryId;
+  @ApiModelProperty("Inventory id of the product.")
+  private int inventoryId;
+  @ApiModelProperty("When the product was created.")
+  private LocalDateTime createdAt;
+  @ApiModelProperty("When the product was last updated.")
+  private LocalDateTime updatedAt;
+  @ApiModelProperty("When the product was deleted.")
+  private LocalDateTime deletedAt;
 
-  public Product(int id, String name, double price) {
+  public Product(int id, String name, String description, String origin, double price, int categoryId, int inventoryId) {
     this.id = id;
     this.name = name;
+    this.description = description;
+    this.origin = origin;
     this.price = price;
+    this.categoryId = categoryId;
+    this.inventoryId = inventoryId;
+    this.createdAt = LocalDateTime.now();
+    this.updatedAt = LocalDateTime.now();
+    this.deletedAt = null;
+  }
+
+  public Product(int id, String name, String description, String origin, double price, int categoryId, int inventoryId, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.origin = origin;
+    this.price = price;
+    this.categoryId = categoryId;
+    this.inventoryId = inventoryId;
+    this.createdAt = LocalDateTime.now();
+    this.updatedAt = LocalDateTime.now();
+    this.deletedAt = null;
+    this.createdAt = createdAt;
+    this.updatedAt = updatedAt;
+    this.deletedAt = deletedAt;
+  }
+
+  public int getCategoryId() {
+    return categoryId;
+  }
+
+  public void setCategoryId(int categoryId) {
+    this.categoryId = categoryId;
+  }
+
+  public int getInventoryId() {
+    return inventoryId;
+  }
+
+  public void setInventoryId(int inventoryId) {
+    this.inventoryId = inventoryId;
+  }
+
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public void setUpdatedAt(LocalDateTime updatedAt) {
+    this.updatedAt = updatedAt;
+  }
+
+  public LocalDateTime getDeletedAt() {
+    return deletedAt;
+  }
+
+  public void setDeletedAt(LocalDateTime deletedAt) {
+    this.deletedAt = deletedAt;
   }
 
   public int getId() {
@@ -58,11 +125,11 @@ public class Product {
     this.origin = origin;
   }
 
-  public String getInfo() {
-    return info;
+  public String getDescription() {
+    return description;
   }
 
-  public void setInfo(String info) {
-    this.info = info;
+  public void setDescription(String description) {
+    this.description = description;
   }
 }

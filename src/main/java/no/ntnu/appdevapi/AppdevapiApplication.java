@@ -31,6 +31,10 @@ public class AppdevapiApplication {
         .apiInfo(describeApi());
   }
 
+  /**
+   * Describe the API (for Swagger)
+   * @return API description
+   */
   private ApiInfo describeApi() {
     return new ApiInfo(
         "AppDev Project app",
