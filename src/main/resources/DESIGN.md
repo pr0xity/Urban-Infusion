@@ -28,7 +28,7 @@ The most important message/product on the site is the products, Our goal with th
 
 <br>
 
-For elements it is the buttons that is the most importants. And right after the products cards.
+For elements it is the buttons that is the most important because they navigate the user to the products and allow them to shop etc. Buttons will therefore have an accent to increase the visual priority on the site. 
 
 <br>
 
@@ -80,13 +80,22 @@ No packs chosen for illustrations yet.
 Because Urban Infusion is a mix of modern and traditional we will use a sans serif font as the main, portraying the modern side, and a cursive font for accents portraying the traditional side. We want don't want an overly bold look, and will use a font with hard egdes.
 
 Main font: Montserrat
+
 Accent font: Hurricane
+
+Font scale: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+<br>
+
+### Spacing
+
+Spacings: 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
 
 <br>
 
 ### Border rounding
 
-We will use little border rounding, except on buttons. The stark contrast between a hard enviroment and soft edge of the buttons will draw in the users attention.
+Montserrat, out main font is very hard, we will therefore use no border rounding for for elements, but will use full rounding on buttons. The stark contrast between a hard enviroment created by general elements and soft edge of the buttons will draw in the users attention.
 
 <br>
 
