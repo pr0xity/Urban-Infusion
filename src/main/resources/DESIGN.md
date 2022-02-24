@@ -56,8 +56,20 @@ Sections layout of the landing page:
 
 ### Images
 
-<!-- ![Green tea](https://images.pexels.com/photos/1793035/pexels-photo-1793035.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500)
-![Green tea](https://images.pexels.com/photos/3604314/pexels-photo-3604314.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500) -->
+![Coffee mug](https://images.unsplash.com/photo-1518358246973-95637f1df901?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=80)
+![Red herbal tea](https://images.pexels.com/photos/7366372/pexels-photo-7366372.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=100)
+![Sencha tea](https://images.pexels.com/photos/5946651/pexels-photo-5946651.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=100)
+![Yellow herbal tea](https://images.pexels.com/photos/3604314/pexels-photo-3604314.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=100)
+![Tea pot with herbal tea](https://images.unsplash.com/photo-1615205597144-5c7c885291d2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8aGVyYmFsJTIwdGVhfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60)
+![Herbal tea in a cup](https://images.unsplash.com/photo-1576092768241-dec231879fc3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGhlcmJhbCUyMHRlYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=200&q=60)
+![Tea ceremony](https://images.unsplash.com/photo-1577016029703-cc22a7c0c28c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTcyfHxoZXJiYWwlMjB0ZWF8ZW58MHx8MHx8&auto=format&fit=crop&w=200&q=60)
+![Herbal tea in a pot](https://images.unsplash.com/photo-1547825407-2d060104b7f8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjF8fGhlcmJhbCUyMHRlYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=200&q=60)
+![Tea cup with herbs and flowers](https://images.unsplash.com/photo-1514733670139-4d87a1941d55?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8aGVyYmFsJTIwdGVhfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=200&q=60)
+![Black herbal tea](https://images.unsplash.com/photo-1597498431021-8a955ef92727?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTM1fHxoZXJiYWwlMjB0ZWF8ZW58MHx8MHx8&auto=format&fit=crop&w=200&q=60)
+![Tea ceremony](https://images.unsplash.com/photo-1601831753677-01f960be19eb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MXx8fGVufDB8fHx8&auto=format&fit=crop&w=200&q=60)
+![Tea ceremony](https://images.unsplash.com/photo-1587834323138-befbf2c33797?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwcm9maWxlLXBhZ2V8MTF8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=200&q=60)
+![Green tea](https://images.pexels.com/photos/1793035/pexels-photo-1793035.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=100)
+![Herbal tea in a pot](https://images.unsplash.com/photo-1602603412313-ab713536e288?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzh8fGhlcmJhbCUyMHRlYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=200&q=60)
 
 We will have some text on images when it comes to buttons, but we will use colour overlay and blur to improve the readability inside the the button, but not on the image as a whole.
 
