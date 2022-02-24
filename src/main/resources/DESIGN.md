@@ -10,7 +10,7 @@ Urban Infusion is a mix of modern and traditional, and the theme will reflect th
 
 ### Colour scheme
 
-Urban Infusion have not provided a colour scheme. Looking at other tea shops we have seen that beige/brown and green are consistent on those sites. These colors represents the calmness of nature and warmth this e-shop wants to reflect to it's customers. To clearly communicate Urban Infusion's main values, the suggested colour scheme for the site is:
+Urban Infusion have not provided a colour scheme. Looking at other tea shops we have seen that beige/brown and green are consistent on those sites. These colours represents the calmness of nature and warmth this e-shop wants to reflect to it's customers. To clearly communicate Urban Infusion's main values, the suggested colour scheme for the site is:
 
 <br>
 
@@ -24,31 +24,31 @@ Text colour: #6D6875 (Dark purple)
 
 ### Hierachy and layout
 
-The most important message/product on the site is the products, Our goal with the site is to draw customers and create interest.
+The most important message on the site is the products and what they represent. Our goal with the site is to draw customers and create interest.
 
 <br>
 
-For elements it is the buttons that is the most important because they navigate the user to the products and allow them to shop etc. Buttons will therefore have an accent to increase the visual priority on the site. 
+The buttons, in combination with descriptive images, are the most important elements of the site because they navigate the user to the products and allow them to shop, read about the products, read about other customers experiences with the products, and so on. Buttons will therefore have an accent to increase the visual priority on the site. 
 
 <br>
 
-The different sections we will have on our site is hero, other cooperations, featured, values, about, products and testimonials.
+The different sections we will have on our landing page is hero, other cooperations, featured, values, about, products and testimonials.
 
 <br>
 
-Layout of the sections:
+Sections layout of the landing page:
 
-- Hero section will contain a slider with different images to communicate some of the companies values, as well as a CTA button.
+- The "hero" section will contain a slider with different images to communicate some of the companies values, as well as a CTA (Call to Action) button.
 
-- The companies Urban Infusion cooperates with will be displayed in a row underneath the header.
+- The companies that Urban Infusion cooperates with will be displayed in a row underneath the header to highlight the validity of Urban Infusion as a company and e-shop that customers can trust.
 
-- The featured section will display the product images of the most popular products with a button to direct the user to the product page.
+- The "featured" section will display product images of the most popular products with individual button to direct the user to that specific product page.
 
-- The values will be displayed in a row.
+- The values of Urban Infusion will be displayed in a row so that the customers can understand what to expect from the company and the products they sell.
 
-- For the about section which will be very content heavy we will use Z-layout to create visual interest throughout the large text.
+- For the "about" section there will be used a Z-layout, which resembles how the human eye moves while it read texts, to create visual interest throughout the large text.
 
-- The products will be displayes in a single row with a slider.
+- The products will be displayed in a single row with a slider.
 
 - The testimonials will be displayed in a row.
 
@@ -59,7 +59,7 @@ Layout of the sections:
 <!-- ![Green tea](https://images.pexels.com/photos/1793035/pexels-photo-1793035.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500)
 ![Green tea](https://images.pexels.com/photos/3604314/pexels-photo-3604314.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500) -->
 
-We will have some text on images when it comes to buttons, but we will use color overlay and blur to improve the readability inside the the button, but not on the image as a whole.
+We will have some text on images when it comes to buttons, but we will use colour overlay and blur to improve the readability inside the the button, but not on the image as a whole.
 
 <br>
 
