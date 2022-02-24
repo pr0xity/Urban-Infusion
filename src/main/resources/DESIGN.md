@@ -8,9 +8,9 @@ Urban Infusion is a mix of modern and traditional, and the theme will reflect th
 
 <br>
 
-### Color scheme
+### Colour scheme
 
-Urban Infusion have not provided a colour scheme. Looking at other tea shops we have seen that beige/brown and green are consistent on those sites. To clearly communicate what Urban Infusion is we have chosen to do use those colours.
+Urban Infusion have not provided a colour scheme. Looking at other tea shops we have seen that beige/brown and green are consistent on those sites. These colors represents the calmness of nature and warmth this e-shop wants to reflect to it's customers. To clearly communicate Urban Infusion's main values, the suggested colour scheme for the site is:
 
 <br>
 
