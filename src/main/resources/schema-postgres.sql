@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS "product" (
     description VARCHAR(255) NOT NULL,
     origin VARCHAR(255),
     price DOUBLE PRECISION NOT NULL,
-    fk_category_id INTEGER REFERENCES "product_category" (id) UNIQUE NOT NULL,
-    fk_inventory_id INTEGER REFERENCES "product_inventory" (id) NOT NULL,
+    fk_category_id INTEGER REFERENCES "product_category" (id) NOT NULL,
+    fk_inventory_id INTEGER REFERENCES "product_inventory" (id) UNIQUE NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP,
     deleted_at TIMESTAMP
@@ -34,7 +34,6 @@ CREATE TABLE IF NOT EXISTS "permission_level" (
     permissions INTEGER NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP
-
 );
 
 CREATE TABLE IF NOT EXISTS "user" (
@@ -47,7 +46,7 @@ CREATE TABLE IF NOT EXISTS "user" (
     updated_at TIMESTAMP,
     fk_permission_id INTEGER REFERENCES "permission_level" (id) NOT NULL,
     enabled BOOLEAN
-    );
+);
 
 CREATE TABLE IF NOT EXISTS "user_payment" (
     id SERIAL PRIMARY KEY,
@@ -64,15 +63,15 @@ CREATE TABLE IF NOT EXISTS "user_address"(
     address_line1 VARCHAR(255) NOT NULL,
     address_line2 VARCHAR(255),
     city VARCHAR(255) NOT NULL,
-    postal_code INTEGER NOT NULL,
+    postal_code VARCHAR(255) NOT NULL,
     country VARCHAR(255) NOT NULL,
     telephone VARCHAR(255) NOT NULL
-    );
+);
 
 CREATE TABLE IF NOT EXISTS "fav_list"(
     id SERIAL PRIMARY KEY,
-    fk_user_id INTEGER REFERENCES "user" (id) UNIQUE NOT NULL,
-    fk_product_id INTEGER REFERENCES "product" (id) UNIQUE NOT NULL,
+    fk_user_id INTEGER REFERENCES "user" (id) NOT NULL,
+    fk_product_id INTEGER REFERENCES "product" (id) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP
 );
@@ -99,6 +98,7 @@ CREATE TABLE IF NOT EXISTS "order_details"(
     fk_user_id INTEGER REFERENCES "user" (id) NOT NULL,
     total DOUBLE PRECISION NOT NULL,
     quantity INTEGER NOT NULL,
+    status VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP
 );
