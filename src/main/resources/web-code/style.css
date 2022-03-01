@@ -1,0 +1,402 @@
+:root {
+  --color-primary: #6d6875;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 160rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 1.8;
+  color: #6d6875;
+  overflow-x: hidden;
+}
+
+.heading-secondary {
+  margin: 0;
+  padding: 0;
+  font-family: "Hurricane";
+  font-weight: 700;
+  font-size: 3.4rem;
+  letter-spacing: 0.5rem;
+  text-transform: capitalize;
+  color: #588157;
+}
+
+.section-title {
+  margin: 0;
+  padding: 0;
+  font-size: 3.4rem;
+  font-weight: 600;
+}
+
+h3 {
+  margin-bottom: 0.4rem;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-primary);
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/****************************/
+/* HERO/HEADER SECTION */
+/****************************/
+.header {
+  padding: 2.4rem 2.4rem 6.8rem 2.4rem;
+  width: 100%;
+  /* position: relative; */
+  background-color: #dad7cd;
+  /* background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 181, 162, 0),
+    rgba(163, 177, 138, 0.5)
+  ); */
+}
+
+.main-nav {
+  padding: 1rem 2.4rem 1rem 2.4rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* background-color: rgba(255, 255, 255, 0.5); */
+}
+
+.site-links {
+  display: flex;
+  align-items: top;
+  gap: 3rem;
+}
+
+.user-btns {
+  display: flex;
+  gap: 2.4rem;
+}
+
+.user-btn {
+  color: var(--color-primary);
+  font-size: 4rem;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 10%);
+  height: 6rem;
+}
+
+.cta-btn {
+  padding: 1.2rem 2rem 1.2rem 2rem;
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.9rem;
+  font-weight: 400;
+  letter-spacing: 0.7rem;
+  word-spacing: 0.5rem;
+  text-transform: uppercase;
+  background-color: #6d68756b;
+  color: #fff;
+  box-shadow: 2rem 2rem 3rem #7a607a27;
+  border-radius: 50px;
+  border: 0.2rem solid white;
+  transition: all 0.4s;
+  backdrop-filter: blur(2px);
+  z-index: 445849305834905;
+}
+
+.cta-btn:hover {
+  color: #6d6875;
+  background-color: #fff;
+  transform: translate(-50%, -50%) scale(110%);
+}
+
+.cta-btn:hover .cta-btn-sub {
+  color: #588157;
+}
+
+.cta-btn-sub {
+  font-family: "Hurricane";
+  text-transform: capitalize;
+  color: #a7f0a4;
+  font-size: 3.2rem;
+  letter-spacing: 0.5rem;
+  word-spacing: 1rem;
+}
+
+.video-container {
+  height: 100%;
+  width: 100%;
+  z-index: -9999;
+}
+
+.bg-video_content {
+  /* position: absolute; */
+  z-index: -9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  opacity: 80%;
+  object-fit: cover;
+}
+
+/****************************/
+/* COOPERATIONS SECTION */
+/****************************/
+.section-cooperations {
+  padding: 3.2rem 0rem 0rem 0rem;
+}
+
+.cooperation-logos {
+  margin-top: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10rem;
+}
+
+.cooperation-logo {
+  filter: grayscale(1);
+  opacity: 0.25;
+  max-height: 9rem;
+  max-width: 9rem;
+}
+
+/****************************/
+/* COMPANY VALUES SECTION */
+/****************************/
+.section-values {
+  padding: 4.8rem 2.4rem 6.8rem 2.4rem;
+}
+
+.values {
+  margin: 0 2rem 0 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-evenly;
+  gap: 4rem;
+}
+
+.value {
+  padding: 2rem 4rem 2rem 4rem;
+  line-height: 1.8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.value-icon {
+  color: #588157;
+  padding: 1rem;
+  border-radius: 50%;
+  background-color: #dee6dd;
+  font-size: 5rem;
+}
+.value-icon-test {
+  color: #588157;
+  padding: 2rem;
+  position: relative;
+  border-radius: 50%;
+  background-color: #dee6dd98;
+  opacity: 75%;
+  width: 15rem;
+  height: 15rem;
+  /* font-size: 5rem; */
+}
+
+/****************************/
+/* COMPANY VALUES SECTION */
+/****************************/
+.section-company {
+  padding: 6.8rem 4.8rem 0rem 4.8rem;
+}
+
+.section-company .section-header {
+  max-width: 80rem;
+  margin: 0 auto 8rem auto;
+}
+
+.company-grid {
+  padding: 2rem 4.8rem 0rem 4.8rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 5rem;
+}
+
+.gallery-container {
+  width: 50%;
+  height: 30rem;
+  position: relative;
+}
+
+.gallery-img {
+  position: absolute;
+  width: 25rem;
+  transition: 0.4s ease;
+  border: 0.4rem solid white;
+  box-shadow: 2rem 2rem 3rem rgba(0, 0, 0, 0.1);
+}
+
+.gallery--right .gallery-img:first-child {
+  top: -20%;
+  right: -90%;
+}
+
+.gallery--right .gallery-img:nth-child(2) {
+  top: -10%;
+  right: -20%;
+}
+
+.gallery--right .gallery-img:nth-child(3) {
+  top: 10%;
+  right: -60%;
+}
+
+.gallery--left .gallery-img:first-child {
+  top: -20%;
+  left: 70%;
+}
+
+.gallery--left .gallery-img:nth-child(2) {
+  top: -10%;
+  left: 0%;
+}
+
+.gallery--left .gallery-img:nth-child(3) {
+  top: 10%;
+  left: 30%;
+}
+
+.gallery-img:hover {
+  z-index: 999;
+  width: 105%;
+}
+
+.gallery--right .gallery-img:hover {
+  transform: translate(5%, -15%);
+}
+.gallery--left .gallery-img:hover {
+  transform: translate(-5%, -15%);
+}
+
+/****************************/
+/* PRODUCTS SECTION */
+/****************************/
+.section-products {
+  padding: 6.8rem 9.8rem 4.8rem 9.8rem;
+  position: relative;
+  height: 100rem;
+  /* overflow: hidden; */
+}
+
+.section-products .section-header {
+  margin: 0 auto;
+}
+
+.products {
+  padding: 4.8rem 9.8rem 4.8rem 9.8rem;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  column-gap: 4.8rem;
+  row-gap: 4.8rem;
+  justify-content: center;
+}
+
+.product-card:nth-child(4),
+.product-card:nth-child(5) {
+  grid-column: span 6;
+  align-self: center;
+  justify-self: end;
+}
+
+.product-card:nth-child(5) {
+  justify-self: start;
+}
+
+.product-card {
+  padding: 2.4rem;
+  grid-column: span 4;
+  height: 50rem;
+  width: 35rem;
+  background-color: #dad7cd;
+  font-size: 1.4rem;
+}
+
+.product-card img {
+  display: inline-block;
+  margin-bottom: 2rem;
+  width: 100%;
+  height: 22rem;
+  border: 0.4rem solid white;
+  box-shadow: 2rem 2rem 2rem rgba(0, 0, 0, 0.082);
+}
+
+.shopping-info {
+  margin-top: 5%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 150%;
+}
+
+.add-to-fave {
+  background-color: #fff0ec;
+  padding: 0.6rem 0.4rem 0 0.4rem;
+  border: 0.1rem solid #b77a7c;
+  border-radius: 50%;
+  color: #b77a7c;
+  cursor: pointer;
+}
+
+.add-to-cart {
+  background-color: #dee6dd;
+  padding: 0.6rem 0.4rem 0 0.4rem;
+  border: 0.1rem solid #588157;
+  border-radius: 50%;
+  color: #588157;
+  cursor: pointer;
+}
+
+.shopping-controls button:hover {
+  background-color: #dee6dd;
+  padding: 0.6rem 0.4rem 0 0.4rem;
+  border: 0.1rem solid #588157;
+  border-radius: 50%;
+  color: #588157;
+}
+
+.shopping-control {
+  font-size: 250%;
+}
+
+.shopping-info select {
+  font-family: inherit;
+  font-size: 65%;
+  color: inherit;
+  font-weight: 700;
+  background-color: rgba(255, 255, 255, 0.637);
+  border: 0.1rem solid rgba(119, 119, 119, 0.3);
+}
