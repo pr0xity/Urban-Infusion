@@ -14,7 +14,7 @@ html {
 
 body {
   margin: 0 auto;
-  max-width: 160rem;
+  max-width: 100%;
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
   font-size: 1.8rem;
@@ -26,7 +26,7 @@ body {
 .heading-secondary {
   margin: 0;
   padding: 0;
-  font-family: "Hurricane";
+  font-family: "Hurricane", sans-serif;
   font-weight: 700;
   font-size: 3.4rem;
   letter-spacing: 0.5rem;
@@ -83,9 +83,14 @@ button {
   /* background-color: rgba(255, 255, 255, 0.5); */
 }
 
+main {
+  max-width: 160rem;
+  margin: 0 auto;
+}
+
 .site-links {
   display: flex;
-  align-items: top;
+  /*  align-items: top;*/
   gap: 3rem;
 }
 
@@ -99,7 +104,7 @@ button {
   font-size: 4rem;
 }
 
-.logo {
+.header-logo {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 10%);
@@ -130,7 +135,7 @@ button {
 .cta-btn:hover {
   color: #6d6875;
   background-color: #fff;
-  transform: translate(-50%, -50%) scale(110%);
+  transform: translate(-50%, -50%) scale(110);
 }
 
 .cta-btn:hover .cta-btn-sub {
@@ -138,7 +143,7 @@ button {
 }
 
 .cta-btn-sub {
-  font-family: "Hurricane";
+  font-family: "Hurricane", sans-serif;
   text-transform: capitalize;
   color: #a7f0a4;
   font-size: 3.2rem;
@@ -163,11 +168,60 @@ button {
   object-fit: cover;
 }
 
+/*****************************/
+/* FEATURED PRODUCTS SECTION */
+/*****************************/
+
+.section-featured {
+  padding: 6.8rem 9.8rem 4.8rem 9.8rem;
+  position: relative;
+  height: 100rem;
+}
+
+.section-featured .section-header {
+  margin: 0 auto;
+  padding-top: 10rem;
+}
+
+.featured-product-img{
+  width: 40rem;
+  height: 40rem;
+  object-fit: cover;
+  border: 0.4rem solid white;
+  box-shadow: 2rem 2rem 3rem rgba(0, 0, 0, 0.5);
+}
+
+.featured-products {
+  position: relative;
+  padding: 3em;
+  display: grid;
+  grid-gap: 4em;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+.card {
+  border-radius: .3em;
+}
+
+.featured-product-btn {
+  padding: 1.2rem 2rem 1.2rem 2rem;
+  transform: translate(-50%, -50%);
+  font-size: 1.9rem;
+  font-weight: 400;
+  word-spacing: 0.5rem;
+  background-color: #6d68756b;
+  color: #fff;
+  box-shadow: 2rem 2rem 3rem #7a607a27;
+  border-radius: 50px;
+  border: 0.4rem solid white;
+  backdrop-filter: blur(2px);
+}
+
 /****************************/
 /* COOPERATIONS SECTION */
 /****************************/
 .section-cooperations {
-  padding: 3.2rem 0rem 0rem 0rem;
+  padding: 3.2rem 0 0 0;
 }
 
 .cooperation-logos {
@@ -216,6 +270,7 @@ button {
   background-color: #dee6dd;
   font-size: 5rem;
 }
+
 .value-icon-test {
   color: #588157;
   padding: 2rem;
@@ -232,16 +287,21 @@ button {
 /* COMPANY VALUES SECTION */
 /****************************/
 .section-company {
-  padding: 6.8rem 4.8rem 0rem 4.8rem;
+  /*padding: 6.8rem 4.8rem 0 4.8rem;*/
+  padding: 6.8rem 9.8rem 4.8rem 9.8rem;
+  position: relative;
+  height: 100rem;
 }
 
 .section-company .section-header {
-  max-width: 80rem;
-  margin: 0 auto 8rem auto;
+  /*  max-width: 80rem;
+    margin: 0 auto 8rem auto;*/
+  margin: 0 auto;
+  padding-bottom: 10rem;
 }
 
 .company-grid {
-  padding: 2rem 4.8rem 0rem 4.8rem;
+  padding: 2rem 4.8rem 0 4.8rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 5rem;
@@ -283,7 +343,7 @@ button {
 
 .gallery--left .gallery-img:nth-child(2) {
   top: -10%;
-  left: 0%;
+  left: 0;
 }
 
 .gallery--left .gallery-img:nth-child(3) {
@@ -299,6 +359,7 @@ button {
 .gallery--right .gallery-img:hover {
   transform: translate(5%, -15%);
 }
+
 .gallery--left .gallery-img:hover {
   transform: translate(-5%, -15%);
 }
@@ -315,6 +376,7 @@ button {
 
 .section-products .section-header {
   margin: 0 auto;
+  padding-top: 30rem;
 }
 
 .products {
@@ -353,6 +415,10 @@ button {
   height: 22rem;
   border: 0.4rem solid white;
   box-shadow: 2rem 2rem 2rem rgba(0, 0, 0, 0.082);
+}
+
+.product-card-list {
+  list-style-type: none;
 }
 
 .shopping-info {
@@ -399,4 +465,62 @@ button {
   font-weight: 700;
   background-color: rgba(255, 255, 255, 0.637);
   border: 0.1rem solid rgba(119, 119, 119, 0.3);
+}
+
+/****************************/
+/* TESTIMONIALS SECTION     */
+/****************************/
+
+.section-testimonials {
+  padding: 20rem 9.8rem 2rem 9.8rem;
+  position: relative;
+}
+
+.section-testimonials .section-header {
+  margin: 0 auto;
+}
+
+.testimonials {
+  padding: 3em;
+  display: grid;
+  grid-gap: 2em;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.testimonial {
+  padding: 2em;
+  border-radius: .3em;
+}
+
+.testimonial p {
+  margin-top: 0;
+}
+
+.testimonial span {
+  font-weight: lighter;
+  position: relative;
+  margin-left: 15px;
+}
+
+/****************************/
+/* FOOTER SECTION           */
+/****************************/
+
+footer {
+  padding: 2.4rem 2.4rem 1rem 2.4rem;
+  width: 100%;
+  background-color: #dad7cd;
+}
+
+.footer-logo {
+  position: absolute;
+  left: 10%;
+  transform: translate(-50%, 10%);
+  height: 4rem;
+}
+
+.copyright {
+  text-align: center;
+  margin-top: 6rem;
+  font-size: small;
 }

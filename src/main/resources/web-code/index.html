@@ -1,384 +1,465 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="img/favicon.png" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Hurricane:wght@200;300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
-    <script src="https://unpkg.com/phosphor-icons"></script>
-    <title>Urban Infusion</title>
-  </head>
-  <body>
-    <header class="header">
-      <nav class="main-nav">
-        <div class="site-links">
-          <a href="#">Home</a>
-          <a href="#">Products</a>
-          <a href="#">About us</a>
-        </div>
-        <img class="logo" src="img/logo-big.svg" alt="Urban fusion logo" />
-        <div class="user-btns">
-          <!-- <button ><ion-icon class="user-btn" name="heart"></ion-icon></button> -->
-          <button aria-label="favouries list">
-            <i class="ph-heart-light user-btn"></i>
-          </button>
-          <!-- <button ><ion-icon class="user-btn" name="cart"></ion-icon></button> -->
-          <button aria-label="shopping cart list">
-            <!-- <i class="ph-shopping-cart-simple-fill user-btn"></i> -->
-            <i class="ph-tote-light user-btn"></i>
-          </button>
-          <!-- <button ><ion-icon class="user-btn" name="person-circle-outline"></ion-icon></button> -->
-          <button aria-label="user button">
-            <i class="ph-user-circle-light user-btn"></i>
-          </button>
-        </div>
-      </nav>
-      <button class="cta-btn">
-        Find your <span class="cta-btn-sub">herbal </span> friend
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="img/favicon.png" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+          href="https://fonts.googleapis.com/css2?family=Hurricane:wght@200;300;400;500;600&display=swap"
+          rel="stylesheet"
+  />
+  <script
+          type="module"
+          src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+  ></script>
+  <script
+          nomodule
+          src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+  ></script>
+  <script src="https://unpkg.com/phosphor-icons"></script>
+  <title>Urban Infusion</title>
+</head>
+<body>
+
+<header class="header">
+  <nav class="main-nav">
+
+    <div class="site-links">
+      <a href="#">Home</a>
+      <a href="#">Products</a>
+      <a href="#">About us</a>
+    </div>
+
+    <img class="header-logo" src="img/logo-big.svg" alt="Urban fusion logo" />
+
+    <div class="user-btns">
+      <!-- <button ><ion-icon class="user-btn" name="heart"></ion-icon></button> -->
+      <button aria-label="favourites list">
+        <i class="ph-heart-light user-btn"></i>
       </button>
-      <div class="video-container">
-        <video class="bg-video_content" autoplay muted loop>
-          <source src="bg-video-2.mp4" type="video/mp4" />
-        </video>
+      <!-- <button ><ion-icon class="user-btn" name="cart"></ion-icon></button> -->
+      <button aria-label="shopping cart list">
+        <!-- <i class="ph-shopping-cart-simple-fill user-btn"></i> -->
+        <i class="ph-tote-light user-btn"></i>
+      </button>
+      <!-- <button ><ion-icon class="user-btn" name="person-circle-outline"></ion-icon></button> -->
+      <button aria-label="user button">
+        <i class="ph-user-circle-light user-btn"></i>
+      </button>
+    </div>
+
+  </nav>
+
+  <button class="cta-btn">
+    Find your <span class="cta-btn-sub">herbal </span> friend
+  </button>
+
+  <div class="video-container">
+    <video class="bg-video_content" autoplay muted loop>
+      <source src="bg-video-2.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <section class="section-cooperations">
+    <div class="cooperation-logos">
+      <img
+              class="cooperation-logo"
+              src="img/yogi-tea.svg"
+              type="img/svg"
+              alt="yogi tea logo"
+      />
+      <img
+              class="cooperation-logo"
+              src="img/ahmad-tea.png"
+              type="img/png"
+              alt="ahmad tea logo"
+      />
+      <img
+              class="cooperation-logo"
+              src="img/pukka.webp"
+              type="img/webp"
+              alt="pukka tea logo"
+      />
+      <img
+              class="cooperation-logo"
+              src="img/clipper-tea.svg"
+              type="img/svg"
+              alt="clipper tea logo"
+      />
+      <img
+              class="cooperation-logo"
+              src="img/fairtrade.svg"
+              type="img/svg"
+              alt="fairtrade logo"
+      />
+    </div>
+  </section>
+
+</header>
+
+<main>
+
+  <section class="section-featured">
+    <div class="section-header">
+      <h2 class="heading-secondary">Top sellers</h2>
+      <h3 class="section-title">Featured</h3>
+    </div>
+
+    <div class="featured-products">
+      <div class="card">
+        <img class="featured-product-img" src="img/pic-2.webp" alt="herbal tea in a teacup"/>
+        <h4>Heather tea</h4>
+        <button class="featured-product-btn">View more</button>
       </div>
-      <section class="section-cooperations">
-        <div class="cooperation-logos">
-          <img
-            class="cooperation-logo"
-            src="img/yogi-tea.svg"
-            type="img/svg"
-            alt="yogi tea logo"
-          />
-          <img
-            class="cooperation-logo"
-            src="img/ahmad-tea.png"
-            type="img/png"
-            alt="ahmad tea logo"
-          />
-          <img
-            class="cooperation-logo"
-            src="img/pukka.webp"
-            type="img/webp"
-            alt="pukka tea logo"
-          />
-          <img
-            class="cooperation-logo"
-            src="img/clipper-tea.svg"
-            type="img/svg"
-            alt="clipper tea logo"
-          />
-          <img
-            class="cooperation-logo"
-            src="img/fairtrade.svg"
-            type="img/svg"
-            alt="fairtrade logo"
-          />
+      <div class="card">
+        <img class="featured-product-img" src="img/pic-3.webp" alt="herbal tea in a teacup"/>
+        <h4>Heather tea</h4>
+        <button class="featured-product-btn">View more</button>
+      </div>
+      <div class="card">
+        <img class="featured-product-img" src="img/pic-1.webp" alt="herbal tea in a teacup"/>
+        <h4>Heather tea</h4>
+        <button class="featured-product-btn">View more</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-values">
+    <div class="values">
+      <div class="value">
+        <!-- <i class="ph-tree-thin value-icon"></i> -->
+        <img class="value-icon-test" src="img/tree.svg" alt="" />
+        <h3>Traditions</h3>
+        <p>
+          We value the ancient traditions which are brought to modern times
+          through nature.
+        </p>
+      </div>
+      <div class="value">
+        <!--            <i class="ph-heart-thin value-icon-test"></i>-->
+        <img class="value-icon-test" src="img/heart.svg" alt="" />
+        <h3>Health</h3>
+        <p>
+          We value your health by offering herbal teas with healing
+          properties made from ancient recipes.
+        </p>
+      </div>
+      <div class="value">
+        <!-- <i class="ph-globe-hemisphere-west-thin value-icon"></i> -->
+        <img class="value-icon-test" src="img/earth.svg" alt="" />
+        <h3>Sustainability</h3>
+        <p>
+          We value our earth and it's life. We work with fairtrade to
+          provide you ethically produced herbal teas.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-company">
+    <div class="section-header">
+      <h2 class="heading-secondary">Urban Infusion</h2>
+      <h3 class="section-title">
+        Fusing ancient traditions and modern times
+      </h3>
+    </div>
+
+    <div class="company-grid">
+      <div class="company-text">
+        <p>
+          Humans have been enjoying herbal teas for millennia. We are
+          passionate for natural teas, nurtured by our ancestors. Our
+          experts have carefully selected teas from all regions of the
+          planet – from Japanese teas to herbal wonders of Machu Picchu.
+        </p>
+      </div>
+
+      <div class="gallery-container gallery--right">
+        <img
+                class="gallery-img"
+                src="img/pic-1.webp"
+                alt="herbal tea in a teapot"
+        />
+        <img
+                class="gallery-img"
+                src="img/pic-2.webp"
+                alt="herbal tea in a teacup"
+        />
+        <img
+                class="gallery-img"
+                src="img/pic-3.webp"
+                alt="herbal tea ready to be served"
+        />
+      </div>
+
+      <div class="gallery-container gallery--left">
+        <img
+                class="gallery-img"
+                src="img/pic-4.webp"
+                alt="herbal tea with blossoms in a teacup"
+        />
+        <img
+                class="gallery-img"
+                src="img/pic-5.webp"
+                alt="herbal tea in a cup outdoors"
+        />
+        <img
+                class="gallery-img"
+                src="img/pic-6.webp"
+                alt="herbal tea in a teapot"
+        />
+      </div>
+
+      <div class="company-text">
+        <p>
+          We are passionate about ancient traditions of tea ceremony.
+          Therefore our employees can help you find what you need for you
+          tea ceremony. We have a collection of different teasets and mugs
+          made out of brazillian clay.
+        </p>
+      </div>
+
+      <div class="company-text">
+        <p>
+          We have carefully created a collection of more than 600 different
+          teas from 140 different countries. Come visit us at our office in
+          Amfi Moa, we have 62 most popular teas available here! Our shop is
+          maskfree (just don't tell it to municipality's chief physician.)
+        </p>
+      </div>
+
+      <div class="gallery-container gallery--right">
+        <img class="gallery-img" src="img/pic-7.webp" alt="tea ceremony" />
+        <img
+                class="gallery-img"
+                src="img/pic-8.webp"
+                alt="outdoor teaparty"
+        />
+        <img class="gallery-img" src="img/pic-9.webp" alt="herbal tea" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section-products">
+    <div class="section-header">
+      <h2 class="heading-secondary">Products</h2>
+      <h3 class="section-title">Find your herbal friend!</h3>
+    </div>
+
+    <div class="products">
+      <article class="product-card product-tertiary-prev">
+        <img src="img/pic-2.webp" alt="herbal tea in a teacup" />
+        <h4>Heather tea</h4>
+        <ul class="product-card-list">
+          <li>
+            <i class="ph-check-thin product-card-icon"></i>From Norwegian
+            mountains
+          </li>
+          <li>
+            <i class="ph-check-thin product-card-icon"></i>Gathered
+            carefully before the bees to hold the honey taste
+          </li>
+          <li>
+            <i class="ph-check-thin product-card-icon"></i>Rich in vitamins
+          </li>
+          <li>
+            <i class="ph-check-thin product-card-icon"></i>Local produce
+          </li>
+        </ul>
+        <div class="shopping-info">
+          <strong>200 NOK</strong>
+          <div class="shopping-controls">
+            <button class="add-to-fave" aria-label="add to favourite list">
+              <i class="ph-heart-thin shopping-control"></i>
+            </button>
+            <button class="add-to-cart" aria-label="add to shopping cart">
+              <i class="ph-shopping-cart-simple-thin shopping-control"></i>
+            </button>
+          </div>
         </div>
-      </section>
-    </header>
-    <main>
-      <section class="section-values">
-        <div class="values">
-          <div class="value">
-            <!-- <i class="ph-tree-thin value-icon"></i> -->
-            <img class="value-icon-test" src="img/tree.svg" alt="" />
-            <h3>Traditions</h3>
-            <p>
-              We value the ancient traditions which are brought to modern times
-              through nature.
-            </p>
-          </div>
-          <div class="value">
-            <i class="ph-heart-thin value-icon-test"></i>
-            <!-- <img class="value-icon-test" src="img/heart.svg" alt="" /> -->
-            <h3>Health</h3>
-            <p>
-              We value your health by offering herbal teas with healing
-              properties made from ancient recipes.
-            </p>
-          </div>
-          <div class="value">
-            <!-- <i class="ph-globe-hemisphere-west-thin value-icon"></i> -->
-            <img class="value-icon-test" src="img/earth.svg" alt="" />
-            <h3>Sustainability</h3>
-            <p>
-              We value our earth and it's life. We work with fairtrade to
-              provide you ethically produced herbal teas.
-            </p>
+      </article>
+      <article class="product-card product-secondary-prev">
+        <img src="img/pic-3.webp" alt="herbal tea ready to be served" />
+        <h4>Heather tea</h4>
+        <ul class="product-card-list">
+          <li>
+            <i class="ph-check-thin product-card-icon"></i>From Norwegian
+            mountains
+          </li>
+          <li>
+            <i class="ph-check-thin product-card-icon"></i>Gathered
+            carefully before the bees to hold the honey taste
+          </li>
+          <li>
+            <i class="ph-check-thin product-card-icon"></i>Rich in vitamins
+          </li>
+          <li>
+            <i class="ph-check-thin product-card-icon"></i>Local produce
+          </li>
+        </ul>
+        <div class="shopping-info">
+          <strong>200 NOK</strong>
+          <div class="shopping-controls">
+            <button class="add-to-fave" aria-label="add to favourite list">
+              <i class="ph-heart-thin shopping-control"></i>
+            </button>
+            <button class="add-to-cart" aria-label="add to shopping cart">
+              <i class="ph-shopping-cart-simple-thin shopping-control"></i>
+            </button>
           </div>
         </div>
-      </section>
-      <section class="section-company">
-        <div class="section-header">
-          <h2 class="heading-secondary">Urban Infusion</h2>
-          <h3 class="section-title">
-            Fusing ancient traditions and modern times
-          </h3>
-        </div>
-        <div class="company-grid">
-          <div class="company-text">
-            <p>
-              Humans have been enjoying herbal teas for millennia. We are
-              passionate for natural teas, nurtured by our ancestors. Our
-              experts have carefully selected teas from all regions of the
-              planet – from Japanese teas to herbal wonders of Machu Picchu.
-            </p>
-          </div>
-          <div class="gallery-container gallery--right">
-            <img
-              class="gallery-img"
-              src="img/pic-1.webp"
-              alt="herbal tea in a teapot"
-            />
-            <img
-              class="gallery-img"
-              src="img/pic-2.webp"
-              alt="herbal tea in a teacup"
-            />
-            <img
-              class="gallery-img"
-              src="img/pic-3.webp"
-              alt="herbal tea ready to be served"
-            />
-          </div>
-          <div class="gallery-container gallery--left">
-            <img
-              class="gallery-img"
-              src="img/pic-4.webp"
-              alt="herbal tea with blossoms in a teacup"
-            />
-            <img
-              class="gallery-img"
-              src="img/pic-5.webp"
-              alt="herbal tea in a cup outdoors"
-            />
-            <img
-              class="gallery-img"
-              src="img/pic-6.webp"
-              alt="herbal tea in a teapot"
-            />
-          </div>
-          <div class="company-text">
-            <p>
-              We are passionate about ancient traditions of tea ceremony.
-              Therefore our employees can help you find what you need for you
-              tea ceremony. We have a collection of different teasets and mugs
-              made out of brazillian clay.
-            </p>
-          </div>
-          <div class="company-text">
-            <p>
-              We have carefully created a collection of more than 600 different
-              teas from 140 different countries. Come visit us at our office in
-              Amfi Moa, we have 62 most popular teas available here! Our shop is
-              maskfree (just don't tell it to municipality's chief physician.)
-            </p>
-          </div>
-          <div class="gallery-container gallery--right">
-            <img class="gallery-img" src="img/pic-7.webp" alt="tea ceremony" />
-            <img
-              class="gallery-img"
-              src="img/pic-8.webp"
-              alt="outdoor teaparty"
-            />
-            <img class="gallery-img" src="img/pic-9.webp" alt="herbal tea" />
+      </article>
+      <article class="product-card product-active">
+        <img src="img/pic-1.webp" alt="herbal tea in a teapot" />
+        <h4>Heather tea</h4>
+        <ul class="product-card-list">
+          <li>
+            <i class="ph-check-thin product-card-icon"></i>From Norwegian
+            mountains
+          </li>
+          <li>
+            <i class="ph-check-thin product-card-icon"></i>Gathered
+            carefully before the bees to hold the honey taste
+          </li>
+          <li>
+            <i class="ph-check-thin product-card-icon"></i>Rich in vitamins
+          </li>
+          <li>
+            <i class="ph-check-thin product-card-icon"></i>Local produce
+          </li>
+        </ul>
+        <div class="shopping-info">
+          <strong>200 NOK</strong>
+          <div class="shopping-controls">
+            <button class="add-to-fave" aria-label="add to favourite list">
+              <i class="ph-heart-thin shopping-control"></i>
+            </button>
+            <button class="add-to-cart" aria-label="add to shopping cart">
+              <i class="ph-shopping-cart-simple-thin shopping-control"></i>
+            </button>
           </div>
         </div>
-      </section>
-      <section class="section-products">
-        <div class="section-header">
-          <h2 class="heading-secondary">Products</h2>
-          <h3 class="section-title">Find your herbal friend!</h3>
-        </div>
-        <div class="products">
-          <article class="product-card product-tertiary-prev">
-            <img src="img/pic-2.webp" alt="herbal tea in a teacup" />
-            <h4>Heather tea</h4>
-            <ul>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>From Norwegian
-                mountains
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Gathered
-                carefully before the bees to hold the honey taste
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Rich in vitamins
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Local produce
-              </li>
-            </ul>
-            <div class="shopping-info">
-              <strong>200 NOK</strong>
-              <div class="shopping-controls">
-                <button class="add-to-fave" aria-label="add to favourite list">
-                  <i class="ph-heart-thin shopping-control"></i>
-                </button>
-                <button class="add-to-cart" aria-label="add to shopping cart">
-                  <i class="ph-shopping-cart-simple-thin shopping-control"></i>
-                </button>
-              </div>
-            </div>
-          </article>
-          <article class="product-card product-secondary-prev">
-            <img src="img/pic-3.webp" alt="herbal tea ready to be served" />
-            <h4>Heather tea</h4>
-            <ul>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>From Norwegian
-                mountains
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Gathered
-                carefully before the bees to hold the honey taste
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Rich in vitamins
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Local produce
-              </li>
-            </ul>
-            <div class="shopping-info">
-              <strong>200 NOK</strong>
-              <div class="shopping-controls">
-                <button class="add-to-fave" aria-label="add to favourite list">
-                  <i class="ph-heart-thin shopping-control"></i>
-                </button>
-                <button class="add-to-cart" aria-label="add to shopping cart">
-                  <i class="ph-shopping-cart-simple-thin shopping-control"></i>
-                </button>
-              </div>
-            </div>
-          </article>
-          <article class="product-card product-active">
-            <img src="img/pic-1.webp" alt="herbal tea in a teapot" />
-            <h4>Heather tea</h4>
-            <ul>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>From Norwegian
-                mountains
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Gathered
-                carefully before the bees to hold the honey taste
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Rich in vitamins
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Local produce
-              </li>
-            </ul>
-            <div class="shopping-info">
-              <strong>200 NOK</strong>
-              <div class="shopping-controls">
-                <button class="add-to-fave" aria-label="add to favourite list">
-                  <i class="ph-heart-thin shopping-control"></i>
-                </button>
-                <button class="add-to-cart" aria-label="add to shopping cart">
-                  <i class="ph-shopping-cart-simple-thin shopping-control"></i>
-                </button>
-              </div>
-            </div>
-          </article>
-          <article class="product-card product-secondary-next">
-            <img
-              src="img/pic-4.webp"
-              alt="herbal tea with blossoms in a teacup"
-            />
-            <h4>Linden blossom tea</h4>
-            <ul>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Classic Latvian
-                tea
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Helps against
-                laziness
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Use 100C water
-                (not typical for herbal teas)
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Gathered in
-                summer 2021
-              </li>
-            </ul>
-            <div class="shopping-info">
-              <strong>200 NOK</strong>
-              <div class="shopping-controls">
-                <button class="add-to-fave" aria-label="add to favourite list">
-                  <i class="ph-heart-thin shopping-control"></i>
-                </button>
-                <button class="add-to-cart" aria-label="add to shopping cart">
-                  <i class="ph-shopping-cart-simple-thin shopping-control"></i>
-                </button>
-              </div>
-            </div>
-          </article>
-          <article class="product-card product-tertiary-next">
-            <img src="img/pic-5.webp" alt="herbal tea in a teapot" />
-            <h4>Sencha</h4>
-            <ul>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Japanese green
-                tea
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Green leaves
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Available in
-                Aug-Sep season only
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Packaging: 50g
-                and 500g
-              </li>
-            </ul>
-            <div class="shopping-info">
-              <select id="select-size" name="select-size">
-                <option value="50g">100 NOK for 50g</option>
-                <option value="500g">800 NOK for 500g</option>
-              </select>
-              <div class="shopping-controls">
-                <button class="add-to-fave" aria-label="add to favourite list">
-                  <i class="ph-heart-thin shopping-control"></i>
-                </button>
-                <button class="add-to-cart" aria-label="add to shopping cart">
-                  <i class="ph-shopping-cart-simple-thin shopping-control"></i>
-                </button>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-    </main>
-  </body>
+      </article>
+
+      <!--          <article class="product-card product-secondary-next">
+                  <img
+                    src="img/pic-4.webp"
+                    alt="herbal tea with blossoms in a teacup"
+                  />
+                  <h4>Linden blossom tea</h4>
+                  <ul class="product-card-list">
+                    <li>
+                      <i class="ph-check-thin product-card-icon"></i>Classic Latvian
+                      tea
+                    </li>
+                    <li>
+                      <i class="ph-check-thin product-card-icon"></i>Helps against
+                      laziness
+                    </li>
+                    <li>
+                      <i class="ph-check-thin product-card-icon"></i>Use 100C water
+                      (not typical for herbal teas)
+                    </li>
+                    <li>
+                      <i class="ph-check-thin product-card-icon"></i>Gathered in
+                      summer 2021
+                    </li>
+                  </ul>
+                  <div class="shopping-info">
+                    <strong>200 NOK</strong>
+                    <div class="shopping-controls">
+                      <button class="add-to-fave" aria-label="add to favourite list">
+                        <i class="ph-heart-thin shopping-control"></i>
+                      </button>
+                      <button class="add-to-cart" aria-label="add to shopping cart">
+                        <i class="ph-shopping-cart-simple-thin shopping-control"></i>
+                      </button>
+                    </div>
+                  </div>
+                </article>
+                <article class="product-card product-tertiary-next">
+                  <img src="img/pic-5.webp" alt="herbal tea in a teapot" />
+                  <h4>Sencha</h4>
+                  <ul class="product-card-list">
+                    <li>
+                      <i class="ph-check-thin product-card-icon"></i>Japanese green
+                      tea
+                    </li>
+                    <li>
+                      <i class="ph-check-thin product-card-icon"></i>Green leaves
+                    </li>
+                    <li>
+                      <i class="ph-check-thin product-card-icon"></i>Available in
+                      Aug-Sep season only
+                    </li>
+                    <li>
+                      <i class="ph-check-thin product-card-icon"></i>Packaging: 50g
+                      and 500g
+                    </li>
+                  </ul>
+                  <div class="shopping-info">
+                    <select id="select-size" name="select-size">
+                      <option value="50g">100 NOK for 50g</option>
+                      <option value="500g">800 NOK for 500g</option>
+                    </select>
+                    <div class="shopping-controls">
+                      <button class="add-to-fave" aria-label="add to favourite list">
+                        <i class="ph-heart-thin shopping-control"></i>
+                      </button>
+                      <button class="add-to-cart" aria-label="add to shopping cart">
+                        <i class="ph-shopping-cart-simple-thin shopping-control"></i>
+                      </button>
+                    </div>
+                  </div>
+                </article>-->
+    </div>
+
+  </section>
+
+  <section class="section-testimonials">
+    <div class="section-header">
+      <h2 class="heading-secondary">Testimonials</h2>
+      <h3 class="section-title">Still not convinced?</h3>
+    </div>
+    <div class="testimonials">
+      <div class="testimonial">
+        <h4>Lorem ipsum dolor sit amet!</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <span><i> - Incidunt Minus</i></span>
+      </div>
+      <div class="testimonial">
+        <h4>Lorem ipsum dolor sit amet!</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <span><i> - Incidunt Minus</i></span>
+      </div>
+      <div class="testimonial">
+        <h4>Lorem ipsum dolor sit amet!</h4>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <span><i> - Incidunt Minus</i></span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <img class="footer-logo" src="img/logo-big.svg" alt="Urban infusion logo" />
+  <p class="copyright">Copyright &copy; 2022 NTNU, IDATA2301 Web Technologies - group 3</p>
+</footer>
+
+</body>
 </html>
