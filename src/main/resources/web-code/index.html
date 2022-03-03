@@ -19,54 +19,75 @@
       href="https://fonts.googleapis.com/css2?family=Hurricane:wght@200;300;400;500;600&display=swap"
       rel="stylesheet"
     />
-    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>
     <script src="https://unpkg.com/phosphor-icons"></script>
     <title>Urban Infusion</title>
   </head>
   <body>
     <header class="header">
-      <nav class="main-nav">
-        <div class="main-nav-list">
-          <a href="#">Home</a>
-          <a href="#">Products</a>
-          <a href="#">About us</a>
-        </div>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a class="nav__link" href="#">Home</a></li>
+          <li class="nav__item"><a class="nav__link" href="#">About us</a></li>
+          <li class="nav__item"><a class="nav__link" href="#">Products</a></li>
+        </ul>
 
-        <img
-          class="header-logo"
-          src="img/logo-big.svg"
-          alt="Urban fusion logo"
-        />
+        <img class="nav__logo" src="img/logo-big.png" alt="Urban fusion logo" />
 
-        <div class="user-btns">
-          <button aria-label="favourites list">
-            <i class="ph-heart-light user-btn"></i>
+        <div class="nav__btn-box">
+          <button class="nav__item" aria-label="favourites list">
+            <i class="ph-heart-light btn--icon"></i>
           </button>
-          <button aria-label="shopping bag">
-            <i class="ph-tote-light user-btn"></i>
+          <button class="nav__item" aria-label="shopping bag">
+            <i class="ph-tote-light btn--icon"></i>
           </button>
-          <button aria-label="user button">
-            <i class="ph-user-circle-light user-btn"></i>
+          <button class="nav__item" aria-label="account menu">
+            <i class="ph-user-circle-light btn--icon"></i>
           </button>
         </div>
       </nav>
-      </header>
+    </header>
+
+    <main>
       <section class="section-hero">
-        <div class="slider">
+        <div class="hero-slider">
+          <img
+            class="hero-slider__slide hidden"
+            src="https://images.unsplash.com/photo-1613217138844-1dae03c64d89?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHRlYSUyMGNlcmVtb255fGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=1600&q=60"
+          />
+          <img
+            class="hero-slider__slide"
+            src="https://images.unsplash.com/photo-1515696955266-4f67e13219e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTE5fHx0ZWElMjBjZXJlbW9ueXxlbnwwfDB8MHx8&auto=format&fit=crop&w=1600&q=60"
+          />
+          <img
+            class="hero-slider__slide hidden"
+            src="https://images.unsplash.com/photo-1515133356580-c863eed555e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDE2fHxoZXJiYWwlMjB0ZWF8ZW58MHwwfDB8fA%3D%3D&auto=format&fit=crop&w=1600&q=60"
+          />
+          <img
+            class="hero-slider__slide hidden"
+            src="https://images.unsplash.com/photo-1494254400119-9a456213b4a2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjAxfHxoZXJiYWwlMjB0ZWF8ZW58MHwwfDB8fA%3D%3D&auto=format&fit=crop&w=1600&q=60"
+          />
+          <img
+            class="hero-slider__slide hidden"
+            src="https://images.unsplash.com/photo-1594137052297-e55c3c6b33f9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzN8fGhlcmJhbCUyMHRlYXxlbnwwfDB8MHx8&auto=format&fit=crop&w=1600&q=60"
+          />
           <!-- Add slides here -->
+          <div class="dots">
+            <button aria-label="got to this slide" class="dots__dot"></button>
+            <button aria-label="got to this slide" class="dots__dot"></button>
+            <button
+              aria-label="got to this slide"
+              class="dots__dot dots__dot--active"
+            ></button>
+            <button aria-label="got to this slide" class="dots__dot"></button>
+            <button aria-label="got to this slide" class="dots__dot"></button>
+          </div>
         </div>
-        <button class="cta-btn">
-          Find your <span class="cta-btn-sub">herbal </span> friend
+        <button class="btn">
+          <h1 class="heading-primary">
+            Find your <span class="decorative-text--light">herbal </span> friend
+          </h1>
         </button>
       </section>
-
       <section class="section-cooperations">
         <div class="cooperation-logos">
           <img
@@ -101,39 +122,35 @@
           />
         </div>
       </section>
-    </header>
-
-    <main>
       <section class="section-featured">
-        <div class="section-header">
-          <h2 class="heading-secondary">Top sellers</h2>
+        <div class="section__heading-box">
+          <h2 class="decorative-heading">Top sellers</h2>
           <h3 class="section-title">Featured</h3>
         </div>
-
         <div class="featured-products">
-          <div class="card">
+          <div class="featured-card">
             <img
-              class="featured-product-img"
+              class="featured-card__img"
               src="img/green tea.jpeg"
               alt="herbal tea in a teacup"
             />
-            <button class="featured-product-btn">View more</button>
+            <button class="btn btn--text">View more</button>
           </div>
-          <div class="card">
+          <div class="featured-card">
             <img
-              class="featured-product-img"
+              class="featured-card__img"
               src="img/red tea.jpeg"
               alt="herbal tea in a teacup"
             />
-            <button class="featured-product-btn">View more</button>
+            <button class="btn btn--text">View more</button>
           </div>
-          <div class="card">
+          <div class="featured-card">
             <img
-              class="featured-product-img"
+              class="featured-card__img"
               src="img/yellow tea.jpeg"
               alt="herbal tea in a teacup"
             />
-            <button class="featured-product-btn">View more</button>
+            <button class="btn btn--text">View more</button>
           </div>
         </div>
       </section>
@@ -141,27 +158,24 @@
       <section class="section-values">
         <div class="values">
           <div class="value">
-            <!-- <i class="ph-tree-thin value-icon"></i> -->
-            <img class="value-icon-test" src="img/tree.svg" alt="" />
-            <h3>Traditions</h3>
+            <img class="value__icon" src="img/tree.svg" alt="" />
+            <h3 class="decorative-heading">Traditions</h3>
             <p>
               We value the ancient traditions which are brought to modern times
               through nature.
             </p>
           </div>
           <div class="value">
-            <!--            <i class="ph-heart-thin value-icon-test"></i>-->
-            <img class="value-icon-test" src="img/heart.svg" alt="" />
-            <h3>Health</h3>
+            <img class="value__icon" src="img/heart.svg" alt="" />
+            <h3 class="decorative-heading">Health</h3>
             <p>
               We value your health by offering herbal teas with healing
               properties made from ancient recipes.
             </p>
           </div>
           <div class="value">
-            <!-- <i class="ph-globe-hemisphere-west-thin value-icon"></i> -->
-            <img class="value-icon-test" src="img/earth.svg" alt="" />
-            <h3>Sustainability</h3>
+            <img class="value__icon" src="img/earth.svg" alt="" />
+            <h3 class="decorative-heading">Sustainability</h3>
             <p>
               We value our earth and it's life. We work with fairtrade to
               provide you ethically produced herbal teas.
@@ -171,15 +185,15 @@
       </section>
 
       <section class="section-company">
-        <div class="section-header">
-          <h2 class="heading-secondary">Urban Infusion</h2>
+        <div class="section__heading-box">
+          <h2 class="decorative-heading">Urban Infusion</h2>
           <h3 class="section-title">
             Fusing ancient traditions and modern times
           </h3>
         </div>
 
         <div class="company-grid">
-          <div class="company-text">
+          <div class="company-grid__text">
             <p>
               Humans have been enjoying herbal teas for millennia. We are
               passionate for natural teas, nurtured by our ancestors. Our
@@ -188,43 +202,43 @@
             </p>
           </div>
 
-          <div class="gallery-container gallery--right">
+          <div class="gallery gallery--right">
             <img
-              class="gallery-img"
+              class="gallery__img"
               src="img/pic-1.webp"
               alt="herbal tea in a teapot"
             />
             <img
-              class="gallery-img"
+              class="gallery__img"
               src="img/pic-2.webp"
               alt="herbal tea in a teacup"
             />
             <img
-              class="gallery-img"
+              class="gallery__img"
               src="img/pic-3.webp"
               alt="herbal tea ready to be served"
             />
           </div>
 
-          <div class="gallery-container gallery--left">
+          <div class="gallery gallery--left">
             <img
-              class="gallery-img"
+              class="gallery__img"
               src="img/pic-4.webp"
               alt="herbal tea with blossoms in a teacup"
             />
             <img
-              class="gallery-img"
+              class="gallery__img"
               src="img/pic-5.webp"
               alt="herbal tea in a cup outdoors"
             />
             <img
-              class="gallery-img"
+              class="gallery__img"
               src="img/pic-6.webp"
               alt="herbal tea in a teapot"
             />
           </div>
 
-          <div class="company-text">
+          <div class="company-grid__text">
             <p>
               We are passionate about ancient traditions of tea ceremony.
               Therefore our employees can help you find what you need for you
@@ -233,7 +247,7 @@
             </p>
           </div>
 
-          <div class="company-text">
+          <div class="company-grid__text">
             <p>
               We have carefully created a collection of more than 600 different
               teas from 140 different countries. Come visit us at our office in
@@ -242,236 +256,434 @@
             </p>
           </div>
 
-          <div class="gallery-container gallery--right">
-            <img class="gallery-img" src="img/pic-7.webp" alt="tea ceremony" />
+          <div class="gallery gallery--right">
+            <img class="gallery__img" src="img/pic-7.webp" alt="tea ceremony" />
             <img
-              class="gallery-img"
+              class="gallery__img"
               src="img/pic-8.webp"
               alt="outdoor teaparty"
             />
-            <img class="gallery-img" src="img/pic-9.webp" alt="herbal tea" />
+            <img class="gallery__img" src="img/pic-9.webp" alt="herbal tea" />
           </div>
         </div>
       </section>
 
       <section class="section-products">
-        <div class="section-header">
-          <h2 class="heading-secondary">Products</h2>
+        <div class="section__heading-box">
+          <h2 class="decorative-heading">Products</h2>
           <h3 class="section-title">Find your herbal friend!</h3>
         </div>
 
-        <div class="products">
-          <article class="product-card product-tertiary-prev">
-            <img src="img/pic-2.webp" alt="herbal tea in a teacup" />
-            <h4>Heather tea</h4>
-            <ul class="product-card-list">
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>From Norwegian
-                mountains
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Gathered
-                carefully before the bees to hold the honey taste
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Rich in vitamins
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Local produce
-              </li>
-            </ul>
-            <div class="shopping-info">
-              <strong>200 NOK</strong>
-              <div class="shopping-controls">
-                <button class="add-to-fave" aria-label="add to favourite list">
-                  <i class="ph-heart-thin shopping-control"></i>
-                </button>
-                <button class="add-to-cart" aria-label="add to shopping cart">
-                  <i class="ph-shopping-cart-simple-thin shopping-control"></i>
-                </button>
+        <div class="product-slider">
+          <article class="product-card product-card__slide--tertiary-prev">
+            <img
+              class="product-card__img"
+              src="img/pic-2.webp"
+              alt="herbal tea in a teacup"
+            />
+            <div class="product-card__details">
+              <h4 class="product-card__heading">Heather tea</h4>
+              <ul class="product-card__list">
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>From Norwegian
+                  mountains
+                </li>
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>Gathered
+                  carefully before the bees to hold the honey taste
+                </li>
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>Rich in
+                  vitamins
+                </li>
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>Local produce
+                </li>
+              </ul>
+              <div class="product-card__cta">
+                <div class="product-card__rating">
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-fill"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-fill"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-fill"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-light"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-light"></i
+                  ></span>
+                </div>
+                <div class="product-card__controls">
+                  <button aria-label="add item to favourite list">
+                    <i class="ph-heart-light btn--icon"></i>
+                  </button>
+                  <button aria-label="add item to shopping cart">
+                    <i class="ph-tote-light btn--icon"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </article>
-          <article class="product-card product-secondary-prev">
-            <img src="img/pic-3.webp" alt="herbal tea ready to be served" />
-            <h4>Heather tea</h4>
-            <ul class="product-card-list">
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>From Norwegian
-                mountains
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Gathered
-                carefully before the bees to hold the honey taste
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Rich in vitamins
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Local produce
-              </li>
-            </ul>
-            <div class="shopping-info">
-              <strong>200 NOK</strong>
-              <div class="shopping-controls">
-                <button class="add-to-fave" aria-label="add to favourite list">
-                  <i class="ph-heart-thin shopping-control"></i>
-                </button>
-                <button class="add-to-cart" aria-label="add to shopping cart">
-                  <i class="ph-shopping-cart-simple-thin shopping-control"></i>
-                </button>
+          <article class="product-card product-card__slide--secondary-prev">
+            <img
+              class="product-card__img"
+              src="img/red tea.jpeg"
+              alt="herbal tea in a teacup"
+            />
+            <div class="product-card__details">
+              <h4 class="product-card__heading">Linden Blossom Tea</h4>
+              <ul class="product-card__list">
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>Classic
+                  Latvian tea
+                </li>
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>Helps against
+                  laziness
+                </li>
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>Use 100C water
+                </li>
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>Gathered in
+                  summer 2021
+                </li>
+              </ul>
+              <div class="product-card__cta">
+                <div class="product-card__rating">
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-fill"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-fill"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-fill"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-light"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-light"></i
+                  ></span>
+                </div>
+                <div class="product-card__controls">
+                  <button aria-label="add item to favourite list">
+                    <i class="ph-heart-light btn--icon"></i>
+                  </button>
+                  <button aria-label="add item to shopping cart">
+                    <i class="ph-tote-light btn--icon"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </article>
-          <article class="product-card product-active">
-            <img src="img/pic-1.webp" alt="herbal tea in a teapot" />
-            <h4>Heather tea</h4>
-            <ul class="product-card-list">
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>From Norwegian
-                mountains
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Gathered
-                carefully before the bees to hold the honey taste
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Rich in vitamins
-              </li>
-              <li>
-                <i class="ph-check-thin product-card-icon"></i>Local produce
-              </li>
-            </ul>
-            <div class="shopping-info">
-              <strong>200 NOK</strong>
-              <div class="shopping-controls">
-                <button class="add-to-fave" aria-label="add to favourite list">
-                  <i class="ph-heart-thin shopping-control"></i>
-                </button>
-                <button class="add-to-cart" aria-label="add to shopping cart">
-                  <i class="ph-shopping-cart-simple-thin shopping-control"></i>
-                </button>
+          <article class="product-card product-card__slide--active">
+            <img
+              class="product-card__img"
+              src="img/green tea.jpeg"
+              alt="herbal tea in a teacup"
+            />
+            <div class="product-card__details">
+              <h4 class="product-card__heading">Green tea</h4>
+              <ul class="product-card__list">
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>From Norwegian
+                  mountains
+                </li>
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>Gathered
+                  carefully before the bees to hold the honey taste
+                </li>
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>Rich in
+                  vitamins
+                </li>
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>Local produce
+                </li>
+              </ul>
+              <div class="product-card__cta">
+                <div class="product-card__rating">
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-fill"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-fill"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-fill"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-light"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-light"></i
+                  ></span>
+                </div>
+                <div class="product-card__controls">
+                  <button aria-label="add item to favourite list">
+                    <i class="ph-heart-light btn--icon"></i>
+                  </button>
+                  <button aria-label="add item to shopping bag">
+                    <i class="ph-tote-light btn--icon"></i>
+                  </button>
+                </div>
               </div>
             </div>
           </article>
-
-          <!--          <article class="product-card product-secondary-next">
-                  <img
-                    src="img/pic-4.webp"
-                    alt="herbal tea with blossoms in a teacup"
-                  />
-                  <h4>Linden blossom tea</h4>
-                  <ul class="product-card-list">
-                    <li>
-                      <i class="ph-check-thin product-card-icon"></i>Classic Latvian
-                      tea
-                    </li>
-                    <li>
-                      <i class="ph-check-thin product-card-icon"></i>Helps against
-                      laziness
-                    </li>
-                    <li>
-                      <i class="ph-check-thin product-card-icon"></i>Use 100C water
-                      (not typical for herbal teas)
-                    </li>
-                    <li>
-                      <i class="ph-check-thin product-card-icon"></i>Gathered in
-                      summer 2021
-                    </li>
-                  </ul>
-                  <div class="shopping-info">
-                    <strong>200 NOK</strong>
-                    <div class="shopping-controls">
-                      <button class="add-to-fave" aria-label="add to favourite list">
-                        <i class="ph-heart-thin shopping-control"></i>
-                      </button>
-                      <button class="add-to-cart" aria-label="add to shopping cart">
-                        <i class="ph-shopping-cart-simple-thin shopping-control"></i>
-                      </button>
-                    </div>
-                  </div>
-                </article>
-                <article class="product-card product-tertiary-next">
-                  <img src="img/pic-5.webp" alt="herbal tea in a teapot" />
-                  <h4>Sencha</h4>
-                  <ul class="product-card-list">
-                    <li>
-                      <i class="ph-check-thin product-card-icon"></i>Japanese green
-                      tea
-                    </li>
-                    <li>
-                      <i class="ph-check-thin product-card-icon"></i>Green leaves
-                    </li>
-                    <li>
-                      <i class="ph-check-thin product-card-icon"></i>Available in
-                      Aug-Sep season only
-                    </li>
-                    <li>
-                      <i class="ph-check-thin product-card-icon"></i>Packaging: 50g
-                      and 500g
-                    </li>
-                  </ul>
-                  <div class="shopping-info">
-                    <select id="select-size" name="select-size">
-                      <option value="50g">100 NOK for 50g</option>
-                      <option value="500g">800 NOK for 500g</option>
-                    </select>
-                    <div class="shopping-controls">
-                      <button class="add-to-fave" aria-label="add to favourite list">
-                        <i class="ph-heart-thin shopping-control"></i>
-                      </button>
-                      <button class="add-to-cart" aria-label="add to shopping cart">
-                        <i class="ph-shopping-cart-simple-thin shopping-control"></i>
-                      </button>
-                    </div>
-                  </div>
-                </article>-->
+          <article class="product-card product-card__slide--secondary-next">
+            <img
+              class="product-card__img"
+              src="img/yellow tea.jpeg"
+              alt="herbal tea in a teacup"
+            />
+            <div class="product-card__details">
+              <h4 class="product-card__heading">Heather tea</h4>
+              <ul class="product-card__list">
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>From Norwegian
+                  mountains
+                </li>
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>Gathered
+                  carefully before the bees to hold the honey taste
+                </li>
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>Rich in
+                  vitamins
+                </li>
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>Local produce
+                </li>
+              </ul>
+              <div class="product-card__cta">
+                <div class="product-card__rating">
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-fill"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-fill"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-fill"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-light"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-light"></i
+                  ></span>
+                </div>
+                <div class="product-card__controls">
+                  <button aria-label="add item to favourite list">
+                    <i class="ph-heart-light btn--icon"></i>
+                  </button>
+                  <button aria-label="add item to shopping bag">
+                    <i class="ph-tote-light btn--icon"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="product-card product-card__slide--tertiary-next">
+            <img
+              class="product-card__img"
+              src="img/pic-2.webp"
+              alt="herbal tea in a teacup"
+            />
+            <div class="product-card__details">
+              <h4 class="product-card__heading">Heather tea</h4>
+              <ul class="product-card__list">
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>From Norwegian
+                  mountains
+                </li>
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>Gathered
+                  carefully before the bees to hold the honey taste
+                </li>
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>Rich in
+                  vitamins
+                </li>
+                <li class="product-card__item">
+                  <i class="ph-check-thin product-card__icon"></i>Local produce
+                </li>
+              </ul>
+              <div class="product-card__cta">
+                <div class="product-card__rating">
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-fill"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-fill"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-fill"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-light"></i
+                  ></span>
+                  <span class="product-card__icon--rating"
+                    ><i class="ph-leaf-light"></i
+                  ></span>
+                </div>
+                <div class="product-card__controls">
+                  <button aria-label="add item to favourite list">
+                    <i class="ph-heart-light btn--icon"></i>
+                  </button>
+                  <button aria-label="add item to shopping bag">
+                    <i class="ph-tote-light btn--icon"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </article>
+          <div class="slider-controls">
+            <button
+              aria-label="go to previous slide"
+              class="slider__btn slider__btn--prev"
+            >
+              <i class="ph-caret-left"></i>
+            </button>
+            <div class="dots">
+              <button aria-label="got to this slide" class="dots__dot"></button>
+              <button aria-label="got to this slide" class="dots__dot"></button>
+              <button
+                aria-label="got to this slide"
+                class="dots__dot dots__dot--active"
+              ></button>
+              <button aria-label="got to this slide" class="dots__dot"></button>
+              <button aria-label="got to this slide" class="dots__dot"></button>
+            </div>
+            <button
+              aria-label="go to next slide"
+              class="slider__btn slider__btn--next"
+            >
+              <i class="ph-caret-right"></i>
+            </button>
+          </div>
         </div>
       </section>
 
       <section class="section-testimonials">
-        <div class="section-header">
-          <h2 class="heading-secondary">Testimonials</h2>
+        <div class="section__heading-box">
+          <h2 class="decorative-heading">Testimonials</h2>
           <h3 class="section-title">Still not convinced?</h3>
         </div>
         <div class="testimonials">
           <div class="testimonial">
-            <h4>Lorem ipsum dolor sit amet!</h4>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-            <span><i> - Incidunt Minus</i></span>
+            <h4 class="testimonial__heading">" Best Sencha tea! "</h4>
+            <blockquote class="testimonial__text">
+              Tea is the necessary component for my busy days at the office. It
+              helps me focus. Urban Infusion have the best Sencha tea – my
+              favorite.
+            </blockquote>
+            <div class="testimonial__author">
+              <img
+                class="testimonial__img"
+                src="img/testimonial-1.jpeg"
+                alt="john cliff"
+              />
+              <span class="testimonial__name">- John Cliff</span>
+            </div>
           </div>
           <div class="testimonial">
-            <h4>Lorem ipsum dolor sit amet!</h4>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-            <span><i> - Incidunt Minus</i></span>
+            <h4 class="testimonial__heading">" Great selection of tea! "</h4>
+            <blockquote class="testimonial__text">
+              “I love the great selection Urban Infusion have! I try a new tea
+              every day and I still have many teas to try out! Recommend!”
+            </blockquote>
+            <div class="testimonial__author">
+              <img
+                class="testimonial__img"
+                src="img/testimonial-2.jpeg"
+                alt="purple floyd"
+              />
+              <span class="testimonial__name">- Purple Floyd</span>
+            </div>
           </div>
           <div class="testimonial">
-            <h4>Lorem ipsum dolor sit amet!</h4>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-            <span><i> - Incidunt Minus</i></span>
+            <h4 class="testimonial__heading">" These teas are dope! "</h4>
+            <blockquote class="testimonial__text">
+              Man, their teas are dope! P.S. You can also smoke them, just don't
+              tell anyone I told you that
+            </blockquote>
+            <div class="testimonial__author">
+              <img
+                class="testimonial__img"
+                src="img/testimonial-3.jpeg"
+                alt="james jagger"
+              />
+              <span class="testimonial__name">- James Jagger</span>
+            </div>
           </div>
         </div>
       </section>
     </main>
 
-    <footer>
-      <img
-        class="footer-logo"
-        src="img/logo-big.svg"
-        alt="Urban infusion logo"
-      />
-      <p class="copyright">
-        Copyright &copy; 2022 NTNU, IDATA2301 Web Technologies - group 3
-      </p>
+    <footer class="footer">
+      <div class="logo-col">
+        <img
+          class="footer__logo"
+          src="img/logo-big.png"
+          alt="Urban infusion logo"
+        />
+        <p class="copyright">
+          Copyright &copy; 2022 NTNU, IDATA2301 Web Technologies - group 3
+        </p>
+      </div>
+      <nav>
+        <p class="footer-heading">Account</p>
+        <ul class="footer__list">
+          <li class="footer__item">
+            <a href="#" class="footer__link">Create account</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Sign in</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Create account</a>
+          </li>
+        </ul>
+      </nav>
+      <nav>
+        <p class="footer-heading">Resources</p>
+        <ul class="footer__list">
+          <li class="footer__item">
+            <a href="#" class="footer__link">Customer service</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Terms of service</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Privacy policy</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Cancellations and returns</a>
+          </li>
+        </ul>
+      </nav>
+      <nav>
+        <p class="footer-heading">Company</p>
+        <ul class="footer__list">
+          <li class="footer__item">
+            <a href="#" class="footer__link">About Urban Infusion</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Business inquries</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Careers</a>
+          </li>
+        </ul>
+      </nav>
     </footer>
   </body>
 </html>
