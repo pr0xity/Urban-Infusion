@@ -41,6 +41,8 @@ public class User {
     this.enabled = true;
   }
 
+  public User() {}
+
   public Integer getId() {
     return id;
   }
