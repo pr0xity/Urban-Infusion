@@ -61,6 +61,8 @@ public class Product {
     this.deletedAt = deletedAt;
   }
 
+  public Product() {}
+
   public int getCategoryId() {
     return categoryId;
   }
