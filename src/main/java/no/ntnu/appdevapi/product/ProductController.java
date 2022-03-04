@@ -34,7 +34,7 @@ public class ProductController {
    * Get a specific product.
    *
    * @param index The index of the product, starting from 0.
-   * @return The product matching the index, null otherwise.
+   * @return The product matching the index, or status 404.
    */
   @GetMapping("/{index}")
   @ApiOperation(value = "Get a specific product.", notes = "Returns the product or null when index is invalid.")
