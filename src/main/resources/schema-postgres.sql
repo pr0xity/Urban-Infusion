@@ -121,3 +121,14 @@ CREATE TABLE IF NOT EXISTS "payment_details"(
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP
 );
+
+CREATE TABLE IF NOT EXISTS "product_rating" (
+    id SERIAL PRIMARY KEY,
+    fk_user_id INTEGER REFERENCES "user" (id) NOT NULL,
+    fk_product_id INTEGER REFERENCES "product" (id) NOT NULL,
+    rating INTEGER NOT NULL,
+    CHECK (rating BETWEEN 1 AND 5),
+    comment VARCHAR(255),
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP
+);
