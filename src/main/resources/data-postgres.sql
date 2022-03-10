@@ -120,3 +120,11 @@ insert into "payment_details" (id, fk_order_id, amount, provider, status, create
 insert into "payment_details" (id, fk_order_id, amount, provider, status, created_at, updated_at) values (2, 2, 63, 'Stripe', 'OK', '2021-10-06 00:12:11', '2021-11-13 22:20:26');
 insert into "payment_details" (id, fk_order_id, amount, provider, status, created_at, updated_at) values (3, 3, 32, 'Visa', 'OK', '2021-07-16 08:48:32', '2021-09-04 06:27:51');
 insert into "payment_details" (id, fk_order_id, amount, provider, status, created_at, updated_at) values (4, 4, 45, 'Visa', 'OK', '2021-05-25 11:24:38', '2021-12-29 04:16:33');
+
+-- Insert data into product_ratings
+insert into "product_rating" (id, fk_user_id, fk_product_id, rating, comment, created_at, updated_at) values (1, 1, 1, 5, 'Love it!', '2021-10-17 22:53:50', '2022-01-16 16:54:19');
+insert into "product_rating" (id, fk_user_id, fk_product_id, rating, comment, created_at, updated_at) values (2, 2, 1, 2, 'It is okay.', '2021-07-16 08:48:32', '2021-09-04 06:27:51');
+insert into "product_rating" (id, fk_user_id, fk_product_id, rating, comment, created_at, updated_at) values (3, 1, 2, 3, 'Enjoyable!.', '2022-02-20 22:42:06', '2022-02-02 09:28:22');
+insert into "product_rating" (id, fk_user_id, fk_product_id, rating, comment, created_at, updated_at) values (4, 3, 1, 5, 'Lovely!.', '2022-02-20 22:42:06', '2022-02-02 09:28:22');
+insert into "product_rating" (id, fk_user_id, fk_product_id, rating, comment, created_at, updated_at) values (5, 3, 2, 1, 'Lovely!.', '2022-02-20 22:42:06', '2022-02-02 09:28:22');
+

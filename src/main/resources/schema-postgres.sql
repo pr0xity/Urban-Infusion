@@ -23,6 +23,7 @@ CREATE TABLE IF NOT EXISTS "product" (
     price DOUBLE PRECISION NOT NULL,
     fk_category_id INTEGER REFERENCES "product_category" (id) NOT NULL,
     fk_inventory_id INTEGER REFERENCES "product_inventory" (id) UNIQUE NOT NULL,
+    average_rating DOUBLE PRECISION,
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP,
     deleted_at TIMESTAMP
@@ -132,3 +133,23 @@ CREATE TABLE IF NOT EXISTS "product_rating" (
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP
 );
+
+CREATE OR REPLACE FUNCTION public.set_average_rating()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+BEGIN
+    UPDATE product
+        SET average_rating = (
+            SELECT AVG(rating)
+            FROM product_rating
+            WHERE product.id = NEW.fk_product_id);
+    RETURN NEW;
+
+END;
+$function$
+;
+
+CREATE OR REPLACE TRIGGER update_average_ratings AFTER
+INSERT OR UPDATE ON public.product_rating
+FOR EACH ROW EXECUTE FUNCTION set_average_rating();
