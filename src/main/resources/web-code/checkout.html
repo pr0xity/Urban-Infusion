@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" href="img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hurricane:wght@200;300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="queries.css" />
+
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <title>Urban Infusion</title>
+  </head>
+  <body>
+    <header class="header">
+      <button class="nav-mobile__btn btn--icon"><i class="ph-list"></i></button>
+      <img class="logo" src="img/logo-big.png" alt="Urban fusion logo" />
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a class="nav__link" href="index.html">Home</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="index.html#section-company">About us</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="index.html#section-products">Products</a>
+          </li>
+        </ul>
+
+        <div class="nav__btn-box">
+          <button class="nav__item" aria-label="favourites list">
+            <a href="wishlist.html" class="nav__link"
+              ><i class="ph-heart-light btn--icon"></i
+            ></a>
+          </button>
+          <button class="nav__item" aria-label="shopping bag">
+            <a href="#" class="nav__link">
+              <i class="ph-tote-light btn--icon"></i
+            ></a>
+          </button>
+          <button class="nav__item" id="user-menu" aria-label="account menu">
+            <i class="ph-user-circle-light btn--icon"></i>
+          </button>
+          <div class="nav__user-menu hidden">
+            <form class="login" name="login">
+              <input
+                class="login__input"
+                type="text"
+                placeholder="emailaddress"
+              />
+              <input
+                class="login__input"
+                type="password"
+                placeholder="password"
+              />
+              <a class="btn--green">Sign in</a>
+            </form>
+            <a href="#" class="link"
+              >Not a member yet? <strong>Join here!</strong></a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="checkout container--beige">
+      <div class="section__heading-box">
+        <h1 class="decorative-heading">Checkout</h1>
+        <h2 class="section-title">Your shopping bag!</h2>
+      </div>
+      <section class="section-bag container--white">
+        <h3 class="heading-tertiary">1. Shopping bag</h3>
+
+        <div class="checkout__list-headings">
+          <span class="checkout__list-heading margin-left--small"
+            >Products</span
+          >
+          <span class="checkout__list-heading">Size</span>
+          <span class="checkout__list-heading">Quantity</span>
+          <span class="checkout__list-heading">Total</span>
+        </div>
+        <ul class="checkout__list">
+          <li class="checkout__item">
+            <img class="item__img" src="img/green tea.jpeg" />
+            <p class="item__description margin-left--small">
+              <a class="link" href="#"
+                ><span class="item__name">Green tea</span></a
+              >
+              <span class="item__number">Art.nr. 43240234</span>
+            </p>
+            <span class="item__size">50g</span>
+            <input
+              class="item__quantity"
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="1"
+              max="100"
+              step="1"
+              value="1"
+            />
+            <span class="item__price">200 NOK</span>
+            <button class="btn--icon"><i class="ph-trash"></i></button>
+          </li>
+          <li class="checkout__item">
+            <img class="item__img" src="img/red tea.jpeg" />
+            <p class="item__description margin-left--small">
+              <a class="link" href="#"
+                ><span class="item__name">Linden Blossom tea</span></a
+              >
+              <span class="item__number">Art.nr. 43455353</span>
+            </p>
+            <span class="item__size">50g</span>
+            <input
+              class="item__quantity"
+              type="number"
+              id="quantity"
+              name="quantity"
+              min="1"
+              max="100"
+              step="1"
+              value="1"
+            />
+            <span class="item__price">200 NOK</span>
+            <button class="btn--icon"><i class="ph-trash"></i></button>
+          </li>
+        </ul>
+      </section>
+      <section class="section-info container--white">
+        <h3 class="heading-tertiary">2. Your information</h3>
+        <address class="checkout__customer margin-left--small">
+          <div class="checkout__info">
+            <span class="checkout__label">Name</span>
+            <span class="checkout__info">Leslie Alexander</span>
+          </div>
+          <div class="checkout__info">
+            <span class="checkout__label">Emailaddress</span>
+            <span class="checkout__info">leslie.alexander@example.com</span>
+          </div>
+          <div class="checkout__info">
+            <span class="checkout__label">Address</span>
+            <span class="checkout__info"
+              >Flat 4, 24 Castle Street, Perth, PH1 3JY</span
+            >
+          </div>
+        </address>
+        <span class="checkout__wrong"
+          >Wrong information? <a class="link">Click here</a></span
+        >
+      </section>
+      <section class="section-payment-delivery container--white">
+        <h3 class="heading-tertiary">3. Delivery and payment</h3>
+        <h4 class="checkout__heading">
+          <i class="btn--icon ph-truck"></i
+          ><span class="checkout__list-heading">Delivery method</span>
+        </h4>
+        <div class="checkout__plan">
+          <span class="checkout__label">Standard - Home delivery</span>
+          <span class="checkout__info">Delivery within 3 - 7 days</span>
+        </div>
+        <h4 class="checkout__heading">
+          <i class="ph-credit-card btn--icon"></i>
+          <span class="checkout__list-heading">Payment method</span>
+        </h4>
+        <div class="checkout__plan">
+          <span class="checkout__label">Coupon</span>
+          <span class="checkout__info">You get a free order from us :)</span>
+        </div>
+      </section>
+      <button class="btn--green">Complete purchase</button>
+    </main>
+
+    <footer class="footer">
+      <div class="logo-col">
+        <img
+          class="footer__logo"
+          src="img/logo-big.png"
+          alt="Urban infusion logo"
+        />
+        <p class="copyright">
+          Copyright &copy; 2022 NTNU, IDATA2301 Web Technologies - group 3
+        </p>
+      </div>
+      <nav>
+        <p class="footer-heading">Account</p>
+        <ul class="footer__list">
+          <li class="footer__item">
+            <a href="#" class="footer__link">Account policy</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Create account</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Sign in</a>
+          </li>
+        </ul>
+      </nav>
+      <nav>
+        <p class="footer-heading">Resources</p>
+        <ul class="footer__list">
+          <li class="footer__item">
+            <a href="#" class="footer__link">Customer service</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Terms of service</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Privacy policy</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Cancellations and returns</a>
+          </li>
+        </ul>
+      </nav>
+      <nav>
+        <p class="footer-heading">Company</p>
+        <ul class="footer__list">
+          <li class="footer__item">
+            <a href="#" class="footer__link">About Urban Infusion</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Business inquries</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Careers</a>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+  </body>
+</html>

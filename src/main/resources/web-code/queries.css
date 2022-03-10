@@ -1,0 +1,382 @@
+/**************************/
+/* LESS THAN 1230px (Smaller desktop) */
+/**************************/
+
+@media (max-width: 76.875em) {
+  html {
+    font-size: 56.5%;
+  }
+
+  .nav__list {
+    gap: 2.4rem;
+  }
+
+  .cooperation-logos {
+    gap: 9.6rem;
+  }
+
+  .cooperation-logo {
+    opacity: 0.3;
+    max-height: 10rem;
+    max-width: 10rem;
+  }
+
+  .values {
+    gap: 2.4rem;
+  }
+
+  .company-grid {
+    padding: 2rem 3.6rem 0 3.6rem;
+  }
+
+  .gallery--right .gallery__img:first-child {
+    top: -20%;
+    right: -110%;
+  }
+
+  .gallery--right .gallery__img:nth-child(2) {
+    top: -10%;
+    right: -40%;
+  }
+
+  .gallery--right .gallery__img:nth-child(3) {
+    top: 10%;
+    right: -80%;
+  }
+
+  .gallery--left .gallery__img:first-child {
+    top: -20%;
+    left: 50%;
+  }
+
+  .gallery--left .gallery__img:nth-child(2) {
+    top: -10%;
+    left: -20%;
+  }
+
+  .gallery--left .gallery__img:nth-child(3) {
+    top: 10%;
+    left: 10%;
+  }
+}
+
+/**************************/
+/* LESS THAN 976px (Laptops) */
+/**************************/
+
+@media (max-width: 61em) {
+  html {
+    font-size: 50%;
+  }
+
+  .nav {
+    padding: 0.8rem 0.8rem 0 0.8rem;
+  }
+
+  .nav__list {
+    gap: 1.6rem;
+  }
+
+  .section-featured {
+    padding: 6.4rem 4.8rem;
+  }
+
+  .gallery--right .gallery__img:first-child {
+    top: -20%;
+    right: -120%;
+  }
+
+  .gallery--right .gallery__img:nth-child(2) {
+    top: -10%;
+    right: -50%;
+  }
+
+  .gallery--right .gallery__img:nth-child(3) {
+    top: 10%;
+    right: -90%;
+  }
+
+  .gallery--left .gallery__img:first-child {
+    top: -20%;
+    left: 50%;
+  }
+
+  .gallery--left .gallery__img:nth-child(2) {
+    top: -10%;
+    left: -30%;
+  }
+
+  .gallery--left .gallery__img:nth-child(3) {
+    top: 10%;
+    left: 10%;
+  }
+}
+
+/**************************/
+/* LESS THAN 864px (Landscape tablets) */
+/**************************/
+
+@media (max-width: 54em) {
+  .btn--icon {
+    font-size: 4.2rem;
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+  }
+  .nav {
+    position: relative;
+  }
+  .overlay {
+    position: fixed;
+    top: 0%;
+    right: 0%;
+    height: 100vh;
+    width: 42vw;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 100000;
+    backdrop-filter: blur(5px);
+  }
+
+  .nav__list {
+    padding: 12.8rem 6.4rem;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    height: 100vh;
+    width: 58vw;
+    font-size: 2.4rem;
+    /* background-color: rgba(255, 255, 255, 0.7); */
+    background-color: rgba(241, 238, 226, 0.6);
+    backdrop-filter: blur(15px);
+    z-index: 10000;
+    flex-direction: column;
+    gap: 4.8rem;
+    box-shadow: 3rem 2rem 10rem rgba(0, 0, 0, 0.49);
+  }
+
+  .nav__user-menu {
+    padding-top: 5.6rem;
+    gap: 4.8rem;
+    bottom: 0%;
+    right: -3.2rem;
+    height: 50vh;
+    width: 100vw;
+    /* background-color: #f1eee2; */
+    /* background-color: rgba(241, 238, 226, 0.6); */
+    background-color: rgba(218, 215, 205, 0.65);
+    backdrop-filter: blur(15px);
+    box-shadow: 0rem 4rem 3rem rgba(0, 0, 0, 0.5);
+    font-size: 2rem;
+  }
+
+  .nav__user-menu .btn--green {
+    font-size: 2.4rem;
+    padding: 0.8rem 2.4rem;
+  }
+  .login {
+    display: flex;
+    flex-direction: column;
+    font-family: inherit;
+    gap: 3.2rem;
+    align-items: center;
+  }
+
+  .login__input {
+    padding: 0.8rem;
+    width: 42rem;
+    border-radius: 3px;
+    border: 0.1rem solid rgba(0, 0, 0, 0.1);
+    font-family: "Montserrat", sans-serif;
+    font-size: 2rem;
+    box-shadow: inset 0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+  }
+
+  .nav__item:hover {
+    transform: scale(1.05);
+  }
+
+  .nav__item:active {
+    transform: scale(1.01);
+  }
+
+  .nav-mobile__btn {
+    display: initial;
+    pointer-events: visible;
+    cursor: pointer;
+    margin-top: 1.2rem;
+    z-index: 100000000000;
+  }
+
+  .logo {
+    top: 2rem;
+    left: 22rem;
+  }
+
+  .cooperation-logo {
+    max-width: 8rem;
+    max-height: 8rem;
+  }
+
+  .featured-products {
+    margin: 0 auto;
+    display: block;
+    height: 48rem;
+    width: 40rem;
+    position: relative;
+  }
+
+  .featured-card {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    /* transform: translateX(-50%); */
+    margin: 0 auto;
+    width: 40rem;
+  }
+
+  .values {
+    padding: 0 16rem;
+    grid-template-columns: 1fr;
+  }
+
+  .section-company .section__heading-box {
+    margin: 0 auto 2rem auto;
+  }
+
+  .company-grid {
+    position: relative;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, auto);
+    padding-bottom: 26rem;
+  }
+
+  .company-grid__text,
+  .company-grid__text:nth-of-type(2),
+  .company-grid__text:nth-of-type(3) {
+    grid-row: span 1;
+    grid-column: 1 / -1;
+  }
+
+  .slider-container {
+    justify-self: center;
+    height: 10rem;
+    width: 110%;
+    position: relative;
+  }
+
+  .gallery {
+    position: static;
+    height: 0;
+    width: 0;
+  }
+
+  .gallery__img {
+    width: 38%;
+  }
+
+  .gallery--right .gallery__img:first-child,
+  .gallery--left .gallery__img:first-child {
+    /* top: 48%;*/
+    left: initial;
+    top: 2%;
+    right: 0%;
+  }
+
+  .gallery--right .gallery__img:nth-child(2),
+  .gallery--left .gallery__img:nth-child(2) {
+    /* top: 45%;
+    left: -200%; */
+    top: -18%;
+    left: 0%;
+  }
+
+  .gallery--right .gallery__img:nth-child(3),
+  .gallery--left .gallery__img:nth-child(3) {
+    /* top: 55%;
+    left: -20%; */
+    top: 20%;
+    left: 30%;
+  }
+
+  .section-testimonials {
+    /* padding: 9.6rem 0.4rem;
+    padding-bottom: 16rem; */
+
+    padding: 9.6rem 6.4rem;
+  }
+
+  .testimonials {
+    /* grid-auto-columns: repeat(3, minmax(auto, 14.6em)); */
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 2.4rem;
+  }
+
+  .testimonial {
+    width: 100%;
+    padding: 2.4em 0.4rem 3.2rem 0.4rem;
+    text-align: left;
+  }
+  .testimonial__heading {
+    margin-bottom: 0rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .testimonial__text {
+    display: none;
+    width: 40%;
+  }
+
+  .testimonial__author {
+    transform: none;
+    position: static;
+    margin-top: 3.2rem;
+  }
+
+  .testimonial__btn {
+    font-size: 3rem;
+  }
+
+  .footer {
+    grid-template-columns: 1fr;
+    row-gap: 5rem;
+  }
+
+  .logo-col {
+    margin-top: 5rem;
+    grid-row: 4 / 5;
+  }
+
+  .footer-heading {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .footer__list {
+    display: none;
+  }
+
+  .footer__btn {
+    font-size: 2rem;
+    transition: all 0.2s ease-out;
+  }
+}
+
+/**************************/
+/* LESS THAN 672px (Portrait tablets) */
+/**************************/
+
+@media (max-width: 42em) {
+}
+
+@media (max-width: 32em) {
+  .logo {
+    content: url(img/favicon.png);
+    top: 1rem;
+    left: 10.5rem;
+  }
+}
