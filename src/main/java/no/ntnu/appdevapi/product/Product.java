@@ -1,7 +1,6 @@
 package no.ntnu.appdevapi.product;
 
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.tomcat.jni.Local;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
