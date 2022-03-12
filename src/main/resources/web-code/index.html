@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="img/favicon.png" />
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="queries.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/queries.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -43,6 +43,7 @@
             <a class="nav__link" href="#section-products">Products</a>
           </li>
         </ul>
+        <div class="overlay hidden"></div>
 
         <div class="nav__btn-box">
           <button class="nav__item" aria-label="favourites list">
@@ -165,7 +166,7 @@
           <h3 class="section-title">Featured</h3>
         </div>
         <div class="featured-products">
-          <div class="featured-card">
+          <div class="featured-card" data-slide="0">
             <img
               class="featured-card__img"
               src="img/green tea.jpeg"
@@ -173,7 +174,7 @@
             />
             <a href="#" class="btn btn--text">View more</a>
           </div>
-          <div class="featured-card">
+          <div class="featured-card" data-slide="1">
             <img
               class="featured-card__img"
               src="img/red tea.jpeg"
@@ -181,7 +182,7 @@
             />
             <a href="#" class="btn btn--text">View more</a>
           </div>
-          <div class="featured-card">
+          <div class="featured-card" data-slide="2">
             <img
               class="featured-card__img"
               src="img/yellow tea.jpeg"
@@ -257,7 +258,7 @@
             </p>
           </div>
 
-          <div class="gallery gallery--right" id="gallery__slide-1">
+          <div class="gallery gallery--right" id="gallery__slide-1" data-slide="0">
             <img
               class="gallery__img"
               src="img/pic-1.webp"
@@ -275,7 +276,7 @@
             />
           </div>
 
-          <div class="gallery gallery--left" id="gallery__slide-2">
+          <div class="gallery gallery--left" id="gallery__slide-2" data-slide="1">
             <img
               class="gallery__img"
               src="img/pic-4.webp"
@@ -293,7 +294,7 @@
             />
           </div>
 
-          <div class="gallery gallery--right" id="gallery__slide-3">
+          <div class="gallery gallery--right" id="gallery__slide-3" data-slide="2">
             <img class="gallery__img" src="img/pic-7.webp" alt="tea ceremony" />
             <img
               class="gallery__img"
@@ -314,7 +315,7 @@
         <div class="product-slider">
           <article
             class="product-card container--white product-card__slide--tertiary-prev"
-          >
+            data-slide="0">
             <img
               class="product-card__img"
               src="img/pic-2.webp"
@@ -370,7 +371,7 @@
           </article>
           <article
             class="product-card container--white product-card__slide--secondary-prev"
-          >
+            data-slide="1">
             <img
               class="product-card__img"
               src="img/red tea.jpeg"
@@ -428,7 +429,7 @@
           </article>
           <article
             class="product-card container--white product-card__slide--active"
-          >
+            data-slide="2">
             <img
               class="product-card__img"
               src="img/green tea.jpeg"
@@ -486,7 +487,7 @@
           </article>
           <article
             class="product-card container--white product-card__slide--active"
-          >
+            data-slide="3">
             <img
               class="product-card__img"
               src="img/green tea.jpeg"
@@ -544,7 +545,7 @@
           </article>
           <article
             class="product-card container--white product-card__slide--secondary-next"
-          >
+            data-slide="4">
             <img
               class="product-card__img"
               src="img/yellow tea.jpeg"
@@ -602,7 +603,7 @@
           </article>
           <article
             class="product-card container--white product-card__slide--secondary-next"
-          >
+            data-slide="5">
             <img
               class="product-card__img"
               src="img/yellow tea.jpeg"
@@ -660,7 +661,7 @@
           </article>
           <article
             class="product-card container--white product-card__slide--tertiary-next"
-          >
+            data-slide="6">
             <img
               class="product-card__img"
               src="img/pic-2.webp"

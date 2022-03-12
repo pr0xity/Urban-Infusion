@@ -1,9 +1,5 @@
 const headerEl = document.querySelector(".header");
 const sectionHeroEl = document.querySelector(".section-hero");
-const sectionCooperationsEl = document.querySelector(".section-cooperations");
-const tabletQuery = window.matchMedia("(max-width: 54em)");
-const footerHeadingsEl = document.querySelectorAll(".footer-heading");
-const navMobileBtns = document.querySelectorAll(".nav-mobile__btn");
 
 /**
  * Adds sticky navigation when scrolled passed hero section.
@@ -29,14 +25,16 @@ const options = {
 };
 
 const observer = new IntersectionObserver(stickyNavigation, options);
+observer.observe(sectionHeroEl);
 
 /**
+ * //TODO: Move this to another file and import from it
+ *
  * Represents a slider
  */
 class Slider {
-  sliderInstance = this;
   slides;
-  elemnt;
+  element;
   currentSlide;
   numberOfSlides;
   dots;
@@ -52,19 +50,21 @@ class Slider {
     this.element = slides[0].parentNode;
     this.numberOfSlides = slides.length;
     this.currentSlide = Math.floor(this.numberOfSlides / 2);
-    this.slides.forEach((slide, index) => {
-      slide.addEventListener("click", (event) => {
-        this.currentSlide = index;
-        this.goToSlide();
-      });
-    });
+    this.goToSlideReference = this.goToSlide.bind(this);
   }
+
+  createSlides = function () {
+    this.createSlideController();
+    this.formatSlides();
+    this.slides.forEach((slide) => {
+      slide.addEventListener("click", this.goToSlideReference);
+    });
+  };
 
   /**
    * Formats the slides
    */
   formatSlides = function () {
-    console.log(this.currentSlide);
     this.slides[this.currentSlide].classList.add("product-card__slide--active");
     if (this.numberOfSlides < 4) {
       this.slides[(+this.currentSlide + 2) % this.numberOfSlides].classList.add(
@@ -114,6 +114,14 @@ class Slider {
     this.isFormatted = true;
   };
 
+  removeSlides() {
+    this.removeFormat();
+    this.removeSlideController();
+    this.slides.forEach((slide) => {
+      slide.removeEventListener("click", this.goToSlideReference);
+    });
+  }
+
   /**
    * Removes format from the slides
    */
@@ -151,8 +159,8 @@ class Slider {
 
     const sliderPrevBtn = this.element.querySelector(".slider__btn--prev");
     const sliderNextBtn = this.element.querySelector(".slider__btn--next");
-    sliderPrevBtn.addEventListener("click", (event) => this.sliderPrev(event));
-    sliderNextBtn.addEventListener("click", (event) => this.sliderNext(event));
+    sliderPrevBtn.addEventListener("click", this.sliderPrev.bind(this));
+    sliderNextBtn.addEventListener("click", this.sliderNext.bind(this));
 
     this.setActiveDot();
     this.dots.forEach((dot) => {
@@ -165,11 +173,8 @@ class Slider {
    */
   removeSlideController = function () {
     const slideController = this.element.querySelectorAll(".slider-controls");
-    console.log(slideController);
     slideController.forEach((controller) => {
       if (this.element.contains(controller)) {
-        console.log(controller.parentNode);
-        // this.element.removeChild(controller);
         controller.parentNode.removeChild(controller);
       }
     });
@@ -181,12 +186,10 @@ class Slider {
    * @param {*} event event used for this handler
    */
   sliderNext = function (event) {
-    event.preventDefault();
+    // event.preventDefault();
     let slide;
     if (this.numberOfSlides > 4) {
       slide = document.querySelector(".product-card__slide--tertiary-prev");
-      console.log(slide);
-      // slide.classList.add("hidden");
       slide.style.opacity = "0";
       slide.style.transform = "translateX(-300%)";
       setTimeout(function () {
@@ -199,8 +202,8 @@ class Slider {
       Number((this.currentSlide += 1));
     }
 
-    // this.setActiveDot();
-    this.goToSlide(this.currentSlide);
+    this.goToSlide();
+
     if (this.numberOfSlides > 4) {
       setTimeout(function () {
         slide.style.transform = "translateX(300%)";
@@ -223,11 +226,10 @@ class Slider {
    * @param {*} event event used for this handler
    */
   sliderPrev = function (event) {
-    event.preventDefault();
+    // event.preventDefault();
     let slide;
     if (this.numberOfSlides > 4) {
       slide = document.querySelector(".product-card__slide--tertiary-next");
-      console.log(slide);
       // slide.classList.add("hidden");
       slide.style.opacity = "0";
       slide.style.transform = "translateX(500%)";
@@ -242,7 +244,7 @@ class Slider {
     }
 
     // this.setActiveDot();
-    this.goToSlide(this.currentSlide);
+    this.goToSlide();
     if (this.numberOfSlides > 4) {
       setTimeout(function () {
         slide.style.transform = "translateX(-500%)";
@@ -274,21 +276,26 @@ class Slider {
    * @param {*} event event used in this handler (only needed for dot)
    */
   goToSlide = function (event) {
-    // If event is a pointerevent (has pointer id 1)
-    console.log(event);
-    if (event != undefined && event.pointerId === 1) {
-      this.currentSlide = Number(event.target.dataset.slide);
-      console.log(this.currentSlide);
+    if (event !== undefined) {
+      if (event.target.classList[0].includes(this.slides[0].classList[0])) {
+        this.currentSlide = Number(
+          event.target.closest(`.${this.slides[0].classList[0]}`).dataset.slide
+        );
+      } else if (event.target.classList[0].includes("dots__dot")) {
+        console.log("here?");
+        this.currentSlide = Number(event.target.dataset.slide);
+      }
     }
+
     if (this.isFormatted) {
       this.removeFormat();
       this.formatSlides();
     } else {
-      this.removeFormat();
-      this.slides[(+this.currentSlide + 1) % this.numberOfSlides].classList.add(
+      this.slides[(this.currentSlide + 1) % this.numberOfSlides].classList.add(
         "hidden"
       );
-      this.slides[(+this.currentSlide + 2) % this.numberOfSlides].classList.add(
+      this.slides[this.currentSlide].classList.remove("hidden");
+      this.slides[(this.currentSlide + 2) % this.numberOfSlides].classList.add(
         "hidden"
       );
     }
@@ -296,11 +303,24 @@ class Slider {
   };
 }
 
+/**
+ * Slider gallery for the static gallery on the landing page.
+ */
 class GallerySlider extends Slider {
+  companyEl = document.querySelector(".company-grid");
+
+  /**
+   * Creates an instance of gallery slider
+   *
+   * @param {*} slides the slide to create a slider from.
+   */
   constructor(slides) {
     super(slides);
   }
 
+  /**
+   * Creates a slider out of the gallery.
+   */
   createSlides = function () {
     this.createSlideController();
     const galleries = document.querySelectorAll(".gallery");
@@ -315,8 +335,11 @@ class GallerySlider extends Slider {
     galleries[0].classList.add("hidden");
     galleries[2].classList.add("hidden");
   };
-  companyEl = document.querySelector(".company-grid");
 
+  /**
+   * Appends gallery back to company section and removes
+   * slidecontainer.
+   */
   removeSlides = function () {
     const slideContainer = document.querySelector(".slider-container");
     const galleries = document.querySelectorAll(".gallery");
@@ -335,7 +358,6 @@ class GallerySlider extends Slider {
    */
   removeSlideController = function () {
     const slideController = this.companyEl.querySelectorAll(".slider-controls");
-    console.log(slideController);
     slideController.forEach((controller) => {
       if (this.companyEl.contains(controller)) {
         this.companyEl.removeChild(controller);
@@ -344,156 +366,34 @@ class GallerySlider extends Slider {
   };
 }
 
-/**
- * Creates caret buttons for the given list of elements.
- *
- * @param {*} elements The list of elements to create caret buttons for.
- */
-const createCaretBtns = function (elements, btnClass) {
-  let i = 0;
-  elements.forEach((element) => {
-    element.insertAdjacentHTML(
-      "beforeend",
-      `<button class="${btnClass}" data-item="${i}"><i class="ph-caret-left"></i></button>`
-    );
-    i++;
-  });
-};
-
-/**
- * Removes the caret buttons from the given list of elements.
- *
- * @param {*} elements The list of elements to remove caret button from.
- */
-const removeCaretBtns = function (elements) {
-  elements.forEach((element) => {
-    if (element.childNodes[1] !== undefined) {
-      element.removeChild(element.childNodes[1]);
-    }
-  });
-};
-
-/**
- * Iterates over footer buttons and adds listeners to the buttons.
- * Opens the footer list for the corresponding button.
- */
-const testimonialsButtons = function () {
-  const footerBtns = document.querySelectorAll(".testimonial__btn");
-
-  const footerListsEl = document.body.querySelectorAll(".testimonial__text");
-
-  footerBtns.forEach((button) => {
-    // Initial degrees value
-    let degrees = 0;
-
-    // Initial display value
-    let display = "none";
-
-    button.addEventListener("click", function (event) {
-      const clicked = event.target.closest(".testimonial__btn");
-
-      let footerListIndex = clicked.dataset.item;
-
-      if (degrees === 0) {
-        degrees = -90;
-        display = "initial";
-      } else {
-        degrees = 0;
-        display = "none";
-      }
-
-      clicked.style.transform = `rotate( ${degrees}deg)`;
-
-      footerListsEl[footerListIndex].style.display = `${display}`;
-    });
-  });
-};
-
-/**
- * Iterates over footer buttons and adds listeners to the buttons.
- * Opens the footer list for the corresponding button.
- */
-const footerButtons = function () {
-  const footerBtns = document.querySelectorAll(".footer__btn");
-
-  const footerListsEl = document.body.querySelectorAll(".footer__list");
-
-  footerBtns.forEach((button) => {
-    // Initial degrees value
-    let degrees = 0;
-
-    // Initial display value
-    let display = "none";
-
-    button.addEventListener("click", function (event) {
-      const clicked = event.target.closest(".footer__btn");
-
-      let footerListIndex = clicked.dataset.item;
-
-      if (degrees === 0) {
-        degrees = -90;
-        display = "initial";
-      } else {
-        degrees = 0;
-        display = "none";
-      }
-
-      clicked.style.transform = `rotate( ${degrees}deg)`;
-
-      footerListsEl[footerListIndex].style.display = `${display}`;
-    });
-  });
-};
+const featuredSlides = document.querySelectorAll(".featured-card");
+const featuredSlider = new Slider(featuredSlides);
+const gallerySlides = document.querySelectorAll(".gallery");
+const gallerySlider = new GallerySlider(gallerySlides);
+const testimonialCaretButtons = new CaretButtons(
+  "testimonial__btn",
+  "testimonial__heading"
+);
+const productsSlides = document.querySelectorAll(".product-card");
+const productsSlider = new Slider(productsSlides);
+productsSlider.removeFormat();
+productsSlider.createSlides();
 
 /**
  * If tablet query size matches creates the features and functions
  * for the components in tablet site.
  */
 const tabletQueryFeatures = function () {
-  const featuredSlides = document.querySelectorAll(".featured-card");
-  const gallerySlides = document.querySelectorAll(".gallery");
-  const gallerySlider = new GallerySlider(gallerySlides);
-  const featuredSlider = new Slider(featuredSlides);
-  const navListEl = document.querySelector(".nav__list");
-  const testimonialHeadingsEl = document.querySelectorAll(
-    ".testimonial__heading"
-  );
-
   if (tabletQuery.matches) {
-    document.body.classList.add("sticky");
-    featuredSlider.formatSlides();
-    featuredSlider.createSlideController();
+    testimonialCaretButtons.createCaretBtns();
+    featuredSlider.createSlides();
     gallerySlider.createSlides();
-
-    createCaretBtns(footerHeadingsEl, "footer__btn");
-    footerButtons();
-    createCaretBtns(testimonialHeadingsEl, "testimonial__btn");
-    testimonialsButtons();
-    navListEl.classList.add("hidden");
-    navMobileBtns.forEach((btn) =>
-      btn.addEventListener("click", (event) => {
-        navMobileBtns[0].classList.toggle("hidden");
-        navMobileBtns[1].classList.toggle("hidden");
-        document.body.querySelector(".overlay").classList.toggle("hidden");
-        navListEl.classList.toggle("hidden");
-      })
-    );
   } else {
-    navListEl.classList.remove("hidden");
-    observer.observe(sectionHeroEl);
-    featuredSlider.removeFormat();
-    featuredSlider.removeSlideController();
+    testimonialCaretButtons.removeCaretBtns();
+    featuredSlider.removeSlides();
     gallerySlider.removeSlides();
-    removeCaretBtns(footerHeadingsEl);
-    removeCaretBtns(testimonialHeadingsEl);
   }
 };
-
-const productsSlides = document.querySelectorAll(".product-card");
-const productsSlider = new Slider(productsSlides);
-productsSlider.removeFormat();
-productsSlider.formatSlides();
-productsSlider.createSlideController();
 
 // Update when the window is resized
 tabletQuery.addEventListener("change", tabletQueryFeatures);

@@ -1,3 +1,14 @@
+@media (min-width: 100em) {
+  html {
+    font-size: 75%;
+  }
+}
+/*
+@media (min-width: 120em) {
+  html {
+    font-size: 87.5%;
+  }
+}
 /**************************/
 /* LESS THAN 1230px (Smaller desktop) */
 /**************************/
@@ -148,7 +159,8 @@
     width: 58vw;
     font-size: 2.4rem;
     /* background-color: rgba(255, 255, 255, 0.7); */
-    background-color: rgba(241, 238, 226, 0.6);
+    /* background-color: rgba(241, 238, 226, 0.6); */
+    background: linear-gradient(180deg, #dad7cd, rgba(241, 238, 226, 0.6));
     backdrop-filter: blur(15px);
     z-index: 10000;
     flex-direction: column;
@@ -161,13 +173,14 @@
     gap: 4.8rem;
     bottom: 0%;
     right: -3.2rem;
+    min-height: 50rem;
     height: 50vh;
     width: 100vw;
     /* background-color: #f1eee2; */
     /* background-color: rgba(241, 238, 226, 0.6); */
     background-color: rgba(218, 215, 205, 0.65);
     backdrop-filter: blur(15px);
-    box-shadow: 0rem 4rem 3rem rgba(0, 0, 0, 0.5);
+    box-shadow: 0rem 4rem 3rem rgba(0, 0, 0, 0.1);
     font-size: 2rem;
   }
 
@@ -249,7 +262,7 @@
     position: relative;
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, auto);
-    padding-bottom: 26rem;
+    padding-bottom: 25%;
   }
 
   .company-grid__text,
@@ -339,16 +352,21 @@
 
   .testimonial__btn {
     font-size: 3rem;
+    transition: all 0.3s ease-out;
   }
 
   .footer {
     grid-template-columns: 1fr;
     row-gap: 5rem;
+    justify-content: center;
   }
 
   .logo-col {
     margin-top: 5rem;
     grid-row: 4 / 5;
+    justify-content: center;
+    justify-items: center;
+    margin-right: 0;
   }
 
   .footer-heading {
@@ -371,12 +389,104 @@
 /**************************/
 
 @media (max-width: 42em) {
+  .slider-container {
+    height: 10rem;
+    width: 123%;
+  }
 }
 
 @media (max-width: 32em) {
+  .section-title {
+    margin: 0;
+    padding: 0;
+    font-size: 3rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
   .logo {
-    content: url(img/favicon.png);
+    content: url(../img/favicon.png);
     top: 1rem;
     left: 10.5rem;
+  }
+
+  .nav__list {
+    width: 68vw;
+  }
+
+  .overlay {
+    width: 32vw;
+  }
+
+  .section-hero {
+    padding: 0rem 0rem 0rem 0rem;
+  }
+
+  .section-featured {
+    padding: 3.2rem 2.4rem;
+  }
+
+  .featured-products {
+    margin: 0 auto;
+    display: block;
+    height: 48rem;
+    width: 100%;
+    position: relative;
+  }
+
+  .featured-card {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    /* transform: translateX(-50%); */
+    margin: 0 auto;
+    width: 36rem;
+  }
+
+  .section-company {
+    padding: 6.4rem 3.2rem;
+    padding-bottom: 25%;
+  }
+
+  .company-grid {
+    padding: 2rem 1.2em 0 1.2rem;
+  }
+
+  .gallery__img {
+    width: 48%;
+  }
+
+  .slider-container {
+    height: 14rem;
+    margin-bottom: 25%;
+    width: 115%;
+  }
+
+  .slider-container .slider-controls {
+    position: absolute;
+    bottom: -1000%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    opacity: 70%;
+  }
+
+  .section-products {
+    padding: 3.2rem;
+  }
+
+  .section-testimonials {
+    padding: 9.6rem 3.2rem;
+  }
+
+  .footer {
+    padding: 4rem;
+  }
+
+  .footer__logo {
+    height: 4.65rem;
+    width: 22.5rem;
   }
 }
