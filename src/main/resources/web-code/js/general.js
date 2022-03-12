@@ -98,33 +98,14 @@ class CaretButtons {
   };
 }
 
+const overlayMobileBtn = document.querySelector(".overlay");
 /**
  * If tablet query size matches creates the features and functions
  * for the components in tablet site.
  */
 const init = function () {
   const footerCaretButtons = new CaretButtons("footer__btn", "footer-heading");
-  const overlayMobileBtn = document.querySelector(".overlay");
 
-  document.body.classList.add("sticky");
-
-  navMobileBtns.forEach((btn) =>
-    btn.addEventListener("click", (event) => {
-      navMobileBtns[0].classList.toggle("hidden");
-      navMobileBtns[1].classList.toggle("hidden");
-      overlayMobileBtn.classList.toggle("hidden");
-      navListEl.classList.toggle("hidden");
-      userMenuEl.classList.add("hidden");
-    })
-  );
-
-  overlayMobileBtn.addEventListener("click", () => {
-    navMobileBtns[1].click();
-  });
-
-  userMenuBtn.addEventListener("click", function (event) {
-    userMenuEl.classList.toggle("hidden");
-  });
   if (tabletQuery.matches) {
     footerCaretButtons.createCaretBtns();
     navListEl.classList.add("hidden");
@@ -136,6 +117,24 @@ const init = function () {
     footerCaretButtons.removeCaretBtns();
   }
 };
+document.body.classList.add("sticky");
+navMobileBtns.forEach((btn) =>
+  btn.addEventListener("click", (event) => {
+    navMobileBtns[0].classList.toggle("hidden");
+    navMobileBtns[1].classList.toggle("hidden");
+    overlayMobileBtn.classList.toggle("hidden");
+    navListEl.classList.toggle("hidden");
+    userMenuEl.classList.add("hidden");
+  })
+);
+
+overlayMobileBtn.addEventListener("click", () => {
+  navMobileBtns[1].click();
+});
+
+userMenuBtn.addEventListener("click", function (event) {
+  userMenuEl.classList.toggle("hidden");
+});
 
 // Update when the window is resized
 tabletQuery.addEventListener("change", init);

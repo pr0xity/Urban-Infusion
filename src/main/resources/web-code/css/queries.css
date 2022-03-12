@@ -393,8 +393,18 @@
     height: 10rem;
     width: 123%;
   }
+
+  .cooperation-logos {
+    gap: 5.6rem;
+  }
+
+  .cooperation-logo {
+  }
 }
 
+/**************************/
+/* LESS THAN 512px (Small tablet) */
+/**************************/
 @media (max-width: 32em) {
   .section-title {
     margin: 0;
@@ -420,6 +430,32 @@
 
   .section-hero {
     padding: 0rem 0rem 0rem 0rem;
+  }
+
+  .section-hero .btn {
+    padding: 0rem 2rem 0.4rem 2rem;
+    max-width: 39rem;
+    width: 86vw;
+    /* text-align: center; */
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .heading-primary {
+    margin-left: 1.2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .cooperation-logos {
+    gap: 2.4rem;
+    justify-content: space-around;
+  }
+
+  .cooperation-logo {
+    max-width: 6rem;
+    max-height: 6rem;
   }
 
   .section-featured {
