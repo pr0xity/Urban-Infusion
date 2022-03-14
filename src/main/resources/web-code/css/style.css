@@ -688,6 +688,11 @@ button {
   color: #588157;
 }
 
+.product-card__rating p {
+  color: #6d6875;
+  font-size: 1.8rem;
+}
+
 .product-card__controls {
   display: flex;
   gap: 0.8rem;
@@ -915,10 +920,6 @@ button {
   justify-items: center;
 }
 
-.wishlist .product-card:hover {
-  transform: scale(105%);
-}
-
 /********************************************************/
 
 /****************************/
@@ -1065,4 +1066,126 @@ button {
   font-size: 2rem;
   margin: 0 auto;
   margin-top: 2.4rem;
+}
+
+/********************************************************/
+
+/****************************/
+/* PRODUCT           */
+/****************************/
+
+.product {
+  padding: 12.8rem 6.4rem 9.6rem 6.4rem;
+  max-width: 160rem;
+  margin: 0 auto;
+}
+
+.product .heading-secondary {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.section-product-info {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: repeat(12, auto);
+  justify-content: center;
+  column-gap: 9.6rem;
+  /* justify-content: space-evenly; */
+}
+
+.product__img {
+  grid-column: 1 / 2;
+  grid-row: 1/12;
+  height: 45rem;
+  width: 45rem;
+  border: 0.6rem solid #fff;
+  box-shadow: -1rem 2rem 3rem rgba(0, 0, 0, 0.1);
+}
+
+.product__description-box {
+  padding-top: 3.2rem;
+}
+
+.product__list {
+  list-style: none;
+  font-size: 1.6rem;
+}
+
+.product__price-cta {
+  grid-row: -3 / -2;
+  grid-column: -2 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product__price {
+  color: #588157;
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+
+.product__cta {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  font-size: 3.2rem;
+}
+
+.product__cta > .btn--green {
+  width: fit-content;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  font-size: 2rem;
+}
+
+.section-reviews {
+  padding-top: 12.8rem;
+  display: flex;
+  /* justify-content: space-evenly; */
+  justify-content: center;
+  gap: 12.8rem;
+}
+
+.review__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.review__input {
+  padding: 0.8rem;
+  resize: none;
+  width: 90%;
+  border-radius: 3px;
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+  font-family: "Montserrat", sans-serif;
+  box-shadow: inset 0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+.review__comment {
+  margin-top: 3.2rem;
+  border-top: 0.15rem solid rgba(109, 104, 117, 0.6);
+  padding-top: 1.2rem;
+  width: 44rem;
+}
+
+.review__comment-info {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 0.1rem solid rgb(109, 104, 117, 0.2);
+}
+
+.review__text {
+  font-size: 1.6rem;
+}
+
+.btn--green .btn--icon {
+  color: #fff;
+}
+
+.review__form .product-card__rating p {
+  margin-right: 3.6rem;
 }
