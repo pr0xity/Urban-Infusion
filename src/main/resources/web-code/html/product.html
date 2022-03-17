@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
+    through nature."
+    />
+    <link rel="icon" href="../img/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hurricane:wght@200;300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/queries.css" />
+
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <script defer src="../js/general.js"></script>
+    <title>Urban Infusion</title>
+  </head>
+  <body>
+    <header class="header">
+      <button class="nav-mobile__btn btn--icon"><i class="ph-list"></i></button>
+      <button class="nav-mobile__btn btn--icon hidden">
+        <i class="ph-x"></i>
+      </button>
+      <a href="../index.html" class="logo">
+        <img
+          class="logo__img"
+          src="../img/logo-big.png"
+          alt="Urban Infusion logo"
+        />
+      </a>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item">
+            <a class="nav__link" href="../index.html">Home</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="../index.html#section-company"
+              >About us</a
+            >
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" href="../index.html#section-products"
+              >Products</a
+            >
+          </li>
+        </ul>
+        <div class="overlay hidden"></div>
+
+        <div class="nav__btn-box">
+          <a
+            href="wishlist.html"
+            class="nav__link nav__item"
+            aria-label="View Wishlist"
+            ><i class="ph-heart-light btn--icon"></i
+          ></a>
+          <a
+            href="checkout.html"
+            class="nav__link nav__item"
+            aria-label="Go to checkout"
+          >
+            <i class="ph-tote-light btn--icon"></i
+          ></a>
+          <button class="nav__item" id="user-menu" aria-label="account menu">
+            <i class="ph-user-circle-light btn--icon"></i>
+          </button>
+          <div class="nav__user-menu hidden">
+            <form class="login" name="login">
+              <div class="login__field">
+                <label for="email">Emailaddress</label>
+                <input
+                  class="login__input"
+                  id="email"
+                  type="text"
+                  placeholder="john@example.com"
+                />
+              </div>
+              <div class="login__field">
+                <label for="password">Password</label>
+                <input
+                  class="login__input"
+                  id="password"
+                  type="password"
+                  placeholder="password"
+                />
+              </div>
+            </form>
+            <a class="btn--green">Sign in</a>
+            <a href="#" class="link"
+              >Not a member yet? <strong>Join here!</strong></a
+            >
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="product">
+      <section class="section-product-info">
+        <h1 class="section-title">Heather tea</h1>
+        <img
+          class="product__img"
+          src="../img/greentea.jpeg"
+          alt="Green tea in a cup"
+        />
+        <a href="#section-reviews">
+          <div class="product__rating">
+            <span class="product__rating--icon"
+              ><i class="ph-leaf-fill"></i
+            ></span>
+            <span class="product__rating--icon"
+              ><i class="ph-leaf-fill"></i
+            ></span>
+            <span class="product__rating--icon"
+              ><i class="ph-leaf-light"></i
+            ></span>
+            <span class="product__rating--icon"
+              ><i class="ph-leaf-light"></i
+            ></span>
+            <span class="product__rating--icon"
+              ><i class="ph-leaf-light"></i
+            ></span>
+            <p>(2)</p>
+          </div>
+        </a>
+        <div class="product__description-box">
+          <h2 class="heading-secondary">Description</h2>
+          <ul class="product__list">
+            <li><i class="ph-check"></i> From Norwegian mountains</li>
+            <li>
+              <i class="ph-check"></i> Gathered carefully before the bees to
+              hold the honey taste
+            </li>
+            <li><i class="ph-check"></i> Rich in vitamins</li>
+            <li><i class="ph-check"></i> Local Produce</li>
+          </ul>
+        </div>
+        <div class="product__price-cta">
+          <span class="product__price">200,-</span>
+          <div class="product__cta">
+            <button class="btn--green">
+              Add to bag <i class="ph-tote-light btn--icon"></i>
+            </button>
+            <button class="" aria-label="Add to wishlist">
+              <i class="ph-heart-light btn--icon"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+      <section class="section-reviews" id="section-reviews">
+        <div class="review__form">
+          <h2 class="heading-secondary">What did you think of this product?</h2>
+          <input class="review__input" type="text" placeholder="Name" />
+          <input class="review__input" type="text" placeholder="Emailaddress" />
+          <textarea
+            class="review__input"
+            placeholder="Write your review here"
+            rows="6"
+            cols="50"
+            maxlength="250"
+          ></textarea>
+          <div class="product__rating">
+            <p>Rating</p>
+            <span class="product__rating--icon">
+              <i class="ph-leaf-light"></i>
+            </span>
+            <span class="product__rating--icon">
+              <i class="ph-leaf-light"></i>
+            </span>
+            <span class="product__rating--icon">
+              <i class="ph-leaf-light"></i>
+            </span>
+            <span class="product__rating--icon">
+              <i class="ph-leaf-light"></i>
+            </span>
+            <span class="product__rating--icon"
+              ><i class="ph-leaf-light"></i
+            ></span>
+          </div>
+          <button class="btn--green">Send review</button>
+        </div>
+        <div class="review__comments-box">
+          <h2 class="heading-secondary">Reviews</h2>
+          <div class="review__comment">
+            <div class="review__comment-info">
+              <div class="product__rating">
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+              </div>
+              <p>Hans</p>
+              <p>05.02.2022</p>
+            </div>
+            <div>
+              <div class="review__text">
+                <p>This tea was tasteless and dissapointing.</p>
+              </div>
+            </div>
+          </div>
+          <div class="review__comment">
+            <div class="review__comment-info">
+              <div class="product__rating">
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+              </div>
+              <p>Miranda</p>
+              <p>04.02.2022</p>
+            </div>
+            <div>
+              <div class="review__text">
+                <p>The tea was ok. Could have more flavour</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="logo-col">
+        <img
+          class="footer__logo"
+          src="../img/logo-big.png"
+          alt="Urban infusion logo"
+        />
+        <p class="copyright">
+          Copyright &copy; 2022 NTNU, IDATA2301 Web Technologies - group 3
+        </p>
+      </div>
+      <nav>
+        <p class="footer-heading">Account</p>
+        <ul class="footer__list">
+          <li class="footer__item">
+            <a href="#" class="footer__link">Account policy</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Create account</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Sign in</a>
+          </li>
+        </ul>
+      </nav>
+      <nav>
+        <p class="footer-heading">Resources</p>
+        <ul class="footer__list">
+          <li class="footer__item">
+            <a href="#" class="footer__link">Customer service</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Terms of service</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Privacy policy</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Cancellations and returns</a>
+          </li>
+        </ul>
+      </nav>
+      <nav>
+        <p class="footer-heading">Company</p>
+        <ul class="footer__list">
+          <li class="footer__item">
+            <a href="#" class="footer__link">About Urban Infusion</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Business inquries</a>
+          </li>
+          <li class="footer__item">
+            <a href="#" class="footer__link">Careers</a>
+          </li>
+        </ul>
+      </nav>
+    </footer>
+    <div class="overlay hidden"></div>
+  </body>
+</html>

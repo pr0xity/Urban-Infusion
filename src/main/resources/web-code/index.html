@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
+    through nature."
+    />
     <link rel="icon" href="img/favicon.png" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/queries.css" />
@@ -29,8 +34,16 @@
   <body>
     <header class="header">
       <button class="nav-mobile__btn btn--icon"><i class="ph-list"></i></button>
-      <button class="nav-mobile__btn btn--icon hidden"><i class="ph-x"></i></button>
-      <img class="logo" src="img/logo-big.png" alt="Urban fusion logo" />
+      <button class="nav-mobile__btn btn--icon hidden">
+        <i class="ph-x"></i>
+      </button>
+      <a href="#" class="logo">
+        <img
+          class="logo__img"
+          src="img/logo-big.png"
+          alt="Urban Infusion logo"
+        />
+      </a>
       <nav class="nav">
         <ul class="nav__list">
           <li class="nav__item">
@@ -43,123 +56,101 @@
             <a class="nav__link" href="#section-products">Products</a>
           </li>
         </ul>
-        <div class="overlay hidden"></div>
+        <div class="nav__link-menu--overlay hidden" id=""></div>
 
         <div class="nav__btn-box">
-          <button class="nav__item" aria-label="favourites list">
-            <a href="wishlist.html" class="nav__link"
-              ><i class="ph-heart-light btn--icon"></i
-            ></a>
-          </button>
-          <button class="nav__item" aria-label="shopping bag">
-            <a href="checkout.html" class="nav__link">
-              <i class="ph-tote-light btn--icon"></i
-            ></a>
-          </button>
+          <a
+            href="html/wishlist.html"
+            class="nav__link nav__item"
+            aria-label="View wishlist"
+            ><i class="ph-heart-light btn--icon"></i
+          ></a>
+          <a
+            href="html/checkout.html"
+            class="nav__link nav__item"
+            aria-label="Go to checkout"
+          >
+            <i class="ph-tote-light btn--icon"></i
+          ></a>
           <button class="nav__item" id="user-menu" aria-label="account menu">
             <i class="ph-user-circle-light btn--icon"></i>
           </button>
           <div class="nav__user-menu hidden">
             <form class="login" name="login">
-              <input
-                class="login__input"
-                type="text"
-                placeholder="emailaddress"
-              />
-              <input
-                class="login__input"
-                type="password"
-                placeholder="password"
-              />
-              <a class="btn--green">Sign in</a>
+              <div class="login__field">
+                <label for="email">Emailaddress</label>
+                <input
+                  class="login__input"
+                  id="email"
+                  type="text"
+                  placeholder="john@example.com"
+                />
+              </div>
+              <div class="login__field">
+                <label for="password">Password</label>
+                <input
+                  class="login__input"
+                  id="password"
+                  type="password"
+                  placeholder="password"
+                />
+              </div>
             </form>
+            <a class="btn--green">Sign in</a>
             <a href="#" class="link"
               >Not a member yet? <strong>Join here!</strong></a
             >
           </div>
         </div>
+        <div class="nav__user-menu--overlay hidden"></div>
       </nav>
     </header>
-    
-    
     <main>
-        <section class="section-hero">
-          <div class="hero-slider">
-            <img
-              class="hero-slider__slide hidden"
-              src="https://images.unsplash.com/photo-1613217138844-1dae03c64d89?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTN8fHRlYSUyMGNlcmVtb255fGVufDB8MHwwfHw%3D&auto=format&fit=crop&w=1600&q=60"
-            />
-            <img
-              class="hero-slider__slide"
-              src="https://images.unsplash.com/photo-1515696955266-4f67e13219e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTE5fHx0ZWElMjBjZXJlbW9ueXxlbnwwfDB8MHx8&auto=format&fit=crop&w=1600&q=60"
-            />
-            <img
-              class="hero-slider__slide hidden"
-              src="https://images.unsplash.com/photo-1515133356580-c863eed555e2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDE2fHxoZXJiYWwlMjB0ZWF8ZW58MHwwfDB8fA%3D%3D&auto=format&fit=crop&w=1600&q=60"
-            />
-            <img
-              class="hero-slider__slide hidden"
-              src="https://images.unsplash.com/photo-1494254400119-9a456213b4a2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjAxfHxoZXJiYWwlMjB0ZWF8ZW58MHwwfDB8fA%3D%3D&auto=format&fit=crop&w=1600&q=60"
-            />
-            <img
-              class="hero-slider__slide hidden"
-              src="https://images.unsplash.com/photo-1594137052297-e55c3c6b33f9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzN8fGhlcmJhbCUyMHRlYXxlbnwwfDB8MHx8&auto=format&fit=crop&w=1600&q=60"
-            />
-            <!-- Add slides here 
-            <div class="dots">
-              <button aria-label="got to this slide" class="dots__dot"></button>
-              <button aria-label="got to this slide" class="dots__dot"></button>
-              <button
-                aria-label="got to this slide"
-                class="dots__dot dots__dot--active"
-              ></button>
-              <button aria-label="got to this slide" class="dots__dot"></button>
-              <button aria-label="got to this slide" class="dots__dot"></button>
-            </div>
-          </div>-->
-          <!-- <button class="btn"> -->
+      <section class="section-hero">
+        <div class="hero-slider">
+          <img
+            class="hero-slider__slide"
+            src="https://images.unsplash.com/photo-1515696955266-4f67e13219e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTE5fHx0ZWElMjBjZXJlbW9ueXxlbnwwfDB8MHx8&auto=format&fit=crop&w=1600&q=60"
+            alt="two hands holding mugs (with tea) on a hike"
+          />
           <a href="#section-products" class="btn">
             <h1 class="heading-primary">
               Find your
               <span class="decorative-text--light">herbal </span> friend
             </h1></a
           >
-          <!-- </button> -->
-        </section>
-        <section class="section-cooperations">
-          <div class="cooperation-logos">
-            <img
-              class="cooperation-logo"
-              src="img/yogi-tea.svg"
-              type="img/svg"
-              alt="yogi tea logo"
-            />
-            <img
-              class="cooperation-logo"
-              src="img/ahmad-tea.png"
-              type="img/png"
-              alt="ahmad tea logo"
-            />
-            <img
-              class="cooperation-logo"
-              src="img/pukka.webp"
-              type="img/webp"
-              alt="pukka tea logo"
-            />
-            <img
-              class="cooperation-logo"
-              src="img/clipper-tea.svg"
-              type="img/svg"
-              alt="clipper tea logo"
-            />
-            <img
-              class="cooperation-logo"
-              src="img/fairtrade.svg"
-              type="img/svg"
-              alt="fairtrade logo"
-            />
-          </div>
-        </section>
+        </div>
+      </section>
+      <section class="section-cooperations">
+        <h2 class="heading--small">In cooperation with</h2>
+        <div class="cooperation-logos">
+          <img
+            class="cooperation-logo"
+            src="img/yogi-tea.svg"
+            alt="yogi tea logo"
+          />
+          <img
+            class="cooperation-logo"
+            src="img/ahmad-tea.png"
+            alt="ahmad tea logo"
+          />
+          <img
+            class="cooperation-logo"
+            src="img/pukka.webp"
+            alt="pukka tea logo"
+          />
+          <img
+            class="cooperation-logo"
+            src="img/clipper-tea.svg"
+            alt="clipper tea logo"
+          />
+          <img
+            class="cooperation-logo"
+            src="img/fairtrade.svg"
+            alt="fairtrade logo"
+          />
+        </div>
+      </section>
       <section class="section-featured">
         <div class="section__heading-box">
           <h2 class="decorative-heading">Top sellers</h2>
@@ -169,26 +160,26 @@
           <div class="featured-card" data-slide="0">
             <img
               class="featured-card__img"
-              src="img/green tea.jpeg"
+              src="img/greentea.jpeg"
               alt="herbal tea in a teacup"
             />
-            <a href="#" class="btn btn--text">View more</a>
+            <a href="html/product.html" class="btn btn--text">View more</a>
           </div>
           <div class="featured-card" data-slide="1">
             <img
               class="featured-card__img"
-              src="img/red tea.jpeg"
+              src="img/redtea.jpeg"
               alt="herbal tea in a teacup"
             />
-            <a href="#" class="btn btn--text">View more</a>
+            <a href="html/product.html" class="btn btn--text">View more</a>
           </div>
           <div class="featured-card" data-slide="2">
             <img
               class="featured-card__img"
-              src="img/yellow tea.jpeg"
+              src="img/yellowtea.jpeg"
               alt="herbal tea in a teacup"
             />
-            <a href="#" class="btn btn--text">View more</a>
+            <a href="html/product.html" class="btn btn--text">View more</a>
           </div>
         </div>
       </section>
@@ -258,7 +249,11 @@
             </p>
           </div>
 
-          <div class="gallery gallery--right" id="gallery__slide-1" data-slide="0">
+          <div
+            class="gallery gallery--right"
+            id="gallery__slide-1"
+            data-slide="0"
+          >
             <img
               class="gallery__img"
               src="img/pic-1.webp"
@@ -276,7 +271,11 @@
             />
           </div>
 
-          <div class="gallery gallery--left" id="gallery__slide-2" data-slide="1">
+          <div
+            class="gallery gallery--left"
+            id="gallery__slide-2"
+            data-slide="1"
+          >
             <img
               class="gallery__img"
               src="img/pic-4.webp"
@@ -294,7 +293,11 @@
             />
           </div>
 
-          <div class="gallery gallery--right" id="gallery__slide-3" data-slide="2">
+          <div
+            class="gallery gallery--right"
+            id="gallery__slide-3"
+            data-slide="2"
+          >
             <img class="gallery__img" src="img/pic-7.webp" alt="tea ceremony" />
             <img
               class="gallery__img"
@@ -315,14 +318,35 @@
         <div class="product-slider">
           <article
             class="product-card container--white product-card__slide--tertiary-prev"
-            data-slide="0">
+            data-slide="0"
+          >
             <img
               class="product-card__img"
               src="img/pic-2.webp"
               alt="herbal tea in a teacup"
             />
             <div class="product-card__details">
-              <h4 class="product-card__heading">Heather tea</h4>
+              <div class="product__rating">
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <p>(2)</p>
+              </div>
+              <a href="html/product.html" class="link">
+                <h4 class="product-card__heading">Heather tea</h4>
+              </a>
               <ul class="product-card__list">
                 <li class="product-card__item">
                   <i class="ph-check-thin product-card__icon"></i>From Norwegian
@@ -341,44 +365,45 @@
                 </li>
               </ul>
               <div class="product-card__cta">
-                <div class="product-card__rating">
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-light"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-light"></i
-                  ></span>
-                </div>
-                <div class="product-card__controls">
-                  <button aria-label="add item to favourite list">
-                    <i class="ph-heart-light btn--icon"></i>
-                  </button>
-                  <button aria-label="add item to shopping cart">
-                    <i class="ph-tote-light btn--icon"></i>
-                  </button>
-                </div>
+                <p class="product-card__price">200,-</p>
+                <button aria-label="add item to favourite list">
+                  <i class="ph-heart-light btn--icon"></i>
+                </button>
+                <button aria-label="add item to shopping cart">
+                  <i class="ph-tote-light btn--icon"></i>
+                </button>
               </div>
             </div>
           </article>
           <article
             class="product-card container--white product-card__slide--secondary-prev"
-            data-slide="1">
+            data-slide="1"
+          >
             <img
               class="product-card__img"
-              src="img/red tea.jpeg"
+              src="img/redtea.jpeg"
               alt="herbal tea in a teacup"
             />
             <div class="product-card__details">
-              <a href="#" class="link">
+              <div class="product__rating">
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <p>(2)</p>
+              </div>
+              <a href="html/product.html" class="link">
                 <h4 class="product-card__heading">Linden Blossom Tea</h4>
               </a>
               <ul class="product-card__list">
@@ -399,44 +424,45 @@
                 </li>
               </ul>
               <div class="product-card__cta">
-                <div class="product-card__rating">
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-light"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-light"></i
-                  ></span>
-                </div>
-                <div class="product-card__controls">
-                  <button aria-label="add item to favourite list">
-                    <i class="ph-heart-light btn--icon"></i>
-                  </button>
-                  <button aria-label="add item to shopping cart">
-                    <i class="ph-tote-light btn--icon"></i>
-                  </button>
-                </div>
+                <p class="product-card__price">200,-</p>
+                <button aria-label="add item to favourite list">
+                  <i class="ph-heart-light btn--icon"></i>
+                </button>
+                <button aria-label="add item to shopping cart">
+                  <i class="ph-tote-light btn--icon"></i>
+                </button>
               </div>
             </div>
           </article>
           <article
             class="product-card container--white product-card__slide--active"
-            data-slide="2">
+            data-slide="2"
+          >
             <img
               class="product-card__img"
-              src="img/green tea.jpeg"
+              src="img/greentea.jpeg"
               alt="herbal tea in a teacup"
             />
             <div class="product-card__details">
-              <a href="#" class="link">
+              <div class="product__rating">
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <p>(2)</p>
+              </div>
+              <a href="html/product.html" class="link">
                 <h4 class="product-card__heading">Green tea</h4>
               </a>
               <ul class="product-card__list">
@@ -457,44 +483,45 @@
                 </li>
               </ul>
               <div class="product-card__cta">
-                <div class="product-card__rating">
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-light"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-light"></i
-                  ></span>
-                </div>
-                <div class="product-card__controls">
-                  <button aria-label="add item to favourite list">
-                    <i class="ph-heart-light btn--icon"></i>
-                  </button>
-                  <button aria-label="add item to shopping bag">
-                    <i class="ph-tote-light btn--icon"></i>
-                  </button>
-                </div>
+                <p class="product-card__price">200,-</p>
+                <button aria-label="add item to favourite list">
+                  <i class="ph-heart-light btn--icon"></i>
+                </button>
+                <button aria-label="add item to shopping bag">
+                  <i class="ph-tote-light btn--icon"></i>
+                </button>
               </div>
             </div>
           </article>
           <article
             class="product-card container--white product-card__slide--active"
-            data-slide="3">
+            data-slide="3"
+          >
             <img
               class="product-card__img"
-              src="img/green tea.jpeg"
+              src="img/greentea.jpeg"
               alt="herbal tea in a teacup"
             />
             <div class="product-card__details">
-              <a href="#" class="link">
+              <div class="product__rating">
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <p>(2)</p>
+              </div>
+              <a href="html/product.html" class="link">
                 <h4 class="product-card__heading">Green tea</h4>
               </a>
               <ul class="product-card__list">
@@ -515,44 +542,45 @@
                 </li>
               </ul>
               <div class="product-card__cta">
-                <div class="product-card__rating">
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-light"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-light"></i
-                  ></span>
-                </div>
-                <div class="product-card__controls">
-                  <button aria-label="add item to favourite list">
-                    <i class="ph-heart-light btn--icon"></i>
-                  </button>
-                  <button aria-label="add item to shopping bag">
-                    <i class="ph-tote-light btn--icon"></i>
-                  </button>
-                </div>
+                <p class="product-card__price">200,-</p>
+                <button aria-label="add item to favourite list">
+                  <i class="ph-heart-light btn--icon"></i>
+                </button>
+                <button aria-label="add item to shopping bag">
+                  <i class="ph-tote-light btn--icon"></i>
+                </button>
               </div>
             </div>
           </article>
           <article
             class="product-card container--white product-card__slide--secondary-next"
-            data-slide="4">
+            data-slide="4"
+          >
             <img
               class="product-card__img"
-              src="img/yellow tea.jpeg"
+              src="img/yellowtea.jpeg"
               alt="herbal tea in a teacup"
             />
             <div class="product-card__details">
-              <a href="#" class="link">
+              <div class="product__rating">
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <p>(2)</p>
+              </div>
+              <a href="html/product.html" class="link">
                 <h4 class="product-card__heading">Heather tea</h4>
               </a>
               <ul class="product-card__list">
@@ -573,44 +601,45 @@
                 </li>
               </ul>
               <div class="product-card__cta">
-                <div class="product-card__rating">
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-light"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-light"></i
-                  ></span>
-                </div>
-                <div class="product-card__controls">
-                  <button aria-label="add item to favourite list">
-                    <i class="ph-heart-light btn--icon"></i>
-                  </button>
-                  <button aria-label="add item to shopping bag">
-                    <i class="ph-tote-light btn--icon"></i>
-                  </button>
-                </div>
+                <p class="product-card__price">200,-</p>
+                <button aria-label="add item to favourite list">
+                  <i class="ph-heart-light btn--icon"></i>
+                </button>
+                <button aria-label="add item to shopping bag">
+                  <i class="ph-tote-light btn--icon"></i>
+                </button>
               </div>
             </div>
           </article>
           <article
             class="product-card container--white product-card__slide--secondary-next"
-            data-slide="5">
+            data-slide="5"
+          >
             <img
               class="product-card__img"
-              src="img/yellow tea.jpeg"
+              src="img/yellowtea.jpeg"
               alt="herbal tea in a teacup"
             />
             <div class="product-card__details">
-              <a href="#" class="link">
+              <div class="product__rating">
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <p>(2)</p>
+              </div>
+              <a href="html/product.html" class="link">
                 <h4 class="product-card__heading">Heather tea</h4>
               </a>
               <ul class="product-card__list">
@@ -631,44 +660,45 @@
                 </li>
               </ul>
               <div class="product-card__cta">
-                <div class="product-card__rating">
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-light"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-light"></i
-                  ></span>
-                </div>
-                <div class="product-card__controls">
-                  <button aria-label="add item to favourite list">
-                    <i class="ph-heart-light btn--icon"></i>
-                  </button>
-                  <button aria-label="add item to shopping bag">
-                    <i class="ph-tote-light btn--icon"></i>
-                  </button>
-                </div>
+                <p class="product-card__price">200,-</p>
+                <button aria-label="add item to favourite list">
+                  <i class="ph-heart-light btn--icon"></i>
+                </button>
+                <button aria-label="add item to shopping bag">
+                  <i class="ph-tote-light btn--icon"></i>
+                </button>
               </div>
             </div>
           </article>
           <article
             class="product-card container--white product-card__slide--tertiary-next"
-            data-slide="6">
+            data-slide="6"
+          >
             <img
               class="product-card__img"
               src="img/pic-2.webp"
               alt="herbal tea in a teacup"
             />
             <div class="product-card__details">
-              <a href="#" class="link">
+              <div class="product__rating">
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <span class="product__rating--icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <p>(2)</p>
+              </div>
+              <a href="html/product.html" class="link">
                 <h4 class="product-card__heading">Heather tea</h4>
               </a>
               <ul class="product-card__list">
@@ -689,58 +719,16 @@
                 </li>
               </ul>
               <div class="product-card__cta">
-                <div class="product-card__rating">
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-fill"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-light"></i
-                  ></span>
-                  <span class="product-card__icon--rating"
-                    ><i class="ph-leaf-light"></i
-                  ></span>
-                </div>
-                <div class="product-card__controls">
-                  <button aria-label="add item to favourite list">
-                    <i class="ph-heart-light btn--icon"></i>
-                  </button>
-                  <button aria-label="add item to shopping bag">
-                    <i class="ph-tote-light btn--icon"></i>
-                  </button>
-                </div>
+                <p class="product-card__price">200,-</p>
+                <button aria-label="add item to favourite list">
+                  <i class="ph-heart-light btn--icon"></i>
+                </button>
+                <button aria-label="add item to shopping bag">
+                  <i class="ph-tote-light btn--icon"></i>
+                </button>
               </div>
             </div>
           </article>
-          <!-- <div class="slider-controls">
-            <button
-              aria-label="go to previous slide"
-              class="slider__btn slider__btn--prev"
-            >
-              <i class="ph-caret-left"></i>
-            </button>
-            <div class="dots">
-              <button aria-label="got to this slide" class="dots__dot"></button>
-              <button aria-label="got to this slide" class="dots__dot"></button>
-              <button
-                aria-label="got to this slide"
-                class="dots__dot dots__dot--active"
-              ></button>
-              <button aria-label="got to this slide" class="dots__dot"></button>
-              <button aria-label="got to this slide" class="dots__dot"></button>
-            </div>
-            <button
-              aria-label="go to next slide"
-              class="slider__btn slider__btn--next"
-            >
-              <i class="ph-caret-right"></i>
-            </button>
-          </div> -->
         </div>
       </section>
 
@@ -849,7 +837,7 @@
             <a href="#" class="footer__link">About Urban Infusion</a>
           </li>
           <li class="footer__item">
-            <a href="#" class="footer__link">Business inquries</a>
+            <a href="#" class="footer__link">Business inquiries</a>
           </li>
           <li class="footer__item">
             <a href="#" class="footer__link">Careers</a>

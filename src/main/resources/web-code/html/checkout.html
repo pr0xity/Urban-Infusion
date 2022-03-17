@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="icon" href="img/favicon.png" />
+    <link rel="icon" href="../img/favicon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,11 +20,11 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/queries.css" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/queries.css" />
 
     <script src="https://unpkg.com/phosphor-icons"></script>
-    <script defer src="js/general.js"></script>
+    <script defer src="../js/general.js"></script>
     <title>Urban Infusion</title>
   </head>
   <body>
@@ -33,49 +33,66 @@
       <button class="nav-mobile__btn btn--icon hidden">
         <i class="ph-x"></i>
       </button>
-      <img class="logo" src="img/logo-big.png" alt="Urban fusion logo" />
+      <a href="../index.html" class="logo">
+        <img
+          class="logo__img"
+          src="../img/logo-big.png"
+          alt="Urban Infusion logo"
+        />
+      </a>
       <nav class="nav">
         <ul class="nav__list">
           <li class="nav__item">
-            <a class="nav__link" href="index.html">Home</a>
+            <a class="nav__link" href="../index.html">Home</a>
           </li>
           <li class="nav__item">
-            <a class="nav__link" href="index.html#section-company">About us</a>
+            <a class="nav__link" href="../index.html#section-company"
+              >About us</a
+            >
           </li>
           <li class="nav__item">
-            <a class="nav__link" href="index.html#section-products">Products</a>
+            <a class="nav__link" href="../index.html#section-products"
+              >Products</a
+            >
           </li>
         </ul>
         <div class="overlay hidden"></div>
 
         <div class="nav__btn-box">
-          <button class="nav__item" aria-label="favourites list">
-            <a href="wishlist.html" class="nav__link"
-              ><i class="ph-heart-light btn--icon"></i
-            ></a>
-          </button>
-          <button class="nav__item" aria-label="shopping bag">
-            <a href="#" class="nav__link">
-              <i class="ph-tote-light btn--icon"></i
-            ></a>
-          </button>
+          <a
+            href="wishlist.html"
+            class="nav__link nav__item"
+            aria-label="View wishlist"
+            ><i class="ph-heart-light btn--icon"></i
+          ></a>
+          <a href="#" class="nav__link nav__item" aria-label="Go to checkout">
+            <i class="ph-tote-light btn--icon"></i
+          ></a>
           <button class="nav__item" id="user-menu" aria-label="account menu">
             <i class="ph-user-circle-light btn--icon"></i>
           </button>
           <div class="nav__user-menu hidden">
             <form class="login" name="login">
-              <input
-                class="login__input"
-                type="text"
-                placeholder="emailaddress"
-              />
-              <input
-                class="login__input"
-                type="password"
-                placeholder="password"
-              />
-              <a class="btn--green">Sign in</a>
+              <div class="login__field">
+                <label for="email">Emailaddress</label>
+                <input
+                  class="login__input"
+                  id="email"
+                  type="text"
+                  placeholder="john@example.com"
+                />
+              </div>
+              <div class="login__field">
+                <label for="password">Password</label>
+                <input
+                  class="login__input"
+                  id="password"
+                  type="password"
+                  placeholder="password"
+                />
+              </div>
             </form>
+            <a class="btn--green">Sign in</a>
             <a href="#" class="link"
               >Not a member yet? <strong>Join here!</strong></a
             >
@@ -101,7 +118,7 @@
         </div>
         <ul class="checkout__list">
           <li class="checkout__item">
-            <img class="item__img" src="img/green tea.jpeg" />
+            <img class="item__img" src="../img/greentea.jpeg" alt="greentea" />
             <p class="item__description margin-left--small">
               <a class="link" href="#"
                 ><span class="item__name">Green tea</span></a
@@ -112,18 +129,20 @@
             <input
               class="item__quantity"
               type="number"
-              id="quantity"
               name="quantity"
+              aria-label="quantity of this product"
               min="1"
               max="100"
               step="1"
               value="1"
             />
-            <span class="item__price">200 NOK</span>
-            <button class="btn--icon"><i class="ph-trash"></i></button>
+            <span class="item__price">200,-</span>
+            <button class="btn--icon" aria-label="remove item from checkout">
+              <i class="ph-trash"></i>
+            </button>
           </li>
           <li class="checkout__item">
-            <img class="item__img" src="img/red tea.jpeg" />
+            <img class="item__img" src="../img/redtea.jpeg" alt="redtea" />
             <p class="item__description margin-left--small">
               <a class="link" href="#"
                 ><span class="item__name">Linden Blossom tea</span></a
@@ -134,15 +153,17 @@
             <input
               class="item__quantity"
               type="number"
-              id="quantity"
               name="quantity"
+              aria-label="quantity of this product"
               min="1"
               max="100"
               step="1"
               value="1"
             />
-            <span class="item__price">200 NOK</span>
-            <button class="btn--icon"><i class="ph-trash"></i></button>
+            <span class="item__price">200,-</span>
+            <button class="btn--icon" aria-label="remove item from checkout">
+              <i class="ph-trash"></i>
+            </button>
           </li>
         </ul>
       </section>
@@ -165,7 +186,7 @@
           </div>
         </address>
         <span class="checkout__wrong"
-          >Wrong information? <a class="link">Click here</a></span
+          >Wrong information? <a class="link" href="#">Click here</a></span
         >
       </section>
       <section class="section-payment-delivery container--white">
@@ -194,7 +215,7 @@
       <div class="logo-col">
         <img
           class="footer__logo"
-          src="img/logo-big.png"
+          src="../img/logo-big.png"
           alt="Urban infusion logo"
         />
         <p class="copyright">

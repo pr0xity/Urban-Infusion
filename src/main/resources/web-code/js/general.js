@@ -11,7 +11,6 @@ const navListEl = document.querySelector(".nav__list");
 class CaretButtons {
   btnClass;
   elementsClass;
-  btns;
   elements;
 
   /**
@@ -39,23 +38,27 @@ class CaretButtons {
       );
       i++;
     });
-    this.caretButtonListeners();
+    this.addCaretButtonListeners();
   };
 
   /**
-   * Iterates over footer buttons and adds event listeners to the buttons.
+   * Iterates over buttons and adds event listeners to the buttons.
    */
-  caretButtonListeners = function () {
+  addCaretButtonListeners = function () {
     this.elements.forEach((element) => {
-      if (element.childNodes[1] !== undefined) {
+      //if the elements button (childNodes[1]) is not undefined,
+      //set the element sibling (parentNode.childNodes[3]) display to none.
+      if (this.buttonExists(element)) {
         element.parentNode.childNodes[3].style.display = `none`;
       }
     });
 
-    this.btns = document.body.querySelectorAll(`.${this.btnClass}`);
-    this.btns.forEach((button) => {
-      // Initial degrees value
-      let degrees = 0;
+    const btns = document.body.querySelectorAll(`.${this.btnClass}`);
+    btns.forEach((button) => {
+      const DEGREES_BUTTON_CLOSED = 0;
+      const DEGREES_BUTTON_OPEN = -90;
+      // Degrees closed
+      let degrees = DEGREES_BUTTON_CLOSED;
 
       // Initial display value
       let display = "none";
@@ -67,15 +70,17 @@ class CaretButtons {
         let item = clicked.dataset.item;
 
         if (degrees === 0) {
-          degrees = -90;
+          // Degrees open
+          degrees = DEGREES_BUTTON_OPEN;
           display = "initial";
         } else {
-          degrees = 0;
+          degrees = DEGREES_BUTTON_CLOSED;
           display = "none";
         }
 
         clicked.style.transform = `rotate( ${degrees}deg)`;
 
+        // Goes up to the parent node and gets the childnode 3 which is the element sibling to heading.
         this.elements[
           item
         ].parentNode.childNodes[3].style.display = `${display}`;
@@ -83,14 +88,17 @@ class CaretButtons {
     });
   };
 
+  buttonExists = function (element) {
+    return element.childNodes[1] !== undefined;
+  };
+
   /**
    * Removes the caret buttons from the given list of elements.
-   *
    * @param {*} elements The list of elements to remove caret button from.
    */
   removeCaretBtns = function () {
     this.elements.forEach((element) => {
-      if (element.childNodes[1] !== undefined) {
+      if (this.buttonExists(element)) {
         element.parentNode.childNodes[3].style.display = `initial`;
         element.removeChild(element.childNodes[1]);
       }
@@ -98,7 +106,12 @@ class CaretButtons {
   };
 }
 
-const overlayMobileBtn = document.querySelector(".overlay");
+const overlayNavLinkMobileBtn = document.querySelector(
+  ".nav__link-menu--overlay"
+);
+const overlayNavUserMobileBtn = document.querySelector(
+  ".nav__user-menu--overlay"
+);
 /**
  * If tablet query size matches creates the features and functions
  * for the components in tablet site.
@@ -112,7 +125,8 @@ const init = function () {
   } else {
     navMobileBtns[0].classList.remove("hidden");
     navMobileBtns[1].classList.add("hidden");
-    overlayMobileBtn.classList.add("hidden");
+    overlayNavLinkMobileBtn.classList.add("hidden");
+    overlayNavUserMobileBtn.classList.add("hidden");
     navListEl.classList.remove("hidden");
     footerCaretButtons.removeCaretBtns();
   }
@@ -122,18 +136,24 @@ navMobileBtns.forEach((btn) =>
   btn.addEventListener("click", (event) => {
     navMobileBtns[0].classList.toggle("hidden");
     navMobileBtns[1].classList.toggle("hidden");
-    overlayMobileBtn.classList.toggle("hidden");
+    overlayNavLinkMobileBtn.classList.toggle("hidden");
     navListEl.classList.toggle("hidden");
     userMenuEl.classList.add("hidden");
+    overlayNavUserMobileBtn.classList.add("hidden");
   })
 );
 
-overlayMobileBtn.addEventListener("click", () => {
+overlayNavLinkMobileBtn.addEventListener("click", () => {
   navMobileBtns[1].click();
+});
+
+overlayNavUserMobileBtn.addEventListener("click", () => {
+  userMenuBtn.click();
 });
 
 userMenuBtn.addEventListener("click", function (event) {
   userMenuEl.classList.toggle("hidden");
+  overlayNavUserMobileBtn.classList.toggle("hidden");
 });
 
 // Update when the window is resized
