@@ -1,8 +1,16 @@
-const userMenuBtn = document.querySelector("#user-menu");
-const userMenuEl = document.querySelector(".nav__user-menu");
 const tabletQuery = window.matchMedia("(max-width: 54em)");
-const navMobileBtns = document.querySelectorAll(".nav-mobile__btn");
-const navListEl = document.querySelector(".nav__list");
+const userMenuButton = document.querySelector("#user-menu");
+const userMenuElement = document.querySelector(".nav__user-menu");
+const navMobileButtons = document.querySelectorAll(".nav-mobile__btn");
+const mobileMenuButtonOpen = document.querySelectorAll(".nav-mobile__btn")[0];
+const mobileMenuButtonClose = document.querySelectorAll(".nav-mobile__btn")[1];
+const navListElement = document.querySelector(".nav__list");
+const overlayNavLinkMobileBtn = document.querySelector(
+  ".nav__link-menu--overlay"
+);
+const overlayNavUserMobileBtn = document.querySelector(
+  ".nav__user-menu--overlay"
+);
 
 /**
  * Buttons to toggle between hide and display for the element underneath
@@ -30,13 +38,13 @@ class CaretButtons {
    * Creates caret buttons for the given list of elements.
    */
   createCaretBtns = function () {
-    let i = 0;
+    let index = 0;
     this.elements.forEach((element) => {
       element.insertAdjacentHTML(
         "beforeend",
-        `<button class="${this.btnClass}" data-item="${i}"><i class="ph-caret-left"></i></button>`
+        `<button class="${this.btnClass}" data-item="${index}"><i class="ph-caret-left"></i></button>`
       );
-      i++;
+      index++;
     });
     this.addCaretButtonListeners();
   };
@@ -46,10 +54,8 @@ class CaretButtons {
    */
   addCaretButtonListeners = function () {
     this.elements.forEach((element) => {
-      //if the elements button (childNodes[1]) is not undefined,
-      //set the element sibling (parentNode.childNodes[3]) display to none.
       if (this.buttonExists(element)) {
-        element.parentNode.childNodes[3].style.display = `none`;
+        this.getContentNodes(element).style.display = `none`;
       }
     });
 
@@ -57,20 +63,16 @@ class CaretButtons {
     btns.forEach((button) => {
       const DEGREES_BUTTON_CLOSED = 0;
       const DEGREES_BUTTON_OPEN = -90;
-      // Degrees closed
+
       let degrees = DEGREES_BUTTON_CLOSED;
 
-      // Initial display value
       let display = "none";
 
-      // On click hide or open list/text element
       button.addEventListener("click", (event) => {
         const clicked = event.target.closest(`.${this.btnClass}`);
-
         let item = clicked.dataset.item;
 
-        if (degrees === 0) {
-          // Degrees open
+        if (degrees === DEGREES_BUTTON_CLOSED) {
           degrees = DEGREES_BUTTON_OPEN;
           display = "initial";
         } else {
@@ -81,15 +83,9 @@ class CaretButtons {
         clicked.style.transform = `rotate( ${degrees}deg)`;
 
         // Goes up to the parent node and gets the childnode 3 which is the element sibling to heading.
-        this.elements[
-          item
-        ].parentNode.childNodes[3].style.display = `${display}`;
+        this.getContentNodes(this.elements[item]).style.display = `${display}`;
       });
     });
-  };
-
-  buttonExists = function (element) {
-    return element.childNodes[1] !== undefined;
   };
 
   /**
@@ -99,19 +95,45 @@ class CaretButtons {
   removeCaretBtns = function () {
     this.elements.forEach((element) => {
       if (this.buttonExists(element)) {
-        element.parentNode.childNodes[3].style.display = `initial`;
-        element.removeChild(element.childNodes[1]);
+        this.getContentNodes(element).style.display = `initial`;
+        // element.removeChild(element.childNodes[1]);
+        element.removeChild(this.getButtonFromElement(element));
       }
     });
   };
+
+  /**
+   * Checks if the caret buttons exists with the given element.
+   * Returns true if the caret butten exists, false if not.
+   *
+   * @param {*} element the element to check if contains a caret button.
+   * @returns true if button exist, false if not.
+   */
+  buttonExists = function (element) {
+    return element.childNodes[1] !== undefined;
+  };
+
+  /**
+   * Retrieves the element (content nodes) which are hidden/displayed with the caret buttons.
+   *
+   * @param {*} element header element for the corresponding content node.
+   * @returns the content node belonging to the given element.
+   */
+  getContentNodes = function (element) {
+    return element.parentNode.querySelector("[data-content]");
+  };
+
+  /**
+   * Retrieves the button belonging to the given element.
+   *
+   * @param {*} element element to find the button of.
+   * @returns the button of the given element, undefined if not.
+   */
+  getButtonFromElement = function (element) {
+    return element.querySelector(`.${this.btnClass}`);
+  };
 }
 
-const overlayNavLinkMobileBtn = document.querySelector(
-  ".nav__link-menu--overlay"
-);
-const overlayNavUserMobileBtn = document.querySelector(
-  ".nav__user-menu--overlay"
-);
 /**
  * If tablet query size matches creates the features and functions
  * for the components in tablet site.
@@ -121,42 +143,43 @@ const init = function () {
 
   if (tabletQuery.matches) {
     footerCaretButtons.createCaretBtns();
-    navListEl.classList.add("hidden");
+    navListElement.classList.add("hidden");
   } else {
-    navMobileBtns[0].classList.remove("hidden");
-    navMobileBtns[1].classList.add("hidden");
+    mobileMenuButtonOpen.classList.remove("hidden");
+    mobileMenuButtonClose.classList.add("hidden");
     overlayNavLinkMobileBtn.classList.add("hidden");
     overlayNavUserMobileBtn.classList.add("hidden");
-    navListEl.classList.remove("hidden");
+    navListElement.classList.remove("hidden");
     footerCaretButtons.removeCaretBtns();
   }
 };
+
 document.body.classList.add("sticky");
-navMobileBtns.forEach((btn) =>
+navMobileButtons.forEach((btn) =>
   btn.addEventListener("click", (event) => {
-    navMobileBtns[0].classList.toggle("hidden");
-    navMobileBtns[1].classList.toggle("hidden");
+    mobileMenuButtonOpen.classList.toggle("hidden");
+    mobileMenuButtonClose.classList.toggle("hidden");
     overlayNavLinkMobileBtn.classList.toggle("hidden");
-    navListEl.classList.toggle("hidden");
-    userMenuEl.classList.add("hidden");
+    navListElement.classList.toggle("hidden");
+    userMenuElement.classList.add("hidden");
     overlayNavUserMobileBtn.classList.add("hidden");
   })
 );
 
 overlayNavLinkMobileBtn.addEventListener("click", () => {
-  navMobileBtns[1].click();
+  mobileMenuButtonClose.click();
 });
 
 overlayNavUserMobileBtn.addEventListener("click", () => {
-  userMenuBtn.click();
+  userMenuButton.click();
 });
 
-userMenuBtn.addEventListener("click", function (event) {
-  userMenuEl.classList.toggle("hidden");
+userMenuButton.addEventListener("click", function (event) {
+  userMenuElement.classList.toggle("hidden");
   overlayNavUserMobileBtn.classList.toggle("hidden");
 });
 
 // Update when the window is resized
 tabletQuery.addEventListener("change", init);
 
-init();
+window.addEventListener("load", init);

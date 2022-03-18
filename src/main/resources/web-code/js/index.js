@@ -25,10 +25,8 @@ const options = {
 };
 
 const observer = new IntersectionObserver(stickyNavigation, options);
-observer.observe(sectionHeroEl);
 
 /**
- * //TODO: Move this to another file and import from it
  *
  * Represents a slider
  */
@@ -39,6 +37,7 @@ class Slider {
   numberOfSlides;
   dots;
   isFormatted = false;
+  formattingClasses;
 
   /**
    * Creates an instance of slider with the given slides
@@ -51,8 +50,19 @@ class Slider {
     this.numberOfSlides = slides.length;
     this.currentSlide = Math.floor(this.numberOfSlides / 2);
     this.goToSlideReference = this.goToSlide.bind(this);
+    this.formattingClasses = [
+      "product-card__slide--active",
+      "product-card__slide--secondary-next",
+      "product-card__slide--secondary-prev",
+      "product-card__slide--tertiary-next",
+      "product-card__slide--tertiary-prev",
+      "hidden",
+    ];
   }
 
+  /**
+   * Creates slidecontroller, formats slides and adds events.
+   */
   createSlides = function () {
     this.createSlideController();
     this.formatSlides();
@@ -67,53 +77,18 @@ class Slider {
   formatSlides = function () {
     this.slides[this.currentSlide].classList.add("product-card__slide--active");
     if (this.numberOfSlides < 4) {
-      this.slides[(+this.currentSlide + 2) % this.numberOfSlides].classList.add(
-        "product-card__slide--secondary-prev"
-      );
-      this.slides[(+this.currentSlide + 1) % this.numberOfSlides].classList.add(
-        "product-card__slide--secondary-next"
-      );
+      this.formatThreeSlides();
     } else if (+this.numberOfSlides === 4) {
-      this.slides[(+this.currentSlide + 1) % this.numberOfSlides].classList.add(
-        "product-card__slide--secondary-next"
-      );
-      this.slides[(+this.currentSlide + 2) % this.numberOfSlides].classList.add(
-        "hidden"
-      );
-      this.slides[(+this.currentSlide + 3) % this.numberOfSlides].classList.add(
-        "product-card__slide--secondary-prev"
-      );
+      this.formatFourSlides();
     } else if (this.numberOfSlides > 4) {
-      this.slides.forEach((slide) => slide.classList.add("hidden"));
-      this.slides[this.currentSlide].classList.remove("hidden");
-      this.slides[
-        (+this.currentSlide + this.numberOfSlides - 1) % this.numberOfSlides
-      ].classList.add("product-card__slide--secondary-prev");
-      this.slides[
-        (+this.currentSlide + this.numberOfSlides - 1) % this.numberOfSlides
-      ].classList.remove("hidden");
-      this.slides[
-        (+this.currentSlide + this.numberOfSlides - 2) % this.numberOfSlides
-      ].classList.add("product-card__slide--tertiary-prev");
-      this.slides[
-        (+this.currentSlide + this.numberOfSlides - 2) % this.numberOfSlides
-      ].classList.remove("hidden");
-      this.slides[(+this.currentSlide + 1) % this.numberOfSlides].classList.add(
-        "product-card__slide--secondary-next"
-      );
-      this.slides[
-        (+this.currentSlide + 1) % this.numberOfSlides
-      ].classList.remove("hidden");
-      this.slides[(+this.currentSlide + 2) % this.numberOfSlides].classList.add(
-        "product-card__slide--tertiary-next"
-      );
-      this.slides[
-        (+this.currentSlide + 2) % this.numberOfSlides
-      ].classList.remove("hidden");
+      this.formatFiveOrMoreSlides();
     }
     this.isFormatted = true;
   };
 
+  /**
+   * Remove slide formatting, controller and events.
+   */
   removeSlides() {
     this.removeFormat();
     this.removeSlideController();
@@ -127,12 +102,9 @@ class Slider {
    */
   removeFormat = function () {
     this.slides.forEach((slide) => {
-      slide.classList.remove("product-card__slide--active");
-      slide.classList.remove("product-card__slide--secondary-next");
-      slide.classList.remove("product-card__slide--secondary-prev");
-      slide.classList.remove("product-card__slide--tertiary-next");
-      slide.classList.remove("product-card__slide--tertiary-prev");
-      slide.classList.remove("hidden");
+      this.formattingClasses.forEach((formatClass) => {
+        slide.classList.remove(formatClass);
+      });
     });
   };
 
@@ -141,30 +113,31 @@ class Slider {
    */
   createSlideController = function () {
     // Insert controller in HTML
-    let html = `<div class="slider-controls">
+    let controllerHtml = `<div class="slider-controls">
             <button aria-label="go to previous slide" class="slider__btn slider__btn--prev">
             <i class="ph-caret-left"></i>
             </button>
             <div class="dots">`;
-    for (let i = 0; i < this.numberOfSlides; i++) {
-      html += `<button aria-label="got to this slide" class="dots__dot" data-slide="${i}"></button>`;
+
+    for (let dotIndex = 0; dotIndex < this.numberOfSlides; dotIndex++) {
+      controllerHtml += `<button aria-label="got to this slide" class="dots__dot" data-slide="${dotIndex}"></button>`;
     }
 
-    html += `</div>
+    controllerHtml += `</div>
             <button aria-label="go to next slide"class="slider__btn slider__btn--next"><i class="ph-caret-right"></i></button>
             </div>`;
-    this.slides[0]
-      .closest(`:not(${this.slides[0].classList[0]})`)
-      .insertAdjacentHTML("afterend", html);
+
+    this.getSliderContainer().insertAdjacentHTML("afterend", controllerHtml);
 
     const sliderPrevBtn = this.element.querySelector(".slider__btn--prev");
     const sliderNextBtn = this.element.querySelector(".slider__btn--next");
+
     sliderPrevBtn.addEventListener("click", this.sliderPrev.bind(this));
     sliderNextBtn.addEventListener("click", this.sliderNext.bind(this));
 
     this.setActiveDot();
     this.dots.forEach((dot) => {
-      dot.addEventListener("click", (event) => this.goToSlide(event));
+      dot.addEventListener("click", this.goToSlide.bind(this));
     });
   };
 
@@ -186,16 +159,6 @@ class Slider {
    * @param {*} event event used for this handler
    */
   sliderNext = function (event) {
-    // event.preventDefault();
-    let slide;
-    if (this.numberOfSlides > 4) {
-      slide = document.querySelector(".product-card__slide--tertiary-prev");
-      slide.style.opacity = "0";
-      slide.style.transform = "translateX(-300%)";
-      setTimeout(function () {
-        slide.style.display = "none";
-      }, 50);
-    }
     if (+this.currentSlide === this.numberOfSlides - 1) {
       this.currentSlide = 0;
     } else {
@@ -203,21 +166,6 @@ class Slider {
     }
 
     this.goToSlide();
-
-    if (this.numberOfSlides > 4) {
-      setTimeout(function () {
-        slide.style.transform = "translateX(300%)";
-        slide.style.opacity = "0";
-        slide.style.display = "initial";
-      }, 100);
-      setTimeout(function () {
-        slide.style.transform = "translateX(170%)";
-        slide.style.opacity = "1";
-      }, 110);
-      setTimeout(function () {
-        slide.setAttribute("style", "");
-      }, 200);
-    }
   };
 
   /**
@@ -226,39 +174,13 @@ class Slider {
    * @param {*} event event used for this handler
    */
   sliderPrev = function (event) {
-    // event.preventDefault();
-    let slide;
-    if (this.numberOfSlides > 4) {
-      slide = document.querySelector(".product-card__slide--tertiary-next");
-      // slide.classList.add("hidden");
-      slide.style.opacity = "0";
-      slide.style.transform = "translateX(500%)";
-      setTimeout(function () {
-        slide.style.display = "none";
-      }, 50);
-    }
     if (+this.currentSlide === 0) {
       this.currentSlide = this.numberOfSlides - 1;
     } else {
       this.currentSlide -= 1;
     }
 
-    // this.setActiveDot();
     this.goToSlide();
-    if (this.numberOfSlides > 4) {
-      setTimeout(function () {
-        slide.style.transform = "translateX(-500%)";
-        slide.style.opacity = "0";
-        slide.style.display = "initial";
-      }, 100);
-      setTimeout(function () {
-        slide.style.transform = "translateX(-270%)";
-        slide.style.opacity = "1";
-      }, 110);
-      setTimeout(function () {
-        slide.setAttribute("style", "");
-      }, 200);
-    }
   };
 
   /**
@@ -277,13 +199,10 @@ class Slider {
    */
   goToSlide = function (event) {
     if (event !== undefined) {
-      if (event.target.classList[0].includes(this.slides[0].classList[0])) {
-        this.currentSlide = Number(
-          event.target.closest(`.${this.slides[0].classList[0]}`).dataset.slide
-        );
-      } else if (event.target.classList[0].includes("dots__dot")) {
-        console.log("here?");
-        this.currentSlide = Number(event.target.dataset.slide);
+      if (this.isEventFromSlide(event)) {
+        this.currentSlide = Number(this.getSlideIndexFromSlide(event));
+      } else if (this.isEventFromDot(event)) {
+        this.currentSlide = Number(this.getSlideIndexFromDot(event));
       }
     }
 
@@ -291,15 +210,135 @@ class Slider {
       this.removeFormat();
       this.formatSlides();
     } else {
-      this.slides[(this.currentSlide + 1) % this.numberOfSlides].classList.add(
-        "hidden"
-      );
+      const previousSlide = (+this.currentSlide + 2) % this.numberOfSlides;
+      const nextSlide = (+this.currentSlide + 1) % this.numberOfSlides;
+
+      this.slides[nextSlide].classList.add("hidden");
       this.slides[this.currentSlide].classList.remove("hidden");
-      this.slides[(this.currentSlide + 2) % this.numberOfSlides].classList.add(
-        "hidden"
-      );
+      this.slides[previousSlide].classList.add("hidden");
     }
     this.setActiveDot();
+  };
+
+  /**
+   * Returns the slidercontainer for the slides.
+   *
+   * @returns slidercontainer for the slides.
+   */
+  getSliderContainer = function () {
+    return this.slides[0].closest(`:not(${this.slides[0].classList[0]})`);
+  };
+
+  /**
+   * Formats the slides for three slides.
+   */
+  formatThreeSlides = function () {
+    // Slide positions
+    const previousSlide = (+this.currentSlide + 2) % this.numberOfSlides;
+    const nextSlide = (+this.currentSlide + 1) % this.numberOfSlides;
+
+    // Formatting slides
+    this.slides[previousSlide].classList.add(
+      "product-card__slide--secondary-prev"
+    );
+    this.slides[nextSlide].classList.add("product-card__slide--secondary-next");
+  };
+
+  /**
+   * Formats the slides for four slides, where one is hidden.
+   */
+  formatFourSlides = function () {
+    //Slide positions
+    const previousSlide = (+this.currentSlide + 3) % this.numberOfSlides;
+    const nextSlide = (+this.currentSlide + 1) % this.numberOfSlides;
+    const hiddenSlide = (+this.currentSlide + 2) % this.numberOfSlides;
+
+    // Formatting slides
+    this.slides[previousSlide].classList.add(
+      "product-card__slide--secondary-prev"
+    );
+    this.slides[nextSlide].classList.add("product-card__slide--secondary-next");
+    this.slides[hiddenSlide].classList.add("hidden");
+  };
+
+  /**
+   * Formats the slides for five or more slides.
+   */
+  formatFiveOrMoreSlides = function () {
+    this.slides.forEach((slide) => slide.classList.add("hidden"));
+    this.slides[this.currentSlide].classList.remove("hidden");
+
+    // Slide positions
+    const secondaryPreviousSlide =
+      (+this.currentSlide + this.numberOfSlides - 1) % this.numberOfSlides;
+    const tertiaryPreviousSlide =
+      (+this.currentSlide + this.numberOfSlides - 2) % this.numberOfSlides;
+    const secondaryNextSlide = (+this.currentSlide + 1) % this.numberOfSlides;
+    const tertiaryNextSlide = (+this.currentSlide + 2) % this.numberOfSlides;
+
+    // Formatting slides
+    this.slides[secondaryPreviousSlide].classList.add(
+      "product-card__slide--secondary-prev"
+    );
+    this.slides[secondaryPreviousSlide].classList.remove("hidden");
+
+    this.slides[tertiaryPreviousSlide].classList.add(
+      "product-card__slide--tertiary-prev"
+    );
+    this.slides[tertiaryPreviousSlide].classList.remove("hidden");
+
+    this.slides[secondaryNextSlide].classList.add(
+      "product-card__slide--secondary-next"
+    );
+    this.slides[secondaryNextSlide].classList.remove("hidden");
+
+    this.slides[tertiaryNextSlide].classList.add(
+      "product-card__slide--tertiary-next"
+    );
+    this.slides[tertiaryNextSlide].classList.remove("hidden");
+  };
+
+  /**
+   * Checks if the event target has a class from slides, returns true
+   * if the event target is a slide, false if not.
+   *
+   * @param {*} event event to check the target for.
+   * @returns true if event target is a slide, false if not.
+   */
+  isEventFromSlide = function (event) {
+    return event.target.classList[0].includes(this.slides[0].classList[0]);
+  };
+
+  /**
+   * Gets the slide index from an event target which is a slide.
+   *
+   * @param {*} event event to retrieve the slide index from
+   * @returns slide index from slide.
+   */
+  getSlideIndexFromSlide = function (event) {
+    return event.target.closest(`.${this.slides[0].classList[0]}`).dataset
+      .slide;
+  };
+
+  /**
+   * Checks if the event target has a class from fots, returns true
+   * if the event target is a dot, false if not.
+   *
+   * @param {*} event event to check the target for.
+   * @returns true if event target is a dot, false if not.
+   */
+  isEventFromDot = function (event) {
+    return event.target.classList[0].includes("dots__dot");
+  };
+
+  /**
+   * Gets the slide index from the corresponding dot.
+   *
+   * @param {*} event event to retrieve slide index for.
+   * @returns slide index from dot.
+   */
+  getSlideIndexFromDot = function (event) {
+    return event.target.dataset.slide;
   };
 }
 
@@ -388,7 +427,9 @@ const tabletQueryFeatures = function () {
     testimonialCaretButtons.createCaretBtns();
     featuredSlider.createSlides();
     gallerySlider.createSlides();
+    observer.unobserve(sectionHeroEl);
   } else {
+    observer.observe(sectionHeroEl);
     testimonialCaretButtons.removeCaretBtns();
     featuredSlider.removeSlides();
     gallerySlider.removeSlides();

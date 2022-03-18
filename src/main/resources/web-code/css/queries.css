@@ -1,13 +1,9 @@
 @media (min-width: 100em) {
   html {
-    font-size: 110%;
-  }
-
-  .section-hero {
-    padding: 2.4rem 4.8rem 6.4rem 4.8rem;
+    font-size: 68.5%;
   }
 }
-/*
+
 @media (min-width: 120em) {
   html {
     font-size: 87.5%;
@@ -166,7 +162,7 @@
     /* background-color: rgba(241, 238, 226, 0.6); */
     background: linear-gradient(180deg, #dad7cd, rgba(241, 238, 226, 0.6));
     backdrop-filter: blur(15px);
-    z-index: 10000;
+    z-index: 100000;
     flex-direction: column;
     gap: 4.8rem;
     box-shadow: 3rem 2rem 10rem rgba(0, 0, 0, 0.49);
