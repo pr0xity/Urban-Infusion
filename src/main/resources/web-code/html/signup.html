@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+            name="description"
+            content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
+    through nature."
+    />
+    <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="../img/apple-touch-icon.png"
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="../img/favicon-32x32.png"
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="../img/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Hurricane:wght@200;300;400;500;600&display=swap"
+            rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/queries.css" />
+
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <script defer src="../js/general.js"></script>
+    <title>Urban Infusion</title>
+</head>
+  <body>
+    <header class="header">
+    <button class="nav-mobile__btn btn--icon"><i class="ph-list"></i></button>
+    <button class="nav-mobile__btn btn--icon hidden">
+        <i class="ph-x"></i>
+    </button>
+    <a href="../index.html" class="logo">
+        <img
+                class="logo__img"
+                src="../img/logo-big.png"
+                alt="Urban Infusion logo"
+        />
+    </a>
+    <nav class="nav">
+        <ul class="nav__list">
+            <li class="nav__item">
+                <a class="nav__link" href="../index.html">Home</a>
+            </li>
+            <li class="nav__item">
+                <a class="nav__link" href="../index.html#section-company"
+                >About us</a
+                >
+            </li>
+            <li class="nav__item">
+                <a class="nav__link" href="../index.html#section-products"
+                >Products</a
+                >
+            </li>
+        </ul>
+        <div class="nav__link-menu--overlay hidden" id=""></div>
+
+        <div class="nav__btn-box">
+            <a
+                    href="wishlist.html"
+                    class="nav__link nav__item"
+                    aria-label="View wishlist"
+            ><i class="ph-heart-light btn--icon"></i
+            ></a>
+            <a
+                    href="checkout.html"
+                    class="nav__link nav__item"
+                    aria-label="Go to checkout"
+            >
+                <i class="ph-tote-light btn--icon"></i
+                ></a>
+            <button class="nav__item" id="user-menu" aria-label="account menu">
+                <i class="ph-user-circle-light btn--icon"></i>
+            </button>
+            <div class="nav__user-menu hidden">
+                <form class="login" name="login">
+                    <div class="login__field">
+                        <label for="email">Emailaddress</label>
+                        <input
+                                class="login__input"
+                                id="email"
+                                type="text"
+                                placeholder="john@example.com"
+                        />
+                    </div>
+                    <div class="login__field">
+                        <label for="password">Password</label>
+                        <input
+                                class="login__input"
+                                id="password"
+                                type="password"
+                                placeholder="password"
+                        />
+                    </div>
+                </form>
+                <a class="btn--green">Sign in</a>
+                <a href="#" class="link"
+                >Not a member yet? <strong>Join here!</strong></a
+                >
+            </div>
+        </div>
+        <div class="nav__user-menu--overlay hidden"></div>
+    </nav>
+</header>
+
+    <main class="signup">
+      <section class="section-create-account">
+        <h1 class="section-title">Create an account</h1>
+          <div class="signup__form">
+            <h3 class="signup-heading">First name</h3>
+            <input class="signup__input first__name" type="text" placeholder="">
+            <h3 class="signup-heading">Last name</h3>
+            <input class="signup__input" type="text" placeholder="">
+            <h3 class="signup-heading">Email address</h3>
+            <input class="signup__input email__address" type="text" placeholder="">
+            <h3 class="signup-heading">Address</h3>
+            <input class="signup__input address" type="text" placeholder="">
+            <h3 class="signup-heading">Municipality</h3>
+            <input class="signup__input" type="text" placeholder="">
+            <h3 class="signup-heading">Zip-code</h3>
+            <input class="signup__input zip__code" type="text" placeholder="">
+            <h3 class="signup-heading">Password</h3>
+            <input class="signup__input password" type="text" placeholder="">
+            <button class="btn--green">Sign up</button>
+          </div>
+
+          <div class="signup__images">
+              <img class="signup_img" src="../img/pic-1.webp" alt="herbal tea in a teapot">
+              <img class="signup_img" src="../img/pic-2.webp" alt="herbal tea in a teacup">
+              <img class="signup_img" src="../img/pic-3.webp" alt="herbal tea ready to be served">
+          </div>
+
+      </section>
+
+
+
+    </main>
+
+  <footer class="footer">
+    <div class="logo-col">
+        <img
+                class="footer__logo"
+                src="../img/logo-big.png"
+                alt="Urban infusion logo"
+        />
+        <p class="copyright">
+            Copyright &copy; 2022 NTNU, IDATA2301 Web Technologies - group 3
+        </p>
+    </div>
+    <nav>
+        <p class="footer-heading">Account</p>
+        <ul class="footer__list" data-content="0">
+            <li class="footer__item">
+                <a href="#" class="footer__link">Account policy</a>
+            </li>
+            <li class="footer__item">
+                <a href="#" class="footer__link">Create account</a>
+            </li>
+            <li class="footer__item">
+                <a href="#" class="footer__link">Sign in</a>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <p class="footer-heading">Resources</p>
+        <ul class="footer__list" data-content="1">
+            <li class="footer__item">
+                <a href="#" class="footer__link">Customer service</a>
+            </li>
+            <li class="footer__item">
+                <a href="#" class="footer__link">Terms of service</a>
+            </li>
+            <li class="footer__item">
+                <a href="#" class="footer__link">Privacy policy</a>
+            </li>
+            <li class="footer__item">
+                <a href="#" class="footer__link">Cancellations and returns</a>
+            </li>
+        </ul>
+    </nav>
+    <nav>
+        <p class="footer-heading">Company</p>
+        <ul class="footer__list" data-content="2">
+            <li class="footer__item">
+                <a href="#" class="footer__link">About Urban Infusion</a>
+            </li>
+            <li class="footer__item">
+                <a href="#" class="footer__link">Business inquiries</a>
+            </li>
+            <li class="footer__item">
+                <a href="#" class="footer__link">Careers</a>
+            </li>
+        </ul>
+    </nav>
+</footer>
+  </body>
+</html>

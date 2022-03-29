@@ -1222,3 +1222,102 @@ button {
 .review__form .product__rating p {
   margin-right: 3.6rem;
 }
+
+/********************************************************/
+
+/****************************/
+/* SIGNUP           */
+/****************************/
+
+.signup {
+  padding: 12.8rem 6.4rem 9.6rem 6.4rem;
+  max-width: 160rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-flow: wrap;
+}
+
+.section-create-account {
+  width: 100%;
+  margin: auto;
+}
+
+.signup .signup-heading {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-top: 2rem;
+}
+
+.signup__form {
+  width: 30%;
+  padding: 2.8rem 2.4rem 5.6rem 2.4rem;
+}
+
+.signup__input {
+  padding: 1.6rem;
+  resize: none;
+  width: 100%;
+  border-radius: 3px;
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+  font-family: "Montserrat", sans-serif;
+  box-shadow: inset 0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+}
+
+.first__name {
+  width: 80%;
+}
+
+.email__address {
+  width: 140%;
+}
+
+.address {
+  width: 140%;
+}
+
+.zip__code {
+  width: 80%;
+}
+
+.password {
+  width: 120%;
+}
+
+.signup .btn--green {
+  padding: 1rem 3rem;
+  margin-top: 2rem;
+  font-size: 1.6rem;
+}
+
+.signup__images{
+}
+
+.signup_img {
+  box-sizing: border-box;
+  position: absolute;
+  transition: 0.4s ease;
+  border: 0.4rem solid white;
+  box-shadow: 2rem 2rem 3rem rgba(0, 0, 0, 0.1);
+}
+
+.signup_img:hover {
+  z-index: 999;
+  transform: scale(1.3);
+}
+
+.signup_img:first-child {
+  top: 20%;
+  right: 9%;
+}
+
+.signup_img:nth-child(2) {
+  top: 40%;
+  right: 19%;
+}
+
+.signup_img:nth-child(3) {
+  top: 60%;
+  right: 7%;
+}
