@@ -2,7 +2,6 @@ package no.ntnu.appdevapi.product;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,7 +25,7 @@ public class ProductController {
    */
   @GetMapping
   @ApiOperation(value = "Get all products.")
-  public List<Product> getAll() {
+  public Iterable<Product> getAll() {
     return productService.getAllProducts();
   }
 

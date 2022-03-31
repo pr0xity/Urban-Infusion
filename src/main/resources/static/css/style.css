@@ -400,6 +400,17 @@ button {
 }
 
 /****************************/
+/* ADMIN SECTION */
+/****************************/
+.admin__logo {
+  align-items: center;
+  justify-content:
+  transform: translate(10%, 0%);
+  z-index: 10000000000000000;
+}
+
+
+/****************************/
 /* HERO SECTION */
 /****************************/
 
