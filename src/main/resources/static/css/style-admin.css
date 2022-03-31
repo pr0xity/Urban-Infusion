@@ -22,7 +22,8 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
     max-width: 1000rem;
     margin: 0 auto;
     min-height: 50rem;
-}
+    justify-content: left;
+    }
 
 .admin-main .admin-sidenav {
     /*order: 1;*/
@@ -30,7 +31,7 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
     border-style: solid;
 }
 
-.admin-sidenav li {
+.admin-sidenav li{
     margin-bottom: 1rem;
     padding: 1rem;
 }

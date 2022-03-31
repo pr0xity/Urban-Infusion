@@ -130,12 +130,12 @@ button {
 }
 
 .btn--green:hover {
-  transform: scale(108%);
+  transform: scale(1.08);
   /* letter-spacing: 1px; */
 }
 
 .btn--green:active {
-  transform: scale(103%);
+  transform: scale(1.03);
 }
 
 .btn:hover {
@@ -506,7 +506,7 @@ button {
 }
 
 .featured-card:hover {
-  transform: scale(105%);
+  transform: scale(1.05);
 }
 
 .featured-card__img {
@@ -525,12 +525,12 @@ button {
 }
 
 .section-featured .btn:hover {
-  transform: translate(-50%, -50%) scale(110%);
+  transform: translate(-50%, -50%) scale(1.10);
   color: #588157;
 }
 
 .section-featured .btn:active {
-  transform: translate(-50%, -50%) scale(105%);
+  transform: translate(-50%, -50%) scale(105);
 }
 
 /****************************/
