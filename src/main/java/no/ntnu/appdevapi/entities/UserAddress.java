@@ -13,14 +13,18 @@ public class UserAddress {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @ApiModelProperty("The id of the user")
-    private int user_id;
+    @Column(name = "fk_user_id")
+    private int userId;
     @ApiModelProperty("The users main address")
-    private String address_line1;
+    @Column(name = "address_line1")
+    private String addressLine1;
     @ApiModelProperty("The users secondary address")
-    private String address_line2;
+    @Column(name = "address_line2")
+    private String addressLine2;
     @ApiModelProperty("The users city")
     private String city;
     @ApiModelProperty("The users postal code")
+    @Column(name = "postal_code")
     private int postalCode;
     @ApiModelProperty("The users current country")
     private String country;
@@ -28,21 +32,21 @@ public class UserAddress {
     private String telephone;
 
 
-    public UserAddress(int id, int user_id, String address_line1, String city, int postalCode, String country, String telephone) {
+    public UserAddress(int id, int userId, String addressLine1, String city, int postalCode, String country, String telephone) {
         this.id = id;
-        this.user_id = user_id;
-        this.address_line1 = address_line1;
+        this.userId = userId;
+        this.addressLine1 = addressLine1;
         this.city = city;
         this.postalCode = postalCode;
         this.country = country;
         this.telephone = telephone;
     }
 
-    public UserAddress(int id, int user_id, String address_line1, String address_line2, String city, int postalCode, String country, String telephone) {
+    public UserAddress(int id, int userId, String addressLine1, String addressLine2, String city, int postalCode, String country, String telephone) {
         this.id = id;
-        this.user_id = user_id;
-        this.address_line1 = address_line1;
-        this.address_line2 = address_line2;
+        this.userId = userId;
+        this.addressLine1 = addressLine1;
+        this.addressLine2 = addressLine2;
         this.city = city;
         this.postalCode = postalCode;
         this.country = country;
@@ -55,17 +59,17 @@ public class UserAddress {
 
     public void setId(int id) { this.id = id; }
 
-    public int getUser_id() { return user_id; }
+    public int getUserId() { return userId; }
 
-    public void setUser_id(int user_id) { this.user_id = user_id; }
+    public void setUserId(int user_id) { this.userId = user_id; }
 
-    public String getAddress_line1() { return address_line1; }
+    public String getAddressLine1() { return addressLine1; }
 
-    public void setAddress_line1(String address_line1) { this.address_line1 = address_line1; }
+    public void setAddressLine1(String address_line1) { this.addressLine1 = address_line1; }
 
-    public String getAddress_line2() { return address_line2; }
+    public String getAddressLine2() { return addressLine2; }
 
-    public void setAddress_line2(String address_line2) { this.address_line2 = address_line2; }
+    public void setAddressLine2(String address_line2) { this.addressLine2 = address_line2; }
 
     public String getCity() { return city; }
 

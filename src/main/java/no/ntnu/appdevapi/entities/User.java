@@ -10,20 +10,26 @@ import java.time.LocalDateTime;
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
+  @Column(name = "id")
   private int id;
   @ApiModelProperty("First name of the user")
+  @Column(name = "first_name")
   private String firstName;
   @ApiModelProperty("Last name of the user")
+  @Column(name = "last_name")
   private String lastName;
   @ApiModelProperty("The users email-address")
   private String email;
   @ApiModelProperty("Password of the user")
   private String password;
   @ApiModelProperty("Date and time of the creation of the user")
+  @Column(name = "created_at")
   private LocalDateTime createdAt;
   @ApiModelProperty("Date and time of the last update of user info")
+  @Column(name = "updated_at")
   private LocalDateTime updatedAt;
   @ApiModelProperty("The permission-ID of the user")
+  @Column(name = "fk_permission_id")
   private Integer permissionID;
   @ApiModelProperty("If the user is enabled or not")
   private boolean enabled;

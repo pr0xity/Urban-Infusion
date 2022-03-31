@@ -9,23 +9,22 @@ import java.time.LocalDateTime;
  * Represents a shopping session on an online store.
  */
 @Entity
-@Table(name = "shopping_sessions")
+@Table(name = "shopping_session")
 public class ShoppingSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-
     @ApiModelProperty("The id of the user of this shopping session.")
+    @Column(name = "fk_user_id")
     private int userId;
-
     @ApiModelProperty("The total cost of the items in this shopping session.")
     private double total;
-
     @ApiModelProperty("When the shopping session was created.")
+    @Column(name = "created_at")
     private LocalDateTime createdAt;
-
     @ApiModelProperty("When the shopping session was last updated.")
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
     /**
