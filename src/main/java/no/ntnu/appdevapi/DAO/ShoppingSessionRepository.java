@@ -1,8 +1,7 @@
-package no.ntnu.appdevapi.shopping_session;
+package no.ntnu.appdevapi.DAO;
 
+import no.ntnu.appdevapi.entities.ShoppingSession;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
 
 /**
  * Repository interface for shopping sessions.

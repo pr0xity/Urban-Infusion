@@ -1,5 +1,7 @@
-package no.ntnu.appdevapi.shopping_session;
+package no.ntnu.appdevapi.services;
 
+import no.ntnu.appdevapi.entities.ShoppingSession;
+import no.ntnu.appdevapi.DAO.ShoppingSessionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

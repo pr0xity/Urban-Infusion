@@ -1,5 +1,7 @@
-package no.ntnu.appdevapi.product;
+package no.ntnu.appdevapi.services;
 
+import no.ntnu.appdevapi.entities.Product;
+import no.ntnu.appdevapi.DAO.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

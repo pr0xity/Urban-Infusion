@@ -1,5 +1,7 @@
-package no.ntnu.appdevapi.shopping_session;
+package no.ntnu.appdevapi.controllers;
 
+import no.ntnu.appdevapi.entities.ShoppingSession;
+import no.ntnu.appdevapi.services.ShoppingSessionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package no.ntnu.appdevapi.user_address;
+package no.ntnu.appdevapi.entities;
 
 
 import io.swagger.annotations.ApiModelProperty;

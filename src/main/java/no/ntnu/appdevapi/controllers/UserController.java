@@ -1,7 +1,9 @@
-package no.ntnu.appdevapi.user;
+package no.ntnu.appdevapi.controllers;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import no.ntnu.appdevapi.entities.User;
+import no.ntnu.appdevapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

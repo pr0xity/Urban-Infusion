@@ -1,8 +1,10 @@
-package no.ntnu.appdevapi.product;
+package no.ntnu.appdevapi.controllers;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
+import no.ntnu.appdevapi.entities.Product;
+import no.ntnu.appdevapi.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

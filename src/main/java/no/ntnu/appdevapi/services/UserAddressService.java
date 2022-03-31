@@ -1,5 +1,7 @@
-package no.ntnu.appdevapi.user_address;
+package no.ntnu.appdevapi.services;
 
+import no.ntnu.appdevapi.entities.UserAddress;
+import no.ntnu.appdevapi.DAO.UserAddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

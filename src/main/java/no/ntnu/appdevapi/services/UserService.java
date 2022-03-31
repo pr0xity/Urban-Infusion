@@ -1,5 +1,7 @@
-package no.ntnu.appdevapi.user;
+package no.ntnu.appdevapi.services;
 
+import no.ntnu.appdevapi.entities.User;
+import no.ntnu.appdevapi.DAO.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package no.ntnu.appdevapi.shopping_session;
+package no.ntnu.appdevapi.entities;
 
 import io.swagger.annotations.ApiModelProperty;
 
