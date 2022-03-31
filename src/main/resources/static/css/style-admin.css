@@ -23,15 +23,17 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
     margin: 0 auto;
     min-height: 50rem;
     justify-content: left;
-    }
+}
 
 .admin-main .admin-sidenav {
     /*order: 1;*/
-    flex-grow: 1;
+    /* flex-grow: 1; */
     border-style: solid;
+    min-width: 25rem;
+    max-width: 25rem;
 }
 
-.admin-sidenav li{
+.admin-sidenav li {
     margin-bottom: 1rem;
     padding: 1rem;
 }
@@ -39,26 +41,31 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
 .admin-body {
     /*order: 2;*/
     /*flex-grow: 3;*/
-    display: flex;
-    flex-grow: 4;
+    /* flex-grow: 4; */
     flex-wrap: wrap;
+    display: flex;
     justify-content: space-between;
+    flex-direction: column;
 }
 
 .admin-body-section {
+    /* this stops flex from going to column */
     flex: 34%;
     margin: 3%;
 }
 
-.admin-customer-table {
+.admin-customer {}
+
+
+/* .admin-customer-table {
     order: 2;
     flex: 1;
     width: 100%;
-}
+} */
 
-.customer-table {
 
-}
+/* .customer-table {} */
+
 th {
     text-align: left;
 }
@@ -67,16 +74,14 @@ th {
     font-size: 3.8rem;
 }
 
-
 .admin__logo {
     transform: translate(0%, 10%);
 }
-.admin__header {
 
+.admin__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     width: 100vw;
     padding: 1.6rem 2.4rem 1.6rem 2.4rem;
     background-color: rgba(218, 215, 205, 1);
