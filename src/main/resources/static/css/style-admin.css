@@ -1,0 +1,52 @@
+/*
+Primary color: #dad7cd;
+Secondary color: #588157;
+Text color: #6d6875;
+
+Spacing: 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128 / 160
+Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+*/
+
+
+/****************************/
+
+
+/* ADMIN */
+
+
+/****************************/
+
+.admin-section {
+    display: flex;
+    gap: 3.2rem;
+    max-width: 160rem;
+    margin: 0 auto;
+    min-height: 50rem;
+}
+
+.admin-sidenav {
+    order: 1;
+    flex-grow: 2;
+    border-style: solid;
+}
+
+.admin-sidenav li {
+    margin-bottom: 1rem;
+    padding: 1rem;
+}
+
+.admin-section-main {
+    order: 2;
+    flex-grow: 3;
+    display: flex;
+}
+
+.admin-customer-table {
+    order: 2;
+    flex: 1;
+    width: 100%;
+}
+
+.admin-sidenav i {
+    font-size: 3.8rem;
+}
