@@ -5,6 +5,7 @@ const navMobileButtons = document.querySelectorAll(".nav-mobile__btn");
 const mobileMenuButtonOpen = document.querySelectorAll(".nav-mobile__btn")[0];
 const mobileMenuButtonClose = document.querySelectorAll(".nav-mobile__btn")[1];
 const navListElement = document.querySelector(".nav__list");
+const navLinks = navListElement.querySelectorAll(".nav__link");
 const overlayNavLinkMobileBtn = document.querySelector(
   ".nav__link-menu--overlay"
 );
@@ -96,7 +97,6 @@ class CaretButtons {
     this.elements.forEach((element) => {
       if (this.buttonExists(element)) {
         this.getContentNodes(element).style.display = `initial`;
-        // element.removeChild(element.childNodes[1]);
         element.removeChild(this.getButtonFromElement(element));
       }
     });
@@ -144,13 +144,19 @@ const init = function () {
   if (tabletQuery.matches) {
     footerCaretButtons.createCaretBtns();
     navListElement.classList.add("hidden");
+    navLinks.forEach((link) => {
+      link.addEventListener("click", closeMenuAfterLinkClick);
+    });
   } else {
     mobileMenuButtonOpen.classList.remove("hidden");
     mobileMenuButtonClose.classList.add("hidden");
     overlayNavLinkMobileBtn.classList.add("hidden");
-    overlayNavUserMobileBtn.classList.add("hidden");
+    // overlayNavUserMobileBtn.classList.add("hidden");
     navListElement.classList.remove("hidden");
     footerCaretButtons.removeCaretBtns();
+    navLinks.forEach((link) => {
+      link.removeEventListener("click", closeMenuAfterLinkClick);
+    });
   }
 };
 
@@ -166,6 +172,10 @@ navMobileButtons.forEach((btn) =>
   })
 );
 
+closeMenuAfterLinkClick = function () {
+  mobileMenuButtonClose.click();
+};
+
 overlayNavLinkMobileBtn.addEventListener("click", () => {
   mobileMenuButtonClose.click();
 });
@@ -176,7 +186,9 @@ overlayNavUserMobileBtn.addEventListener("click", () => {
 
 userMenuButton.addEventListener("click", function (event) {
   userMenuElement.classList.toggle("hidden");
+  // if (tabletQuery.matches) {
   overlayNavUserMobileBtn.classList.toggle("hidden");
+  // }
 });
 
 // Update when the window is resized

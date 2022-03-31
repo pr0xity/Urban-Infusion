@@ -87,37 +87,70 @@
           <button class="nav__item" id="user-menu" aria-label="account menu">
             <i class="ph-user-circle-light btn--icon"></i>
           </button>
-          <div class="nav__user-menu hidden">
-            <form class="login" name="login">
-              <div class="login__field">
-                <label for="email">Emailaddress</label>
-                <input
+          <!-- Login menu -->
+          <!--
+            <div class="nav__user-menu align-items--center hidden">
+              <form class="login" name="login">
+                <div class="login__field">
+                  <label for="email">Emailaddress</label>
+                  <input
                   class="login__input"
                   id="email"
                   type="text"
                   placeholder="john@example.com"
-                />
-              </div>
-              <div class="login__field">
-                <label for="password">Password</label>
-                <input
+                  />
+                </div>
+                <div class="login__field">
+                  <label for="password">Password</label>
+                  <input
                   class="login__input"
                   id="password"
                   type="password"
                   placeholder="password"
-                />
-              </div>
-            </form>
-            <a class="btn--green">Sign in</a>
-            <a href="#" class="link"
+                  />
+                </div>
+              </form>
+              <a class="btn--green">Sign in</a>
+              <a href="signup.html" class="link"
               >Not a member yet? <strong>Join here!</strong></a
-            >
+              >
+            </div>
+          -->
+
+          <!-- Customer menu -->
+          <!--
+            <div class="nav__user-menu hidden">
+              <a href="account.html" class="user-menu__item">
+                <i class="ph-user-circle-light btn--icon"></i>
+                <span class="link">Account information</span>
+              </a>
+              <button class="user-menu__item">
+                <i class="ph-sign-out-light btn--icon"></i>
+                <span class="link">Sign out</span>
+              </button>
+            </div>
+          -->
+
+          <!-- Admin menu -->
+          <div class="nav__user-menu hidden">
+            <a href="account.html" class="user-menu__item">
+              <i class="ph-user-circle-light btn--icon"></i>
+              <span class="link">Account information</span>
+            </a>
+            <a href="#" class="user-menu__item">
+              <i class="ph-squares-four-light btn--icon"></i>
+              <span class="link">Admin dashboard</span>
+            </a>
+            <a href="../index.html" class="user-menu__item">
+              <i class="ph-sign-out-light btn--icon"></i>
+              <span class="link">Sign out</span>
+            </a>
           </div>
         </div>
         <div class="nav__user-menu--overlay hidden"></div>
       </nav>
     </header>
-    <main class="wishlist">
+    <main class="wishlist container--beige">
       <div class="section__heading-box">
         <h1 class="decorative-heading">Wishlist</h1>
         <h2 class="section-title">Your favourites!</h2>

@@ -29,12 +29,11 @@ body {
   font-weight: 400;
   line-height: 1.8;
   color: #6d6875;
-  /* max-width: 160rem; */
   margin: 0 auto;
-  overflow-x: hidden;
 }
 
-a {
+a,
+.link {
   text-decoration: none;
   color: inherit;
   padding: 0;
@@ -109,6 +108,7 @@ button {
   border: 0.2rem solid white;
   width: fit-content;
   transition: all 0.4s ease-out;
+  -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
   z-index: 1000;
   cursor: pointer;
@@ -125,7 +125,6 @@ button {
   font-family: "Montserrat", sans-serif;
   font-size: 1.6rem;
   transition: all 0.4s ease-out;
-  backdrop-filter: blur(2px);
   z-index: 100000;
   cursor: pointer;
 }
@@ -194,6 +193,15 @@ button {
   opacity: 70%;
 }
 
+.input {
+  padding: 0.8rem;
+  width: 100%;
+  border-radius: 3px;
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+  font-family: "Montserrat", sans-serif;
+  box-shadow: inset 0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+}
+
 .sticky {
   transition: all 0.2s ease-out;
 }
@@ -222,10 +230,19 @@ button {
   margin-left: 2rem;
 }
 
+.align-items--center {
+  align-items: center;
+}
+
+.align-items--start {
+  align-items: start;
+}
+
 .product__rating--icon {
   font-size: 2rem;
   line-height: 0;
 }
+
 .product__rating {
   display: flex;
   align-items: center;
@@ -242,9 +259,6 @@ button {
 /* HEADER SECTION */
 /****************************/
 .header {
-  /* position: absolute; */
-  /* top:0; */
-  /* max-width: 160rem; */
   width: 100vw;
   padding: 1.6rem 2.4rem 1.6rem 2.4rem;
   background-color: rgba(218, 215, 205, 1);
@@ -266,7 +280,9 @@ button {
 }
 
 .nav__item {
+  cursor: pointer;
   transition: all 0.2s ease-out;
+  z-index: 2;
 }
 
 .nav__item:hover {
@@ -312,17 +328,28 @@ button {
   padding: 3.2rem 1.6rem 1.6rem 1.6rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
   gap: 1.2rem;
   position: absolute;
   top: 100%;
   right: 0;
   width: 32rem;
   background: linear-gradient(180deg, #dad7cd, rgba(241, 238, 226, 0.6));
+  -webkit-backdrop-filter: blur(15px);
   backdrop-filter: blur(15px);
-  box-shadow: 0 4rem 3rem rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4rem 4rem rgba(0, 0, 0, 0.2);
   font-size: 1.4rem;
   z-index: 10000000;
+}
+
+.nav__user-menu--overlay {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: transparent;
+  /* z-index: 1; */
 }
 
 .nav-mobile__btn {
@@ -347,12 +374,29 @@ button {
 }
 
 .login__input {
-  padding: 0.8rem;
   width: 24rem;
-  border-radius: 3px;
-  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+}
+
+.login .btn--green {
+  padding: 0.8rem 1.6rem;
+}
+
+.user-menu__item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   font-family: "Montserrat", sans-serif;
-  box-shadow: inset 0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+  color: #6d6875;
+  font-size: 1.4rem;
+}
+
+.user-menu__item:not(:last-child) {
+  padding: 0 0 0.8rem 0;
+  border-bottom: 0.1rem solid rgba(109, 104, 117, 0.5);
+}
+
+.user-menu__item .btn--icon {
+  font-size: 3rem;
 }
 
 /****************************/
@@ -360,29 +404,14 @@ button {
 /****************************/
 
 .section-hero {
-  padding: 2.4rem 2.4rem 6.4rem 2.4rem;
   background-color: #dad7cd;
   position: relative;
   max-width: 100vw;
 }
 
-.hero-slider {
-  height: 80vh;
-  /* height: 60rem; */
-  position: relative;
-}
-
-/* .hero-slider .dots {
-  position: absolute;
-  bottom: -10%;
-  left: 50%;
-  transform: translateX(-50%);
-  opacity: 70%;
-} */
-
-.hero-slider__slide {
-  width: 100%;
-  height: 100%;
+.hero__img {
+  width: 100vw;
+  height: 86vh;
   object-fit: cover;
   object-position: 50% 80%;
   opacity: 0.9;
@@ -470,7 +499,7 @@ button {
 
 .featured-card {
   position: relative;
-  transition: all 0.7s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .featured-card:hover {
@@ -664,7 +693,7 @@ button {
 
   font-size: 1.4rem;
 
-  transition: all 0.4s ease-out;
+  transition: all 0.3s ease-out;
 }
 
 .product-card__img {
@@ -934,11 +963,12 @@ button {
 /****************************/
 .wishlist {
   padding: 9.6rem 5.6rem 6.4rem 5.6rem;
-  background-color: #dad7cd;
 }
 
 .wishlist .section__heading-box {
-  /* margin-left: 4.8rem; */
+  max-width: 160rem;
+  width: 100%;
+  margin: 0 auto;
   margin-bottom: 2.4rem;
 }
 
@@ -948,6 +978,8 @@ button {
   row-gap: 4.8rem;
   column-gap: 3.2rem;
   justify-items: center;
+  max-width: 160rem;
+  margin: 0 auto;
 }
 
 /********************************************************/
@@ -962,8 +994,17 @@ button {
   gap: 3.6rem;
 }
 
-.checkout > .container--white {
+.checkout .section__heading-box {
+  max-width: 160rem;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.checkout .container--white {
   padding: 1.2rem 3.2rem 3.2rem 3.2rem;
+  max-width: 160rem;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .checkout__list-headings {
@@ -1098,6 +1139,48 @@ button {
   font-size: 2rem;
   margin: 0 auto;
   margin-top: 2.4rem;
+  line-height: 1;
+}
+
+.checkout__complete {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000000;
+}
+
+.checkout__complete--overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+.checkout__complete-heading {
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+
+.checkout__btn--close {
+  position: absolute;
+  top: 7%;
+  right: 3%;
+}
+
+.checkout__logo {
+  height: 10rem;
 }
 
 /********************************************************/
@@ -1198,6 +1281,20 @@ button {
   box-shadow: inset 0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
 }
 
+.product__rating--img {
+  position: relative;
+  height: 2rem;
+  width: 2rem;
+  cursor: pointer;
+}
+
+.review__form .product__rating input[type="radio"] {
+  /* To take out of flow */
+  position: absolute;
+
+  visibility: hidden;
+}
+
 .review__comment {
   margin-top: 3.2rem;
   border-top: 0.15rem solid rgba(109, 104, 117, 0.6);
@@ -1291,7 +1388,7 @@ button {
   font-size: 1.6rem;
 }
 
-.signup__images{
+.signup__images {
 }
 
 .signup_img {
@@ -1320,4 +1417,131 @@ button {
 .signup_img:nth-child(3) {
   top: 60%;
   right: 7%;
+}
+
+/********************************************************/
+
+/****************************/
+/* ACCOUNT           */
+/****************************/
+.account {
+  padding: 9.6rem 5.6rem 6.4rem 5.6rem;
+  font-size: 1.6rem;
+}
+
+.account .section__heading-box {
+  max-width: 160rem;
+  margin: 0 auto;
+}
+
+.account-sections {
+  display: flex;
+  gap: 3.2rem;
+  max-width: 160rem;
+  margin: 0 auto;
+}
+
+.account .container--white {
+  padding: 1.2rem 3.2rem 3.2rem 3.2rem;
+  width: 50vw;
+}
+
+.section-account-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 1.2rem;
+}
+
+.account-info__row {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3fr 3fr 1fr;
+  justify-content: space-evenly;
+}
+
+.account-info__row span {
+  word-wrap: break-word;
+}
+
+.account-info__row:last-child {
+  margin-top: 4.8rem;
+}
+
+.account-info__row .btn--icon {
+  font-size: 3rem;
+}
+
+.account-info__btn {
+  justify-self: end;
+}
+
+.account-info__btn--delete {
+  grid-column: 1 / -1;
+  justify-self: start;
+  align-self: end;
+  display: flex;
+  align-items: center;
+  color: darkred;
+  font-family: inherit;
+  font-size: 1.4rem;
+}
+
+.account-info__btn--delete .btn--icon {
+  color: darkred;
+  font-size: 3rem;
+}
+
+.account-info__change {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80vw;
+  height: 70vh;
+  z-index: 1000;
+  padding: 1.2rem 2.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.change-heading {
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+
+.change__field {
+  display: flex;
+  flex-direction: column;
+  width: 30rem;
+}
+
+.account-info__change--overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+}
+
+.change__btn--close {
+  position: absolute;
+  top: 7%;
+  right: 3%;
+}
+
+thead tr {
+  border-bottom: 0.1rem solid rgba(109, 104, 117, 0.3);
+}
+
+.section-purchases tr {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr) 10rem;
+  text-align: left;
+  gap: 2.4rem;
+  margin-bottom: 1.2rem;
+  justify-content: space-between;
 }

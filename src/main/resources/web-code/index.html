@@ -9,9 +9,23 @@
       content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
     through nature."
     />
-    <link rel="apple-touch-icon" sizes="180x180" href="img/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16x16.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="img/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="img/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="img/favicon-16x16.png"
+    />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/queries.css" />
@@ -78,12 +92,15 @@
           <button class="nav__item" id="user-menu" aria-label="account menu">
             <i class="ph-user-circle-light btn--icon"></i>
           </button>
-          <div class="nav__user-menu hidden">
+
+          <!-- Login menu -->
+
+          <div class="nav__user-menu align-items--center hidden">
             <form class="login" name="login">
               <div class="login__field">
                 <label for="email">Emailaddress</label>
                 <input
-                  class="login__input"
+                  class="login__input input"
                   id="email"
                   type="text"
                   placeholder="john@example.com"
@@ -92,66 +109,110 @@
               <div class="login__field">
                 <label for="password">Password</label>
                 <input
-                  class="login__input"
+                  class="login__input input"
                   id="password"
                   type="password"
                   placeholder="password"
                 />
               </div>
+              <input type="submit" class="btn--green" value="Sign in" />
             </form>
-            <a class="btn--green">Sign in</a>
             <a href="html/signup.html" class="link"
               >Not a member yet? <strong>Join here!</strong></a
             >
           </div>
+
+          <!-- Customer menu -->
+          <!--
+            <div class="nav__user-menu hidden">
+              <a href="html/account.html" class="user-menu__item">
+                <i class="ph-user-circle-light btn--icon"></i>
+                <span class="link">Account information</span>
+              </a>
+              <button class="user-menu__item">
+                <i class="ph-sign-out-light btn--icon"></i>
+                <span class="link">Sign out</span>
+              </button>
+            </div>
+          -->
+
+          <!-- Admin menu -->
+          <!-- 
+
+            <div class="nav__user-menu hidden">
+              <a href="html/account.html" class="user-menu__item">
+                <i class="ph-user-circle-light btn--icon"></i>
+                <span class="link">Account information</span>
+              </a>
+              <a href="#" class="user-menu__item">
+                <i class="ph-squares-four-light btn--icon"></i>
+                <span class="link">Admin dashboard</span>
+              </a>
+              <button class="user-menu__item">
+                <i class="ph-sign-out-light btn--icon"></i>
+                <span class="link">Sign out</span>
+              </button>
+            </div>
+          -->
         </div>
         <div class="nav__user-menu--overlay hidden"></div>
       </nav>
     </header>
     <main>
       <section class="section-hero">
-        <div class="hero-slider">
-          <img
-            class="hero-slider__slide"
-            src="https://images.unsplash.com/photo-1515696955266-4f67e13219e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTE5fHx0ZWElMjBjZXJlbW9ueXxlbnwwfDB8MHx8&auto=format&fit=crop&w=1600&q=60"
-            alt="two hands holding mugs (with tea) on a hike"
-          />
-          <a href="#section-products" class="btn">
-            <h1 class="heading-primary">
-              Find your
-              <span class="decorative-text--light">herbal </span> friend
-            </h1></a
-          >
-        </div>
+        <img
+          class="hero__img"
+          src="https://images.unsplash.com/photo-1515696955266-4f67e13219e8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTE5fHx0ZWElMjBjZXJlbW9ueXxlbnwwfDB8MHx8&auto=format&fit=crop&w=1600&q=60"
+          alt="two hands holding mugs (with tea) on a hike"
+        />
+        <a href="#section-products" class="btn">
+          <h1 class="heading-primary">
+            Find your
+            <span class="decorative-text--light">herbal </span> friend
+          </h1></a
+        >
       </section>
       <section class="section-cooperations">
         <h2 class="heading--small">In cooperation with</h2>
         <div class="cooperation-logos">
-          <img
-            class="cooperation-logo"
-            src="img/yogi-tea.svg"
-            alt="yogi tea logo"
-          />
-          <img
-            class="cooperation-logo"
-            src="img/ahmad-tea.png"
-            alt="ahmad tea logo"
-          />
-          <img
-            class="cooperation-logo"
-            src="img/pukka.webp"
-            alt="pukka tea logo"
-          />
-          <img
-            class="cooperation-logo"
-            src="img/clipper-tea.svg"
-            alt="clipper tea logo"
-          />
-          <img
-            class="cooperation-logo"
-            src="img/fairtrade.svg"
-            alt="fairtrade logo"
-          />
+          <a
+            href="https://www.yogitea.com/nb/products/yogi-tea/"
+            target="_blank"
+          >
+            <img
+              class="cooperation-logo"
+              src="img/yogi-tea.svg"
+              alt="yogi tea logo"
+            />
+          </a>
+          <a href="https://www.ahmadtea.com/" target="_blank">
+            <img
+              class="cooperation-logo"
+              src="img/ahmad-tea.png"
+              alt="ahmad tea logo"
+            />
+          </a>
+          <a href="https://www.pukkaherbs.com/no/no" target="_blank">
+            <img
+              class="cooperation-logo"
+              src="img/pukka.webp"
+              alt="pukka tea logo"
+            />
+          </a>
+          <a href="https://www.clipper-teas.com/" target="_blank">
+            <img
+              class="cooperation-logo"
+              src="img/clipper-tea.svg"
+              alt="clipper tea logo"
+            />
+          </a>
+          <a href="https://www.fairtrade.no/" target="_blank">
+            <img
+              class="cooperation-logo"
+              src="img/fairtrade.svg"
+              alt="fairtrade logo"
+            />
+          </a>
         </div>
       </section>
       <section class="section-featured">

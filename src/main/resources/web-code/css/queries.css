@@ -70,6 +70,15 @@
     left: 10%;
   }
 
+  .account-sections {
+    flex-direction: column;
+  }
+
+  .account .container--white {
+    margin: 0 auto;
+    padding: 1.2rem 3.2rem 3.2rem 3.2rem;
+    width: 65vw;
+  }
 }
 
 /**************************/
@@ -148,6 +157,7 @@
     width: 42vw;
     background-color: rgba(0, 0, 0, 0.3);
     z-index: 100000;
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
   }
 
@@ -162,6 +172,7 @@
     /* background-color: rgba(255, 255, 255, 0.7); */
     /* background-color: rgba(241, 238, 226, 0.6); */
     background: linear-gradient(180deg, #dad7cd, rgba(241, 238, 226, 0.6));
+    -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
     z-index: 100000;
     flex-direction: column;
@@ -178,6 +189,7 @@
     height: 50vh;
     width: 100vw;
     background-color: rgba(218, 215, 205, 0.65);
+    -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
     box-shadow: 0 4rem 3rem rgba(0, 0, 0, 0.1);
     font-size: 2rem;
@@ -191,6 +203,7 @@
     width: 100vw;
     background-color: rgba(0, 0, 0, 0.3);
     z-index: 100000;
+    -webkit-backdrop-filter: blur(5px);
     backdrop-filter: blur(5px);
   }
 
@@ -399,6 +412,18 @@
   .checkout__item {
     grid-template-columns: 2fr 3fr repeat(3, 1fr) 0.5fr;
   }
+
+  /**************************/
+  /* PRODUCT */
+
+  .product__price-cta {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    /* padding: 1.6rem 10rem 1.6rem 20rem; */
+    width: 100vw;
+    background-color: #fff;
+  }
 }
 
 /**************************/
@@ -459,8 +484,12 @@
     visibility: hidden;
   }
 
+  .account .container--white {
+    margin: 0 auto;
+    padding: 1.2rem 3.2rem 3.2rem 3.2rem;
+    width: 85vw;
+  }
 }
-
 
 /**************************/
 /* LESS THAN 512px (Small tablet) */
@@ -726,6 +755,15 @@
     margin: 0 auto;
     margin-top: 2.4rem;
   }
+
+  .account {
+    padding: 9.6rem 1.2rem 4.8rem 1.2rem;
+  }
+
+  .account .container--white {
+    padding: 0.8rem;
+    width: 95vw;
+  }
 }
 
 /**************************/
@@ -807,7 +845,6 @@
   .signup__images {
     visibility: hidden;
   }
-
 
   /********************************************************/
 

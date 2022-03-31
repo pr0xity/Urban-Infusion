@@ -45,7 +45,6 @@
 
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script defer src="../js/general.js"></script>
-    <script defer src="../js/product.js"></script>
     <title>Urban Infusion</title>
   </head>
   <body>
@@ -96,6 +95,7 @@
           <button class="nav__item" id="user-menu" aria-label="account menu">
             <i class="ph-user-circle-light btn--icon"></i>
           </button>
+
           <!-- Login menu -->
           <!--
             <div class="nav__user-menu align-items--center hidden">
@@ -159,213 +159,116 @@
         <div class="nav__user-menu--overlay hidden"></div>
       </nav>
     </header>
-    <main class="product">
-      <section class="section-product-info">
-        <h1 class="section-title">Heather tea</h1>
-        <img
-          class="product__img"
-          src="../img/greentea.jpeg"
-          alt="Green tea in a cup"
-        />
-        <a href="#section-reviews">
-          <div class="product__rating">
-            <span class="product__rating--icon"
-              ><i class="ph-leaf-fill"></i
-            ></span>
-            <span class="product__rating--icon"
-              ><i class="ph-leaf-fill"></i
-            ></span>
-            <span class="product__rating--icon"
-              ><i class="ph-leaf-light"></i
-            ></span>
-            <span class="product__rating--icon"
-              ><i class="ph-leaf-light"></i
-            ></span>
-            <span class="product__rating--icon"
-              ><i class="ph-leaf-light"></i
-            ></span>
-            <p>(2)</p>
-          </div>
-        </a>
-        <div class="product__description-box">
-          <h2 class="heading-secondary">Description</h2>
-          <ul class="product__list">
-            <li><i class="ph-check"></i> From Norwegian mountains</li>
-            <li>
-              <i class="ph-check"></i> Gathered carefully before the bees to
-              hold the honey taste
-            </li>
-            <li><i class="ph-check"></i> Rich in vitamins</li>
-            <li><i class="ph-check"></i> Local Produce</li>
-          </ul>
-        </div>
-        <div class="product__price-cta">
-          <span class="product__price">200,-</span>
-          <div class="product__cta">
-            <button class="btn--green">
-              Add to bag <i class="ph-tote-light btn--icon"></i>
+    <main class="account container--beige">
+      <div class="section__heading-box">
+        <h1 class="decorative-heading">Customer</h1>
+        <h2 class="section-title">Your account!</h2>
+      </div>
+      <div class="account-sections">
+        <section class="section-account-info container--white">
+          <h3>Account information</h3>
+          <p class="account-info__row">
+            <span>Name /&#8203; Customer id</span>
+            <span>Esther Howard /&#8203; 85329</span>
+          </p>
+          <p class="account-info__row">
+            <span>Emailaddress</span>
+            <span>esther.&#8203;howard@&#8203;example.&#8203;com</span>
+            <button class="account-info__btn">
+              <i class="ph-pencil-simple-light btn--icon"></i>
             </button>
-            <button class="" aria-label="Add to wishlist">
-              <i class="ph-heart-light btn--icon"></i>
+          </p>
+          <p class="account-info__row">
+            <span>Password</span>
+            <span>********</span>
+            <button class="account-info__btn">
+              <i class="ph-pencil-simple-light btn--icon"></i>
             </button>
-          </div>
-        </div>
-      </section>
-      <section class="section-reviews" id="section-reviews">
-        <form method="post" action="#" class="review__form">
-          <h2 class="heading-secondary">What did you think of this product?</h2>
-          <input
-            class="review__input"
-            type="text"
-            placeholder="Name"
-            aria-label="Name"
-          />
-          <input
-            class="review__input"
-            type="text"
-            placeholder="Emailaddress"
-            aria-label="Emailaddress"
-          />
-          <textarea
-            class="review__input"
-            placeholder="Write your review here"
-            rows="6"
-            cols="50"
-            maxlength="250"
-            aria-label="Write your review here"
-          ></textarea>
-          <div class="product__rating" id="review__rating">
-            <p>Rating</p>
-            <label>
-              <img
-                class="product__rating--img"
-                src="../img/leaf.svg"
-                data-rating="1"
-              />
-              <input
-                name="rating"
-                type="radio"
-                value="1"
-                aria-label="select 1 star rating"
-              />
+          </p>
+          <p class="account-info__row">
+            <span>Address</span>
+            <span>2972 Westheimer Rd. Santa Ana, Illinois 85486 </span>
+            <button class="account-info__btn">
+              <i class="ph-pencil-simple-light btn--icon"></i>
+            </button>
+          </p>
+          <p class="account-info__row">
+            <span>Member since</span>
+            <span>04.02.2022</span>
+          </p>
+          <p class="account-info__row">
+            <span>Last login</span>
+            <span>15.03.2022</span>
+          </p>
+          <p class="account-info__row">
+            <button class="account-info__btn--delete">
+              <i class="ph-trash-light btn--icon"></i> Want to delete your
+              account?
+            </button>
+          </p>
+          <div class="account-info__change container--beige hidden">
+            <button class="change__btn--close close btn--icon">
+              <i class="ph-x"></i>
+            </button>
+            <p class="change-heading">Change address</p>
+            <label class="change__field">
+              Address
+              <input class="input address" type="text" placeholder="" />
             </label>
-            <label>
-              <img
-                class="product__rating--img"
-                src="../img/leaf.svg"
-                data-rating="2"
-              />
-              <input
-                name="rating"
-                type="radio"
-                value="2"
-                aria-label="select 2 star rating"
-              />
-            </label>
-            <label>
-              <img
-                class="product__rating--img"
-                src="../img/leaf.svg"
-                data-rating="3"
-              />
-              <input
-                name="rating"
-                type="radio"
-                value="3"
-                aria-label="select 3 star rating"
-              />
-            </label>
-            <label>
-              <img
-                class="product__rating--img"
-                src="../img/leaf.svg"
-                data-rating="4"
-              />
-              <input
-                name="rating"
-                type="radio"
-                value="4"
-                aria-label="select 4 star rating"
-              />
-            </label>
-            <label>
-              <img
-                class="product__rating--img"
-                src="../img/leaf.svg"
-                data-rating="5"
-              />
-              <input
-                name="rating"
-                type="radio"
-                value="5"
-                aria-label="select 5 star rating"
-              />
-            </label>
-          </div>
-          <input type="submit" class="btn--green" value="Send review" />
-        </form>
-        <div class="review__comments-box">
-          <h2 class="heading-secondary">Reviews</h2>
-          <div class="review__comment">
-            <div class="review__comment-info">
-              <div class="product__rating">
-                <span class="product__rating--icon"
-                  ><i class="ph-leaf-fill"></i
-                ></span>
-                <span class="product__rating--icon"
-                  ><i class="ph-leaf-fill"></i
-                ></span>
-                <span class="product__rating--icon"
-                  ><i class="ph-leaf-light"></i
-                ></span>
-                <span class="product__rating--icon"
-                  ><i class="ph-leaf-light"></i
-                ></span>
-                <span class="product__rating--icon"
-                  ><i class="ph-leaf-light"></i
-                ></span>
-              </div>
-              <p>Hans</p>
-              <p>05.02.2022</p>
-            </div>
-            <div>
-              <div class="review__text">
-                <p>This tea was tasteless and dissapointing.</p>
-              </div>
-            </div>
-          </div>
-          <div class="review__comment">
-            <div class="review__comment-info">
-              <div class="product__rating">
-                <span class="product__rating--icon"
-                  ><i class="ph-leaf-fill"></i
-                ></span>
-                <span class="product__rating--icon"
-                  ><i class="ph-leaf-fill"></i
-                ></span>
-                <span class="product__rating--icon"
-                  ><i class="ph-leaf-fill"></i
-                ></span>
-                <span class="product__rating--icon"
-                  ><i class="ph-leaf-light"></i
-                ></span>
-                <span class="product__rating--icon"
-                  ><i class="ph-leaf-light"></i
-                ></span>
-              </div>
-              <p>Miranda</p>
-              <p>04.02.2022</p>
-            </div>
-            <div>
-              <div class="review__text">
-                <p>The tea was ok. Could have more flavour</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
 
+            <label class="change__field">
+              Municipality
+              <input class="input municipality" type="text" placeholder="" />
+            </label>
+            <label class="change__field">
+              Zip-code
+              <input class="input zip__code" type="text" placeholder="" />
+            </label>
+          </div>
+          <div class="account-info__change--overlay hidden"></div>
+        </section>
+
+        <section class="section-purchases container--white">
+          <h3>Purchase history</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Purchased</th>
+                <th>Order nr.</th>
+                <th>Items</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>04.02.2022</td>
+                <td>6453450</td>
+                <td>1xHeather tea, 2xLinden blossom tea</td>
+                <td>600,-</td>
+              </tr>
+              <tr>
+                <td>24.02.2022</td>
+                <td>6456342</td>
+                <td>1xLinden blossom tea</td>
+                <td>200,-</td>
+              </tr>
+              <tr>
+                <td>03.03.2022</td>
+                <td>7563464</td>
+                <td>1xLinden blossom tea, 4xSencha tea</td>
+                <td>2200,-</td>
+              </tr>
+              <tr>
+                <td>15.03.2022</td>
+                <td>7695405</td>
+                <td>1xSencha tea</td>
+                <td>500,-</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </main>
     <footer class="footer">
       <div class="logo-col">
         <img
@@ -384,7 +287,7 @@
             <a href="#" class="footer__link">Account policy</a>
           </li>
           <li class="footer__item">
-            <a href="#" class="footer__link">Create account</a>
+            <a href="signup.html" class="footer__link">Create account</a>
           </li>
           <li class="footer__item">
             <a href="#" class="footer__link">Sign in</a>
@@ -412,7 +315,9 @@
         <p class="footer-heading">Company</p>
         <ul class="footer__list" data-content="2">
           <li class="footer__item">
-            <a href="#" class="footer__link">About Urban Infusion</a>
+            <a href="../index.html#section-company" class="footer__link"
+              >About Urban Infusion</a
+            >
           </li>
           <li class="footer__item">
             <a href="#" class="footer__link">Business inquiries</a>
