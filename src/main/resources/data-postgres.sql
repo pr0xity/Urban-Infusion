@@ -25,18 +25,21 @@ insert into "permission_level" (id, admin_type, permissions, created_at, updated
 insert into "permission_level" (id, admin_type, permissions, created_at, updated_at) values (3, 'user', 1, '2021-03-29 18:49:48', '2021-04-25 18:23:26');
 
 -- Insert data into user
-INSERT INTO "user" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) VALUES (1, 'Espen', 'Otlo', 'espenotl@stud.ntnu.no', 'dugjetterdetaldri69', '2017-03-31 9:30:20', '2017-03-31 9:30:20', 3, 'true');
-INSERT INTO "user" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) VALUES (2,'Sakarias', 'Sæterstøl', 'sakkis@stud.ntnu.no', 'hemmelig', '2017-03-31 9:30:20', '2017-03-31 9:30:20', 2, 'true');
-insert into "user" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (3, 'Aline', 'Durante', 'adurante0@wisc.edu', '0P5I0in2tJ', '2021-08-27 03:58:57', '2021-11-22 09:28:43', 1, 'true');
-insert into "user" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (4, 'Valery', 'Stening', 'vstening1@goodreads.com', 'yAx5n1', '2021-03-28 22:19:22', '2021-12-24 16:19:07', 1, 'true');
-insert into "user" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (5, 'Stepha', 'Hyland', 'shyland2@arstechnica.com', 'exFhkcV', '2021-11-14 18:10:49', '2022-02-07 21:36:25', 1, 'true');
-insert into "user" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (6, 'Lowe', 'Tolson', 'ltolson3@paypal.com', 'DqFbgV56', '2021-09-20 13:23:46', '2021-07-26 18:06:00', 1, 'true');
-insert into "user" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (7, 'Kenneth', 'Dallimare', 'kdallimare4@hostgator.com', 'mF3AucpXq', '2021-12-22 15:08:03', '2022-01-30 15:50:01', 1, 'true');
-insert into "user" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (8, 'Boyce', 'Fidgett', 'bfidgett5@seesaa.net', 'IK5Cu1', '2021-04-15 04:52:53', '2021-08-31 02:42:21', 1, 'true');
-insert into "user" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (9, 'Bennett', 'Choules', 'bchoules6@mapy.cz', '3wL1w9gu', '2021-08-19 09:53:31', '2021-03-07 07:31:21', 1, 'true');
-insert into "user" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (10, 'Ode', 'Fergie', 'ofergie7@boston.com', 'UJMNcX6', '2021-10-29 13:01:27', '2021-07-25 19:05:35', 1, 'true');
-insert into "user" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (11, 'Nadya', 'Bransdon', 'nbransdon8@about.com', '6wJE68B5l18', '2021-04-01 03:10:02', '2021-04-30 01:44:45', 1, 'true');
-insert into "user" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (12, 'Glenna', 'Baden', 'gbaden9@prlog.org', 'zlnK0CI', '2021-03-11 22:22:39', '2021-07-18 17:11:29', 1, 'true');
+INSERT INTO "users" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) VALUES (1, 'Espen', 'Otlo', 'espenotl@stud.ntnu.no', 'dugjetterdetaldri69', '2017-03-31 9:30:20', '2017-03-31 9:30:20', 3, 'true');
+INSERT INTO "users" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) VALUES (2,'Sakarias', 'Sæterstøl', 'sakkis@stud.ntnu.no', 'hemmelig', '2017-03-31 9:30:20', '2017-03-31 9:30:20', 2, 'true');
+insert into "users" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (3, 'Aline', 'Durante', 'adurante0@wisc.edu', '0P5I0in2tJ', '2021-08-27 03:58:57', '2021-11-22 09:28:43', 1, 'true');
+insert into "users" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (4, 'Valery', 'Stening', 'vstening1@goodreads.com', 'yAx5n1', '2021-03-28 22:19:22', '2021-12-24 16:19:07', 1, 'true');
+insert into "users" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (5, 'Stepha', 'Hyland', 'shyland2@arstechnica.com', 'exFhkcV', '2021-11-14 18:10:49', '2022-02-07 21:36:25', 1, 'true');
+insert into "users" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (6, 'Lowe', 'Tolson', 'ltolson3@paypal.com', 'DqFbgV56', '2021-09-20 13:23:46', '2021-07-26 18:06:00', 1, 'true');
+insert into "users" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (7, 'Kenneth', 'Dallimare', 'kdallimare4@hostgator.com', 'mF3AucpXq', '2021-12-22 15:08:03', '2022-01-30 15:50:01', 1, 'true');
+insert into "users" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (8, 'Boyce', 'Fidgett', 'bfidgett5@seesaa.net', 'IK5Cu1', '2021-04-15 04:52:53', '2021-08-31 02:42:21', 1, 'false');
+insert into "users" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (9, 'Bennett', 'Choules', 'bchoules6@mapy.cz', '3wL1w9gu', '2021-08-19 09:53:31', '2021-03-07 07:31:21', 1, 'false');
+insert into "users" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (10, 'Ode', 'Fergie', 'ofergie7@boston.com', 'UJMNcX6', '2021-10-29 13:01:27', '2021-07-25 19:05:35', 1, 'false');
+insert into "users" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (11, 'Nadya', 'Bransdon', 'nbransdon8@about.com', '6wJE68B5l18', '2021-04-01 03:10:02', '2021-04-30 01:44:45', 1, 'true');
+insert into "users" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) values (12, 'Glenna', 'Baden', 'gbaden9@prlog.org', 'zlnK0CI', '2021-03-11 22:22:39', '2021-07-18 17:11:29', 1, 'true');
+INSERT INTO "users" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) VALUES (13,'Janita', 'Røyseth', 'janita.royseth@stud.ntnu.no', 'temmelighemmelig', '2017-03-31 9:30:20', '2017-03-31 9:30:20', 2, 'true');
+INSERT INTO "users" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) VALUES (14,'Nina', 'Marstrander', 'ninmar@stud.ntnu.no', 'ikkehemmelig', '2017-03-31 9:30:20', '2017-03-31 9:30:20', 2, 'true');
+INSERT INTO "users" (id, first_name, last_name, email, password, created_at, updated_at, fk_permission_id, enabled) VALUES (15,'Didrik', 'Eilertsen', 'dideil@stud.ntnu.no', 'ikketemmelighemmelig', '2017-03-31 9:30:20', '2017-03-31 9:30:20', 2, 'true');
 
 -- Insert data into user_payment
 insert into "user_payment" (id, fk_user_id, payment_type, provider, account_no, expiry) values (1, 1, 'Visa', 'Stripe', 40045, '19-09-2024');
@@ -123,8 +126,9 @@ insert into "payment_details" (id, fk_order_id, amount, provider, status, create
 
 -- Insert data into product_ratings
 insert into "product_rating" (id, fk_user_id, fk_product_id, rating, comment, created_at, updated_at) values (1, 1, 1, 5, 'Love it!', '2021-10-17 22:53:50', '2022-01-16 16:54:19');
-insert into "product_rating" (id, fk_user_id, fk_product_id, rating, comment, created_at, updated_at) values (2, 2, 1, 2, 'It is okay.', '2021-07-16 08:48:32', '2021-09-04 06:27:51');
-insert into "product_rating" (id, fk_user_id, fk_product_id, rating, comment, created_at, updated_at) values (3, 1, 2, 3, 'Enjoyable!.', '2022-02-20 22:42:06', '2022-02-02 09:28:22');
-insert into "product_rating" (id, fk_user_id, fk_product_id, rating, comment, created_at, updated_at) values (4, 3, 1, 5, 'Lovely!.', '2022-02-20 22:42:06', '2022-02-02 09:28:22');
-insert into "product_rating" (id, fk_user_id, fk_product_id, rating, comment, created_at, updated_at) values (5, 3, 2, 1, 'Lovely!.', '2022-02-20 22:42:06', '2022-02-02 09:28:22');
+insert into "product_rating" (id, fk_user_id, fk_product_id, rating, comment, created_at, updated_at) values (2, 2, 2, 2, 'It is okay.', '2021-07-16 08:48:32', '2021-09-04 06:27:51');
+insert into "product_rating" (id, fk_user_id, fk_product_id, rating, comment, created_at, updated_at) values (3, 1, 3, 3, 'Was hoping for something better.', '2022-02-20 22:42:06', '2022-02-02 09:28:22');
+insert into "product_rating" (id, fk_user_id, fk_product_id, rating, comment, created_at, updated_at) values (4, 3, 4, 5, 'Lovely!.', '2022-02-20 22:42:06', '2022-02-02 09:28:22');
+insert into "product_rating" (id, fk_user_id, fk_product_id, rating, comment, created_at, updated_at) values (5, 3, 5, 1, 'Not the best..', '2022-02-20 22:42:06', '2022-02-02 09:28:22');
+insert into "product_rating" (id, fk_user_id, fk_product_id, rating, comment, created_at, updated_at) values (6, 2, 5, 5, 'Lovely!.', '2022-02-20 22:42:06', '2022-02-02 09:28:22');
 
