@@ -25,24 +25,31 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
     justify-content: left;
 }
 
-.admin-main .admin-sidenav {
+.sidenav {
     /*order: 1;*/
     /* flex-grow: 1; */
     border-style: solid;
     min-width: 25rem;
     max-width: 25rem;
+    /* min-height: 50rem;
+    max-height: 50rem; */
 }
 
-.admin-sidenav li {
+.sidenav li {
     margin-bottom: 1rem;
     padding: 1rem;
+}
+
+.sidenav__link {
+    display: flex;
+    align-items: center;
 }
 
 .admin-body {
     /*order: 2;*/
     /*flex-grow: 3;*/
     /* flex-grow: 4; */
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     display: flex;
     justify-content: space-between;
     flex-direction: column;
@@ -70,7 +77,7 @@ th {
     text-align: left;
 }
 
-.admin-sidenav i {
+.sidenav__icon {
     font-size: 3.8rem;
 }
 
