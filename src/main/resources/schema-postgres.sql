@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS "product_category" (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) UNIQUE NOT NULL,
     description VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP,
     deleted_at TIMESTAMP
 );
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS "product_category" (
 CREATE TABLE IF NOT EXISTS "product_inventory" (
     id SERIAL PRIMARY KEY,
     quantity INTEGER NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP,
     deleted_at TIMESTAMP
 );
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS "product" (
     fk_category_id INTEGER REFERENCES "product_category" (id) NOT NULL,
     fk_inventory_id INTEGER REFERENCES "product_inventory" (id) UNIQUE NOT NULL,
     average_rating DOUBLE PRECISION,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP,
     deleted_at TIMESTAMP
 );
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS "permission_level" (
     id SERIAL PRIMARY KEY,
     admin_type VARCHAR(255) UNIQUE NOT NULL,
     permissions INTEGER NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP
 );
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS "users" (
     last_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP  NOT NULL,
+    created_at TIMESTAMP  NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP,
     fk_permission_id INTEGER REFERENCES "permission_level" (id) NOT NULL,
     enabled BOOLEAN
@@ -55,7 +55,8 @@ CREATE TABLE IF NOT EXISTS "user_payment" (
     payment_type VARCHAR(255) NOT NULL,
     provider VARCHAR(255) NOT NULL,
     account_no VARCHAR(255) NOT NULL,
-    expiry VARCHAR(255) NOT NULL
+    expiry VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS "user_address"(
@@ -66,22 +67,23 @@ CREATE TABLE IF NOT EXISTS "user_address"(
     city VARCHAR(255) NOT NULL,
     postal_code VARCHAR(255) NOT NULL,
     country VARCHAR(255) NOT NULL,
-    telephone VARCHAR(255) NOT NULL
+    telephone VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS "fav_list"(
     id SERIAL PRIMARY KEY,
     fk_user_id INTEGER REFERENCES "users" (id) NOT NULL,
     fk_product_id INTEGER REFERENCES "product" (id) NOT NULL,
-    created_at TIMESTAMP NOT NULL,
-    updated_at TIMESTAMP
+    created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
 CREATE TABLE IF NOT EXISTS "shopping_session"(
     id SERIAL PRIMARY KEY,
     fk_user_id INTEGER REFERENCES "users" (id) UNIQUE NOT NULL,
     total DOUBLE PRECISION NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP
 );
 
@@ -90,7 +92,7 @@ CREATE TABLE IF NOT EXISTS "cart_item"(
     fk_session_id INTEGER REFERENCES "shopping_session" (id) NOT NULL,
     fk_product_id INTEGER REFERENCES "product" (id) NOT NULL,
     quantity INTEGER NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP
 );
 
@@ -100,7 +102,7 @@ CREATE TABLE IF NOT EXISTS "order_details"(
     total DOUBLE PRECISION NOT NULL,
     quantity INTEGER NOT NULL,
     status VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP
 );
 
@@ -109,7 +111,7 @@ CREATE TABLE IF NOT EXISTS "order_item"(
     fk_order_id INTEGER REFERENCES "order_details" (id) NOT NULL,
     fk_product_id INTEGER REFERENCES "product" (id) NOT NULL,
     quantity INTEGER NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP
 );
 
@@ -119,7 +121,7 @@ CREATE TABLE IF NOT EXISTS "payment_details"(
     amount DOUBLE PRECISION NOT NULL,
     provider VARCHAR(255) NOT NULL,
     status VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP
 );
 
@@ -130,7 +132,7 @@ CREATE TABLE IF NOT EXISTS "product_rating" (
     rating INTEGER NOT NULL,
     CHECK (rating BETWEEN 1 AND 5),
     comment VARCHAR(255),
-    created_at TIMESTAMP NOT NULL,
+    created_at TIMESTAMP NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP
 );
 
@@ -181,7 +183,7 @@ FOR EACH ROW
 EXECUTE FUNCTION set_average_rating();
 */
 
-create view avg_rating as
+create or replace view avg_rating as
 select p.id as fk_product_id ,
 (select avg(pr.rating) from product_rating pr where pr.fk_product_id = p.id) as average_rating
 from public.product p;
