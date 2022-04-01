@@ -79,6 +79,37 @@
     padding: 1.2rem 3.2rem 3.2rem 3.2rem;
     width: 65vw;
   }
+
+
+  /********************************************************/
+
+  /****************************/
+  /* SIGNUP          */
+  /****************************/
+
+  .signup__input {
+    width: 110%;
+  }
+
+  .signup__input--first-name {
+    width: 85%;
+  }
+
+  .signup__input--email-address {
+    width: 160%;
+  }
+
+  .signup__input--address {
+    width: 160%;
+  }
+
+  .signup__input--zip-code {
+    width: 85%;
+  }
+
+  .signup__input--password {
+    width: 140%;
+  }
 }
 
 /**************************/
@@ -130,6 +161,25 @@
   .gallery--left .gallery__img:nth-child(3) {
     top: 10%;
     left: 10%;
+  }
+
+
+  /********************************************************/
+
+  /****************************/
+  /* SIGNUP          */
+  /****************************/
+
+  .signup__img:first-child {
+    top: 15%;
+  }
+
+  .signup__img:nth-child(2) {
+    top: 28%;
+  }
+
+  .signup__img:nth-child(3) {
+    top: 45%;
   }
 }
 
@@ -424,6 +474,24 @@
     width: 100vw;
     background-color: #fff;
   }
+
+  /********************************************************/
+
+  /****************************/
+  /* SIGNUP          */
+  /****************************/
+
+  .signup__img:first-child {
+    top: 15%;
+  }
+
+  .signup__img:nth-child(2) {
+    top: 25%;
+  }
+
+  .signup__img:nth-child(3) {
+    top: 37%;
+  }
 }
 
 /**************************/
@@ -480,8 +548,33 @@
     justify-self: start;
   }
 
-  .signup__images {
+  /********************************************************/
+
+  /****************************/
+  /* SIGNUP          */
+  /****************************/
+
+  .signup--images {
     visibility: hidden;
+  }
+
+  .account .container--white {
+    margin: 0 auto;
+    padding: 1.2rem 3.2rem 3.2rem 3.2rem;
+    width: 85vw;
+  }
+
+  .signup__form {
+    padding: 0 2rem 0 0;
+  }
+
+  .signup__input {
+    width: 80vw;
+    padding: 2rem;
+  }
+
+  .signup .btn--green {
+    position: absolute;
   }
 
   .account .container--white {
@@ -640,6 +733,8 @@
     height: 4.65rem;
     width: 22.5rem;
   }
+
+  /********************************************************/
 
   /****************************/
   /* SIGNUP          */
@@ -835,15 +930,6 @@
   /****************************/
   .wishlist {
     padding: 9.6rem 1.8rem 6.4rem 1.8rem;
-  }
-
-  /********************************************************/
-
-  /****************************/
-  /* SIGNUP          */
-  /****************************/
-  .signup__images {
-    visibility: hidden;
   }
 
   /********************************************************/

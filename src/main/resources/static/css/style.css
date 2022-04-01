@@ -1330,7 +1330,7 @@ button {
 /****************************/
 
 .signup {
-  padding: 12.8rem 6.4rem 9.6rem 6.4rem;
+  padding: 12.8rem 6.4rem 0 6.4rem;
   max-width: 160rem;
   margin: 0 auto;
   display: flex;
@@ -1340,86 +1340,94 @@ button {
 }
 
 .section-create-account {
-  width: 100%;
+  position: relative;
+  width: 100vw;
   margin: auto;
 }
 
-.signup .signup-heading {
-  font-size: 1.8rem;
+.signup .heading-signup {
+  font-size: 1.6rem;
   font-weight: 500;
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .signup__form {
-  width: 30%;
-  padding: 2.8rem 2.4rem 5.6rem 2.4rem;
+  width: 30vw;
+  padding: 2.8rem 2.4rem 1rem 2.4rem;
 }
 
 .signup__input {
-  padding: 1.6rem;
+  padding: 1.4rem;
   resize: none;
-  width: 100%;
+  max-width: 70rem;
+  width: 40rem;
   border-radius: 3px;
   border: 0.1rem solid rgba(0, 0, 0, 0.1);
   font-family: "Montserrat", sans-serif;
   box-shadow: inset 0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
 }
 
-.first__name {
-  width: 80%;
+.signup__input--first-name {
+  width: 30rem;
 }
 
-.email__address {
-  width: 140%;
+.signup__input--email-address {
+  width: 60rem;
 }
 
-.address {
-  width: 140%;
+.signup__input--address {
+  width: 60rem;
 }
 
-.zip__code {
-  width: 80%;
+.signup__input--zip-code {
+  width: 30rem;
 }
 
-.password {
-  width: 120%;
+.signup__input--password {
+  width: 50rem;
 }
 
 .signup .btn--green {
   padding: 1rem 3rem;
-  margin-top: 2rem;
+  margin-top: 3rem;
   font-size: 1.6rem;
 }
 
-.signup__images {
+.signup--images {
+  box-sizing: border-box;
+
 }
 
-.signup_img {
-  box-sizing: border-box;
+.signup__img {
   position: absolute;
   transition: 0.4s ease;
   border: 0.4rem solid white;
   box-shadow: 2rem 2rem 3rem rgba(0, 0, 0, 0.1);
+  width: 25%;
+  max-width: 50rem;
+  height: auto;
 }
 
-.signup_img:hover {
+.signup__img:hover {
   z-index: 999;
   transform: scale(1.3);
 }
 
-.signup_img:first-child {
-  top: 20%;
-  right: 9%;
+.signup__img:first-child {
+  top: 10%;
+  right: 4%;
 }
 
-.signup_img:nth-child(2) {
-  top: 40%;
-  right: 19%;
+.signup__img:nth-child(2) {
+  top: 25%;
+  right: 14%;
 }
 
-.signup_img:nth-child(3) {
-  top: 60%;
-  right: 7%;
+.signup__img:nth-child(3) {
+  top: 45%;
+  right: 2%;
 }
 
 /********************************************************/
