@@ -80,7 +80,6 @@
     width: 65vw;
   }
 
-
   /********************************************************/
 
   /****************************/
@@ -162,7 +161,6 @@
     top: 10%;
     left: 10%;
   }
-
 
   /********************************************************/
 
@@ -838,11 +836,11 @@
     text-decoration: underline;
   }
 
-  .checkout__plan {
+  /* .checkout__plan {
     border: 0.2rem solid #588157;
     border-radius: 100px;
     padding: 0.8rem 2.4rem;
-  }
+  } */
 
   .checkout .btn--green {
     padding: 1.6rem 3.2rem;
@@ -1031,11 +1029,11 @@
     text-decoration: underline;
   }
 
-  .checkout__plan {
+  /* .checkout__plan {
     border: 0.2rem solid #588157;
     border-radius: 100px;
     padding: 0.8rem 2.4rem;
-  }
+  } */
 
   .checkout .btn--green {
     padding: 1.6rem 3.2rem;

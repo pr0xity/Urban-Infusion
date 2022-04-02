@@ -36,12 +36,24 @@
       href="https://fonts.googleapis.com/css2?family=Hurricane:wght@200;300;400;500;600&display=swap"
       rel="stylesheet"
     />
-
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/queries.css" />
 
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script defer src="../js/general.js"></script>
+    <script defer src="../js/checkout.js"></script>
     <title>Urban Infusion</title>
   </head>
   <body>
@@ -231,8 +243,8 @@
           </div>
           <div class="checkout__info">
             <span class="checkout__label"> Address </span>
-            <span class="checkout__info">
-              Flat 4, 24 Castle Street, Perth, PH1 3JY
+            <span class="checkout__info checkout__info--address">
+              Larsgårdsvegen 2, 6009 Ålesund
             </span>
           </div>
         </address>
@@ -250,6 +262,7 @@
         <div class="checkout__plan">
           <span class="checkout__label">Standard - Home delivery</span>
           <span class="checkout__info">Delivery within 3 - 7 days</span>
+          <div class="checkout__map" id="map"></div>
         </div>
         <h4 class="checkout__heading">
           <i class="ph-credit-card btn--icon"></i>

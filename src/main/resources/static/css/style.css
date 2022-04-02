@@ -399,9 +399,6 @@ button {
   font-size: 3rem;
 }
 
-
-
-
 /****************************/
 /* HERO SECTION */
 /****************************/
@@ -525,7 +522,7 @@ button {
 }
 
 .section-featured .btn:hover {
-  transform: translate(-50%, -50%) scale(1.10);
+  transform: translate(-50%, -50%) scale(1.1);
   color: #588157;
 }
 
@@ -1132,9 +1129,16 @@ button {
 }
 
 .checkout__plan {
+  position: relative;
   border: 0.2rem solid #588157;
-  border-radius: 100px;
+  border-radius: 70px;
   padding: 0.8rem 2.4rem;
+}
+
+.checkout__plan:first-of-type {
+  padding: 1.6rem 3.2rem;
+  height: 40rem;
+  overflow: hidden;
 }
 
 .checkout .btn--green {
@@ -1143,6 +1147,21 @@ button {
   margin: 0 auto;
   margin-top: 2.4rem;
   line-height: 1;
+}
+
+/* .section-payment-delivery {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+} */
+
+.checkout__map {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 30rem;
+  width: 100%;
+  align-self: center;
 }
 
 .checkout__complete {
@@ -1397,7 +1416,6 @@ button {
 
 .signup--images {
   box-sizing: border-box;
-
 }
 
 .signup__img {
@@ -1555,4 +1573,13 @@ thead tr {
   gap: 2.4rem;
   margin-bottom: 1.2rem;
   justify-content: space-between;
+}
+
+.marker-icon {
+  content: url(../img/mapmarker.svg);
+}
+
+.leaflet-marker-icon .marker-icon .leaflet-zoom-animated .leaflet-interactive {
+  height: 5rem;
+  rotate: 90;
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="311.03583"
+   height="311.00485"
+   fill="#588157"
+   viewBox="0 0 414.71444 414.67314"
+   version="1.1"
+   id="svg8"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs12">
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter964"
+       x="-0.37892764"
+       y="-0.37906844"
+       width="1.7578553"
+       height="1.7581369">
+      <feGaussianBlur
+         stdDeviation="29.118332"
+         id="feGaussianBlur966" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter968"
+       x="-2.0957864"
+       y="-2.098298"
+       width="5.1915728"
+       height="5.196596">
+      <feGaussianBlur
+         stdDeviation="29.118332"
+         id="feGaussianBlur970" />
+    </filter>
+  </defs>
+  <rect
+     width="256"
+     height="256"
+     fill="none"
+     id="rect2"
+     x="39.341602"
+     y="72.857643" />
+  <path
+     d="M 224,39.5 A 8.1,8.1 0 0 0 216.5,32 C 140.2,27.5 79.1,50.5 53,93.6 a 87.3,87.3 0 0 0 -12.8,49.1 c 0.6,15.9 5.2,32.1 13.8,48 L 154.3,90.3 a 8.1,8.1 0 0 1 11.4,11.4 L 65.3,202 c 15.9,8.6 32.1,13.2 48,13.8 h 3.3 A 87,87 0 0 0 162.4,203 C 205.5,176.9 228.5,115.8 224,39.5 Z"
+     id="path4"
+     style="mix-blend-mode:normal;fill:#00000099;filter:url(#filter964)"
+     transform="rotate(19.768697,-70.367872,380.73103)" />
+  <path
+     d="m 96.441603,268.95764 c -1.1,-1.8 -2.1,-3.6 -3.1,-5.4 l -19.7,19.6 a 8.1,8.1 0 0 0 0,11.4 8.2,8.2 0 0 0 11.4,0 l 19.599997,-19.7 -5.399997,-3.1 a 9.3,9.3 0 0 1 -2.8,-2.8 z"
+     id="path6"
+     style="mix-blend-mode:normal;fill:#00000099;filter:url(#filter968)" />
+</svg>
