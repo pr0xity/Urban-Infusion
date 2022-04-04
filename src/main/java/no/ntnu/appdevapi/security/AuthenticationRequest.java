@@ -21,8 +21,16 @@ public class AuthenticationRequest {
      * Creates an instance of authentication request.
      */
     public AuthenticationRequest() {
-
     }
+
+    /**
+     * Creates an instance of authentication request.
+     */
+    public AuthenticationRequest(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
 
     /**
      * Returns email used for authentication of user.

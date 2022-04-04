@@ -22,17 +22,25 @@ public class AccessUserDetails implements UserDetails{
     private final String username;
     private final String password;
     private final boolean isActive;
+    private final List<GrantedAuthority> authorities = new LinkedList<>();
 
 
     public AccessUserDetails(User user) {
         this.username = user.getEmail();
         this.password = user.getPassword();
         this.isActive = user.isEnabled();
+        this.convertPermissionLevel(user.getPermissionID());
+    }
+
+    private void convertPermissionLevel(int permissionLevel) {
+        authorities.clear();
+        authorities.add(new SimpleGrantedAuthority(String.valueOf(permissionLevel)));
+
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override

@@ -50,6 +50,7 @@ public class PermissionLevel {
 
     public PermissionLevel() {};
 
+
     /**
      * Returns the id of this permission level.
      *
