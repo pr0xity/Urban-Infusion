@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Represents permission level for a user.
@@ -16,10 +17,11 @@ public class PermissionLevel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @Column(name = "pl_id")
+    private long id;
 
     @ApiModelProperty("The roles of the permission levels")
-    @Column(name = "admin_type")
+    @Column(name = "adminType")
     private String adminType;
 
     @ApiModelProperty("A number 1-4 representing permission level")
@@ -32,6 +34,10 @@ public class PermissionLevel {
     @ApiModelProperty("When the product was last updated.")
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @ApiModelProperty("The users assigned to this permission level")
+    @OneToMany(mappedBy = "permissionLevel")
+    private List<User> users;
 
     /**
      * Creates an instance of permission level.
@@ -56,7 +62,7 @@ public class PermissionLevel {
      *
      * @return id of this permission level.
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 

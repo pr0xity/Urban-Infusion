@@ -2,14 +2,23 @@ package no.ntnu.appdevapi.controllers;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import no.ntnu.appdevapi.DTO.AuthToken;
+import no.ntnu.appdevapi.DTO.LoginUser;
+import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.User;
+import no.ntnu.appdevapi.security.JwtUtil;
 import no.ntnu.appdevapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.naming.AuthenticationException;
 import java.util.List;
 
 
@@ -18,8 +27,25 @@ import java.util.List;
 public class UserController {
 
   @Autowired
+  private AuthenticationManager authenticationManager;
+
+  @Autowired
+  private JwtUtil jwtUtil;
+
+  @Autowired
   private UserService userService;
 
+
+  @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+  public ResponseEntity<?> generateToken(@RequestBody LoginUser loginUser) throws AuthenticationException {
+    final Authentication authentication = authenticationManager.authenticate(
+            new UsernamePasswordAuthenticationToken(
+                    loginUser.getEmail(),
+                    loginUser.getPassword()));
+    SecurityContextHolder.getContext().setAuthentication(authentication);
+    final String token = jwtUtil.generateToken(authentication);
+    return ResponseEntity.ok(new AuthToken(token));
+  }
 
   /**
    * Returns all users in the store.
@@ -29,20 +55,20 @@ public class UserController {
   @GetMapping
   @ApiOperation(value = "Get all users.")
   public List<User> getAll() {
-    return userService.getAllUsers();
+    return userService.findAll();
   }
 
   /**
    * Get a specific user.
    *
-   * @param index The index of the user, starting from 0.
-   * @return The user matching the index, null otherwise.
+   * @param email The email of the user.
+   * @return The user matching the email, null otherwise.
    */
-  @GetMapping("/{index}")
-  @ApiOperation(value = "Get a specific user.", notes = "Returns the user or null when index is invalid.")
-  public ResponseEntity<User> get(@ApiParam("Index of the user.") @PathVariable int index) {
+  @GetMapping("/{email}")
+  @ApiOperation(value = "Get a specific user.", notes = "Returns the user or null when email is invalid.")
+  public ResponseEntity<User> get(@ApiParam("email of the user.") @PathVariable String email) {
     ResponseEntity<User> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    User user = userService.getUser(index);
+    User user = userService.findOne(email);
     if (null != user) {
       response = new ResponseEntity<>(user, HttpStatus.OK);
     }
@@ -57,10 +83,10 @@ public class UserController {
    */
   @PostMapping
   @ApiOperation(value = "Add a new user.", notes = "Status 200 when added, 400 on error.")
-  public ResponseEntity<String> add(@RequestBody User user) {
+  public ResponseEntity<String> add(@RequestBody UserDto user) {
     ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     if (null != user) {
-      userService.addUser(user);
+      userService.save(user);
       response = new ResponseEntity<>(HttpStatus.OK);
     }
     return response;
@@ -69,15 +95,15 @@ public class UserController {
   /**
    * Delete a user from the store
    *
-   * @param index Index of the user to delete.
+   * @param email Email of the user to delete.
    * @return 200 when deleted, 404 if not.
    */
-  @DeleteMapping("/{index}")
+  @DeleteMapping("/{email}")
   @ApiIgnore
-  public ResponseEntity<String> delete(@PathVariable int index) {
+  public ResponseEntity<String> delete(@PathVariable String email) {
     ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    if (null != userService.getUser(index)) {
-      userService.deleteUser(index);
+    if (null != userService.findOne(email)) {
+      userService.deleteUser(email);
       response = new ResponseEntity<>(HttpStatus.OK);
     }
     return response;
