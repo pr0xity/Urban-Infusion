@@ -20,9 +20,9 @@ insert into "product" (name, description, origin, price, fk_category_id, fk_inve
 insert into "product" (name, description, origin, price, fk_category_id, fk_inventory_id, updated_at) values ('Mug', 'implement real-time methodologies', 'Brazilian clay', 120, 4, 5, '2021-12-10 02:33:30');
 
 -- Insert data into permission_level
-insert into "permission_level" (admin_type, permissions, updated_at) values ('owner', 3, '2021-09-29 01:32:00');
-insert into "permission_level" (admin_type, permissions, updated_at) values ('admin', 2, '2021-09-02 20:33:59');
 insert into "permission_level" (admin_type, permissions, updated_at) values ('user', 1,  '2021-04-25 18:23:26');
+insert into "permission_level" (admin_type, permissions, updated_at) values ('admin', 2, '2021-09-02 20:33:59');
+insert into "permission_level" (admin_type, permissions, updated_at) values ('owner', 3, '2021-09-29 01:32:00');
 
 -- Insert data into user
 INSERT INTO "users" (first_name, last_name, email, password, updated_at, fk_permission_id, enabled) VALUES ('Espen', 'Otlo', 'espenotl@stud.ntnu.no', 'dugjetterdetaldri69', '2017-03-31 9:30:20', 3, 'true');
