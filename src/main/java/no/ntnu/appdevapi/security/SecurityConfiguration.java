@@ -53,13 +53,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     http.sessionManagement().sessionCreationPolicy(STATELESS);
     http.authorizeRequests()
             .antMatchers(DELETE).hasAuthority("owner")
-            .antMatchers( "/users/").hasAnyAuthority("admin", "owner")
-            .antMatchers(GET,"/users/**").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers(" /register", "/products/**", "/login")
-            .permitAll();
-    http.authorizeRequests().antMatchers(GET, "/user/**").hasAnyAuthority("user");
-    http.authorizeRequests().antMatchers("/users").hasAnyAuthority("admin", "owner");
-    http.authorizeRequests().antMatchers(DELETE).hasAnyAuthority("owner");
+            .antMatchers("/users").hasAnyAuthority("admin", "owner")
+            .antMatchers(GET,"/users/?*").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers("/register", "/products/**", "/login").permitAll();
     http.authorizeRequests().anyRequest().authenticated().and().exceptionHandling()
             .authenticationEntryPoint(unauthorizedEntryPoint);
     http.addFilterBefore(authenticationTokenFilterBean(),

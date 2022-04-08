@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -41,11 +42,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public User save(UserDto user) {
         User nUser = user.getUserFromDto();
         if (userRepository.findByEmail(nUser.getEmail()) == null) {
-
             nUser.setPassword(bcryptEncoder.encode(user.getPassword()));
-        PermissionLevel permissionLevel = permissionLevelService.findByAdminType(user.getPermissionLevel());
-        nUser.setPermissionLevel(permissionLevel);
-        return userRepository.save(nUser);
+            PermissionLevel permissionLevel = permissionLevelService.findByAdminType(user.getPermissionLevel());
+            nUser.setCreatedAt(LocalDateTime.now());
+            nUser.setPermissionLevel(permissionLevel);
+            nUser.setEnabled(true);
+            return userRepository.save(nUser);
         }
         return null;
     }

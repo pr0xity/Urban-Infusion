@@ -36,18 +36,6 @@ public class UserController {
   @Autowired
   private UserService userService;
 
-
-  @RequestMapping(value = "/login", method = RequestMethod.POST)
-  public ResponseEntity<?> generateToken(@RequestBody LoginUser loginUser) throws AuthenticationException {
-    final Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(
-                    loginUser.getEmail(),
-                    loginUser.getPassword()));
-    SecurityContextHolder.getContext().setAuthentication(authentication);
-    final String token = jwtUtil.generateToken(authentication);
-    return ResponseEntity.ok(new AuthToken(token));
-  }
-
   /**
    * Returns all users in the store.
    *
@@ -70,15 +58,19 @@ public class UserController {
   public ResponseEntity<User> get(@ApiParam("email of the user.") @RequestHeader MultiValueMap<String, String> headers, @PathVariable String email) {
     ResponseEntity<User> response = new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     User user = userService.findOne(email);
-    // TODO: check requesting user
+
     String token = headers.get("authorization").get(0).replace("Bearer ", "");
     String username = jwtUtil.getUsernameFromToken(token);
     String permissionLevel = jwtUtil.getAdminTypeFromToken(token);
 
-    if (null != user && user.getEmail().equals(username) || permissionLevel.equals("admin") || permissionLevel.equals("owner")) {
-      response = new ResponseEntity<>(user, HttpStatus.OK);
-    } else if (null == user) {
-      response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    if (null != user) {
+      if (email.equals(username) || permissionLevel.equals("admin") || permissionLevel.equals("owner")) {
+        response = new ResponseEntity<>(user, HttpStatus.OK);
+      }
+    } else {
+      if (permissionLevel.equals("admin") || permissionLevel.equals("owner")) {
+        response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      }
     }
     return response;
   }
