@@ -17,18 +17,18 @@ public class PermissionLevel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "pl_id")
+    @Column(unique = true, name = "pl_id")
     private long id;
 
     @ApiModelProperty("The roles of the permission levels")
-    @Column(name = "adminType")
+    @Column(unique = true, name = "adminType")
     private String adminType;
 
-    @ApiModelProperty("A number 1-4 representing permission level")
+    @ApiModelProperty("A number representing permission level")
     private int permissions;
 
     @ApiModelProperty("When the product was created.")
-    @Column(name = "created_at")
+    @Column(name = "created_at", columnDefinition = "timestamp default now()")
     private LocalDateTime createdAt;
 
     @ApiModelProperty("When the product was last updated.")
@@ -95,7 +95,7 @@ public class PermissionLevel {
 
     /**
      * Returns the number representing the permission level.
-     * 
+     *
      * @return the number representing the permission level.
      */
     public int getPermissions() {

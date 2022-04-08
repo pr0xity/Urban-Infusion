@@ -16,6 +16,30 @@ public class UserDto {
   private LocalDateTime updatedAt;
   private boolean enabled;
 
+  public UserDto(String fname, String lname, String email, String password) {
+    this.firstName = fname;
+    this.lastName = lname;
+    this.email = email;
+    this.password = password;
+    this.createdAt = LocalDateTime.now();
+    this.updatedAt = null;
+    this.enabled = true;
+    this.permissionLevel = "user";
+
+  }
+  public UserDto(String fname, String lname, String email, String password, String permissionLevel) {
+    this.firstName = fname;
+    this.lastName = lname;
+    this.email = email;
+    this.password = password;
+    this.createdAt = LocalDateTime.now();
+    this.updatedAt = null;
+    this.enabled = true;
+    this.permissionLevel = permissionLevel;
+
+  }
+
+
   public User getUserFromDto() {
     User user = new User();
     user.setFirstName(firstName);
@@ -90,5 +114,9 @@ public class UserDto {
 
   public String getPermissionLevel() {
     return permissionLevel;
+  }
+
+  public void setPermissionLevel(String permissionLevel) {
+    this.permissionLevel = permissionLevel;
   }
 }

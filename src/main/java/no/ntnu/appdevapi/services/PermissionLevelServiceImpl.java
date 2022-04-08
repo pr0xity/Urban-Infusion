@@ -1,5 +1,6 @@
 package no.ntnu.appdevapi.services;
 
+import java.util.logging.Logger;
 import no.ntnu.appdevapi.DAO.PermissionLevelRepository;
 import no.ntnu.appdevapi.entities.PermissionLevel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,5 +15,17 @@ public class PermissionLevelServiceImpl implements PermissionLevelService {
     @Override
     public PermissionLevel findByAdminType(String adminType) {
         return permissionLevelRepository.findPermissionLevelByAdminType(adminType);
+    }
+
+    @Override
+    public PermissionLevel savePermissionLevel(PermissionLevel permissionLevel) {
+        if (permissionLevelRepository.findPermissionLevelByAdminType(
+                permissionLevel.getAdminType()) == null) {
+
+            return permissionLevelRepository.save(permissionLevel);
+        }
+        return null;
+
+
     }
 }

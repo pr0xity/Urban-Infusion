@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private Set<SimpleGrantedAuthority> getAuthority(User user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         user.getPermissionLevel().forEach(permissionLevel -> {
-            authorities.add(new SimpleGrantedAuthority("PermissionLevel_" + permissionLevel.getAdminType()));
+            authorities.add(new SimpleGrantedAuthority(permissionLevel.getAdminType()));
         });
         return authorities;
     }
@@ -40,10 +40,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User save(UserDto user) {
         User nUser = user.getUserFromDto();
-        nUser.setPassword(bcryptEncoder.encode(user.getPassword()));
+        if (userRepository.findByEmail(nUser.getEmail()) == null) {
+
+            nUser.setPassword(bcryptEncoder.encode(user.getPassword()));
         PermissionLevel permissionLevel = permissionLevelService.findByAdminType(user.getPermissionLevel());
         nUser.setPermissionLevel(permissionLevel);
         return userRepository.save(nUser);
+        }
+        return null;
     }
 
     @Override
@@ -59,6 +63,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public User findOneByID(long id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
     public void deleteUser(String email) {
         userRepository.delete(userRepository.findByEmail(email));
     }
@@ -70,4 +79,5 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
     }
+
 }

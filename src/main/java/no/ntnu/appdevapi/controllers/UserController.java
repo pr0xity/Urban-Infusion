@@ -81,11 +81,11 @@ public class UserController {
    * @param user The user to add.
    * @return 200 when added, 400 on error.
    */
-  @PostMapping
+  @PostMapping("/save")
   @ApiOperation(value = "Add a new user.", notes = "Status 200 when added, 400 on error.")
   public ResponseEntity<String> add(@RequestBody UserDto user) {
     ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    if (null != user) {
+    if (null != user && userService.findOne(user.getEmail()) == null) {
       userService.save(user);
       response = new ResponseEntity<>(HttpStatus.OK);
     }

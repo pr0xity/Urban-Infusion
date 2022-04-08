@@ -13,6 +13,8 @@ public interface UserService {
 
     User findOne(String email);
 
+    User findOneByID(long id);
+
     void deleteUser(String email);
 
 }

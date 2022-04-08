@@ -12,7 +12,7 @@ import java.util.*;
 public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "user_id")
+  @Column(unique = true, name = "user_id")
   private long id;
   @ApiModelProperty("First name of the user")
   @Column(name = "first_name")
@@ -21,6 +21,7 @@ public class User {
   @Column(name = "last_name")
   private String lastName;
   @ApiModelProperty("The users email-address")
+  @Column(unique = true)
   private String email;
   @ApiModelProperty("Password of the user")
   @JsonIgnore
@@ -37,7 +38,7 @@ public class User {
   @ApiModelProperty("If the user is enabled or not")
   private boolean enabled;
 
-  @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+  @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name="pl_id")
   private PermissionLevel permissionLevel;
 
