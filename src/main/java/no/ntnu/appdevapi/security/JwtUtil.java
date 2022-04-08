@@ -20,6 +20,10 @@ import java.util.Date;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+
+/**
+ * This class handles JWT-tokens by analyzing them, extracting data and creating new tokens
+ */
 @Component
 public class JwtUtil {
 
