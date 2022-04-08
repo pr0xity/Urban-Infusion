@@ -12,11 +12,18 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
+
+/**
+ * Creates AuthenticationManager - set up authentication type
+ * The @EnableWebSecurity tells that this ia a class for configuring web security
+ */
+@Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -32,6 +39,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
   }
 
+
+  /**
+   * Configure the authorization rules
+   *
+   * @param http HTTP Security object
+   * @throws Exception
+   */
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable();
@@ -43,13 +57,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers(GET,"/users/**").hasAnyAuthority("user", "admin", "owner")
             .antMatchers(" /register", "/products/**", "/login")
             .permitAll();
+    http.authorizeRequests().antMatchers(GET, "/user/**").hasAnyAuthority("user");
+    http.authorizeRequests().antMatchers("/users").hasAnyAuthority("admin", "owner");
+    http.authorizeRequests().antMatchers(DELETE).hasAnyAuthority("owner");
     http.authorizeRequests().anyRequest().authenticated().and().exceptionHandling()
             .authenticationEntryPoint(unauthorizedEntryPoint);
     http.addFilterBefore(authenticationTokenFilterBean(),
             UsernamePasswordAuthenticationFilter.class);
   }
 
-
+  /**
+   * This method is called to decide what encryption to use for password checking
+   *
+   * @return The password encryptor
+   */
   @Bean
   public BCryptPasswordEncoder encoder() {
     return new BCryptPasswordEncoder();
