@@ -13,6 +13,7 @@
 	<groupId>no.ntnu</groupId>
 	<artifactId>appdevapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>appdevapi</name>
 	<description>The API for the project in Appdev adn WebTek</description>
 	<properties>
