@@ -16,6 +16,10 @@ public class UserDto {
   private LocalDateTime updatedAt;
   private boolean enabled;
 
+  public UserDto() {
+
+  }
+
   public UserDto(String fname, String lname, String email, String password) {
     this.firstName = fname;
     this.lastName = lname;

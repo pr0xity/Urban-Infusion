@@ -1,7 +1,6 @@
 package no.ntnu.appdevapi.security;
 
-import static org.springframework.http.HttpMethod.DELETE;
-import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.*;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +12,11 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
-@Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -41,11 +38,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     //TODO: This need to be be updated with correct paths
     http.sessionManagement().sessionCreationPolicy(STATELESS);
     http.authorizeRequests()
-            .antMatchers("/signup", "/login", "/products", "/product/**", "/users/authenticate")
+            .antMatchers(DELETE).hasAuthority("owner")
+            .antMatchers( "/users/").hasAnyAuthority("admin", "owner")
+            .antMatchers(GET,"/users/**").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers(" /register", "/products/**", "/login")
             .permitAll();
-    http.authorizeRequests().antMatchers(GET, "/user/**").hasAnyAuthority("user");
-    http.authorizeRequests().antMatchers("/users").hasAnyAuthority("admin", "owner");
-    http.authorizeRequests().antMatchers(DELETE).hasAnyAuthority("owner");
     http.authorizeRequests().anyRequest().authenticated().and().exceptionHandling()
             .authenticationEntryPoint(unauthorizedEntryPoint);
     http.addFilterBefore(authenticationTokenFilterBean(),

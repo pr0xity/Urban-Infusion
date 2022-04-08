@@ -35,6 +35,7 @@ public class JwtUtil {
   public String getUsernameFromToken(String token) {
     return getClaimFromToken(token, Claims::getSubject);
   }
+
   public String getAdminTypeFromToken(String token) {
     return getClaimFromToken(token, Claims::getSubject);
   }

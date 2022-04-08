@@ -15,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -36,7 +37,7 @@ public class UserController {
   private UserService userService;
 
 
-  @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+  @RequestMapping(value = "/login", method = RequestMethod.POST)
   public ResponseEntity<?> generateToken(@RequestBody LoginUser loginUser) throws AuthenticationException {
     final Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(
@@ -66,11 +67,18 @@ public class UserController {
    */
   @GetMapping("/{email}")
   @ApiOperation(value = "Get a specific user.", notes = "Returns the user or null when email is invalid.")
-  public ResponseEntity<User> get(@ApiParam("email of the user.") @PathVariable String email) {
-    ResponseEntity<User> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  public ResponseEntity<User> get(@ApiParam("email of the user.") @RequestHeader MultiValueMap<String, String> headers, @PathVariable String email) {
+    ResponseEntity<User> response = new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
     User user = userService.findOne(email);
-    if (null != user) {
+    // TODO: check requesting user
+    String token = headers.get("authorization").get(0).replace("Bearer ", "");
+    String username = jwtUtil.getUsernameFromToken(token);
+    String permissionLevel = jwtUtil.getAdminTypeFromToken(token);
+
+    if (null != user && user.getEmail().equals(username) || permissionLevel.equals("admin") || permissionLevel.equals("owner")) {
       response = new ResponseEntity<>(user, HttpStatus.OK);
+    } else if (null == user) {
+      response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     return response;
   }
@@ -81,7 +89,7 @@ public class UserController {
    * @param user The user to add.
    * @return 200 when added, 400 on error.
    */
-  @PostMapping("/save")
+  @PostMapping()
   @ApiOperation(value = "Add a new user.", notes = "Status 200 when added, 400 on error.")
   public ResponseEntity<String> add(@RequestBody UserDto user) {
     ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);

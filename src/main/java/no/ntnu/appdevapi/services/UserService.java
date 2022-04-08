@@ -2,7 +2,6 @@ package no.ntnu.appdevapi.services;
 
 import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.User;
-import no.ntnu.appdevapi.DAO.UserRepository;
 
 import java.util.List;
 
