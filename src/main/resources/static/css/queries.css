@@ -580,6 +580,35 @@
     padding: 1.2rem 3.2rem 3.2rem 3.2rem;
     width: 85vw;
   }
+
+  /********************************************************/
+
+  /****************************/
+  /* PRODUCT          */
+  /****************************/
+
+  .product__rating {
+    margin-top: 2rem;
+  }
+
+  .section-product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .section-reviews {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .review__comment{
+    width: 75vw;
+  }
+
+  .review__form {
+    width: 85vw;
+  }
 }
 
 /**************************/
@@ -857,6 +886,18 @@
     padding: 0.8rem;
     width: 95vw;
   }
+
+  /********************************************************/
+
+  /****************************/
+  /* PRODUCT          */
+  /****************************/
+
+  .product__img {
+    height: auto;
+    width: auto;
+  }
+
 }
 
 /**************************/
@@ -1040,5 +1081,19 @@
     font-size: 2rem;
     margin: 0 auto;
     margin-top: 2.4rem;
+  }
+
+  /********************************************************/
+
+  /****************************/
+  /* PRODUCT          */
+  /****************************/
+
+  .review__comment{
+    width: 70vw;
+  }
+
+  .review__form {
+    width: 80vw;
   }
 }
