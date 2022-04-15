@@ -1614,12 +1614,6 @@ thead tr {
   padding: 4rem;
 }
 
-.modal__close--btn {
-  position: absolute;
-  right: 2rem;
-  font-size: xx-large;
-}
-
 .btn--delete {
   background-color: #ad5b58;
 }
