@@ -1583,3 +1583,47 @@ thead tr {
   height: 5rem;
   rotate: 90;
 }
+
+.modal {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.modal__window {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 60rem;
+  max-width: 100%;
+  position: relative;
+  padding: 4rem;
+}
+
+.modal__close--btn {
+  position: absolute;
+  right: 2rem;
+  font-size: xx-large;
+}
+
+.btn--delete {
+  background-color: #ad5b58;
+}
+
+.modal__form--delete {
+  margin-top: 2rem;
+}

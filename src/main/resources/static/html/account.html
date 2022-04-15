@@ -45,6 +45,7 @@
 
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script defer src="../js/general.js"></script>
+    <script defer src="../js/account.js"></script>
     <title>Urban Infusion</title>
   </head>
   <body>
@@ -172,26 +173,59 @@
             <span>Esther Howard /&#8203; 85329</span>
           </p>
           <p class="account-info__row">
-            <span>Emailaddress</span>
-            <span>esther.&#8203;howard@&#8203;example.&#8203;com</span>
-            <button class="account-info__btn">
+            <span>Email address</span>
+            <span id="field_email">esther.&#8203;howard@&#8203;example.&#8203;com</span>
+            <button id="open_email" class="account-info__btn">
               <i class="ph-pencil-simple-light btn--icon"></i>
             </button>
           </p>
+            <div class="modal" id="modal_email">
+              <div class="modal__window">
+                <button class="modal__close--btn" id="close_email">&times;</button>
+                <h2>Change email address</h2>
+                <form class="modal__form--email">
+                <label for="edit_email">New email address: </label>
+                <input type="text" id="edit_email" name="edit_email">
+                <input type="submit" value="Submit" class="btn--green">
+                </form>
+              </div>
+            </div>
           <p class="account-info__row">
             <span>Password</span>
-            <span>********</span>
-            <button class="account-info__btn">
+            <span id="field_password">********</span>
+            <button id="open_password" class="account-info__btn">
               <i class="ph-pencil-simple-light btn--icon"></i>
             </button>
           </p>
+            <div class="modal" id="modal_password">
+              <div class="modal__window">
+                <button class="modal__close--btn" id="close_password">&times;</button>
+                <h2>Change password</h2>
+                <form class="modal__form--password">
+                <label for="edit_password">New password: </label>
+                <input type="text" id="edit_password" name="edit_password">
+                <input type="submit" value="Submit" class="btn--green">
+                </form>
+              </div>
+            </div>
           <p class="account-info__row">
             <span>Address</span>
-            <span>2972 Westheimer Rd. Santa Ana, Illinois 85486 </span>
-            <button class="account-info__btn">
+            <span id="field_address">2972 Westheimer Rd. Santa Ana, Illinois 85486 </span>
+            <button id="open_address" class="account-info__btn">
               <i class="ph-pencil-simple-light btn--icon"></i>
             </button>
           </p>
+          <div class="modal" id="modal_address">
+            <div class="modal__window">
+              <button class="modal__close--btn" id="close_address">&times;</button>
+              <h2>Change address</h2>
+              <form class="modal__form--address">
+              <label for="edit_address">New address: </label>
+              <input type="text" id="edit_address" name="edit_address">
+              <input type="submit" value="Submit" class="btn--green">
+              </form>
+            </div>
+          </div>
           <p class="account-info__row">
             <span>Member since</span>
             <span>04.02.2022</span>
@@ -206,6 +240,16 @@
               account?
             </button>
           </p>
+          <div class="modal" id="modal_delete">
+            <div class="modal__window">
+              <button class="modal__close--btn" id="close_delete">&times</button>
+              <h2>Do you wish to delete your account?</h2>
+              <form class="modal__form--delete">
+              <input type="submit" value="Yes" class="btn--green btn--delete">
+              <input type="submit" value="No" class="btn--green">
+              </form>
+            </div>
+          </div>
           <div class="account-info__change container--beige hidden">
             <button class="change__btn--close close btn--icon">
               <i class="ph-x"></i>
