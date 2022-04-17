@@ -1177,6 +1177,13 @@ button {
   justify-content: center;
   align-items: center;
   z-index: 1000000;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checkout__complete.show {
+  pointer-events: auto;
+  opacity: 1;
 }
 
 .checkout__complete--overlay {
@@ -1188,6 +1195,13 @@ button {
   background-color: rgba(0, 0, 0, 0.5);
   -webkit-backdrop-filter: blur(5px);
   backdrop-filter: blur(5px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.checkout__complete--overlay.show {
+  pointer-events: auto;
+  opacity: 1;
 }
 
 .checkout__complete-heading {
