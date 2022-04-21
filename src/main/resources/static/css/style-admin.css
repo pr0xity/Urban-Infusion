@@ -9,11 +9,7 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
 
 
 /****************************/
-
-
 /* ADMIN */
-
-
 /****************************/
 
 .currentpage {
@@ -21,9 +17,20 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
     font-weight: 600;
 }
 
-.main {
+.admin__main {
     display: grid;
+    column-gap: 3.2rem;
+    /*max-width: 160rem;
+    min-height: 50rem;
+    justify-content: left;*/
     grid-template-columns: 20rem auto;
+
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1.8;
+    color: #6d6875;
+    margin: 0 auto;
 }
 
 .sidenav {
@@ -96,53 +103,43 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
     top: 0;
 }
 
-
-/* tbody {
-    display: block;
-    position: relative;
-    width: 100%;
-    max-height: 50rem;
-    overflow: scroll;
-    overflow-x: hidden;
-} */
-
-.admin-main {
-    display: flex;
-    gap: 3.2rem;
-    max-width: 1000rem;
-    margin: 0 auto;
-    min-height: 50rem;
-    justify-content: left;
+.section-dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 8rem;
+    padding: 2.4rem;
 }
 
-.admin-body {
-    /*order: 2;*/
-    /*flex-grow: 3;*/
-    /* flex-grow: 4; */
-    /* flex-wrap: wrap; */
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+.dashboard__label {
+    display:flex;
+    padding: 1.6rem 2.4rem 1.6rem 2.4rem;
 }
 
-.admin-body-section {
-    /* this stops flex from going to column */
-    flex: 34%;
-    margin: 3%;
+.dashboard__table tr {
+    display: grid;
+    column-gap: 0.8rem;
+    font-size: 1.6rem;
 }
 
+.dashboard__table tr:first-child {
+    white-space: nowrap;
+}
 
-/* .admin-customer-table {
-    order: 2;
-    flex: 1;
-    width: 100%;
-} */
+.dashboard__table--order tr {
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.1fr;
+}
 
-
-/* .customer-table {} */
+.dashboard__table--customer tr {
+    grid-template-columns: 1fr 1fr 1fr 0.1fr;
+}
 
 th {
     text-align: left;
+}
+
+.dashboard__label {
+    display: flex;
+    justify-content: center;
 }
 
 .sidenav__icon {

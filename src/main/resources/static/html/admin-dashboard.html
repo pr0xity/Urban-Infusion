@@ -28,7 +28,7 @@
     <title>Urban Infusion</title>
 </head>
 
-<body>
+<body class>
     <header class="admin__header">
 
         <a href="../index.html" class="admin__logo">
@@ -38,7 +38,7 @@
             <label class="nav__username" id="username" aria-label="user name">Didrik Eilertsen</label>
             <button class="nav__item nav__link" id="user-menu" aria-label="account menu">
             <i class="ph-user-circle-light btn--icon"></i>
-        </button>
+            </button>
             <div class="nav__user-menu hidden">
                 <a href="account.html" class="user-menu__item">
                     <i class="ph-user-circle-light btn--icon"></i>
@@ -56,31 +56,32 @@
         </div>
     </header>
 
-    <main class="admin-main">
-        <aside class="admin-sidenav">
-            <ul style="list-style-type: none">
-                <li class="currentpage">
-                    <a href="../html/admin-dashboard.html"> <i class="ph-squares-four"></i> Dashboard</a>
-                </li>
-                <li>
-                    <a href="../html/admin-customers.html"> <i class="ph-users-three"></i> Customers</a>
-                </li>
-                <li>
-                    <a href="../html/admin-orders.html"> <i class="ph-clipboard-text"></i> Orders</a>
-                </li>
-                <li>
-                    <a href="../html/admin-products.html"> <i class="ph-shopping-bag"></i> Products</a>
-                </li>
-                <li>
-                    <a href="../html/admin-comments.html"> <i class="ph-chat-circle-text"></i> Comments</a>
-                </li>
-            </ul>
+    <main class="admin__main">
+        <aside class="sidenav ">
+            <nav class="sidenav__nav">
+                <ul class="sidenav__list" style="list-style-type: none">
+                    <li class="sidenav__item currentpage">
+                        <a class="sidenav__link" href="../html/admin-dashboard.html"><i class="ph-squares-four sidenav__icon"></i> Dashboard</a></li>
+                    <li class="sidenav__item ">
+                        <a class="sidenav__link " href="../html/admin-customers.html "><i class="ph-users-three sidenav__icon "></i> Customers</a>
+                    </li>
+                    <li class="sidenav__item ">
+                        <a class="sidenav__link " href="../html/admin-orders.html "><i class="ph-clipboard-text sidenav__icon "></i> Orders</a>
+                    </li>
+                    <li class="sidenav__item ">
+                        <a class="sidenav__link " href="../html/admin-products.html "><i class="ph-shopping-bag sidenav__icon "></i> Products</a>
+                    </li>
+                    <li class="sidenav__item ">
+                        <a class="sidenav__link " href="../html/admin-comments.html "><i class="ph-chat-circle-text sidenav__icon "></i> Comments</a>
+                    </li>
+                </ul>
+            </nav>
         </aside>
 
-        <div class="admin-body">
-            <section class="admin-body-section customer-table">
-                <label class="body-section-header"> New customers: </label>
-                <table class="admin-customer-table">
+        <section class="section-dashboard">
+            <section class="dashboard__grid">
+                <h2 class="dashboard__header"> New customers: </h2>
+                <table class="dashboard__table dashboard__table--customer">
                     <tr>
                         <th style="width: 15%;">Customer ID</th>
                         <th style="width: 25%;">Name</th>
@@ -113,12 +114,12 @@
                         <th><i class="ph-arrow-square-out"></i></th>
                     </tr>
                 </table>
+                <label class="dashboard__label">See all customers</label>
             </section>
 
-
-            <section class="admin-body-section">
-                <label class="body-section-header"> Latest orders: </label>
-                <table class="admin-customer-table">
+            <section class="dashboard__grid">
+                <h2 class="dashboard__header"> Latest orders: </h2>
+                <table class="dashboard__table dashboard__table--order">
                     <tr>
                         <th style="width: 20%;">Order date</th>
                         <th>Order nr.</th>
@@ -155,23 +156,17 @@
                         <th><i class="ph-arrow-square-out"></i></th>
                     </tr>
                 </table>
+                <label class="dashboard__label">See all orders</label>
+
             </section>
 
-            <section class="admin-body-section">
-                <label class="body-section-header"> Latest comments: </label>
+            <section class="dashboard__grid">
+                <h2 class="dashboard__header"> Latest comments: </h2>
+
+                <label class="dashboard__label">See all comments</label>
             </section>
-        </div>
-
-
+        </section>
     </main>
-
-
-
-
-
-
-
-
 
     <footer class="footer">
         <div class="logo-col">
