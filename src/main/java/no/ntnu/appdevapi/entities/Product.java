@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "products")
+@Table(name = "product")
 public class Product {
 
   @Id
@@ -21,14 +21,19 @@ public class Product {
   @ApiModelProperty("Price of the product, decimal in NOK.")
   private double price;
   @ApiModelProperty("Category id of the product.")
+  @Column(name = "fk_category_id")
   private int categoryId;
   @ApiModelProperty("Inventory id of the product.")
+  @Column(name = "fk_inventory_id")
   private int inventoryId;
   @ApiModelProperty("When the product was created.")
+  @Column(name = "created_at")
   private LocalDateTime createdAt;
   @ApiModelProperty("When the product was last updated.")
+  @Column(name = "updated_at")
   private LocalDateTime updatedAt;
   @ApiModelProperty("When the product was deleted.")
+  @Column(name = "deleted_at")
   private LocalDateTime deletedAt;
 
   public Product(int id, String name, String description, String origin, double price, int categoryId, int inventoryId) {

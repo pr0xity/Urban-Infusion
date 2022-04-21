@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -26,63 +27,61 @@
     <script defer src="../js/admin.js"></script>
     <title>Urban Infusion</title>
 </head>
-<body>
-<header class="admin__header">
 
-    <a href="../index.html" class="admin__logo">
-        <img
-                class="logo__img"
-                src="../img/logo-big.png"
-                alt="Urban Infusion logo"
-        />
-    </a>
-    <div class="admin__nav-box">
-        <label class="nav__username" id="username" aria-label="user name">Didrik Eilertsen</label>
-        <button class="nav__item nav__link" id="user-menu" aria-label="account menu">
+<body class>
+    <header class="admin__header">
+
+        <a href="../index.html" class="admin__logo">
+            <img class="logo__img" src="../img/logo-big.png" alt="Urban Infusion logo" />
+        </a>
+        <div class="admin__nav-box">
+            <label class="nav__username" id="username" aria-label="user name">Didrik Eilertsen</label>
+            <button class="nav__item nav__link" id="user-menu" aria-label="account menu">
             <i class="ph-user-circle-light btn--icon"></i>
-        </button>
-        <div class="nav__user-menu hidden">
-            <a href="account.html" class="user-menu__item">
-                <i class="ph-user-circle-light btn--icon"></i>
-                <span class="link">Account information</span>
-            </a>
-            <a href="#" class="user-menu__item">
-                <i class="ph-squares-four-light btn--icon"></i>
-                <span class="link">Admin dashboard</span>
-            </a>
-            <a href="../index.html" class="user-menu__item">
-                <i class="ph-sign-out-light btn--icon"></i>
-                <span class="link">Sign out</span>
-            </a>
+            </button>
+            <div class="nav__user-menu hidden">
+                <a href="account.html" class="user-menu__item">
+                    <i class="ph-user-circle-light btn--icon"></i>
+                    <span class="link">Account information</span>
+                </a>
+                <a href="#" class="user-menu__item">
+                    <i class="ph-squares-four-light btn--icon"></i>
+                    <span class="link">Admin dashboard</span>
+                </a>
+                <a href="../index.html" class="user-menu__item">
+                    <i class="ph-sign-out-light btn--icon"></i>
+                    <span class="link">Sign out</span>
+                </a>
+            </div>
         </div>
-    </div>
-</header>
+    </header>
 
-<main class="admin-main">
-    <aside class="admin-sidenav">
-        <ul style="list-style-type: none">
-            <li>
-                <a href="../html/admin-dashboard.html"> <i class="ph-squares-four"></i> Dashboard</a>
-            </li>
-            <li>
-                <a href="../html/admin-customers.html"> <i class="ph-users-three"></i> Customers</a>
-            </li>
-            <li>
-                <a href="../html/admin-orders.html"> <i class="ph-clipboard-text"></i> Orders</a>
-            </li>
-            <li>
-                <a href="../html/admin-products.html"> <i class="ph-shopping-bag"></i> Products</a>
-            </li>
-            <li>
-                <a href="../html/admin-comments.html"> <i class="ph-chat-circle-text"></i> Comments</a>
-            </li>
-        </ul>
-    </aside>
+    <main class="admin__main">
+        <aside class="sidenav ">
+            <nav class="sidenav__nav">
+                <ul class="sidenav__list" style="list-style-type: none">
+                    <li class="sidenav__item currentpage">
+                        <a class="sidenav__link" href="../html/admin-dashboard.html"><i class="ph-squares-four sidenav__icon"></i> Dashboard</a></li>
+                    <li class="sidenav__item ">
+                        <a class="sidenav__link " href="../html/admin-customers.html "><i class="ph-users-three sidenav__icon "></i> Customers</a>
+                    </li>
+                    <li class="sidenav__item ">
+                        <a class="sidenav__link " href="../html/admin-orders.html "><i class="ph-clipboard-text sidenav__icon "></i> Orders</a>
+                    </li>
+                    <li class="sidenav__item ">
+                        <a class="sidenav__link " href="../html/admin-products.html "><i class="ph-shopping-bag sidenav__icon "></i> Products</a>
+                    </li>
+                    <li class="sidenav__item ">
+                        <a class="sidenav__link " href="../html/admin-comments.html "><i class="ph-chat-circle-text sidenav__icon "></i> Comments</a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
 
-    <div class="admin-body">
-        <section class="admin-body-section customer-table">
-                <label class="body-section-header"> New customers: </label>
-                <table class="admin-customer-table">
+        <section class="section-dashboard">
+            <section class="dashboard__grid">
+                <h2 class="dashboard__header"> New customers: </h2>
+                <table class="dashboard__table dashboard__table--customer">
                     <tr>
                         <th style="width: 15%;">Customer ID</th>
                         <th style="width: 25%;">Name</th>
@@ -115,121 +114,116 @@
                         <th><i class="ph-arrow-square-out"></i></th>
                     </tr>
                 </table>
+                <label class="dashboard__label">See all customers</label>
+            </section>
+
+            <section class="dashboard__grid">
+                <h2 class="dashboard__header"> Latest orders: </h2>
+                <table class="dashboard__table dashboard__table--order">
+                    <tr>
+                        <th style="width: 20%;">Order date</th>
+                        <th>Order nr.</th>
+                        <th>Customer ID</th>
+                        <th>Processing status </th>
+                    </tr>
+                    <tr>
+                        <td>31/03/2022</td>
+                        <td>12345</td>
+                        <td>2972 </td>
+                        <td>Completed</td>
+                        <th><i class="ph-arrow-square-out"></i></th>
+                    </tr>
+                    <tr>
+                        <td>31/03/2022</td>
+                        <td>12345</td>
+                        <td>2972 </td>
+                        <td>Completed</td>
+                        <th><i class="ph-arrow-square-out"></i></th>
+                    </tr>
+                    <tr>
+                        <td>31/03/2022</td>
+                        <td>12345</td>
+                        <td>2972 </td>
+                        <td>Completed</td>
+                        <th><i class="ph-arrow-square-out"></i></th>
+                    </tr>
+
+                    <tr>
+                        <td>19/04/1990</td>
+                        <td>142567</td>
+                        <td>1337</td>
+                        <td>Unprocessed</td>
+                        <th><i class="ph-arrow-square-out"></i></th>
+                    </tr>
+                </table>
+                <label class="dashboard__label">See all orders</label>
+
+            </section>
+
+            <section class="dashboard__grid">
+                <h2 class="dashboard__header"> Latest comments: </h2>
+
+                <label class="dashboard__label">See all comments</label>
+            </section>
         </section>
+    </main>
 
-
-        <section class="admin-body-section">
-            <label class="body-section-header"> Latest orders: </label>
-            <table class="admin-customer-table">
-                <tr>
-                    <th style="width: 20%;">Order date</th>
-                    <th>Order nr.</th>
-                    <th >Customer ID</th>
-                    <th>Processing status </th>
-                </tr>
-                <tr>
-                    <td>31/03/2022</td>
-                    <td>12345</td>
-                    <td>2972 </td>
-                    <td>Completed</td>
-                    <th><i class="ph-arrow-square-out"></i></th>
-                </tr>
-                <tr>
-                    <td>31/03/2022</td>
-                    <td>12345</td>
-                    <td>2972 </td>
-                    <td>Completed</td>
-                    <th><i class="ph-arrow-square-out"></i></th>
-                </tr>
-                <tr>
-                    <td>31/03/2022</td>
-                    <td>12345</td>
-                    <td>2972 </td>
-                    <td>Completed</td>
-                    <th><i class="ph-arrow-square-out"></i></th>
-                </tr>
-
-                <tr>
-                    <td>19/04/1990</td>
-                    <td>142567</td>
-                    <td>1337</td>
-                    <td>Unprocessed</td>
-                    <th><i class="ph-arrow-square-out"></i></th>
-                </tr>
-            </table>
-        </section>
-
-        <section class="admin-body-section">
-            <label class="body-section-header"> Latest comments: </label>
-        </section>
-    </div>
-
-
-</main>
-
-
-
-
-
-
-
-
-
-<footer class="footer">
-    <div class="logo-col">
-        <img class="footer__logo" src="../img/logo-big.png" alt="Urban infusion logo" />
-        <p class="copyright">
-            Copyright &copy; 2022 NTNU, IDATA2301 Web Technologies - group 3
-        </p>
-    </div>
-    <nav>
-        <p class="footer-heading">Account</p>
-        <ul class="footer__list">
-            <li class="footer__item">
-                <a href="#" class="footer__link">Account policy</a>
-            </li>
-            <li class="footer__item">
-                <a href="#" class="footer__link">Create account</a>
-            </li>
-            <li class="footer__item">
-                <a href="#" class="footer__link">Sign in</a>
-            </li>
-        </ul>
-    </nav>
-    <nav>
-        <p class="footer-heading">Resources</p>
-        <ul class="footer__list">
-            <li class="footer__item">
-                <a href="#" class="footer__link">Customer service</a>
-            </li>
-            <li class="footer__item">
-                <a href="#" class="footer__link">Terms of service</a>
-            </li>
-            <li class="footer__item">
-                <a href="#" class="footer__link">Privacy policy</a>
-            </li>
-            <li class="footer__item">
-                <a href="#" class="footer__link">Cancellations and returns</a>
-            </li>
-        </ul>
-    </nav>
-    <nav>
-        <p class="footer-heading">Company</p>
-        <ul class="footer__list">
-            <li class="footer__item">
-                <a href="#" class="footer__link">About Urban Infusion</a>
-            </li>
-            <li class="footer__item">
-                <a href="#" class="footer__link">Business inquries</a>
-            </li>
-            <li class="footer__item">
-                <a href="#" class="footer__link">Careers</a>
-            </li>
-        </ul>
-    </nav>
-</footer>
-<div class="overlay hidden"></div>
+    <footer class="footer">
+        <div class="logo-col">
+            <img class="footer__logo" src="../img/logo-big.png" alt="Urban infusion logo" />
+            <p class="copyright">
+                Copyright &copy; 2022 NTNU, IDATA2301 Web Technologies - group 3
+            </p>
+        </div>
+        <nav>
+            <p class="footer-heading">Account</p>
+            <ul class="footer__list">
+                <li class="footer__item">
+                    <a href="#" class="footer__link">Account policy</a>
+                </li>
+                <li class="footer__item">
+                    <a href="#" class="footer__link">Create account</a>
+                </li>
+                <li class="footer__item">
+                    <a href="#" class="footer__link">Sign in</a>
+                </li>
+            </ul>
+        </nav>
+        <nav>
+            <p class="footer-heading">Resources</p>
+            <ul class="footer__list">
+                <li class="footer__item">
+                    <a href="#" class="footer__link">Customer service</a>
+                </li>
+                <li class="footer__item">
+                    <a href="#" class="footer__link">Terms of service</a>
+                </li>
+                <li class="footer__item">
+                    <a href="#" class="footer__link">Privacy policy</a>
+                </li>
+                <li class="footer__item">
+                    <a href="#" class="footer__link">Cancellations and returns</a>
+                </li>
+            </ul>
+        </nav>
+        <nav>
+            <p class="footer-heading">Company</p>
+            <ul class="footer__list">
+                <li class="footer__item">
+                    <a href="#" class="footer__link">About Urban Infusion</a>
+                </li>
+                <li class="footer__item">
+                    <a href="#" class="footer__link">Business inquries</a>
+                </li>
+                <li class="footer__item">
+                    <a href="#" class="footer__link">Careers</a>
+                </li>
+            </ul>
+        </nav>
+    </footer>
+    <div class="overlay hidden"></div>
 
 
 </body>
+
 </html>

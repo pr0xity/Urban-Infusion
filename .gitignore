@@ -1,3 +1,7 @@
+### Custom ignores ###
+src/main/resources/application-prod.properties
+
+### Target ###
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

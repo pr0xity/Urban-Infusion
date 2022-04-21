@@ -1,6 +1,12 @@
 package no.ntnu.appdevapi;
 
+import java.util.ArrayList;
 import java.util.Collections;
+import no.ntnu.appdevapi.DTO.UserDto;
+import no.ntnu.appdevapi.entities.PermissionLevel;
+import no.ntnu.appdevapi.services.PermissionLevelService;
+import no.ntnu.appdevapi.services.UserService;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -49,4 +55,26 @@ public class AppdevapiApplication {
     );
   }
 
+
+
+
+
+  @Bean
+  CommandLineRunner run(UserService userService, PermissionLevelService permissionLevelService) {
+    return args -> {
+      try {
+        permissionLevelService.savePermissionLevel(new PermissionLevel(1, "user", 1, null));
+        permissionLevelService.savePermissionLevel(new PermissionLevel(2, "admin", 2, null));
+        permissionLevelService.savePermissionLevel(new PermissionLevel(3, "owner", 3, null));
+      } catch (Exception e) {
+      }
+      userService.save(new UserDto("Geir", "Otlo", "geo@geo.geo", "1234"));
+      userService.save(new UserDto("Per", "Person",  "Per@Person.geo", "1234"));
+      userService.save(new UserDto("user", "user",  "user", "1234"));
+      userService.save(new UserDto("admin", "admin",  "admin",  "1234", "admin"));
+      userService.save(new UserDto("owner", "owner", "owner", "1234","owner"));
+
+
+    };
+  }
 }
