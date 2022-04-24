@@ -159,6 +159,7 @@ th {
     background-color: rgba(218, 215, 205, 1);
     z-index: 5254354523425;
     transition: all 0.2s ease-out;
+    box-shadow: 1rem 0.2rem 2rem rgb(0 0 0 / 15%);
 }
 
 .admin__nav-box {

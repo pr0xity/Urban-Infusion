@@ -4,6 +4,7 @@ import no.ntnu.appdevapi.DAO.UserRepository;
 import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.PermissionLevel;
 import no.ntnu.appdevapi.entities.User;
+import no.ntnu.appdevapi.entities.UserAddress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +29,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private UserRepository userRepository;
 
     @Autowired
+    private UserAddressService userAddressService;
+
+    @Autowired
     private BCryptPasswordEncoder bcryptEncoder;
 
     private Set<SimpleGrantedAuthority> getAuthority(User user) {
@@ -47,9 +51,18 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             nUser.setCreatedAt(LocalDateTime.now());
             nUser.setPermissionLevel(permissionLevel);
             nUser.setEnabled(true);
-            return userRepository.save(nUser);
+
+            System.out.println("saving user: " + nUser.getFirstName() + " " + nUser.getLastName());
+            userRepository.save(nUser);
+
+            UserAddress address = user.getAddressFromDto();
+            if (null!= address) {
+                address.setUser(nUser);
+                System.out.println("saving address: " + address.getAddressLine());
+                userAddressService.save(address);
+            }
         }
-        return null;
+        return userRepository.findByEmail(nUser.getEmail());
     }
 
     @Override
@@ -60,7 +73,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User findOne(String email) {
+    public User findOneByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 

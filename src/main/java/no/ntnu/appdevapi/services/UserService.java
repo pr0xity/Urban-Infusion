@@ -10,7 +10,7 @@ public interface UserService {
 
     List<User> findAll();
 
-    User findOne(String email);
+    User findOneByEmail(String email);
 
     User findOneByID(long id);
 

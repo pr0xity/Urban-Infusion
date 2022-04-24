@@ -32,9 +32,6 @@ public class User {
   @ApiModelProperty("Date and time of the last update of user info")
   @Column(name = "updated_at")
   private LocalDateTime updatedAt;
-//  @ApiModelProperty("The permission-ID of the user")
-//  @Column(name = "fk_permission_id")
-//  private Integer permissionID;
   @ApiModelProperty("If the user is enabled or not")
   private boolean enabled;
 
@@ -98,10 +95,6 @@ public class User {
     this.updatedAt = updatedAt;
   }
 
-//  public void setPermissionID(Integer permissionID) {
-//    this.permissionID = permissionID;
-//  }
-
   public boolean isEnabled() {
     return enabled;
   }
@@ -118,5 +111,20 @@ public class User {
 
   public void setPermissionLevel(PermissionLevel permissionLevel) {
     this.permissionLevel = permissionLevel;
+  }
+
+  public Map<String, ?> getUserMap() {
+    Map<String, String> userMap = new HashMap<>();
+    userMap.put("userId", "" + id);
+    userMap.put("firstName", firstName);
+    userMap.put("lastName", lastName);
+    userMap.put("email", email);
+    userMap.put("createdAt", "" + createdAt);
+    userMap.put("enabled", "" + enabled);
+    userMap.put("userType", permissionLevel.getAdminType());
+    if (null != updatedAt) {
+      userMap.put("updatedAt", "" + updatedAt);
+    }
+    return userMap;
   }
 }

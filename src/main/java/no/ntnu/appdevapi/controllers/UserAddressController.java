@@ -40,7 +40,7 @@ public class UserAddressController {
     @ApiOperation(value = "Get a specific address with a matching address id.", notes = "Returns the address or null when index is invalid.")
     public ResponseEntity<UserAddress> getAddressFromID(@ApiParam("id of the product.") @PathVariable int id) {
         ResponseEntity<UserAddress> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        UserAddress address = userAddressService.getUserAddressByID(id);
+        UserAddress address = userAddressService.getUserAddressByUserID(id);
         if (address != null) {
             response = new ResponseEntity<>(address, HttpStatus.OK);
         }
@@ -55,11 +55,11 @@ public class UserAddressController {
      */
     @PostMapping
     @ApiOperation(value = "Add a new address", notes = "An HTTP-response is returned")
-    public ResponseEntity<UserAddress> add(@RequestBody UserAddress userAddress){
+    public ResponseEntity<UserAddress> save(@RequestBody UserAddress userAddress){
 
         ResponseEntity<UserAddress> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         if (userAddress != null){
-            userAddressService.addUserAddress(userAddress);
+            userAddressService.save(userAddress);
             response = new ResponseEntity<>(HttpStatus.OK);
         }
         return response;
@@ -76,7 +76,7 @@ public class UserAddressController {
     @ApiIgnore
     public ResponseEntity<String> delete(@PathVariable int id) {
         ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        if (userAddressService.getUserAddressByID(id) != null) {
+        if (userAddressService.getUserAddressByUserID(id) != null) {
             userAddressService.deleteUserAddressByID(id);
             response = new ResponseEntity<>(HttpStatus.OK);
         }

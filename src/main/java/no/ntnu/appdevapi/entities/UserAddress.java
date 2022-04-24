@@ -12,9 +12,6 @@ public class UserAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @ApiModelProperty("The id of the user")
-    @Column(name = "fk_user_id")
-    private int userId;
     @ApiModelProperty("The users main address")
     @Column(name = "address_line1")
     private String addressLine1;
@@ -29,39 +26,19 @@ public class UserAddress {
     @ApiModelProperty("The users current country")
     private String country;
     @ApiModelProperty("The users telephone number")
-    private String telephone;
+    private String phone;
 
-
-    public UserAddress(int id, int userId, String addressLine1, String city, int postalCode, String country, String telephone) {
-        this.id = id;
-        this.userId = userId;
-        this.addressLine1 = addressLine1;
-        this.city = city;
-        this.postalCode = postalCode;
-        this.country = country;
-        this.telephone = telephone;
-    }
-
-    public UserAddress(int id, int userId, String addressLine1, String addressLine2, String city, int postalCode, String country, String telephone) {
-        this.id = id;
-        this.userId = userId;
-        this.addressLine1 = addressLine1;
-        this.addressLine2 = addressLine2;
-        this.city = city;
-        this.postalCode = postalCode;
-        this.country = country;
-        this.telephone = telephone;
-    }
-
-    public UserAddress() {}
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name="user_id")
+    private User user;
 
     public int getId() { return id; }
 
     public void setId(int id) { this.id = id; }
 
-    public int getUserId() { return userId; }
+    public User getUser() { return user; }
 
-    public void setUserId(int user_id) { this.userId = user_id; }
+    public void setUser(User user) { this.user = user; }
 
     public String getAddressLine1() { return addressLine1; }
 
@@ -83,8 +60,16 @@ public class UserAddress {
 
     public void setCountry(String country) { this.country = country; }
 
-    public String getTelephone() { return telephone; }
+    public String getPhone() { return phone; }
 
-    public void setTelephone(String telephone) { this.telephone = telephone; }
+    public void setPhone(String telephone) { this.phone = telephone; }
 
+    /**
+     * Gets the full address line.
+     * @return {@code String} full address line.
+     */
+    public String getAddressLine() {
+        return this.addressLine1 + (this.addressLine2 == null || this.addressLine2.isBlank() ? "" : ", " + this.addressLine2)
+                + ", " + this.postalCode + " " + this.city + ", " + this.country;
+    }
 }

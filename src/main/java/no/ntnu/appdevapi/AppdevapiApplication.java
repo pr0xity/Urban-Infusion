@@ -66,10 +66,11 @@ public class AppdevapiApplication {
         permissionLevelService.savePermissionLevel(new PermissionLevel(1, "user", 1, null));
         permissionLevelService.savePermissionLevel(new PermissionLevel(2, "admin", 2, null));
         permissionLevelService.savePermissionLevel(new PermissionLevel(3, "owner", 3, null));
-      } catch (Exception e) {
+      } catch (Exception ignored) {
       }
-      userService.save(new UserDto("Geir", "Otlo", "geo@geo.geo", "1234"));
-      userService.save(new UserDto("Per", "Person",  "Per@Person.geo", "1234"));
+
+      userService.save(new UserDto("Geir", "Otlo", "geo@geo.geo", "1234", "Vika Terrasse 9", "C/O Espen Otlo", "6010","Ålesund", "Norge", "91887754"));
+      userService.save(new UserDto("Per", "Person",  "Per@Person.geo", "1234", "Gamle Blindheimsveg 72a", "6012", "Ålesund", "Norge", "46537894"));
       userService.save(new UserDto("user", "user",  "user", "1234"));
       userService.save(new UserDto("admin", "admin",  "admin",  "1234", "admin"));
       userService.save(new UserDto("owner", "owner", "owner", "1234","owner"));
