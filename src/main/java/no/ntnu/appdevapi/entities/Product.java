@@ -36,8 +36,7 @@ public class Product {
   @Column(name = "deleted_at")
   private LocalDateTime deletedAt;
 
-  public Product(int id, String name, String description, String origin, double price, int categoryId, int inventoryId) {
-    this.id = id;
+  public Product(String name, String description, String origin, double price, int categoryId, int inventoryId) {
     this.name = name;
     this.description = description;
     this.origin = origin;
@@ -49,8 +48,7 @@ public class Product {
     this.deletedAt = null;
   }
 
-  public Product(int id, String name, String description, String origin, double price, int categoryId, int inventoryId, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
-    this.id = id;
+  public Product(String name, String description, String origin, double price, int categoryId, int inventoryId, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
     this.name = name;
     this.description = description;
     this.origin = origin;

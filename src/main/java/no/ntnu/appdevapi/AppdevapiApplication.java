@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.PermissionLevel;
+import no.ntnu.appdevapi.entities.Product;
+import no.ntnu.appdevapi.entities.Rating;
 import no.ntnu.appdevapi.services.PermissionLevelService;
+import no.ntnu.appdevapi.services.ProductService;
+import no.ntnu.appdevapi.services.RatingService;
 import no.ntnu.appdevapi.services.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -60,7 +64,7 @@ public class AppdevapiApplication {
 
 
   @Bean
-  CommandLineRunner run(UserService userService, PermissionLevelService permissionLevelService) {
+  CommandLineRunner run(UserService userService, PermissionLevelService permissionLevelService, ProductService productService, RatingService ratingService) {
     return args -> {
       try {
         permissionLevelService.savePermissionLevel(new PermissionLevel(1, "user", 1, null));
@@ -75,7 +79,29 @@ public class AppdevapiApplication {
       userService.save(new UserDto("admin", "admin",  "admin",  "1234", "admin"));
       userService.save(new UserDto("owner", "owner", "owner", "1234","owner"));
 
+      Product product1 = new Product("Heather tea", "From Norwegian mountains. Gathered carefully before the bees to hold the honey taste. Rich in vitamins. Local produce", "Norwegian mountains", 200, 3, 1);
+      Product product2 = new Product("Linden blossom tea", "Classic Latvian tea. Helps against laziness. Use 100C water (not typical for herbal teas). Gathered in summer 2021", "Classic Latvian tea", 200, 2, 2);
+      Product product3 = new Product("Sencha 50g", "Japanese green tea. Green leaves. Available in Aug-Sep season only", "Japanese green tea", 100, 1, 3);
+      Product product4 = new Product("Sencha 500g", "Japanese green tea. Green leaves. Available in Aug-Sep season only", "Japanese green tea", 800, 1, 4);
+      Product product5 = new Product("Mug", "Classic mug. Made from Brazilian clay. Hot-friendly - comfortable to hold even when the water is hot. Handy handle", "Brazilian clay", 120, 4, 5);
 
+      productService.addProduct(product1);
+      productService.addProduct(product2);
+      productService.addProduct(product3);
+      productService.addProduct(product4);
+      productService.addProduct(product5);
+
+      ratingService.addRating( new Rating(userService.findAll().get(0), product1, 3, "Not the worst but not the best") );
+      ratingService.addRating( new Rating(userService.findAll().get(0), product2, 5, "A taste of heaven") );
+      ratingService.addRating( new Rating(userService.findAll().get(0), product3, 4, "Good tea") );
+      ratingService.addRating( new Rating(userService.findAll().get(0), product4, 4, "Good tea in larger sizes") );
+      ratingService.addRating( new Rating(userService.findAll().get(0), product5, 5, "Nice mugs") );
+
+      ratingService.addRating( new Rating(userService.findAll().get(1), product1, 1, "Awful, waste of money") );
+      ratingService.addRating( new Rating(userService.findAll().get(1), product2, 5, "Great tea") );
+      ratingService.addRating( new Rating(userService.findAll().get(1), product3, 2, "This was weird") );
+      ratingService.addRating( new Rating(userService.findAll().get(1), product4, 2, "This was a lot of weird") );
+      ratingService.addRating( new Rating(userService.findAll().get(1), product5, 5, "Great big mugs") );
     };
   }
 }
