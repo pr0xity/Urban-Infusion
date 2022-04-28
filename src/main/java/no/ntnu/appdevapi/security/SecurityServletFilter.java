@@ -14,17 +14,17 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import javax.annotation.Resource;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Optional;
 
-public class JwtAuthenticationFilter extends OncePerRequestFilter {
+public class SecurityServletFilter extends OncePerRequestFilter {
 
-  @Value("${jwt.header.string}")
-  public String HEADER_STRING;
-
-  @Value("${jwt.token.prefix}")
-  public String TOKEN_PREFIX;
+  @Value("${jwt.cookie.name}")
+  public String TOKEN;
 
   @Resource(name = "userService")
   private UserDetailsService userDetailsService;
@@ -34,13 +34,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   @Override
   protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-    String header = req.getHeader(HEADER_STRING);
+    String token = null;
+    if (null != req.getCookies()) {
+      //Attempt to extract jwt token from cookie:
+      token = extractToken(req);
+    }
     String username = null;
-    String authToken = null;
-    if (header != null && header.startsWith(TOKEN_PREFIX)) {
-      authToken = header.replace(TOKEN_PREFIX,"");
+    //if cookie was found and jwt token was successfully extracted:
+    if (null != token) {
       try {
-        username = jwtTokenUtil.getUsernameFromToken(authToken);
+        username = jwtTokenUtil.getUsernameFromToken(token);
       } catch (IllegalArgumentException e) {
         logger.error("An error occurred while fetching Username from Token", e);
       } catch (ExpiredJwtException e) {
@@ -49,15 +52,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         logger.error("Authentication Failed. Username or Password not valid.");
       }
     } else {
-      logger.warn("Couldn't find bearer string, header will be ignored");
+      logger.warn("Couldn't find cookie, anonymous user");
     }
+
     if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
       UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-      if (jwtTokenUtil.validateToken(authToken, userDetails)) {
+      if (jwtTokenUtil.validateToken(token, userDetails)) {
         UsernamePasswordAuthenticationToken authentication =
-                jwtTokenUtil.getAuthenticationToken(authToken, SecurityContextHolder.getContext().getAuthentication(), userDetails);
+                jwtTokenUtil.getAuthenticationToken(
+                        token, SecurityContextHolder.getContext().getAuthentication(), userDetails);
         authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
         logger.info("authenticated user " + username + ", setting security context");
         logger.info("email: " + userDetails.getUsername());
@@ -66,7 +71,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         SecurityContextHolder.getContext().setAuthentication(authentication);
       }
     }
-
     chain.doFilter(req, res);
+  }
+
+  private String extractToken(HttpServletRequest request) {
+    Optional<String> optionalToken = Arrays.stream(request.getCookies()).filter(cookie -> TOKEN.equals(cookie.getName())).map(Cookie::getValue).findAny();
+    return optionalToken.orElse(null);
   }
 }

@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name="description" content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
     through nature."/>
-  <meta id="token" content="${token}"/>
   <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/apple-touch-icon.png}"/>
   <link rel="icon" type="image/png" sizes="32x32" th:href="@{/img/favicon-32x32.png}"/>
   <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon-16x16.png}"/>
@@ -21,9 +20,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Hurricane:wght@200;300;400;500;600&display=swap"
         rel="stylesheet"/>
-  <link th:href="@{/css/style.css}"/>
-  <link th:href="@{/css/queries.css}"/>
-  <link th:href="@{/css/style-admin.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/queries.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style-admin.css}"/>
 
   <script src="https://unpkg.com/phosphor-icons"></script>
   <script th:src="@{/js/admin-customers.js}"></script>
@@ -63,21 +62,21 @@
     <nav class="sidenav__nav">
       <ul class="sidenav__list" style="list-style-type: none">
         <li class="sidenav__item">
-          <a class="sidenav__link" href="dashboard.html"><i class="ph-squares-four sidenav__icon"></i> Dashboard</a>
+          <a class="sidenav__link" href="dashboard"><i class="ph-squares-four sidenav__icon"></i> Dashboard</a>
         </li>
         <li class="sidenav__item currentpage ">
-          <a class="sidenav__link" href="customers.html "><i class="ph-users-three sidenav__icon"></i> Customers</a>
+          <a class="sidenav__link" href="customers"><i class="ph-users-three sidenav__icon"></i> Customers</a>
         </li>
         <li class="sidenav__item">
-          <a class="sidenav__link " href="../html/admin-orders.html"><i class="ph-clipboard-text sidenav__icon"></i>
+          <a class="sidenav__link " href="orders"><i class="ph-clipboard-text sidenav__icon"></i>
             Orders</a>
         </li>
         <li class="sidenav__item">
-          <a class="sidenav__link " href="../html/admin-products.html"><i class="ph-shopping-bag sidenav__icon"></i>
+          <a class="sidenav__link " href="products"><i class="ph-shopping-bag sidenav__icon"></i>
             Products</a>
         </li>
         <li class="sidenav__item">
-          <a class="sidenav__link" href="../html/admin-comments.html"><i class="ph-chat-circle-text sidenav__icon"></i>
+          <a class="sidenav__link" href="comments"><i class="ph-chat-circle-text sidenav__icon"></i>
             Comments</a>
         </li>
       </ul>

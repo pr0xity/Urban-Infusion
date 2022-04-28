@@ -1,13 +1,13 @@
 const customerTable = document.getElementById("customerTable");
-const token = document.getElementById("token");
+const host = "http://localhost";
+const port = ":8080";
 
 function getCustomers() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', "http://localhost:8080/users", true);
-    req.setRequestHeader("Authentication", token);
+    req.open('GET', host + port + "/users", true);
     req.onload  = function() {
-        const jsonResponse = req.responseText;
+        const jsonResponse = JSON.parse(req.responseText);
         loadCustomers(jsonResponse)
     };
     req.send(null);
@@ -16,13 +16,17 @@ function getCustomers() {
 function loadCustomers(users) {
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
-        addRow(user[0], user[1] + " " + user[2], user[3]);
+        if (user["address"]) {
+            addRow(user["id"], user["firstName"] + " " + user["lastName"], user["address"].addressLine);
+        } else {
+            addRow(user["id"], user["firstName"] + " " + user["lastName"], "");
+        }
     }
 }
 
 function addRow(id, name, email) {
     if (!document.getElementById("customerTable")) return;
-    const tableBody = document.getElementById("tbody").item(0);
+    const tableBody = document.getElementById("tbody");
     const row = document.createElement("tr");
 
     const idCell = document.createElement("td");
@@ -31,7 +35,7 @@ function addRow(id, name, email) {
 
     const idNode = document.createTextNode(id);
     const nameNode = document.createTextNode(name);
-    const emailNode = document.createElement(email);
+    const emailNode = document.createTextNode(email);
 
     idCell.appendChild(idNode);
     nameCell.appendChild(nameNode);

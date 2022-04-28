@@ -1,6 +1,7 @@
 package no.ntnu.appdevapi.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
@@ -11,7 +12,8 @@ public class UserAddress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @Column(unique = true, name = "address_id")
+    private long id;
     @ApiModelProperty("The users main address")
     @Column(name = "address_line1")
     private String addressLine1;
@@ -28,14 +30,14 @@ public class UserAddress {
     @ApiModelProperty("The users telephone number")
     private String phone;
 
-    @OneToOne(cascade = CascadeType.REMOVE)
-    @JoinColumn(name="user_id")
+    @OneToOne(mappedBy = "address")
     private User user;
 
-    public int getId() { return id; }
+    public long getId() { return id; }
 
     public void setId(int id) { this.id = id; }
 
+    @JsonIgnore
     public User getUser() { return user; }
 
     public void setUser(User user) { this.user = user; }

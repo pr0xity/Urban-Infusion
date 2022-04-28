@@ -52,15 +52,15 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             nUser.setPermissionLevel(permissionLevel);
             nUser.setEnabled(true);
 
-            System.out.println("saving user: " + nUser.getFirstName() + " " + nUser.getLastName());
-            userRepository.save(nUser);
-
             UserAddress address = user.getAddressFromDto();
-            if (null!= address) {
-                address.setUser(nUser);
+            if (null != address) {
                 System.out.println("saving address: " + address.getAddressLine());
                 userAddressService.save(address);
+                nUser.setAddress(address);
             }
+
+            System.out.println("saving user: " + nUser.getFirstName() + " " + nUser.getLastName());
+            userRepository.save(nUser);
         }
         return userRepository.findByEmail(nUser.getEmail());
     }
@@ -90,7 +90,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
         if(user == null) {
-            throw new UsernameNotFoundException("Invalid username or password.");
+            throw new UsernameNotFoundException("No such user in database.");
         }
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
     }

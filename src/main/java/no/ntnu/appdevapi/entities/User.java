@@ -39,6 +39,11 @@ public class User {
   @JoinColumn(name="pl_id")
   private PermissionLevel permissionLevel;
 
+  @OneToOne(cascade = CascadeType.REMOVE)
+  @JoinColumn(name="address_id")
+  private UserAddress address;
+
+
   public long getId() {
     return id;
   }
@@ -113,7 +118,15 @@ public class User {
     this.permissionLevel = permissionLevel;
   }
 
-  public Map<String, ?> getUserMap() {
+  public UserAddress getAddress() {
+    return address;
+  }
+
+  public void setAddress(UserAddress address) {
+    this.address = address;
+  }
+
+  public Map<String, ?> generateUserMap() {
     Map<String, String> userMap = new HashMap<>();
     userMap.put("userId", "" + id);
     userMap.put("firstName", firstName);

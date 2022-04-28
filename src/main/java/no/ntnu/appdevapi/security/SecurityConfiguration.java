@@ -12,7 +12,6 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -52,11 +51,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     //TODO: This need to be be updated with correct paths
     http.sessionManagement().sessionCreationPolicy(STATELESS);
     http.authorizeRequests()
+            .antMatchers("/resources/**").permitAll()
             .antMatchers(DELETE).hasAuthority("owner")
-            .antMatchers("/users","/admin", "/admin/?*").hasAnyAuthority("admin", "owner")
-            .antMatchers(GET,"/users/?*").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers("/","/register", "/products/**", "/login").permitAll();
-    http.authorizeRequests().anyRequest().authenticated().and().exceptionHandling()
+            .antMatchers("/admin/?*").hasAnyAuthority("admin", "owner")
+            .antMatchers(GET, "/users").hasAnyAuthority("admin", "owner")
+            .antMatchers(GET,"/user").authenticated()
+            .antMatchers(POST,"/users").permitAll()
+            .antMatchers("/","/login","/register", "/products/**").permitAll();
+    http.authorizeRequests().and().exceptionHandling()
             .authenticationEntryPoint(unauthorizedEntryPoint);
     http.addFilterBefore(authenticationTokenFilterBean(),
             UsernamePasswordAuthenticationFilter.class);
@@ -79,8 +81,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   }
 
   @Bean
-  public JwtAuthenticationFilter authenticationTokenFilterBean() {
-    return new JwtAuthenticationFilter();
+  public SecurityServletFilter authenticationTokenFilterBean() {
+    return new SecurityServletFilter();
   }
 
 }
