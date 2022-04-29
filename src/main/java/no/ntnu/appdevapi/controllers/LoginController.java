@@ -5,6 +5,7 @@ import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.security.JwtUtil;
 import no.ntnu.appdevapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
@@ -20,6 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class LoginController {
+
+  @Value("${domain.name}")
+  private String host;
+
+  @Value("${jwt.cookie.name}")
+  private String cookie;
 
   @Autowired
   private JwtUtil jwtUtil;
@@ -53,12 +60,12 @@ public class LoginController {
     SecurityContextHolder.getContext().setAuthentication(authentication);
     final String token = jwtUtil.generateToken(authentication);
 
-    ResponseCookie springCookie = ResponseCookie.from("token", token)
+    ResponseCookie springCookie = ResponseCookie.from(cookie, token)
             .httpOnly(true)
             .secure(false)
             .path("/")
             .maxAge(12000)
-            .domain("localhost")
+            .domain(host)
             .build();
 
     return ResponseEntity

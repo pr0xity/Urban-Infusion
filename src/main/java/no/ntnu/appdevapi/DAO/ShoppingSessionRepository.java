@@ -6,5 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 /**
  * Repository interface for shopping sessions.
  */
-public interface ShoppingSessionRepository extends CrudRepository<ShoppingSession, Integer> {
+public interface ShoppingSessionRepository extends CrudRepository<ShoppingSession, Long> {
 }

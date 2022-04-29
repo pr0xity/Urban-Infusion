@@ -14,7 +14,8 @@ public class ShoppingSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @Column(unique = true, name = "ss_id")
+    private long id;
     @ApiModelProperty("The id of the user of this shopping session.")
     @Column(name = "fk_user_id")
     private int userId;
@@ -54,7 +55,7 @@ public class ShoppingSession {
      *
      * @return id of this shopping session.
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 

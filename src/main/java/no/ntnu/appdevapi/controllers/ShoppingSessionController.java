@@ -1,7 +1,7 @@
 package no.ntnu.appdevapi.controllers;
 
 import no.ntnu.appdevapi.entities.ShoppingSession;
-import no.ntnu.appdevapi.services.ShoppingSessionService;
+import no.ntnu.appdevapi.services.ShoppingSessionServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import java.util.List;
 public class ShoppingSessionController {
 
     @Autowired
-    private ShoppingSessionService shoppingSessionService;
+    private ShoppingSessionServiceImpl shoppingSessionService;
 
     /**
      * Get all shopping sessions.

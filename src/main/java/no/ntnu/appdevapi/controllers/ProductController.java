@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 import no.ntnu.appdevapi.entities.Product;
-import no.ntnu.appdevapi.services.ProductService;
+import no.ntnu.appdevapi.services.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ import springfox.documentation.annotations.ApiIgnore;
 public class ProductController {
 
   @Autowired
-  private ProductService productService;
+  private ProductServiceImpl productService;
 
 
   /**
@@ -39,7 +39,7 @@ public class ProductController {
    */
   @GetMapping("/{index}")
   @ApiOperation(value = "Get a specific product.", notes = "Returns the product or null when index is invalid.")
-  public ResponseEntity<Product> get(@ApiParam("Index of the product.") @PathVariable int index) {
+  public ResponseEntity<Product> get(@ApiParam("Index of the product.") @PathVariable long index) {
     ResponseEntity<Product> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
     Product product = productService.getProduct(index);
     if (null != product) {
@@ -73,7 +73,7 @@ public class ProductController {
    */
   @DeleteMapping("/{index}")
   @ApiIgnore
-  public ResponseEntity<String> delete(@PathVariable int index) {
+  public ResponseEntity<String> delete(@PathVariable long index) {
     ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
     if (null != productService.getProduct(index)) {
       productService.deleteProduct(index);

@@ -1,82 +1,20 @@
 package no.ntnu.appdevapi.services;
 
-import no.ntnu.appdevapi.DAO.RatingRepository;
 import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.Rating;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Optional;
 
-/**
- * Business logic for ratings.
- */
-@Service
-public class RatingService {
+public interface RatingService {
+  List<Rating> getAllRatings();
 
-    @Autowired
-    private RatingRepository ratingRepository;
+  List<Rating> getRatingsFromProduct(Product product);
 
-    /**
-     * Returns a list over all ratings.
-     *
-     * @return list over all ratings.
-     */
-    public List<Rating> getAllRatings() {
-        List<Rating> ratings = new ArrayList<>();
-        ratingRepository.findAll().forEach(ratings::add);
-        return ratings;
-    }
+  Rating getRating(long id);
 
-    /**
-     * Returns the rating containing the specified product id.
-     *
-     * @param product the product id to retrieve ratings for.
-     * @return returns the rating for the product with the given product id.
-     */
-    public List<Rating> getRatingsFromProduct(Product product) {
-        return new ArrayList<>(ratingRepository.findByProduct(product));
-    }
+  void addRating(Rating rating);
 
-    /**
-     * Returns the rating with the given id.
-     *
-     * @param id id of the rating to find.
-     * @return the rating with the given id or null if not found.
-     */
-    public Rating getRating(int id) {
-        Optional<Rating> rating = ratingRepository.findById(id);
-        return rating.orElse(null);
-    }
+  void updateRating(long id, Rating rating);
 
-    /**
-     * Adds a rating.
-     *
-     * @param rating the rating to be added.
-     */
-    public void addRating(Rating rating) {
-        ratingRepository.save(rating);
-    }
-
-    /**
-     * Updates the rating with the given id.
-     *
-     * @param id the id of the rating to update.
-     * @param rating the rating to update to.
-     */
-    public void updateRating(int id, Rating rating) {
-        if (rating != null && rating.getId() == id && getRating(id) != null) {
-            this.ratingRepository.save(rating);
-        }
-    }
-
-    /**
-     * Deletes the rating with the given id.
-     *
-     * @param id id of the rating to be deleted.
-     */
-    public void deleteRating(int id) {
-        this.ratingRepository.deleteById(id);
-    }
+  void deleteRating(long id);
 }

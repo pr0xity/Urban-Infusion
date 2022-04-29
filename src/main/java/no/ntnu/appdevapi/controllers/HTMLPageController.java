@@ -4,17 +4,10 @@ import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.Wishlist;
 import no.ntnu.appdevapi.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseCookie;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * MVC controller for the html pages.
@@ -29,7 +22,7 @@ public class HTMLPageController {
     private RatingService ratingService;
 
     @Autowired
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @Autowired
     private UserAddressService userAddressService;
@@ -84,7 +77,7 @@ public class HTMLPageController {
      * @return product thymeleaf template.
      */
     @GetMapping("product/{id}")
-    public String getProduct(@PathVariable int id, Model model) {
+    public String getProduct(@PathVariable long id, Model model) {
         Product product = productService.getProduct(id);
         model.addAttribute("product", product);
         model.addAttribute("user", userService.getSessionUser());

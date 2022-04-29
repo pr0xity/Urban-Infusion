@@ -12,7 +12,8 @@ public class Rating {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @Column(unique = true, name = "rating_id")
+    private long id;
 
     @ApiModelProperty("The the user of who made the rating.")
     @OneToOne
@@ -60,7 +61,7 @@ public class Rating {
      *
      * @return the id of this rating.
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 

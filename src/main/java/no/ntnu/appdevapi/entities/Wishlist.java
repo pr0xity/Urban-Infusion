@@ -16,10 +16,11 @@ public class Wishlist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @Column(unique = true, name = "fl_id")
+    private long id;
 
     @ApiModelProperty("The the user of the wishlist")
-    @OneToOne
+    @OneToOne(mappedBy = "wishlist")
     private User user;
 
     @ApiModelProperty("Set of products in the wishlist")
@@ -57,7 +58,7 @@ public class Wishlist {
      *
      * @return id of this wishlist.
      */
-    public int getId() {
+    public long getId() {
         return id;
     }
 

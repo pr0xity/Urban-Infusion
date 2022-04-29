@@ -43,6 +43,9 @@ public class User {
   @JoinColumn(name="address_id")
   private UserAddress address;
 
+  @OneToOne(cascade = CascadeType.REMOVE)
+  @JoinColumn(name="fl_id")
+  private Wishlist wishlist;
 
   public long getId() {
     return id;

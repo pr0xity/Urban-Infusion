@@ -6,6 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface WishlistRepository extends CrudRepository<Wishlist, Integer> {
+public interface WishlistRepository extends CrudRepository<Wishlist, Long> {
     Optional<Wishlist> findByUser(User user);
 }

@@ -11,7 +11,8 @@ public class Product {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private int id;
+  @Column(unique = true, name = "product_id")
+  private long id;
   @ApiModelProperty("Name of the product.")
   private String name;
   @ApiModelProperty("Some info about the product.")
@@ -97,7 +98,7 @@ public class Product {
     this.deletedAt = deletedAt;
   }
 
-  public int getId() {
+  public long getId() {
     return id;
   }
 

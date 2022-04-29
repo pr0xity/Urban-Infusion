@@ -8,6 +8,6 @@ import java.util.List;
 /**
  * Repository interface for ratings.
  */
-public interface RatingRepository extends CrudRepository<Rating, Integer> {
+public interface RatingRepository extends CrudRepository<Rating, Long> {
     List<Rating> findByProduct(Product product);
 }

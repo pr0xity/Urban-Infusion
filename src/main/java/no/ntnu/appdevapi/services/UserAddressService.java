@@ -5,11 +5,11 @@ import no.ntnu.appdevapi.entities.UserAddress;
 import java.util.List;
 
 public interface UserAddressService {
-  public List<UserAddress> getAllAddresses();
+  List<UserAddress> getAllAddresses();
 
-  public UserAddress getUserAddressByUserID(long id);
+  UserAddress getUserAddressByUserID(long id);
 
-  public boolean save(UserAddress userAddress);
+  boolean save(UserAddress userAddress);
 
-  public void deleteUserAddressByID(long id);
+  void deleteUserAddressByID(long id);
 }
