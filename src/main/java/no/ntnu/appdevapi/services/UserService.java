@@ -16,5 +16,7 @@ public interface UserService {
 
     void deleteUser(String email);
 
+    User getSessionUser();
+
 }
 

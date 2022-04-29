@@ -104,6 +104,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
      *
      * @return User object or null if no user has logged in
      */
+    @Override
     public User getSessionUser() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
