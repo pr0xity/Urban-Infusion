@@ -30,8 +30,8 @@
 <body class>
     <header class="admin__header">
 
-        <a href="../../static/index.html" class="admin__logo">
-            <img class="logo__img" src="../../static/img/logo-big.png" alt="Urban Infusion logo" />
+        <a th:href="@{/index.html}" class="admin__logo">
+            <img class="logo__img" th:src="@{/img/logo-big.png}" alt="Urban Infusion logo" />
         </a>
         <div class="admin__nav-box">
             <label class="nav__username" id="username" aria-label="user name">Didrik Eilertsen</label>
@@ -169,7 +169,7 @@
 
     <footer class="footer">
         <div class="logo-col">
-            <img class="footer__logo" src="../../static/img/logo-big.png" alt="Urban infusion logo" />
+            <img class="footer__logo" th:src="@{/img/logo-big.png}" alt="Urban infusion logo" />
             <p class="copyright">
                 Copyright &copy; 2022 NTNU, IDATA2301 Web Technologies - group 3
             </p>
