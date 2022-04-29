@@ -6,7 +6,10 @@ import no.ntnu.appdevapi.entities.PermissionLevel;
 import no.ntnu.appdevapi.entities.User;
 import no.ntnu.appdevapi.entities.UserAddress;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -36,7 +39,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     private Set<SimpleGrantedAuthority> getAuthority(User user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-        user.getPermissionLevel().forEach(permissionLevel -> {
+        user.getPermissionLevels().forEach(permissionLevel -> {
             authorities.add(new SimpleGrantedAuthority(permissionLevel.getAdminType()));
         });
         return authorities;
@@ -87,12 +90,25 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.delete(userRepository.findByEmail(email));
     }
 
+    @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
         if(user == null) {
             throw new UsernameNotFoundException("No such user in database.");
         }
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
+    }
+
+    /**
+     * Get the user which is authenticated for the current session
+     *
+     * @return User object or null if no user has logged in
+     */
+    public User getSessionUser() {
+        SecurityContext securityContext = SecurityContextHolder.getContext();
+        Authentication authentication = securityContext.getAuthentication();
+        String email = authentication.getName();
+        return userRepository.findByEmail(email);
     }
 
 }

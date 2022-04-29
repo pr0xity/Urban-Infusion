@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
+    through nature."
+    />
+    <meta id="token" content="${token}"/>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../img/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../img/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../img/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hurricane:wght@200;300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/queries.css" />
+
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <script defer src="../js/general.js"></script>
+    <script defer src="../js/account.js"></script>
+    <title>Urban Infusion</title>
+  </head>
+  <body>
+    <header class="header" th:include="components/header"></header>
+    <main class="account container--beige">
+      <div class="section__heading-box">
+        <h1 class="decorative-heading">Customer</h1>
+        <h2 class="section-title">Your account!</h2>
+      </div>
+      <div class="account-sections">
+        <section class="section-account-info container--white">
+          <h3>Account information</h3>
+          <p class="account-info__row">
+            <span>Name /&#8203; Customer id</span>
+            <span th:text="${user.firstName} + ' ' + ${user.lastName}"
+              >Esther Howard /&#8203; 85329</span
+            >
+          </p>
+          <p class="account-info__row">
+            <span>Email address</span>
+            <span th:text="${user.email}" id="field_email"
+              >esther.&#8203;howard@&#8203;example.&#8203;com</span
+            >
+            <button id="open_email" class="account-info__btn">
+              <i class="ph-pencil-simple-light btn--icon"></i>
+            </button>
+          </p>
+          <div class="modal" id="modal_email">
+            <div class="modal__window">
+              <button
+                class="checkout__btn--close close btn--icon"
+                id="close_email"
+              >
+                <i class="ph-x"></i>
+              </button>
+              <h2>Change email address</h2>
+              <form class="modal__form--email">
+                <label for="edit_email">New email address: </label>
+                <input type="text" id="edit_email" name="edit_email" />
+                <input type="submit" value="Submit" class="btn--green" />
+              </form>
+            </div>
+          </div>
+          <p class="account-info__row">
+            <span>Password</span>
+            <span id="field_password">********</span>
+            <button id="open_password" class="account-info__btn">
+              <i class="ph-pencil-simple-light btn--icon"></i>
+            </button>
+          </p>
+          <div class="modal" id="modal_password">
+            <div class="modal__window">
+              <button
+                class="checkout__btn--close close btn--icon"
+                id="close_password"
+              >
+                <i class="ph-x"></i>
+              </button>
+              <h2>Change password</h2>
+              <form class="modal__form--password">
+                <label for="edit_password">New password: </label>
+                <input type="text" id="edit_password" name="edit_password" />
+                <input type="submit" value="Submit" class="btn--green" />
+              </form>
+            </div>
+          </div>
+          <p class="account-info__row">
+            <span>Address</span>
+            <span th:text="${address}" id="field_address"
+              >2972 Westheimer Rd. Santa Ana, Illinois 85486
+            </span>
+            <button id="open_address" class="account-info__btn">
+              <i class="ph-pencil-simple-light btn--icon"></i>
+            </button>
+          </p>
+          <div class="modal" id="modal_address">
+            <div class="modal__window">
+              <button
+                class="checkout__btn--close close btn--icon"
+                id="close_address"
+              >
+                <i class="ph-x"></i>
+              </button>
+              <h2>Change address</h2>
+              <form class="modal__form--address">
+                <label for="edit_address">New address: </label>
+                <input type="text" id="edit_address" name="edit_address" />
+                <input type="submit" value="Submit" class="btn--green" />
+              </form>
+            </div>
+          </div>
+          <p class="account-info__row">
+            <span>Member since</span>
+            <span th:text="${user.createdAt.toLocalDate()}">04.02.2022</span>
+          </p>
+          <p class="account-info__row">
+            <span>Last login</span>
+            <span th:text="${user.updatedAt.toLocalDate()}">15.03.2022</span>
+          </p>
+          <p class="account-info__row">
+            <button class="account-info__btn--delete">
+              <i class="ph-trash-light btn--icon"></i> Want to delete your
+              account?
+            </button>
+          </p>
+          <div class="modal" id="modal_delete">
+            <div class="modal__window">
+              <button
+                class="checkout__btn--close close btn--icon"
+                id="close_delete"
+              >
+                <i class="ph-x"></i>
+              </button>
+              <h2>Do you wish to delete your account?</h2>
+              <form class="modal__form--delete">
+                <input
+                  type="submit"
+                  value="Yes"
+                  class="btn--green btn--delete"
+                />
+                <input type="submit" value="No" class="btn--green" />
+              </form>
+            </div>
+          </div>
+          <div class="account-info__change container--beige hidden">
+            <button class="change__btn--close close btn--icon">
+              <i class="ph-x"></i>
+            </button>
+            <p class="change-heading">Change address</p>
+            <label class="change__field">
+              Address
+              <input
+                class="input signup__input--address"
+                type="text"
+                placeholder=""
+              />
+            </label>
+
+            <label class="change__field">
+              Municipality
+              <input class="input municipality" type="text" placeholder="" />
+            </label>
+            <label class="change__field">
+              Zip-code
+              <input
+                class="input signup__input--zip-code"
+                type="text"
+                placeholder=""
+              />
+            </label>
+          </div>
+          <div class="account-info__change--overlay hidden"></div>
+        </section>
+
+        <section class="section-purchases container--white">
+          <h3>Purchase history</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Purchased</th>
+                <th>Order nr.</th>
+                <th>Items</th>
+                <th>Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>04.02.2022</td>
+                <td>6453450</td>
+                <td>1xHeather tea, 2xLinden blossom tea</td>
+                <td>600,-</td>
+              </tr>
+              <tr>
+                <td>24.02.2022</td>
+                <td>6456342</td>
+                <td>1xLinden blossom tea</td>
+                <td>200,-</td>
+              </tr>
+              <tr>
+                <td>03.03.2022</td>
+                <td>7563464</td>
+                <td>1xLinden blossom tea, 4xSencha tea</td>
+                <td>2200,-</td>
+              </tr>
+              <tr>
+                <td>15.03.2022</td>
+                <td>7695405</td>
+                <td>1xSencha tea</td>
+                <td>500,-</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </main>
+    <footer th:include="components/footer" class="footer"></footer>
+  </body>
+</html>

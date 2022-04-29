@@ -195,3 +195,46 @@ userMenuButton.addEventListener("click", function (event) {
 tabletQuery.addEventListener("change", init);
 
 window.addEventListener("load", init);
+
+const loginbtn = document.querySelector("#login-btn");
+const loginemail = document.querySelector("#login-email");
+const loginpassword = document.querySelector("#login-password");
+const loginHandler = function (event) {
+  console.log(event);
+  if (event.type)
+  fetch("http://localhost:8080/login", {
+    method: "POST",
+    body: JSON.stringify({
+      email: loginemail.value.toString(),
+      password: loginpassword.value.toString(),
+    }),
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
+  }).then((response) => {
+    console.log(response);
+    if (response.ok) userMenuButton.click();
+    window.location.reload();
+  });
+};
+
+if (loginbtn !== null) {
+  loginbtn.addEventListener("click", loginHandler);
+  //loginemail.addEventListener("keypress", loginHandler)
+}
+
+/*const signout = document.querySelector("#signout");
+
+const signoutHandler = function () {
+  fetch("http://localhost:8080/logout", {
+    method: "POST",
+  }).then((response) => {
+    console.log(response)
+    if (response.ok) userMenuButton.click();
+    //window.location.reload();
+  });
+};
+
+if (signout !== null) {
+  signout.addEventListener("click", signoutHandler);
+}*/

@@ -93,7 +93,11 @@ public class User {
   }
 
   public LocalDateTime getUpdatedAt() {
-    return updatedAt;
+    if (updatedAt == null) {
+      return createdAt;
+    } else {
+      return updatedAt;
+    }
   }
 
   public void setUpdatedAt(LocalDateTime updatedAt) {
@@ -108,10 +112,14 @@ public class User {
     this.enabled = enabled;
   }
 
-  public List<PermissionLevel> getPermissionLevel() {
+  public List<PermissionLevel> getPermissionLevels() {
     List<PermissionLevel> permissionLevels = new ArrayList<>();
     permissionLevels.add(permissionLevel);
     return permissionLevels;
+  }
+
+  public PermissionLevel getPermissionLevel() {
+    return this.permissionLevel;
   }
 
   public void setPermissionLevel(PermissionLevel permissionLevel) {

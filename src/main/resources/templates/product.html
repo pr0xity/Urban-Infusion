@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
+    through nature."
+    />
+    <meta id="token" content="${token}"/>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../img/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../img/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../img/favicon-16x16.png"
+    />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hurricane:wght@200;300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/queries.css" />
+
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <script
+      defer
+      th:src="@{/js/general.js}"
+      type="application/javascript"
+    ></script>
+    <script
+      defer
+      th:src="@{/js/product.js}"
+      type="application/javascript"
+    ></script>
+    <title>Urban Infusion</title>
+  </head>
+  <body>
+    <header th:include="components/header" class="header"></header>
+    <main class="product">
+      <section class="section-product-info">
+        <h1 class="section-title" th:text="${product.name}">Heather tea</h1>
+        <img
+          class="product__img"
+          src="../img/greentea.jpeg"
+          alt="Green tea in a cup"
+        />
+        <a href="#section-reviews">
+          <div class="product__rating" th:attr="data-rating=${rating}">
+            <span class="product__rating--icon"
+              ><i class="ph-leaf-fill"></i
+            ></span>
+            <span class="product__rating--icon"
+              ><i class="ph-leaf-fill"></i
+            ></span>
+            <span class="product__rating--icon"
+              ><i class="ph-leaf-light"></i
+            ></span>
+            <span class="product__rating--icon"
+              ><i class="ph-leaf-light"></i
+            ></span>
+            <span class="product__rating--icon"
+              ><i class="ph-leaf-light"></i
+            ></span>
+            <p>(2)</p>
+          </div>
+        </a>
+        <div class="product__description-box">
+          <h2 class="heading-secondary">Description</h2>
+          <ul class="product__list" th:each="line : ${description}">
+            <li><i class="ph-check"></i><span th:text="${line}"></span></li>
+          </ul>
+        </div>
+        <div class="product__price-cta">
+          <span class="product__price" th:text="${product.price} + ',-'"></span>
+          <div class="product__cta">
+            <button class="btn--green">
+              Add to bag <i class="ph-tote-light btn--icon"></i>
+            </button>
+            <button class="" aria-label="Add to wishlist">
+              <i class="ph-heart-light btn--icon"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+      <section class="section-reviews" id="section-reviews">
+        <form method="post" action="#" class="review__form">
+          <h2 class="heading-secondary">What did you think of this product?</h2>
+          <input
+            class="review__input"
+            type="text"
+            placeholder="Name"
+            aria-label="Name"
+          />
+          <input
+            class="review__input"
+            type="text"
+            placeholder="Emailaddress"
+            aria-label="Emailaddress"
+          />
+          <textarea
+            class="review__input"
+            placeholder="Write your review here"
+            rows="6"
+            cols="50"
+            maxlength="250"
+            aria-label="Write your review here"
+          ></textarea>
+          <div class="product__rating" id="review__rating">
+            <p>Rating</p>
+            <label>
+              <img
+                class="product__rating--img"
+                src="../img/leaf.svg"
+                data-rating="1"
+              />
+              <input
+                name="rating"
+                type="radio"
+                value="1"
+                aria-label="select 1 star rating"
+              />
+            </label>
+            <label>
+              <img
+                class="product__rating--img"
+                src="../img/leaf.svg"
+                data-rating="2"
+              />
+              <input
+                name="rating"
+                type="radio"
+                value="2"
+                aria-label="select 2 star rating"
+              />
+            </label>
+            <label>
+              <img
+                class="product__rating--img"
+                src="../img/leaf.svg"
+                data-rating="3"
+              />
+              <input
+                name="rating"
+                type="radio"
+                value="3"
+                aria-label="select 3 star rating"
+              />
+            </label>
+            <label>
+              <img
+                class="product__rating--img"
+                src="../img/leaf.svg"
+                data-rating="4"
+              />
+              <input
+                name="rating"
+                type="radio"
+                value="4"
+                aria-label="select 4 star rating"
+              />
+            </label>
+            <label>
+              <img
+                class="product__rating--img"
+                src="../img/leaf.svg"
+                data-rating="5"
+              />
+              <input
+                name="rating"
+                type="radio"
+                value="5"
+                aria-label="select 5 star rating"
+              />
+            </label>
+          </div>
+          <input type="submit" class="btn--green" value="Send review" />
+        </form>
+        <div class="review__comments-box">
+          <h2 class="heading-secondary">Reviews</h2>
+          <div class="review__comment" th:each="comment : ${comments}">
+            <div class="review__comment-info">
+              <div
+                class="product__rating"
+                th:attr="data-rating=${comment.rating}"
+              >
+                <span class="product__rating&#45;&#45;icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating&#45;&#45;icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating&#45;&#45;icon"
+                  ><i class="ph-leaf-fill"></i
+                ></span>
+                <span class="product__rating&#45;&#45;icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+                <span class="product__rating&#45;&#45;icon"
+                  ><i class="ph-leaf-light"></i
+                ></span>
+              </div>
+              <p
+                th:text="${comment.user.firstName + ' ' + comment.user.lastName}"
+              >
+                Miranda
+              </p>
+              <p th:text="${comment.updatedAt}">04.02.2022</p>
+            </div>
+            <div>
+              <div class="review__text" th:text="${comment.comment}">
+                <p>The tea was ok. Could have more flavour</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer th:include="components/footer" class="footer"></footer>
+  </body>
+</html>
