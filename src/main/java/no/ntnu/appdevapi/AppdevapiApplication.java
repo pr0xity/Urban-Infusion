@@ -5,10 +5,7 @@ import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.PermissionLevel;
 import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.Rating;
-import no.ntnu.appdevapi.services.PermissionLevelService;
-import no.ntnu.appdevapi.services.ProductServiceImpl;
-import no.ntnu.appdevapi.services.RatingServiceImpl;
-import no.ntnu.appdevapi.services.UserService;
+import no.ntnu.appdevapi.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -63,7 +60,7 @@ public class AppdevapiApplication {
 
 
   @Bean
-  CommandLineRunner run(UserService userService, PermissionLevelService permissionLevelService, ProductServiceImpl productService, RatingServiceImpl ratingService) {
+  CommandLineRunner run(UserService userService, PermissionLevelService permissionLevelService, ProductService productService, RatingServiceImpl ratingService) {
     return args -> {
       try {
         permissionLevelService.savePermissionLevel(new PermissionLevel(1, "user", 1, null));

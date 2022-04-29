@@ -22,8 +22,11 @@ public class ProductServiceImpl implements ProductService {
         return p.orElse(null);
     }
 
-    public void addProduct(Product product) {
-        productRepository.save(product);
+    public Product addProduct(Product product) {
+        if (productRepository.findByName(product.getName()) == null) {
+            productRepository.save(product);
+        }
+        return productRepository.findByName(product.getName());
     }
 
     public void deleteProduct(long id) {

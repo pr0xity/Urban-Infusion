@@ -1,6 +1,8 @@
 package no.ntnu.appdevapi.services;
 
+import no.ntnu.appdevapi.DAO.ProductRepository;
 import no.ntnu.appdevapi.DAO.RatingRepository;
+import no.ntnu.appdevapi.DAO.UserRepository;
 import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.Rating;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,12 @@ public class RatingServiceImpl implements RatingService {
 
     @Autowired
     private RatingRepository ratingRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     /**
      * Returns a list over all ratings.
@@ -39,6 +47,12 @@ public class RatingServiceImpl implements RatingService {
         return new ArrayList<>(ratingRepository.findByProduct(product));
     }
 
+    @Override
+    public double getAverageRatingFromProduct(Product product) {
+        List<Rating> ratings = getRatingsFromProduct(product);
+        return ratings.stream().mapToDouble(Rating::getRating).average().orElse(0.0);
+    }
+
     /**
      * Returns the rating with the given id.
      *
@@ -55,8 +69,13 @@ public class RatingServiceImpl implements RatingService {
      *
      * @param rating the rating to be added.
      */
-    public void addRating(Rating rating) {
-        ratingRepository.save(rating);
+    public Rating addRating(Rating rating) {
+        if (null == ratingRepository.findFirstByUserproduct(rating.getUserAndProductAsString())) {
+            rating.setUser(userRepository.findByEmail(rating.getUser().getEmail()));
+            rating.setProduct(productRepository.findByName(rating.getProduct().getName()));
+            ratingRepository.save(rating);
+        }
+        return ratingRepository.findFirstByUserproduct(rating.getUserAndProductAsString());
     }
 
     /**

@@ -15,12 +15,14 @@ public class Rating {
     @Column(unique = true, name = "rating_id")
     private long id;
 
-    @ApiModelProperty("The the user of who made the rating.")
-    @OneToOne
+    @ApiModelProperty("The user of who made the rating.")
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "user_id")
     private User user;
 
-    @ApiModelProperty("The product id of the product rated.")
-    @ManyToOne
+    @ApiModelProperty("The product rated.")
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "product_id")
     private Product product;
 
     @ApiModelProperty("Integer value of this rating.")
@@ -32,6 +34,9 @@ public class Rating {
     @ApiModelProperty("When the rating was last updated.")
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    //User and product as string
+    private String userproduct;
 
     /**
      * Creates an instance of a rating
@@ -47,6 +52,7 @@ public class Rating {
         this.rating = rating;
         this.comment = comment;
         this.updatedAt = LocalDateTime.now();
+        this.userproduct = user.getEmail() + product.getName();
     }
 
     /**
@@ -81,6 +87,10 @@ public class Rating {
      */
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getUserAndProductAsString() {
+        return userproduct;
     }
 
     /**

@@ -45,7 +45,12 @@ public class User {
 
   @OneToOne(cascade = CascadeType.REMOVE)
   @JoinColumn(name="fl_id")
+  @JsonIgnore
   private Wishlist wishlist;
+
+  @OneToMany(mappedBy = "user")
+  @JsonIgnore
+  private List<Rating> ratings;
 
   public long getId() {
     return id;

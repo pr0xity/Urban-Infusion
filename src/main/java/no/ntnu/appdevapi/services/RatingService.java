@@ -10,9 +10,11 @@ public interface RatingService {
 
   List<Rating> getRatingsFromProduct(Product product);
 
+  double getAverageRatingFromProduct(Product product);
+
   Rating getRating(long id);
 
-  void addRating(Rating rating);
+  Rating addRating(Rating rating);
 
   void updateRating(long id, Rating rating);
 

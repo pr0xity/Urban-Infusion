@@ -7,7 +7,7 @@ public interface ProductService {
 
   Product getProduct(long id);
 
-  void addProduct(Product product);
+  Product addProduct(Product product);
 
   void deleteProduct(long id);
 }

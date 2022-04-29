@@ -1,9 +1,11 @@
 package no.ntnu.appdevapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "product")
@@ -36,6 +38,10 @@ public class Product {
   @ApiModelProperty("When the product was deleted.")
   @Column(name = "deleted_at")
   private LocalDateTime deletedAt;
+
+  @OneToMany(mappedBy = "product")
+  @JsonIgnore
+  List<Rating> ratings;
 
   public Product(String name, String description, String origin, double price, int categoryId, int inventoryId) {
     this.name = name;
