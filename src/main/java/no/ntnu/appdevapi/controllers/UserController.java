@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -77,25 +76,6 @@ public class UserController {
       }
     }
     return response;
-  }
-
-  /**
-   * Gets the info of the logged-in user.
-   */
-  @GetMapping("/user")
-  public String getUser(Model model, @CookieValue(name = "token", defaultValue = "anonymous") String userToken) {
-    String returnString = "not-logged-in-error-page";
-
-    //Attempts to read the jwt token embedded in the cookie.
-    if (!userToken.equals("anonymous")) {
-      String username = jwtUtil.getUsernameFromToken(userToken);
-      User user = userService.findOneByEmail(username);
-      if (null != user) {
-        returnString = "user";
-        model.addAllAttributes(user.generateUserMap());
-      }
-    }
-    return returnString;
   }
 
   /**

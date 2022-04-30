@@ -19,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Endpoint controller for user authentication.
+ */
 @RestController
 public class LoginController {
 
@@ -37,11 +40,23 @@ public class LoginController {
   @Autowired
   private UserService userService;
 
+  /**
+   * Authenticates existing user
+   * @param loginUser LoginUser DTO containing login info (email & password)
+   * @return ResponseEntity containing the jwt token in a cookie and HttpStatus ok on success,
+   * or HttpStatus not found on fail.
+   */
   @RequestMapping(value = "/login", method = RequestMethod.POST)
   public ResponseEntity<?> generateToken(@RequestBody LoginUser loginUser) {
     return authenticate(loginUser.getEmail(), loginUser.getPassword());
   }
 
+  /**
+   * Registers and authenticates a new user.
+   * @param nUser UserDto DTO containing necessary information about the new user
+   * @return ResponseEntity containing the jwt token in a cookie and HttpStatus ok on success,
+   * or HttpStatus not found on fail.
+   */
   @RequestMapping(value = "/register", method = RequestMethod.POST)
   public ResponseEntity<?> registerUser(@RequestBody UserDto nUser) {
     if (null != nUser && userService.findOneByEmail(nUser.getEmail()) == null) {
