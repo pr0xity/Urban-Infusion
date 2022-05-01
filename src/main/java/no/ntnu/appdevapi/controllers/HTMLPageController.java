@@ -1,6 +1,8 @@
 package no.ntnu.appdevapi.controllers;
 
 import no.ntnu.appdevapi.entities.Product;
+import no.ntnu.appdevapi.entities.User;
+import no.ntnu.appdevapi.entities.UserAddress;
 import no.ntnu.appdevapi.entities.Wishlist;
 import no.ntnu.appdevapi.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,14 +40,15 @@ public class HTMLPageController {
      */
     @GetMapping("/")
     public String getHome(Model model) {
-        model.addAttribute("user", userService.getSessionUser());
+        model.addAttribute("user", this.getUser());
         model.addAttribute("products", productService.getAllProducts());
 
-        if(userService.getSessionUser() != null) {
-            model.addAttribute("permission", userService.getSessionUser().getPermissionLevel().getAdminType());
-        } else {
-            model.addAttribute("permission", "NoUser");
+        Wishlist wishlist = this.wishlistService.getWishlistByUser(this.getUser());
+        if (wishlist != null) {
+            model.addAttribute("wishlist", wishlist.getProducts());
         }
+
+        this.addPermissionLevelToModel(model);
 
         return "index";
     }
@@ -59,13 +62,10 @@ public class HTMLPageController {
     @GetMapping("/account")
     public String getAccount(Model model) {
 
-        model.addAttribute("user" , userService.getSessionUser());
+        model.addAttribute("user" , this.getUser());
         model.addAttribute("address", userAddressService.getUserAddressByUserID(userService.getSessionUser().getId()).getAddressLine());
-        if(userService.getSessionUser() != null) {
-            model.addAttribute("permission", userService.getSessionUser().getPermissionLevel().getAdminType());
-        } else {
-            model.addAttribute("permission", "NoUser");
-        }
+
+        this.addPermissionLevelToModel(model);
         return "account";
     }
 
@@ -79,34 +79,57 @@ public class HTMLPageController {
     @GetMapping("product/{id}")
     public String getProduct(@PathVariable long id, Model model) {
         Product product = productService.getProduct(id);
+        Wishlist wishlist = this.wishlistService.getWishlistByUser(this.getUser());
+
+        if (wishlist != null){
+            model.addAttribute("wishlist", wishlist.getProducts());
+        }
         model.addAttribute("product", product);
-        model.addAttribute("user", userService.getSessionUser());
+        model.addAttribute("user", this.getUser());
         model.addAttribute("description", product.getDescription().split("\\."));
         model.addAttribute("comments", ratingService.getRatingsFromProduct(product));
-        if(userService.getSessionUser() != null) {
-            model.addAttribute("permission", userService.getSessionUser().getPermissionLevel().getAdminType());
-        } else {
-            model.addAttribute("permission", "NoUser");
-        }
+        this.addPermissionLevelToModel(model);
         return "product";
     }
 
     /**
+     * Displays the current users wishlist.
      *
+     * @return wishlist thymeleaf template.
      */
     @GetMapping("wishlist")
     public String getWishlist(Model model) {
-        model.addAttribute("user", userService.getSessionUser());
-        Wishlist wishlist = this.wishlistService.getWishlistByUser(this.userService.getSessionUser());
+        model.addAttribute("user", this.getUser());
+        Wishlist wishlist = this.wishlistService.getWishlistByUser(this.getUser());
+
         if (wishlist != null){
-            model.addAttribute("wishlist", this.wishlistService.getWishlistByUser(this.userService.getSessionUser()).getProducts());
+            model.addAttribute("wishlist", wishlist.getProducts());
         }
-        if(userService.getSessionUser() != null) {
-            model.addAttribute("permission", userService.getSessionUser().getPermissionLevel().getAdminType());
-        } else {
-            model.addAttribute("permission", "NoUser");
-        }
+
+        this.addPermissionLevelToModel(model);
+
         return "wishlist";
     }
 
+    /**
+     * Retireves permission level and adds to the given model.
+     *
+     * @param model model to add permission level to.
+     */
+    private void addPermissionLevelToModel(Model model) {
+        if(this.getUser() != null) {
+            model.addAttribute("permission", this.getUser().getPermissionLevel().getAdminType());
+        } else {
+            model.addAttribute("permission", "NoUser");
+        }
+    }
+
+    /**
+     * Returns the user of this session.
+     *
+     * @return user of this session.
+     */
+    private User getUser() {
+        return this.userService.getSessionUser();
+    }
 }

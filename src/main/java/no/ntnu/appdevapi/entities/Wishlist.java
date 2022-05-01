@@ -20,7 +20,8 @@ public class Wishlist {
     private long id;
 
     @ApiModelProperty("The the user of the wishlist")
-    @OneToOne(mappedBy = "wishlist")
+    @OneToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ApiModelProperty("Set of products in the wishlist")
@@ -42,6 +43,7 @@ public class Wishlist {
      */
     public Wishlist(User user) {
         this.user = user;
+        this.user.setWishlist(this);
         this.updatedAt = LocalDateTime.now();
         this.createdAt = LocalDateTime.now();
     }

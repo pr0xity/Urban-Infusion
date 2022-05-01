@@ -45,6 +45,7 @@
     <link rel="stylesheet" type="text/css" href="../css/queries.css" />
 
     <script src="https://unpkg.com/phosphor-icons"></script>
+    <script defer th:src="@{/js/components.js}" type="application/javascript"></script>
     <script
       defer
       th:src="@{/js/general.js}"
@@ -55,6 +56,7 @@
       th:src="@{/js/product.js}"
       type="application/javascript"
     ></script>
+    <script defer th:src="@{/js/productcontrols.js}" type="application/javascript"></script>
     <title>Urban Infusion</title>
   </head>
   <body>
@@ -99,7 +101,20 @@
             <button class="btn--green">
               Add to bag <i class="ph-tote-light btn--icon"></i>
             </button>
-            <button class="" aria-label="Add to wishlist">
+            <button
+                    id="remove-from-fave"
+                    th:if="${wishlist != null && #sets.contains(wishlist, product)}"
+                    th:attr="data-id=${product.id}"
+                    aria-label="remove item from favourite list"
+            >
+              <i class="ph-heart-fill btn--icon btn--selected"></i>
+            </button>
+            <button
+                    id="add-to-fave"
+                    th:if="${wishlist == null || !#sets.contains(wishlist, product)}"
+                    th:attr="data-id=${product.id}"
+                    aria-label="add item to favourite list"
+            >
               <i class="ph-heart-light btn--icon"></i>
             </button>
           </div>
@@ -227,7 +242,7 @@
               >
                 Miranda
               </p>
-              <p th:text="${comment.updatedAt}">04.02.2022</p>
+              <p th:text="${comment.updatedAt.toLocalDate()}">04.02.2022</p>
             </div>
             <div>
               <div class="review__text" th:text="${comment.comment}">

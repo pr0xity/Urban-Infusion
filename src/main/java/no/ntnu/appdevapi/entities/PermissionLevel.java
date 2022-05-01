@@ -48,7 +48,7 @@ public class PermissionLevel {
      * @param permissions a number between 1 and 4 representing permission level.
      * @param updatedAt when this permission level was last updated.
      */
-    public PermissionLevel(int id, String adminType, int permissions, LocalDateTime updatedAt) {
+    public PermissionLevel(long id, String adminType, int permissions, LocalDateTime updatedAt) {
         this.adminType = adminType;
         this.permissions = permissions;
         this.createdAt = LocalDateTime.now();
@@ -72,7 +72,7 @@ public class PermissionLevel {
      *
      * @param id the id to be set for this permission level.
      */
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

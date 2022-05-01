@@ -5,6 +5,7 @@ import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.PermissionLevel;
 import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.Rating;
+import no.ntnu.appdevapi.entities.Wishlist;
 import no.ntnu.appdevapi.services.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -60,7 +61,7 @@ public class AppdevapiApplication {
 
 
   @Bean
-  CommandLineRunner run(UserService userService, PermissionLevelService permissionLevelService, ProductService productService, RatingServiceImpl ratingService) {
+  CommandLineRunner run(UserService userService, PermissionLevelService permissionLevelService, ProductService productService, RatingServiceImpl ratingService, WishlistService wishlistService) {
     return args -> {
       try {
         permissionLevelService.savePermissionLevel(new PermissionLevel(1, "user", 1, null));
@@ -98,6 +99,16 @@ public class AppdevapiApplication {
       ratingService.addRating( new Rating(userService.findAll().get(1), product3, 2, "This was weird") );
       ratingService.addRating( new Rating(userService.findAll().get(1), product4, 2, "This was a lot of weird") );
       ratingService.addRating( new Rating(userService.findAll().get(1), product5, 5, "Great big mugs") );
+
+      wishlistService.addWishlist( new Wishlist(userService.findAll().get(0)));
+      Wishlist wishlist = new Wishlist(userService.findAll().get(1));
+      wishlistService.addWishlist(wishlist);
+      wishlistService.addWishlist( new Wishlist(userService.findAll().get(2)));
+      wishlistService.addWishlist( new Wishlist(userService.findAll().get(3)));
+      wishlistService.addWishlist( new Wishlist(userService.findAll().get(4)));
+
+      wishlist.addProduct(product3);
+      wishlistService.updateWishlist(wishlist.getId(), wishlist);
     };
   }
 }

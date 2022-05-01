@@ -43,8 +43,7 @@ public class User {
   @JoinColumn(name="address_id")
   private UserAddress address;
 
-  @OneToOne(cascade = CascadeType.REMOVE)
-  @JoinColumn(name="fl_id")
+  @OneToOne(mappedBy = "user")
   @JsonIgnore
   private Wishlist wishlist;
 
@@ -140,6 +139,24 @@ public class User {
 
   public void setAddress(UserAddress address) {
     this.address = address;
+  }
+
+  /**
+   * Returns this users wishlist.
+   *
+   * @return this users wishlist.
+   */
+  public Wishlist getWishlist() {
+    return this.wishlist;
+  }
+
+  /**
+   * Sets this users wishlist to the given wishlist.
+   *
+   * @param wishlist the wishlist to be set as this users wishlist.
+   */
+  public void setWishlist(Wishlist wishlist) {
+    this.wishlist = wishlist;
   }
 
   public Map<String, ?> generateUserMap() {

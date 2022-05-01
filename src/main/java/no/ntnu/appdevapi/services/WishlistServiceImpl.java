@@ -1,6 +1,7 @@
 package no.ntnu.appdevapi.services;
 
 import no.ntnu.appdevapi.DAO.WishlistRepository;
+import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.User;
 import no.ntnu.appdevapi.entities.Wishlist;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import java.util.Optional;
 /**
  * Business logic for wishlist.
  */
-@Service
+@Service(value = "wishlistService")
 public class WishlistServiceImpl implements WishlistService {
 
     @Autowired
@@ -57,7 +58,19 @@ public class WishlistServiceImpl implements WishlistService {
      * @param wishlist the wishlist to be added.
      */
     public void addWishlist(Wishlist wishlist) {
-        this.wishlistRepository.save(wishlist);
+        if (this.wishlistRepository.findById(wishlist.getId()).isEmpty()) {
+            this.wishlistRepository.save(wishlist);
+        }
+    }
+
+    public void addProductToWishlist(Wishlist wishlist, Product product) {
+        wishlist.addProduct(product);
+        updateWishlist(wishlist.getId(), wishlist);
+    }
+
+    public void deleteProductFromWishlist(Wishlist wishlist, Product product) {
+        wishlist.deleteProduct(product);
+        updateWishlist(wishlist.getId(), wishlist);
     }
 
     /**

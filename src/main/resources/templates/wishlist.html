@@ -38,8 +38,9 @@
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/queries.css" />
     <script src="https://unpkg.com/phosphor-icons"></script>
-    <script defer src="../js/general.js"></script>
-
+    <script defer th:src="@{/js/components.js}" type="application/javascript"></script>
+    <script defer th:src="@{/js/general.js}" type="application/javascript"></script>
+    <script defer th:src="@{/js/productcontrols.js}" type="application/javascript"></script>
     <title>Urban Infusion</title>
   </head>
   <body>
@@ -99,8 +100,11 @@
               >
                 200,-
               </p>
-              <button aria-label="add item to favourite list">
+              <button id="remove-from-fave" th:if="${wishlist != null && #sets.contains(wishlist, product)}" th:attr="data-id=${product.id}" aria-label="remove item from favourite list">
                 <i class="ph-heart-break-light btn--icon"></i>
+              </button>
+              <button id="add-to-fave" th:if="${wishlist == null || !#sets.contains(wishlist, product)}" th:attr="data-id=${product.id}" aria-label="add item to favourite list">
+                <i class="ph-heart-light btn--icon"></i>
               </button>
               <button aria-label="add item to shopping cart">
                 <i class="ph-tote-light btn--icon"></i>

@@ -25,6 +25,7 @@ html {
 
 body {
   font-family: "Montserrat", sans-serif;
+  min-height: 100vh;
   font-size: 1.8rem;
   font-weight: 400;
   line-height: 1.8;
@@ -55,6 +56,10 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
+img {
+  display: block;
+}
+
 .heading-primary {
   font-weight: 500;
   font-size: 1.8rem;
@@ -75,11 +80,10 @@ button {
 }
 
 .section-title {
-  margin: 0;
   padding: 0;
   font-size: 3.6rem;
   font-weight: 600;
-  margin-bottom: 0.4rem;
+  margin: 0 0 0.4rem;
 }
 
 .heading--small {
@@ -158,6 +162,10 @@ button {
 
 .btn--icon:hover {
   scale: 1.2;
+}
+
+.btn--selected {
+  color: #588157;
 }
 
 .dots {
@@ -667,8 +675,7 @@ button {
 
 .section-products .section__heading-box {
   max-width: 160rem;
-  margin: 0 auto;
-  margin-bottom: 3.2rem;
+  margin: 0 auto 3.2rem;
 }
 
 .product-slider {
@@ -842,8 +849,7 @@ button {
 .section-testimonials {
   max-width: 160rem;
   margin: 0 auto;
-  padding: 9.6rem 6.4rem;
-  padding-bottom: 16rem;
+  padding: 9.6rem 6.4rem 16rem;
   position: relative;
   text-align: center;
 }
@@ -963,13 +969,13 @@ button {
 /****************************/
 .wishlist {
   padding: 9.6rem 5.6rem 6.4rem 5.6rem;
+
 }
 
 .wishlist .section__heading-box {
   max-width: 160rem;
   width: 100%;
-  margin: 0 auto;
-  margin-bottom: 2.4rem;
+  margin: 0 auto 2.4rem;
 }
 
 .wishlist-grid {
@@ -1144,8 +1150,7 @@ button {
 .checkout .btn--green {
   padding: 1.6rem 3.2rem;
   font-size: 2rem;
-  margin: 0 auto;
-  margin-top: 2.4rem;
+  margin: 2.4rem auto 0;
   line-height: 1;
 }
 
