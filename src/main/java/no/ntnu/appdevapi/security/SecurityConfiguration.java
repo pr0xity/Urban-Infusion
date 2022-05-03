@@ -51,12 +51,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     //TODO: This need to be be updated with correct paths
     http.sessionManagement().sessionCreationPolicy(STATELESS);
     http.authorizeRequests()
-            .antMatchers("/resources/**").permitAll()
+            //.antMatchers("/resources/**").permitAll()
             // NB: Deleting product from wishlist does not work with this:
             //.antMatchers(DELETE).hasAuthority("owner")
             .antMatchers("/admin/?*").hasAnyAuthority("admin", "owner")
             .antMatchers(GET, "/users").hasAnyAuthority("admin", "owner")
             .antMatchers("/wishlist").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers(DELETE, "/rating/**").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers(POST,"/rating/**").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers(GET,"/rating/**").hasAnyAuthority("admin", "owner")
+            .antMatchers(DELETE, "/cart/**").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers(PUT, "/cart/**").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers(GET, "/cart/**").hasAnyAuthority("admin", "owner")
             .antMatchers(GET,"/user").authenticated()
             .antMatchers(POST,"/users").permitAll()
             .antMatchers("/","/login","/register", "/products/**" ).permitAll()

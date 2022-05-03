@@ -1,9 +1,6 @@
 package no.ntnu.appdevapi.controllers;
 
-import no.ntnu.appdevapi.entities.Product;
-import no.ntnu.appdevapi.entities.User;
-import no.ntnu.appdevapi.entities.UserAddress;
-import no.ntnu.appdevapi.entities.Wishlist;
+import no.ntnu.appdevapi.entities.*;
 import no.ntnu.appdevapi.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +28,9 @@ public class HTMLPageController {
 
     @Autowired
     private WishlistService wishlistService;
+
+    @Autowired
+    private ShoppingSessionService shoppingSessionService;
 
     /**
      * Gets the home page with the required attributes. Returns index thymeleaf template.
@@ -112,7 +112,26 @@ public class HTMLPageController {
     }
 
     /**
-     * Retireves permission level and adds to the given model.
+     * Displays the current users shopping session.
+     *
+     * @return checkout thymeleaf template.
+     */
+    @GetMapping("checkout")
+    public String getCheckout(Model model) {
+        model.addAttribute("user", this.getUser());
+        ShoppingSession shoppingSession = this.shoppingSessionService.getShoppingSessionByUser(this.getUser());
+
+        if (shoppingSession != null){
+            model.addAttribute("cart", shoppingSession.getCart());
+        }
+
+        this.addPermissionLevelToModel(model);
+
+        return "checkout";
+    }
+
+    /**
+     * Retrieves permission level and adds to the given model.
      *
      * @param model model to add permission level to.
      */

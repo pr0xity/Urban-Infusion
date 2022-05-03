@@ -16,7 +16,7 @@ public class Wishlist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(unique = true, name = "fl_id")
+    @Column(name = "fl_id")
     private long id;
 
     @ApiModelProperty("The the user of the wishlist")
@@ -25,7 +25,11 @@ public class Wishlist {
     private User user;
 
     @ApiModelProperty("Set of products in the wishlist")
-    @OneToMany
+    @ManyToMany
+    @JoinTable(name = "fav_item",
+            joinColumns = @JoinColumn(name="fl_id"),
+            inverseJoinColumns = @JoinColumn(name="product_id")
+    )
     private Set<Product> products = new HashSet<>();
 
     @ApiModelProperty("When the wishlist was last updated.")

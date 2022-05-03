@@ -1,7 +1,9 @@
 package no.ntnu.appdevapi.controllers;
 
-import no.ntnu.appdevapi.entities.ShoppingSession;
-import no.ntnu.appdevapi.services.ShoppingSessionServiceImpl;
+import no.ntnu.appdevapi.entities.*;
+import no.ntnu.appdevapi.services.ProductService;
+import no.ntnu.appdevapi.services.ShoppingSessionService;
+import no.ntnu.appdevapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +15,11 @@ import java.util.List;
  * REST API controller for shopping sessions.
  */
 @RestController
-@RequestMapping("/cart")
+@RequestMapping("/shoppingSession")
 public class ShoppingSessionController {
 
     @Autowired
-    private ShoppingSessionServiceImpl shoppingSessionService;
+    private ShoppingSessionService shoppingSessionService;
 
     /**
      * Get all shopping sessions.

@@ -1,12 +1,15 @@
 package no.ntnu.appdevapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
- * Represents a shopping session on an online store.
+ * Represents a shopping session.
  */
 @Entity
 @Table(name = "shopping_session")
@@ -14,16 +17,26 @@ public class ShoppingSession {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(unique = true, name = "ss_id")
+    @Column(unique = true, name = "session_id")
     private long id;
-    @ApiModelProperty("The id of the user of this shopping session.")
-    @Column(name = "fk_user_id")
-    private int userId;
+
+    @ApiModelProperty("The the user belonging to this shopping session.")
+    @OneToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ApiModelProperty("Set of products in the shopping session.")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "shoppingSession")
+    private Set<CartItem> cart = new HashSet<>();
+
     @ApiModelProperty("The total cost of the items in this shopping session.")
     private double total;
+
     @ApiModelProperty("When the shopping session was created.")
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
     @ApiModelProperty("When the shopping session was last updated.")
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
@@ -31,21 +44,16 @@ public class ShoppingSession {
     /**
      * Creates an instance of shopping session.
      *
-     * @param id id of this shopping session.
-     * @param userId user id of this shopping session.
-     * @param total the total cost of this shopping session.
-     * @param createdAt when this shopping sessions was created
-     * @param updatedAt when this shopping session was last updated.
+     * @param user user of this shopping session.
      */
-    public ShoppingSession(int id, int userId, double total, LocalDateTime createdAt,
-                           LocalDateTime updatedAt) {
-        this.id = id;
-        this.userId = userId;
-        this.total = total;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+    public ShoppingSession(User user) {
+        this.user = user;
+        this.createdAt = LocalDateTime.now();
     }
 
+    /**
+     * Empty constructor.
+     */
     public ShoppingSession() {
 
     }
@@ -69,21 +77,25 @@ public class ShoppingSession {
     }
 
     /**
-     * Returns the user id of this shopping session.
+     * Returns the user of this shopping session.
      *
-     * @return user id of this shopping session.
+     * @return user of this shopping session.
      */
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
     /**
-     * Sets the user id for this shopping session.
+     * Sets the user for this shopping session.
      *
-     * @param userId the user id to be set for this shopping session.
+     * @param user the user to be set for this shopping session.
      */
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Set<CartItem> getCart() {
+        return this.cart;
     }
 
     /**
@@ -92,7 +104,7 @@ public class ShoppingSession {
      * @return total cost of this shopping session.
      */
     public double getTotal() {
-        return total;
+        return this.total;
     }
 
     /**
@@ -101,7 +113,7 @@ public class ShoppingSession {
      * @param total the new total cost of this shopping session.
      */
     public void setTotal(double total) {
-        this.total = total;
+        this.total = this.cart.stream().mapToDouble(CartItem::getTotal).sum();
     }
 
     /**
