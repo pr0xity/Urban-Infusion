@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link th:replace="components/designelements/favicon" />
+    <link th:replace="components/designelements/font" />
+
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet" />
+    <link th:href="@{/css/queries.css}" type="text/css" rel="stylesheet" />
+
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <script
+      defer
+      th:src="@{/js/components.js}"
+      type="application/javascript"
+    ></script>
+    <script
+      defer
+      th:src="@{/js/general.js}"
+      type="application/javascript"
+    ></script>
+    <script
+      defer
+      th:src="@{/js/checkout.js}"
+      type="application/javascript"
+    ></script>
+    <title>Urban Infusion</title>
+  </head>
+  <body>
+    <header th:insert="components/header" class="header"></header>
+    <main class="checkout container--beige">
+      <div class="section__heading-box">
+        <h1 class="decorative-heading">Checkout</h1>
+        <h2 class="section-title">Your shopping bag!</h2>
+      </div>
+      <section class="section-bag container--white">
+        <h3 class="heading-tertiary">1. Shopping bag</h3>
+
+        <div class="checkout__list-headings">
+          <span class="checkout__list-heading margin-left--small"
+            >Products</span
+          >
+          <span class="checkout__list-heading">Size</span>
+          <span class="checkout__list-heading">Quantity</span>
+          <span class="checkout__list-heading">Total</span>
+        </div>
+        <ul class="checkout__list">
+          <li th:each="cartItem : ${cart}" class="checkout__item">
+            <img
+              class="item__img"
+              th:src="@{/img/products/{name}.jpeg(name = ${cartItem.product.name.toLowerCase().replaceAll(' ','')})}"
+              alt="greentea"
+            />
+            <p class="item__description margin-left--small">
+              <a class="link" href="#"
+                ><span class="item__name" th:text="${cartItem.product.name}"
+                  >Green tea</span
+                ></a
+              >
+              <span
+                class="item__number"
+                th:text="'Art.nr ' + ${cartItem.product.id}"
+                >Art.nr. 43240234</span
+              >
+            </p>
+            <span
+              class="item__size"
+              th:if="${cartItem.product.size} != 0"
+              th:text="${cartItem.product.size} + 'g'"
+              >50g</span
+            >
+            <span
+              class="item__size"
+              th:unless="${cartItem.product.size} != 0"
+              th:text="'&#8211;'"
+              >50g</span
+            >
+            <input
+              class="item__quantity"
+              type="number"
+              name="quantity"
+              aria-label="quantity of this product"
+              min="1"
+              max="100"
+              step="1"
+              th:value="${cartItem.quantity}"
+              value="1"
+            />
+            <span class="item__price" th:text="${cartItem.getTotal()} + ',-'"
+              >200,-</span
+            >
+            <button class="btn--icon" aria-label="remove item from checkout">
+              <i class="ph-trash"></i>
+            </button>
+          </li>
+        </ul>
+      </section>
+      <section class="section-info container--white">
+        <h3 class="heading-tertiary">2. Your information</h3>
+        <address class="checkout__customer margin-left--small">
+          <div class="checkout__info">
+            <span class="checkout__label">Name</span>
+            <span class="checkout__info">Leslie Alexander</span>
+          </div>
+          <div class="checkout__info">
+            <span class="checkout__label">Emailaddress</span>
+            <span class="checkout__info">leslie.alexander@example.com</span>
+          </div>
+          <div class="checkout__info">
+            <span class="checkout__label"> Address </span>
+            <span class="checkout__info checkout__info--address">
+              Larsgårdsvegen 2, 6009 Ålesund
+            </span>
+          </div>
+        </address>
+        <span class="checkout__wrong">
+          Wrong information?
+          <a class="link" href="account.html"> Click here </a>
+        </span>
+      </section>
+      <section class="section-payment-delivery container--white">
+        <h3 class="heading-tertiary">3. Delivery and payment</h3>
+        <h4 class="checkout__heading">
+          <i class="btn--icon ph-truck"></i
+          ><span class="checkout__list-heading">Delivery method</span>
+        </h4>
+        <div class="checkout__plan">
+          <span class="checkout__label">Standard - Home delivery</span>
+          <span class="checkout__info">Delivery within 3 - 7 days</span>
+          <div class="checkout__map" id="map"></div>
+        </div>
+        <h4 class="checkout__heading">
+          <i class="ph-credit-card btn--icon"></i>
+          <span class="checkout__list-heading">Payment method</span>
+        </h4>
+        <div class="checkout__plan">
+          <span class="checkout__label">Coupon</span>
+          <span class="checkout__info">You get a free order from us :)</span>
+        </div>
+      </section>
+      <button class="btn--green open_modal">Complete purchase</button>
+      <div class="checkout__complete container--beige">
+        <button class="checkout__btn--close close btn--icon">
+          <i class="ph-x"></i>
+        </button>
+        <img
+          class="checkout__logo"
+          src="../img/favicon/favicon.png"
+          alt="urban infusion logo"
+        />
+        <p class="checkout__complete-heading">Thanks for purchasing!</p>
+        <p>Order confirmation will soon be sent to your email.</p>
+        <a class="btn--green" href="../index.html">Back to homepage</a>
+      </div>
+      <div class="checkout__complete--overlay"></div>
+    </main>
+    <footer th:insert="components/footer" class="footer"></footer>
+  </body>
+</html>

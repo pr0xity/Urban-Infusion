@@ -102,8 +102,7 @@ productsSlider.removeFormat();
 productsSlider.createSlides();
 
 /**
- * If tablet query size matches creates the features and functions
- * for the components in tablet site.
+ * Checks screen size and changes layout accordingly for index page.
  */
 const tabletQueryFeatures = function () {
   if (tabletQuery.matches) {

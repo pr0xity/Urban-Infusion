@@ -1,4 +1,4 @@
-@media (min-width: 100em) {
+/*@media (min-width: 100em) {
   html {
     font-size: 68.5%;
   }
@@ -8,7 +8,7 @@
   html {
     font-size: 87.5%;
   }
-}
+}*/
 /**************************/
 /* LESS THAN 1230px (Smaller desktop) */
 /**************************/
@@ -40,36 +40,39 @@
     padding: 2rem 3.6rem 0 3.6rem;
   }
 
-  .gallery--right .gallery__img:first-child {
-    top: -20%;
-    right: -110%;
+  .gallery__picture {
+    width: 98%;
   }
 
-  .gallery--right .gallery__img:nth-child(2) {
-    top: -10%;
-    right: -40%;
-  }
+ .gallery--right .gallery__picture:first-child {
+  top: -20%;
+  left: 100%;
+}
 
-  .gallery--right .gallery__img:nth-child(3) {
-    top: 10%;
-    right: -80%;
-  }
+.gallery--right .gallery__picture:nth-child(2) {
+  top: -10%;
+  right: -30%;
+}
 
-  .gallery--left .gallery__img:first-child {
-    top: -20%;
-    left: 50%;
-  }
+.gallery--right .gallery__picture:nth-child(3) {
+  top: 10%;
+  right: -70%;
+}
 
-  .gallery--left .gallery__img:nth-child(2) {
-    top: -10%;
-    left: -20%;
-  }
+.gallery--left .gallery__picture:first-child {
+  top: -20%;
+  left: 60%;
+}
 
-  .gallery--left .gallery__img:nth-child(3) {
-    top: 10%;
-    left: 10%;
-  }
+.gallery--left .gallery__picture:nth-child(2) {
+  top: -10%;
+  left: -20%;
+}
 
+.gallery--left .gallery__picture:nth-child(3) {
+  top: 10%;
+  left: 30%;
+}
   .account-sections {
     flex-direction: column;
   }
@@ -131,37 +134,37 @@
   .section-featured {
     padding: 6.4rem 4.8rem;
   }
-
-  .gallery--right .gallery__img:first-child {
+/*
+  .gallery--right .gallery__picture:first-child {
     top: -20%;
     right: -120%;
   }
 
-  .gallery--right .gallery__img:nth-child(2) {
+  .gallery--right .gallery__picture:nth-child(2) {
     top: -10%;
     right: -50%;
   }
 
-  .gallery--right .gallery__img:nth-child(3) {
+  .gallery--right .gallery__picture:nth-child(3) {
     top: 10%;
     right: -90%;
   }
 
-  .gallery--left .gallery__img:first-child {
+  .gallery--right .gallery__picture:first-child {
     top: -20%;
     left: 50%;
   }
 
-  .gallery--left .gallery__img:nth-child(2) {
+  .gallery--right .gallery__picture:nth-child(2) {
     top: -10%;
     left: -30%;
   }
 
-  .gallery--left .gallery__img:nth-child(3) {
+  .gallery--right .gallery__picture:nth-child(3) {
     top: 10%;
     left: 10%;
   }
-
+*/
   /********************************************************/
 
   /****************************/
@@ -186,6 +189,10 @@
 /**************************/
 
 @media (max-width: 54em) {
+  body {
+    overflow-x: hidden;
+  }
+
   .btn--icon {
     font-size: 4.2rem;
   }
@@ -356,28 +363,28 @@
     width: 0;
   }
 
-  .gallery__img {
+  .gallery__picture {
     width: 38%;
   }
 
-  .gallery--right .gallery__img:first-child,
-  .gallery--left .gallery__img:first-child {
+  .gallery--right .gallery__picture:first-child,
+  .gallery--left .gallery__picture:first-child {
     /* top: 48%;*/
     left: initial;
     top: 2%;
     right: 0;
   }
 
-  .gallery--right .gallery__img:nth-child(2),
-  .gallery--left .gallery__img:nth-child(2) {
+  .gallery--right .gallery__picture:nth-child(2),
+  .gallery--left .gallery__picture:nth-child(2) {
     /* top: 45%;
     left: -200%; */
     top: -18%;
     left: 0;
   }
 
-  .gallery--right .gallery__img:nth-child(3),
-  .gallery--left .gallery__img:nth-child(3) {
+  .gallery--right .gallery__picture:nth-child(3),
+  .gallery--left .gallery__picture:nth-child(3) {
     /* top: 55%;
     left: -20%; */
     top: 20%;
@@ -602,7 +609,7 @@
     flex-direction: column-reverse;
   }
 
-  .review__comment{
+  .review__comment {
     width: 75vw;
   }
 
@@ -629,7 +636,7 @@
   }
 
   .logo__img {
-    content: url(../img/favicon.png);
+    content: url(../img/icons/favicon/favicon.png);
   }
 
   .nav__list {
@@ -723,7 +730,7 @@
     padding: 1.6rem;
   }
 
-  .gallery__img {
+  .gallery__picture {
     width: 48%;
   }
 
@@ -897,7 +904,6 @@
     height: auto;
     width: auto;
   }
-
 }
 
 /**************************/
@@ -939,11 +945,11 @@
   }
 
   .company-grid {
-    padding: 0rem 0rem 0 0rem;
+    padding: 0;
   }
 
-  .gallery__img {
-    width: 48%;
+  .gallery__picture {
+    width: 43%;
   }
 
   .slider-container {
@@ -1089,7 +1095,7 @@
   /* PRODUCT          */
   /****************************/
 
-  .review__comment{
+  .review__comment {
     width: 70vw;
   }
 

@@ -3,7 +3,7 @@
 const open_modal = document.querySelector(".open_modal");
 const checkout_container = document.querySelector(".checkout__complete");
 const checkout_overlay = document.querySelector(".checkout__complete--overlay");
-const close_modal = document.querySelector(".checkout__btn--close")
+const close_modal = document.querySelector(".checkout__btn--close");
 const address = document.querySelector(".checkout__info--address").innerText;
 const mapMarker = L.divIcon({ className: "marker-icon" });
 
@@ -14,13 +14,13 @@ const createAddressQueryParam = function () {
 addListeners();
 
 function addListeners() {
-  open_modal.addEventListener('click', () => {
-    checkout_container.classList.add('show');
-    checkout_overlay.classList.add('show');
+  open_modal.addEventListener("click", () => {
+    checkout_container.classList.add("show");
+    checkout_overlay.classList.add("show");
   });
-  close_modal.addEventListener('click', () => {
-    checkout_container.classList.remove('show');
-    checkout_overlay.classList.remove('show');
+  close_modal.addEventListener("click", () => {
+    checkout_container.classList.remove("show");
+    checkout_overlay.classList.remove("show");
   });
 }
 
@@ -29,8 +29,8 @@ const renderMap = function (lat, lon) {
   // L.marker([lat, lon], { icon: mapMarker }).addTo(map);
 
   var greenIcon = new L.Icon({
-    iconUrl: "../img/mapmarker.svg",
-    shadowUrl: "../img/shadow.svg",
+    iconUrl: "../img/icons/mapmarker.svg",
+    shadowUrl: "../img/icons/shadow.svg",
     iconSize: [41, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
@@ -56,6 +56,7 @@ const getAddress = async function (addressParams) {
   let latitude;
   let longitude;
   try {
+    console.log(data);
     latitude = data.lat;
     longitude = data.lon;
     const address = data.display_name;

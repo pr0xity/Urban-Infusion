@@ -1,5 +1,6 @@
 package no.ntnu.appdevapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -21,6 +22,7 @@ public class Rating {
     private User user;
 
     @ApiModelProperty("The product rated.")
+    //@JsonBackReference
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "product_id")
     private Product product;
@@ -39,7 +41,7 @@ public class Rating {
     private String userproduct;
 
     /**
-     * Creates an instance of a rating
+     * Creates an instance of a rating.
      *
      * @param user the user who made this rating.
      * @param product the product this rating belongs to.

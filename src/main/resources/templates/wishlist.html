@@ -4,43 +4,26 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="../img/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="../img/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="../img/favicon-16x16.png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Hurricane:wght@200;300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <link th:replace="components/design/favicon" />
+    <link th:replace="components/design/font" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/queries.css" />
     <script src="https://unpkg.com/phosphor-icons"></script>
-    <script defer th:src="@{/js/components.js}" type="application/javascript"></script>
-    <script defer th:src="@{/js/general.js}" type="application/javascript"></script>
-    <script defer th:src="@{/js/productcontrols.js}" type="application/javascript"></script>
+    <script
+      defer
+      th:src="@{/js/components.js}"
+      type="application/javascript"
+    ></script>
+    <script
+      defer
+      th:src="@{/js/general.js}"
+      type="application/javascript"
+    ></script>
+    <script
+      defer
+      th:src="@{/js/wishlistcontrols.js}"
+      type="application/javascript"
+    ></script>
     <title>Urban Infusion</title>
   </head>
   <body>
@@ -52,121 +35,12 @@
       </div>
       <div class="wishlist-grid">
         <article
-                class="product-card container--white"
-                th:each="product : ${wishlist}"
-        >
-          <img
-                  class="product-card__img"
-                  src="img/pic-2.webp"
-                  alt="herbal tea in a teacup"
-          />
-          <div class="product-card__details">
-            <div class="product__rating">
-                <span class="product__rating--icon"
-                ><i class="ph-leaf-fill"></i
-                ></span>
-              <span class="product__rating--icon"
-              ><i class="ph-leaf-fill"></i
-              ></span>
-              <span class="product__rating--icon"
-              ><i class="ph-leaf-fill"></i
-              ></span>
-              <span class="product__rating--icon"
-              ><i class="ph-leaf-light"></i
-              ></span>
-              <span class="product__rating--icon"
-              ><i class="ph-leaf-light"></i
-              ></span>
-              <p>(2)</p>
-            </div>
-            <a th:href="@{/product/{id}(id=${product.id})}" class="link">
-              <h4 class="product-card__heading" th:text="${product.name}">
-                Heather tea
-              </h4>
-            </a>
-            <ul
-                    th:each="line : ${product.description.split('[.]')}"
-                    class="product-card__list"
-            >
-              <li class="product-card__item">
-                <i class="ph-check-thin product-card__icon"></i
-                ><span th:text="${line}"></span>
-              </li>
-            </ul>
-            <div class="product-card__cta">
-              <p
-                      class="product-card__price"
-                      th:text="${product.price} + ',-'"
-              >
-                200,-
-              </p>
-              <button id="remove-from-fave" th:if="${wishlist != null && #sets.contains(wishlist, product)}" th:attr="data-id=${product.id}" aria-label="remove item from favourite list">
-                <i class="ph-heart-break-light btn--icon"></i>
-              </button>
-              <button id="add-to-fave" th:if="${wishlist == null || !#sets.contains(wishlist, product)}" th:attr="data-id=${product.id}" aria-label="add item to favourite list">
-                <i class="ph-heart-light btn--icon"></i>
-              </button>
-              <button aria-label="add item to shopping cart">
-                <i class="ph-tote-light btn--icon"></i>
-              </button>
-            </div>
-          </div>
-        </article>
-        <!--<article class="product-card container&#45;&#45;white">
-          <img
-            class="product-card__img"
-            src="../img/redtea.jpeg"
-            alt="herbal tea in a teacup"
-          />
-          <div class="product-card__details">
-            <div class="product__rating">
-              <span class="product__rating&#45;&#45;icon"
-                ><i class="ph-leaf-fill"></i
-              ></span>
-              <span class="product__rating&#45;&#45;icon"
-                ><i class="ph-leaf-fill"></i
-              ></span>
-              <span class="product__rating&#45;&#45;icon"
-                ><i class="ph-leaf-fill"></i
-              ></span>
-              <span class="product__rating&#45;&#45;icon"
-                ><i class="ph-leaf-light"></i
-              ></span>
-              <span class="product__rating&#45;&#45;icon"
-                ><i class="ph-leaf-light"></i
-              ></span>
-              <p>(2)</p>
-            </div>
-            <a href="product.html" class="link">
-              <h4 class="product-card__heading">Linden Blossom Tea</h4>
-            </a>
-            <ul class="product-card__list">
-              <li class="product-card__item">
-                <i class="ph-check-thin product__icon"></i>Classic Latvian tea
-              </li>
-              <li class="product-card__item">
-                <i class="ph-check-thin product__icon"></i>Helps against
-                laziness
-              </li>
-              <li class="product-card__item">
-                <i class="ph-check-thin product__icon"></i>Use 100C water
-              </li>
-              <li class="product-card__item">
-                <i class="ph-check-thin product__icon"></i>Gathered in summer
-                2021
-              </li>
-            </ul>
-            <div class="product-card__cta">
-              <p class="product-card__price">200,-</p>
-              <button aria-label="add item to favourite list">
-                <i class="ph-heart-break-light btn&#45;&#45;icon"></i>
-              </button>
-              <button aria-label="add item to shopping cart">
-                <i class="ph-tote-light btn&#45;&#45;icon"></i>
-              </button>
-            </div>
-          </div>
-        </article>-->
+          class="product-card container--white"
+          th:insert="components/productcard"
+          th:each="product : ${wishlist}"
+          th:attr="data-id=${product.id}"
+          th:attrappend="data-wishlist=${wishlist == null} ? 'false' : (${#sets.contains(wishlist, product)} ? 'true' : 'false')"
+        ></article>
       </div>
     </main>
     <footer th:include="components/footer" class="footer"></footer>

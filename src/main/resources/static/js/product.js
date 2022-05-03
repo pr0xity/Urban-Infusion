@@ -3,8 +3,8 @@ function reviewRating() {
   let isRatingChosen = false;
   let rating;
 
-  const LEAF_SELECTED = "../img/leaf-fill.svg";
-  const LEAF_UNSELECTED = "../img/leaf.svg";
+  const LEAF_SELECTED = "../img/icons/leaf-fill.svg";
+  const LEAF_UNSELECTED = "../img/icons/leaf.svg";
 
   /**
    * Adds functionality for hover events when selecting review rating.

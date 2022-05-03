@@ -9,43 +9,17 @@
       content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
     through nature."
     />
-    <meta id="token" content="${token}"/>
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="../img/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="../img/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="../img/favicon-16x16.png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Hurricane:wght@200;300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <link th:replace="components/design/favicon" />
+    <link th:replace="components/design/font" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/queries.css" />
 
     <script src="https://unpkg.com/phosphor-icons"></script>
-    <script defer th:src="@{/js/components.js}" type="application/javascript"></script>
+    <script
+      defer
+      th:src="@{/js/components.js}"
+      type="application/javascript"
+    ></script>
     <script
       defer
       th:src="@{/js/general.js}"
@@ -56,21 +30,32 @@
       th:src="@{/js/product.js}"
       type="application/javascript"
     ></script>
-    <script defer th:src="@{/js/productcontrols.js}" type="application/javascript"></script>
+    <script
+      defer
+      th:src="@{/js/wishlistcontrols.js}"
+      type="application/javascript"
+    ></script>
     <title>Urban Infusion</title>
   </head>
   <body>
     <header th:include="components/header" class="header"></header>
-    <main class="product">
+    <main
+      class="product"
+      th:attr="data-id=${product.id}"
+      th:attrappend="data-wishlist=${wishlist == null} ? 'false' : (${#sets.contains(wishlist, product)} ? 'true' : 'false')"
+    >
       <section class="section-product-info">
         <h1 class="section-title" th:text="${product.name}">Heather tea</h1>
         <img
           class="product__img"
-          src="../img/greentea.jpeg"
+          th:src="@{/img/products/{name}.jpeg(name = ${product.name.toLowerCase().replaceAll(' ','')})}"
           alt="Green tea in a cup"
         />
         <a href="#section-reviews">
-          <div class="product__rating" th:attr="data-rating=${rating}">
+          <div
+            class="product__rating"
+            th:attr="data-rating=${product.averageRating}"
+          >
             <span class="product__rating--icon"
               ><i class="ph-leaf-fill"></i
             ></span>
@@ -86,7 +71,7 @@
             <span class="product__rating--icon"
               ><i class="ph-leaf-light"></i
             ></span>
-            <p>(2)</p>
+            <p th:text="'(' + ${product.ratings.size()} + ')'">(0)</p>
           </div>
         </a>
         <div class="product__description-box">
@@ -101,22 +86,10 @@
             <button class="btn--green">
               Add to bag <i class="ph-tote-light btn--icon"></i>
             </button>
-            <button
-                    id="remove-from-fave"
-                    th:if="${wishlist != null && #sets.contains(wishlist, product)}"
-                    th:attr="data-id=${product.id}"
-                    aria-label="remove item from favourite list"
-            >
-              <i class="ph-heart-fill btn--icon btn--selected"></i>
-            </button>
-            <button
-                    id="add-to-fave"
-                    th:if="${wishlist == null || !#sets.contains(wishlist, product)}"
-                    th:attr="data-id=${product.id}"
-                    aria-label="add item to favourite list"
-            >
-              <i class="ph-heart-light btn--icon"></i>
-            </button>
+            <div
+              class="product__btn--wishlist"
+              th:attr="data-wishlist=${wishlist == null} ? 'false' : (${#sets.contains(wishlist, product)} ? 'true' : 'false')"
+            ></div>
           </div>
         </div>
       </section>
@@ -148,7 +121,7 @@
             <label>
               <img
                 class="product__rating--img"
-                src="../img/leaf.svg"
+                src="../img/icons/leaf.svg"
                 data-rating="1"
               />
               <input
@@ -161,7 +134,7 @@
             <label>
               <img
                 class="product__rating--img"
-                src="../img/leaf.svg"
+                src="../img/icons/leaf.svg"
                 data-rating="2"
               />
               <input
@@ -174,7 +147,7 @@
             <label>
               <img
                 class="product__rating--img"
-                src="../img/leaf.svg"
+                src="../img/icons/leaf.svg"
                 data-rating="3"
               />
               <input
@@ -187,7 +160,7 @@
             <label>
               <img
                 class="product__rating--img"
-                src="../img/leaf.svg"
+                src="../img/icons/leaf.svg"
                 data-rating="4"
               />
               <input
@@ -200,7 +173,7 @@
             <label>
               <img
                 class="product__rating--img"
-                src="../img/leaf.svg"
+                src="../img/icons/leaf.svg"
                 data-rating="5"
               />
               <input

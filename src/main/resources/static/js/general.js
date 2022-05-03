@@ -1,40 +1,74 @@
-const URL = "http://localhost:8080"
+const URL = "http://localhost:8080";
+const AUTHENTICATION_API_PATHNAME = "/login";
+const WISHLIST_API_PATHNAME = "/wishlist";
+const PRODUCT_PATHNAME = "/product/";
 
-/**
- * Login handling
- */
+/**********************************************
+ * Log in handling *
+ **********************************************/
+
 const loginbtn = document.querySelector("#login-btn");
 const loginemail = document.querySelector("#login-email");
 const loginpassword = document.querySelector("#login-password");
+const loginAlert = document.querySelector(".login__alert");
 
-const sendLoginRequest = function (event) {
-  if (event.type === "click" || event.key === "Enter") {
-  fetch(`${URL}/login`, {
-    method: "POST",
-    body: JSON.stringify({
-      email: loginemail.value.toString(),
-      password: loginpassword.value.toString(),
-    }),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  }).then((response) => {
-    console.log(response);
-    if (response.ok) userMenuButton.click();
-    window.location.reload();
-  });
+/**
+ * Sets the login alert to the given message.
+ *
+ * @param alertMessage message to be set.
+ */
+const setLoginAlert = function (alertMessage) {
+  if (loginbtn !== null) {
+    loginAlert.innerHTML = `${alertMessage}`;
   }
 };
 
-if (loginbtn !== null) {
-  loginbtn.addEventListener("click", sendLoginRequest);
-  loginemail.addEventListener("keypress", sendLoginRequest)
-  loginpassword.addEventListener("keypress", sendLoginRequest)
-}
+/**
+ * Sets the login alert to empty.
+ */
+const resetLoginAlert = function () {
+  if (loginbtn !== null) {
+    loginAlert.innerHTML = "";
+  }
+};
 
 /**
- * Initializing common features for all pages.
+ * Sends a POST request for log in.
  */
+const sendLoginRequest = function (event) {
+  if (event.type === "click" || event.key === "Enter") {
+    fetch(`${URL}${AUTHENTICATION_API_PATHNAME}`, {
+      method: "POST",
+      body: JSON.stringify({
+        email: loginemail.value.toString(),
+        password: loginpassword.value.toString(),
+      }),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    }).then((response) => {
+      console.log(response);
+      if (response.ok) {
+        userMenuButton.click();
+        window.location.reload();
+      } else {
+        setLoginAlert("Wrong username or password");
+      }
+    });
+  }
+};
+
+//Adding event listeners if login button is present.
+if (loginbtn !== null) {
+  loginbtn.addEventListener("click", sendLoginRequest);
+  loginemail.addEventListener("keypress", sendLoginRequest);
+  loginpassword.addEventListener("keypress", sendLoginRequest);
+}
+
+/**********************************************
+ * Initializing common features for all pages *
+ **********************************************/
+
 const tabletQuery = window.matchMedia("(max-width: 54em)");
 const userMenuButton = document.querySelector("#user-menu");
 const userMenuElement = document.querySelector(".nav__user-menu");
@@ -44,43 +78,77 @@ const mobileMenuButtonClose = document.querySelectorAll(".nav-mobile__btn")[1];
 const navListElement = document.querySelector(".nav__list");
 const navLinks = navListElement.querySelectorAll(".nav__link");
 const overlayNavLinkMobileBtn = document.querySelector(
-    ".nav__link-menu--overlay"
+  ".nav__link-menu--overlay"
 );
 const overlayNavUserMobileBtn = document.querySelector(
-    ".nav__user-menu--overlay"
+  ".nav__user-menu--overlay"
 );
 
+/**
+ * Initializes common features on all pages.
+ */
 const generalInitialize = function () {
   const footerCaretButtons = new CaretButtons("footer__btn", "footer-heading");
 
+  /**
+   * Hides the given element.
+   *
+   * @param element element to be hidden.
+   */
   const hideElement = function (element) {
     element.classList.add("hidden");
-  }
+  };
 
+  /**
+   * Displays the given element.
+   *
+   * @param element element to be displayed.
+   */
   const showElement = function (element) {
     element.classList.remove("hidden");
-  }
+  };
 
+  /**
+   * Removes click event from the items in given list with the given function reference.
+   *
+   * @param list list with items to remove click event from.
+   * @param functionReference function reference to remove from click event.
+   */
   const removeClickEventListenersFromList = function (list, functionReference) {
     list.forEach((item) => {
       item.removeEventListener("click", functionReference);
     });
-  }
+  };
 
+  /**
+   * Adds click event to the items in the given list with the given function reference.
+   *
+   * @param list list with items to add click event to.
+   * @param functionReference function reference to add to click event.
+   */
   const addClickEventListenersToList = function (list, functionReference) {
     list.forEach((item) => {
       item.addEventListener("click", functionReference);
-    })
-  }
+    });
+  };
 
+  /**
+   * Clicks on the close menu button.
+   */
   const clickMenuButtonClose = function () {
     mobileMenuButtonClose.click();
   };
 
+  /**
+   * Clicks on the user menu button.
+   */
   const clickUserMenuButton = function () {
     userMenuButton.click();
-  }
+  };
 
+  /**
+   * Displays and/or hides certain elements when navigation menu is clicked.
+   */
   const navMobileButtonHandler = function () {
     mobileMenuButtonOpen.classList.toggle("hidden");
     mobileMenuButtonClose.classList.toggle("hidden");
@@ -88,13 +156,20 @@ const generalInitialize = function () {
     navListElement.classList.toggle("hidden");
     userMenuElement.classList.add("hidden");
     overlayNavUserMobileBtn.classList.add("hidden");
-  }
+  };
 
+  /**
+   * Displays or hides elements when user menu is clicked.
+   */
   const userMenuButtonHandler = function () {
     userMenuElement.classList.toggle("hidden");
     overlayNavUserMobileBtn.classList.toggle("hidden");
-  }
+    if (userMenuElement.classList.contains("hidden")) {
+      resetLoginAlert();
+    }
+  };
 
+  // Checks screen size and changes layout accordingly
   if (tabletQuery.matches) {
     footerCaretButtons.createCaretBtns();
     hideElement(navListElement);

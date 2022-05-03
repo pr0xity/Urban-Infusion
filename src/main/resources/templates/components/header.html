@@ -5,7 +5,7 @@
 <a th:href="@{/}" class="logo">
   <img
     class="logo__img"
-    th:src="@{/img/logo-big.png}"
+    th:src="@{/img/icons/logo-big.png}"
     alt="Urban Infusion logo"
   />
 </a>
@@ -40,25 +40,19 @@
     <button class="nav__item" id="user-menu" aria-label="account menu">
       <i class="ph-user-circle-light btn--icon"></i>
     </button>
-
-    <!-- Login menu -->
     <div
       th:if="${permission} == 'NoUser'"
-      th:include="components/login"
+      th:include="components/menus/login"
       class="nav__user-menu align-items--center hidden"
     ></div>
-
-    <!-- Customer menu -->
     <div
       th:if="${permission} == 'user'"
-      th:include="components/usermenu"
+      th:include="components/menus/usermenu"
       class="nav__user-menu hidden"
     ></div>
-
-    <!-- Admin menu -->
     <div
       th:if="${permission} eq 'admin'"
-      th:include="components/adminmenu"
+      th:include="components/menus/adminmenu"
       class="nav__user-menu hidden"
     ></div>
   </div>

@@ -1,6 +1,7 @@
 package no.ntnu.appdevapi.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
@@ -24,6 +25,8 @@ public class Product {
   private String origin;
   @ApiModelProperty("Price of the product, decimal in NOK.")
   private double price;
+  @ApiModelProperty("Size of the product in grams")
+  private int size;
   @ApiModelProperty("Category id of the product.")
   @Column(name = "fk_category_id")
   private int categoryId;
@@ -44,11 +47,12 @@ public class Product {
   @JsonIgnore
   List<Rating> ratings;
 
-  public Product(String name, String description, String origin, double price, int categoryId, int inventoryId) {
+  public Product(String name, String description, String origin, double price, int size, int categoryId, int inventoryId) {
     this.name = name;
     this.description = description;
     this.origin = origin;
     this.price = price;
+    this.size = size;
     this.categoryId = categoryId;
     this.inventoryId = inventoryId;
     this.createdAt = LocalDateTime.now();
@@ -129,6 +133,24 @@ public class Product {
     this.price = price;
   }
 
+  /**
+   * Returns the size (in grams) this product.
+   *
+   * @return size of this product.
+   */
+  public int getSize() {
+    return size;
+  }
+
+  /**
+   * Sets the size (in grams) of this product.
+   *
+   * @param size size to be set for the product.
+   */
+  public void setSize(int size) {
+    this.size = size;
+  }
+
   public String getOrigin() {
     return origin;
   }
@@ -143,6 +165,19 @@ public class Product {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  /**
+   * Returns the average rating.
+   *
+   * @return the average rating.
+   */
+  public double getAverageRating() {
+    return this.ratings.stream().mapToDouble(Rating::getRating).average().orElse(0.0);
+  }
+
+  public List<Rating> getRatings() {
+    return this.ratings;
   }
 
   @Override

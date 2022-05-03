@@ -9,43 +9,18 @@
       content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
     through nature."
     />
-    <meta id="token" content="${token}"/>
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="../img/apple-touch-icon.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="../img/favicon-32x32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="../img/favicon-16x16.png"
-    />
-    <link rel="manifest" href="/site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Hurricane:wght@200;300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <link th:replace="components/designelements/favicon" />
+    <link th:replace="components/designelements/font" />
+
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/queries.css" />
 
     <script src="https://unpkg.com/phosphor-icons"></script>
-    <script defer th:src="@{/js/components.js}" type="application/javascript"></script>
+    <script
+      defer
+      th:src="@{/js/components.js}"
+      type="application/javascript"
+    ></script>
     <script defer src="../js/general.js"></script>
     <script defer src="../js/account.js"></script>
     <title>Urban Infusion</title>
@@ -62,11 +37,12 @@
           <h3>Account information</h3>
           <p class="account-info__row">
             <span>Name /&#8203; Customer id</span>
-            <span th:text="${user.firstName} + ' ' + ${user.lastName}"
+            <span
+              th:text="${user.firstName} + ' ' + ${user.lastName} + ' / ' + ${user.id}"
               >Esther Howard /&#8203; 85329</span
             >
           </p>
-          <p class="account-info__row">
+          <address class="account-info__row">
             <span>Email address</span>
             <span th:text="${user.email}" id="field_email"
               >esther.&#8203;howard@&#8203;example.&#8203;com</span
@@ -74,7 +50,7 @@
             <button id="open_email" class="account-info__btn">
               <i class="ph-pencil-simple-light btn--icon"></i>
             </button>
-          </p>
+          </address>
           <div class="modal" id="modal_email">
             <div class="modal__window">
               <button
@@ -114,7 +90,7 @@
               </form>
             </div>
           </div>
-          <p class="account-info__row">
+          <address class="account-info__row">
             <span>Address</span>
             <span th:text="${address}" id="field_address"
               >2972 Westheimer Rd. Santa Ana, Illinois 85486
@@ -122,7 +98,7 @@
             <button id="open_address" class="account-info__btn">
               <i class="ph-pencil-simple-light btn--icon"></i>
             </button>
-          </p>
+          </address>
           <div class="modal" id="modal_address">
             <div class="modal__window">
               <button
@@ -141,11 +117,19 @@
           </div>
           <p class="account-info__row">
             <span>Member since</span>
-            <span th:text="${user.createdAt.toLocalDate()}">04.02.2022</span>
+            <time
+              datetime="user.createdAt"
+              th:text="${user.createdAt.toLocalDate()}"
+              >04.02.2022</time
+            >
           </p>
           <p class="account-info__row">
             <span>Last login</span>
-            <span th:text="${user.updatedAt.toLocalDate()}">15.03.2022</span>
+            <time
+              datetime="user.updatedAt"
+              th:text="${user.updatedAt.toLocalDate()}"
+              >15.03.2022</time
+            >
           </p>
           <p class="account-info__row">
             <button class="account-info__btn--delete">
