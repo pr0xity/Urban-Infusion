@@ -4,11 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link th:replace="components/design/favicon" />
-    <link th:replace="components/design/font" />
+    <link th:replace="components/designelements/favicon" />
+    <link th:replace="components/designelements/font" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/queries.css" />
     <script src="https://unpkg.com/phosphor-icons"></script>
+    <script
+      defer
+      th:src="@{/js/tools.js}"
+      type="application/javascript"
+    ></script>
     <script
       defer
       th:src="@{/js/components.js}"
@@ -38,7 +43,7 @@
           class="product-card container--white"
           th:insert="components/productcard"
           th:each="product : ${wishlist}"
-          th:attr="data-id=${product.id}"
+          th:attr="data-productid=${product.id}"
           th:attrappend="data-wishlist=${wishlist == null} ? 'false' : (${#sets.contains(wishlist, product)} ? 'true' : 'false')"
         ></article>
       </div>

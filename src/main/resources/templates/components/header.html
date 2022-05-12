@@ -1,5 +1,5 @@
-<button class="nav-mobile__btn btn--icon"><i class="ph-list"></i></button>
-<button class="nav-mobile__btn btn--icon hidden">
+<button class="nav-mobile__btn btn--icon" aria-label="open navigation menu"><i class="ph-list"></i></button>
+<button class="nav-mobile__btn btn--icon hidden" aria-label="close navigation menu">
   <i class="ph-x"></i>
 </button>
 <a th:href="@{/}" class="logo">
@@ -24,7 +24,16 @@
   <div class="nav__link-menu--overlay hidden" id=""></div>
 
   <div class="nav__btn-box">
+    <button
+      th:if="${permission} == 'NoUser'"
+      id="wishlist-link"
+      class="nav__item"
+      aria-label="View wishlist"
+    >
+      <i class="ph-heart-light btn--icon"></i>
+    </button>
     <a
+      th:if="${permission} == 'user' or ${permission} eq 'owner' or ${permission} eq 'admin'"
       th:href="@{/wishlist}"
       class="nav__link nav__item"
       aria-label="View wishlist"
@@ -51,7 +60,7 @@
       class="nav__user-menu hidden"
     ></div>
     <div
-      th:if="${permission} eq 'admin'"
+      th:if="${permission} eq 'admin' or ${permission} eq 'owner'"
       th:include="components/menus/adminmenu"
       class="nav__user-menu hidden"
     ></div>

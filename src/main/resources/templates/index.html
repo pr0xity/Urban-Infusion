@@ -17,6 +17,11 @@
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script
       defer
+      th:src="@{/js/tools.js}"
+      type="application/javascript"
+    ></script>
+    <script
+      defer
       th:src="@{/js/components.js}"
       type="application/javascript"
     ></script>
@@ -460,8 +465,7 @@
             th:insert="components/productcard"
             class="product-card container--white product-card__slide--tertiary-prev"
             th:each="product, iteration : ${products}"
-            th:attr="data-slide=${iteration.index}, data-id=${product.id}"
-            th:attrappend="data-wishlist=${wishlist == null} ? 'false' : (${#sets.contains(wishlist, product)} ? 'true' : 'false')"
+            th:attr="data-slide=${iteration.index}, data-productid=${product.id}"
           ></article>
         </div>
       </section>

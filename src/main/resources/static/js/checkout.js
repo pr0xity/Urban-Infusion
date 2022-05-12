@@ -5,11 +5,6 @@ const checkout_container = document.querySelector(".checkout__complete");
 const checkout_overlay = document.querySelector(".checkout__complete--overlay");
 const close_modal = document.querySelector(".checkout__btn--close");
 const address = document.querySelector(".checkout__info--address").innerText;
-const mapMarker = L.divIcon({ className: "marker-icon" });
-
-const createAddressQueryParam = function () {
-  return address.replaceAll(" ", "+").replaceAll(",", "");
-};
 
 addListeners();
 
@@ -48,7 +43,7 @@ const renderMap = function (lat, lon) {
     }
   ).addTo(map);
 };
-
+/*
 const getAddress = async function (addressParams) {
   const [data] = await getJSON(
     `https://nominatim.openstreetmap.org/search?q=${addressParams}&format=json`
@@ -74,6 +69,6 @@ const getJSON = function (url, errorMsg = "Something went wrong") {
 
     return response.json();
   });
-};
+};*/
 
-getAddress(createAddressQueryParam());
+getAddressInfo(address).then(data => renderMap(data[0], data[1]));

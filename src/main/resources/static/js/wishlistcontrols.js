@@ -24,7 +24,7 @@ const setWishlistButtons = function () {
     const button = document.createElement("button");
     button.classList.add("product__btn--wishlist");
     button.dataset.wishlist = dataWishlist;
-    button.dataset.id = dataProductId;
+    button.dataset.productid = dataProductId;
     button.ariaLabel = ariaLabel;
     return button;
   };
@@ -145,8 +145,8 @@ const setWishlistButtons = function () {
   const setWishlistButtonsOnMultipleProducts = function () {
     const products = document.querySelectorAll(".product-card");
     products.forEach((product) => {
-      const dataProductId = product.dataset.id;
       const wishlistButton = product.querySelector(".product__btn--wishlist");
+      const dataProductId = getProductIdFromElement(product);
       replaceWishlistButton(wishlistButton, dataProductId);
     });
   };
@@ -156,19 +156,9 @@ const setWishlistButtons = function () {
    */
   const setWishlistButtonsOnAProductPage = function () {
     const product = document.querySelector(".product");
-    const dataProductId = product.dataset.id;
     const wishlistButton = product.querySelector(".product__btn--wishlist");
+    const dataProductId = getProductIdFromElement(product);
     replaceWishlistButton(wishlistButton, dataProductId);
-  };
-
-  /**
-   * Returns the product id from the button given.
-   *
-   * @param button the button to retrieve product id from.
-   * @returns {string} the product id from the button.
-   */
-  const getProductIdFromButton = function (button) {
-    return button.dataset.id;
   };
 
   /**
@@ -209,7 +199,7 @@ const setWishlistButtons = function () {
    */
   const sendWishlistRequest = function (event) {
     const wishlistButton = event.target.closest(wishlistButtonClass);
-    const productId = getProductIdFromButton(wishlistButton);
+    const productId = getProductIdFromElement(wishlistButton);
 
     if (isProductInWishlist(wishlistButton)) {
       sendApiRequest(
@@ -246,25 +236,6 @@ const setWishlistButtons = function () {
       wishlistButton.addEventListener("click", sendWishlistRequest);
     });
   }
-};
-
-const sendApiRequest = function (
-  pathname,
-  method,
-  successCallback,
-  unauthorizedCallback
-) {
-  fetch(`${URL}${pathname}`, {
-    method: method,
-  }).then((response) => {
-    if (response.ok) {
-      successCallback();
-    } else if (response.status === 401) {
-      unauthorizedCallback();
-    } else {
-      console.error("An error occurred, contact customer service.");
-    }
-  });
 };
 
 //Initial setting buttons.

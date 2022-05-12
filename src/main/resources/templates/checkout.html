@@ -26,6 +26,11 @@
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script
       defer
+      th:src="@{/js/tools.js}"
+      type="application/javascript"
+    ></script>
+    <script
+      defer
       th:src="@{/js/components.js}"
       type="application/javascript"
     ></script>
@@ -160,12 +165,12 @@
         </button>
         <img
           class="checkout__logo"
-          src="../img/favicon/favicon.png"
+          th:src="@{/img/icons/favicon/favicon.png}"
           alt="urban infusion logo"
         />
         <p class="checkout__complete-heading">Thanks for purchasing!</p>
         <p>Order confirmation will soon be sent to your email.</p>
-        <a class="btn--green" href="../index.html">Back to homepage</a>
+        <a class="btn--green" th:href="@{/}">Back to homepage</a>
       </div>
       <div class="checkout__complete--overlay"></div>
     </main>

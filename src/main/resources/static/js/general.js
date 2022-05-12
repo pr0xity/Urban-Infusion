@@ -7,9 +7,9 @@ const PRODUCT_PATHNAME = "/product/";
  * Log in handling *
  **********************************************/
 
-const loginbtn = document.querySelector("#login-btn");
-const loginemail = document.querySelector("#login-email");
-const loginpassword = document.querySelector("#login-password");
+const loginButton = document.querySelector("#login-btn");
+const loginEmail = document.querySelector("#login-email");
+const loginPassword = document.querySelector("#login-password");
 const loginAlert = document.querySelector(".login__alert");
 
 /**
@@ -18,7 +18,7 @@ const loginAlert = document.querySelector(".login__alert");
  * @param alertMessage message to be set.
  */
 const setLoginAlert = function (alertMessage) {
-  if (loginbtn !== null) {
+  if (loginButton !== null) {
     loginAlert.innerHTML = `${alertMessage}`;
   }
 };
@@ -27,7 +27,7 @@ const setLoginAlert = function (alertMessage) {
  * Sets the login alert to empty.
  */
 const resetLoginAlert = function () {
-  if (loginbtn !== null) {
+  if (loginButton !== null) {
     loginAlert.innerHTML = "";
   }
 };
@@ -40,8 +40,8 @@ const sendLoginRequest = function (event) {
     fetch(`${URL}${AUTHENTICATION_API_PATHNAME}`, {
       method: "POST",
       body: JSON.stringify({
-        email: loginemail.value.toString(),
-        password: loginpassword.value.toString(),
+        email: loginEmail.value.toString(),
+        password: loginPassword.value.toString(),
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -59,30 +59,40 @@ const sendLoginRequest = function (event) {
 };
 
 //Adding event listeners if login button is present.
-if (loginbtn !== null) {
-  loginbtn.addEventListener("click", sendLoginRequest);
-  loginemail.addEventListener("keypress", sendLoginRequest);
-  loginpassword.addEventListener("keypress", sendLoginRequest);
+if (loginButton !== null) {
+  loginButton.addEventListener("click", sendLoginRequest);
+  loginEmail.addEventListener("keypress", sendLoginRequest);
+  loginPassword.addEventListener("keypress", sendLoginRequest);
 }
 
 /**********************************************
  * Initializing common features for all pages *
  **********************************************/
 
-const tabletQuery = window.matchMedia("(max-width: 54em)");
+const mobileLayoutSize = window.matchMedia("(max-width: 54em)");
+const mobileMenuButtonOpen = document.querySelectorAll(".nav-mobile__btn")[0];
+const mobileMenuButtonClose = document.querySelectorAll(".nav-mobile__btn")[1];
 const userMenuButton = document.querySelector("#user-menu");
 const userMenuElement = document.querySelector(".nav__user-menu");
 const navMobileButtons = document.querySelectorAll(".nav-mobile__btn");
-const mobileMenuButtonOpen = document.querySelectorAll(".nav-mobile__btn")[0];
-const mobileMenuButtonClose = document.querySelectorAll(".nav-mobile__btn")[1];
 const navListElement = document.querySelector(".nav__list");
 const navLinks = navListElement.querySelectorAll(".nav__link");
+const wishlistLink = document.querySelector("#wishlist-link");
 const overlayNavLinkMobileBtn = document.querySelector(
   ".nav__link-menu--overlay"
 );
 const overlayNavUserMobileBtn = document.querySelector(
   ".nav__user-menu--overlay"
 );
+
+const getWishlistUnauthorized = function () {
+  userMenuButton.click();
+  setLoginAlert("Log in to see your favourites")
+}
+
+if (wishlistLink !== null) {
+  wishlistLink.addEventListener("click", getWishlistUnauthorized);
+}
 
 /**
  * Initializes common features on all pages.
@@ -170,7 +180,7 @@ const generalInitialize = function () {
   };
 
   // Checks screen size and changes layout accordingly
-  if (tabletQuery.matches) {
+  if (mobileLayoutSize.matches) {
     footerCaretButtons.createCaretBtns();
     hideElement(navListElement);
     navLinks.forEach((link) => {
@@ -196,4 +206,4 @@ const generalInitialize = function () {
 generalInitialize();
 
 // Update when the window is resized
-tabletQuery.addEventListener("change", generalInitialize);
+mobileLayoutSize.addEventListener("change", generalInitialize);

@@ -9,12 +9,17 @@
       content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
     through nature."
     />
-    <link th:replace="components/design/favicon" />
-    <link th:replace="components/design/font" />
+    <link th:replace="components/designelements/favicon" />
+    <link th:replace="components/designelements/font" />
     <link rel="stylesheet" type="text/css" href="../css/style.css" />
     <link rel="stylesheet" type="text/css" href="../css/queries.css" />
 
     <script src="https://unpkg.com/phosphor-icons"></script>
+    <script
+      defer
+      th:src="@{/js/tools.js}"
+      type="application/javascript"
+    ></script>
     <script
       defer
       th:src="@{/js/components.js}"
@@ -97,19 +102,19 @@
         <form method="post" action="#" class="review__form">
           <h2 class="heading-secondary">What did you think of this product?</h2>
           <input
-            class="review__input"
+            class="input review__input"
             type="text"
             placeholder="Name"
             aria-label="Name"
           />
           <input
-            class="review__input"
+            class="input review__input"
             type="text"
             placeholder="Emailaddress"
             aria-label="Emailaddress"
           />
           <textarea
-            class="review__input"
+            class="input review__input"
             placeholder="Write your review here"
             rows="6"
             cols="50"

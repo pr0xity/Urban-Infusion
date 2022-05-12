@@ -42,7 +42,6 @@ public class HTMLPageController {
     public String getHome(Model model) {
         model.addAttribute("user", this.getUser());
         model.addAttribute("products", productService.getAllProducts());
-
         Wishlist wishlist = this.wishlistService.getWishlistByUser(this.getUser());
         if (wishlist != null) {
             model.addAttribute("wishlist", wishlist.getProducts());

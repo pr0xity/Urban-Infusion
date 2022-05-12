@@ -105,7 +105,7 @@ productsSlider.createSlides();
  * Checks screen size and changes layout accordingly for index page.
  */
 const tabletQueryFeatures = function () {
-  if (tabletQuery.matches) {
+  if (mobileLayoutSize.matches) {
     testimonialCaretButtons.createCaretBtns();
     featuredSlider.createSlides();
     gallerySlider.createSlides();
@@ -119,7 +119,7 @@ const tabletQueryFeatures = function () {
 };
 
 // Update when the window is resized
-tabletQuery.addEventListener("change", tabletQueryFeatures);
+mobileLayoutSize.addEventListener("change", tabletQueryFeatures);
 
 // Initial check when browser is opened
 tabletQueryFeatures();
