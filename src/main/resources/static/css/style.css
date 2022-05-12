@@ -257,14 +257,16 @@ address {
   line-height: 0;
 }
 
-.product__rating {
+.product__rating,
+.product__rating--review {
   display: flex;
   align-items: center;
   font-size: 2.4rem;
   color: #588157;
 }
 
-.product__rating p {
+.product__rating p,
+.product__rating--review p {
   color: #6d6875;
   font-size: 1.8rem;
 }
@@ -1336,7 +1338,7 @@ address {
   cursor: pointer;
 }
 
-.review__form .product__rating input[type="radio"] {
+.review__form .product__rating--review input[type="radio"] {
   /* To take out of flow */
   position: absolute;
   visibility: hidden;
@@ -1363,7 +1365,7 @@ address {
   color: #fff;
 }
 
-.review__form .product__rating p {
+.review__form .product__rating--review p {
   margin-right: 3.6rem;
 }
 

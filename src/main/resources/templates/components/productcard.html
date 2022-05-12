@@ -9,11 +9,27 @@
     class="product__rating"
     th:attr="data-rating=${product.averageRating}"
   >
-    <span class="product__rating--icon"><i class="ph-leaf-fill"></i></span>
-    <span class="product__rating--icon"><i class="ph-leaf-fill"></i></span>
-    <span class="product__rating--icon"><i class="ph-leaf-fill"></i></span>
-    <span class="product__rating--icon"><i class="ph-leaf-light"></i></span>
-    <span class="product__rating--icon"><i class="ph-leaf-light"></i></span>
+    <img
+      class="product__rating--img"
+      src="../img/icons/leaf.svg"
+      data-rating="1"
+    /><img
+      class="product__rating--img"
+      src="../img/icons/leaf.svg"
+      data-rating="2"
+    /><img
+      class="product__rating--img"
+      src="../img/icons/leaf.svg"
+      data-rating="3"
+    /><img
+      class="product__rating--img"
+      src="../img/icons/leaf.svg"
+      data-rating="4"
+    /><img
+      class="product__rating--img"
+      src="../img/icons/leaf.svg"
+      data-rating="5"
+    />
     <p th:text="'(' + ${product.ratings.size()} + ')'">(0)</p>
   </a>
   <a th:href="@{/product/{id}(id=${product.id})}" class="link">
@@ -34,7 +50,10 @@
       class="product__btn--wishlist"
       th:attr="data-wishlist=${wishlist == null} ? 'false' : (${#sets.contains(wishlist, product)} ? 'true' : 'false')"
     ></div>
-    <button th:attr="data-productid=${product.id}" aria-label="add item to shopping cart">
+    <button
+      th:attr="data-productid=${product.id}"
+      aria-label="add item to shopping cart"
+    >
       <i class="ph-tote-light btn--icon"></i>
     </button>
   </div>

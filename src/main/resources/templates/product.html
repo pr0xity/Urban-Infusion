@@ -61,21 +61,27 @@
             class="product__rating"
             th:attr="data-rating=${product.averageRating}"
           >
-            <span class="product__rating--icon"
-              ><i class="ph-leaf-fill"></i
-            ></span>
-            <span class="product__rating--icon"
-              ><i class="ph-leaf-fill"></i
-            ></span>
-            <span class="product__rating--icon"
-              ><i class="ph-leaf-light"></i
-            ></span>
-            <span class="product__rating--icon"
-              ><i class="ph-leaf-light"></i
-            ></span>
-            <span class="product__rating--icon"
-              ><i class="ph-leaf-light"></i
-            ></span>
+            <img
+              class="product__rating--img"
+              src="../img/icons/leaf.svg"
+              data-rating="1"
+            /><img
+              class="product__rating--img"
+              src="../img/icons/leaf.svg"
+              data-rating="2"
+            /><img
+              class="product__rating--img"
+              src="../img/icons/leaf.svg"
+              data-rating="3"
+            /><img
+              class="product__rating--img"
+              src="../img/icons/leaf.svg"
+              data-rating="4"
+            /><img
+              class="product__rating--img"
+              src="../img/icons/leaf.svg"
+              data-rating="5"
+            />
             <p th:text="'(' + ${product.ratings.size()} + ')'">(0)</p>
           </div>
         </a>
@@ -121,7 +127,7 @@
             maxlength="250"
             aria-label="Write your review here"
           ></textarea>
-          <div class="product__rating" id="review__rating">
+          <div class="product__rating--review" id="review__rating">
             <p>Rating</p>
             <label>
               <img
@@ -199,21 +205,27 @@
                 class="product__rating"
                 th:attr="data-rating=${comment.rating}"
               >
-                <span class="product__rating&#45;&#45;icon"
-                  ><i class="ph-leaf-fill"></i
-                ></span>
-                <span class="product__rating&#45;&#45;icon"
-                  ><i class="ph-leaf-fill"></i
-                ></span>
-                <span class="product__rating&#45;&#45;icon"
-                  ><i class="ph-leaf-fill"></i
-                ></span>
-                <span class="product__rating&#45;&#45;icon"
-                  ><i class="ph-leaf-light"></i
-                ></span>
-                <span class="product__rating&#45;&#45;icon"
-                  ><i class="ph-leaf-light"></i
-                ></span>
+                <img
+                  class="product__rating--img"
+                  src="../img/icons/leaf.svg"
+                  data-rating="1"
+                /><img
+                  class="product__rating--img"
+                  src="../img/icons/leaf.svg"
+                  data-rating="2"
+                /><img
+                  class="product__rating--img"
+                  src="../img/icons/leaf.svg"
+                  data-rating="3"
+                /><img
+                  class="product__rating--img"
+                  src="../img/icons/leaf.svg"
+                  data-rating="4"
+                /><img
+                  class="product__rating--img"
+                  src="../img/icons/leaf.svg"
+                  data-rating="5"
+                />
               </div>
               <p
                 th:text="${comment.user.firstName + ' ' + comment.user.lastName}"
