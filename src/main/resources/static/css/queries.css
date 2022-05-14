@@ -648,11 +648,11 @@
   }
 
   .section-hero {
-    padding: 0000;
+    padding: 0;
   }
 
   .section-hero .btn,
-  .sedtion-hero .btn:visited {
+  .section-hero .btn:visited {
     padding: 0 2rem 0.4rem 2rem;
     max-width: 39rem;
     width: 86vw;

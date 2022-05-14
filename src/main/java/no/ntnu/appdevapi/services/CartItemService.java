@@ -48,4 +48,11 @@ public interface CartItemService {
      * @param id id of the cart item to delete.
      */
     void deleteCartItem(long id);
+
+    /**
+     * Deletes all the cart items in the given shopping sessions.
+     *
+     * @param shoppingSession shopping session to delete cart items from.
+     */
+    void deleteAllCartItemsInShoppingSession(ShoppingSession shoppingSession);
 }

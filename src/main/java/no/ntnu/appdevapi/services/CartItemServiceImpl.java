@@ -40,4 +40,9 @@ public class CartItemServiceImpl implements CartItemService{
     public void deleteCartItem(long id) {
         this.cartItemRepository.deleteById(id);
     }
+
+    @Override
+    public void deleteAllCartItemsInShoppingSession(ShoppingSession shoppingSession) {
+        this.cartItemRepository.deleteAllByShoppingSession(shoppingSession);
+    }
 }

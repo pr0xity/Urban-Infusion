@@ -1,5 +1,7 @@
 package no.ntnu.appdevapi.controllers;
 
+import no.ntnu.appdevapi.DAO.OrderItemRepository;
+import no.ntnu.appdevapi.DAO.ProductRepository;
 import no.ntnu.appdevapi.entities.*;
 import no.ntnu.appdevapi.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * MVC controller for the html pages.
@@ -32,6 +37,9 @@ public class HTMLPageController {
     @Autowired
     private ShoppingSessionService shoppingSessionService;
 
+    @Autowired
+    private OrderItemService orderItemService;
+
     /**
      * Gets the home page with the required attributes. Returns index thymeleaf template.
      *
@@ -42,6 +50,7 @@ public class HTMLPageController {
     public String getHome(Model model) {
         model.addAttribute("user", this.getUser());
         model.addAttribute("products", productService.getAllProducts());
+        model.addAttribute("topSellingProducts", getTop3SellingProducts());
         Wishlist wishlist = this.wishlistService.getWishlistByUser(this.getUser());
         if (wishlist != null) {
             model.addAttribute("wishlist", wishlist.getProducts());
@@ -117,7 +126,10 @@ public class HTMLPageController {
      */
     @GetMapping("checkout")
     public String getCheckout(Model model) {
+        UserAddress userAddress = userAddressService.getUserAddressByUserID(this.getUser().getId());
+
         model.addAttribute("user", this.getUser());
+        model.addAttribute("address", userAddress.getAddressLine1() + ", " + userAddress.getPostalCode() + " " + userAddress.getCity());
         ShoppingSession shoppingSession = this.shoppingSessionService.getShoppingSessionByUser(this.getUser());
 
         if (shoppingSession != null){
@@ -127,6 +139,17 @@ public class HTMLPageController {
         this.addPermissionLevelToModel(model);
 
         return "checkout";
+    }
+
+    /**
+     * Displays the current users shopping session.
+     *
+     * @return checkout thymeleaf template.
+     */
+    @GetMapping("signup")
+    public String getSignup(Model model) {
+        this.addPermissionLevelToModel(model);
+        return "signup";
     }
 
     /**
@@ -149,5 +172,21 @@ public class HTMLPageController {
      */
     private User getUser() {
         return this.userService.getSessionUser();
+    }
+
+    /**
+     * Returns a list over the 3 top-selling products.
+     *
+     * @return list over 3 top-selling products.
+     */
+    private List<Product> getTop3SellingProducts() {
+        List<Product> topSellingProducts = new ArrayList<>();
+
+        List<Long> productIds = orderItemService.getIdOfTop3SellingProducts();
+        for (Long id : productIds) {
+            topSellingProducts.add(productService.getProduct(id));
+        }
+
+        return topSellingProducts;
     }
 }

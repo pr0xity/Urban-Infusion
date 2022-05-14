@@ -33,6 +33,9 @@ public class ShoppingSession {
     @ApiModelProperty("The total cost of the items in this shopping session.")
     private double total;
 
+    @ApiModelProperty("The total amount of products in this shopping session")
+    private int quantity;
+
     @ApiModelProperty("When the shopping session was created.")
     @Column(name = "created_at")
     private LocalDateTime createdAt;
@@ -94,6 +97,11 @@ public class ShoppingSession {
         this.user = user;
     }
 
+    /**
+     * Returns the set of cart items in this shopping session.
+     *
+     * @return set of cart items in this shopping session.
+     */
     public Set<CartItem> getCart() {
         return this.cart;
     }
@@ -109,11 +117,33 @@ public class ShoppingSession {
 
     /**
      * Sets the total cost of this shopping session.
-     *
-     * @param total the new total cost of this shopping session.
      */
-    public void setTotal(double total) {
-        this.total = this.cart.stream().mapToDouble(CartItem::getTotal).sum();
+    public void updateTotal() {
+        if (this.cart.isEmpty()) {
+            this.total = 0;
+        } else {
+            this.total = this.cart.stream().mapToDouble(CartItem::getTotal).sum();
+        }
+    }
+
+    /**
+     * Returns the quantity of products in this order.
+     *
+     * @return quantity of products in this order.
+     */
+    public int getQuantity() {
+        return quantity;
+    }
+
+    /**
+     * Updates the quantity of products in this order.
+     */
+    public void updateQuantity() {
+        if (this.cart.isEmpty()) {
+            this.quantity = 0;
+        } else {
+            this.quantity = this.cart.stream().mapToInt(CartItem::getQuantity).sum();
+        }
     }
 
     /**

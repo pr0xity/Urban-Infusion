@@ -39,13 +39,25 @@
       aria-label="View wishlist"
       ><i class="ph-heart-light btn--icon"></i
     ></a>
+    <button
+      th:if="${permission} == 'NoUser'"
+      id="checkout-link"
+      class="nav__item"
+      aria-label="Go to checkout"
+    >
+      <i class="ph-tote-light btn--icon"></i
+      ></button>
     <a
+      th:if="${permission} == 'user' or ${permission} eq 'owner' or ${permission} eq 'admin'"
       th:href="@{/checkout}"
       class="nav__link nav__item"
       aria-label="Go to checkout"
     >
-      <i class="ph-tote-light btn--icon"></i
-    ></a>
+      <i class="ph-tote-light btn--icon">
+
+      </i
+    ><div class="nav__checkout--quantity">1</div>
+    </a>
     <button class="nav__item" id="user-menu" aria-label="account menu">
       <i class="ph-user-circle-light btn--icon"></i>
     </button>

@@ -120,22 +120,31 @@
         <address class="checkout__customer margin-left--small">
           <div class="checkout__info">
             <span class="checkout__label">Name</span>
-            <span class="checkout__info">Leslie Alexander</span>
+            <span
+              class="checkout__info"
+              th:text="${user.firstName} + ' ' + ${user.lastName}"
+              >Leslie Alexander</span
+            >
           </div>
           <div class="checkout__info">
             <span class="checkout__label">Emailaddress</span>
-            <span class="checkout__info">leslie.alexander@example.com</span>
+            <span class="checkout__info" th:text="${user.email}"
+              >leslie.alexander@example.com</span
+            >
           </div>
           <div class="checkout__info">
             <span class="checkout__label"> Address </span>
-            <span class="checkout__info checkout__info--address">
+            <span
+              class="checkout__info checkout__info--address"
+              th:text="${address}"
+            >
               Larsgårdsvegen 2, 6009 Ålesund
             </span>
           </div>
         </address>
         <span class="checkout__wrong">
           Wrong information?
-          <a class="link" href="account.html"> Click here </a>
+          <a class="link" th:href="@{/account}"> Click here </a>
         </span>
       </section>
       <section class="section-payment-delivery container--white">

@@ -69,6 +69,7 @@ public class AppdevapiApplication {
       userService.save(new UserDto("user", "user",  "user", "1234"));
       userService.save(new UserDto("admin", "admin",  "admin",  "1234", "admin"));
       userService.save(new UserDto("owner", "owner", "owner", "1234","owner"));
+      userService.save(new UserDto("Janita", "Røyseth", "janita.lillevik@hotmail.com", "SuperHemmelig123", "Borgundvegen 321", "6003", "Ålesund", "Norge", "93021232"));
 
       Product product1 = new Product("Heather tea", "From Norwegian mountains. Gathered carefully before the bees to hold the honey taste. Rich in vitamins. Local produce", "Norwegian mountains", 200, 50, 3, 1);
       Product product2 = new Product("Linden blossom tea", "Classic Latvian tea. Helps against laziness. Use 100C water (not typical for herbal teas). Gathered in summer 2021", "Classic Latvian tea", 200, 50, 2, 2);
@@ -105,7 +106,7 @@ public class AppdevapiApplication {
       shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(2)));
       shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(3)));
       shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(4)));
-
+      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(5)));
     };
   }*/
 }

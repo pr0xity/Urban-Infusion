@@ -376,6 +376,22 @@ address {
   /* z-index: 1; */
 }
 
+.nav__checkout--quantity {
+  position: absolute;
+  top: 0;
+  right: -15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100px;
+  background-color: #588157;
+  color: #ffffff;
+  text-align: center;
+}
+
 .nav-mobile__btn {
   margin-right: auto;
   display: none;
@@ -551,7 +567,7 @@ address {
 }
 
 .section-featured .btn:active {
-  transform: translate(-50%, -50%) scale(105);
+  transform: translate(-50%, -50%) scale(1.05);
 }
 
 /****************************/
@@ -1436,36 +1452,39 @@ address {
   font-size: 1.6rem;
 }
 
-.signup--images {
-  box-sizing: border-box;
-}
-
 .signup__img {
-  position: absolute;
   transition: 0.4s ease;
+  width: 100%;
+  height: auto;
   border: 0.4rem solid white;
   box-shadow: 2rem 2rem 3rem rgba(0, 0, 0, 0.1);
-  width: 25%;
-  max-width: 50rem;
-  height: auto;
 }
 
 .signup__img:hover {
-  z-index: 999;
   transform: scale(1.3);
 }
 
-.signup__img:first-child {
+.signup__picture {
+  position: absolute;
+  width: 25%;
+  max-width: 50rem;
+}
+
+.signup__picture:hover {
+  z-index: 999;
+}
+
+.signup__picture:first-child {
   top: 10%;
   right: 4%;
 }
 
-.signup__img:nth-child(2) {
+.signup__picture:nth-child(2) {
   top: 25%;
   right: 14%;
 }
 
-.signup__img:nth-child(3) {
+.signup__picture:nth-child(3) {
   top: 45%;
   right: 2%;
 }
@@ -1595,15 +1614,6 @@ thead tr {
   gap: 2.4rem;
   margin-bottom: 1.2rem;
   justify-content: space-between;
-}
-
-.marker-icon {
-  content: url(../img/mapmarker.svg);
-}
-
-.leaflet-marker-icon .marker-icon .leaflet-zoom-animated .leaflet-interactive {
-  height: 5rem;
-  rotate: 90;
 }
 
 .modal {

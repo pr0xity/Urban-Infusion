@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
+    through nature."
+    />
+    <link th:replace="components/designelements/favicon" />
+    <link th:replace="components/designelements/font" />
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet" />
+    <link th:href="@{/css/queries.css}" type="text/css" rel="stylesheet" />
+
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <script
+      defer
+      th:src="@{/js/tools.js}"
+      type="application/javascript"
+    ></script>
+    <script
+      defer
+      th:src="@{/js/components.js}"
+      type="application/javascript"
+    ></script>
+    <script
+      defer
+      th:src="@{/js/general.js}"
+      type="application/javascript"
+    ></script>
+    <title>Urban Infusion</title>
+  </head>
+  <body>
+    <header th:insert="components/header" class="header"></header>
+    <main class="signup">
+      <section class="section-create-account">
+        <h1 class="section-title">Create an account</h1>
+        <div class="signup__form">
+          <label class="heading-signup"
+            >First name
+            <input
+              class="input signup__input signup__input--first-name"
+              type="text"
+              placeholder=""
+            />
+          </label>
+          <label class="heading-signup"
+            >Last name
+            <input class="input signup__input" type="text" placeholder="" />
+          </label>
+          <label class="heading-signup"
+            >Email address
+            <input
+              class="input signup__input signup__input--email-address"
+              type="text"
+              placeholder=""
+            />
+          </label>
+
+          <label class="heading-signup"
+            >Address
+            <input
+              class="input signup__input signup__input--address"
+              type="text"
+              placeholder=""
+            />
+          </label>
+
+          <label class="heading-signup"
+            >Municipality
+            <input class="input signup__input" type="text" placeholder="" />
+          </label>
+
+          <label class="heading-signup"
+            >Zip-code
+            <input
+              class="input signup__input signup__input--zip-code"
+              type="text"
+              placeholder=""
+            />
+          </label>
+
+          <label class="heading-signup"
+            >Password
+            <input
+              class="input signup__input signup__input--password"
+              type="password"
+              placeholder=""
+            />
+          </label>
+
+          <button class="btn--green">Sign up</button>
+        </div>
+        <div class="signup signup--images">
+          <picture class="signup__picture">
+            <source
+              type="image/webp"
+              srcset="
+                img/gallery/pic-1-390w.webp,
+                img/gallery/pic-1-780w.webp  2x,
+                img/gallery/pic-1-1200w.webp 3x
+              "
+            />
+            <source
+              type="image/jpeg"
+              srcset="
+                img/gallery/pic-1-390w.jpg,
+                img/gallery/pic-1-780w.jpg  2x,
+                img/gallery/pic-1-1200w.jpg 3x
+              "
+            />
+            <img
+              class="signup__img"
+              src="img/gallery/pic-1-390w.jpg"
+              alt="herbal tea in a teapot"
+            />
+          </picture>
+          <picture class="signup__picture">
+            <source
+              type="image/webp"
+              srcset="
+                img/gallery/pic-2-390w.webp,
+                img/gallery/pic-2-780w.webp  2x,
+                img/gallery/pic-2-1200w.webp 3x
+              "
+            />
+            <source
+              type="image/jpeg"
+              srcset="
+                img/gallery/pic-2-390w.jpg,
+                img/gallery/pic-2-780w.jpg  2x,
+                img/gallery/pic-2-1200w.jpg 3x
+              "
+            />
+            <img
+              class="signup__img"
+              src="img/gallery/pic-2-390w.jpg"
+              alt="herbal tea in a teacup"
+            />
+          </picture>
+          <picture class="signup__picture">
+            <source
+              type="image/webp"
+              srcset="
+                img/gallery/pic-3-390w.webp,
+                img/gallery/pic-3-780w.webp  2x,
+                img/gallery/pic-3-1200w.webp 3x
+              "
+            />
+            <source
+              type="image/jpeg"
+              srcset="
+                img/gallery/pic-3-390w.jpg,
+                img/gallery/pic-3-780w.jpg  2x,
+                img/gallery/pic-3-1200w.jpg 3x
+              "
+            />
+            <img
+              class="signup__img"
+              src="img/gallery/pic-3-390w.jpg"
+              alt="herbal tea ready to be served"
+            />
+          </picture>
+        </div>
+      </section>
+    </main>
+    <footer th:insert="components/footer" class="footer"></footer>
+  </body>
+</html>

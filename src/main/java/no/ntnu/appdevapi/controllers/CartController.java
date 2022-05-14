@@ -6,6 +6,7 @@ import no.ntnu.appdevapi.services.ProductService;
 import no.ntnu.appdevapi.services.ShoppingSessionService;
 import no.ntnu.appdevapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,14 +53,15 @@ public class CartController {
     public ResponseEntity<?> addProductToCart(@PathVariable long productId) {
         CartItem cartItem = getCartItem(productId);
 
-        if (!canCartItemBeModified(productId, cartItem)) {
+        if (!canCartItemBeModified(productId, cartItem) && getProduct(productId) != null) {
             CartItem newCartItem = new CartItem(getShoppingSession(), getProduct(productId));
             cartItemService.addCartItem(newCartItem);
-
+            updateShoppingSession();
             return new ResponseEntity<>(HttpStatus.OK);
         } else if (canCartItemBeModified(productId, cartItem)) {
             cartItem.increaseQuantity();
             cartItemService.update(cartItem.getId(), cartItem);
+            updateShoppingSession();
 
             return new ResponseEntity<>(HttpStatus.OK);
         } else if (getUser() == null) {
@@ -81,12 +83,12 @@ public class CartController {
         if (canCartItemBeModified(productId, cartItem) && cartItem.getQuantity() > 1) {
             cartItem.decreaseQuantity();
             cartItemService.update(cartItem.getId(), cartItem);
-
+            updateShoppingSession();
             return new ResponseEntity<>(HttpStatus.OK);
 
         } else if (canCartItemBeModified(productId, cartItem) && cartItem.getQuantity() == 1) {
             cartItemService.deleteCartItem(cartItem.getId());
-
+            updateShoppingSession();
             return new ResponseEntity<>(HttpStatus.OK);
         } else if (getUser() == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
@@ -121,6 +123,15 @@ public class CartController {
      */
     private ShoppingSession getShoppingSession() {
         return this.shoppingSessionService.getShoppingSessionByUser(getUser());
+    }
+
+    /**
+     * Updates total and quantity fields in the current shopping session.
+     */
+    private void updateShoppingSession() {
+        getShoppingSession().updateQuantity();
+        getShoppingSession().updateTotal();
+        shoppingSessionService.update(getShoppingSession().getId(), getShoppingSession());
     }
 
     /**

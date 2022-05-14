@@ -43,6 +43,14 @@ public class User {
   @JoinColumn(name="address_id")
   private UserAddress address;
 
+  @OneToMany(mappedBy = "user")
+  @JsonIgnore
+  private List<OrderDetails> orders;
+
+  @OneToOne(mappedBy = "user")
+  @JsonIgnore
+  private ShoppingSession shoppingSession;
+
   @OneToOne(mappedBy = "user")
   @JsonIgnore
   private Wishlist wishlist;

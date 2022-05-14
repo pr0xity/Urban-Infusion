@@ -78,6 +78,7 @@ const navMobileButtons = document.querySelectorAll(".nav-mobile__btn");
 const navListElement = document.querySelector(".nav__list");
 const navLinks = navListElement.querySelectorAll(".nav__link");
 const wishlistLink = document.querySelector("#wishlist-link");
+const checkoutLink = document.querySelector("#checkout-link");
 const overlayNavLinkMobileBtn = document.querySelector(
   ".nav__link-menu--overlay"
 );
@@ -92,6 +93,15 @@ const getWishlistUnauthorized = function () {
 
 if (wishlistLink !== null) {
   wishlistLink.addEventListener("click", getWishlistUnauthorized);
+}
+
+const getCheckoutUnauthorized = function () {
+  userMenuButton.click();
+  setLoginAlert("Log in to checkout")
+}
+
+if (checkoutLink !== null) {
+  checkoutLink.addEventListener("click", getCheckoutUnauthorized);
 }
 
 /**
