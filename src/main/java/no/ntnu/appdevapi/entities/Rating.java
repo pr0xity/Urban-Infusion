@@ -1,6 +1,5 @@
 package no.ntnu.appdevapi.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import io.swagger.annotations.ApiModelProperty;
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -20,6 +19,9 @@ public class Rating {
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ApiModelProperty("The display name of the user who made the rating.")
+    private String displayName;
 
     @ApiModelProperty("The product rated.")
     //@JsonBackReference
@@ -44,12 +46,14 @@ public class Rating {
      * Creates an instance of a rating.
      *
      * @param user the user who made this rating.
+     * @param displayName the display name of the user in this rating.
      * @param product the product this rating belongs to.
      * @param rating the integer value of this rating.
      * @param comment the comment of this rating.
      */
-    public Rating(User user, Product product, int rating, String comment) {
+    public Rating(User user, String displayName, Product product, int rating, String comment) {
         this.user = user;
+        setDisplayName(displayName);
         this.product = product;
         this.rating = rating;
         this.comment = comment;
@@ -89,6 +93,28 @@ public class Rating {
      */
     public void setUser(User user) {
         this.user = user;
+    }
+
+    /**
+     * Returns the display name for this rating.
+     *
+     * @return display name for this rating.
+     */
+    public String getDisplayName() {
+        return this.displayName;
+    }
+
+    /**
+     * Sets the display name for this rating.
+     *
+     * @param displayName display name to be set for this rating, if empty "anonymous" will be set.
+     */
+    public void setDisplayName(String displayName) {
+        if (displayName == null || displayName.isEmpty()) {
+            this.displayName = "Anonymous";
+        } else {
+            this.displayName = displayName;
+        }
     }
 
     public String getUserAndProductAsString() {

@@ -1,5 +1,6 @@
 package no.ntnu.appdevapi.services;
 
+import no.ntnu.appdevapi.entities.OrderDetails;
 import no.ntnu.appdevapi.entities.OrderItem;
 
 import java.util.List;
@@ -23,6 +24,14 @@ public interface OrderItemService {
      * @return all order items.
      */
     List<OrderItem> getAllOrderItems();
+
+    /**
+     * Returns list of order items with the given order details.
+     *
+     * @param orderDetails the order detail to find order items from.
+     * @return list of order items associated with the given order details.
+     */
+    List<OrderItem> getOrderItemsByOrderDetails(OrderDetails orderDetails);
 
     /**
      * Adds the given order item.

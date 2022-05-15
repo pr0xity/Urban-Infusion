@@ -49,7 +49,7 @@
           </p>
           <address class="account-info__row">
             <span>Email address</span>
-            <span th:text="${user.email}" id="field_email"
+            <span th:text="${user.email.replace('@', '@&#8203;')}" id="field_email"
               >esther.&#8203;howard@&#8203;example.&#8203;com</span
             >
             <button id="open_email" class="account-info__btn">
@@ -203,29 +203,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>04.02.2022</td>
-                <td>6453450</td>
-                <td>1xHeather tea, 2xLinden blossom tea</td>
-                <td>600,-</td>
-              </tr>
-              <tr>
-                <td>24.02.2022</td>
-                <td>6456342</td>
-                <td>1xLinden blossom tea</td>
-                <td>200,-</td>
-              </tr>
-              <tr>
-                <td>03.03.2022</td>
-                <td>7563464</td>
-                <td>1xLinden blossom tea, 4xSencha tea</td>
-                <td>2200,-</td>
-              </tr>
-              <tr>
-                <td>15.03.2022</td>
-                <td>7695405</td>
-                <td>1xSencha tea</td>
-                <td>500,-</td>
+              <tr th:each="orderDetail : ${orderDetails}">
+                <td th:text="${orderDetail.getCreatedAt().toLocalDate()}">04.02.2022</td>
+                <td th:text="${orderDetail.id}">6453450</td>
+                <td><span th:each="orderItem : ${orderDetail.orderItems}" th:text="${orderItem.quantity} + 'x' + ${orderItem.getProduct().getName()} + ', '"></span></td>
+                <td th:text="${orderDetail.total} + ',-'">600,-</td>
               </tr>
             </tbody>
           </table>

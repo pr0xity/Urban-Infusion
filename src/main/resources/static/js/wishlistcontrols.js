@@ -74,10 +74,7 @@ const setWishlistButtons = function () {
    * @param button the button to change icon of.
    */
   const addHeartIcon = function (button) {
-    if (
-      isProductInWishlist(button) &&
-      window.location.pathname === "/wishlist"
-    ) {
+    if (isProductInWishlist(button) && window.location.pathname === "/wishlist") {
       addBrokenHeartIcon(button);
     } else if (isProductInWishlist(button)) {
       addFilledHeartIcon(button);

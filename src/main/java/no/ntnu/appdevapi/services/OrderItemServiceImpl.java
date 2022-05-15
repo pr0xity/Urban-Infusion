@@ -1,8 +1,8 @@
 package no.ntnu.appdevapi.services;
 
 import no.ntnu.appdevapi.DAO.OrderItemRepository;
+import no.ntnu.appdevapi.entities.OrderDetails;
 import no.ntnu.appdevapi.entities.OrderItem;
-import no.ntnu.appdevapi.entities.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +31,11 @@ public class OrderItemServiceImpl implements OrderItemService {
     }
 
     @Override
+    public List<OrderItem> getOrderItemsByOrderDetails(OrderDetails orderDetails) {
+        return new ArrayList<>(orderItemRepository.findAllByOrderDetails(orderDetails));
+    }
+
+    @Override
     public void addOrderItem(OrderItem orderItem) {
         this.orderItemRepository.save(orderItem);
     }
@@ -56,11 +61,7 @@ public class OrderItemServiceImpl implements OrderItemService {
     public List<Long> getIdOfTop3SellingProducts() {
         List<Long> topSellingProducts = new ArrayList<>();
 
-        if (orderItemRepository.findTopBestSellingProducts().isEmpty()) {
-            topSellingProducts.add(getAllOrderItems().get(0).getProduct().getId());
-            topSellingProducts.add(getAllOrderItems().get(1).getProduct().getId());
-            topSellingProducts.add(getAllOrderItems().get(2).getProduct().getId());
-        } else {
+        if (!orderItemRepository.findTopBestSellingProducts().isEmpty()) {
             topSellingProducts.addAll(orderItemRepository.findTopBestSellingProducts());
         }
 

@@ -124,8 +124,8 @@ public class OrderDetails {
     /**
      * Sets the total cost of this order.
      */
-    public void setTotal() {
-        this.total = this.orderItems.stream().mapToDouble(OrderItem::getTotal).sum();
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     /**
@@ -138,10 +138,10 @@ public class OrderDetails {
     }
 
     /**
-     * Updates the quantity of products in this order.
+     * Sets the quantity of products in this order
      */
-    public void updateQuantity() {
-        this.quantity = this.orderItems.stream().mapToInt(OrderItem::getQuantity).sum();
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     /**

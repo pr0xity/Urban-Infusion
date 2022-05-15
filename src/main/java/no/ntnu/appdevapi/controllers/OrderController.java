@@ -1,5 +1,6 @@
 package no.ntnu.appdevapi.controllers;
 
+import no.ntnu.appdevapi.DTO.OrderDetailsDto;
 import no.ntnu.appdevapi.entities.*;
 import no.ntnu.appdevapi.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,13 +54,13 @@ public class OrderController {
     /**
      * Retrieves the order details with the given id.
      *
-     * @param id id of the order details to get.
+     * @param orderId id of the order details to get.
      * @return order details with the given id and 200 OK, or 404 Not found on failure.
      */
-    @GetMapping("/{id}")
-    public ResponseEntity<OrderDetails> getOne(@PathVariable Integer id) {
+    @GetMapping("/{orderId}")
+    public ResponseEntity<OrderDetails> getOne(@PathVariable Integer orderId) {
         ResponseEntity<OrderDetails> response;
-        OrderDetails orderDetails = this.orderDetailsService.getOrderDetails(id);
+        OrderDetails orderDetails = this.orderDetailsService.getOrderDetails(orderId);
 
         if (orderDetails != null) {
             response = new ResponseEntity<>(orderDetails, HttpStatus.OK);
@@ -100,39 +101,47 @@ public class OrderController {
     }
 
     /**
-     * Deletes the order details which has the given id.
+     * Updates the order details which has the given id by the given order details.
      *
-     * @param id the id of the order details to be deleted.
-     * @return 200 OK on success, 404 Not found on failure.
+     * @param orderId the id of the order details to update.
+     * @param orderDetailsDto the order details to update with.
+     * @return 200 OK on success, 400 Bad request on failure.
      */
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable int id) {
+    @PutMapping("/{orderId}")
+    public ResponseEntity<String> update(@PathVariable long orderId, @RequestBody OrderDetailsDto orderDetailsDto) {
         ResponseEntity<String> response;
-        if (this.orderDetailsService.getOrderDetails(id) != null) {
-            this.orderDetailsService.deleteOrderDetails(id);
+
+        OrderDetails orderDetails = orderDetailsService.getOrderDetails(orderId);
+        User user = userService.findOneByEmail(orderDetailsDto.getEmail());
+
+        if ( doesOrderExist(orderId, user) ) {
+            orderDetails.setTotal(orderDetailsDto.getTotal());
+            orderDetails.setQuantity(orderDetailsDto.getQuantity());
+            orderDetails.setProcessed(orderDetailsDto.isProcessed());
+            this.orderDetailsService.update(orderId, orderDetails);
             response = new ResponseEntity<>(HttpStatus.OK);
         } else {
-            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+
         return response;
     }
 
     /**
-     * Updates the order details which has the given id by the given order details.
+     * Deletes the order details which has the given id.
      *
-     * @param id the id of the order details to update.
-     * @param orderDetails the order details to update with.
-     * @return 200 OK on success, 400 Bad request on failure.
+     * @param orderId the id of the order details to be deleted.
+     * @return 200 OK on success, 404 Not found on failure.
      */
-    @PutMapping("/{id}")
-    public ResponseEntity<String> update(@PathVariable int id, @RequestBody OrderDetails orderDetails) {
+    @DeleteMapping("/{orderId}")
+    public ResponseEntity<String> delete(@PathVariable long orderId) {
         ResponseEntity<String> response;
 
-        if (orderDetails != null && orderDetails.getId() == id && this.orderDetailsService.getOrderDetails(id) != null ) {
-            this.orderDetailsService.update(id, orderDetails);
+        if (this.orderDetailsService.getOrderDetails(orderId) != null) {
+            this.orderDetailsService.deleteOrderDetails(orderId);
             response = new ResponseEntity<>(HttpStatus.OK);
         } else {
-            response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
         return response;
@@ -183,6 +192,18 @@ public class OrderController {
         getShoppingSession().updateQuantity();
         getShoppingSession().updateTotal();
         shoppingSessionService.update(getShoppingSession().getId(), getShoppingSession());
+    }
+
+    /**
+     * Checks if an order with the given order id and given user exists.
+     *
+     * @param orderId the id of the order to check if exists.
+     * @param user the user of the order to check if exists.
+     * @return true if an order with the id and user exists, false if not.
+     */
+    private boolean doesOrderExist(long orderId, User user) {
+        OrderDetails orderDetails = orderDetailsService.getOrderDetails(orderId);
+        return  orderDetails != null && orderDetails.getId() == orderId && this.orderDetailsService.getOrderDetails(orderId) != null && orderDetails.getUser() == user ;
     }
 
     /**

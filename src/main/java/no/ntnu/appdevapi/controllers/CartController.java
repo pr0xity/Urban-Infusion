@@ -6,7 +6,6 @@ import no.ntnu.appdevapi.services.ProductService;
 import no.ntnu.appdevapi.services.ShoppingSessionService;
 import no.ntnu.appdevapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -57,6 +56,7 @@ public class CartController {
             CartItem newCartItem = new CartItem(getShoppingSession(), getProduct(productId));
             cartItemService.addCartItem(newCartItem);
             updateShoppingSession();
+
             return new ResponseEntity<>(HttpStatus.OK);
         } else if (canCartItemBeModified(productId, cartItem)) {
             cartItem.increaseQuantity();
@@ -67,6 +67,7 @@ public class CartController {
         } else if (getUser() == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
+
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
@@ -80,15 +81,17 @@ public class CartController {
     @RequestMapping(value = "/{productId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteProductFromCart(@PathVariable long productId) {
         CartItem cartItem = getCartItem(productId);
+
         if (canCartItemBeModified(productId, cartItem) && cartItem.getQuantity() > 1) {
             cartItem.decreaseQuantity();
             cartItemService.update(cartItem.getId(), cartItem);
             updateShoppingSession();
-            return new ResponseEntity<>(HttpStatus.OK);
 
+            return new ResponseEntity<>(HttpStatus.OK);
         } else if (canCartItemBeModified(productId, cartItem) && cartItem.getQuantity() == 1) {
             cartItemService.deleteCartItem(cartItem.getId());
             updateShoppingSession();
+
             return new ResponseEntity<>(HttpStatus.OK);
         } else if (getUser() == null) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);

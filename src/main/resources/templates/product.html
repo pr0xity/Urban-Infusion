@@ -46,7 +46,7 @@
     <header th:include="components/header" class="header"></header>
     <main
       class="product"
-      th:attr="data-id=${product.id}"
+      th:attr="data-productId=${product.id}"
       th:attrappend="data-wishlist=${wishlist == null} ? 'false' : (${#sets.contains(wishlist, product)} ? 'true' : 'false')"
     >
       <section class="section-product-info">
@@ -228,7 +228,7 @@
                 />
               </div>
               <p
-                th:text="${comment.user.firstName + ' ' + comment.user.lastName}"
+                th:text="${comment.displayName}"
               >
                 Miranda
               </p>

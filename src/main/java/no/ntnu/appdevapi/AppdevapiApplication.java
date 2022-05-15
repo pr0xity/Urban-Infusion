@@ -53,7 +53,7 @@ public class AppdevapiApplication {
     );
   }
 
-/*
+
   @Bean
   CommandLineRunner run(UserService userService, PermissionLevelService permissionLevelService, ProductService productService, RatingServiceImpl ratingService, WishlistService wishlistService, ShoppingSessionService shoppingSessionService) {
     return args -> {
@@ -69,7 +69,6 @@ public class AppdevapiApplication {
       userService.save(new UserDto("user", "user",  "user", "1234"));
       userService.save(new UserDto("admin", "admin",  "admin",  "1234", "admin"));
       userService.save(new UserDto("owner", "owner", "owner", "1234","owner"));
-      userService.save(new UserDto("Janita", "Røyseth", "janita.lillevik@hotmail.com", "SuperHemmelig123", "Borgundvegen 321", "6003", "Ålesund", "Norge", "93021232"));
 
       Product product1 = new Product("Heather tea", "From Norwegian mountains. Gathered carefully before the bees to hold the honey taste. Rich in vitamins. Local produce", "Norwegian mountains", 200, 50, 3, 1);
       Product product2 = new Product("Linden blossom tea", "Classic Latvian tea. Helps against laziness. Use 100C water (not typical for herbal teas). Gathered in summer 2021", "Classic Latvian tea", 200, 50, 2, 2);
@@ -83,17 +82,17 @@ public class AppdevapiApplication {
       productService.addProduct(product4);
       productService.addProduct(product5);
 
-      ratingService.addRating( new Rating(userService.findAll().get(0), product1, 3, "Not the worst but not the best") );
-      ratingService.addRating( new Rating(userService.findAll().get(0), product2, 5, "A taste of heaven") );
-      ratingService.addRating( new Rating(userService.findAll().get(0), product3, 4, "Good tea") );
-      ratingService.addRating( new Rating(userService.findAll().get(0), product4, 4, "Good tea in larger sizes") );
-      ratingService.addRating( new Rating(userService.findAll().get(0), product5, 5, "Nice mugs") );
+      ratingService.addRating( new Rating(userService.findAll().get(0), "Geir", product1, 3, "Not the worst but not the best") );
+      ratingService.addRating( new Rating(userService.findAll().get(0),"Geir", product2, 5, "A taste of heaven") );
+      ratingService.addRating( new Rating(userService.findAll().get(0),"Geir", product3, 4, "Good tea") );
+      ratingService.addRating( new Rating(userService.findAll().get(0),null, product4, 4, "Good tea in larger sizes") );
+      ratingService.addRating( new Rating(userService.findAll().get(0),null, product5, 5, "Nice mugs") );
 
 //      ratingService.addRating( new Rating(userService.findAll().get(1), product1, 1, "Awful, waste of money") );
-      ratingService.addRating( new Rating(userService.findAll().get(1), product2, 5, "Great tea") );
-      ratingService.addRating( new Rating(userService.findAll().get(1), product3, 2, "This was weird") );
-      ratingService.addRating( new Rating(userService.findAll().get(1), product4, 2, "This was a lot of weird") );
-      ratingService.addRating( new Rating(userService.findAll().get(1), product5, 5, "Great big mugs") );
+      ratingService.addRating( new Rating(userService.findAll().get(1),"Per", product2, 5, "Great tea") );
+      ratingService.addRating( new Rating(userService.findAll().get(1), null, product3, 2, "This was weird") );
+      ratingService.addRating( new Rating(userService.findAll().get(1), null, product4, 2, "This was a lot of weird") );
+      ratingService.addRating( new Rating(userService.findAll().get(1), null, product5, 5, "Great big mugs") );
 
       wishlistService.addWishlist( new Wishlist(userService.findAll().get(0)));
       wishlistService.addWishlist( new Wishlist(userService.findAll().get(1)));
@@ -108,5 +107,5 @@ public class AppdevapiApplication {
       shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(4)));
       shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(5)));
     };
-  }*/
+  }
 }

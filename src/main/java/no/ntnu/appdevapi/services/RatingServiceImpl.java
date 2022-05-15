@@ -5,6 +5,7 @@ import no.ntnu.appdevapi.DAO.RatingRepository;
 import no.ntnu.appdevapi.DAO.UserRepository;
 import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.Rating;
+import no.ntnu.appdevapi.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
@@ -45,6 +46,10 @@ public class RatingServiceImpl implements RatingService {
      */
     public List<Rating> getRatingsFromProduct(Product product) {
         return new ArrayList<>(ratingRepository.findByProduct(product));
+    }
+
+    public Rating getRatingFromUserAndProduct(User user, Product product) {
+        return ratingRepository.findByUserAndProduct(user, product).orElse(null);
     }
 
     @Override

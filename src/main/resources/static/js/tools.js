@@ -1,19 +1,13 @@
 /**
  * Sends an API request to the sites API URL.
  *
- * //@param pathname the request mapping to send request to.
+ * @param pathname the request mapping to send request to.
  * @param method request method.
  * @param successCallback method to do on status Ok.
  * @param unauthorizedCallback method to do on status 401 unauthorized.
  */
-const sendApiRequest = function (
-  url,
-  method,
-  successCallback,
-  unauthorizedCallback,
-  errorCallback
-) {
-  return fetch(url, {
+const sendApiRequest = function (pathname, method, successCallback, unauthorizedCallback, errorCallback) {
+  return fetch(`${URL}${pathname}`, {
     method: method,
   }).then((response) => {
     if (response.ok) {

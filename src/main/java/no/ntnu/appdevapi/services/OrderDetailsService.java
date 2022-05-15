@@ -30,7 +30,7 @@ public interface OrderDetailsService {
      * @param user the user to find the order details of.
      * @return the order details of the given user or null if not found.
      */
-    OrderDetails getOrderDetailsByUser(User user);
+    List<OrderDetails> getOrderDetailsByUser(User user);
 
     /**
      * Adds a order details.

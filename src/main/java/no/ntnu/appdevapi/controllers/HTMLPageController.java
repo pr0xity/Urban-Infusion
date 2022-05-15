@@ -1,7 +1,5 @@
 package no.ntnu.appdevapi.controllers;
 
-import no.ntnu.appdevapi.DAO.OrderItemRepository;
-import no.ntnu.appdevapi.DAO.ProductRepository;
 import no.ntnu.appdevapi.entities.*;
 import no.ntnu.appdevapi.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +36,9 @@ public class HTMLPageController {
     private ShoppingSessionService shoppingSessionService;
 
     @Autowired
+    private OrderDetailsService orderDetailsService;
+
+    @Autowired
     private OrderItemService orderItemService;
 
     /**
@@ -72,6 +73,7 @@ public class HTMLPageController {
 
         model.addAttribute("user" , this.getUser());
         model.addAttribute("address", userAddressService.getUserAddressByUserID(userService.getSessionUser().getId()).getAddressLine());
+        model.addAttribute("orderDetails", orderDetailsService.getOrderDetailsByUser(getUser()));
 
         this.addPermissionLevelToModel(model);
         return "account";
@@ -92,6 +94,7 @@ public class HTMLPageController {
         if (wishlist != null){
             model.addAttribute("wishlist", wishlist.getProducts());
         }
+
         model.addAttribute("product", product);
         model.addAttribute("user", this.getUser());
         model.addAttribute("description", product.getDescription().split("\\."));
@@ -183,8 +186,25 @@ public class HTMLPageController {
         List<Product> topSellingProducts = new ArrayList<>();
 
         List<Long> productIds = orderItemService.getIdOfTop3SellingProducts();
-        for (Long id : productIds) {
-            topSellingProducts.add(productService.getProduct(id));
+        if (productIds.isEmpty() || productIds.size() < 3) {
+            //Add some arbitrary products if no/less than 3 best sellers.
+            productService.getAllProducts().forEach(topSellingProducts::add);
+            topSellingProducts = topSellingProducts.subList(0, 3);
+
+            if (!productIds.isEmpty()) {
+                int index = 1;
+                for (Long id : productIds) {
+                    //Swap if top sellers not in the first few products.
+                    if (!topSellingProducts.contains(productService.getProduct(id))) {
+                        topSellingProducts.set(index, productService.getProduct(id));
+                        index++;
+                    }
+                }
+            }
+        } else {
+            for (Long id : productIds) {
+                topSellingProducts.add(productService.getProduct(id));
+            }
         }
 
         return topSellingProducts;

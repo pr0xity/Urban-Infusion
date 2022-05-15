@@ -1001,6 +1001,7 @@ address {
 /****************************/
 .wishlist {
   padding: 9.6rem 5.6rem 6.4rem 5.6rem;
+  min-height: 50vh;
 }
 
 .wishlist .section__heading-box {
@@ -1273,11 +1274,14 @@ address {
 }
 
 .section-product-info {
+  margin: 0 auto;
   display: grid;
   grid-template-columns: auto auto;
   grid-template-rows: repeat(12, auto);
   justify-content: center;
   column-gap: 9.6rem;
+  width: 80vw;
+  max-width: 160rem;
   /* justify-content: space-evenly; */
 }
 
@@ -1314,6 +1318,7 @@ address {
 }
 
 .product__cta {
+  padding-left: 3.6rem;
   display: flex;
   align-items: center;
   padding-right: 3.2rem;
@@ -1327,6 +1332,7 @@ address {
   gap: 2rem;
   align-items: center;
   font-size: 2rem;
+  white-space: nowrap;
 }
 
 .section-reviews {
@@ -1520,6 +1526,7 @@ address {
   display: grid;
   grid-template-columns: 1fr;
   row-gap: 1.2rem;
+  max-height: 50rem;
 }
 
 .account-info__row {

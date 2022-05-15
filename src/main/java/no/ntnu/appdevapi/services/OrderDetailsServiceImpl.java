@@ -33,8 +33,8 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     }
 
     @Override
-    public OrderDetails getOrderDetailsByUser(User user) {
-        return this.orderDetailsRepository.findByUser(user).orElse(null);
+    public List<OrderDetails> getOrderDetailsByUser(User user) {
+        return this.orderDetailsRepository.findAllByUser(user);
     }
 
     @Override
