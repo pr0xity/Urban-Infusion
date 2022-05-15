@@ -1,0 +1,18 @@
+<a th:href="@{/}" class="admin__logo">
+  <img
+    class="logo__img"
+    th:src="@{/img/icons/logo-big.png}"
+    alt="Urban Infusion logo"
+  />
+</a>
+<div class="admin__nav-box">
+  <label class="nav__username" id="username" aria-label="user name"
+         th:text="${user.firstName} + ' ' + ${user.lastName}">Didrik Eilertsen</label>
+  <button class="nav__item nav__link" id="user-menu" aria-label="account menu">
+    <i class="ph-user-circle-light btn--icon"></i>
+  </button>
+  <div
+    th:include="components/menus/adminmenu"
+    class="nav__user-menu hidden"
+  ></div>
+</div>
