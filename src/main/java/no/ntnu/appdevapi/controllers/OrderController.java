@@ -1,5 +1,6 @@
 package no.ntnu.appdevapi.controllers;
 
+import io.swagger.annotations.ApiOperation;
 import no.ntnu.appdevapi.DTO.OrderDetailsDto;
 import no.ntnu.appdevapi.entities.*;
 import no.ntnu.appdevapi.services.*;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,7 +22,7 @@ import java.util.Set;
  * REST API controller for orders.
  */
 @RestController
-@RequestMapping("order")
+@RequestMapping("/orders")
 public class OrderController {
 
     @Autowired
@@ -49,6 +51,24 @@ public class OrderController {
     @GetMapping
     public List<OrderDetails> getAll() {
         return this.orderDetailsService.getAllOrderDetails();
+    }
+
+    /**
+     * Returns the five most recently created orders.
+     *
+     * @return List of the five newest orders.
+     */
+    @RequestMapping(value = "/recent", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "Get the five most recent orders.")
+    @ResponseBody
+    public List<OrderDetails> getRecent() {
+        List<OrderDetails> orders = orderDetailsService.getAllOrderDetails();
+        orders.sort(Comparator.comparing(OrderDetails::getCreatedAt).reversed());
+        int k = orders.size();
+        if (k > 5) {
+            orders.subList(5,k).clear();
+        }
+        return orders;
     }
 
     /**

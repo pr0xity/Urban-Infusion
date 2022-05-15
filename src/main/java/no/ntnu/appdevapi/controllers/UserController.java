@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -36,6 +37,24 @@ public class UserController {
   @ResponseBody
   public List<User> getAll() {
     return userService.findAll();
+  }
+
+  /**
+   * Returns the five most recently created users.
+   *
+   * @return List of the five newest users.
+   */
+  @RequestMapping(value = "/users/new", method = RequestMethod.GET, produces = "application/json")
+  @ApiOperation(value = "Get newly created users.")
+  @ResponseBody
+  public List<User> getNew() {
+    List<User> users = userService.findAll();
+    users.sort(Comparator.comparing(User::getCreatedAt).reversed());
+    int k = users.size();
+    if (k > 5) {
+      users.subList(5,k).clear();
+    }
+    return users;
   }
 
   /**

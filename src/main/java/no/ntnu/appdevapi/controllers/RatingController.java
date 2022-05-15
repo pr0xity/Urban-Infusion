@@ -1,5 +1,6 @@
 package no.ntnu.appdevapi.controllers;
 
+import io.swagger.annotations.ApiOperation;
 import no.ntnu.appdevapi.DTO.RatingDto;
 import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.Rating;
@@ -13,13 +14,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 /**
  * REST API controller for ratings.
  */
 @RestController
-@RequestMapping("rating")
+@RequestMapping("/ratings")
 public class RatingController {
 
     @Autowired
@@ -47,6 +49,41 @@ public class RatingController {
             response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
+        return response;
+    }
+
+    /**
+     * Returns the five most recently created ratings.
+     *
+     * @return List of the five newest ratings.
+     */
+    @RequestMapping(value = "/recent", method = RequestMethod.GET, produces = "application/json")
+    @ApiOperation(value = "Get the five most recent ratings.")
+    @ResponseBody
+    public List<Rating> getRecent() {
+        List<Rating> ratings = ratingService.getAllRatings();
+        ratings.sort(Comparator.comparing(Rating::getUpdatedAt).reversed());
+        int k = ratings.size();
+        if (k > 5) {
+            ratings.subList(5,k).clear();
+        }
+        return ratings;
+    }
+
+    /**
+     * Returns the requested rating.
+     *
+     * @param ratingId the ID of the requested rating.
+     * @return The requested rating.
+     */
+    @GetMapping("/{ratingId}")
+    public ResponseEntity<Rating> getRating(@PathVariable long ratingId) {
+        ResponseEntity<Rating> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        Rating rating = ratingService.getRating(ratingId);
+
+        if (rating != null) {
+            response = new ResponseEntity<>(rating, HttpStatus.OK);
+        }
         return response;
     }
 
