@@ -4,14 +4,14 @@
 </a>
 <a
   th:if="${#httpServletRequest.requestURI} eq '/'"
-  th:href="@{/admin/dashboard}"
+  th:href="@{/admin/}"
   class="user-menu__item"
 >
   <i class="ph-squares-four-light btn--icon"></i>
   <span class="link">Admin dashboard</span>
 </a>
 <a
-  th:if="${#httpServletRequest.requestURI eq '/admin/dashboard'}"
+  th:if="${#httpServletRequest.requestURI eq '/admin/'}"
   th:href="@{/}"
   class="user-menu__item"
 >

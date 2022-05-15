@@ -7,17 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
     through nature." />
-    <link rel="apple-touch-icon" sizes="180x180" href="../../static/img/apple-touch-icon.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="../../static/img/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="../../static/img/favicon-16x16.png" />
-    <link rel="manifest" href="../../static/site.webmanifest" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Hurricane:wght@200;300;400;500;600&display=swap" rel="stylesheet" />
+    <link th:replace="components/designelements/favicon">
+    <link th:replace="components/designelements/font">
+
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/queries.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style-admin.css}"/>
@@ -28,54 +20,11 @@
 </head>
 
 <body class>
-    <header class="admin__header">
-
-        <a th:href="@{/index.html}" class="admin__logo">
-            <img class="logo__img" th:src="@{/img/logo-big.png}" alt="Urban Infusion logo" />
-        </a>
-        <div class="admin__nav-box">
-            <label class="nav__username" id="username" aria-label="user name">Didrik Eilertsen</label>
-            <button class="nav__item nav__link" id="user-menu" aria-label="account menu">
-            <i class="ph-user-circle-light btn--icon"></i>
-            </button>
-            <div class="nav__user-menu hidden">
-                <a href="../../static/html/account.html" class="user-menu__item">
-                    <i class="ph-user-circle-light btn--icon"></i>
-                    <span class="link">Account information</span>
-                </a>
-                <a href="#" class="user-menu__item">
-                    <i class="ph-squares-four-light btn--icon"></i>
-                    <span class="link">Admin dashboard</span>
-                </a>
-                <a href="../../static/index.html" class="user-menu__item">
-                    <i class="ph-sign-out-light btn--icon"></i>
-                    <span class="link">Sign out</span>
-                </a>
-            </div>
-        </div>
+    <header class="admin__header" th:insert="components/admin-header">
     </header>
 
     <main class="admin__main">
-        <aside class="sidenav ">
-            <nav class="sidenav__nav">
-                <ul class="sidenav__list" style="list-style-type: none">
-                    <li class="sidenav__item currentpage">
-                        <a class="sidenav__link" href="dashboard.html"><i class="ph-squares-four sidenav__icon"></i> Dashboard</a></li>
-                    <li class="sidenav__item ">
-                        <a class="sidenav__link " href="customers.html "><i class="ph-users-three sidenav__icon "></i> Customers</a>
-                    </li>
-                    <li class="sidenav__item ">
-                        <a class="sidenav__link " href="../html/admin-orders.html "><i class="ph-clipboard-text sidenav__icon "></i> Orders</a>
-                    </li>
-                    <li class="sidenav__item ">
-                        <a class="sidenav__link " href="../html/admin-products.html "><i class="ph-shopping-bag sidenav__icon "></i> Products</a>
-                    </li>
-                    <li class="sidenav__item ">
-                        <a class="sidenav__link " href="../html/admin-comments.html "><i class="ph-chat-circle-text sidenav__icon "></i> Comments</a>
-                    </li>
-                </ul>
-            </nav>
-        </aside>
+        <aside th:insert="components/admin-sidenav"></aside>
 
         <section class="section-dashboard">
             <section class="dashboard__grid">
@@ -113,7 +62,7 @@
                         <th><i class="ph-arrow-square-out"></i></th>
                     </tr>
                 </table>
-                <label class="dashboard__label">See all customers</label>
+                <link class="dashboard__label" th:href="@{/admin/customers}">See all customers</link>
             </section>
 
             <section class="dashboard__grid">
@@ -155,73 +104,20 @@
                         <th><i class="ph-arrow-square-out"></i></th>
                     </tr>
                 </table>
-                <label class="dashboard__label">See all orders</label>
+                <link class="dashboard__label" th:href="@{/admin/orders}">See all orders</link>
 
             </section>
 
             <section class="dashboard__grid">
                 <h2 class="dashboard__header"> Latest comments: </h2>
 
-                <label class="dashboard__label">See all comments</label>
+                <link class="dashboard__label" th:href="@{/admin/comments}">See all comments</link>
             </section>
         </section>
     </main>
 
-    <footer class="footer">
-        <div class="logo-col">
-            <img class="footer__logo" th:src="@{/img/logo-big.png}" alt="Urban infusion logo" />
-            <p class="copyright">
-                Copyright &copy; 2022 NTNU, IDATA2301 Web Technologies - group 3
-            </p>
-        </div>
-        <nav>
-            <p class="footer-heading">Account</p>
-            <ul class="footer__list">
-                <li class="footer__item">
-                    <a href="#" class="footer__link">Account policy</a>
-                </li>
-                <li class="footer__item">
-                    <a href="#" class="footer__link">Create account</a>
-                </li>
-                <li class="footer__item">
-                    <a href="#" class="footer__link">Sign in</a>
-                </li>
-            </ul>
-        </nav>
-        <nav>
-            <p class="footer-heading">Resources</p>
-            <ul class="footer__list">
-                <li class="footer__item">
-                    <a href="#" class="footer__link">Customer service</a>
-                </li>
-                <li class="footer__item">
-                    <a href="#" class="footer__link">Terms of service</a>
-                </li>
-                <li class="footer__item">
-                    <a href="#" class="footer__link">Privacy policy</a>
-                </li>
-                <li class="footer__item">
-                    <a href="#" class="footer__link">Cancellations and returns</a>
-                </li>
-            </ul>
-        </nav>
-        <nav>
-            <p class="footer-heading">Company</p>
-            <ul class="footer__list">
-                <li class="footer__item">
-                    <a href="#" class="footer__link">About Urban Infusion</a>
-                </li>
-                <li class="footer__item">
-                    <a href="#" class="footer__link">Business inquries</a>
-                </li>
-                <li class="footer__item">
-                    <a href="#" class="footer__link">Careers</a>
-                </li>
-            </ul>
-        </nav>
-    </footer>
+    <footer class="footer" th:include="components/footer"></footer>
     <div class="overlay hidden"></div>
-
 
 </body>
 

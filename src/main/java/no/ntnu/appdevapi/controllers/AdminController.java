@@ -1,7 +1,10 @@
 package no.ntnu.appdevapi.controllers;
 
+import no.ntnu.appdevapi.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -9,23 +12,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin")
 public class AdminController {
 
-  @GetMapping("/customers")
-  String getCustomers() {
-    return "admin/customers";
-  }
+  @Autowired
+  private UserService userService;
 
-  @GetMapping("/dashboard")
-  String getDashboard() {
+  @GetMapping("/")
+  String getDashboard(Model model) {
+    model.addAttribute("user", userService.getSessionUser());
     return "admin/dashboard";
   }
 
+  @GetMapping("/customers")
+  String getCustomers(Model model) {
+    model.addAttribute("user", userService.getSessionUser());
+    return "admin/customers";
+  }
+
   @GetMapping("/orders")
-  String getOrders() {
+  String getOrders(Model model) {
+    model.addAttribute("user", userService.getSessionUser());
     return "admin/orders";
   }
 
   @GetMapping("/products")
-  String getProducts() {
+  String getProducts(Model model) {
+    model.addAttribute("user", userService.getSessionUser());
     return "admin/products";
   }
 }
