@@ -25,8 +25,6 @@ public class PermissionLevel {
     @Column(unique = true, name = "adminType")
     private String adminType;
 
-    @ApiModelProperty("A number representing permission level")
-    private int permissions;
 
     @ApiModelProperty("When the product was created.")
     @Column(name = "created_at", columnDefinition = "timestamp default now()")
@@ -43,14 +41,11 @@ public class PermissionLevel {
     /**
      * Creates an instance of permission level.
      *
-     * @param id the id of the permission level.
      * @param adminType the type of role of this permission level.
-     * @param permissions a number between 1 and 4 representing permission level.
      * @param updatedAt when this permission level was last updated.
      */
-    public PermissionLevel(long id, String adminType, int permissions, LocalDateTime updatedAt) {
+    public PermissionLevel(String adminType,LocalDateTime updatedAt) {
         this.adminType = adminType;
-        this.permissions = permissions;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = updatedAt;
     }
@@ -94,23 +89,6 @@ public class PermissionLevel {
         this.adminType = adminType;
     }
 
-    /**
-     * Returns the number representing the permission level.
-     *
-     * @return the number representing the permission level.
-     */
-    public int getPermissions() {
-        return permissions;
-    }
-
-    /**
-     * Sets the number representing this permission level.
-     *
-     * @param permissions the number to be set for representing this permission level.
-     */
-    public void setPermissions(int permissions) {
-        this.permissions = permissions;
-    }
 
 
     /**

@@ -11,7 +11,6 @@ const wishlistButtonClass = ".product__btn--wishlist";
  * Adds, formats and add requests to the wishlist buttons for the products on the page.
  */
 const setWishlistButtons = function () {
-
   /**
    * Creates a button element for wishlist and adds the given attributes to it.
    *
@@ -20,7 +19,11 @@ const setWishlistButtons = function () {
    * @param ariaLabel aria-label of the buttons action.
    * @returns {HTMLButtonElement} the resulting button element.
    */
-  const createWishlistButton = function (dataWishlist, dataProductId, ariaLabel) {
+  const createWishlistButton = function (
+    dataWishlist,
+    dataProductId,
+    ariaLabel
+  ) {
     const button = document.createElement("button");
     button.classList.add("product__btn--wishlist");
     button.dataset.wishlist = dataWishlist;
@@ -74,7 +77,10 @@ const setWishlistButtons = function () {
    * @param button the button to change icon of.
    */
   const addHeartIcon = function (button) {
-    if (isProductInWishlist(button) && window.location.pathname === "/wishlist") {
+    if (
+      isProductInWishlist(button) &&
+      window.location.pathname === "/wishlist"
+    ) {
       addBrokenHeartIcon(button);
     } else if (isProductInWishlist(button)) {
       addFilledHeartIcon(button);
@@ -202,6 +208,7 @@ const setWishlistButtons = function () {
       sendApiRequest(
         `${WISHLIST_API_PATHNAME}/${productId}`,
         "DELETE",
+        null,
         wishlistRemoveSuccessCallback(wishlistButton),
         wishlistUnauthorizedCallback
       );
@@ -209,6 +216,7 @@ const setWishlistButtons = function () {
       sendApiRequest(
         `${WISHLIST_API_PATHNAME}/${productId}`,
         "POST",
+        null,
         wishlistAddSuccessCallback(wishlistButton),
         wishlistUnauthorizedCallback
       );

@@ -41,6 +41,9 @@ public class HTMLPageController {
     @Autowired
     private OrderItemService orderItemService;
 
+
+
+    //TODO: getTop3SellingProducts causing some bugs
     /**
      * Gets the home page with the required attributes. Returns index thymeleaf template.
      *
@@ -51,7 +54,7 @@ public class HTMLPageController {
     public String getHome(Model model) {
         model.addAttribute("user", this.getUser());
         model.addAttribute("products", productService.getAllProducts());
-        model.addAttribute("topSellingProducts", getTop3SellingProducts());
+       // model.addAttribute("topSellingProducts", getTop3SellingProducts());
         Wishlist wishlist = this.wishlistService.getWishlistByUser(this.getUser());
         if (wishlist != null) {
             model.addAttribute("wishlist", wishlist.getProducts());
@@ -99,6 +102,7 @@ public class HTMLPageController {
         model.addAttribute("user", this.getUser());
         model.addAttribute("description", product.getDescription().split("\\."));
         model.addAttribute("comments", ratingService.getRatingsFromProduct(product));
+        model.addAttribute("comment", ratingService.getRatingFromUserAndProduct(getUser(), product));
         this.addPermissionLevelToModel(model);
         return "product";
     }

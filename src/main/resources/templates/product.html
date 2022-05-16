@@ -105,21 +105,123 @@
         </div>
       </section>
       <section class="section-reviews" id="section-reviews">
-        <form method="post" action="#" class="review__form">
-          <h2 class="heading-secondary">What did you think of this product?</h2>
+        <div class="review__form" th:if="${user} == null">
+          <h2 class="heading-secondary">
+            Please sign in to tell us what you think!
+          </h2>
+          <p class="review__alert"></p>
           <input
+            name="displayName"
             class="input review__input"
             type="text"
             placeholder="Name"
+            disabled
             aria-label="Name"
           />
           <input
+            name="email"
             class="input review__input"
             type="text"
             placeholder="Emailaddress"
+            disabled
             aria-label="Emailaddress"
           />
           <textarea
+            name="comment"
+            class="input review__input"
+            placeholder="Write your review here"
+            rows="6"
+            cols="50"
+            maxlength="250"
+            disabled
+            aria-label="Write your review here"
+          ></textarea>
+          <div class="product__rating--review" id="review__rating">
+            <p>Rating</p>
+            <label>
+              <img class="product__rating--img" src="../img/icons/leaf.svg" />
+              <input
+                name="rating"
+                type="radio"
+                value="1"
+                disabled
+                aria-label="select 1 star rating"
+              />
+            </label>
+            <label>
+              <img class="product__rating--img" src="../img/icons/leaf.svg" />
+              <input
+                name="rating"
+                type="radio"
+                value="2"
+                disabled
+                aria-label="select 2 star rating"
+              />
+            </label>
+            <label>
+              <img class="product__rating--img" src="../img/icons/leaf.svg" />
+              <input
+                name="rating"
+                type="radio"
+                value="3"
+                disabled
+                aria-label="select 3 star rating"
+              />
+            </label>
+            <label>
+              <img class="product__rating--img" src="../img/icons/leaf.svg" />
+              <input
+                name="rating"
+                type="radio"
+                value="4"
+                disabled
+                aria-label="select 4 star rating"
+              />
+            </label>
+            <label>
+              <img class="product__rating--img" src="../img/icons/leaf.svg" />
+              <input
+                name="rating"
+                type="radio"
+                value="5"
+                disabled
+                aria-label="select 5 star rating"
+              />
+            </label>
+          </div>
+          <input
+            name="sendReview"
+            type="submit"
+            class="btn--disabled"
+            disabled
+            value="Send review"
+          />
+        </div>
+        <div
+          class="review__form"
+          th:if="${user} != null and ${comment} == null"
+        >
+          <h2 class="heading-secondary">What did you think of this product?</h2>
+          <p class="review__alert"></p>
+          <input
+            name="displayName"
+            class="input review__input"
+            type="text"
+            placeholder="Name"
+            th:value="${user.firstName}"
+            aria-label="Name"
+          />
+          <input
+            name="email"
+            class="input review__input"
+            type="text"
+            placeholder="Emailaddress"
+            th:value="${user.email}"
+            disabled
+            aria-label="Emailaddress"
+          />
+          <textarea
+            name="comment"
             class="input review__input"
             placeholder="Write your review here"
             rows="6"
@@ -195,8 +297,128 @@
               />
             </label>
           </div>
-          <input type="submit" class="btn--green" value="Send review" />
-        </form>
+          <input
+            name="sendReview"
+            type="submit"
+            class="btn--green"
+            value="Send review"
+          />
+        </div>
+        <div
+          class="review__form"
+          th:if="${user} != null and ${comment} != null"
+          th:attr="data-rating=${comment.rating}"
+        >
+          <h2 class="heading-secondary">Did you change your mind?</h2>
+          <p class="review__alert"></p>
+          <input
+            name="displayName"
+            class="input review__input"
+            type="text"
+            placeholder="Name"
+            th:value="${comment.displayName}"
+            aria-label="Name"
+          />
+          <input
+            name="email"
+            class="input review__input"
+            type="text"
+            placeholder="Emailaddress"
+            th:value="${user.email}"
+            disabled
+            aria-label="Emailaddress"
+          />
+          <textarea
+            name="comment"
+            class="input review__input"
+            placeholder="Write your review here"
+            rows="6"
+            cols="50"
+            maxlength="250"
+            th:text="${comment.comment}"
+            aria-label="Write your review here"
+          ></textarea>
+          <div class="product__rating--review" id="review__rating">
+            <p>Rating</p>
+            <label>
+              <img
+                class="product__rating--img"
+                src="../img/icons/leaf.svg"
+                data-rating="1"
+              />
+              <input
+                name="rating"
+                type="radio"
+                value="1"
+                aria-label="select 1 star rating"
+              />
+            </label>
+            <label>
+              <img
+                class="product__rating--img"
+                src="../img/icons/leaf.svg"
+                data-rating="2"
+              />
+              <input
+                name="rating"
+                type="radio"
+                value="2"
+                aria-label="select 2 star rating"
+              />
+            </label>
+            <label>
+              <img
+                class="product__rating--img"
+                src="../img/icons/leaf.svg"
+                data-rating="3"
+              />
+              <input
+                name="rating"
+                type="radio"
+                value="3"
+                aria-label="select 3 star rating"
+              />
+            </label>
+            <label>
+              <img
+                class="product__rating--img"
+                src="../img/icons/leaf.svg"
+                data-rating="4"
+              />
+              <input
+                name="rating"
+                type="radio"
+                value="4"
+                aria-label="select 4 star rating"
+              />
+            </label>
+            <label>
+              <img
+                class="product__rating--img"
+                src="../img/icons/leaf.svg"
+                data-rating="5"
+              />
+              <input
+                name="rating"
+                type="radio"
+                value="5"
+                aria-label="select 5 star rating"
+              />
+            </label>
+          </div>
+          <input
+            name="updateReview"
+            type="submit"
+            class="btn--green"
+            value="Update review"
+          />
+          <input
+            name="deleteReview"
+            type="submit"
+            class="btn--small-text"
+            value="Delete review?"
+          />
+        </div>
         <div class="review__comments-box">
           <h2 class="heading-secondary">Reviews</h2>
           <div class="review__comment" th:each="comment : ${comments}">
@@ -227,11 +449,7 @@
                   data-rating="5"
                 />
               </div>
-              <p
-                th:text="${comment.displayName}"
-              >
-                Miranda
-              </p>
+              <p th:text="${comment.displayName}">Miranda</p>
               <p th:text="${comment.updatedAt.toLocalDate()}">04.02.2022</p>
             </div>
             <div>

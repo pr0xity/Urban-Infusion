@@ -139,12 +139,27 @@ address {
 }
 
 .btn--green:hover {
-  transform: scale(1.08);
+  transform: scale(1.07);
   /* letter-spacing: 1px; */
 }
 
 .btn--green:active {
   transform: scale(1.03);
+}
+
+.btn--disabled {
+  padding: 0.4rem 1.6rem;
+  color: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  background-color: #aaa;
+  border-radius: 100px;
+  border: 0.2rem solid white;
+  width: fit-content;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.6rem;
+  transition: all 0.4s ease-out;
+  z-index: 100000;
+  cursor: initial;
 }
 
 .btn:hover {
@@ -157,6 +172,19 @@ address {
   font-weight: 400;
   font-family: inherit;
   word-spacing: 0.4rem;
+}
+
+.btn--small-text {
+  padding: 0 0.8rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  font-family: inherit;
+  background-color: transparent;
+  border: 0;
+  color: #6d6875;
+  text-align: left;
+  word-spacing: 0.4rem;
+  cursor: pointer;
 }
 
 .btn--icon {
@@ -1347,6 +1375,11 @@ address {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+}
+
+.review__alert {
+  font-weight: 600;
+  font-size: 1.4rem;
 }
 
 .review__input {

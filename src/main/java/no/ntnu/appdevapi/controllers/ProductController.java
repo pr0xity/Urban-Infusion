@@ -3,6 +3,7 @@ package no.ntnu.appdevapi.controllers;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
+import no.ntnu.appdevapi.DTO.ProductDto;
 import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.services.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,10 +57,10 @@ public class ProductController {
    */
   @PostMapping
   @ApiOperation(value = "Add a new product.", notes = "Status 200 when added, 400 on error.")
-  public ResponseEntity<String> add(@RequestBody Product product) {
+  public ResponseEntity<String> add(@RequestBody ProductDto product) {
     ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     if (null != product) {
-      productService.addProduct(product);
+      productService.addProductFromDto(product);
       response = new ResponseEntity<>(HttpStatus.OK);
     }
     return response;

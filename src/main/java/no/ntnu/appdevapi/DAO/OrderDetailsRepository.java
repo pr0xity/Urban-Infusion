@@ -6,8 +6,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
+/**
+ * Repository interface for order details.
+ */
 @Repository
 public interface OrderDetailsRepository extends CrudRepository<OrderDetails, Long> {
 
