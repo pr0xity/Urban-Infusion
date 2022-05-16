@@ -38,4 +38,10 @@ public class AdminController {
     model.addAttribute("user", userService.getSessionUser());
     return "admin/products";
   }
+
+  @GetMapping("/reviews")
+  String getReviews(Model model) {
+    model.addAttribute("user", userService.getSessionUser());
+    return "admin/reviews";
+  }
 }
