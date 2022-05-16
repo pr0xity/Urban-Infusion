@@ -305,7 +305,8 @@ public class OrderController {
             content.append("<tr>" +
                             "<td style='border-bottom: 1px solid #ddd;'>").append(orderItem.getProduct().getId()).append("</td>")
                     .append("<td style='border-bottom: 1px solid #ddd;'>").append(orderItem.getProduct().getName()).append("</td>")
-                    .append("<td style='border-bottom: 1px solid #ddd;'>").append(orderItem.getProduct().getSize()).append("g").append("</td>")
+                     // Vi har fjernet size-feltet fra produkter :)
+                    //  .append("<td style='border-bottom: 1px solid #ddd;'>").append(orderItem.getProduct().getSize()).append("g").append("</td>")
                     .append("<td style='border-bottom: 1px solid #ddd;'>").append(orderItem.getQuantity()).append("</td>")
                     .append("<td style='border-bottom: 1px solid #ddd;'>").append(orderItem.getTotal()).append(",-").append("</td>")
                     .append("</tr>");

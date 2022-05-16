@@ -1,7 +1,6 @@
 package no.ntnu.appdevapi.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
@@ -25,11 +24,6 @@ public class Product {
   private String origin;
   @ApiModelProperty("Price of the product, decimal in NOK.")
   private double price;
-  @ApiModelProperty("Size of the product in grams")
-  private int size;
-  @ApiModelProperty("Category id of the product.")
-  @Column(name = "fk_category_id")
-  private int categoryId;
   @ApiModelProperty("Inventory id of the product.")
   @Column(name = "fk_inventory_id")
   private int inventoryId;
@@ -47,42 +41,18 @@ public class Product {
   @JsonIgnore
   List<Rating> ratings;
 
-  public Product(String name, String description, String origin, double price, int size, int categoryId, int inventoryId) {
-    this.name = name;
-    this.description = description;
-    this.origin = origin;
-    this.price = price;
-    this.size = size;
-    this.categoryId = categoryId;
-    this.inventoryId = inventoryId;
-    this.createdAt = LocalDateTime.now();
-    this.updatedAt = LocalDateTime.now();
-    this.deletedAt = null;
+  @ApiModelProperty("Category id of the product.")
+  @ManyToOne (cascade = CascadeType.DETACH)
+  @JoinColumn(name= "category_id")
+  private ProductCategory category;
+
+
+  public ProductCategory getCategory() {
+    return category;
   }
 
-  public Product(String name, String description, String origin, double price, int categoryId, int inventoryId, LocalDateTime createdAt, LocalDateTime updatedAt, LocalDateTime deletedAt) {
-    this.name = name;
-    this.description = description;
-    this.origin = origin;
-    this.price = price;
-    this.categoryId = categoryId;
-    this.inventoryId = inventoryId;
-    this.createdAt = LocalDateTime.now();
-    this.updatedAt = LocalDateTime.now();
-    this.deletedAt = null;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
-    this.deletedAt = deletedAt;
-  }
-
-  public Product() {}
-
-  public int getCategoryId() {
-    return categoryId;
-  }
-
-  public void setCategoryId(int categoryId) {
-    this.categoryId = categoryId;
+  public void setCategory(ProductCategory category) {
+    this.category = category;
   }
 
   public int getInventoryId() {
@@ -91,6 +61,10 @@ public class Product {
 
   public void setInventoryId(int inventoryId) {
     this.inventoryId = inventoryId;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
   }
 
   public LocalDateTime getUpdatedAt() {
@@ -131,24 +105,6 @@ public class Product {
 
   public void setPrice(double price) {
     this.price = price;
-  }
-
-  /**
-   * Returns the size (in grams) this product.
-   *
-   * @return size of this product.
-   */
-  public int getSize() {
-    return size;
-  }
-
-  /**
-   * Sets the size (in grams) of this product.
-   *
-   * @param size size to be set for the product.
-   */
-  public void setSize(int size) {
-    this.size = size;
   }
 
   public String getOrigin() {

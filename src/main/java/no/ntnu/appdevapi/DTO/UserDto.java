@@ -98,7 +98,8 @@ public class UserDto {
     user.setUpdatedAt(updatedAt);
     user.setEnabled(enabled);
 
-    PermissionLevel p = new PermissionLevel(1, permissionLevel, 1, updatedAt);
+
+    PermissionLevel p = new PermissionLevel(permissionLevel, updatedAt);
     user.setPermissionLevel(p);
 
     return user;

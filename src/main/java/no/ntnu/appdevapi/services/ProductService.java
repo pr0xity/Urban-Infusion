@@ -1,5 +1,6 @@
 package no.ntnu.appdevapi.services;
 
+import no.ntnu.appdevapi.DTO.ProductDto;
 import no.ntnu.appdevapi.entities.Product;
 
 public interface ProductService {
@@ -7,7 +8,7 @@ public interface ProductService {
 
   Product getProduct(long id);
 
-  Product addProduct(Product product);
+  Product addProductFromDto(ProductDto product);
 
   void deleteProduct(long id);
 }

@@ -1,6 +1,8 @@
 package no.ntnu.appdevapi;
 
 import java.util.Collections;
+
+import no.ntnu.appdevapi.DTO.ProductDto;
 import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.*;
 import no.ntnu.appdevapi.services.*;
@@ -58,9 +60,9 @@ public class AppdevapiApplication {
   CommandLineRunner run(UserService userService, PermissionLevelService permissionLevelService, ProductService productService, RatingServiceImpl ratingService, WishlistService wishlistService, ShoppingSessionService shoppingSessionService) {
     return args -> {
       try {
-        permissionLevelService.savePermissionLevel(new PermissionLevel(1, "user", 1, null));
-        permissionLevelService.savePermissionLevel(new PermissionLevel(2, "admin", 2, null));
-        permissionLevelService.savePermissionLevel(new PermissionLevel(3, "owner", 3, null));
+        permissionLevelService.savePermissionLevel(new PermissionLevel( "user", null));
+        permissionLevelService.savePermissionLevel(new PermissionLevel( "admin", null));
+        permissionLevelService.savePermissionLevel(new PermissionLevel( "owner", null));
       } catch (Exception ignored) {
       }
 
@@ -70,41 +72,30 @@ public class AppdevapiApplication {
       userService.save(new UserDto("admin", "admin",  "admin",  "1234", "admin"));
       userService.save(new UserDto("owner", "owner", "owner", "1234","owner"));
 
-      Product product1 = new Product("Heather tea", "From Norwegian mountains. Gathered carefully before the bees to hold the honey taste. Rich in vitamins. Local produce", "Norwegian mountains", 200, 50, 3, 1);
-      Product product2 = new Product("Linden blossom tea", "Classic Latvian tea. Helps against laziness. Use 100C water (not typical for herbal teas). Gathered in summer 2021", "Classic Latvian tea", 200, 50, 2, 2);
-      Product product3 = new Product("Sencha 50g", "Japanese green tea. Green leaves. Available in Aug-Sep season only", "Japanese green tea", 100, 50, 1, 3);
-      Product product4 = new Product("Sencha 500g", "Japanese green tea. Green leaves. Available in Aug-Sep season only", "Japanese green tea", 800, 500, 1, 4);
-      Product product5 = new Product("Mug", "Classic mug. Made from Brazilian clay. Hot-friendly - comfortable to hold even when the water is hot. Handy handle", "Brazilian clay", 120, 0, 4, 5);
+      productService.addProductFromDto(new ProductDto("Heather tea", "From Norwegian mountains. Gathered carefully before the bees to hold the honey taste. Rich in vitamins. Local produce", "Norwegian mountains", 200, "Tea", "Bags of tea"));
+      productService.addProductFromDto(new ProductDto("Linden blossom tea", "Classic Latvian tea. Helps against laziness. Use 100C water (not typical for herbal teas). Gathered in summer 2021", "Classic Latvian tea", 200, "Tea"));
+      productService.addProductFromDto(new ProductDto("Sencha 50g", "Japanese green tea. Green leaves. Available in Aug-Sep season only", "Japanese green tea", 100, "Tea"));
+      productService.addProductFromDto(new ProductDto("Sencha 500g", "Japanese green tea. Green leaves. Available in Aug-Sep season only", "Japanese green tea", 800, "Tea"));
+      productService.addProductFromDto(new ProductDto("Mug", "Classic mug. Made from Brazilian clay. Hot-friendly - comfortable to hold even when the water is hot. Handy handle", "Brazilian clay", 120, "Accessories", "Mug"));
 
-      productService.addProduct(product1);
-      productService.addProduct(product2);
-      productService.addProduct(product3);
-      productService.addProduct(product4);
-      productService.addProduct(product5);
-
-      ratingService.addRating( new Rating(userService.findAll().get(0), "Geir", product1, 3, "Not the worst but not the best") );
-      ratingService.addRating( new Rating(userService.findAll().get(0),"Geir", product2, 5, "A taste of heaven") );
-      ratingService.addRating( new Rating(userService.findAll().get(0),"Geir", product3, 4, "Good tea") );
-      ratingService.addRating( new Rating(userService.findAll().get(0),null, product4, 4, "Good tea in larger sizes") );
-      ratingService.addRating( new Rating(userService.findAll().get(0),null, product5, 5, "Nice mugs") );
 
 //      ratingService.addRating( new Rating(userService.findAll().get(1), product1, 1, "Awful, waste of money") );
-      ratingService.addRating( new Rating(userService.findAll().get(1),"Per", product2, 5, "Great tea") );
-      ratingService.addRating( new Rating(userService.findAll().get(1), null, product3, 2, "This was weird") );
-      ratingService.addRating( new Rating(userService.findAll().get(1), null, product4, 2, "This was a lot of weird") );
-      ratingService.addRating( new Rating(userService.findAll().get(1), null, product5, 5, "Great big mugs") );
-
-      wishlistService.addWishlist( new Wishlist(userService.findAll().get(0)));
-      wishlistService.addWishlist( new Wishlist(userService.findAll().get(1)));
-      wishlistService.addWishlist( new Wishlist(userService.findAll().get(2)));
-      wishlistService.addWishlist( new Wishlist(userService.findAll().get(3)));
-      wishlistService.addWishlist( new Wishlist(userService.findAll().get(4)));
-
-      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(0)));
-      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(1)));
-      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(2)));
-      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(3)));
-      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(4)));
+//      ratingService.addRating( new Rating(userService.findAll().get(1),"Per", product2, 5, "Great tea") );
+//      ratingService.addRating( new Rating(userService.findAll().get(1), null, product3, 2, "This was weird") );
+//      ratingService.addRating( new Rating(userService.findAll().get(1), null, product4, 2, "This was a lot of weird") );
+//      ratingService.addRating( new Rating(userService.findAll().get(1), null, product5, 5, "Great big mugs") );
+//
+//      wishlistService.addWishlist( new Wishlist(userService.findAll().get(0)));
+//      wishlistService.addWishlist( new Wishlist(userService.findAll().get(1)));
+//      wishlistService.addWishlist( new Wishlist(userService.findAll().get(2)));
+//      wishlistService.addWishlist( new Wishlist(userService.findAll().get(3)));
+//      wishlistService.addWishlist( new Wishlist(userService.findAll().get(4)));
+//
+//      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(0)));
+//      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(1)));
+//      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(2)));
+//      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(3)));
+//      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(4)));
     };
   }
 }

@@ -79,6 +79,7 @@ public class UserController {
         //Check if the acting user is an admin or an owner:
         Predicate<PermissionLevel> isAdmin = pl -> pl.getAdminType().equals("admin");
         Predicate<PermissionLevel> isOwner = pl -> pl.getAdminType().equals("owner");
+
         boolean adminLevelAuth = actingUser.getPermissionLevels().stream().anyMatch(isAdmin.or(isOwner));
 
         if (actingUser.getEmail().equals(email) || adminLevelAuth) {
