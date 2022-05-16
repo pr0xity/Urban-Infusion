@@ -1,10 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Orders</title>
-</head>
-<body>
 
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
+    through nature." />
+  <link th:replace="components/designelements/favicon">
+  <link th:replace="components/designelements/font">
+
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/queries.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style-admin.css}"/>
+
+  <script src="https://unpkg.com/phosphor-icons"></script>
+  <script defer th:src="@{/js/admin.js}"></script>
+  <title>Urban Infusion</title>
+</head>
+
+<body>
+<header class="admin__header" th:insert="components/admin-header"></header>
+
+<main class="admin__main">
+
+  <aside class="sidenav" th:insert="components/admin-sidenav"></aside>
+
+  <section class="section-content">
+
+    <form class="searchbar">
+      <label class="searchbar__label">
+        <input class="searchbar__input" aria-label="Search bar" placeholder="Search">
+        <i class="ph-magnifying-glass searchbar__icon"></i>
+      </label>
+    </form>
+
+    <section class="section-list">
+      <table class="dashboard__table dashboard__table--order" id="orderTable">
+        <thead>
+        <tr>
+          <th>Order date</th>
+          <th>Order no.</th>
+          <th>Customer ID</th>
+          <th>Processing status </th>
+        </tr>
+        </thead>
+        <tbody id="orderTableBody"></tbody>
+      </table>
+    </section>
+  </section>
+</main>
+
+<footer class="footer" th:include="components/footer"></footer>
 </body>
-</html>
