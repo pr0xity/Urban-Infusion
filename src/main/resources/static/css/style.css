@@ -99,15 +99,6 @@ address {
   opacity: 0.4;
 }
 
-.container--beige {
-  background-color: #dad7cd;
-}
-
-.container--white {
-  background-color: #fff;
-  box-shadow: 2rem 2rem 3rem rgba(0, 0, 0, 0.1);
-}
-
 .btn {
   padding: 0.6rem 2.4rem;
   color: #fff;
@@ -301,6 +292,54 @@ address {
 
 .login__alert {
   font-weight: 600;
+}
+
+.modal {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.modal__window {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 60rem;
+  max-width: 100%;
+  position: relative;
+  padding: 4rem;
+}
+
+.btn--delete {
+  background-color: #ad5b58;
+}
+
+.modal__form--delete {
+  margin-top: 2rem;
+}
+
+.container--beige {
+  background-color: #dad7cd;
+}
+
+.container--white {
+  background-color: #fff;
+  box-shadow: 2rem 2rem 3rem rgba(0, 0, 0, 0.1);
 }
 
 /****************************/
@@ -1399,6 +1438,10 @@ address {
   visibility: hidden;
 }
 
+.review__comments-box {
+  width: 44rem;
+}
+
 .review__comment {
   margin-top: 3.2rem;
   border-top: 0.15rem solid rgba(109, 104, 117, 0.6);
@@ -1606,13 +1649,33 @@ address {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 80vw;
-  height: 70vh;
+  width: fit-content;
+  height: fit-content;
   z-index: 1000;
   padding: 1.2rem 2.4rem;
+
+}
+
+.account-info__change--address {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8rem;
+}
+
+.account__form--address {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+}
+
+.account__map {
+  margin-right: 8rem;
+  width: 60rem;
+  height: 40rem;
+  border: 0.2rem solid #6d6875;
+  border-radius: 50px;
+  box-shadow: 2rem 2rem 3rem rgba(0, 0, 0, 0.15);;
 }
 
 .change-heading {
@@ -1628,8 +1691,8 @@ address {
 
 .account-info__change--overlay {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: 50%;
+  left: 50%;
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.5);
@@ -1654,42 +1717,4 @@ thead tr {
   gap: 2.4rem;
   margin-bottom: 1.2rem;
   justify-content: space-between;
-}
-
-.modal {
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0, 0, 0, 0.3);
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.modal.show {
-  pointer-events: auto;
-  opacity: 1;
-}
-
-.modal__window {
-  background-color: white;
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  width: 60rem;
-  max-width: 100%;
-  position: relative;
-  padding: 4rem;
-}
-
-.btn--delete {
-  background-color: #ad5b58;
-}
-
-.modal__form--delete {
-  margin-top: 2rem;
 }

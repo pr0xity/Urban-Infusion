@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     /**
      * Get the user which is authenticated for the current session
      *
-     * @return User object or null if no user has logged in
+     * @return current user in session or null
      */
     @Override
     public User getSessionUser() {

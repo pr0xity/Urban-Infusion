@@ -126,3 +126,58 @@ const getAddressInfo = async function (address) {
     console.log(e);
   }
 };
+
+/**
+ * Returns true if address is valid, false if not.
+ *
+ * @param address address to check for validity
+ * @return {Promise<boolean>} true if valid, false if not.
+ */
+const isAddressValid = async function (address) {
+  return await getAddressInfo(`${address}`).then((data) => {
+    return data !== undefined;
+  });
+};
+
+
+let map;
+const leafIcon = new L.Icon({
+  iconUrl: "../img/icons/mapmarker.svg",
+  shadowUrl: "../img/icons/shadow.svg",
+  iconSize: [41, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [61, 51],
+});
+
+/**
+ * Initializes and renders the map to the given latitude and longitude.
+ *
+ * @param latitude the latitude to render the map to.
+ * @param longitude the longitude to render the map to.
+ */
+const renderMap = function (latitude, longitude) {
+  map = L.map("map").setView([latitude, longitude], 17);
+
+  L.marker([latitude, longitude], { icon: leafIcon }).addTo(map);
+  L.tileLayer(
+    "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png",
+    {
+      maxZoom: 20,
+      attribution:
+        '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+    }
+  ).addTo(map);
+};
+
+/**
+ * Moves the map to a new location.
+ *
+ * @param latitude the new latitude.
+ * @param longitude the new longitude.
+ */
+const moveMap = function (latitude, longitude) {
+  map.panTo([latitude, longitude], 17);
+
+  L.marker([latitude, longitude], { icon: leafIcon }).addTo(map);
+};

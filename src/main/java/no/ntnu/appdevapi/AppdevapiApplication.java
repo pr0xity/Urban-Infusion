@@ -79,23 +79,23 @@ public class AppdevapiApplication {
       productService.addProductFromDto(new ProductDto("Mug", "Classic mug. Made from Brazilian clay. Hot-friendly - comfortable to hold even when the water is hot. Handy handle", "Brazilian clay", 120, "Accessories", "Mug"));
 
 
-//      ratingService.addRating( new Rating(userService.findAll().get(1), product1, 1, "Awful, waste of money") );
+//      ratingService.addRating( new Rating(userService.findAll().get(1), "Per", product1, 1, "Awful, waste of money") );
 //      ratingService.addRating( new Rating(userService.findAll().get(1),"Per", product2, 5, "Great tea") );
-//      ratingService.addRating( new Rating(userService.findAll().get(1), null, product3, 2, "This was weird") );
-//      ratingService.addRating( new Rating(userService.findAll().get(1), null, product4, 2, "This was a lot of weird") );
-//      ratingService.addRating( new Rating(userService.findAll().get(1), null, product5, 5, "Great big mugs") );
-//
-//      wishlistService.addWishlist( new Wishlist(userService.findAll().get(0)));
-//      wishlistService.addWishlist( new Wishlist(userService.findAll().get(1)));
-//      wishlistService.addWishlist( new Wishlist(userService.findAll().get(2)));
-//      wishlistService.addWishlist( new Wishlist(userService.findAll().get(3)));
-//      wishlistService.addWishlist( new Wishlist(userService.findAll().get(4)));
-//
-//      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(0)));
-//      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(1)));
-//      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(2)));
-//      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(3)));
-//      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(4)));
+//      ratingService.addRating( new Rating(userService.findAll().get(1), "Per", product3, 2, "This was weird") );
+//      ratingService.addRating( new Rating(userService.findAll().get(1), "Per", product4, 2, "This was a lot of weird") );
+//      ratingService.addRating( new Rating(userService.findAll().get(1), "Per", product5, 5, "Great big mugs") );
+
+      wishlistService.addWishlist( new Wishlist(userService.findAll().get(0)));
+      wishlistService.addWishlist( new Wishlist(userService.findAll().get(1)));
+      wishlistService.addWishlist( new Wishlist(userService.findAll().get(2)));
+      wishlistService.addWishlist( new Wishlist(userService.findAll().get(3)));
+      wishlistService.addWishlist( new Wishlist(userService.findAll().get(4)));
+
+      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(0)));
+      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(1)));
+      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(2)));
+      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(3)));
+      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(4)));
     };
   }
 }

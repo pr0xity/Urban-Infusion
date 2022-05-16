@@ -54,7 +54,7 @@ public class HTMLPageController {
     public String getHome(Model model) {
         model.addAttribute("user", this.getUser());
         model.addAttribute("products", productService.getAllProducts());
-       // model.addAttribute("topSellingProducts", getTop3SellingProducts());
+        model.addAttribute("topSellingProducts", getTop3SellingProducts());
         Wishlist wishlist = this.wishlistService.getWishlistByUser(this.getUser());
         if (wishlist != null) {
             model.addAttribute("wishlist", wishlist.getProducts());
@@ -75,7 +75,7 @@ public class HTMLPageController {
     public String getAccount(Model model) {
 
         model.addAttribute("user" , this.getUser());
-        model.addAttribute("address", userAddressService.getUserAddressByUserID(userService.getSessionUser().getId()).getAddressLine());
+        model.addAttribute("address", userAddressService.getUserAddressByUserID(userService.getSessionUser().getId()));
         model.addAttribute("orderDetails", orderDetailsService.getOrderDetailsByUser(getUser()));
 
         this.addPermissionLevelToModel(model);

@@ -12,9 +12,21 @@
     <link th:replace="components/designelements/favicon" />
     <link th:replace="components/designelements/font" />
 
-    <link rel="stylesheet" type="text/css" href="../css/style.css" />
-    <link rel="stylesheet" type="text/css" href="../css/queries.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+      integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+      crossorigin=""
+    />
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet" />
+    <link th:href="@{/css/queries.css}" type="text/css" rel="stylesheet" />
 
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+      integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+      crossorigin=""
+    ></script>
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script
       defer
@@ -26,8 +38,16 @@
       th:src="@{/js/components.js}"
       type="application/javascript"
     ></script>
-    <script defer src="../js/general.js"></script>
-    <script defer src="../js/account.js"></script>
+    <script
+      defer
+      th:src="@{/js/general.js}"
+      type="application/javascript"
+    ></script>
+    <script
+      defer
+      th:src="@{/js/account.js}"
+      type="application/javascript"
+    ></script>
     <title>Urban Infusion</title>
   </head>
   <body>
@@ -49,7 +69,9 @@
           </p>
           <address class="account-info__row">
             <span>Email address</span>
-            <span th:text="${user.email.replace('@', '@&#8203;')}" id="field_email"
+            <span
+              th:text="${user.email.replace('@', '@&#8203;')}"
+              id="field_email"
               >esther.&#8203;howard@&#8203;example.&#8203;com</span
             >
             <button id="open_email" class="account-info__btn">
@@ -97,29 +119,29 @@
           </div>
           <address class="account-info__row">
             <span>Address</span>
-            <span th:text="${address}" id="field_address"
+            <span th:text="${address.getAddressLine()}" id="field_address"
               >2972 Westheimer Rd. Santa Ana, Illinois 85486
             </span>
             <button id="open_address" class="account-info__btn">
               <i class="ph-pencil-simple-light btn--icon"></i>
             </button>
           </address>
-          <div class="modal" id="modal_address">
+          <!--<div class="modal" id="modal_address">
             <div class="modal__window">
               <button
-                class="checkout__btn--close close btn--icon"
+                class="checkout__btn&#45;&#45;close close btn&#45;&#45;icon"
                 id="close_address"
               >
                 <i class="ph-x"></i>
               </button>
               <h2>Change address</h2>
-              <form class="modal__form--address">
+              <form class="modal__form&#45;&#45;address">
                 <label for="edit_address">New address: </label>
                 <input type="text" id="edit_address" name="edit_address" />
-                <input type="submit" value="Submit" class="btn--green" />
+                <input type="submit" value="Submit" class="btn&#45;&#45;green" />
               </form>
             </div>
-          </div>
+          </div>-->
           <p class="account-info__row">
             <span>Member since</span>
             <time
@@ -129,7 +151,7 @@
             >
           </p>
           <p class="account-info__row">
-            <span>Last login</span>
+            <span>Updated last</span>
             <time
               datetime="user.updatedAt"
               th:text="${user.updatedAt.toLocalDate()}"
@@ -161,34 +183,73 @@
               </form>
             </div>
           </div>
-          <div class="account-info__change container--beige hidden">
-            <button class="change__btn--close close btn--icon">
+          <div class="modal account-info__change account-info__change--address container--beige " id="modal_address">
+            <button class="change__btn--close close btn--icon" id="close_address">
               <i class="ph-x"></i>
             </button>
-            <p class="change-heading">Change address</p>
-            <label class="change__field">
-              Address
+            <div class="account__form--address">
+              <h3 class="change-heading">Change address</h3>
+              <p class="review__alert account__form--alert"></p>
+              <label class="change__field">
+                Addressline 1 *
+                <input
+                  name="addressLine1"
+                  class="input"
+                  type="text"
+                  th:value="${address.getAddressLine1()}"
+                  placeholder=""
+                />
+              </label>
+              <label class="change__field">
+                Addressline 2
+                <input
+                  name="addressLine2"
+                  class="input"
+                  type="text"
+                  th:value="${address.getAddressLine2()}"
+                  placeholder=""
+                />
+              </label>
+              <label class="change__field">
+                Municipality *
+                <input
+                  name="municipality"
+                  class="input"
+                  type="text"
+                  th:value="${address.getCity()}"
+                  placeholder=""
+                />
+              </label>
+              <label class="change__field">
+                Zip-code *
+                <input
+                  name="zipCode"
+                  class="input"
+                  type="text"
+                  th:value="${address.getPostalCode()}"
+                  placeholder=""
+                />
+              </label>
+              <label class="change__field">
+                Country *
+                <input
+                  name="country"
+                  class="input"
+                  type="text"
+                  th:value="${address.getCountry()}"
+                  placeholder=""
+                />
+              </label>
               <input
-                class="input signup__input--address"
-                type="text"
-                placeholder=""
+                type="submit"
+                name="changeAddress"
+                class="btn--green"
+                value="Change address"
               />
-            </label>
-
-            <label class="change__field">
-              Municipality
-              <input class="input municipality" type="text" placeholder="" />
-            </label>
-            <label class="change__field">
-              Zip-code
-              <input
-                class="input signup__input--zip-code"
-                type="text"
-                placeholder=""
-              />
-            </label>
+            </div>
+            <div class="account__map" id="map"></div>
           </div>
-          <div class="account-info__change--overlay hidden"></div>
+          <div class="account-info__change--overlay modal"></div>
         </section>
 
         <section class="section-purchases container--white">
@@ -204,9 +265,16 @@
             </thead>
             <tbody>
               <tr th:each="orderDetail : ${orderDetails}">
-                <td th:text="${orderDetail.getCreatedAt().toLocalDate()}">04.02.2022</td>
+                <td th:text="${orderDetail.getCreatedAt().toLocalDate()}">
+                  04.02.2022
+                </td>
                 <td th:text="${orderDetail.id}">6453450</td>
-                <td><span th:each="orderItem : ${orderDetail.orderItems}" th:text="${orderItem.quantity} + 'x' + ${orderItem.getProduct().getName()} + ', '"></span></td>
+                <td>
+                  <span
+                    th:each="orderItem : ${orderDetail.orderItems}"
+                    th:text="${orderItem.quantity} + 'x' + ${orderItem.getProduct().getName()} + ', '"
+                  ></span>
+                </td>
                 <td th:text="${orderDetail.total} + ',-'">600,-</td>
               </tr>
             </tbody>
