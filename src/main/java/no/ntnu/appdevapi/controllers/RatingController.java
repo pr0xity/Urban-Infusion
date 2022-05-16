@@ -101,7 +101,7 @@ public class RatingController {
         if ( ratingDto != null && productService.getProduct(productId) != null ) {
             User user = userService.findOneByEmail(ratingDto.getEmail());
 
-            if ( user != null ) {
+            if ( user != null && user.getEmail().equals(getUser().getEmail())) {
                 this.ratingService.addRating( new Rating(user, ratingDto.getDisplayName(), productService.getProduct(productId), ratingDto.getRating(), ratingDto.getComment()) );
                 response = new ResponseEntity<>(HttpStatus.CREATED);
             } else {
@@ -124,21 +124,23 @@ public class RatingController {
      */
     @PutMapping("/{productId}")
     public ResponseEntity<String> update(@PathVariable long productId, @RequestBody RatingDto ratingDto) {
-        ResponseEntity<String> response;
+        ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         Product product = productService.getProduct(productId);
         User user = userService.findOneByEmail(ratingDto.getEmail());
 
-        if (doesRatingAlreadyExist(productId, user)) {
-            Rating rating = this.ratingService.getRatingFromUserAndProduct(user, product);
-            rating.setDisplayName(ratingDto.getDisplayName());
-            rating.setRating(ratingDto.getRating());
-            rating.setComment(ratingDto.getComment());
-            rating.setUpdatedAt(LocalDateTime.now());
-            this.ratingService.updateRating(rating.getId(), rating);
-            response = new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if (user.getEmail().equals(getUser().getEmail())) {
+            if (doesRatingAlreadyExist(productId, user)) {
+                Rating rating = this.ratingService.getRatingFromUserAndProduct(user, product);
+                rating.setDisplayName(ratingDto.getDisplayName());
+                rating.setRating(ratingDto.getRating());
+                rating.setComment(ratingDto.getComment());
+                rating.setUpdatedAt(LocalDateTime.now());
+                this.ratingService.updateRating(rating.getId(), rating);
+                response = new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
         }
 
         return response;
@@ -153,17 +155,22 @@ public class RatingController {
      */
     @DeleteMapping("/{productId}")
     public ResponseEntity<String> delete(@PathVariable long productId, @RequestBody RatingDto ratingDto) {
-        ResponseEntity<String> response;
+        ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);;
 
         Product product = productService.getProduct(productId);
         User user = userService.findOneByEmail(ratingDto.getEmail());
         Rating rating = this.ratingService.getRatingFromUserAndProduct(user, product);
 
-        if (doesRatingAlreadyExist(productId, user)) {
-            ratingService.deleteRating(rating.getId());
-            response = new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        if ( user.getEmail().equals(getUser().getEmail()) ||
+                getUser().getPermissionLevel().getAdminType().equals("admin") ||
+                getUser().getPermissionLevel().getAdminType().equals("owner") ) {
+
+            if (doesRatingAlreadyExist(productId, user)) {
+                ratingService.deleteRating(rating.getId());
+                response = new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
         }
 
         return response;
@@ -181,5 +188,14 @@ public class RatingController {
         Product product = productService.getProduct(productId);
         Rating rating = this.ratingService.getRatingFromUserAndProduct(user, product);
         return rating != null;
+    }
+
+    /**
+     * Returns the user of this session.
+     *
+     * @return user of this session.
+     */
+    private User getUser() {
+        return this.userService.getSessionUser();
     }
 }

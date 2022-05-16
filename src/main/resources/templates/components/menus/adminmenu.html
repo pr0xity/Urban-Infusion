@@ -3,7 +3,7 @@
   <span class="link">Account information</span>
 </a>
 <a
-  th:if="${#httpServletRequest.requestURI} eq '/'"
+  th:unless="${#httpServletRequest.requestURI.contains('/admin')}"
   th:href="@{/admin/}"
   class="user-menu__item"
 >
@@ -11,7 +11,7 @@
   <span class="link">Admin dashboard</span>
 </a>
 <a
-  th:if="${#httpServletRequest.requestURI eq '/admin/'}"
+  th:if="${#httpServletRequest.requestURI.contains('/admin')}"
   th:href="@{/}"
   class="user-menu__item"
 >

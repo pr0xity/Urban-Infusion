@@ -3,19 +3,65 @@
  *
  * @param pathname the request mapping to send request to.
  * @param method request method.
+ * @param body the request body to be sent, set as null if not needed.
  * @param successCallback method to do on status Ok.
- * @param unauthorizedCallback method to do on status 401 unauthorized.
+ * @param unauthorizedCallback method to do on status 401 unauthorized, set as null if not needed.
+ * @param errorCallback method to do on error.
  */
-const sendApiRequest = function (pathname, method, successCallback, unauthorizedCallback, errorCallback) {
-  return fetch(`${URL}${pathname}`, {
-    method: method,
-  }).then((response) => {
+const sendApiRequest = function (
+  pathname,
+  method,
+  body,
+  successCallback,
+  unauthorizedCallback,
+  errorCallback
+) {
+  /**
+   * Returns fetch request with body and headers defined.
+   *
+   * @returns {Promise<Response>} the fetch request with body and headers.
+   */
+  const fetchWithBody = function () {
+    return fetch(`${URL}${pathname}`, {
+      method: method,
+      body: JSON.stringify(body()),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+  };
+
+  /**
+   * Returns fetch request with no body or headers.
+   *
+   * @returns {Promise<Response>} fetch request with no body or headers.
+   */
+  const fetchWithoutBody = function () {
+    return fetch(`${URL}${pathname}`, {
+      method: method,
+    });
+  };
+
+  /**
+   * Gets the appropriate fetch request according to defined parameters.
+   *
+   * @returns {Promise<Response>} fetch request fitting the parameters.
+   */
+  const getFetchRequest = function () {
+    if (body != null) {
+      return fetchWithBody();
+    } else {
+      return fetchWithoutBody();
+    }
+  };
+
+  // send request and handle it.
+  getFetchRequest().then((response) => {
     if (response.ok) {
       successCallback();
     } else if (response.status === 401) {
-      if (unauthorizedCallback !== undefined)
-      unauthorizedCallback();
-    } else if (errorCallback !== undefined) {
+      if (unauthorizedCallback !== null) unauthorizedCallback();
+    } else if (errorCallback !== null) {
       errorCallback();
     } else {
       console.error("An error occurred, contact customer service.");
@@ -37,7 +83,6 @@ const getJSON = function (url, errorMsg = "Something went wrong") {
     return response.json();
   });
 };
-
 
 /**
  * Returns the product id from the data attribute on the element given.
@@ -70,7 +115,8 @@ const getAddressInfo = async function (address) {
   const addressParams = createAddressQueryParam(address);
 
   const [data] = await getJSON(
-      `https://nominatim.openstreetmap.org/search?q=${addressParams}&format=json`);
+    `https://nominatim.openstreetmap.org/search?q=${addressParams}&format=json`
+  );
   try {
     const latitude = data.lat;
     const longitude = data.lon;

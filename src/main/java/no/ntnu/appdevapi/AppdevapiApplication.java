@@ -105,7 +105,6 @@ public class AppdevapiApplication {
       shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(2)));
       shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(3)));
       shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(4)));
-      shoppingSessionService.addShoppingSession( new ShoppingSession(userService.findAll().get(5)));
     };
   }
 }

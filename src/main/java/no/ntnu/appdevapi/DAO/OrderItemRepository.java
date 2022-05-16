@@ -2,14 +2,15 @@ package no.ntnu.appdevapi.DAO;
 
 import no.ntnu.appdevapi.entities.OrderDetails;
 import no.ntnu.appdevapi.entities.OrderItem;
-import no.ntnu.appdevapi.entities.Product;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
+/**
+ * Repository interface for order items.
+ */
 @Repository
 public interface OrderItemRepository extends CrudRepository<OrderItem, Long> {
 

@@ -2,15 +2,25 @@ const LEAF_SELECTED = "../img/icons/leaf-fill.svg";
 const LEAF_UNSELECTED = "../img/icons/leaf.svg";
 
 /**
- * Makes the leaves below and equal the given rating
- * to selected.
+ * Returns the rounded rating from dataset of the given element.
  *
- * @param leaves
+ * @param element the element to retrieve rating from.
+ * @returns {number} the rounded rating.
+ */
+function getRatingFromElement(element) {
+  return Math.round(Number(element.dataset.rating));
+}
+
+/**
+ * Makes the leaves which has a data rating attribute less than
+ * or equal the given rating to selected.
+ *
+ * @param leaves the leaves to check and set as selected.
  * @param {*} rating the rating to make leaves selected for.
  */
 function setLeavesToSelected(leaves, rating) {
   leaves.forEach((leaf) => {
-    if (leaf.dataset.rating <= rating) {
+    if (getRatingFromElement(leaf) <= rating) {
       leaf.src = LEAF_SELECTED;
     } else {
       leaf.src = LEAF_UNSELECTED;
@@ -19,78 +29,218 @@ function setLeavesToSelected(leaves, rating) {
 }
 
 /**
- * Set the rating leaves on product and ratings.
+ * Sets the rating leaves to filled on the various product(s) and reviews.
  */
-function setRatingLeaves() {
+function setRatingLeavesOnProductsAndReviews() {
   const ratings = document.querySelectorAll(".product__rating");
-  ratings.forEach(rating => {
+  ratings.forEach((rating) => {
     const leaves = rating.querySelectorAll(".product__rating--img");
-    setLeavesToSelected(leaves, rating.dataset.rating);
-  })
+    setLeavesToSelected(leaves, getRatingFromElement(rating));
+  });
 }
 
 /**
- * Dynamically changes leaves on review-form.
+ * Sets functionality and request handling on the review form on a products page.
  */
-function reviewRating() {
-
-  const ratingReview = document.querySelector("#review__rating")
-  const ratingLeaves = ratingReview.querySelectorAll(".product__rating--img");
+function setReviewHandling() {
+  const productId = getProductIdFromElement(document.querySelector(".product"));
+  const ratingReview = document.querySelector("#review__rating");
+  const reviewRatingLeaves = ratingReview.querySelectorAll(
+    ".product__rating--img"
+  );
   let isRatingChosen = false;
   let rating;
 
   /**
-   * Adds functionality for hover events when selecting review rating.
-   *
-   * @param {*} event hover event
+   * Sets all the leaves unselected.
+   */
+  function setAllLeavesToUnselected() {
+    reviewRatingLeaves.forEach((leaf) => (leaf.src = LEAF_UNSELECTED));
+  }
+
+  /**
+   * Makes all the leaves up to the hovered leaf selected.
    */
   function ratingsMouseOverHandler(event) {
-    hoveredRating = event.target.dataset.rating;
-
-    ratingLeaves.forEach((leaf) => {
-      setLeavesToSelected(ratingLeaves, hoveredRating);
-    });
+    const hoveredRating = getRatingFromElement(event.target);
+    setLeavesToSelected(reviewRatingLeaves, hoveredRating);
   }
 
   /**
-   * Adds functionality for when mouse hovering stops.
+   * If no rating is selected, set all leaves to unselected.
    */
   function ratingsMouseLeaveHandler() {
-    ratingLeaves.forEach((leaf) => {
-      if (isRatingChosen) {
-        setLeavesToSelected(ratingLeaves, rating);
-      } else {
-        setAllLeavesToUnselected();
-      }
-    });
+    if (isRatingChosen) {
+      setLeavesToSelected(reviewRatingLeaves, rating);
+    } else {
+      setAllLeavesToUnselected();
+    }
   }
 
   /**
-   * Adds functionality for when rating is selected for review.
-   *
-   * @param {*} event click event for selecting rating.
+   * Selects the rating from the clicked element.
    */
   function ratingsMouseClickHandler(event) {
-    rating = event.target.dataset.rating;
+    rating = getRatingFromElement(event.target);
     isRatingChosen = true;
   }
 
-  /**
-   * Makes all the leaves unselected.
-   */
-  function setAllLeavesToUnselected() {
-    ratingLeaves.forEach((leaf) => (leaf.src = LEAF_UNSELECTED));
-  }
-
-  ratingLeaves.forEach((leaf) => {
+  // Adding events to the leaves on the review form.
+  reviewRatingLeaves.forEach((leaf) => {
     leaf.addEventListener("mouseover", ratingsMouseOverHandler);
     leaf.addEventListener("mouseleave", ratingsMouseLeaveHandler);
     leaf.addEventListener("click", ratingsMouseClickHandler);
   });
+
+  /**
+   * Returns true if necessary fields are filled (email and rating), false if not.
+   *
+   * @returns {boolean} true if necessary fields are filled, false if not.
+   */
+  const isReviewFormValid = function () {
+    const email = document.querySelector('input[name="email"]');
+    const reviewRating = document.querySelector(`input[name="rating"]:checked`);
+    return email.value !== "" && reviewRating !== null;
+  };
+
+  /**
+   * Creates a request body object from the review form fields and returns the object.
+   *
+   * @returns {{displayName: string, rating, comment, email: string}} the request body object.
+   */
+  function getBodyForReviewRequest() {
+    const displayName = document.querySelector('input[name="displayName"]');
+    const email = document.querySelector('input[name="email"]');
+    const reviewRating = document.querySelector(`input[name="rating"]:checked`);
+    const comment = document.querySelector('textarea[name="comment"]');
+
+    return {
+      displayName: displayName.value.toString(),
+      email: email.value.toString(),
+      rating: reviewRating.value,
+      comment: comment.value,
+    };
+  }
+
+  const sendReview = document.querySelector('input[name="sendReview"]');
+  const updateReview = document.querySelector('input[name="updateReview"]');
+  const deleteReview = document.querySelector('input[name="deleteReview"]');
+  const reviewAlert = document.querySelector(".review__alert");
+
+  /**
+   * Sets the review alert ot the given alert message.
+   *
+   * @param alertMessage alert message to set on review alert.
+   */
+  const setReviewAlert = function (alertMessage) {
+    reviewAlert.innerHTML = `${alertMessage}`;
+  };
+
+  /**
+   * Sets the review alert to empty.
+   */
+  const resetReviewAlert = function () {
+    reviewAlert.innerHTML = "";
+  };
+
+  /**
+   * Reloads the page.
+   */
+  const reviewRequestSuccess = function () {
+    resetReviewAlert();
+    window.location.reload();
+  };
+
+  /**
+   * Sets review alert.
+   */
+  const reviewRequestUnauthorized = function () {
+    resetReviewAlert();
+    setReviewAlert("Please log in to send a review");
+  };
+
+  /**
+   *
+   */
+  const reviewRequestError = function () {
+    setReviewAlert("Please type in your own email");
+  };
+
+  /**
+   * Sends a POST request for a new rating.
+   */
+  const sendReviewRequest = function () {
+    if (isReviewFormValid()) {
+      sendApiRequest(
+        `${RATING_API_PATHNAME}/${productId}`,
+        "POST",
+        getBodyForReviewRequest,
+        reviewRequestSuccess,
+        reviewRequestUnauthorized
+      );
+    } else {
+      setReviewAlert("Email and a selected rating is required for a review");
+    }
+  };
+
+  /**
+   * Sends a PUT request to update a rating.
+   */
+  const updateReviewRequest = function () {
+    if (isReviewFormValid()) {
+      sendApiRequest(
+        `${RATING_API_PATHNAME}/${productId}`,
+        "PUT",
+        getBodyForReviewRequest,
+        reviewRequestSuccess,
+        reviewRequestUnauthorized,
+        reviewRequestError
+      );
+    } else {
+      setReviewAlert("Email and a selected rating is required for a review");
+    }
+  };
+
+  /**
+   * Sends a DELETE request to delete a rating.
+   */
+  const deleteReviewRequest = function () {
+    if (isReviewFormValid()) {
+      sendApiRequest(
+        `${RATING_API_PATHNAME}/${productId}`,
+        "DELETE",
+        getBodyForReviewRequest,
+        reviewRequestSuccess,
+        reviewRequestUnauthorized
+      );
+    } else {
+      setReviewAlert("Please fill in your email to delete your review");
+    }
+  };
+
+  // Adding event listener to the button which is not null.
+  if (sendReview !== null) {
+    sendReview.addEventListener("click", sendReviewRequest);
+  }
+  if (updateReview !== null) {
+    rating = getRatingFromElement(document.querySelector(".review__form"));
+    const ratingRadioButton = document.querySelector(
+      `input[value="${rating}"]`
+    );
+    ratingRadioButton.checked = true;
+    isRatingChosen = true;
+    setLeavesToSelected(reviewRatingLeaves, rating);
+
+    updateReview.addEventListener("click", updateReviewRequest);
+  }
+  if (deleteReview !== null) {
+    deleteReview.addEventListener("click", deleteReviewRequest);
+  }
 }
 
-setRatingLeaves();
-
+// Only on a products page.
 if (window.location.pathname.includes(PRODUCT_PATHNAME)) {
-  reviewRating();
+  setReviewHandling();
 }
+
+setRatingLeavesOnProductsAndReviews();

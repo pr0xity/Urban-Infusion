@@ -99,6 +99,7 @@ public class HTMLPageController {
         model.addAttribute("user", this.getUser());
         model.addAttribute("description", product.getDescription().split("\\."));
         model.addAttribute("comments", ratingService.getRatingsFromProduct(product));
+        model.addAttribute("comment", ratingService.getRatingFromUserAndProduct(getUser(), product));
         this.addPermissionLevelToModel(model);
         return "product";
     }

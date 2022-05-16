@@ -1,6 +1,7 @@
 const URL = "http://localhost:8080";
 const AUTHENTICATION_API_PATHNAME = "/login";
 const WISHLIST_API_PATHNAME = "/wishlist";
+const RATING_API_PATHNAME = "/ratings";
 const PRODUCT_PATHNAME = "/product/";
 
 /**********************************************
@@ -88,8 +89,8 @@ const overlayNavUserMobileBtn = document.querySelector(
 
 const getWishlistUnauthorized = function () {
   userMenuButton.click();
-  setLoginAlert("Log in to see your favourites")
-}
+  setLoginAlert("Log in to see your favourites");
+};
 
 if (wishlistLink !== null) {
   wishlistLink.addEventListener("click", getWishlistUnauthorized);
@@ -97,8 +98,8 @@ if (wishlistLink !== null) {
 
 const getCheckoutUnauthorized = function () {
   userMenuButton.click();
-  setLoginAlert("Log in to checkout")
-}
+  setLoginAlert("Log in to checkout");
+};
 
 if (checkoutLink !== null) {
   checkoutLink.addEventListener("click", getCheckoutUnauthorized);
