@@ -17,7 +17,7 @@ function loadCustomers(users) {
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
         if (user["address"]) {
-            addRow(user["id"], user["firstName"] + " " + user["lastName"], user["email"], user["address"].addressLine);
+            addRow(user["id"], user["firstName"] + " " + user["lastName"], user["email"], user["address"]["addressLine"]);
         } else {
             addRow(user["id"], user["firstName"] + " " + user["lastName"], user["email"],"");
         }

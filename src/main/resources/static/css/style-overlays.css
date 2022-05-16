@@ -1,0 +1,11 @@
+.section-manage-product {
+    padding-top: 1.6rem;
+}
+
+.section-info {
+    display: flex;
+}
+.section-info__labels {
+    display: flex;
+    flex-direction: column;
+}

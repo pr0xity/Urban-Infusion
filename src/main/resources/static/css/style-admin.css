@@ -35,7 +35,7 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
 
 .sidenav {
     /*order: 1;*/
-    /* flex-grow: 1; */
+    flex-grow: 1;
     /* border-style: solid; */
     /* min-width: 25rem;
     max-width: 25rem; */
@@ -47,6 +47,11 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
 .sidenav__item {
     margin-bottom: 1.2rem;
     padding: 1.2rem;
+}
+
+.sidenav__item:hover {
+    transition: all 0.2s ease-out;
+    transform: scale(1.1);
 }
 
 .sidenav__link {
@@ -110,6 +115,11 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
     padding: 1.6rem 2.4rem 1.6rem 2.4rem;
 }
 
+.dashboard__label:hover {
+    transition: all 0.2s ease-out;
+    transform: scale(1.1);
+}
+
 .dashboard__table tr {
     display: grid;
     column-gap: 1.6rem;
@@ -122,13 +132,13 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
 }
 
 .dashboard__table tbody tr:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background-color: #dae4e8;
     outline: none;
     cursor: pointer;
 }
 
 .customer-table tbody tr:hover {
-    background: rgba(0, 0, 0, 0.05);
+    background-color: #dae4e8;
     outline: none;
     cursor: pointer;
 }
