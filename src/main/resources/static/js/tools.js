@@ -1,3 +1,12 @@
+// For REST API requests
+const URL = "http://localhost:8080";
+const AUTHENTICATION_API_PATHNAME = "/login";
+const WISHLIST_API_PATHNAME = "/wishlist";
+const RATING_API_PATHNAME = "/ratings";
+const PRODUCT_PATHNAME = "/product/";
+
+let map;
+
 /**
  * Sends an API request to the sites API URL.
  *
@@ -139,17 +148,6 @@ const isAddressValid = async function (address) {
   });
 };
 
-
-let map;
-const leafIcon = new L.Icon({
-  iconUrl: "../img/icons/mapmarker.svg",
-  shadowUrl: "../img/icons/shadow.svg",
-  iconSize: [41, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [61, 51],
-});
-
 /**
  * Initializes and renders the map to the given latitude and longitude.
  *
@@ -158,6 +156,15 @@ const leafIcon = new L.Icon({
  */
 const renderMap = function (latitude, longitude) {
   map = L.map("map").setView([latitude, longitude], 17);
+
+  const leafIcon = new L.Icon({
+    iconUrl: "../img/icons/mapmarker.svg",
+    shadowUrl: "../img/icons/shadow.svg",
+    iconSize: [41, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [61, 51],
+  });
 
   L.marker([latitude, longitude], { icon: leafIcon }).addTo(map);
   L.tileLayer(
@@ -178,6 +185,15 @@ const renderMap = function (latitude, longitude) {
  */
 const moveMap = function (latitude, longitude) {
   map.panTo([latitude, longitude], 17);
+
+  const leafIcon = new L.Icon({
+    iconUrl: "../img/icons/mapmarker.svg",
+    shadowUrl: "../img/icons/shadow.svg",
+    iconSize: [41, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [61, 51],
+  });
 
   L.marker([latitude, longitude], { icon: leafIcon }).addTo(map);
 };

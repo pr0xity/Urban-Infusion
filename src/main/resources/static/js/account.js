@@ -59,7 +59,7 @@ function addEditableListeners(tags) {
   let [modal, open, close, field, edit] = tags;
   open.addEventListener("click", () => {
     modal.classList.add("show");
-    // Refactor this
+    //TODO: Refactor this
     if (modal.classList.contains("account-info__change--address")) {
       document
         .querySelector(".account-info__change--overlay")
@@ -69,7 +69,7 @@ function addEditableListeners(tags) {
   close.addEventListener("click", () => {
     resetAccountFormAlert();
     modal.classList.remove("show");
-    // Refactor this
+    //TODO: Refactor this
     if (modal.classList.contains("account-info__change--address")) {
       document
         .querySelector(".account-info__change--overlay")
