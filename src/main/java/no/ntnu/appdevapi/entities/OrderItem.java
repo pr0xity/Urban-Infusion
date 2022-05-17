@@ -1,6 +1,7 @@
 package no.ntnu.appdevapi.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
@@ -19,8 +20,8 @@ public class OrderItem {
     private long id;
 
     @ApiModelProperty("The order details this order item belongs in.")
-    @JsonBackReference
-    @ManyToOne
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_details_id")
     private OrderDetails orderDetails;
 

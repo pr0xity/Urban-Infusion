@@ -1,13 +1,12 @@
 
 package no.ntnu.appdevapi.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents an order and its details.
@@ -26,10 +25,9 @@ public class OrderDetails {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ApiModelProperty("Set of products in the shopping session.")
-    @JsonManagedReference
+    @ApiModelProperty("List of products in the shopping session.")
     @OneToMany(mappedBy = "orderDetails")
-    private Set<OrderItem> orderItems = new HashSet<>();
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     @ApiModelProperty("The total cost of this order")
     private double total;
@@ -58,13 +56,19 @@ public class OrderDetails {
         this.total = total;
         this.quantity = quantity;
         this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        this.processed = false;
     }
 
     /**
      * Empty constructor
      */
     public OrderDetails () {
-
+        this.total = 0;
+        this.quantity = 0;
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+        this.processed = false;
     }
 
     /**
@@ -95,21 +99,47 @@ public class OrderDetails {
     }
 
     /**
-     * Returns the user of this order details.
+     * Returns the items in this order.
      *
-     * @return user of this order details.
+     * @return {@code List<OrderItem>} of items in the order.
      */
-    public Set<OrderItem> getOrderItems() {
+    public List<OrderItem> getOrderItems() {
         return orderItems;
     }
 
     /**
-     * Sets the set of order items of this order details.
+     * Sets the list of order items of this order details.
      *
-     * @param orderItems set of order items to be set for this order details.
+     * @param orderItems list of order items to be set for this order details.
      */
-    public void setOrderItems(Set<OrderItem> orderItems) {
+    public void setOrderItems(List<OrderItem> orderItems) {
         this.orderItems = orderItems;
+        this.total = orderItems.stream().mapToDouble(OrderItem::getTotal).sum();
+        this.quantity = orderItems.stream().mapToInt(OrderItem::getQuantity).sum();
+    }
+
+    /**
+     * Adds an item to the order.
+     *
+     * @param orderItem {@code OrderItem} to be added.
+     */
+    public void addOrderItem(OrderItem orderItem) {
+        this.orderItems.add(orderItem);
+        this.total += orderItem.getTotal();
+        this.quantity += orderItem.getQuantity();
+    }
+
+    /**
+     * Removes an order item from the order.
+     *
+     * @param orderItem the order item to remove.
+     */
+    public void removeOrderItem(OrderItem orderItem) {
+        if (this.orderItems.contains(orderItem)) {
+            this.orderItems.remove(orderItem);
+            this.total -= orderItem.getTotal();
+            this.quantity -= orderItem.getQuantity();
+        }
     }
 
     /**

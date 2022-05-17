@@ -8,6 +8,8 @@ public interface ProductService {
 
   Product getProduct(long id);
 
+  Product getProductByName(String name);
+
   Product addProductFromDto(ProductDto product);
 
   void deleteProduct(long id);

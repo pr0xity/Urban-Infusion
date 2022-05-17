@@ -83,11 +83,13 @@ function addOrderRow(order) {
     const customerIdCell = document.createElement("td");
     const statusCell = document.createElement("td");
 
-    const dateNode = document.createTextNode(order["createdAt"]);
+    let string = order["createdAt"];
+    let trimmedString = string.substring(0,10);
+    const dateNode = document.createTextNode(trimmedString);
     const orderIdNode = document.createTextNode(order["id"]);
-    const customerIdNode = document.createTextNode(order["user"]);
+    const customerIdNode = document.createTextNode(order["user"]["id"]);
     let statusNode = document.createTextNode("Unprocessed");
-    if (order["processed"] === "true") {
+    if (order["processed"] === true) {
         statusNode = document.createTextNode("Completed");
     }
 

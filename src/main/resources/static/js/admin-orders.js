@@ -1,18 +1,43 @@
 const host = "http://localhost";
 const port = ":8080";
+let orders = null;
+const searchInput = document.getElementById("searchInput");
+const tableBody = document.getElementById("orderTableBody");
 
 function getOrders() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
     req.open('GET', host + port + "/orders/", true);
     req.onload  = function() {
-        const jsonResponse = JSON.parse(req.responseText);
-        loadOrders(jsonResponse)
+        orders = JSON.parse(req.responseText);
+        loadOrders(orders)
     };
     req.send(null);
 }
 
+function filterOrders() {
+    const filteredOrders = [];
+    const searchString = searchInput.value.toLowerCase();
+    for (let i = 0; i < orders.length; i++) {
+        const order = orders[i];
+        let added = false;
+        if (order["id"].toString().includes(searchString) || order["user"]["id"].toString().includes(searchString)) {
+            filteredOrders.push(order);
+            added = true;
+        }
+        for (let j = 0; j < order["orderItems"].length; j++) {
+            const item = order["orderItems"][j];
+            if (item["product"]["name"].toLowerCase().includes(searchString) && !added) {
+                filteredOrders.push(order);
+                break;
+            }
+        }
+    }
+    loadOrders(filteredOrders);
+}
+
 function loadOrders(orders) {
+    tableBody.innerHTML = "";
     for (let i = 0; i < orders.length; i++) {
         const order = orders[i];
         addOrderRow(order);
@@ -20,8 +45,6 @@ function loadOrders(orders) {
 }
 
 function addOrderRow(order) {
-    if (!document.getElementById("orderTable")) return;
-    const tableBody = document.getElementById("orderTableBody");
     const row = document.createElement("tr");
 
     row.addEventListener("click", () => {
@@ -31,24 +54,42 @@ function addOrderRow(order) {
     const dateCell = document.createElement("td");
     const orderIdCell = document.createElement("td");
     const customerIdCell = document.createElement("td");
+    const itemsCell = document.createElement("td");
     const statusCell = document.createElement("td");
 
-    const dateNode = document.createTextNode(order["createdAt"]);
+    let string = order["createdAt"];
+    let trimmedString = string.substring(0,10);
+    const dateNode = document.createTextNode(trimmedString);
     const orderIdNode = document.createTextNode(order["id"]);
-    const customerIdNode = document.createTextNode(order["user"]);
+    const customerIdNode = document.createTextNode(order["user"]["id"]);
+
+    let items = "";
+    for (let i = 0; i < Math.min(order["orderItems"].length, 2); i++) {
+        let item = order["orderItems"][i];
+        if (i > 0) {
+            items += ", ";
+        }
+        items += item["quantity"] + " x " + item["product"]["name"];
+    }
+    if (order["orderItems"].length > 2) {
+        items += "...";
+    }
+    const itemsNode = document.createTextNode(items)
     let statusNode = document.createTextNode("Unprocessed");
-    if (order["processed"] === "true") {
+    if (order["processed"] === true) {
         statusNode = document.createTextNode("Completed");
     }
 
     dateCell.appendChild(dateNode);
     orderIdCell.appendChild(orderIdNode);
     customerIdCell.appendChild(customerIdNode);
+    itemsCell.appendChild(itemsNode);
     statusCell.appendChild(statusNode);
 
     row.appendChild(dateCell);
     row.appendChild(orderIdCell);
     row.appendChild(customerIdCell);
+    row.appendChild(itemsCell);
     row.appendChild(statusCell);
     tableBody.appendChild(row);
 }

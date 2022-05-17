@@ -28,6 +28,10 @@ public class ProductServiceImpl implements ProductService {
         return p.orElse(null);
     }
 
+    public Product getProductByName(String name) {
+        return productRepository.findByName(name);
+    }
+
 
     public Product addProductFromDto(ProductDto product) {
         Product nProduct = product.getProductFromDto();
