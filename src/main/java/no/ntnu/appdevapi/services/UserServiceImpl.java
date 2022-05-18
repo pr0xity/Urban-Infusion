@@ -1,10 +1,12 @@
 package no.ntnu.appdevapi.services;
 
 import no.ntnu.appdevapi.DAO.UserRepository;
+import no.ntnu.appdevapi.DAO.VerificationTokenRepository;
 import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.PermissionLevel;
 import no.ntnu.appdevapi.entities.User;
 import no.ntnu.appdevapi.entities.UserAddress;
+import no.ntnu.appdevapi.entities.VerificationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -83,6 +85,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User findOneByID(long id) {
         return userRepository.findById(id);
+    }
+
+    @Override
+    public void update(long id, User user) {
+        if (user != null && user.getId() == id && findOneByID(id) != null) {
+            this.userRepository.save(user);
+        }
     }
 
     @Override

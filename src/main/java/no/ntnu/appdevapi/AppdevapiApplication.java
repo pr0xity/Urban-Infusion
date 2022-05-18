@@ -66,6 +66,7 @@ public class AppdevapiApplication {
 
         userService.save(new UserDto("Geir", "Otlo", "geo@geo.geo", "1234", "Vika Terrasse 9", "C/O Espen Otlo", "6010", "Ålesund", "Norge", "91887754"));
         userService.save(new UserDto("Per", "Person", "per@person.geo", "1234", "Gamle Blindheimsveg 72a", "6012", "Ålesund", "Norge", "46537894"));
+        //userService.save(new UserDto("Janita", "Røyseth", "janita.lillevik@hotmail.com", "hemmelig123", "Salevegen 47", "6030", "Langevåg", "Norge", "45345335"));
         userService.save(new UserDto("user", "user", "user", "1234"));
         userService.save(new UserDto("admin", "admin", "admin", "1234", "admin"));
         userService.save(new UserDto("owner", "owner", "owner", "1234", "owner"));

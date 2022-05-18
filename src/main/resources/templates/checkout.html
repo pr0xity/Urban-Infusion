@@ -65,7 +65,7 @@
           <span class="checkout__list-heading margin-left--small"
             >Products</span
           >
-          <span class="checkout__list-heading">Size</span>
+<!--          <span class="checkout__list-heading">Size</span>-->
           <span class="checkout__list-heading">Quantity</span>
           <span class="checkout__list-heading">Total</span>
         </div>
@@ -88,6 +88,7 @@
                 >Art.nr. 43240234</span
               >
             </p>
+            <!--
             <span
               class="item__size"
               th:if="${cartItem.product.size} != 0"
@@ -99,7 +100,7 @@
               th:unless="${cartItem.product.size} != 0"
               th:text="'&#8211;'"
               >50g</span
-            >
+            >-->
             <input
               class="item__quantity"
               type="number"

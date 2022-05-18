@@ -36,7 +36,7 @@ public class UserDto {
     this.password = password;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
-    this.enabled = true;
+    this.enabled = false;
     this.permissionLevel = "user";
 
     this.addressLine1 = addressLine1;
@@ -55,7 +55,7 @@ public class UserDto {
     this.password = password;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
-    this.enabled = true;
+    this.enabled = false;
     this.permissionLevel = "user";
 
     this.addressLine1 = addressLine1;
@@ -73,7 +73,7 @@ public class UserDto {
     this.password = password;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
-    this.enabled = true;
+    this.enabled = false;
     this.permissionLevel = permissionLevel;
   }
 
@@ -84,7 +84,7 @@ public class UserDto {
     this.password = password;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
-    this.enabled = true;
+    this.enabled = false;
     this.permissionLevel = "user";
   }
 

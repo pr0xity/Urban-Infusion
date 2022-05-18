@@ -3,16 +3,15 @@ package no.ntnu.appdevapi.controllers;
 import io.swagger.annotations.ApiOperation;
 import no.ntnu.appdevapi.DTO.OrderDetailsDto;
 import no.ntnu.appdevapi.entities.*;
+import no.ntnu.appdevapi.events.CompleteOrderEvent;
 import no.ntnu.appdevapi.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -24,9 +23,6 @@ import java.util.Set;
 @RestController
 @RequestMapping("/orders")
 public class OrderController {
-
-    @Autowired
-    private JavaMailSender mailSender;
     
     @Autowired
     private OrderDetailsService orderDetailsService;
@@ -42,6 +38,9 @@ public class OrderController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ApplicationEventPublisher applicationEventPublisher;
 
     /**
      * Get all order details.
@@ -110,7 +109,7 @@ public class OrderController {
             this.orderItemService.addAllOrderItems(orderItems);
 
             //Send order confirmation email and empty shopping session.
-            this.sendOrderConfirmation(orderDetails, orderItems);
+            applicationEventPublisher.publishEvent(new CompleteOrderEvent(getUser(), orderDetails, orderItems));
             this.clearShoppingSession();
             response = new ResponseEntity<>(HttpStatus.CREATED);
         } else {
@@ -233,86 +232,5 @@ public class OrderController {
      */
     private User getUser() {
         return this.userService.getSessionUser();
-    }
-
-    /**
-     * Sends order confirmation email to the customer/user.
-     *
-     * @param orderDetails the order details of the users order.
-     * @param orderItems the ordered items of the users order.
-     */
-    private void sendOrderConfirmation(OrderDetails orderDetails, Iterable<OrderItem> orderItems) {
-        String from = "UrbanInfusionTea@gmail.com";
-        String to = this.getUser().getEmail();
-
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper messageHelper = null;
-        try {
-            messageHelper = new MimeMessageHelper(message, true);
-            messageHelper.setSubject("Order Confirmation - Urban Infusion");
-            messageHelper.setFrom(from);
-            messageHelper.setTo(to);
-
-            String content = createOrderConfirmationMailContent(orderDetails, orderItems);
-
-            messageHelper.setText(content, true);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-
-        mailSender.send(message);
-    }
-
-    /**
-     * Creates the content in an order confirmation email using the order details given and order items given.
-     *
-     * @param orderDetails the order details for the order confirmation.
-     * @param orderItems the ordered items for the order confirmation.
-     * @return html of the email content of the order confirmation.
-     */
-    private String createOrderConfirmationMailContent(OrderDetails orderDetails, Iterable<OrderItem> orderItems) {
-        StringBuilder content = new StringBuilder("<h1>Dear " + getUser().getFirstName() + " " + getUser().getLastName() + ",</h1><p>Your order has been received and will swiftly be processed. Thank you for supporting Urban Infusion</p>" +
-                "<br> <br>" +
-                "<table style=' margin: 0 auto;' width='700'>\n" +
-                "  <tr style='display:flex;'>\n" +
-                "    <td width='250'>" +
-                "     <p style='font-weight: bold; line-height: 0;'>Order number:</p><p>" + orderDetails.getId() + "</p><br>" +
-                "     <p style='font-weight: bold; line-height: 0;'>Order date:</p><p>" + orderDetails.getCreatedAt().toLocalDate() + "</p><br>" +
-                "     <p style='font-weight: bold; line-height: 0;'>Payment method:</p><p>Coupon</p><br>" +
-                "     <p style='font-weight: bold; line-height: 0;'>Delivery method:</p><p>Home-delivery</p><br>" +
-                "    </td>\n" +
-                "    <td width='250'>" +
-                "     <p style='font-weight: bold; line-height: 0;'>Full name:</p><p>" + orderDetails.getUser().getFirstName() + " " + orderDetails.getUser().getLastName() + "</p><br>" +
-                "     <p style='font-weight: bold; line-height: 0;'>Email-address:</p><p>" + orderDetails.getUser().getEmail() + "</p><br>" +
-                "     <p style='font-weight: bold; line-height: 0;'>Phone-number:</p><p>" + orderDetails.getUser().getAddress().getPhone() + "</p><br>" +
-                "     <p style='font-weight: bold; line-height: 0;'>Home-address:</p><p>" + orderDetails.getUser().getAddress().getAddressLine() + "</p><br>" +
-                "    </td>\n" +
-                "  </tr>\n" +
-                "</table>" +
-                "<br> <br>" +
-                "<table style=' margin: 0 auto;' width='700'>" +
-                "  <tr style='text-align: left; border-bottom: 1px solid black;'>" +
-                "    <th><h3>Items</h3></th>" +
-                "  </tr>" +
-                "  <tr style='text-align: left; border-bottom: 1px solid black;'>" +
-                "    <th style='border-bottom: 1px solid #999;'>Art. nr</th>" +
-                "    <th style='border-bottom: 1px solid #999;'>Product</th>" +
-                "    <th style='border-bottom: 1px solid #999;'>Size</th>" +
-                "    <th style='border-bottom: 1px solid #999;'>Quantity</th>" +
-                "    <th style='border-bottom: 1px solid #999;'>Price (NOK)</th>" +
-                "  </tr>");
-        for (OrderItem orderItem : orderItems) {
-            content.append("<tr>" +
-                            "<td style='border-bottom: 1px solid #ddd;'>").append(orderItem.getProduct().getId()).append("</td>")
-                    .append("<td style='border-bottom: 1px solid #ddd;'>").append(orderItem.getProduct().getName()).append("</td>")
-                     // Vi har fjernet size-feltet fra produkter :)
-                    //  .append("<td style='border-bottom: 1px solid #ddd;'>").append(orderItem.getProduct().getSize()).append("g").append("</td>")
-                    .append("<td style='border-bottom: 1px solid #ddd;'>").append(orderItem.getQuantity()).append("</td>")
-                    .append("<td style='border-bottom: 1px solid #ddd;'>").append(orderItem.getTotal()).append(",-").append("</td>")
-                    .append("</tr>");
-        }
-        content.append("<tr><td></td><td></td><td></td><td></td><td style='line-height: 2;'><strong>Total: </strong>").append(orderDetails.getTotal()).append(",-").append("</td></tr>").append("</table>");
-
-        return String.valueOf(content);
     }
 }

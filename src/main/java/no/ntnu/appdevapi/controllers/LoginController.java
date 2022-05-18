@@ -2,10 +2,15 @@ package no.ntnu.appdevapi.controllers;
 
 import no.ntnu.appdevapi.DTO.LoginUser;
 import no.ntnu.appdevapi.DTO.UserDto;
+import no.ntnu.appdevapi.entities.User;
+import no.ntnu.appdevapi.entities.VerificationToken;
+import no.ntnu.appdevapi.events.CompleteRegistrationEvent;
 import no.ntnu.appdevapi.security.JwtUtil;
 import no.ntnu.appdevapi.services.UserService;
+import no.ntnu.appdevapi.services.VerificationTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
@@ -14,10 +19,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * Endpoint controller for user authentication.
@@ -40,6 +46,12 @@ public class LoginController {
   @Autowired
   private UserService userService;
 
+  @Autowired
+  private ApplicationEventPublisher applicationEventPublisher;
+
+  @Autowired
+  private VerificationTokenService verificationTokenService;
+
   /**
    * Authenticates existing user
    * @param loginUser LoginUser DTO containing login info (email & password)
@@ -58,13 +70,41 @@ public class LoginController {
    * or HttpStatus not found on fail.
    */
   @RequestMapping(value = "/register", method = RequestMethod.POST)
-  public ResponseEntity<?> registerUser(@RequestBody UserDto nUser) {
+  public ResponseEntity<String> registerUser(@RequestBody UserDto nUser) {
     if (null != nUser && userService.findOneByEmail(nUser.getEmail()) == null) {
       nUser.setPermissionLevel("user");
-      userService.save(nUser);
-      return authenticate(nUser.getEmail(), nUser.getPassword());
+      User user = userService.save(nUser);
+
+      applicationEventPublisher.publishEvent(new CompleteRegistrationEvent(user));
+
+      //verification token is only placed here for testing outside of email. Will be removed.
+      return new ResponseEntity<>(verificationTokenService.getTokenFromUser(user), HttpStatus.OK);
     }
     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  }
+
+  /**
+   * Checks if given verification token is valid and enables and redirect user accordingly.
+   *
+   * @param token the verification token.
+   * @return redirect user to home page and authenticates the user.
+   */
+  @RequestMapping(value = "/confirmRegistration", method = RequestMethod.GET)
+  public ResponseEntity<?> confirmRegistration(HttpServletResponse response, @RequestParam("token") String token) throws IOException {
+    VerificationToken verificationToken = verificationTokenService.getVerificationTokenByToken(token);
+
+    if (verificationToken == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    if (verificationToken.hasTokenExpired()) {
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    User user = verificationToken.getUser();
+    user.setEnabled(true);
+    userService.update(user.getId(), user);
+    response.sendRedirect("/");
+    return new ResponseEntity<>(HttpStatus.OK);
   }
 
   private ResponseEntity<?> authenticate(String email, String password) {
