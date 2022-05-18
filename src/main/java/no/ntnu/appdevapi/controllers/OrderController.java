@@ -1,10 +1,11 @@
 package no.ntnu.appdevapi.controllers;
 
 import io.swagger.annotations.ApiOperation;
-import no.ntnu.appdevapi.DTO.OrderDetailsDto;
 import no.ntnu.appdevapi.entities.*;
 import no.ntnu.appdevapi.events.CompleteOrderEvent;
 import no.ntnu.appdevapi.services.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
@@ -12,10 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * REST API controller for orders.
@@ -29,6 +27,9 @@ public class OrderController {
     
     @Autowired
     private OrderItemService orderItemService;
+
+    @Autowired
+    private ProductService productService;
 
     @Autowired
     private ShoppingSessionService shoppingSessionService;
@@ -123,22 +124,30 @@ public class OrderController {
      * Updates the order details which has the given id by the given order details.
      *
      * @param orderId the id of the order details to update.
-     * @param orderDetailsDto the order details to update with.
+     * @param orderDetails the order details to update with.
      * @return 200 OK on success, 400 Bad request on failure.
      */
     @PutMapping("/{orderId}")
-    public ResponseEntity<String> update(@PathVariable long orderId, @RequestBody OrderDetailsDto orderDetailsDto) {
-        ResponseEntity<String> response;
+    public ResponseEntity<String> update(@PathVariable long orderId, @RequestBody String orderDetails) {
+        ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.OK);
+        OrderDetails old = orderDetailsService.getOrderDetails(orderId);
 
-        OrderDetails orderDetails = orderDetailsService.getOrderDetails(orderId);
-        User user = userService.findOneByEmail(orderDetailsDto.getEmail());
+        if (null != orderDetails && null != old) {
 
-        if ( doesOrderExist(orderId, user) ) {
-            orderDetails.setTotal(orderDetailsDto.getTotal());
-            orderDetails.setQuantity(orderDetailsDto.getQuantity());
-            orderDetails.setProcessed(orderDetailsDto.isProcessed());
-            this.orderDetailsService.update(orderId, orderDetails);
-            response = new ResponseEntity<>(HttpStatus.OK);
+            JSONObject order = new JSONObject(orderDetails);
+            List<OrderItem> items = new ArrayList<>();
+            JSONArray itemIds = (JSONArray) order.get("itemIds");
+            JSONArray quantities = (JSONArray) order.get("quantities");
+            for (int i = 0; i < itemIds.length(); i++) {
+                System.out.println(itemIds.get(i));
+                items.add(new OrderItem(old, productService.getProduct(Long.valueOf((Integer) itemIds.get(i))),
+                        (Integer) quantities.get(i)));
+            }
+            old.setOrderItems(items);
+
+            old.setProcessed((Boolean) order.get("processed"));
+            old.setUpdatedAt();
+            this.orderDetailsService.update(orderId, old);
         } else {
             response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

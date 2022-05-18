@@ -137,7 +137,7 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
     cursor: pointer;
 }
 
-.customer-table tbody tr:hover {
+.user-table tbody tr:hover {
     background-color: #dae4e8;
     outline: none;
     cursor: pointer;
@@ -183,7 +183,6 @@ th {
     width: 100vw;
     padding: 1.6rem 2.4rem 1.6rem 2.4rem;
     background-color: rgba(218, 215, 205, 1);
-    z-index: 5254354523425;
     transition: all 0.2s ease-out;
     box-shadow: 1rem 0.2rem 2rem rgb(0 0 0 / 15%);
 }

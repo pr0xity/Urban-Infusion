@@ -8,17 +8,17 @@ public class OrderDetailsDto {
     /**
      * The user's of this order's email address.
      */
-    private final String email;
+    private String id;
 
     /**
      * The total cost of this order.
      */
-    private double total;
+    private String[] itemIds;
 
     /**
      * The amount of items in this order.
      */
-    private int quantity;
+    private String[] quantities;
 
     /**
      * Whether the order is processed or not.
@@ -28,49 +28,47 @@ public class OrderDetailsDto {
     /**
      * Creates an DTO of order details.
      *
-     * @param email the email of the user of this order.
-     * @param total the total cost of this order.
-     * @param quantity the amount of items in this order.
+     * @param id the id of the order.
+     * @param itemIds the ids of the items in the order.
+     * @param quantities the quantity of each item in this order.
      * @param processed if this order is processed or not.
      */
-    public OrderDetailsDto(String email, double total, int quantity, boolean processed) {
-        this.email = email;
-
-        if ( total != 0.0 ) {
-            this.total = total;
-        }
-        if ( quantity != 0 ) {
-            this.quantity = quantity;
-        }
-
+    public OrderDetailsDto(String id, String[] itemIds, String[] quantities, boolean processed) {
+        this.id = id;
+        this.itemIds = itemIds;
+        this.quantities = quantities;
         this.processed = processed;
     }
 
-    /**
-     * Returns the user of this order's email-address.
-     *
-     * @return the user of this order's email-address.
-     */
-    public String getEmail() {
-        return email;
+    public OrderDetailsDto() {
+
     }
 
     /**
-     * Returns the total cost of this order.
+     * Returns the id of the order.
      *
-     * @return total cost of this order.
+     * @return {@code long} id of the order.
      */
-    public double getTotal() {
-        return total;
+    public String getId() {
+        return id;
     }
 
     /**
-     * Returns the amount of items in this order.
+     * Returns the id of each item in the order.
      *
-     * @return the amount of items in this order.
+     * @return {@code int[]} id of every item in the order.
      */
-    public int getQuantity() {
-        return quantity;
+    public String[] getItemIds() {
+        return itemIds;
+    }
+
+    /**
+     * Returns the amount of each item in this order.
+     *
+     * @return the amount of each item in this order.
+     */
+    public String[] getQuantities() {
+        return quantities;
     }
 
     /**

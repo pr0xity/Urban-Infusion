@@ -1,11 +1,32 @@
-.section-manage-product {
-    padding-top: 1.6rem;
+.overlay {
+    z-index: 5254354523425;
+}
+
+.manage__btn--close {
+    position: absolute;
+    top: 3%;
+    right: 3%;
+}
+
+.section-manage-overlay {
+    padding: 1.6rem;
+}
+
+.section-mark-processed {
+
 }
 
 .section-info {
     display: flex;
+    gap: 1.6rem;
 }
-.section-info__labels {
-    display: flex;
-    flex-direction: column;
+
+.info__row {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+}
+
+.manage-order__table {
+    grid-template-columns: 8fr 1fr 1fr;
+    border-spacing: 1.6rem;
 }

@@ -3,6 +3,13 @@ const port = ":8080";
 let orders = null;
 const searchInput = document.getElementById("searchInput");
 const tableBody = document.getElementById("orderTableBody");
+const manageOrderTableBody = document.getElementById("manageOrderTableBody");
+const overlay = document.getElementById("overlay");
+const processedCheckBox = document.getElementById("orderProcessed");
+
+function initializeOrders() {
+    getOrders();
+}
 
 function getOrders() {
     const req = new XMLHttpRequest();
@@ -45,10 +52,11 @@ function loadOrders(orders) {
 }
 
 function addOrderRow(order) {
+    if (!document.getElementById("orderTable")) return;
     const row = document.createElement("tr");
-
     row.addEventListener("click", () => {
         manageOrder(order);
+        overlay.classList.toggle("show");
     })
 
     const dateCell = document.createElement("td");
@@ -100,23 +108,54 @@ function manageOrder(order) {
     const orderAddressLabel = document.getElementById("orderAddressLabel");
     const orderDateLabel = document.getElementById("orderDateLabel");
     const orderIdLabel = document.getElementById("orderIdLabel");
-    const processedCheckBox = document.getElementById("orderProcessed");
 
     orderNameLabel.textContent = order["user"]["firstName"] + " " + order["user"]["lastName"];
     orderEmailLabel.textContent = order["user"]["email"];
-    orderAddressLabel.textContent = order["user"]["address"]["addressLine"];
-    orderDateLabel.textContent = order["date"];
+    let address = order["user"]["address"]["addressLine"];
+    orderAddressLabel.innerHTML = address.replaceAll(",", ",&ZeroWidthSpace;");
+    let string = order["createdAt"];
+    orderDateLabel.textContent = string.substring(0, 10);
     orderIdLabel.textContent = order["id"];
+
+    processedCheckBox.onclick = function() {
+        if (!overlay.classList.contains("hidden")) {
+            updateOrder(order);
+        }
+    };
 
     loadOrderItems(order);
 
-    if (order["processed"] === true) {
-        processedCheckBox.checked = true;
-    }
+    processedCheckBox.checked = order["processed"] === true;
 }
+
+function updateOrder(order) {
+    let dto = {};
+    let itemIds = [];
+    let quantities = [];
+    for (let i = 0; i < order["orderItems"].length; i++) {
+        itemIds.push(order["orderItems"][i]["product"]["id"]);
+        quantities.push(order["orderItems"][i]["quantity"]);
+    }
+    dto["id"] = order["id"];
+    dto["itemIds"] = itemIds;
+    dto["quantities"] = quantities;
+    dto["processed"] = processedCheckBox.checked;
+
+    const req = new XMLHttpRequest();
+    req.onreadystatechange = function() {
+        if (req.readyState === 4) {
+            getOrders();
+        }
+    };
+    req.overrideMimeType("application/json");
+    req.open('PUT', host + port + "/orders/" + order["id"], true);
+    req.send(JSON.stringify(dto));
+}
+
 
 function loadOrderItems(order) {
     const items = order["orderItems"];
+    manageOrderTableBody.innerHTML="";
     for (let i = 0; i < items.length; i++) {
         const item = items[i];
         addOrderItemRow(item);
@@ -125,7 +164,6 @@ function loadOrderItems(order) {
 
 function addOrderItemRow(item) {
     if (!document.getElementById("manageOrderTable")) return;
-    const tableBody = document.getElementById("manageOrderTableBody");
     const row = document.createElement("tr");
 
     const productNameCell = document.createElement("td");
@@ -143,5 +181,5 @@ function addOrderItemRow(item) {
     row.appendChild(productNameCell);
     row.appendChild(productIdCell);
     row.appendChild(quantityCell);
-    tableBody.appendChild(row);
+    manageOrderTableBody.appendChild(row);
 }

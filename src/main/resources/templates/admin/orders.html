@@ -13,6 +13,7 @@
   <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
   <link rel="stylesheet" type="text/css" th:href="@{/css/queries.css}"/>
   <link rel="stylesheet" type="text/css" th:href="@{/css/style-admin.css}"/>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style-overlays.css}"/>
 
   <script src="https://unpkg.com/phosphor-icons"></script>
   <script defer th:src="@{/js/admin.js}"></script>
@@ -20,11 +21,11 @@
   <title>Urban Infusion</title>
 </head>
 
-<body onload="getOrders()">
+<body onload="initializeOrders()">
 <header class="admin__header" th:insert="components/admin-header"></header>
 
 <main class="admin__main">
-
+  <div class="modal overlay" id="overlay" th:insert="components/overlays/manage-order"></div>
   <aside class="sidenav" th:insert="components/admin-sidenav"></aside>
 
   <section class="section-content">
