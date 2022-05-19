@@ -53,34 +53,6 @@ const generalInitialize = function () {
   }
 
   /**
-   * Hides the given element.
-   *
-   * @param element element to be hidden.
-   */
-  const hideElement = function (element) {
-    element.classList.add("hidden");
-  };
-
-  /**
-   * Displays the given element.
-   *
-   * @param element element to be displayed.
-   */
-  const showElement = function (element) {
-    element.classList.remove("hidden");
-  };
-
-  /**
-   * Returns whether the element is hidden.
-   *
-   * @param element the element to check if is hidden.
-   * @return {boolean} true if hidden, false if not.
-   */
-  const isElementHidden = function (element) {
-    return element.classList.contains("hidden");
-  }
-
-  /**
    * Removes click event from the items in given list with the given function reference.
    *
    * @param list list with items to remove click event from.
@@ -136,6 +108,9 @@ const generalInitialize = function () {
     if (isElementHidden(userMenuElement)) {
       resetLoginAlert();
     }
+    if (!isElementHidden(userMenuElement) && loginEmail !== null) {
+      loginEmail.focus();
+    }
   };
 
   /**
@@ -178,6 +153,7 @@ const generalInitialize = function () {
   mobileLayoutSize.addEventListener("change", dynamicallyChangeSize);
 
 
+  document.body.classList.add("sticky");
   addClickEventListenersToList(navMobileButtons, navMobileButtonHandler);
   overlayNavLinkMenu.addEventListener("click", clickMenuButtonClose);
   overlayNavUserMenu.addEventListener("click", clickUserMenuButton);

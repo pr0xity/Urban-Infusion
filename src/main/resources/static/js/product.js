@@ -148,7 +148,7 @@ function setReviewHandling() {
    */
   const reviewRequestSuccess = function () {
     resetReviewAlert();
-    window.location.reload();
+    reloadCurrentPage();
   };
 
   /**
@@ -169,12 +169,13 @@ function setReviewHandling() {
   /**
    * Sends a POST request for a new rating.
    */
-  const sendReviewRequest = function () {
+  const sendReviewRequest = function (event) {
+    event.preventDefault();
     if (isReviewFormValid()) {
       sendApiRequest(
         `${RATING_API_PATHNAME}/${productId}`,
         "POST",
-        getBodyForReviewRequest,
+        getBodyForReviewRequest(),
         reviewRequestSuccess,
         reviewRequestUnauthorized
       );
@@ -186,12 +187,13 @@ function setReviewHandling() {
   /**
    * Sends a PUT request to update a rating.
    */
-  const updateReviewRequest = function () {
+  const updateReviewRequest = function (event) {
+    event.preventDefault();
     if (isReviewFormValid()) {
       sendApiRequest(
         `${RATING_API_PATHNAME}/${productId}`,
         "PUT",
-        getBodyForReviewRequest,
+        getBodyForReviewRequest(),
         reviewRequestSuccess,
         reviewRequestUnauthorized,
         reviewRequestError
@@ -204,12 +206,13 @@ function setReviewHandling() {
   /**
    * Sends a DELETE request to delete a rating.
    */
-  const deleteReviewRequest = function () {
+  const deleteReviewRequest = function (event) {
+    event.preventDefault();
     if (isReviewFormValid()) {
       sendApiRequest(
         `${RATING_API_PATHNAME}/${productId}`,
         "DELETE",
-        getBodyForReviewRequest,
+        getBodyForReviewRequest(),
         reviewRequestSuccess,
         reviewRequestUnauthorized
       );

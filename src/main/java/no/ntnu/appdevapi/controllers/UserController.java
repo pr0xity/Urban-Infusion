@@ -2,6 +2,7 @@ package no.ntnu.appdevapi.controllers;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.PermissionLevel;
 import no.ntnu.appdevapi.entities.User;
 import no.ntnu.appdevapi.security.JwtUtil;
@@ -9,15 +10,18 @@ import no.ntnu.appdevapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
-@Controller
+@RestController
 @RequestMapping()
 public class UserController {
 
@@ -26,6 +30,9 @@ public class UserController {
 
   @Autowired
   private UserService userService;
+
+  @Autowired
+  private BCryptPasswordEncoder bCryptPasswordEncoder;
 
   /**
    * Returns all users in the store.
@@ -99,6 +106,53 @@ public class UserController {
   }
 
   /**
+   * Updates the user with the given user id with the given user dto object.
+   *
+   * @param userId the user id of the user to be updated.
+   * @param userDto the user dto to update to.
+   * @return 200 Ok if updated, 401 if not.
+   */
+  @PutMapping("/users/{userId}")
+  public ResponseEntity<?> update(@PathVariable long userId, @RequestBody UserDto userDto, HttpServletResponse response) throws IOException {
+    System.out.println("tullball");
+    User currentUser = userService.getSessionUser();
+    User userToUpdate = userService.findOneByID(userId);
+
+    Predicate<PermissionLevel> isAdmin = pl -> pl.getAdminType().equals("admin");
+    Predicate<PermissionLevel> isOwner = pl -> pl.getAdminType().equals("owner");
+    boolean adminLevelAuth = currentUser.getPermissionLevels().stream().anyMatch(isAdmin.or(isOwner));
+
+    if ((currentUser.getId() == userId  || adminLevelAuth) && userToUpdate != null) {
+      if (userDto.getNewPassword() != null && !bCryptPasswordEncoder.matches(userDto.getPassword(), userToUpdate.getPassword())) {
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+      }
+      if (userDto.getEmail() != null && userToUpdate.getId() == currentUser.getId()) {
+        if (bCryptPasswordEncoder.matches(userDto.getPassword(), currentUser.getPassword())) {
+
+          userService.updateWithUserDto(userToUpdate.getId(), userDto);
+          Cookie cookie = deleteCookie();
+          response.addCookie(cookie);
+          return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+      }
+      if (!userDto.isEnabled()) {
+        if (adminLevelAuth || (currentUser.getId() == userId && bCryptPasswordEncoder.matches(userDto.getPassword(), currentUser.getPassword()))) {
+          userService.updateWithUserDto(userToUpdate.getId(), userDto);
+          Cookie cookie = deleteCookie();
+          response.addCookie(cookie);
+          return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+      }
+
+      userService.updateWithUserDto(userToUpdate.getId(), userDto);
+      return new ResponseEntity<>(HttpStatus.OK);
+    }
+    return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+  }
+
+  /**
    * Delete a user from the store
    *
    * @param email Email of the user to delete.
@@ -114,5 +168,20 @@ public class UserController {
       response = new ResponseEntity<>(HttpStatus.OK);
     }
     return response;
+  }
+
+  /**
+   * Creates a "token" cookie which expires instantly.
+   *
+   * @return "token" cookie which expires instantly.
+   */
+  private Cookie deleteCookie() {
+    Cookie cookie = new Cookie("token", null);
+    cookie.setMaxAge(0);
+    cookie.setSecure(true);
+    cookie.setHttpOnly(true);
+    cookie.setPath("/");
+
+    return cookie;
   }
 }

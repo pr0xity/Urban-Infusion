@@ -1,12 +1,10 @@
 package no.ntnu.appdevapi.services;
 
 import no.ntnu.appdevapi.DAO.UserRepository;
-import no.ntnu.appdevapi.DAO.VerificationTokenRepository;
 import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.PermissionLevel;
 import no.ntnu.appdevapi.entities.User;
 import no.ntnu.appdevapi.entities.UserAddress;
-import no.ntnu.appdevapi.entities.VerificationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -55,7 +53,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             PermissionLevel permissionLevel = permissionLevelService.findByAdminType(user.getPermissionLevel());
             nUser.setCreatedAt(LocalDateTime.now());
             nUser.setPermissionLevel(permissionLevel);
-            nUser.setEnabled(true);
 
             UserAddress address = user.getAddressFromDto();
             if (null != address) {
@@ -88,9 +85,53 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public void update(long id, User user) {
+    public void updateWithUser(long id, User user) {
         if (user != null && user.getId() == id && findOneByID(id) != null) {
             this.userRepository.save(user);
+        }
+    }
+
+    @Override
+    public void updateWithUserDto(long id, UserDto userDto) {
+        User updatedUser = userDto.getUserFromDto();
+        User user = userRepository.findById(id);
+
+        if (updatedUser != null && user != null) {
+            if (updatedUser.getFirstName() != null) {
+                user.setFirstName(updatedUser.getFirstName());
+            }
+            if (updatedUser.getLastName() != null) {
+                user.setLastName(updatedUser.getLastName());
+            }
+            if (updatedUser.getEmail() != null) {
+                user.setEmail(updatedUser.getEmail());
+            }
+            if (userDto.getNewPassword() != null) {
+                user.setPassword(bcryptEncoder.encode(userDto.getNewPassword()));
+            }
+            if (!updatedUser.isEnabled()) {
+                user.setEnabled(false);
+            }
+            user.setUpdatedAt(LocalDateTime.now());
+
+            UserAddress address = userDto.getAddressFromDto();
+            if (address != null && user.getAddress() != null) {
+                UserAddress existingAddress = user.getAddress();
+                existingAddress.setAddressLine1(address.getAddressLine1());
+                existingAddress.setAddressLine2(address.getAddressLine2());
+                existingAddress.setCity(address.getCity());
+                existingAddress.setPostalCode(address.getPostalCode());
+                existingAddress.setCountry(address.getCountry());
+                userAddressService.save(existingAddress);
+            }
+            if (address != null) {
+                System.out.println("saving address: " + address.getAddressLine());
+                address.setUser(user);
+                user.setAddress(address);
+                userAddressService.save(address);
+            }
+            userRepository.save(user);
+            System.out.println("updating user: " + user.getFirstName() + " " + user.getLastName());
         }
     }
 
@@ -108,11 +149,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
     }
 
-    /**
-     * Get the user which is authenticated for the current session
-     *
-     * @return current user in session or null
-     */
     @Override
     public User getSessionUser() {
         SecurityContext securityContext = SecurityContextHolder.getContext();

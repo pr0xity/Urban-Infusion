@@ -21,7 +21,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -60,6 +59,13 @@ public class LoginController {
    */
   @RequestMapping(value = "/login", method = RequestMethod.POST)
   public ResponseEntity<?> generateToken(@RequestBody LoginUser loginUser) {
+    User user = userService.findOneByEmail(loginUser.getEmail());
+    if (user == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    if (!user.isEnabled()) {
+      return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+    }
     return authenticate(loginUser.getEmail(), loginUser.getPassword());
   }
 
@@ -73,8 +79,8 @@ public class LoginController {
   public ResponseEntity<String> registerUser(@RequestBody UserDto nUser) {
     if (null != nUser && userService.findOneByEmail(nUser.getEmail()) == null) {
       nUser.setPermissionLevel("user");
+      nUser.setEnabled(false);
       User user = userService.save(nUser);
-
       applicationEventPublisher.publishEvent(new CompleteRegistrationEvent(user));
 
       //verification token is only placed here for testing outside of email. Will be removed.
@@ -102,7 +108,7 @@ public class LoginController {
 
     User user = verificationToken.getUser();
     user.setEnabled(true);
-    userService.update(user.getId(), user);
+    userService.updateWithUser(user.getId(), user);
     response.sendRedirect("/");
     return new ResponseEntity<>(HttpStatus.OK);
   }

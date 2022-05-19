@@ -39,9 +39,9 @@
       type="application/javascript"
     ></script>
     <script
-            defer
-            th:src="@{/js/login.js}"
-            type="application/javascript"
+      defer
+      th:src="@{/js/login.js}"
+      type="application/javascript"
     ></script>
     <script
       defer
@@ -67,11 +67,60 @@
           <h3>Account information</h3>
           <p class="account-info__row">
             <span>Name /&#8203; Customer id</span>
-            <span
-              th:text="${user.firstName} + ' ' + ${user.lastName} + ' / ' + ${user.id}"
-              >Esther Howard /&#8203; 85329</span
-            >
+            <span>
+              <span th:text="${user.firstName}" id="field_firstName"
+                >Esther</span
+              >
+              <span th:text="${user.lastName} + ' &#8203;'" id="field_lastName"
+                >Howard</span
+              >
+              /
+              <span th:text=" ${user.id}" id="field_userId">&#8203; 85329</span>
+            </span>
+            <button id="open_name" class="account-info__btn">
+              <i class="ph-pencil-simple-light btn--icon"></i>
+            </button>
           </p>
+          <div class="modal hidden" id="modal_name">
+            <div class="modal__window">
+              <button
+                class="checkout__btn--close close btn--icon"
+                id="close_name"
+              >
+                <i class="ph-x"></i>
+              </button>
+              <h3 class="change-heading">Change name</h3>
+              <p class="review__alert account__form--alert"></p>
+              <form class="modal__form modal__form--name">
+                <label class="change__field" for="edit_firstName">
+                  First name *
+                  <input
+                    class="input"
+                    type="text"
+                    id="edit_firstName"
+                    th:value="${user.firstName}"
+                    name="edit_firstName"
+                  />
+                </label>
+                <label class="change__field" for="edit_firstName">
+                  Last name *
+                  <input
+                    class="input"
+                    type="text"
+                    id="edit_lastName"
+                    th:value="${user.lastName}"
+                    name="edit_lastName"
+                  />
+                </label>
+                <input
+                  type="submit"
+                  value="Change name"
+                  name="changeName"
+                  class="btn--green"
+                />
+              </form>
+            </div>
+          </div>
           <address class="account-info__row">
             <span>Email address</span>
             <span
@@ -83,7 +132,7 @@
               <i class="ph-pencil-simple-light btn--icon"></i>
             </button>
           </address>
-          <div class="modal" id="modal_email">
+          <div class="modal hidden" id="modal_email">
             <div class="modal__window">
               <button
                 class="checkout__btn--close close btn--icon"
@@ -91,11 +140,35 @@
               >
                 <i class="ph-x"></i>
               </button>
-              <h2>Change email address</h2>
-              <form class="modal__form--email">
-                <label for="edit_email">New email address: </label>
-                <input type="text" id="edit_email" name="edit_email" />
-                <input type="submit" value="Submit" class="btn--green" />
+              <h3 class="change-heading">Change email-address</h3>
+              <strong>You will be logged off after this action</strong>
+              <p class="review__alert account__form--alert"></p>
+              <form class="modal__form modal__form--email">
+                <label class="change__field" for="edit_email"
+                  >New email-address *
+                  <input
+                    class="input"
+                    type="text"
+                    id="edit_email"
+                    name="edit_email"
+                  />
+                </label>
+                <label class="change__field" for="edit_email_password"
+                  >Password *
+                  <input
+                    class="input"
+                    type="password"
+                    id="edit_email_password"
+                    name="edit_email_password"
+                  />
+                </label>
+
+                <input
+                  type="submit"
+                  value="Change email"
+                  name="changeEmail"
+                  class="btn--green"
+                />
               </form>
             </div>
           </div>
@@ -106,7 +179,7 @@
               <i class="ph-pencil-simple-light btn--icon"></i>
             </button>
           </p>
-          <div class="modal" id="modal_password">
+          <div class="modal hidden" id="modal_password">
             <div class="modal__window">
               <button
                 class="checkout__btn--close close btn--icon"
@@ -114,39 +187,60 @@
               >
                 <i class="ph-x"></i>
               </button>
-              <h2>Change password</h2>
-              <form class="modal__form--password">
-                <label for="edit_password">New password: </label>
-                <input type="text" id="edit_password" name="edit_password" />
-                <input type="submit" value="Submit" class="btn--green" />
+              <h3 class="change-heading">Change password</h3>
+              <p class="review__alert account__form--alert"></p>
+              <form class="modal__form modal__form--password">
+                <label class="change__field" for="edit_password"
+                  >Current password *
+                  <input
+                    class="input"
+                    type="password"
+                    id="edit_password"
+                    name="edit_password"
+                  />
+                </label>
+                <label class="change__field" for="edit_password"
+                  >New password *
+                  <input
+                    class="input"
+                    type="password"
+                    id="edit_newPassword"
+                    name="edit_newPassword"
+                  />
+                </label>
+                <input
+                  type="submit"
+                  value="Change password"
+                  name="changePassword"
+                  class="btn--green"
+                />
               </form>
             </div>
           </div>
           <address class="account-info__row">
             <span>Address</span>
-            <span th:text="${address.getAddressLine()}" id="field_address"
-              >2972 Westheimer Rd. Santa Ana, Illinois 85486
+            <span th:if="${address != null}">
+              <span
+                th:text="${address.addressLine1}"
+                id="field_addressLine1"
+              ></span>
+              <span
+                th:if="address.addressLine2 != null"
+                th:text="${address.addressLine2}"
+                id="field_addressLine2"
+              ></span>
+              <span
+                th:text="${address.postalCode}"
+                id="field_postalCode"
+              ></span>
+              <span th:text="${address.city}" id="field_city"></span>
+              <span th:text="${address.country}" id="field_country"></span>
             </span>
+            <span th:unless="${address != null}">No address</span>
             <button id="open_address" class="account-info__btn">
               <i class="ph-pencil-simple-light btn--icon"></i>
             </button>
           </address>
-          <!--<div class="modal" id="modal_address">
-            <div class="modal__window">
-              <button
-                class="checkout__btn&#45;&#45;close close btn&#45;&#45;icon"
-                id="close_address"
-              >
-                <i class="ph-x"></i>
-              </button>
-              <h2>Change address</h2>
-              <form class="modal__form&#45;&#45;address">
-                <label for="edit_address">New address: </label>
-                <input type="text" id="edit_address" name="edit_address" />
-                <input type="submit" value="Submit" class="btn&#45;&#45;green" />
-              </form>
-            </div>
-          </div>-->
           <p class="account-info__row">
             <span>Member since</span>
             <time
@@ -169,7 +263,7 @@
               account?
             </button>
           </p>
-          <div class="modal" id="modal_delete">
+          <div class="modal hidden" id="modal_delete">
             <div class="modal__window">
               <button
                 class="checkout__btn--close close btn--icon"
@@ -177,87 +271,105 @@
               >
                 <i class="ph-x"></i>
               </button>
-              <h2>Do you wish to delete your account?</h2>
-              <form class="modal__form--delete">
+              <h3 class="change-heading">
+                Do you wish to delete your account?
+              </h3>
+              <p class="review__alert account__form--alert"></p>
+              <form class="modal__form modal__form--delete">
+                <label class="change__field" for="delete-password">
+                  Password *
+                  <input
+                    type="password"
+                    id="delete-password"
+                    name="delete-account-password"
+                    class="input"
+                  />
+                </label>
                 <input
                   type="submit"
                   value="Yes"
+                  name="deleteAccount"
                   class="btn--green btn--delete"
                 />
                 <input type="submit" value="No" class="btn--green" />
               </form>
             </div>
           </div>
-          <div class="modal account-info__change account-info__change--address container--beige " id="modal_address">
-            <button class="change__btn--close close btn--icon" id="close_address">
-              <i class="ph-x"></i>
-            </button>
-            <div class="account__form--address">
-              <h3 class="change-heading">Change address</h3>
-              <p class="review__alert account__form--alert"></p>
-              <label class="change__field">
-                Addressline 1 *
+          <div class="modal hidden" id="modal_address">
+            <div class="modal__window modal__window--account-address">
+              <button
+                class="change__btn--close close btn--icon"
+                id="close_address"
+              >
+                <i class="ph-x"></i>
+              </button>
+              <form class="account__form--address">
+                <h3 class="change-heading">Change address</h3>
+                <p class="review__alert account__form--alert"></p>
+                <label class="change__field">
+                  Addressline 1 *
+                  <input
+                    name="addressLine1"
+                    class="input"
+                    th:value="${address == null} ? '' : ${address.addressLine1}"
+                    type="text"
+                  />
+                </label>
+                <label class="change__field">
+                  Addressline 2
+                  <input
+                    name="addressLine2"
+                    class="input"
+                    type="text"
+                    th:value="${address == null} ? '' : ${address.addressLine2}"
+                  />
+                </label>
+                <label class="change__field">
+                  Municipality *
+                  <input
+                    name="municipality"
+                    class="input"
+                    type="text"
+                    th:value="${address == null} ? '' : ${address.city}"
+                    placeholder=""
+                  />
+                </label>
+                <label class="change__field">
+                  Zip-code *
+                  <input
+                    name="zipCode"
+                    class="input"
+                    type="text"
+                    th:value="${address == null} ? '' : ${address.postalCode}"
+                    placeholder=""
+                  />
+                </label>
+                <label class="change__field">
+                  Country *
+                  <input
+                    name="country"
+                    class="input"
+                    type="text"
+                    th:value="${address == null} ? '' : ${address.country}"
+                    placeholder=""
+                  />
+                </label>
                 <input
-                  name="addressLine1"
-                  class="input"
-                  type="text"
-                  th:value="${address.getAddressLine1()}"
-                  placeholder=""
+                  type="submit"
+                  name="changeAddress"
+                  class="btn--green"
+                  value="Change address"
                 />
-              </label>
-              <label class="change__field">
-                Addressline 2
-                <input
-                  name="addressLine2"
-                  class="input"
-                  type="text"
-                  th:value="${address.getAddressLine2()}"
-                  placeholder=""
-                />
-              </label>
-              <label class="change__field">
-                Municipality *
-                <input
-                  name="municipality"
-                  class="input"
-                  type="text"
-                  th:value="${address.getCity()}"
-                  placeholder=""
-                />
-              </label>
-              <label class="change__field">
-                Zip-code *
-                <input
-                  name="zipCode"
-                  class="input"
-                  type="text"
-                  th:value="${address.getPostalCode()}"
-                  placeholder=""
-                />
-              </label>
-              <label class="change__field">
-                Country *
-                <input
-                  name="country"
-                  class="input"
-                  type="text"
-                  th:value="${address.getCountry()}"
-                  placeholder=""
-                />
-              </label>
-              <input
-                type="submit"
-                name="changeAddress"
-                class="btn--green"
-                value="Change address"
-              />
+              </form>
+              <div class="account__map" id="map"></div>
             </div>
-            <div class="account__map" id="map"></div>
           </div>
-          <div class="account-info__change--overlay modal"></div>
         </section>
 
-        <section class="section-purchases container--white">
+        <section
+          th:if="${orderDetails != null}"
+          class="section-purchases container--white"
+        >
           <h3>Purchase history</h3>
           <table>
             <thead>

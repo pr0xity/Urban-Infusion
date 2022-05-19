@@ -39,7 +39,7 @@ public class User {
   @JoinColumn(name="pl_id")
   private PermissionLevel permissionLevel;
 
-  @OneToOne(cascade = CascadeType.REMOVE)
+  @OneToOne(cascade = CascadeType.MERGE)
   @JoinColumn(name="address_id")
   private UserAddress address;
 

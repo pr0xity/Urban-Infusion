@@ -1,11 +1,27 @@
 // For REST API requests
 const URL = "http://localhost:8080";
+const HOME_PATHNAME = "/";
 const AUTHENTICATION_API_PATHNAME = "/login";
 const WISHLIST_API_PATHNAME = "/wishlist";
 const RATING_API_PATHNAME = "/ratings";
 const PRODUCT_PATHNAME = "/product/";
 
 let map;
+let marker;
+
+/**
+ * Go to frontpage
+ */
+const goToFrontpage = function () {
+  window.location.href = HOME_PATHNAME;
+}
+
+/**
+ * Reloads the current page.
+ */
+const reloadCurrentPage = function () {
+  window.location.reload();
+};
 
 /**
  * Sends an API request to the sites API URL.
@@ -33,7 +49,7 @@ const sendApiRequest = function (
   const fetchWithBody = function () {
     return fetch(`${URL}${pathname}`, {
       method: method,
-      body: JSON.stringify(body()),
+      body: JSON.stringify(body),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
@@ -149,6 +165,34 @@ const isAddressValid = async function (address) {
 };
 
 /**
+ * Hides the given element.
+ *
+ * @param element element to be hidden.
+ */
+const hideElement = function (element) {
+  element.classList.add("hidden");
+};
+
+/**
+ * Displays the given element.
+ *
+ * @param element element to be displayed.
+ */
+const showElement = function (element) {
+  element.classList.remove("hidden");
+};
+
+/**
+ * Returns whether the element is hidden.
+ *
+ * @param element the element to check if is hidden.
+ * @return {boolean} true if hidden, false if not.
+ */
+const isElementHidden = function (element) {
+  return element.classList.contains("hidden");
+};
+
+/**
  * Initializes and renders the map to the given latitude and longitude.
  *
  * @param latitude the latitude to render the map to.
@@ -166,7 +210,7 @@ const renderMap = function (latitude, longitude) {
     shadowSize: [61, 51],
   });
 
-  L.marker([latitude, longitude], { icon: leafIcon }).addTo(map);
+  marker = L.marker([latitude, longitude], { icon: leafIcon }).addTo(map);
   L.tileLayer(
     "https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png",
     {
@@ -178,7 +222,7 @@ const renderMap = function (latitude, longitude) {
 };
 
 /**
- * Moves the map to a new location.
+ * Moves the map to a new location and places a marker.
  *
  * @param latitude the new latitude.
  * @param longitude the new longitude.
@@ -195,5 +239,6 @@ const moveMap = function (latitude, longitude) {
     shadowSize: [61, 51],
   });
 
+  map.removeLayer(marker);
   L.marker([latitude, longitude], { icon: leafIcon }).addTo(map);
 };

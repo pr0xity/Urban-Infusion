@@ -77,7 +77,7 @@ public class HTMLPageController {
     public String getAccount(Model model) {
 
         model.addAttribute("user" , this.getUser());
-        model.addAttribute("address", userAddressService.getUserAddressByUserID(userService.getSessionUser().getId()));
+        model.addAttribute("address", this.getUser().getAddress());
         model.addAttribute("orderDetails", orderDetailsService.getOrderDetailsByUser(getUser()));
 
         this.addPermissionLevelToModel(model);
@@ -135,7 +135,7 @@ public class HTMLPageController {
      */
     @GetMapping("checkout")
     public String getCheckout(Model model) {
-        UserAddress userAddress = userAddressService.getUserAddressByUserID(this.getUser().getId());
+        UserAddress userAddress = this.getUser().getAddress();
 
         model.addAttribute("user", this.getUser());
         model.addAttribute("address", userAddress.getAddressLine1() + ", " + userAddress.getPostalCode() + " " + userAddress.getCity());

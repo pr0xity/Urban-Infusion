@@ -32,7 +32,7 @@ const resetLoginAlert = function () {
  */
 const loginSuccess = function () {
     userMenuButton.click();
-    window.location.reload();
+    reloadCurrentPage();
 }
 
 /**
@@ -58,14 +58,11 @@ const getLoginRequestBody = function () {
  * Sends a POST request for log in.
  */
 const sendLoginRequest = function (event) {
-    if (event.type === "click" || event.key === "Enter") {
-        sendApiRequest(`${AUTHENTICATION_API_PATHNAME}`, "POST", getLoginRequestBody, loginSuccess, loginError, loginError)
-    }
+    event.preventDefault();
+    sendApiRequest(`${AUTHENTICATION_API_PATHNAME}`, "POST", getLoginRequestBody(), loginSuccess, loginError, loginError)
 };
 
 //Adding event listeners if login button is present.
 if (loginButton !== null) {
     loginButton.addEventListener("click", sendLoginRequest);
-    loginEmail.addEventListener("keypress", sendLoginRequest);
-    loginPassword.addEventListener("keypress", sendLoginRequest);
 }

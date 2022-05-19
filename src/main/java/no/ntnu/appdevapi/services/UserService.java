@@ -21,10 +21,23 @@ public interface UserService {
      * @param id id of the user to update.
      * @param user the user object to update to.
      */
-    void update(long id, User user);
+    void updateWithUser(long id, User user);
+
+    /**
+     * Updates the user with the given id with the user dto object given.
+     *
+     * @param id id of the user to update.
+     * @param userDto the user dto to update to.
+     */
+    void updateWithUserDto(long id, UserDto userDto);
 
     void deleteUser(String email);
 
+    /**
+     * Returns the current user in session.
+     *
+     * @return current user in session.
+     */
     User getSessionUser();
 }
 

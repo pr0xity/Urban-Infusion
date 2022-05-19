@@ -110,7 +110,7 @@ address {
   transition: all 0.4s ease-out;
   -webkit-backdrop-filter: blur(2px);
   backdrop-filter: blur(2px);
-  z-index: 1000;
+  z-index: 10;
   cursor: pointer;
 }
 
@@ -125,7 +125,7 @@ address {
   font-family: "Montserrat", sans-serif;
   font-size: 1.6rem;
   transition: all 0.4s ease-out;
-  z-index: 100000;
+  z-index: 11;
   cursor: pointer;
 }
 
@@ -149,7 +149,7 @@ address {
   font-family: "Montserrat", sans-serif;
   font-size: 1.6rem;
   transition: all 0.4s ease-out;
-  z-index: 100000;
+  z-index: 9;
   cursor: initial;
 }
 
@@ -167,14 +167,13 @@ address {
 
 .btn--small-text {
   padding: 0 0.8rem;
-  font-size: 1.6rem;
-  font-weight: 400;
+  font-size: 1.4rem;
+  font-weight: 500;
   font-family: inherit;
   background-color: transparent;
   border: 0;
-  color: #6d6875;
+  color: #58555f;
   text-align: left;
-  word-spacing: 0.4rem;
   cursor: pointer;
 }
 
@@ -246,7 +245,7 @@ address {
   width: 100vw;
   padding: 1.6rem 2.4rem 1.6rem 2.4rem;
   background-color: rgba(218, 215, 205, 1);
-  z-index: 5254354523425;
+  z-index: 10000;
   /* left:0; */
 }
 
@@ -255,7 +254,8 @@ address {
 }
 
 .hidden {
-  display: none !important;
+  pointer-events: none;
+  opacity: 0;
   cursor: initial !important;
 }
 
@@ -299,20 +299,21 @@ address {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.3);
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 100%;
-  width: 100%;
-  opacity: 0;
-  pointer-events: none;
   transition: opacity 0.3s ease;
+  z-index: 100000;
 }
 
-.modal.show {
-  pointer-events: auto;
-  opacity: 1;
+.modal__form .btn--green {
+  padding: 0.8rem 1.2rem;
+  margin-top: 1.2rem;
 }
 
 .modal__window {
@@ -349,7 +350,7 @@ address {
   width: 100vw;
   padding: 1.6rem 2.4rem 1.6rem 2.4rem;
   background-color: rgba(218, 215, 205, 1);
-  z-index: 5254354523425;
+  z-index: 10000;
   transition: all 0.2s ease-out;
 }
 
@@ -404,7 +405,7 @@ address {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 5%);
-  z-index: 10000000000000000;
+  z-index: 100000;
 }
 
 .logo__img {
@@ -1411,10 +1412,20 @@ address {
   gap: 12.8rem;
 }
 
+.section-review-forms {
+  position: relative;
+}
+
 .review__form {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+}
+
+.review__form--delete {
+  position: absolute;
+  bottom: -10%;
+  left: 1%;
 }
 
 .review__alert {
@@ -1645,25 +1656,6 @@ address {
   font-size: 3rem;
 }
 
-.account-info__change {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: fit-content;
-  height: fit-content;
-  z-index: 1000;
-  padding: 1.2rem 2.4rem;
-
-}
-
-.account-info__change--address {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8rem;
-}
-
 .account__form--address {
   display: flex;
   flex-direction: column;
@@ -1690,15 +1682,19 @@ address {
   width: 30rem;
 }
 
-.account-info__change--overlay {
+.modal__window--account-address {
   position: fixed;
   top: 50%;
   left: 50%;
-  height: 100vh;
-  width: 100vw;
-  background-color: rgba(0, 0, 0, 0.5);
-  -webkit-backdrop-filter: blur(5px);
-  backdrop-filter: blur(5px);
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  height: fit-content;
+  z-index: 1000;
+  padding: 1.2rem 2.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8rem;
 }
 
 .change__btn--close {

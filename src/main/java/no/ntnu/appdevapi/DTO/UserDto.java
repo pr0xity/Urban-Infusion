@@ -12,6 +12,7 @@ public class UserDto {
   private String lastName;
   private String email;
   private String password;
+  private String newPassword;
   private String permissionLevel;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
@@ -36,7 +37,7 @@ public class UserDto {
     this.password = password;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
-    this.enabled = false;
+    this.enabled = true;
     this.permissionLevel = "user";
 
     this.addressLine1 = addressLine1;
@@ -55,7 +56,7 @@ public class UserDto {
     this.password = password;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
-    this.enabled = false;
+    this.enabled = true;
     this.permissionLevel = "user";
 
     this.addressLine1 = addressLine1;
@@ -73,7 +74,7 @@ public class UserDto {
     this.password = password;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
-    this.enabled = false;
+    this.enabled = true;
     this.permissionLevel = permissionLevel;
   }
 
@@ -84,7 +85,7 @@ public class UserDto {
     this.password = password;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
-    this.enabled = false;
+    this.enabled = true;
     this.permissionLevel = "user";
   }
 
@@ -151,6 +152,14 @@ public class UserDto {
     this.password = password;
   }
 
+  public String getNewPassword() {
+    return newPassword;
+  }
+
+  public void setNewPassword(String newPassword) {
+    this.newPassword = newPassword;
+  }
+
   public String getPermissionLevel() {
     return permissionLevel;
   }
@@ -205,5 +214,13 @@ public class UserDto {
 
   public void setPhone(String phone) {
     this.phone = phone;
+  }
+
+  public boolean isEnabled() {
+    return enabled;
+  }
+
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
   }
 }
