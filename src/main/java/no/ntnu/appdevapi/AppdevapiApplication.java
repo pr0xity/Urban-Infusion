@@ -78,7 +78,11 @@ public class AppdevapiApplication {
         productService.addProductFromDto(new ProductDto("Mug", "Classic mug. Made from Brazilian clay. Hot-friendly - comfortable to hold even when the water is hot. Handy handle", "Brazilian clay", 120, "Accessories", "Mug"));
 
 
-        ratingService.addRating(new Rating(userService.findAll().get(1), "Per", productService.getProductByName("Heather tea"), 1, "Awful, waste of money"));
+        ratingService.addRating(new Rating(userService.findAll().get(0), "Geir", productService.getProductByName("Heather tea"), 4, "ok"));
+        ratingService.addRating(new Rating(userService.findAll().get(0), "Geir", productService.getProductByName("Linden blossom tea"), 5, "Best tea ever"));
+        ratingService.addRating(new Rating(userService.findAll().get(0), "Geir", productService.getProductByName("Sencha 50g"), 2, "yum"));
+        ratingService.addRating(new Rating(userService.findAll().get(0), "Geir", productService.getProductByName("Sencha 50g"), 2, "more quantity of yum"));
+        ratingService.addRating(new Rating(userService.findAll().get(0), "Geir", productService.getProductByName("Mug"), 5, "Nice mugs"));
         ratingService.addRating(new Rating(userService.findAll().get(1), "Per", productService.getProductByName("Linden blossom tea"), 5, "Great tea"));
         ratingService.addRating(new Rating(userService.findAll().get(1), "Per", productService.getProductByName("Sencha 50g"), 2, "This was weird"));
         ratingService.addRating(new Rating(userService.findAll().get(1), "Per", productService.getProductByName("Sencha 50g"), 2, "This was a lot of weird"));

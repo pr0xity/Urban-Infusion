@@ -114,7 +114,6 @@ public class UserController {
    */
   @PutMapping("/users/{userId}")
   public ResponseEntity<?> update(@PathVariable long userId, @RequestBody UserDto userDto, HttpServletResponse response) throws IOException {
-    System.out.println("tullball");
     User currentUser = userService.getSessionUser();
     User userToUpdate = userService.findOneByID(userId);
 
