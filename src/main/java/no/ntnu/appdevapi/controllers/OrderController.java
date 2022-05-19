@@ -145,8 +145,16 @@ public class OrderController {
             }
             old.setOrderItems(items);
 
-            old.setProcessed((Boolean) order.get("processed"));
-            old.setUpdatedAt();
+            if ((Boolean) order.get("processed") && !old.isProcessed()) {
+                old.setProcessed((Boolean) order.get("processed"));
+                old.setUpdatedAt();
+                applicationEventPublisher.publishEvent(new CompleteOrderEvent(old.getUser(), old, orderItemService.getOrderItemsByOrderDetails(old)));
+            } else {
+                old.setProcessed((Boolean) order.get("processed"));
+                old.setUpdatedAt();
+            }
+
+
             this.orderDetailsService.update(orderId, old);
         } else {
             response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
