@@ -8,10 +8,10 @@ userMenuButton.addEventListener("click", function () {
 if (document.getElementsByClassName("overlay")) {
     const overlay = document.getElementById("overlay");
     const closeButton = document.getElementById("closeButton")
-    closeButton.addEventListener("click", () => {
+    closeButton.onclick = function () {
         overlay.classList.remove("show");
-    });
-    window.addEventListener('mouseup', function(event){
+    };
+    window.addEventListener('mouseup', function(event) {
         if (!document.getElementById("overlayWindow").contains(event.target)){
             overlay.classList.remove("show");
         }

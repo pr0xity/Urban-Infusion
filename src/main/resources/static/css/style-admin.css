@@ -34,13 +34,7 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
 }
 
 .sidenav {
-    /*order: 1;*/
-    flex-grow: 1;
-    /* border-style: solid; */
-    /* min-width: 25rem;
-    max-width: 25rem; */
-    /* min-height: 50rem;
-    max-height: 50rem; */
+    height: 100%;
     box-shadow: 1rem 0.2rem 2rem rgb(0 0 0 / 15%);
 }
 
@@ -143,11 +137,11 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
     cursor: pointer;
 }
 
-.dashboard__table--customer tr {
+.dashboard__table--customers tr {
     grid-template-columns: 1fr 4fr 5fr;
 }
 
-.dashboard__table--order tr {
+.dashboard__table--orders tr {
     grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
@@ -157,6 +151,10 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
 
 .order__table tr {
     grid-template-columns: 1fr 1fr 1fr 4fr 1fr;
+}
+
+.products__table tr {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
 th {

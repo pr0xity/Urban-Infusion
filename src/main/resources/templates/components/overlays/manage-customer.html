@@ -1,4 +1,4 @@
-<div class="modal__window" id="overlayWindow">
+<div class="modal__window manage-customer__window" id="overlayWindow">
   <h2>User information</h2>
   <button
           class="manage__btn--close close btn--icon"
@@ -8,17 +8,17 @@
   </button>
   <section class="section-manage-overlay section-info">
     <section class="section-info__labels">
-      <p class="info__row"><span>ID</span><span id="customerIdLabel"></span></p>
-      <p class="info__row"><span>Name</span><span id="customerNameLabel"></span></p>
-      <p class="info__row"><span>Email</span><span id="customerEmailLabel"></span></p>
-      <p class="info__row"><span>Password</span><span id="customerPasswordLabel"></span></p>
-      <p class="info__row"><span>Address</span><span id="customerAddressLabel"></span></p>
-      <p class="info__row"><span>Member since</span><span id="createdAtLabel"></span></p>
-      <p class="info__row"><span>Last login</span><span id="lastLoginLabel"></span></p>
+      <p class="info__row"><span class="info__label">ID</span><span id="customerIdLabel"></span></p>
+      <p class="info__row"><span class="info__label">Name</span><span id="customerNameLabel"></span></p>
+      <p class="info__row"><span class="info__label">Email</span><span id="customerEmailLabel"></span></p>
+      <p class="info__row"><span class="info__label">Password</span><span id="customerPasswordLabel"></span></p>
+      <p class="info__row"><span class="info__label">Address</span><span id="customerAddressLabel"></span></p>
+      <p class="info__row"><span class="info__label">Member since</span><span id="createdAtLabel"></span></p>
+      <p class="info__row"><span class="info__label">Last login</span><span id="lastLoginLabel"></span></p>
     </section>
   </section>
   <h2>Purchase history</h2>
-  <section class="section-manage-overlay section-table">
+  <section class="section-manage-overlay">
     <table class="manage-customer__table" id="purchaseHistoryTable">
       <thead>
       <tr>
@@ -26,6 +26,7 @@
         <th>Order no.</th>
         <th>Items</th>
         <th>Total</th>
+        <th>Status</th>
       </tr>
       </thead>
       <tbody id="purchaseHistoryTableBody">

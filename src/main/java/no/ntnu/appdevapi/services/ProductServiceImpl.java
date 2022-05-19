@@ -8,6 +8,7 @@ import no.ntnu.appdevapi.entities.ProductCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -46,6 +47,27 @@ public class ProductServiceImpl implements ProductService {
             productRepository.save(nProduct);
         }
         return productRepository.findByName(nProduct.getName());
+    }
+
+    public Product updateProduct(ProductDto product) {
+        Product newProduct = product.getProductFromDto();
+
+        Product old = productRepository.findById(newProduct.getId()).orElse(null);
+        if (null == old) {
+            return null;
+        }
+        old.setName(newProduct.getName());
+        old.setCategory(productCategoryRepository.findByName(newProduct.getCategory().getName()));
+        old.setPrice(newProduct.getPrice());
+        old.setDescription(newProduct.getDescription());
+        old.setUpdatedAt(LocalDateTime.now());
+        old.setDeletedAt(newProduct.getDeletedAt());
+        old.setOrigin(newProduct.getOrigin());
+        old.setInventoryId(newProduct.getInventoryId());
+
+        productRepository.save(old);
+
+        return productRepository.findById(old.getId()).orElse(null);
     }
 
     public void deleteProduct(long id) {

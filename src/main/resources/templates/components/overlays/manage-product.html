@@ -1,10 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+<div class="modal__window manage-product__overlay" id="overlayWindow">
+  <h2>Product information</h2>
+  <button
+          class="manage__btn--close close btn--icon"
+          id="closeButton"
+  >
+    <i class="ph-x"></i>
+  </button>
+  <section class="section-manage-overlay section-info">
+    <section class="section-image">
+      <img src="" id="productImage"
+      alt="Pretty picture of product">
+    </section>
 
-</body>
-</html>
+    <section class="section-info__labels">
+      <p class="account-info__row"><span class="info__label">Name</span><span id="productNameLabel"></span>
+        <button id="editNameButton" class="account-info__btn">
+          <i class="ph-pencil-simple-light btn--icon"></i>
+        </button></p>
+      <div id="editNameOverlay" class="edit-product__overlay" th:insert="components/overlays/edit-product/edit-name"></div>
+      <p class="account-info__row"><span class="info__label">Category</span><span id="productCategoryLabel"></span>
+        <button id="editCategoryButton" class="account-info__btn">
+          <i class="ph-pencil-simple-light btn--icon"></i>
+        </button></p>
+      <div id="editCategoryOverlay" class="edit-product__overlay" th:insert="components/overlays/edit-product/edit-category"></div>
+      <p class="account-info__row"><span class="info__label">Price</span><span id="productPriceLabel"></span>
+        <button id="editPriceButton" class="account-info__btn">
+        <i class="ph-pencil-simple-light btn--icon"></i>
+        </button></p>
+      <div id="editPriceOverlay" class="edit-product__overlay" th:insert="components/overlays/edit-product/edit-price"></div>
+      <p class="account-info__row"><span class="info__label">Description</span><span id="productDescriptionLabel"></span>
+        <button id="editDescriptionButton" class="account-info__btn">
+          <i class="ph-pencil-simple-light btn--icon"></i>
+        </button></p>
+      <div id="editDescriptionOverlay" class="edit-product__overlay" th:insert="components/overlays/edit-product/edit-description">
+      </div>
+      <p class="account-info__row"><span class="info__label">Article no.</span><span id="productIdLabel"></span></p>
+      <p class="account-info__row"><span class="info__label">Stock</span><span id="productStockLabel"></span></p>
+      <p class="account-info__row"><span class="info__label">Image source</span><span id="productImageLabel"></span></p>
+    </section>
+  </section>
+</div>

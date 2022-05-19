@@ -66,6 +66,17 @@ public class ProductController {
     return response;
   }
 
+  @PutMapping()
+  @ApiOperation(value = "Update existing product.", notes = "Status 200 when updated, 400 on error.")
+  public ResponseEntity<String> update(@RequestBody ProductDto product) {
+    ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    if (null != product) {
+      productService.updateProduct(product);
+      response = new ResponseEntity<>(HttpStatus.OK);
+    }
+    return response;
+  }
+
   /**
    * Delete a product from the store
    *
