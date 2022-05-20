@@ -56,14 +56,29 @@ public class ProductServiceImpl implements ProductService {
         if (null == old) {
             return null;
         }
-        old.setName(newProduct.getName());
-        old.setCategory(productCategoryRepository.findByName(newProduct.getCategory().getName()));
-        old.setPrice(newProduct.getPrice());
-        old.setDescription(newProduct.getDescription());
+        if (null != newProduct.getName()) {
+            old.setName(newProduct.getName());
+        }
+        if (null != newProduct.getCategory()) {
+            old.setCategory(productCategoryRepository.findByName(newProduct.getCategory().getName()));
+        }
+        if (0 != newProduct.getPrice()) {
+            old.setPrice(newProduct.getPrice());
+        }
+        if (null != newProduct.getDescription()) {
+            old.setDescription(newProduct.getDescription());
+        }
         old.setUpdatedAt(LocalDateTime.now());
-        old.setDeletedAt(newProduct.getDeletedAt());
-        old.setOrigin(newProduct.getOrigin());
-        old.setInventoryId(newProduct.getInventoryId());
+
+        if (null != newProduct.getDeletedAt()) {
+            old.setDeletedAt(newProduct.getDeletedAt());
+        }
+        if (null != newProduct.getOrigin()) {
+            old.setOrigin(newProduct.getOrigin());
+        }
+        if (0 != newProduct.getInventoryId()) {
+            old.setInventoryId(newProduct.getInventoryId());
+        }
 
         productRepository.save(old);
 

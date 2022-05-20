@@ -148,7 +148,7 @@ function updateOrder(order) {
         }
     };
     req.overrideMimeType("application/json");
-    req.open('PUT', host + port + "/orders/" + order["id"], true);
+    req.open('PUT', host + port + ORDERS_PATHNAME + order["id"], true);
     req.send(JSON.stringify(dto));
 }
 

@@ -9,7 +9,7 @@ const port = ":8080";
 function getUsers() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', host + port + "/users", true);
+    req.open('GET', host + port + USERS_PATHNAME, true);
     req.onload  = function() {
         const jsonResponse = JSON.parse(req.responseText);
         loadUsers(jsonResponse)
@@ -29,7 +29,7 @@ function addUserRow(user) {
     const row = document.createElement("tr");
     row.addEventListener("click", () => {
         manageUser(user);
-        overlay.classList.toggle("show");
+        overlay.classList.toggle("hidden");
     })
 
     const idCell = document.createElement("td");
@@ -74,7 +74,7 @@ function manageUser(user) {
 function fetchOrders(user) {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', host + port + "/orders/", true);
+    req.open('GET', host + port + ORDERS_PATHNAME, true);
     req.onload  = function() {
         const allOrders = JSON.parse(req.responseText);
         populatePurchaseHistory(user, allOrders);

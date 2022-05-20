@@ -16,6 +16,7 @@
   <link rel="stylesheet" type="text/css" th:href="@{/css/style-overlays.css}"/>
 
   <script src="https://unpkg.com/phosphor-icons"></script>
+  <script defer th:src="@{/js/tools.js}"></script>
   <script defer th:src="@{/js/admin.js}"></script>
   <script defer th:src="@{/js/admin-customers.js}"></script>
   <title>Urban Infusion</title>
@@ -25,7 +26,7 @@
 <header class="admin__header" th:insert="components/admin-header"></header>
 
 <main class="admin__main">
-  <div class="modal overlay" id="overlay" th:insert="components/overlays/manage-customer"></div>
+  <div class="modal overlay hidden" id="overlay" th:insert="components/overlays/manage-customer"></div>
   <aside class="sidenav" th:insert="components/admin-sidenav"></aside>
 
   <section class="section-content">

@@ -19,7 +19,10 @@ public class ProductDto {
   private String categoryDescription;
 
 
-  public ProductDto(){}
+  public ProductDto(){
+    this.price = 0;
+    this.inventoryId = 0;
+  }
 
 
   public ProductDto(String name, String description, String origin, double price, String category) {

@@ -10,7 +10,7 @@ function getTableContent() {
 function getNewCustomers() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', host + port + "/users/new", true);
+    req.open('GET', host + port + USERS_PATHNAME + "/new", true);
     req.onload  = function() {
         const jsonResponse = JSON.parse(req.responseText);
         loadCustomers(jsonResponse)
@@ -54,7 +54,7 @@ function addCustomerRow(id, name, email) {
 function getLatestOrders() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', host + port + "/orders/recent", true);
+    req.open('GET', host + port + ORDERS_PATHNAME + "/recent", true);
     req.onload  = function() {
         const jsonResponse = JSON.parse(req.responseText);
         loadOrders(jsonResponse)
@@ -75,7 +75,7 @@ function addOrderRow(order) {
     const row = document.createElement("tr");
 
     row.addEventListener("click", () => {
-        window.location.href = "/orders/" + order["id"];
+        window.location.href = ORDERS_PATHNAME + order["id"];
     })
 
     const dateCell = document.createElement("td");
@@ -108,7 +108,7 @@ function addOrderRow(order) {
 function getLatestRatings() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', host + port + "/ratings/recent", true);
+    req.open('GET', host + port + RATING_API_PATHNAME + "/recent", true);
     req.onload  = function() {
         const jsonResponse = JSON.parse(req.responseText);
         loadRatings(jsonResponse)
@@ -129,7 +129,7 @@ function addRatingRow(rating) {
     const row = document.createElement("tr");
 
     row.addEventListener("click", () => {
-        window.location.href = "/ratings/" + rating["id"];
+        window.location.href = RATING_API_PATHNAME + "/" + rating["id"];
     })
 
     const dateCell = document.createElement("td");

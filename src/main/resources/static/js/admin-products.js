@@ -13,6 +13,7 @@ const editDescriptionOverlay = document.getElementById("editDescriptionOverlay")
 const editCategoryOverlay = document.getElementById("editCategoryOverlay");
 
 let products = null;
+let product = null;
 
 /* search bar */
 
@@ -49,7 +50,7 @@ function addProductRow(product) {
     const row = document.createElement("tr");
     row.onclick = () => {
         manageProduct(product);
-        overlay.classList.toggle("show");
+        overlay.classList.toggle("hidden");
     };
 
     const idCell = document.createElement("td");
@@ -90,6 +91,7 @@ function manageProduct(product) {
     const descriptionLabel = document.getElementById("productDescriptionLabel");
     const imageLabel = document.getElementById("productImageLabel");
     const image = document.getElementById("productImage");
+    this.product = product;
 
     idLabel.textContent = product["id"];
     nameLabel.textContent = product["name"];
@@ -120,10 +122,25 @@ function setEventListeners() {
     editCategoryButton.addEventListener("click",function() {
         editCategory();
     });
+    const closeButtons = document.getElementsByClassName("checkout__btn--close");
+    for (let i = 0; i < closeButtons.length; i++) {
+        closeButtons[i].addEventListener("click", function() {
+            closeButtons[i].parentElement.parentElement.classList.remove("display");
+        });
+    }
 }
 
 function editName() {
     editNameOverlay.classList.toggle("display");
+    document.getElementById("updateProductNameButton").onclick = updateProductName();
+
+}
+
+function updateProductName() {
+    const newName = document.getElementById("newName").value;
+    if (newName.length > 0) {
+        sendApiRequest(host + port + PRODUCT_PATHNAME + "/" + product["id"], "PUT", {name:newName},null,null,null);
+    }
 }
 
 function editDescription() {

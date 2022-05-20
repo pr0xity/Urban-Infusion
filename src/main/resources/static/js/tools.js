@@ -4,7 +4,9 @@ const HOME_PATHNAME = "/";
 const AUTHENTICATION_API_PATHNAME = "/login";
 const WISHLIST_API_PATHNAME = "/wishlist";
 const RATING_API_PATHNAME = "/ratings";
-const PRODUCT_PATHNAME = "/product/";
+const PRODUCT_PATHNAME = "/product";
+const USERS_PATHNAME = "/users";
+const ORDERS_PATHNAME = "/orders";
 
 let map;
 let marker;
