@@ -6,6 +6,7 @@ const loginButton = document.querySelector("#login-btn");
 const loginEmail = document.querySelector("#login-email");
 const loginPassword = document.querySelector("#login-password");
 const loginAlert = document.querySelector(".login__alert");
+const forgottenPasswordButton = document.querySelector("#forgotten-password");
 
 /**
  * Sets the login alert to the given message.
@@ -62,7 +63,22 @@ const sendLoginRequest = function (event) {
     sendApiRequest(`${AUTHENTICATION_API_PATHNAME}`, "POST", getLoginRequestBody(), loginSuccess, loginError, loginError)
 };
 
+const forgottenPasswordError = function () {
+    setLoginAlert("Did you type in email?")
+}
+const forgottenPasswordUnauthorized = function () {
+    setLoginAlert("Could not find user with this email")
+}
+const forgottenPasswordSuccess = function () {
+    setLoginAlert("A new password has been sent to you email")
+}
+const sendForgottenPasswordRequest = function (event) {
+    event.preventDefault();
+    sendApiRequest(`/forgottenPassword`, "POST", {email: loginEmail.value.toString()}, forgottenPasswordSuccess, forgottenPasswordUnauthorized, forgottenPasswordError);
+}
+
 //Adding event listeners if login button is present.
 if (loginButton !== null) {
     loginButton.addEventListener("click", sendLoginRequest);
+    forgottenPasswordButton.addEventListener("click", sendForgottenPasswordRequest);
 }

@@ -77,6 +77,8 @@ function addDeleteAccountListeners(tags) {
  ************************************************/
 const accountFormAlerts = document.querySelectorAll(".account__form--alert");
 const userId = document.querySelector("#field_userId").innerHTML;
+const userEmail = document.querySelector(`input[name="edit_email"]`).value;
+console.log(userEmail);
 
 /**
  * Sets the alert on the form to the given alert message.
@@ -356,6 +358,7 @@ const getDeleteAccountBody = function () {
   return {
     password: password,
     enabled: false,
+    changeEnabled: true,
   }
 }
 
@@ -366,8 +369,7 @@ const getDeleteAccountBody = function () {
  */
 const deleteAccountRequest = function(event) {
   event.preventDefault();
-
-  sendApiRequest(`/users/${userId}`, "PUT", getDeleteAccountBody(), goToFrontpage);
+  sendApiRequest(`/users/${userEmail}`, "DELETE", getDeleteAccountBody(), goToFrontpage);
 }
 
 const deleteAccountButton = document.querySelector(`input[name="deleteAccount"]`);

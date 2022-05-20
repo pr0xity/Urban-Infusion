@@ -5,6 +5,7 @@ import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.User;
 import no.ntnu.appdevapi.entities.VerificationToken;
 import no.ntnu.appdevapi.events.CompleteRegistrationEvent;
+import no.ntnu.appdevapi.events.ForgottenPasswordEvent;
 import no.ntnu.appdevapi.security.JwtUtil;
 import no.ntnu.appdevapi.services.UserService;
 import no.ntnu.appdevapi.services.VerificationTokenService;
@@ -87,6 +88,26 @@ public class LoginController {
       return new ResponseEntity<>(verificationTokenService.getTokenFromUser(user), HttpStatus.OK);
     }
     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  }
+
+  /**
+   * Sends an email to the user given.
+   *
+   * @param userDto the user who has forgotten password.
+   * @return 200 Ok on success, 404 not found if user was not found.
+   */
+  @RequestMapping(value = "/forgottenPassword", method = RequestMethod.POST)
+  public ResponseEntity<?> forgottenPassword(@RequestBody UserDto userDto) {
+    if (userDto == null || userDto.getEmail() == null) {
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    User user = userService.findOneByEmail(userDto.getEmail());
+    if (user != null) {
+      applicationEventPublisher.publishEvent(new ForgottenPasswordEvent(user));
+      return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
   }
 
   /**

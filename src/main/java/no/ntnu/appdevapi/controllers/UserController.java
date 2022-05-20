@@ -159,14 +159,19 @@ public class UserController {
    */
   @DeleteMapping("/users/{email}")
   @ApiIgnore
-  public ResponseEntity<String> delete(@PathVariable String email) {
-    ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  public ResponseEntity<?> delete(@PathVariable String email, HttpServletResponse response) {
     User requestedUser = userService.findOneByEmail(email);
+    if (requestedUser != null && requestedUser == userService.getSessionUser()) {
+      userService.deleteUser(email);
+      Cookie cookie = deleteCookie();
+      response.addCookie(cookie);
+      return new ResponseEntity<>(HttpStatus.OK);
+    }
     if (null != requestedUser) {
       userService.deleteUser(email);
-      response = new ResponseEntity<>(HttpStatus.OK);
+      return new ResponseEntity<>(HttpStatus.OK);
     }
-    return response;
+    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
 
   /**

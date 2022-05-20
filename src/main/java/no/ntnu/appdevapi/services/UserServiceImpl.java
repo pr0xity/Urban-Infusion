@@ -86,7 +86,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void updateWithUser(long id, User user) {
-        if (user != null && user.getId() == id && findOneByID(id) != null) {
+        User existingUser = findOneByID(id);
+        if (user != null && user.getId() == id && existingUser != null) {
+            if (!user.getPassword().equals(existingUser.getPassword()) && !bcryptEncoder.matches(user.getPassword(), existingUser.getPassword())) {
+                user.setPassword(bcryptEncoder.encode(user.getPassword()));
+                this.userRepository.save(user);
+                return;
+            }
             this.userRepository.save(user);
         }
     }
@@ -109,9 +115,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             if (userDto.getNewPassword() != null) {
                 user.setPassword(bcryptEncoder.encode(userDto.getNewPassword()));
             }
-            if (!updatedUser.isEnabled()) {
-                user.setEnabled(false);
-            }
+
             user.setUpdatedAt(LocalDateTime.now());
 
             UserAddress address = userDto.getAddressFromDto();
