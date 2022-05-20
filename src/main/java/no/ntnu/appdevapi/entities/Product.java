@@ -27,6 +27,11 @@ public class Product {
   @ApiModelProperty("Inventory id of the product.")
   @Column(name = "fk_inventory_id")
   private int inventoryId;
+
+  @OneToOne(mappedBy = "product")
+  @JsonIgnore
+  private ProductImage image;
+
   @ApiModelProperty("When the product was created.")
   @Column(name = "created_at")
   private LocalDateTime createdAt;
@@ -105,6 +110,24 @@ public class Product {
 
   public void setPrice(double price) {
     this.price = price;
+  }
+
+  /**
+   * Returns the image of this product.
+   *
+   * @return image of this product.
+   */
+  public ProductImage getImage() {
+    return image;
+  }
+
+  /**
+   * Sets the image of this product.
+   *
+   * @param image new image of this product.
+   */
+  public void setImage(ProductImage image) {
+    this.image = image;
   }
 
   public String getOrigin() {

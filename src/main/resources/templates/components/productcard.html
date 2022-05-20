@@ -1,6 +1,6 @@
 <img
   class="product-card__img"
-  th:src="@{/img/products/{name}.jpeg(name = ${product.name.toLowerCase().replaceAll(' ','')})}"
+  th:src="@{/products/images/{id}(id = ${product.id})}"
   alt="herbal tea in a teacup"
 />
 <div class="product-card__details">

@@ -19,7 +19,7 @@ public class Wishlist {
     @Column(name = "fl_id")
     private long id;
 
-    @ApiModelProperty("The the user of the wishlist")
+    @ApiModelProperty("The user of the wishlist")
     @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id")
     private User user;

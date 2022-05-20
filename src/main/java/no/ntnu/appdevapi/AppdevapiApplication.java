@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
@@ -57,7 +58,7 @@ public class AppdevapiApplication {
 
 
   @Bean
-  CommandLineRunner run(UserService userService, PermissionLevelService permissionLevelService, ProductService productService, RatingServiceImpl ratingService, WishlistService wishlistService, ShoppingSessionService shoppingSessionService, OrderDetailsService orderDetailsService, OrderItemService orderItemService) {
+  CommandLineRunner run(UserService userService, PermissionLevelService permissionLevelService, ProductService productService, ProductImageService productImageService, RatingServiceImpl ratingService, WishlistService wishlistService, ShoppingSessionService shoppingSessionService, OrderDetailsService orderDetailsService, OrderItemService orderItemService) {
     return args -> {
       if (orderItemService.getAllOrderItems().size() < 1) {
         permissionLevelService.savePermissionLevel(new PermissionLevel("user", null));
@@ -77,6 +78,7 @@ public class AppdevapiApplication {
         productService.addProductFromDto(new ProductDto("Sencha 500g", "Japanese green tea. Green leaves. Available in Aug-Sep season only", "Japanese green tea", 800, "Tea"));
         productService.addProductFromDto(new ProductDto("Mug", "Classic mug. Made from Brazilian clay. Hot-friendly - comfortable to hold even when the water is hot. Handy handle", "Brazilian clay", 120, "Accessories", "Mug"));
 
+        //TODO: add image test-data
 
         ratingService.addRating(new Rating(userService.findAll().get(0), "Geir", productService.getProductByName("Heather tea"), 4, "ok"));
         ratingService.addRating(new Rating(userService.findAll().get(0), "Geir", productService.getProductByName("Linden blossom tea"), 5, "Best tea ever"));

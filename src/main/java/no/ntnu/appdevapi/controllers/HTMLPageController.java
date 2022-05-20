@@ -120,7 +120,7 @@ public class HTMLPageController {
         Wishlist wishlist = this.wishlistService.getWishlistByUser(this.getUser());
 
         if (wishlist != null){
-            model.addAttribute("wishlist", wishlist.getProducts());
+            model.addAttribute("wishlist", this.getUser().getWishlist().getProducts());
         }
 
         this.addPermissionLevelToModel(model);
