@@ -143,11 +143,10 @@ const updateProductName = function(event) {
 }
 
 const updateProductPrice = function(event) {
-    console.log("HOW DO")
     event.preventDefault();
     const newPrice = document.getElementById("newPrice").value;
-    console.log(newPrice);
     if (newPrice.length > 0) {
+        /*todo: this does not work. all fields are null.*/
         sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { price: newPrice }, editProductSuccess);
     }
 }
@@ -156,12 +155,18 @@ const updateProductDescription = function(event) {
     event.preventDefault();
     const newDescription = document.getElementById("newDescription").value;
     if (newDescription.length > 0) {
-        sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { name: "name"+newDescription }, editProductSuccess);
+        /*todo: this does not work. all fields are null.*/
+        sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { description: newDescription }, editProductSuccess);
     }
 }
 
 const updateProductCategory = function(event) {
-
+    event.preventDefault();
+    const newCategory = document.getElementById("newCategory").value;
+    if (newCategory.length > 0) {
+        /*todo: this does not work. all fields are null.*/
+        sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { categoryName: newCategory }, editProductSuccess);
+    }
 }
 
 const editProductSuccess = function() {
@@ -216,7 +221,6 @@ function editDescription() {
 }
 
 function editPrice() {
-    console.log("edit price");
     document.getElementById("updatePriceButton").addEventListener("click", updateProductPrice);
     editPriceOverlay.classList.add("display");
 }
