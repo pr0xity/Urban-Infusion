@@ -83,6 +83,7 @@ function addProductRow(product) {
 }
 
 function manageProduct(product) {
+    document.getElementById("updateProductNameButton").dataset.productId = product.id;
     const idLabel = document.getElementById("productIdLabel");
     const nameLabel = document.getElementById("productNameLabel");
     const stockLabel = document.getElementById("productStockLabel");
@@ -130,20 +131,19 @@ function setEventListeners() {
     }
 }
 
+const button = document.getElementById("updateProductNameButton");
 function editName() {
-    document.getElementById("updateProductNameButton").onclick = updateProductName();
+    overlay.querySelector("[data-product-id]").addEventListener("click", updateProductName)
     editNameOverlay.classList.toggle("display");
 }
 
-function updateProductName() {
+function updateProductName(event) {
+    event.preventDefault();
     if (!document.getElementById("editNameOverlay").classList.contains("display")) return;
     console.log("Does this reach?");
     const newName = document.getElementById("newName").value;
     if (newName.length > 0) {
-        const req = new XMLHttpRequest();
-        req.overrideMimeType("application/json");
-        req.open('PUT', host + port + PRODUCT_PATHNAME + product["id"], true);
-        req.send("{name:'"+ newName + "'}");
+        sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { name: newName }, reloadCurrentPage);
     }
 }
 

@@ -70,4 +70,8 @@ public class ProductDto {
     product.setCategory(c);
     return product;
   }
+
+  public String getName() {
+    return name;
+  }
 }
