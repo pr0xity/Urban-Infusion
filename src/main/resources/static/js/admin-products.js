@@ -131,15 +131,19 @@ function setEventListeners() {
 }
 
 function editName() {
-    editNameOverlay.classList.toggle("display");
     document.getElementById("updateProductNameButton").onclick = updateProductName();
-
+    editNameOverlay.classList.toggle("display");
 }
 
 function updateProductName() {
+    if (!document.getElementById("editNameOverlay").classList.contains("display")) return;
+    console.log("Does this reach?");
     const newName = document.getElementById("newName").value;
     if (newName.length > 0) {
-        sendApiRequest(host + port + PRODUCT_PATHNAME + "/" + product["id"], "PUT", {name:newName},null,null,null);
+        const req = new XMLHttpRequest();
+        req.overrideMimeType("application/json");
+        req.open('PUT', host + port + PRODUCT_PATHNAME + product["id"], true);
+        req.send("{name:'"+ newName + "'}");
     }
 }
 

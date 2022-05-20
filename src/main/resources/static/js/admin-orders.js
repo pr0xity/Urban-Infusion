@@ -56,7 +56,7 @@ function addOrderRow(order) {
     const row = document.createElement("tr");
     row.addEventListener("click", () => {
         manageOrder(order);
-        overlay.classList.toggle("show");
+        overlay.classList.toggle("hidden");
     })
 
     const dateCell = document.createElement("td");
@@ -148,7 +148,7 @@ function updateOrder(order) {
         }
     };
     req.overrideMimeType("application/json");
-    req.open('PUT', host + port + ORDERS_PATHNAME + order["id"], true);
+    req.open('PUT', host + port + ORDERS_PATHNAME + "/" + order["id"], true);
     req.send(JSON.stringify(dto));
 }
 

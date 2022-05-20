@@ -49,10 +49,10 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findByName(nProduct.getName());
     }
 
-    public Product updateProduct(ProductDto product) {
+    public Product updateProduct(long id, ProductDto product) {
         Product newProduct = product.getProductFromDto();
 
-        Product old = productRepository.findById(newProduct.getId()).orElse(null);
+        Product old = productRepository.findById(id).orElse(null);
         if (null == old) {
             return null;
         }
@@ -81,7 +81,7 @@ public class ProductServiceImpl implements ProductService {
         }
 
         productRepository.save(old);
-
+        System.out.println("did it update?");
         return productRepository.findById(old.getId()).orElse(null);
     }
 
