@@ -2,13 +2,17 @@ package no.ntnu.appdevapi.controllers;
 
 import no.ntnu.appdevapi.DTO.LoginUser;
 import no.ntnu.appdevapi.DTO.UserDto;
+import no.ntnu.appdevapi.entities.ShoppingSession;
 import no.ntnu.appdevapi.entities.User;
 import no.ntnu.appdevapi.entities.VerificationToken;
+import no.ntnu.appdevapi.entities.Wishlist;
 import no.ntnu.appdevapi.events.CompleteRegistrationEvent;
 import no.ntnu.appdevapi.events.ForgottenPasswordEvent;
 import no.ntnu.appdevapi.security.JwtUtil;
+import no.ntnu.appdevapi.services.ShoppingSessionService;
 import no.ntnu.appdevapi.services.UserService;
 import no.ntnu.appdevapi.services.VerificationTokenService;
+import no.ntnu.appdevapi.services.WishlistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
@@ -47,6 +51,12 @@ public class LoginController {
   private UserService userService;
 
   @Autowired
+  private ShoppingSessionService shoppingSessionService;
+
+  @Autowired
+  private WishlistService wishlistService;
+
+  @Autowired
   private ApplicationEventPublisher applicationEventPublisher;
 
   @Autowired
@@ -82,6 +92,8 @@ public class LoginController {
       nUser.setPermissionLevel("user");
       nUser.setEnabled(false);
       User user = userService.save(nUser);
+      shoppingSessionService.addShoppingSession(new ShoppingSession(user));
+      wishlistService.addWishlist(new Wishlist(user));
       applicationEventPublisher.publishEvent(new CompleteRegistrationEvent(user));
 
       //verification token is only placed here for testing outside of email. Will be removed.

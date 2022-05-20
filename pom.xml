@@ -76,6 +76,13 @@
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
+		<!--/ To make multipart file out of images for test data-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+		</dependency>
+
+
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
