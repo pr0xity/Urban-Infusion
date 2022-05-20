@@ -66,7 +66,6 @@ public class ProductDto {
 
     ProductCategory c = new ProductCategory(categoryName,categoryDescription);
 
-
     product.setCategory(c);
     return product;
   }

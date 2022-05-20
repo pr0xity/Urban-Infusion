@@ -60,10 +60,10 @@ public class ProductServiceImpl implements ProductService {
             //old.setName(newProduct.getName());
             old.setName(product.getName());
         }
-        if (null != newProduct.getCategory()) {
+        if (null != newProduct.getCategory().getName()) {
             old.setCategory(productCategoryRepository.findByName(newProduct.getCategory().getName()));
         }
-        if (0 != newProduct.getPrice()) {
+        if (0.0 != newProduct.getPrice()) {
             old.setPrice(newProduct.getPrice());
         }
         if (null != newProduct.getDescription()) {

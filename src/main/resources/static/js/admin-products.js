@@ -140,11 +140,16 @@ function editName() {
 function updateProductName(event) {
     event.preventDefault();
     if (!document.getElementById("editNameOverlay").classList.contains("display")) return;
-    console.log("Does this reach?");
     const newName = document.getElementById("newName").value;
     if (newName.length > 0) {
-        sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { name: newName }, reloadCurrentPage);
+        sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { name: newName }, editProductSuccess);
     }
+}
+
+const editProductSuccess = function() {
+    hideEditOverlays();
+    document.getElementById("productNameLabel").textContent = document.getElementById("newName").value;
+    getProducts();
 }
 
 function editDescription() {
@@ -168,8 +173,14 @@ if (document.getElementsByClassName("edit__window")) {
                 return;
             }
         }
-        for (let i= 0; i < editOverlays.length; i++) {
-            editOverlays[i].parentElement.classList.remove("display");
-        }
+        hideEditOverlays();
     });
+}
+
+const hideEditOverlays = function(event) {
+    const editOverlays = document.getElementsByClassName("edit__window");
+
+    for (let i= 0; i < editOverlays.length; i++) {
+        editOverlays[i].parentElement.classList.remove("display");
+    }
 }
