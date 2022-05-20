@@ -41,16 +41,17 @@ function loadProducts() {
     tableBody.innerHTML = "";
     for (let i = 0; i < products.length; i++) {
         const product = products[i];
-        addProductRow(product);
+        addProductRow(product, i);
     }
 }
 
-function addProductRow(product) {
+function addProductRow(product, productNumber) {
     if (!document.getElementById("productTable")) return;
     const row = document.createElement("tr");
+    row.dataset.productNumber = productNumber;
     row.onclick = () => {
         manageProduct(product);
-        overlay.classList.toggle("hidden");
+        overlay.classList.remove("hidden");
     };
 
     const idCell = document.createElement("td");
@@ -132,36 +133,97 @@ function setEventListeners() {
 }
 
 const button = document.getElementById("updateProductNameButton");
-function editName() {
-    overlay.querySelector("[data-product-id]").addEventListener("click", updateProductName)
-    editNameOverlay.classList.toggle("display");
-}
 
-function updateProductName(event) {
+const updateProductName = function(event) {
     event.preventDefault();
-    if (!document.getElementById("editNameOverlay").classList.contains("display")) return;
     const newName = document.getElementById("newName").value;
     if (newName.length > 0) {
         sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { name: newName }, editProductSuccess);
     }
 }
 
+const updateProductPrice = function(event) {
+    console.log("HOW DO")
+    event.preventDefault();
+    const newPrice = document.getElementById("newPrice").value;
+    console.log(newPrice);
+    if (newPrice.length > 0) {
+        sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { price: newPrice }, editProductSuccess);
+    }
+}
+
+const updateProductDescription = function(event) {
+    event.preventDefault();
+    const newDescription = document.getElementById("newDescription").value;
+    if (newDescription.length > 0) {
+        sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { name: "name"+newDescription }, editProductSuccess);
+    }
+}
+
+const updateProductCategory = function(event) {
+
+}
+
 const editProductSuccess = function() {
     hideEditOverlays();
-    document.getElementById("productNameLabel").textContent = document.getElementById("newName").value;
     getProducts();
+
+    const nameLabel = document.getElementById("productNameLabel");
+    const priceLabel = document.getElementById("productPriceLabel");
+    const categoryLabel = document.getElementById("productCategoryLabel");
+    const descriptionLabel = document.getElementById("productDescriptionLabel");
+
+    const newName = document.getElementById("newName").value;
+    const newDescription = document.getElementById("newDescription").value;
+    const newCategory = document.getElementById("newCategory").value;
+    const newPrice = document.getElementById("newPrice").value;
+
+    if (newName !== "") {
+        nameLabel.textContent = newName;
+    }
+    if (newDescription !== "") {
+        descriptionLabel.textContent = newDescription;
+    }
+    if (newCategory !== "") {
+        categoryLabel.textContent = newCategory;
+    }
+    if (newPrice !== "") {
+        priceLabel.textContent = newPrice;
+    }
+}
+
+const clickRowFromId = function () {
+    const rows = tableBody.children;
+    console.log("Fetching rows");
+    for (let i = 0; i < rows.length; i++) {
+        const row = rows[i];
+        for (let y = 0; y < row.children.length; y++) {
+            if (row.textContent.includes(button.dataset.productId)) {
+                manageProduct(products[row.dataset.productNumber]);
+            }
+        }
+    }
+}
+
+function editName() {
+    overlay.querySelector("[data-product-id]").addEventListener("click", updateProductName);
+    editNameOverlay.classList.add("display");
 }
 
 function editDescription() {
-    editDescriptionOverlay.classList.toggle("display");
+    document.getElementById("updateDescriptionButton").addEventListener("click", updateProductDescription);
+    editDescriptionOverlay.classList.add("display");
 }
 
 function editPrice() {
-    editPriceOverlay.classList.toggle("display");
+    console.log("edit price");
+    document.getElementById("updatePriceButton").addEventListener("click", updateProductPrice);
+    editPriceOverlay.classList.add("display");
 }
 
 function editCategory() {
-    editCategoryOverlay.classList.toggle("display");
+    document.getElementById("updateCategoryButton").addEventListener("click", updateProductCategory);
+    editCategoryOverlay.classList.add("display");
 }
 
 if (document.getElementsByClassName("edit__window")) {
