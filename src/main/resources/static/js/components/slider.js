@@ -150,10 +150,15 @@ class Slider {
    * Adds slider controller to slider container and sets event listeners on the buttons.
    */
   implementSliderController = function () {
-    this.sliderContainer.insertAdjacentHTML("afterbegin", this.createSliderControllerHtml());
+    this.sliderContainer.insertAdjacentHTML(
+      "afterbegin",
+      this.createSliderControllerHtml()
+    );
 
-    const sliderPrevBtn = this.sliderContainer.querySelector(".slider__btn--prev");
-    const sliderNextBtn = this.sliderContainer.querySelector(".slider__btn--next");
+    const sliderPrevBtn =
+      this.sliderContainer.querySelector(".slider__btn--prev");
+    const sliderNextBtn =
+      this.sliderContainer.querySelector(".slider__btn--next");
 
     sliderPrevBtn.addEventListener("click", this.sliderPrev.bind(this));
     sliderNextBtn.addEventListener("click", this.sliderNext.bind(this));

@@ -36,9 +36,21 @@ public class CartController {
      *
      * @return list of all shopping sessions.
      */
-    @GetMapping
+    @GetMapping("all")
     public List<ShoppingSession> getAll() {
         return this.shoppingSessionService.getAllShoppingSessions();
+    }
+
+
+    @GetMapping()
+    public ResponseEntity<ShoppingSession> get() {
+        ShoppingSession shoppingSession = this.getShoppingSession();
+
+        if (shoppingSession != null) {
+            return new ResponseEntity<>(shoppingSession, HttpStatus.OK);
+        }
+
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     /**

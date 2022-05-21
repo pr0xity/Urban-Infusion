@@ -136,10 +136,8 @@ public class HTMLPageController {
      */
     @GetMapping("checkout")
     public String getCheckout(Model model) {
-        UserAddress userAddress = this.getUser().getAddress();
-
         model.addAttribute("user", this.getUser());
-        model.addAttribute("address", userAddress.getAddressLine1() + ", " + userAddress.getPostalCode() + " " + userAddress.getCity());
+        model.addAttribute("address", this.getUser().getAddress());
         ShoppingSession shoppingSession = this.shoppingSessionService.getShoppingSessionByUser(this.getUser());
 
         if (shoppingSession != null){

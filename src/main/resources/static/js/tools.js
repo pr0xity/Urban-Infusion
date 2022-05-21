@@ -1,14 +1,15 @@
 // For REST API requests
 const URL = "http://localhost:8080";
-const HOME_PATHNAME = "/";
 const AUTHENTICATION_API_PATHNAME = "/login";
 const WISHLIST_API_PATHNAME = "/wishlist";
 const RATING_API_PATHNAME = "/ratings";
 const PRODUCT_API_PATHNAME = "/products";
-const PRODUCT_PATHNAME = "/product";
 const USERS_API_PATHNAME = "/users";
 const ORDERS_API_PATHNAME = "/orders";
 const IMAGE_API_PATHNAME = "/products/images";
+const CART_API_PATHNAME = "/cart";
+const HOME_PATHNAME = "/";
+const PRODUCT_PATHNAME = "/product";
 
 let map;
 let marker;
@@ -87,7 +88,11 @@ const sendApiRequest = function (
   // send request and handle it.
   getFetchRequest().then((response) => {
     if (response.ok) {
-      successCallback();
+      if (successCallback !== null) {
+        successCallback();
+      } else {
+        console.log("Request was successful");
+      }
     } else if (response.status === 401) {
       if (unauthorizedCallback !== null) unauthorizedCallback();
     } else if (errorCallback !== null) {
