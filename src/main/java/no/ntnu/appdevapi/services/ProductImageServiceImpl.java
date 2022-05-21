@@ -1,6 +1,7 @@
 package no.ntnu.appdevapi.services;
 
 import no.ntnu.appdevapi.DAO.ProductImageRepository;
+import no.ntnu.appdevapi.DAO.ProductRepository;
 import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.ProductImage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,9 @@ public class ProductImageServiceImpl implements ProductImageService {
 
     @Autowired
     private ProductImageRepository productImageRepository;
+
+    @Autowired
+    private ProductRepository productRepository;
 
     private final String[] FILE_EXTENSIONS = {"jpeg", "jpg", "png", "webp", "svg"};
     private final String[] CONTENT_TYPES = {"image/jpeg", "image/jpg", "image/png",  "image/webp", "image/svg+xml"};
@@ -47,7 +51,7 @@ public class ProductImageServiceImpl implements ProductImageService {
 
     @Override
     public ProductImage updateImage(long productId, MultipartFile imageFile) {
-        ProductImage existingImage = getImageById(productId);
+        ProductImage existingImage = getImageByProduct(productRepository.findById(productId).orElse(null));
         if (existingImage != null) {
             try {
                 existingImage.setData(imageFile.getBytes());

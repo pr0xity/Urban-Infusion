@@ -105,6 +105,7 @@ function manageProduct(product) {
     todo: implement image controller
      */
     fetchImage(product["id"]);
+    /* todo: replace image source label with edit image button */
     imageLabel.textContent = image.src.toString();
 }
 
