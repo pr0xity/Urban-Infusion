@@ -28,6 +28,11 @@ public class UserDto {
   public UserDto() {
   }
 
+  public UserDto(String email, boolean enabled) {
+    this.email = email;
+    this.enabled = enabled;
+  }
+
   public UserDto(String firstName, String lastName, String email,
                  String password, String addressLine1, String postalCode,
                  String city, String country, String phone) {
@@ -37,7 +42,7 @@ public class UserDto {
     this.password = password;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
-    this.enabled = true;
+    //this.enabled = true;
     this.permissionLevel = "user";
 
     this.addressLine1 = addressLine1;
@@ -56,7 +61,7 @@ public class UserDto {
     this.password = password;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
-    this.enabled = true;
+    //this.enabled = true;
     this.permissionLevel = "user";
 
     this.addressLine1 = addressLine1;
@@ -74,7 +79,7 @@ public class UserDto {
     this.password = password;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
-    this.enabled = true;
+    //this.enabled = true;
     this.permissionLevel = permissionLevel;
   }
 
@@ -85,7 +90,7 @@ public class UserDto {
     this.password = password;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
-    this.enabled = true;
+    //this.enabled = true;
     this.permissionLevel = "user";
   }
 
@@ -97,7 +102,7 @@ public class UserDto {
     user.setPassword(password);
     user.setCreatedAt(createdAt);
     user.setUpdatedAt(updatedAt);
-    user.setEnabled(enabled);
+    //user.setEnabled(enabled);
 
 
     PermissionLevel p = new PermissionLevel(permissionLevel, updatedAt);

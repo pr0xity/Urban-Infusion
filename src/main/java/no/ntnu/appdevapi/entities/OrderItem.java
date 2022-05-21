@@ -2,6 +2,8 @@ package no.ntnu.appdevapi.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -25,6 +27,7 @@ public class OrderItem {
     private OrderDetails orderDetails;
 
     @ApiModelProperty("The product of this order item.")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
     @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "product_id")
     private Product product;

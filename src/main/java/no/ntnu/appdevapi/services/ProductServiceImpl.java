@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -21,7 +24,9 @@ public class ProductServiceImpl implements ProductService {
     private ProductCategoryRepository productCategoryRepository;
 
     public Iterable<Product> getAllProducts() {
-        return productRepository.findAll();
+        List<Product> products = new ArrayList<>();
+        productRepository.findAll().forEach(products::add);
+        return products.stream().filter(product -> product.getDeletedAt() == null).collect(Collectors.toList());
     }
 
     public Product getProduct(long id) {
@@ -86,7 +91,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public void deleteProduct(long id) {
-        productRepository.deleteById(id);
+        Product product = getProduct(id);
+        if (product != null) {
+            product.setDeletedAt(LocalDateTime.now());
+            productRepository.save(product);
+        }
+        //productRepository.deleteById(id);
     }
 
     private Product getProductFromDto(ProductDto object) {

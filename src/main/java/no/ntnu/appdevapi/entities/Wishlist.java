@@ -1,6 +1,8 @@
 package no.ntnu.appdevapi.entities;
 
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -20,6 +22,7 @@ public class Wishlist {
     private long id;
 
     @ApiModelProperty("The user of the wishlist")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "user_id")
     private User user;

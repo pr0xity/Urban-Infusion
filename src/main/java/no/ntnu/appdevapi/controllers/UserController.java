@@ -162,7 +162,7 @@ public class UserController {
   public ResponseEntity<?> delete(@PathVariable String email, HttpServletResponse response) {
     User requestedUser = userService.findOneByEmail(email);
     if (requestedUser != null && requestedUser == userService.getSessionUser()) {
-      userService.deleteUser(email);
+      userService.disableUser(email);
       Cookie cookie = deleteCookie();
       response.addCookie(cookie);
       return new ResponseEntity<>(HttpStatus.OK);

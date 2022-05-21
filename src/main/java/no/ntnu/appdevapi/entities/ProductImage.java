@@ -1,6 +1,8 @@
 package no.ntnu.appdevapi.entities;
 
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -19,6 +21,7 @@ public class ProductImage {
     private byte [] data;
 
     @ApiModelProperty("The product this image belongs to.")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "product_id")
     private Product product;
@@ -26,7 +29,7 @@ public class ProductImage {
     @ApiModelProperty("The file extension if the image (.jpg, .png etc.)")
     private String fileExtension;
 
-    @ApiModelProperty("")
+    @ApiModelProperty("The content type of the image (image/jpeg, image/png etc.)")
     private String contentType;
 
     /**

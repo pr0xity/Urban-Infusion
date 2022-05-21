@@ -50,20 +50,20 @@ public class ProductController {
   public ResponseEntity<Product> get(@ApiParam("Index of the product.") @PathVariable long index) {
     ResponseEntity<Product> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
     Product product = productService.getProduct(index);
-    if (null != product) {
+    if (null != product && product.getDeletedAt() == null) {
       response = new ResponseEntity<>(product, HttpStatus.OK);
     }
     return response;
   }
 
   /**
-   * Adds the given image file to the product with the given id.
+   * Gets the image for of the product with the given product id.
    *
-   * @param productId the product id to add image to.
-   * @return 200 OK on success, 404 not found if product or image was not found.
+   * @param productId the product id of the product to find image for.
+   * @return 200 OK on success (with image), 404 not found if product or image was not found.
    */
   @GetMapping("/images/{productId}")
-  @ApiOperation(value = "Add a image to product", notes = "Status 200 when added, 404 if product not found, 400 on error.")
+  @ApiOperation(value = "Gets image of product", notes = "Status 200 and image if found, 404 if product or image not found")
   public ResponseEntity<byte[]> getImage(@PathVariable long productId) {
     Product product = productService.getProduct(productId);
 

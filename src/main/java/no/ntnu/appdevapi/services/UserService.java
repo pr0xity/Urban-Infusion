@@ -9,6 +9,14 @@ public interface UserService {
 
     User save(UserDto user);
 
+    /**
+     * Adds the given user object.
+     *
+     * @param user the user object to add.
+     * @return the user that was added.
+     */
+    User saveUserObject(User user);
+
     List<User> findAll();
 
     User findOneByEmail(String email);
@@ -32,6 +40,13 @@ public interface UserService {
     void updateWithUserDto(long id, UserDto userDto);
 
     void deleteUser(String email);
+
+    /**
+     * Sets the user with the given email to disable.
+     *
+     * @param email email of the user to set as disabled.
+     */
+    void disableUser(String email);
 
     /**
      * Returns the current user in session.

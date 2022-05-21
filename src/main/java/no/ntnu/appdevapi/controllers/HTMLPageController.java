@@ -8,9 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * MVC controller for the html pages.
@@ -191,30 +190,30 @@ public class HTMLPageController {
      * @return list over 3 top-selling products.
      */
     private List<Product> getTop3SellingProducts() {
-        List<Product> topSellingProducts = new ArrayList<>();
+        List<Product> topSellingProducts = new ArrayList<>(getListOfBestSellingProducts());
 
-        List<Long> productIds = orderItemService.getIdOfTop3SellingProducts();
-        if (productIds.isEmpty() || productIds.size() < 3) {
-            //Add some arbitrary products if no/less than 3 best sellers.
-            productService.getAllProducts().forEach(topSellingProducts::add);
-            topSellingProducts = topSellingProducts.subList(0, 3);
-
-            if (!productIds.isEmpty()) {
-                int index = 1;
-                for (Long id : productIds) {
-                    //Swap if top sellers not in the first few products.
-                    if (!topSellingProducts.contains(productService.getProduct(id))) {
-                        topSellingProducts.set(index, productService.getProduct(id));
-                        index++;
-                    }
+        if (topSellingProducts.isEmpty() || topSellingProducts.size() < 3) {
+            for (Product product : this.productService.getAllProducts()) {
+                if (!topSellingProducts.contains(product)) {
+                    topSellingProducts.add(product);
                 }
             }
-        } else {
-            for (Long id : productIds) {
-                topSellingProducts.add(productService.getProduct(id));
+
+            if (topSellingProducts.size() >= 4) {
+                topSellingProducts = topSellingProducts.subList(0, 3);
             }
         }
-
         return topSellingProducts;
+    }
+
+    /**
+     * Returns a list of the best-selling products that are not deleted.
+     *
+     * @return list of the best-selling products that are not deleted.
+     */
+    private List<Product> getListOfBestSellingProducts() {
+        return this.orderItemService.getIdOfTop3SellingProducts().stream()
+                .filter(id -> productService.getProduct(id) != null && productService.getProduct(id).getDeletedAt() == null)
+                .map(id -> productService.getProduct(id)).toList();
     }
 }

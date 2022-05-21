@@ -68,6 +68,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
+    public User saveUserObject(User user) {
+        return this.userRepository.save(user);
+    }
+
+    @Override
     public List<User> findAll() {
         List<User> list = new ArrayList<>();
         userRepository.findAll().iterator().forEachRemaining(list::add);
@@ -142,6 +147,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void deleteUser(String email) {
         userRepository.delete(userRepository.findByEmail(email));
+    }
+
+    @Override
+    public void disableUser(String email) {
+        User user = findOneByEmail(email);
+        user.setEnabled(false);
+        userRepository.save(user);
     }
 
     @Override

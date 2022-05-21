@@ -2,6 +2,8 @@ package no.ntnu.appdevapi.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -21,6 +23,7 @@ public class ShoppingSession {
     private long id;
 
     @ApiModelProperty("The the user belonging to this shopping session.")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @OneToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "user_id")
     private User user;

@@ -88,7 +88,7 @@ public class LoginController {
    */
   @RequestMapping(value = "/register", method = RequestMethod.POST)
   public ResponseEntity<String> registerUser(@RequestBody UserDto nUser) {
-    if (null != nUser && userService.findOneByEmail(nUser.getEmail()) == null) {
+    if (null != nUser && (userService.findOneByEmail(nUser.getEmail()) == null)) {
       nUser.setPermissionLevel("user");
       nUser.setEnabled(false);
       User user = userService.save(nUser);
