@@ -18,7 +18,7 @@ let marker;
  */
 const goToFrontpage = function () {
   window.location.href = HOME_PATHNAME;
-}
+};
 
 /**
  * Reloads the current page.
@@ -166,6 +166,16 @@ const isAddressValid = async function (address) {
   return await getAddressInfo(`${address}`).then((data) => {
     return data !== undefined;
   });
+};
+
+/**
+ * Checks if the given email address has a valid format.
+ *
+ * @param {*} email the email address to check if has a valid format.
+ * @returns through if the email address is a valid format, false if not.
+ */
+const isEmailAddressValid = function (email) {
+  return email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/);
 };
 
 /**

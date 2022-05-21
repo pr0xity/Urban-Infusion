@@ -936,7 +936,7 @@ address {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10000;
+  z-index: 100;
 }
 
 .product-card__slide--active:hover {
@@ -1669,7 +1669,7 @@ address {
   height: 40rem;
   border: 0.2rem solid #6d6875;
   border-radius: 50px;
-  box-shadow: 2rem 2rem 3rem rgba(0, 0, 0, 0.15);;
+  box-shadow: 2rem 2rem 3rem rgba(0, 0, 0, 0.15);
 }
 
 .change-heading {

@@ -1,14 +1,3 @@
-/*@media (min-width: 100em) {
-  html {
-    font-size: 68.5%;
-  }
-}
-
-@media (min-width: 120em) {
-  html {
-    font-size: 87.5%;
-  }
-}*/
 /**************************/
 /* LESS THAN 1230px (Smaller desktop) */
 /**************************/
@@ -44,35 +33,35 @@
     width: 98%;
   }
 
- .gallery--right .gallery__picture:first-child {
-  top: -20%;
-  left: 100%;
-}
+  .gallery--right .gallery__picture:first-child {
+    top: -20%;
+    left: 100%;
+  }
 
-.gallery--right .gallery__picture:nth-child(2) {
-  top: -10%;
-  right: -30%;
-}
+  .gallery--right .gallery__picture:nth-child(2) {
+    top: -10%;
+    right: -30%;
+  }
 
-.gallery--right .gallery__picture:nth-child(3) {
-  top: 10%;
-  right: -70%;
-}
+  .gallery--right .gallery__picture:nth-child(3) {
+    top: 10%;
+    right: -70%;
+  }
 
-.gallery--left .gallery__picture:first-child {
-  top: -20%;
-  left: 60%;
-}
+  .gallery--left .gallery__picture:first-child {
+    top: -20%;
+    left: 60%;
+  }
 
-.gallery--left .gallery__picture:nth-child(2) {
-  top: -10%;
-  left: -20%;
-}
+  .gallery--left .gallery__picture:nth-child(2) {
+    top: -10%;
+    left: -20%;
+  }
 
-.gallery--left .gallery__picture:nth-child(3) {
-  top: 10%;
-  left: 30%;
-}
+  .gallery--left .gallery__picture:nth-child(3) {
+    top: 10%;
+    left: 30%;
+  }
   .account-sections {
     flex-direction: column;
   }
@@ -134,7 +123,7 @@
   .section-featured {
     padding: 6.4rem 4.8rem;
   }
-/*
+  /*
   .gallery--right .gallery__picture:first-child {
     top: -20%;
     right: -120%;
@@ -357,6 +346,10 @@
     position: relative;
   }
 
+  .slider-container .slider-controls {
+    bottom: -222%;
+  }
+
   .gallery {
     position: static;
     height: 0;
@@ -480,7 +473,7 @@
     width: 100vw;
     background-color: #fff;
     box-shadow: 0 -1rem 4rem rgba(0, 0, 0, 0.05);
-    z-index: 10000000;
+    z-index: 100;
   }
 
   /********************************************************/
@@ -514,6 +507,10 @@
 
   .cooperation-logos {
     gap: 5.6rem;
+  }
+
+  .slider-container .slider-controls {
+    bottom: -165%;
   }
 
   .checkout > .container--white {
@@ -626,11 +623,10 @@
 /**************************/
 @media (max-width: 32em) {
   .section-title {
-    margin: 0;
     padding: 0;
     font-size: 3rem;
     font-weight: 600;
-    margin-bottom: 0.4rem;
+    margin: 0 0 0.4rem;
   }
 
   .logo {
@@ -745,7 +741,7 @@
 
   .slider-container .slider-controls {
     position: absolute;
-    bottom: -1000%;
+    bottom: -90%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -963,7 +959,7 @@
 
   .slider-container .slider-controls {
     position: absolute;
-    bottom: -1000%;
+    bottom: -50%;
     left: 50%;
     transform: translateX(-50%);
     display: flex;

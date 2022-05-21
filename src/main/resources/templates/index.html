@@ -22,13 +22,23 @@
     ></script>
     <script
       defer
-      th:src="@{/js/components.js}"
+      th:src="@{/js/components/slider.js}"
       type="application/javascript"
     ></script>
     <script
-            defer
-            th:src="@{/js/login.js}"
-            type="application/javascript"
+      defer
+      th:src="@{/js/components/gallerySlider.js}"
+      type="application/javascript"
+    ></script>
+    <script
+      defer
+      th:src="@{/js/components/caretbutton.js}"
+      type="application/javascript"
+    ></script>
+    <script
+      defer
+      th:src="@{/js/login.js}"
+      type="application/javascript"
     ></script>
     <script
       defer
@@ -141,15 +151,21 @@
           <h3 class="section-title">Featured</h3>
         </div>
         <div class="featured-products">
-          <div class="featured-card"
-               th:each="product, iteration : ${topSellingProducts}"
-               th:attr="data-slide=${iteration.index}">
+          <div
+            class="featured-card"
+            th:each="product, iteration : ${topSellingProducts}"
+            th:attr="data-slide=${iteration.index}"
+          >
             <img
               class="featured-card__img"
               th:src="@{/products/images/{id}(id = ${product.id})}"
               th:alt="${product.name}"
             />
-            <a th:href="@{/product/{id}(id=${product.id})}" class="btn btn--text">View more</a>
+            <a
+              th:href="@{/product/{id}(id=${product.id})}"
+              class="btn btn--text"
+              >View more</a
+            >
           </div>
         </div>
       </section>
