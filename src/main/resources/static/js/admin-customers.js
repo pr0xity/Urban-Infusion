@@ -84,6 +84,7 @@ function fetchOrders(user) {
 }
 
 function populatePurchaseHistory(user, allOrders) {
+    purchaseHistoryTableBody.innerHTML = "";
     const orders = [];
     for (let i = 0; i < allOrders.length; i++) {
         if (allOrders[i]["user"]["id"] === user["id"]) {
