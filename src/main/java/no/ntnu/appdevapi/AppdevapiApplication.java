@@ -3,15 +3,12 @@ package no.ntnu.appdevapi;
 import java.io.File;
 import java.io.FileInputStream;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Collections;
 
 import no.ntnu.appdevapi.DTO.ProductDto;
 import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.*;
 import no.ntnu.appdevapi.services.*;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -11,16 +11,11 @@ const editNameOverlay = document.getElementById("editNameOverlay");
 const editPriceOverlay = document.getElementById("editPriceOverlay");
 const editDescriptionOverlay = document.getElementById("editDescriptionOverlay");
 const editCategoryOverlay = document.getElementById("editCategoryOverlay");
+const searchInput = document.getElementById("searchInput");
 
 let products = null;
 let product = null;
 
-/* search bar */
-
-
-
-
-/* laste inn produkt */
 function initializeProducts() {
     getProducts();
     setEventListeners();
@@ -249,4 +244,20 @@ const hideEditOverlays = function(event) {
     for (let i= 0; i < editOverlays.length; i++) {
         editOverlays[i].parentElement.classList.remove("display");
     }
+}
+
+function filterProducts() {
+    const filteredProducts = [];
+    const searchString = this.searchInput.value.toLowerCase();
+    for (let i = 0; i < products.length; i++) {
+        const product = products[i];
+        let added = false;
+        if (product["id"].toString().includes(searchString) ||
+            product["name"].toString().toLowerCase().includes(searchString) ||
+            product["category"]["name"].toString.toLowerCase().includes(searchString)) {
+            filteredProducts.push(product);
+            added = true;
+        }
+    }
+    loadProducts(filteredProducts);
 }
