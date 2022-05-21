@@ -75,6 +75,12 @@ public class AppdevapiApplication {
         userService.save(new UserDto("admin", "admin", "admin", "1234", "admin"));
         userService.save(new UserDto("owner", "owner", "owner", "1234", "owner"));
 
+        //Saving by user dto sets enable = false so new user's need to verify. Enabling test data here:
+        userService.findAll().forEach(user -> {
+          user.setEnabled(true);
+          userService.saveUserObject(user);
+        });
+
         productService.addProductFromDto(new ProductDto("Heather tea", "From Norwegian mountains. Gathered carefully before the bees to hold the honey taste. Rich in vitamins. Local produce", "Norwegian mountains", 200, "Tea", "Bags of tea"));
         productService.addProductFromDto(new ProductDto("Linden blossom tea", "Classic Latvian tea. Helps against laziness. Use 100C water (not typical for herbal teas). Gathered in summer 2021", "Classic Latvian tea", 200, "Tea"));
         productService.addProductFromDto(new ProductDto("Sencha 50g", "Japanese green tea. Green leaves. Available in Aug-Sep season only", "Japanese green tea", 100, "Tea"));
