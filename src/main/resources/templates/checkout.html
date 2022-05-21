@@ -73,7 +73,8 @@
           <li th:each="cartItem : ${cart}" class="checkout__item">
             <img
               class="item__img"
-              th:src="@{/img/products/{name}.jpeg(name = ${cartItem.product.name.toLowerCase().replaceAll(' ','')})}"
+              th:src="@{/products/images/{id}(id = ${cartItem.product.id})}"
+              th:alt="${cartItem.product.name}"
               alt="greentea"
             />
             <p class="item__description margin-left--small">

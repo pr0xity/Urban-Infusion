@@ -3,6 +3,7 @@ package no.ntnu.appdevapi.controllers;
 import io.swagger.annotations.ApiOperation;
 import no.ntnu.appdevapi.entities.*;
 import no.ntnu.appdevapi.events.CompleteOrderEvent;
+import no.ntnu.appdevapi.events.ProcessedOrderEvent;
 import no.ntnu.appdevapi.services.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -148,7 +149,7 @@ public class OrderController {
             if ((Boolean) order.get("processed") && !old.isProcessed()) {
                 old.setProcessed((Boolean) order.get("processed"));
                 old.setUpdatedAt();
-                applicationEventPublisher.publishEvent(new CompleteOrderEvent(old.getUser(), old, orderItemService.getOrderItemsByOrderDetails(old)));
+                applicationEventPublisher.publishEvent(new ProcessedOrderEvent(old.getUser(), old));
             } else {
                 old.setProcessed((Boolean) order.get("processed"));
                 old.setUpdatedAt();

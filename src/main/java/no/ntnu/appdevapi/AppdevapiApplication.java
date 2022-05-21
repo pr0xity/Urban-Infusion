@@ -1,15 +1,22 @@
 package no.ntnu.appdevapi;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Collections;
 
 import no.ntnu.appdevapi.DTO.ProductDto;
 import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.*;
 import no.ntnu.appdevapi.services.*;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -67,7 +74,6 @@ public class AppdevapiApplication {
 
         userService.save(new UserDto("Geir", "Otlo", "geo@geo.geo", "1234", "Vika Terrasse 9", "C/O Espen Otlo", "6010", "Ålesund", "Norge", "91887754"));
         userService.save(new UserDto("Per", "Person", "per@person.geo", "1234", "Gamle Blindheimsveg 72a", "6012", "Ålesund", "Norge", "46537894"));
-        //userService.save(new UserDto("Janita", "Røyseth", "janita.lillevik@hotmail.com", "hemmelig123", "Salevegen 47", "6030", "Langevåg", "Norge", "45345335"));
         userService.save(new UserDto("user", "user", "user", "1234"));
         userService.save(new UserDto("admin", "admin", "admin", "1234", "admin"));
         userService.save(new UserDto("owner", "owner", "owner", "1234", "owner"));
@@ -78,7 +84,19 @@ public class AppdevapiApplication {
         productService.addProductFromDto(new ProductDto("Sencha 500g", "Japanese green tea. Green leaves. Available in Aug-Sep season only", "Japanese green tea", 800, "Tea"));
         productService.addProductFromDto(new ProductDto("Mug", "Classic mug. Made from Brazilian clay. Hot-friendly - comfortable to hold even when the water is hot. Handy handle", "Brazilian clay", 120, "Accessories", "Mug"));
 
-        //TODO: add image test-data
+        //Adding image to products
+        int index = 1;
+        for (Product product : productService.getAllProducts()) {
+          String imagePath = "static/img/products/" + index + ".jpeg";
+          URL imageResource = getClass().getClassLoader().getResource(imagePath);
+          if (imageResource != null) {
+            File image = new File(imageResource.toURI());
+            FileInputStream imageStream = new FileInputStream(image);
+            MultipartFile multipartFile = new MockMultipartFile("product"+index, index + ".jpeg", "image/jpeg", imageStream);
+            productImageService.addImage(multipartFile, product);
+          }
+          index++;
+        }
 
         ratingService.addRating(new Rating(userService.findAll().get(0), "Geir", productService.getProductByName("Heather tea"), 4, "ok"));
         ratingService.addRating(new Rating(userService.findAll().get(0), "Geir", productService.getProductByName("Linden blossom tea"), 5, "Best tea ever"));

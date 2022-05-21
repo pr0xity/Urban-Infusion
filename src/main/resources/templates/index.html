@@ -146,8 +146,8 @@
                th:attr="data-slide=${iteration.index}">
             <img
               class="featured-card__img"
-              th:src="@{/img/products/{name}.jpeg(name = ${product.name.toLowerCase().replaceAll(' ','')})}"
-              alt="herbal tea in a teacup"
+              th:src="@{/products/images/{id}(id = ${product.id})}"
+              th:alt="${product.name}"
             />
             <a th:href="@{/product/{id}(id=${product.id})}" class="btn btn--text">View more</a>
           </div>

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -117,6 +118,7 @@ public class Product {
    *
    * @return image of this product.
    */
+  @Transactional
   public ProductImage getImage() {
     return image;
   }
