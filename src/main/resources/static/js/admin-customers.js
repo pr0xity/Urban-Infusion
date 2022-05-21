@@ -97,11 +97,11 @@ function populatePurchaseHistory(user, allOrders) {
 
 function addPurchaseHistoryRow(order) {
     const row = document.createElement("tr");
-    const dateCell = document.createElement("th");
-    const idCell = document.createElement("th");
-    const itemCell = document.createElement("th");
-    const totalCell = document.createElement("th");
-    const statusCell = document.createElement("th");
+    const dateCell = document.createElement("td");
+    const idCell = document.createElement("td");
+    const itemCell = document.createElement("td");
+    const totalCell = document.createElement("td");
+    const statusCell = document.createElement("td");
 
     const dateNode = document.createTextNode(order["createdAt"].substring(0,10));
     const idNode = document.createTextNode(order["id"]);
