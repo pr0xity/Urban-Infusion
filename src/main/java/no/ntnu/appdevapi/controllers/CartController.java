@@ -1,5 +1,6 @@
 package no.ntnu.appdevapi.controllers;
 
+import no.ntnu.appdevapi.DTO.CartItemDto;
 import no.ntnu.appdevapi.entities.*;
 import no.ntnu.appdevapi.services.CartItemService;
 import no.ntnu.appdevapi.services.ProductService;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * REST API controller for cart/shopping sessions.
@@ -61,7 +63,7 @@ public class CartController {
      * @return 200 OK if added/increased quantity, 400 Bad request if an issue occurred.
      */
     @RequestMapping(value = "/{productId}", method = RequestMethod.PUT)
-    public ResponseEntity<?> addProductToCart(@PathVariable long productId) {
+    public ResponseEntity<?> addOrUpdateProductToCart(@PathVariable long productId, @RequestBody Optional<CartItemDto> cartItemDto) {
         CartItem cartItem = getCartItem(productId);
 
         if (!canCartItemBeModified(productId, cartItem) && getProduct(productId) != null) {
@@ -71,6 +73,11 @@ public class CartController {
 
             return new ResponseEntity<>(HttpStatus.OK);
         } else if (canCartItemBeModified(productId, cartItem)) {
+            if (cartItemDto.isPresent()) {
+                cartItem.setQuantity(cartItemDto.get().getQuantity());
+                cartItemService.update(cartItem.getId(), cartItem);
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
             cartItem.increaseQuantity();
             cartItemService.update(cartItem.getId(), cartItem);
             updateShoppingSession();
@@ -84,23 +91,16 @@ public class CartController {
     }
 
     /**
-     * Deletes or decreases quantity of the cart item with the given product id
-     * for this user.
+     * Deletes the cart item with the given product id for this user.
      *
      * @param productId id of the product to be deleted.
-     * @return 200 OK if deleted/decreased, 400 Bad request if an issue occurred.
+     * @return 200 OK if deleted, 400 Bad request if an issue occurred.
      */
     @RequestMapping(value = "/{productId}", method = RequestMethod.DELETE)
     public ResponseEntity<?> deleteProductFromCart(@PathVariable long productId) {
         CartItem cartItem = getCartItem(productId);
 
-        if (canCartItemBeModified(productId, cartItem) && cartItem.getQuantity() > 1) {
-            cartItem.decreaseQuantity();
-            cartItemService.update(cartItem.getId(), cartItem);
-            updateShoppingSession();
-
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else if (canCartItemBeModified(productId, cartItem) && cartItem.getQuantity() == 1) {
+        if (canCartItemBeModified(productId, cartItem)) {
             cartItemService.deleteCartItem(cartItem.getId());
             updateShoppingSession();
 

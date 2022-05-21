@@ -7,6 +7,7 @@ const navCheckoutQuantity = document.querySelector(".nav__checkout--quantity");
  * Implements functionality ot the add to cart buttons.
  */
 const setAddToCartButtons = function () {
+
   /**
    * Gets the quantity of the shopping cart and display the
    * increment counter on the checkout button accordingly.

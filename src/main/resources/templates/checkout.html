@@ -104,6 +104,8 @@
             >-->
             <input
               class="item__quantity"
+              th:attr="data-quantity=${cartItem.quantity}"
+              th:attrappend="data-productId=${cartItem.product.id}"
               type="number"
               name="quantity"
               aria-label="quantity of this product"
@@ -113,10 +115,10 @@
               th:value="${cartItem.quantity}"
               value="1"
             />
-            <span class="item__price" th:text="${cartItem.getTotal()} + ',-'"
+            <span class="item__price" th:attr="data-productId=${cartItem.product.id}" th:text="${cartItem.getTotal()} + ',-'"
               >200,-</span
             >
-            <button class="btn--icon" aria-label="remove item from checkout">
+            <button class="btn--icon item__btn--delete" th:attr="data-productId=${cartItem.product.id}" aria-label="remove item from checkout">
               <i class="ph-trash"></i>
             </button>
           </li>
