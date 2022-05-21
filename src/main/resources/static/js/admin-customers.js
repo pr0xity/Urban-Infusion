@@ -66,6 +66,7 @@ function manageUser(user) {
     passwordLabel.textContent = "*******";
     if (user["address"]) addressLabel.textContent = user["address"]["addressLine"];
     createdAtLabel.textContent = user["createdAt"].substring(0,10);
+    // todo: delete or implement last login.
     lastLoginLabel.textContent = "yesterday";
 
     fetchOrders(user);
