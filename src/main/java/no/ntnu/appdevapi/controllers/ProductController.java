@@ -106,7 +106,7 @@ public class ProductController {
    * @return 200 OK on success, 400 bad request on error, 404 not found if product was not found.
    */
   @PostMapping("/images/{productId}")
-  @ApiOperation(value = "Add a image to product", notes = "Status 200 when added, 404 if product not found, 400 on error.")
+  @ApiOperation(value = "Add an image to product", notes = "Status 200 when added, 404 if product not found, 400 on error.")
   public ResponseEntity<String> addImage(@PathVariable long productId, @RequestParam("imageFile") MultipartFile imageFile) {
     Product product = productService.getProduct(productId);
     ProductImage image = productImageService.getImageByProduct(product);
@@ -135,14 +135,14 @@ public class ProductController {
   }
 
   /**
-   * Adds the given image file to the product with the given id.
+   * Updates the given image file to the product with the given id.
    *
-   * @param productId the product id to add image to.
-   * @param imageFile the image file to add.
+   * @param productId the product id to update image of.
+   * @param imageFile the image file to update.
    * @return 200 OK on success, 400 bad request on error, 404 not found if product was not found.
    */
   @PutMapping("/images/{productId}")
-  @ApiOperation(value = "Add a image to product", notes = "Status 200 when added, 404 if product not found, 400 on error.")
+  @ApiOperation(value = "Update image of product", notes = "Status 200 when successfully updated, 404 if product not found, 400 on error.")
   public ResponseEntity<String> updateImage(@PathVariable long productId, @RequestParam("imageFile") MultipartFile imageFile) {
     Product product = productService.getProduct(productId);
     ProductImage image = productImageService.getImageByProduct(product);

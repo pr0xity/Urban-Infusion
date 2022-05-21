@@ -9,6 +9,12 @@ const processedCheckBox = document.getElementById("orderProcessed");
 
 function initializeOrders() {
     getOrders();
+    searchInput.onkeydown = function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            return false;
+        }
+    }
 }
 
 function getOrders() {
@@ -148,7 +154,7 @@ function updateOrder(order) {
         }
     };
     req.overrideMimeType("application/json");
-    req.open('PUT', host + port + ORDERS_PATHNAME + "/" + order["id"], true);
+    req.open('PUT', host + port + ORDERS_API_PATHNAME + "/" + order["id"], true);
     req.send(JSON.stringify(dto));
 }
 

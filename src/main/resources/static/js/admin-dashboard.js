@@ -10,7 +10,7 @@ function getTableContent() {
 function getNewCustomers() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', host + port + USERS_PATHNAME + "/new", true);
+    req.open('GET', host + port + USERS_API_PATHNAME + "/new", true);
     req.onload  = function() {
         const jsonResponse = JSON.parse(req.responseText);
         loadCustomers(jsonResponse)
@@ -54,7 +54,7 @@ function addCustomerRow(id, name, email) {
 function getLatestOrders() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', host + port + ORDERS_PATHNAME + "/recent", true);
+    req.open('GET', host + port + ORDERS_API_PATHNAME + "/recent", true);
     req.onload  = function() {
         const jsonResponse = JSON.parse(req.responseText);
         loadOrders(jsonResponse)
@@ -75,7 +75,7 @@ function addOrderRow(order) {
     const row = document.createElement("tr");
 
     row.addEventListener("click", () => {
-        window.location.href = ORDERS_PATHNAME + order["id"];
+        window.location.href = ORDERS_API_PATHNAME + order["id"];
     })
 
     const dateCell = document.createElement("td");

@@ -6,8 +6,9 @@ const WISHLIST_API_PATHNAME = "/wishlist";
 const RATING_API_PATHNAME = "/ratings";
 const PRODUCT_API_PATHNAME = "/products";
 const PRODUCT_PATHNAME = "/product";
-const USERS_PATHNAME = "/users";
-const ORDERS_PATHNAME = "/orders";
+const USERS_API_PATHNAME = "/users";
+const ORDERS_API_PATHNAME = "/orders";
+const IMAGE_API_PATHNAME = "/products/images";
 
 let map;
 let marker;

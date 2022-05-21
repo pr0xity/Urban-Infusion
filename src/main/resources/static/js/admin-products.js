@@ -27,12 +27,12 @@ function getProducts() {
     req.open('GET', host + port + "/products/", true);
     req.onload  = function() {
         products = JSON.parse(req.responseText);
-        loadProducts()
+        loadProducts(products)
     };
     req.send(null);
 }
 
-function loadProducts() {
+function loadProducts(products) {
     tableBody.innerHTML = "";
     for (let i = 0; i < products.length; i++) {
         const product = products[i];
@@ -90,6 +90,8 @@ function manageProduct(product) {
     const image = document.getElementById("productImage");
     this.product = product;
 
+
+
     idLabel.textContent = product["id"];
     nameLabel.textContent = product["name"];
     /*
@@ -102,8 +104,21 @@ function manageProduct(product) {
     /*
     todo: implement image controller
      */
-    imageLabel.textContent = "/img/gallery/pic-6-390w.jpg";
-    image.src = imageLabel.textContent;
+    fetchImage(product["id"]);
+    imageLabel.textContent = image.src.toString();
+}
+
+const fetchImage = function(productId) {
+    const req = new XMLHttpRequest();
+    req.open('GET', host + port + IMAGE_API_PATHNAME + "/" + productId, true);
+    req.responseType = "blob";
+    req.onload  = function() {
+        const urlCreator = window.URL || window.webkitURL;
+        const imageUrl = urlCreator.createObjectURL(this.response);
+        const image = document.getElementById("productImage");
+        image.src = imageUrl;
+    };
+    req.send(null);
 }
 
 function setEventListeners() {
@@ -124,6 +139,13 @@ function setEventListeners() {
         closeButtons[i].addEventListener("click", function() {
             closeButtons[i].parentElement.parentElement.classList.remove("display");
         });
+    }
+
+    searchInput.onkeydown = function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            return false;
+        }
     }
 }
 
@@ -192,19 +214,6 @@ const editProductSuccess = function() {
     }
 }
 
-const clickRowFromId = function () {
-    const rows = tableBody.children;
-    console.log("Fetching rows");
-    for (let i = 0; i < rows.length; i++) {
-        const row = rows[i];
-        for (let y = 0; y < row.children.length; y++) {
-            if (row.textContent.includes(button.dataset.productId)) {
-                manageProduct(products[row.dataset.productNumber]);
-            }
-        }
-    }
-}
-
 function editName() {
     overlay.querySelector("[data-product-id]").addEventListener("click", updateProductName);
     editNameOverlay.classList.add("display");
@@ -248,15 +257,13 @@ const hideEditOverlays = function(event) {
 
 function filterProducts() {
     const filteredProducts = [];
-    const searchString = this.searchInput.value.toLowerCase();
+    const searchString = searchInput.value.toLowerCase();
     for (let i = 0; i < products.length; i++) {
         const product = products[i];
-        let added = false;
         if (product["id"].toString().includes(searchString) ||
-            product["name"].toString().toLowerCase().includes(searchString) ||
-            product["category"]["name"].toString.toLowerCase().includes(searchString)) {
+            product["name"].toLowerCase().includes(searchString) ||
+            product["category"]["name"].toLowerCase().includes(searchString)) {
             filteredProducts.push(product);
-            added = true;
         }
     }
     loadProducts(filteredProducts);
