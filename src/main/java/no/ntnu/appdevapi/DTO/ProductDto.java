@@ -1,7 +1,5 @@
 package no.ntnu.appdevapi.DTO;
 
-import no.ntnu.appdevapi.entities.Product;
-import no.ntnu.appdevapi.entities.ProductCategory;
 import java.time.LocalDateTime;
 
 public class ProductDto {
@@ -23,7 +21,6 @@ public class ProductDto {
     this.price = 0;
     this.inventoryId = 0;
   }
-
 
   public ProductDto(String name, String description, String origin, double price, String category) {
     this.name = name;
@@ -52,25 +49,43 @@ public class ProductDto {
     this.categoryDescription = categoryDescription;
   }
 
-
-  public Product getProductFromDto(){
-    Product product = new Product();
-    product.setName(name);
-    product.setDescription(description);
-    product.setOrigin(origin);
-    product.setPrice(price);
-    product.setInventoryId(inventoryId);
-    product.setCreatedAt(createdAt);
-    product.setUpdatedAt(updatedAt);
-    product.setDeletedAt(deletedAt);
-
-    ProductCategory c = new ProductCategory(categoryName,categoryDescription);
-
-    product.setCategory(c);
-    return product;
-  }
-
   public String getName() {
     return name;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public String getOrigin() {
+    return origin;
+  }
+
+  public double getPrice() {
+    return price;
+  }
+
+  public int getInventoryId() {
+    return inventoryId;
+  }
+
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public LocalDateTime getUpdatedAt() {
+    return updatedAt;
+  }
+
+  public LocalDateTime getDeletedAt() {
+    return deletedAt;
+  }
+
+  public String getCategoryName() {
+    return categoryName;
+  }
+
+  public String getCategoryDescription() {
+    return categoryDescription;
   }
 }

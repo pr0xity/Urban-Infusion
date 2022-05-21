@@ -35,7 +35,7 @@ public class ProductServiceImpl implements ProductService {
 
 
     public Product addProductFromDto(ProductDto product) {
-        Product nProduct = product.getProductFromDto();
+        Product nProduct = getProductFromDto(product);
         if (productRepository.findByName(nProduct.getName()) == null){
             ProductCategory category = productCategoryRepository.findByName(nProduct.getCategory().getName());
             if (category == null){
@@ -50,15 +50,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public Product updateProduct(long id, ProductDto product) {
-        Product newProduct = product.getProductFromDto();
+        Product newProduct = getProductFromDto(product);
 
         Product old = productRepository.findById(id).orElse(null);
         if (null == old) {
             return null;
         }
         if (null != newProduct.getName()) {
-            //old.setName(newProduct.getName());
-            old.setName(product.getName());
+            old.setName(newProduct.getName());
         }
         if (null != newProduct.getCategory().getName()) {
             old.setCategory(productCategoryRepository.findByName(newProduct.getCategory().getName()));
@@ -88,5 +87,21 @@ public class ProductServiceImpl implements ProductService {
 
     public void deleteProduct(long id) {
         productRepository.deleteById(id);
+    }
+
+    private Product getProductFromDto(ProductDto object) {
+        Product product = new Product();
+        product.setName(object.getName());
+        product.setDescription(object.getDescription());
+        product.setOrigin(object.getOrigin());
+        product.setPrice(object.getPrice());
+        product.setInventoryId(object.getInventoryId());
+        product.setCreatedAt(object.getCreatedAt());
+        product.setUpdatedAt(object.getUpdatedAt());
+
+        ProductCategory c = new ProductCategory(object.getCategoryName(), object.getCategoryDescription());
+        product.setCategory(c);
+
+        return product;
     }
 }
