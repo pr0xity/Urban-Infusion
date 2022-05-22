@@ -240,6 +240,17 @@ address {
   box-shadow: inset 0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
 }
 
+.input--overlay {
+  padding: 0.8rem;
+  resize: none;
+  width: 50%;
+  border-radius: 3px;
+  border: 0.1rem solid rgba(0, 0, 0, 0.1);
+  font-family: "Montserrat", sans-serif;
+  box-shadow: inset 0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+
+}
+
 .input--error {
   border: 0.12rem solid #ad5b58;
 }

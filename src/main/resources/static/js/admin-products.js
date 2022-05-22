@@ -135,7 +135,7 @@ function setEventListeners() {
     editCategoryButton.addEventListener("click",function() {
         editCategory();
     });
-    const closeButtons = document.getElementsByClassName("checkout__btn--close");
+    const closeButtons = document.getElementsByClassName("btn--close");
     for (let i = 0; i < closeButtons.length; i++) {
         closeButtons[i].addEventListener("click", function() {
             closeButtons[i].parentElement.parentElement.classList.remove("display");
