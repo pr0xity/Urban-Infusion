@@ -49,6 +49,9 @@
 }
 
 .section-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     width: 50rem;
     height: 50rem;
 }
@@ -82,4 +85,27 @@
     width: 30rem;
     height: 30rem;
     box-shadow: 2rem 2rem 3rem rgba(0, 0, 0, 0.1);
+}
+
+.btn--changeImage{
+
+    padding: 0.4rem 1.6rem;
+    margin-top: 1.5rem;
+
+    color: #fff;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    background-color: #588157;
+    border-radius: 100px;
+    border: 0.2rem solid white;
+    width: fit-content;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.6rem;
+    transition: all 0.4s ease-out;
+    z-index: 11;
+    cursor: pointer;
+
+}
+
+.btn--changeImage:hover {
+    transform: scale(1.07);
 }

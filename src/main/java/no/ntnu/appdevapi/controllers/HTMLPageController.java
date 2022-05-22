@@ -44,9 +44,6 @@ public class HTMLPageController {
     @Autowired
     private OrderItemService orderItemService;
 
-
-
-    //TODO: getTop3SellingProducts causing some bugs
     /**
      * Gets the home page with the required attributes. Returns index thymeleaf template.
      *
