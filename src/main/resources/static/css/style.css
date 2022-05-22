@@ -153,6 +153,12 @@ address {
   cursor: initial;
 }
 
+.btn--close {
+  position: absolute;
+  top: 7%;
+  right: 3%;
+}
+
 .btn:hover {
   color: #6d6875;
   background-color: #fff;
@@ -1302,12 +1308,6 @@ address {
 .completed-heading {
   font-size: 2.4rem;
   font-weight: 500;
-}
-
-.completed__btn--close {
-  position: absolute;
-  top: 7%;
-  right: 3%;
 }
 
 .completed__logo {
