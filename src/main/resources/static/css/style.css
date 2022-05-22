@@ -1727,3 +1727,56 @@ thead tr {
   margin-bottom: 1.2rem;
   justify-content: space-between;
 }
+
+/********************************************************/
+
+/****************************/
+/* PRODUCTS PAGE          */
+/****************************/
+
+.search-bar {
+  width: 25rem;
+  margin: 2rem auto;
+  height: 3rem;
+  background-color: white;
+  border-radius: 6.2rem;
+  display: flex;
+  align-items: center;
+  padding: 0.6rem;
+}
+
+.search {
+  transform: scale(0.6);
+}
+
+.search-input {
+  flex: 1;
+  width: 20rem;
+  height: 2rem;
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+  color: #6d6875;
+  padding-left: 1rem;
+}
+
+.products-filter {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.filter {
+  margin: 1rem;
+  transform: scale(0.9);
+}
+
+.product-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
+  row-gap: 4.8rem;
+  column-gap: 3.2rem;
+  justify-items: center;
+  max-width: 160rem;
+  margin: 0 auto;
+  transform: scale(0.9);
+}
