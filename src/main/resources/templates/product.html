@@ -203,7 +203,7 @@
             <input
               name="sendReview"
               type="submit"
-              class="btn--disabled"
+              class="btn--disabled btn--submit"
               disabled
               value="Send review"
             />
@@ -313,7 +313,7 @@
             <input
               name="sendReview"
               type="submit"
-              class="btn--green"
+              class="btn--green btn--submit"
               value="Send review"
             />
           </form>
@@ -422,7 +422,7 @@
             <input
               name="updateReview"
               type="submit"
-              class="btn--green"
+              class="btn--green btn--submit"
               value="Update review"
             />
           </form>
@@ -441,6 +441,7 @@
         </section>
         <div class="review__comments-box">
           <h2 class="heading-secondary">Reviews</h2>
+          <p th:if="${comments == null or comments.isEmpty()}">No reviews yet...</p>
           <div class="review__comment" th:each="comment : ${comments}">
             <div class="review__comment-info">
               <div

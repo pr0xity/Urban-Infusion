@@ -51,7 +51,7 @@
       th:attr="data-wishlist=${wishlist == null} ? 'false' : (${#sets.contains(wishlist, product)} ? 'true' : 'false')"
     ></div>
     <button
-      th:attr="data-productid=${product.id}"
+      th:attr="data-productid=${product.id}" th:attrappend="data-loggedin=(${permission} == 'NoUser' ? false : true)"
       class="product__btn--add-to-cart"
       aria-label="add item to shopping cart"
     >

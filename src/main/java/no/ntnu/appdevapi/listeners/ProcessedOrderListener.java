@@ -4,6 +4,7 @@ import no.ntnu.appdevapi.entities.OrderDetails;
 import no.ntnu.appdevapi.entities.User;
 import no.ntnu.appdevapi.events.ProcessedOrderEvent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -20,6 +21,9 @@ public class ProcessedOrderListener implements ApplicationListener<ProcessedOrde
 
     @Autowired
     private JavaMailSender mailSender;
+
+    @Value("${spring.mail.username}")
+    public String SENDER;
 
     @Override
     public void onApplicationEvent(ProcessedOrderEvent event) {
@@ -42,6 +46,7 @@ public class ProcessedOrderListener implements ApplicationListener<ProcessedOrde
         try {
             messageHelper = new MimeMessageHelper(message, true);
             messageHelper.setSubject("Your order has been processed - Urban Infusion");
+            messageHelper.setFrom(SENDER);
             messageHelper.setTo(recipient);
 
             String content = createOrderIsProcessedMailContent(user, orderDetails);

@@ -1,27 +1,5 @@
 "use strict";
 
-const open_modal = document.querySelector(".open_modal");
-const checkout_container = document.querySelector(".checkout__complete");
-const checkout_overlay = document.querySelector(".checkout__complete--overlay");
-const close_modal = document.querySelector(".checkout__btn--close");
-const address = document.querySelector(".checkout__info--address").innerText;
-
-addListeners();
-
-function addListeners() {
-  open_modal.addEventListener("click", () => {
-    checkout_container.classList.add("show");
-    checkout_overlay.classList.add("show");
-  });
-  close_modal.addEventListener("click", () => {
-    checkout_container.classList.remove("show");
-    checkout_overlay.classList.remove("show");
-  });
-}
-
-//Render map
-getAddressInfo(address).then((data) => renderMap(data[0], data[1]));
-
 /**
  * Implements listeners to input fields buttons and updates shopping session accordingly.
  */
@@ -140,4 +118,39 @@ const setCartItemControls = function () {
   });
 };
 
+/**
+ * Initializes functionality to send order requests.
+ */
+const setOrderRequestHandling = function () {
+  const completeCheckoutButton = document.querySelector(".checkout__btn--complete");
+  const completedCheckoutWindow = document.querySelector(".modal");
+  const closeCompletedWindowButton = document.querySelector(".checkout__btn--close");
+
+  /**
+   * Show completed checkout modal if order was successful.
+   */
+  const orderRequestSuccess = function() {
+    showElement(completedCheckoutWindow);
+    closeCompletedWindowButton.addEventListener("click", () => {
+      hideElement(completedCheckoutWindow);
+    });
+  }
+
+  /**
+   * Sends an order request.
+   */
+  const sendOrderRequest = function () {
+    sendApiRequest(`${ORDERS_API_PATHNAME}`, "POST", null, orderRequestSuccess, null, null);
+
+  }
+
+  if (completeCheckoutButton !== null) {
+    completeCheckoutButton.addEventListener("click", sendOrderRequest);
+  }
+};
+
 setCartItemControls();
+setOrderRequestHandling();
+
+const address = document.querySelector(".checkout__info--address").innerText;
+getAddressInfo(address).then((data) => renderMap(data[0], data[1]));

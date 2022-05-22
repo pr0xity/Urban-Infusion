@@ -87,7 +87,9 @@ const setAddToCartButtons = function () {
   document.querySelectorAll(addToCartButtonClass).forEach((button) => {
     button.addEventListener("click", sendAddToCartRequest);
   });
-  setIncrementCounter();
+  if (document.querySelectorAll(addToCartButtonClass)[0].dataset.loggedin === "true") {
+    setIncrementCounter();
+  }
 };
 
 setAddToCartButtons();

@@ -5,6 +5,7 @@ import no.ntnu.appdevapi.entities.User;
 import no.ntnu.appdevapi.events.ForgottenPasswordEvent;
 import no.ntnu.appdevapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -27,6 +28,9 @@ public class ForgottenPasswordListeners implements ApplicationListener<Forgotten
     @Autowired
     private UserService userService;
 
+    @Value("${spring.mail.username}")
+    public String SENDER;
+
     @Override
     public void onApplicationEvent(ForgottenPasswordEvent event) {
         sendForgottenPasswordMail(event);
@@ -46,6 +50,7 @@ public class ForgottenPasswordListeners implements ApplicationListener<Forgotten
         try {
             messageHelper = new MimeMessageHelper(message, true);
             messageHelper.setSubject("Forgotten password - Urban Infusion");
+            messageHelper.setFrom(SENDER);
             messageHelper.setTo(recipient);
 
             String content = createForgottenPasswordMailContent(user);

@@ -241,9 +241,51 @@ function setReviewHandling() {
   }
 }
 
-// Only on a products page.
-if (window.location.pathname.includes(PRODUCT_PATHNAME)) {
-  setReviewHandling();
+/**
+ * Sets the products page, implements changes when screen size changes.
+ */
+const setProductPage =  function () {
+  const footer = document.querySelector(".footer");
+  const productCta = document.querySelector(".product__price-cta");
+  const productCtaHeight = productCta.getBoundingClientRect().height;
+
+
+  const stickyCta = function (entries) {
+    const [entry] = entries;
+
+    if (entry.isIntersecting) {
+      productCta.classList.add("product__price-cta--absolute");
+      productCta.classList.remove("product__price-cta--sticky");
+      document.querySelector("main").appendChild(productCta);
+    } else {
+      productCta.classList.add("product__price-cta--sticky");
+      productCta.classList.remove("product__price-cta--absolute");
+      document.querySelector(".section-product-info").appendChild(productCta);
+    }
+  };
+
+  const footerObserver = new IntersectionObserver(stickyCta, {
+    root: null,
+    threshold: 0,
+    rootMargin: `${productCtaHeight}px`,
+  });
+
+
+  if (mobileLayoutSize.matches) {
+    footerObserver.observe(footer);
+  } else {
+    productCta.classList.remove("product__price-cta--sticky");
+    productCta.classList.remove("product__price-cta--absolute");
+    document.querySelector(".section-product-info").appendChild(productCta);
+    footerObserver.unobserve(footer);
+  }
+
 }
 
+// Only on a products page.
+if (window.location.pathname.includes(PRODUCT_PATHNAME)) {
+  mobileLayoutSize.addEventListener("change", setProductPage);
+  setProductPage();
+  setReviewHandling();
+}
 setRatingLeavesOnProductsAndReviews();

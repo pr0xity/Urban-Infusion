@@ -4,6 +4,7 @@ import no.ntnu.appdevapi.entities.User;
 import no.ntnu.appdevapi.events.CompleteRegistrationEvent;
 import no.ntnu.appdevapi.services.VerificationTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -17,6 +18,9 @@ import javax.mail.internet.MimeMessage;
  */
 @Component
 public class CompleteRegistrationListener implements ApplicationListener<CompleteRegistrationEvent> {
+
+    @Value("${spring.mail.username}")
+    public String SENDER;
 
     @Autowired
     private VerificationTokenService verificationTokenService;
@@ -45,6 +49,7 @@ public class CompleteRegistrationListener implements ApplicationListener<Complet
         try {
             messageHelper = new MimeMessageHelper(message, true);
             messageHelper.setSubject("Registration Confirmation - Urban Infusion");
+            messageHelper.setFrom(SENDER);
             messageHelper.setTo(recipient);
 
             String content = createConfirmRegistrationMailContent(user);

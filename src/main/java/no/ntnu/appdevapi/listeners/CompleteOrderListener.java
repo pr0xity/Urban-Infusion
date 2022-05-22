@@ -5,6 +5,7 @@ import no.ntnu.appdevapi.entities.OrderItem;
 import no.ntnu.appdevapi.entities.User;
 import no.ntnu.appdevapi.events.CompleteOrderEvent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -21,6 +22,9 @@ public class CompleteOrderListener implements ApplicationListener<CompleteOrderE
 
     @Autowired
     private JavaMailSender mailSender;
+
+    @Value("${spring.mail.username}")
+    public String SENDER;
 
     @Override
     public void onApplicationEvent(CompleteOrderEvent event) {
@@ -44,6 +48,7 @@ public class CompleteOrderListener implements ApplicationListener<CompleteOrderE
         try {
             messageHelper = new MimeMessageHelper(message, true);
             messageHelper.setSubject("Order Confirmation - Urban Infusion");
+            messageHelper.setFrom(SENDER);
             messageHelper.setTo(recipient);
 
             String content = createOrderConfirmationMailContent(user, orderDetails, orderItems);

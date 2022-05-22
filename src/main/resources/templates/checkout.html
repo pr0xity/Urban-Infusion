@@ -70,6 +70,7 @@
           <span class="checkout__list-heading">Total</span>
         </div>
         <ul class="checkout__list">
+          <li th:if="${cart.isEmpty()}"><p class="checkout__list--empty">Your shopping bag is empty! <a th:href="@{/products}" class="link"><strong>Start shopping here!</strong></a></p></li>
           <li th:each="cartItem : ${cart}" class="checkout__item">
             <img
               class="item__img"
@@ -78,7 +79,7 @@
               alt="greentea"
             />
             <p class="item__description margin-left--small">
-              <a class="link" href="#"
+              <a class="link" th:href="@{/product/{id}(id=${cartItem.product.id})}"
                 ><span class="item__name" th:text="${cartItem.product.name}"
                   >Green tea</span
                 ></a
@@ -115,10 +116,17 @@
               th:value="${cartItem.quantity}"
               value="1"
             />
-            <span class="item__price" th:attr="data-productId=${cartItem.product.id}" th:text="${cartItem.getTotal()} + ',-'"
+            <span
+              class="item__price"
+              th:attr="data-productId=${cartItem.product.id}"
+              th:text="${cartItem.getTotal()} + ',-'"
               >200,-</span
             >
-            <button class="btn--icon item__btn--delete" th:attr="data-productId=${cartItem.product.id}" aria-label="remove item from checkout">
+            <button
+              class="btn--icon item__btn--delete"
+              th:attr="data-productId=${cartItem.product.id}"
+              aria-label="remove item from checkout"
+            >
               <i class="ph-trash"></i>
             </button>
           </li>
@@ -176,21 +184,24 @@
           <span class="checkout__info">You get a free order from us :)</span>
         </div>
       </section>
-      <button class="btn--green open_modal">Complete purchase</button>
-      <div class="checkout__complete container--beige">
-        <button class="checkout__btn--close close btn--icon">
-          <i class="ph-x"></i>
-        </button>
-        <img
-          class="checkout__logo"
-          th:src="@{/img/icons/favicon/favicon.png}"
-          alt="urban infusion logo"
-        />
-        <p class="checkout__complete-heading">Thanks for purchasing!</p>
-        <p>Order confirmation will soon be sent to your email.</p>
-        <a class="btn--green" th:href="@{/}">Back to homepage</a>
+      <button th:unless="${cart.isEmpty()}" class="btn--green checkout__btn--complete">
+        Complete purchase
+      </button>
+      <div class="modal hidden">
+        <div class="checkout__complete modal__window">
+          <button class="checkout__btn--close close btn--icon">
+            <i class="ph-x"></i>
+          </button>
+          <img
+            class="checkout__logo"
+            th:src="@{/img/icons/favicon/favicon.png}"
+            alt="urban infusion logo"
+          />
+          <p class="checkout__complete-heading">Thanks for purchasing!</p>
+          <p>Order confirmation will soon be sent to your email.</p>
+          <a class="btn--green" th:href="@{/}">Back to homepage</a>
+        </div>
       </div>
-      <div class="checkout__complete--overlay"></div>
     </main>
     <footer th:insert="components/footer" class="footer"></footer>
   </body>
