@@ -21,7 +21,7 @@ const setCartItemControls = function () {
         totalField = field;
       }
     });
-    totalField.innerHTML = `${total},-`;
+    totalField.innerHTML = `${total}.0,-`;
   };
 
   /**
@@ -124,7 +124,7 @@ const setCartItemControls = function () {
 const setOrderRequestHandling = function () {
   const completeCheckoutButton = document.querySelector(".checkout__btn--complete");
   const completedCheckoutWindow = document.querySelector(".modal");
-  const closeCompletedWindowButton = document.querySelector(".checkout__btn--close");
+  const closeCompletedWindowButton = document.querySelector(".completed__btn--close");
 
   /**
    * Show completed checkout modal if order was successful.
@@ -149,8 +149,8 @@ const setOrderRequestHandling = function () {
   }
 };
 
-setCartItemControls();
-setOrderRequestHandling();
-
+// Initializing page.
 const address = document.querySelector(".checkout__info--address").innerText;
 getAddressInfo(address).then((data) => renderMap(data[0], data[1]));
+setOrderRequestHandling();
+setCartItemControls();

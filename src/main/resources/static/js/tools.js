@@ -1,6 +1,7 @@
 // For REST API requests
 const URL = "http://localhost:8080";
 const AUTHENTICATION_API_PATHNAME = "/login";
+const REGISTRATION_API_PATHNAME = "/register";
 const WISHLIST_API_PATHNAME = "/wishlist";
 const RATING_API_PATHNAME = "/ratings";
 const PRODUCT_API_PATHNAME = "/products";
@@ -176,11 +177,22 @@ const isAddressValid = async function (address) {
 /**
  * Checks if the given email address has a valid format.
  *
- * @param {*} email the email address to check if has a valid format.
+ * @param {*} email the email address to check if it has a valid format.
  * @returns through if the email address is a valid format, false if not.
  */
 const isEmailAddressValid = function (email) {
-  return email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/);
+  const emailPattern = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  return !!email.match(emailPattern) || email !== "";
+};
+
+/**
+ * Creates an address string out of the given object.
+ *
+ * @param object object to create address string of.
+ * @return {string} the object as an address string.
+ */
+const createAddressStringFromObject = function (object) {
+  return `${object.addressLine1} ${object.postalCode} ${object.city} ${object.country}`;
 };
 
 /**

@@ -158,9 +158,10 @@ submitName.addEventListener("click", updateNameRequest);
  * @return {boolean} true if valid, false if not.
  */
 const isEmailFormValid = function () {
-  const email = document.querySelector(`input[name="edit_email"]`).value;
+  const email = document.querySelector(`input[name="edit_email"]`)
+    .value.replaceAll(' ', '').toLowerCase();
   const password = document.querySelector(`input[name="edit_email_password"]`).value;
-  return email.match(/^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/) && password !== '';
+  return isEmailAddressValid(email) && password !== '';
 };
 
 /**
@@ -301,16 +302,6 @@ const getUpdatedAddress = function () {
   }
 
   return requestBody;
-};
-
-/**
- * Creates an address string out of the given object.
- *
- * @param object object to create address string of.
- * @return {string} the object as an address string.
- */
-const createAddressStringFromObject = function (object) {
-  return `${object.addressLine1} ${object.postalCode} ${object.city} ${object.country}`;
 };
 
 /**

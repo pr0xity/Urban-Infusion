@@ -54,15 +54,17 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             nUser.setCreatedAt(LocalDateTime.now());
             nUser.setPermissionLevel(permissionLevel);
 
+            User savedUser = userRepository.save(nUser);
             UserAddress address = user.getAddressFromDto();
             if (null != address) {
                 System.out.println("saving address: " + address.getAddressLine());
+                savedUser.setAddress(address);
+                address.setUser(savedUser);
                 userAddressService.save(address);
-                nUser.setAddress(address);
             }
 
             System.out.println("saving user: " + nUser.getFirstName() + " " + nUser.getLastName());
-            userRepository.save(nUser);
+            userRepository.save(savedUser);
         }
         return userRepository.findByEmail(nUser.getEmail());
     }

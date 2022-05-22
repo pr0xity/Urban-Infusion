@@ -70,7 +70,14 @@
           <span class="checkout__list-heading">Total</span>
         </div>
         <ul class="checkout__list">
-          <li th:if="${cart.isEmpty()}"><p class="checkout__list--empty">Your shopping bag is empty! <a th:href="@{/products}" class="link"><strong>Start shopping here!</strong></a></p></li>
+          <li th:if="${cart.isEmpty()}">
+            <p class="checkout__list--empty">
+              Your shopping bag is empty!
+              <a th:href="@{/products}" class="link"
+                ><strong>Start shopping here!</strong></a
+              >
+            </p>
+          </li>
           <li th:each="cartItem : ${cart}" class="checkout__item">
             <img
               class="item__img"
@@ -79,7 +86,9 @@
               alt="greentea"
             />
             <p class="item__description margin-left--small">
-              <a class="link" th:href="@{/product/{id}(id=${cartItem.product.id})}"
+              <a
+                class="link"
+                th:href="@{/product/{id}(id=${cartItem.product.id})}"
                 ><span class="item__name" th:text="${cartItem.product.name}"
                   >Green tea</span
                 ></a
@@ -184,20 +193,23 @@
           <span class="checkout__info">You get a free order from us :)</span>
         </div>
       </section>
-      <button th:unless="${cart.isEmpty()}" class="btn--green checkout__btn--complete">
+      <button
+        th:unless="${cart.isEmpty()}"
+        class="btn--green checkout__btn--complete"
+      >
         Complete purchase
       </button>
       <div class="modal hidden">
-        <div class="checkout__complete modal__window">
-          <button class="checkout__btn--close close btn--icon">
+        <div class="completed modal__window">
+          <button class="completed__btn--close close btn--icon">
             <i class="ph-x"></i>
           </button>
           <img
-            class="checkout__logo"
+            class="completed__logo"
             th:src="@{/img/icons/favicon/favicon.png}"
             alt="urban infusion logo"
           />
-          <p class="checkout__complete-heading">Thanks for purchasing!</p>
+          <p class="completed-heading">Thanks for purchasing!</p>
           <p>Order confirmation will soon be sent to your email.</p>
           <a class="btn--green" th:href="@{/}">Back to homepage</a>
         </div>
