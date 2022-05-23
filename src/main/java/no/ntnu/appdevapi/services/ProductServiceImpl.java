@@ -115,7 +115,7 @@ public class ProductServiceImpl implements ProductService {
             }
         }
 
-        ProductCategory c = new ProductCategory(categoryName.toString(), object.getCategoryDescription());
+        ProductCategory c = new ProductCategory(categoryName.toString());
 
         product.setCategory(c);
 
