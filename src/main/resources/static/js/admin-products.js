@@ -271,8 +271,17 @@ function filterProducts() {
 const fileSelector = document.getElementById('file-selector');
 fileSelector.addEventListener('change', (event) => {
     const file = event.target.files[0];
+    readImage(file);
     uploadImage(file);
 });
+
+function readImage(file) {
+    const reader = new FileReader();
+    reader.addEventListener('load', (event) => {
+        document.getElementById("productImage").src = event.target.result;
+    });
+    reader.readAsDataURL(file);
+}
 
 const uploadImage = function (imageFile) {
     let data = new FormData();

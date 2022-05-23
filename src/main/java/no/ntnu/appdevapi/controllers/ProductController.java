@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
 
+import javax.servlet.http.Part;
+import java.io.File;
+import java.io.IOException;
+
 
 @RestController
 @RequestMapping("API/products")
@@ -126,7 +130,7 @@ public class ProductController {
   @PutMapping("/{id}")
   @ApiOperation(value = "Update existing product.", notes = "Status 200 when updated, 400 on error.")
   public ResponseEntity<String> update(@PathVariable long id, @RequestBody ProductDto product) {
-    ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.OK);
+    ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     if (null == product) {
       response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     } else if (null == productService.getProduct(id)) {
@@ -141,25 +145,35 @@ public class ProductController {
    * Updates the given image file to the product with the given id.
    *
    * @param productId the product id to update image of.
-   * @param imageFile the image file to update.
+   * @param part the new image of the product.
    * @return 200 OK on success, 400 bad request on error, 404 not found if product was not found.
    */
   @PutMapping("/images/{productId}")
   @ApiOperation(value = "Update image of product", notes = "Status 200 when successfully updated, 404 if product not found, 400 on error.")
-  public ResponseEntity<String> updateImage(@PathVariable long productId, @RequestParam("imageFile") MultipartFile imageFile) {
-    Product product = productService.getProduct(productId);
-    ProductImage image = productImageService.getImageByProduct(product);
+  public ResponseEntity<String> updateImage(@PathVariable long productId, @RequestPart("file") Part part) throws IOException {
+    ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    Product p = productService.getProduct(productId);
+    if (null != p) {
+      //Writing image or file
+      String fileName = getFileName(part);
+      part.write("path/to/upload" + File.separator + fileName);
 
-    if (product != null) {
 
-      if (image != null && imageFile != null) {
-        productImageService.updateImage(image.getId(), imageFile);
-        return new ResponseEntity<>(HttpStatus.OK);
-      }
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
+      return response;
+  }
 
-    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  private String getFileName(Part part) {
+    String contentDisp = part.getHeader("content-disposition");
+    System.out.println("content-disposition header= " + contentDisp);
+    String[] tokens = contentDisp.split(";");
+    for (String token : tokens) {
+      if (token.trim().startsWith("filename")) {
+        return token.substring(token.indexOf("=") + 2,
+                token.length() - 1);
+      }
+    }
+    return "";
   }
 
   /**
