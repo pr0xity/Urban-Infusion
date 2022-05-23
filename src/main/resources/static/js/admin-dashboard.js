@@ -1,6 +1,3 @@
-const host = "http://localhost";
-const port = ":8080";
-
 function getTableContent() {
     getNewCustomers();
     getLatestOrders();
@@ -10,7 +7,7 @@ function getTableContent() {
 function getNewCustomers() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', host + port + USERS_API_PATHNAME + "/new", true);
+    req.open('GET', URL + USERS_API_PATHNAME + "/new", true);
     req.onload  = function() {
         const jsonResponse = JSON.parse(req.responseText);
         loadCustomers(jsonResponse)

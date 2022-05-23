@@ -1,5 +1,3 @@
-const host = "http://localhost";
-const port = ":8080";
 let orders = null;
 const searchInput = document.getElementById("searchInput");
 const tableBody = document.getElementById("orderTableBody");
@@ -20,7 +18,7 @@ function initializeOrders() {
 function getOrders() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', host + port + ORDERS_API_PATHNAME, true);
+    req.open('GET', URL + ORDERS_API_PATHNAME, true);
     req.onload  = function() {
         orders = JSON.parse(req.responseText);
         loadOrders(orders)

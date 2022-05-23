@@ -1,5 +1,3 @@
-const host = "http://localhost";
-const port = ":8080";
 const productTable = document.getElementById("productTable");
 const tableBody = document.getElementById("productTableBody");
 const overlay = document.getElementById("overlay");
@@ -24,7 +22,7 @@ function initializeProducts() {
 function getProducts() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', host + port + PRODUCT_API_PATHNAME, true);
+    req.open('GET', URL + PRODUCT_API_PATHNAME, true);
     req.onload  = function() {
         products = JSON.parse(req.responseText);
         loadProducts(products)
@@ -111,7 +109,7 @@ function manageProduct(product) {
 
 const fetchImage = function(productId) {
     const req = new XMLHttpRequest();
-    req.open('GET', host + port + IMAGE_API_PATHNAME + "/" + productId, true);
+    req.open('GET', URL + IMAGE_API_PATHNAME + "/" + productId, true);
     req.responseType = "blob";
     req.onload  = function() {
         const urlCreator = window.URL || window.webkitURL;
@@ -268,4 +266,20 @@ function filterProducts() {
         }
     }
     loadProducts(filteredProducts);
+}
+
+const fileSelector = document.getElementById('file-selector');
+fileSelector.addEventListener('change', (event) => {
+    const file = event.target.files[0];
+    uploadImage(file);
+});
+
+const uploadImage = function (imageFile) {
+    let data = new FormData();
+    data.append("file", imageFile);
+    uploadToServer(data);
+}
+
+const uploadToServer = function(data) {
+    sendApiRequest(`${IMAGE_API_PATHNAME}/${button.dataset.productId}`, "PUT", data);
 }

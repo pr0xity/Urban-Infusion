@@ -5,13 +5,11 @@ const purchaseHistoryTable = document.getElementById("purchaseHistoryTable");
 const purchaseHistoryTableBody = document.getElementById("purchaseHistoryTableBody");
 const searchInput = document.getElementById("searchInput");
 let users = null;
-const host = "http://localhost";
-const port = ":8080";
 
 function getUsers() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', host + port + USERS_API_PATHNAME, true);
+    req.open('GET', URL + USERS_API_PATHNAME, true);
     req.onload  = function() {
         users = JSON.parse(req.responseText);
         loadUsers(users)
@@ -78,7 +76,7 @@ function manageUser(user) {
 function fetchOrders(user) {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', host + port + ORDERS_API_PATHNAME, true);
+    req.open('GET', URL + ORDERS_API_PATHNAME, true);
     req.onload  = function() {
         const allOrders = JSON.parse(req.responseText);
         populatePurchaseHistory(user, allOrders);
