@@ -191,6 +191,10 @@ address {
   transition: all 0.2s ease-out;
 }
 
+.btn--rotated {
+  transform: rotate(-90deg);
+}
+
 .btn--selected {
   color: #588157;
 }
@@ -279,6 +283,8 @@ address {
 
 .hidden {
   pointer-events: none;
+  visibility: hidden;
+  display: none;
   opacity: 0;
   cursor: initial !important;
 }
@@ -492,6 +498,12 @@ address {
   cursor: none;
 }
 
+.nav-mobile__btn--close {
+  position: absolute;
+  top: 16%;
+  right: 46vw;
+}
+
 .login {
   display: flex;
   flex-direction: column;
@@ -552,7 +564,7 @@ address {
 }
 
 .section-hero .btn,
-.sedtion-hero .btn:visited {
+.section-hero .btn:visited {
   position: absolute;
   top: 65%;
   left: 50%;
@@ -1303,6 +1315,15 @@ address {
   align-self: center;
 }
 
+.completed-heading {
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+
+.completed__logo {
+  height: 10rem;
+}
+
 .completed {
   position: fixed;
   top: 50%;
@@ -1315,6 +1336,7 @@ address {
   gap: 1.6rem;
   justify-content: center;
   align-items: center;
+  text-align: center;
   z-index: 1000000;
 }
 

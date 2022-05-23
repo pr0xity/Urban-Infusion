@@ -62,7 +62,7 @@ const setAddToCartButtons = function () {
       );
     };
 
-    if (window.location.pathname.includes(WISHLIST_API_PATHNAME)) {
+    if (window.location.pathname.includes(WISHLIST_PATHNAME)) {
       sendApiRequest(
         `${CART_API_PATHNAME}/${productId}`,
         "PUT",
@@ -87,7 +87,7 @@ const setAddToCartButtons = function () {
   document.querySelectorAll(addToCartButtonClass).forEach((button) => {
     button.addEventListener("click", sendAddToCartRequest);
   });
-  if (window.location.pathname.includes("checkout") ||window.location.pathname.includes("account") || window.location.pathname.includes("wishlist") || document.querySelectorAll(addToCartButtonClass)[0].dataset.loggedin === "true") {
+  if (window.location.pathname.includes("checkout") ||window.location.pathname.includes("account") || window.location.pathname.includes("wishlist") || window.location.pathname.includes("product") || document.querySelectorAll(addToCartButtonClass)[0].dataset.loggedin === "true") {
     setIncrementCounter();
   }
 };

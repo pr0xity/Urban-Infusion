@@ -18,7 +18,7 @@ class GallerySlider extends Slider {
   /**
    * Creates a slider out of the gallery.
    */
-  createSlides = function () {
+  createSlides () {
     const galleries = document.querySelectorAll(".gallery");
     galleries[0].insertAdjacentHTML(
       "beforebegin",
@@ -36,7 +36,7 @@ class GallerySlider extends Slider {
    * Appends gallery back to company section and removes
    * slide container.
    */
-  removeSlides = function () {
+  removeSlides () {
     const galleries = document.querySelectorAll(".gallery");
     if (this.sliderContainer !== null) {
       this.appendListItemsToElement(galleries, this.companyGridElement);
@@ -50,7 +50,7 @@ class GallerySlider extends Slider {
   /**
    * Removes the slider controllers from the slider
    */
-  removeSlideController = function () {
+  removeSlideController () {
     const slideController =
       this.companyGridElement.querySelectorAll(".slider-controls");
     slideController.forEach((controller) => {
@@ -66,7 +66,7 @@ class GallerySlider extends Slider {
    * @param list list of elements to append as children.
    * @param element the element to become their parent.
    */
-  appendListItemsToElement = function (list, element) {
+  appendListItemsToElement (list, element) {
     list.forEach((item) => element.appendChild(item));
   };
 }

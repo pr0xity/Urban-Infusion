@@ -28,7 +28,7 @@ public class Wishlist {
     private User user;
 
     @ApiModelProperty("Set of products in the wishlist")
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "fav_item",
             joinColumns = @JoinColumn(name="fl_id"),
             inverseJoinColumns = @JoinColumn(name="product_id")
