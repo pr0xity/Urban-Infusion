@@ -186,6 +186,12 @@
     font-size: 4.2rem;
   }
 
+  .btn--small-text {
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+    font-size: 2rem;
+  }
+
   .header {
     display: flex;
     justify-content: space-between;
@@ -226,7 +232,7 @@
 
   .nav__user-menu {
     padding-top: 2.4rem;
-    gap: 0;
+    gap: 1.2rem;
     bottom: 0;
     right: -3.2rem;
     min-height: 50rem;
@@ -259,7 +265,7 @@
     display: flex;
     flex-direction: column;
     font-family: inherit;
-    gap: 3.2rem;
+    gap: 1.2rem;
     align-items: center;
   }
 
@@ -411,8 +417,7 @@
   }
 
   .testimonial__text {
-    display: none;
-    width: 40%;
+    width: 90%;
   }
 
   .testimonial__author {
@@ -444,10 +449,6 @@
   .footer-heading {
     display: flex;
     justify-content: space-between;
-  }
-
-  .footer__list {
-    display: none;
   }
 
   .footer__btn {
@@ -626,7 +627,7 @@
   }
 
   .signup .btn--green {
-    position: absolute;
+    /*position: absolute;*/
   }
 
   .account .container--white {
@@ -665,6 +666,21 @@
 /* LESS THAN 512px (Small tablet) */
 /**************************/
 @media (max-width: 32em) {
+
+  .completed {
+    justify-content: flex-start;
+  }
+
+  .completed .btn--green {
+    position: absolute;
+    top: 70%;
+  }
+
+  .nav-mobile__btn--close {
+    top: 16%;
+    right: 40vw;
+  }
+
   .section-title {
     padding: 0;
     font-size: 3rem;
@@ -693,7 +709,7 @@
     padding: 0;
   }
 
-  .section-hero .btn,
+  .section-hero .btn:link,
   .section-hero .btn:visited {
     padding: 0 2rem 0.4rem 2rem;
     max-width: 39rem;
@@ -923,8 +939,7 @@
   .checkout .btn--green {
     padding: 1.6rem 3.2rem;
     font-size: 2rem;
-    margin: 0 auto;
-    margin-top: 2.4rem;
+    margin: 2.4rem auto 0;
   }
 
   .account {
@@ -941,6 +956,10 @@
   /****************************/
   /* PRODUCT          */
   /****************************/
+
+  .product {
+    padding: 12.8rem 3.2rem 9.6rem 3.2rem;
+  }
 
   .product__img {
     height: auto;
@@ -1127,8 +1146,7 @@
   .checkout .btn--green {
     padding: 1.6rem 3.2rem;
     font-size: 2rem;
-    margin: 0 auto;
-    margin-top: 2.4rem;
+    margin: 2.4rem auto 0;
   }
 
   /********************************************************/

@@ -118,7 +118,7 @@ const generalInitialize = function () {
    */
   const setMobileLayout = function () {
     document.body.classList.add("sticky");
-    footerCaretButtons.createCaretBtns();
+    footerCaretButtons.createCaretButtons();
     hideElement(navListElement);
     addClickEventListenersToList(navLinks, clickMenuButtonClose);
 
@@ -128,7 +128,7 @@ const generalInitialize = function () {
    * Sets/changes the element for desktop layout.
    */
   const setDesktopLayout = function () {
-    footerCaretButtons.removeCaretBtns();
+    footerCaretButtons.removeCaretButtons();
     showElement(mobileMenuButtonOpen);
     hideElement(mobileMenuButtonClose);
     hideElement(overlayNavLinkMenu);

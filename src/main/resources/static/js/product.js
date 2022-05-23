@@ -274,10 +274,10 @@ const setProductPage =  function () {
   if (mobileLayoutSize.matches) {
     footerObserver.observe(footer);
   } else {
+    footerObserver.unobserve(footer);
     productCta.classList.remove("product__price-cta--sticky");
     productCta.classList.remove("product__price-cta--absolute");
     document.querySelector(".section-product-info").appendChild(productCta);
-    footerObserver.unobserve(footer);
   }
 
 }

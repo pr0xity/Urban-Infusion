@@ -36,7 +36,7 @@ class Slider {
   /**
    * Creates slider controller, formats slides and adds events.
    */
-  createSlides = function () {
+  createSlides() {
     this.implementSliderController(this.sliderContainer);
     this.formatSlides();
     this.slides.forEach((slide) => {
@@ -67,7 +67,7 @@ class Slider {
    *
    * @param {*} event event used for this handler
    */
-  sliderNext = function (event) {
+  sliderNext (event) {
     if (+this.currentSlide === this.numberOfSlides - 1) {
       this.currentSlide = 0;
     } else {
@@ -82,7 +82,7 @@ class Slider {
    *
    * @param {*} event event used for this handler
    */
-  sliderPrev = function (event) {
+  sliderPrev (event) {
     if (+this.currentSlide === 0) {
       this.currentSlide = this.numberOfSlides - 1;
     } else {
@@ -97,7 +97,7 @@ class Slider {
    *
    * @param {*} event event used in this handler (only needed for dot)
    */
-  goToSlide = function (event) {
+  goToSlide (event) {
     if (event !== undefined) {
       if (this.isEventFromSlide(event)) {
         this.currentSlide = Number(this.getSlideIndexFromSlide(event));
@@ -127,7 +127,7 @@ class Slider {
    * @param {*} event event to check the target for.
    * @returns true if event target is a slide, false if not.
    */
-  isEventFromSlide = function (event) {
+  isEventFromSlide (event) {
     return event.target.classList[0].includes(this.slides[0].classList[0]);
   };
 
@@ -137,7 +137,7 @@ class Slider {
    * @param {*} event event to retrieve the slide index from
    * @returns slide index from slide.
    */
-  getSlideIndexFromSlide = function (event) {
+  getSlideIndexFromSlide (event) {
     return event.target.closest(`.${this.slides[0].classList[0]}`).dataset
       .slide;
   };
@@ -149,7 +149,7 @@ class Slider {
   /**
    * Adds slider controller to slider container and sets event listeners on the buttons.
    */
-  implementSliderController = function () {
+  implementSliderController () {
     this.sliderContainer.insertAdjacentHTML(
       "afterbegin",
       this.createSliderControllerHtml()
@@ -174,7 +174,7 @@ class Slider {
    *
    * @return {string} the html for slider controller as string
    */
-  createSliderControllerHtml = function () {
+  createSliderControllerHtml () {
     let controllerHtml = `<div class="slider-controls">
                 <button aria-label="go to previous slide" class="slider__btn slider__btn--prev">
                 <i class="ph-caret-left"></i>
@@ -186,7 +186,7 @@ class Slider {
     }
 
     controllerHtml += `</div>
-                <button aria-label="go to next slide"class="slider__btn slider__btn--next"><i class="ph-caret-right"></i></button>
+                <button aria-label="go to next slide" class="slider__btn slider__btn--next"><i class="ph-caret-right"></i></button>
                 </div>`;
     return controllerHtml;
   };
@@ -194,7 +194,7 @@ class Slider {
   /**
    * Removes the slider controllers from the slider
    */
-  removeSlideController = function () {
+  removeSlideController () {
     const slideController =
       this.sliderContainer.querySelectorAll(".slider-controls");
     slideController.forEach((controller) => {
@@ -207,7 +207,7 @@ class Slider {
   /**
    * Sets the current slide to the active dot.
    */
-  setActiveDot = function () {
+  setActiveDot () {
     this.dots = this.sliderContainer.querySelectorAll(".dots__dot");
     this.dots.forEach((dot) => dot.classList.remove("dots__dot--active"));
     this.dots[this.currentSlide].classList.add("dots__dot--active");
@@ -220,7 +220,7 @@ class Slider {
    * @param {*} event event to check the target for.
    * @returns true if event target is a dot, false if not.
    */
-  isEventFromDot = function (event) {
+  isEventFromDot (event) {
     return event.target.classList[0].includes("dots__dot");
   };
 
@@ -230,7 +230,7 @@ class Slider {
    * @param {*} event event to retrieve slide index for.
    * @returns slide index from dot.
    */
-  getSlideIndexFromDot = function (event) {
+  getSlideIndexFromDot (event) {
     return event.target.dataset.slide;
   };
 
@@ -244,7 +244,7 @@ class Slider {
   /**
    * Adds touchend and touchstart event listeners to the slider container.
    */
-  addTouchEventsToSlider = function (sliderContainer) {
+  addTouchEventsToSlider (sliderContainer) {
     sliderContainer.addEventListener(
       "touchstart",
       this.touchStartHandlerReference
@@ -255,7 +255,7 @@ class Slider {
   /**
    * Removes the touchend and touchstart event listeners from the slider container.
    */
-  removeTouchEventsFromSlider = function (sliderContainer) {
+  removeTouchEventsFromSlider (sliderContainer) {
     sliderContainer.removeEventListener(
       "touchstart",
       this.touchStartHandlerReference
@@ -271,7 +271,7 @@ class Slider {
    *
    * @param event touchstart event.
    */
-  touchStartHandler = function (event) {
+  touchStartHandler (event) {
     this.touchstart = event.changedTouches[0].screenX;
   };
 
@@ -281,7 +281,7 @@ class Slider {
    *
    * @param event the touchend event.
    */
-  touchEndHandler = function (event) {
+  touchEndHandler (event) {
     this.touchend = event.changedTouches[0].screenX;
 
     if (this.swipedRight()) {
@@ -297,7 +297,7 @@ class Slider {
    *
    * @return {boolean} true if the touch event went right, false if not.
    */
-  swipedRight = function () {
+  swipedRight  () {
     return this.touchend < this.touchstart + 50;
   };
 
@@ -306,7 +306,7 @@ class Slider {
    *
    * @return {boolean} true if the touch event went left, false if not.
    */
-  swipedLeft = function () {
+  swipedLeft () {
     return 50 + this.touchend > this.touchstart;
   };
 
@@ -317,7 +317,7 @@ class Slider {
   /**
    * Formats the slides
    */
-  formatSlides = function () {
+  formatSlides () {
     this.slides[this.currentSlide].classList.add("product-card__slide--active");
     if (this.numberOfSlides < 4) {
       this.formatThreeSlides();
@@ -332,7 +332,7 @@ class Slider {
   /**
    * Removes format from the slides
    */
-  removeFormat = function () {
+  removeFormat () {
     this.slides.forEach((slide) => {
       this.formattingClasses.forEach((formatClass) => {
         slide.classList.remove(formatClass);
@@ -343,7 +343,7 @@ class Slider {
   /**
    * Formats the slides for three slides.
    */
-  formatThreeSlides = function () {
+  formatThreeSlides () {
     const previousSlide = (+this.currentSlide + 2) % this.numberOfSlides;
     const nextSlide = (+this.currentSlide + 1) % this.numberOfSlides;
 
@@ -354,7 +354,7 @@ class Slider {
   /**
    * Formats the slides for four slides, where one is hidden.
    */
-  formatFourSlides = function () {
+  formatFourSlides () {
     const previousSlide = (+this.currentSlide + 3) % this.numberOfSlides;
     const nextSlide = (+this.currentSlide + 1) % this.numberOfSlides;
     const hiddenSlide = (+this.currentSlide + 2) % this.numberOfSlides;
@@ -367,7 +367,7 @@ class Slider {
   /**
    * Formats the slides for five or more slides.
    */
-  formatFiveOrMoreSlides = function () {
+  formatFiveOrMoreSlides () {
     this.slides.forEach((slide) => hideElement(slide));
     showElement(this.slides[this.currentSlide]);
 

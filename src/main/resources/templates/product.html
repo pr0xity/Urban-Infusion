@@ -15,41 +15,13 @@
     <link rel="stylesheet" type="text/css" href="../css/queries.css" />
 
     <script src="https://unpkg.com/phosphor-icons"></script>
-    <script
-      defer
-      th:src="@{/js/tools.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/components/caretbutton.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/login.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/general.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/product.js}"
-      type="application/javascript"
-    ></script>
-    <script
-            defer
-            th:src="@{/js/productcontrols/cartcontrols.js}"
-            type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/productcontrols/wishlistcontrols.js}"
-      type="application/javascript"
-    ></script>
+    <script defer th:src="@{/js/tools.js}"></script>
+    <script defer th:src="@{/js/components/caretbutton.js}"></script>
+    <script defer th:src="@{/js/login.js}"></script>
+    <script defer th:src="@{/js/general.js}"></script>
+    <script defer th:src="@{/js/product.js}"></script>
+    <script defer th:src="@{/js/productcontrols/cartcontrols.js}"></script>
+    <script defer th:src="@{/js/productcontrols/wishlistcontrols.js}"></script>
     <title>Urban Infusion</title>
   </head>
   <body>
@@ -63,7 +35,7 @@
         <h1 class="section-title" th:text="${product.name}">Heather tea</h1>
         <img
           class="product__img"
-          th:src="@{API/products/images/{id}(id = ${product.id})}"
+          th:src="@{/API/products/images/{id}(id = ${product.id})}"
           alt="Green tea in a cup"
         />
         <a href="#section-reviews">
@@ -72,22 +44,27 @@
             th:attr="data-rating=${product.averageRating}"
           >
             <img
+              alt=""
               class="product__rating--img"
               src="../img/icons/leaf.svg"
               data-rating="1"
             /><img
+              alt=""
               class="product__rating--img"
               src="../img/icons/leaf.svg"
               data-rating="2"
             /><img
+              alt=""
               class="product__rating--img"
               src="../img/icons/leaf.svg"
               data-rating="3"
             /><img
+              alt=""
               class="product__rating--img"
               src="../img/icons/leaf.svg"
               data-rating="4"
             /><img
+              alt=""
               class="product__rating--img"
               src="../img/icons/leaf.svg"
               data-rating="5"
@@ -104,7 +81,10 @@
         <div class="product__price-cta">
           <span class="product__price" th:text="${product.price} + ',-'"></span>
           <div class="product__cta">
-            <button th:attr="data-productid=${product.id}" class="btn--green product__btn--add-to-cart">
+            <button
+              th:attr="data-productid=${product.id}"
+              class="btn--green product__btn--add-to-cart"
+            >
               Add to bag <i class="ph-tote-light btn--icon"></i>
             </button>
             <div
@@ -114,7 +94,7 @@
           </div>
         </div>
       </section>
-      <section class="section-reviews" id="section-reviews">
+      <div class="section-reviews">
         <section class="section-review-forms">
           <div class="review__form" th:if="${user} == null">
             <h2 class="heading-secondary">
@@ -150,7 +130,11 @@
             <div class="product__rating--review" id="review__rating">
               <p>Rating</p>
               <label>
-                <img class="product__rating--img" src="../img/icons/leaf.svg" />
+                <img
+                  alt=""
+                  class="product__rating--img"
+                  src="../img/icons/leaf.svg"
+                />
                 <input
                   name="rating"
                   type="radio"
@@ -160,7 +144,11 @@
                 />
               </label>
               <label>
-                <img class="product__rating--img" src="../img/icons/leaf.svg" />
+                <img
+                  alt=""
+                  class="product__rating--img"
+                  src="../img/icons/leaf.svg"
+                />
                 <input
                   name="rating"
                   type="radio"
@@ -170,7 +158,11 @@
                 />
               </label>
               <label>
-                <img class="product__rating--img" src="../img/icons/leaf.svg" />
+                <img
+                  alt=""
+                  class="product__rating--img"
+                  src="../img/icons/leaf.svg"
+                />
                 <input
                   name="rating"
                   type="radio"
@@ -180,7 +172,11 @@
                 />
               </label>
               <label>
-                <img class="product__rating--img" src="../img/icons/leaf.svg" />
+                <img
+                  alt=""
+                  class="product__rating--img"
+                  src="../img/icons/leaf.svg"
+                />
                 <input
                   name="rating"
                   type="radio"
@@ -190,7 +186,11 @@
                 />
               </label>
               <label>
-                <img class="product__rating--img" src="../img/icons/leaf.svg" />
+                <img
+                  alt=""
+                  class="product__rating--img"
+                  src="../img/icons/leaf.svg"
+                />
                 <input
                   name="rating"
                   type="radio"
@@ -246,6 +246,7 @@
               <p>Rating</p>
               <label>
                 <img
+                  alt=""
                   class="product__rating--img"
                   src="../img/icons/leaf.svg"
                   data-rating="1"
@@ -259,6 +260,7 @@
               </label>
               <label>
                 <img
+                  alt=""
                   class="product__rating--img"
                   src="../img/icons/leaf.svg"
                   data-rating="2"
@@ -272,6 +274,7 @@
               </label>
               <label>
                 <img
+                  alt=""
                   class="product__rating--img"
                   src="../img/icons/leaf.svg"
                   data-rating="3"
@@ -285,6 +288,7 @@
               </label>
               <label>
                 <img
+                  alt=""
                   class="product__rating--img"
                   src="../img/icons/leaf.svg"
                   data-rating="4"
@@ -298,6 +302,7 @@
               </label>
               <label>
                 <img
+                  alt=""
                   class="product__rating--img"
                   src="../img/icons/leaf.svg"
                   data-rating="5"
@@ -355,6 +360,7 @@
               <p>Rating</p>
               <label>
                 <img
+                  alt=""
                   class="product__rating--img"
                   src="../img/icons/leaf.svg"
                   data-rating="1"
@@ -368,6 +374,7 @@
               </label>
               <label>
                 <img
+                  alt=""
                   class="product__rating--img"
                   src="../img/icons/leaf.svg"
                   data-rating="2"
@@ -381,6 +388,7 @@
               </label>
               <label>
                 <img
+                  alt=""
                   class="product__rating--img"
                   src="../img/icons/leaf.svg"
                   data-rating="3"
@@ -394,6 +402,7 @@
               </label>
               <label>
                 <img
+                  alt=""
                   class="product__rating--img"
                   src="../img/icons/leaf.svg"
                   data-rating="4"
@@ -407,6 +416,7 @@
               </label>
               <label>
                 <img
+                  alt=""
                   class="product__rating--img"
                   src="../img/icons/leaf.svg"
                   data-rating="5"
@@ -439,9 +449,11 @@
             />
           </form>
         </section>
-        <div class="review__comments-box">
+        <section id="section-reviews" class="review__comments-box">
           <h2 class="heading-secondary">Reviews</h2>
-          <p th:if="${comments == null or comments.isEmpty()}">No reviews yet...</p>
+          <p th:if="${comments == null or comments.isEmpty()}">
+            No reviews yet...
+          </p>
           <div class="review__comment" th:each="comment : ${comments}">
             <div class="review__comment-info">
               <div
@@ -449,22 +461,27 @@
                 th:attr="data-rating=${comment.rating}"
               >
                 <img
+                  alt=""
                   class="product__rating--img"
                   src="../img/icons/leaf.svg"
                   data-rating="1"
                 /><img
+                  alt=""
                   class="product__rating--img"
                   src="../img/icons/leaf.svg"
                   data-rating="2"
                 /><img
+                  alt=""
                   class="product__rating--img"
                   src="../img/icons/leaf.svg"
                   data-rating="3"
                 /><img
+                  alt=""
                   class="product__rating--img"
                   src="../img/icons/leaf.svg"
                   data-rating="4"
                 /><img
+                  alt=""
                   class="product__rating--img"
                   src="../img/icons/leaf.svg"
                   data-rating="5"
@@ -479,8 +496,8 @@
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
     <footer th:include="components/footer" class="footer"></footer>
   </body>
