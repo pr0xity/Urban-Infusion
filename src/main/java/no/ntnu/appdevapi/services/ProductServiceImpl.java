@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -108,7 +105,18 @@ public class ProductServiceImpl implements ProductService {
         product.setCreatedAt(object.getCreatedAt());
         product.setUpdatedAt(object.getUpdatedAt());
 
-        ProductCategory c = new ProductCategory(object.getCategoryName(), object.getCategoryDescription());
+        String[] cName = object.getCategoryName().split(" ");
+        StringBuilder categoryName = new StringBuilder();
+        for (int i = 0; i < cName.length; i++) {
+            categoryName.append(cName[i].substring(0, 1).toUpperCase(Locale.ROOT));
+            categoryName.append(cName[i].substring(1).toLowerCase(Locale.ROOT));
+            if (i < cName.length-1) {
+                categoryName.append(" ");
+            }
+        }
+
+        ProductCategory c = new ProductCategory(categoryName.toString(), object.getCategoryDescription());
+
         product.setCategory(c);
 
         return product;

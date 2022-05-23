@@ -126,10 +126,13 @@ public class ProductController {
   @PutMapping("/{id}")
   @ApiOperation(value = "Update existing product.", notes = "Status 200 when updated, 400 on error.")
   public ResponseEntity<String> update(@PathVariable long id, @RequestBody ProductDto product) {
-    ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    if (null != product && null != productService.getProduct(id)) {
+    ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.OK);
+    if (null == product) {
+      response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    } else if (null == productService.getProduct(id)) {
+      response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    } else {
       productService.updateProduct(id, product);
-      response = new ResponseEntity<>(HttpStatus.OK);
     }
     return response;
   }
