@@ -62,7 +62,7 @@ public class ProductServiceImpl implements ProductService {
         if (null != newProduct.getName()) {
             old.setName(newProduct.getName());
         }
-        if (null != newProduct.getCategory().getName()) {
+        if (null != newProduct.getCategory()) {
             ProductCategory dbCat = productCategoryRepository.findByName(newProduct.getCategory().getName());
             old.setCategory(Objects.requireNonNullElseGet(dbCat, () -> productCategoryRepository.save(newProduct.getCategory())));
         }
@@ -105,20 +105,20 @@ public class ProductServiceImpl implements ProductService {
         product.setCreatedAt(object.getCreatedAt());
         product.setUpdatedAt(object.getUpdatedAt());
 
-        String[] cName = object.getCategoryName().split(" ");
-        StringBuilder categoryName = new StringBuilder();
-        for (int i = 0; i < cName.length; i++) {
-            categoryName.append(cName[i].substring(0, 1).toUpperCase(Locale.ROOT));
-            categoryName.append(cName[i].substring(1).toLowerCase(Locale.ROOT));
-            if (i < cName.length-1) {
-                categoryName.append(" ");
+        if (null != object.getCategoryName()) {
+            String[] cName = object.getCategoryName().split(" ");
+            StringBuilder categoryName = new StringBuilder();
+            for (int i = 0; i < cName.length; i++) {
+                categoryName.append(cName[i].substring(0, 1).toUpperCase(Locale.ROOT));
+                categoryName.append(cName[i].substring(1).toLowerCase(Locale.ROOT));
+                if (i < cName.length - 1) {
+                    categoryName.append(" ");
+                }
             }
+            ProductCategory c = new ProductCategory(categoryName.toString());
+
+            product.setCategory(c);
         }
-
-        ProductCategory c = new ProductCategory(categoryName.toString());
-
-        product.setCategory(c);
-
         return product;
     }
 }
