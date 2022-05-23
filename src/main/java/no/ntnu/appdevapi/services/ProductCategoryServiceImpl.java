@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class ProductCategoryServiceImpl {
+public class ProductCategoryServiceImpl implements ProductCategoryService{
 
   @Autowired
   private ProductCategoryRepository productCategoryRepository;

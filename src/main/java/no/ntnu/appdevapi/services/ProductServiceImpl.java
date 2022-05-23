@@ -84,9 +84,7 @@ public class ProductServiceImpl implements ProductService {
         if (0 != newProduct.getInventoryId()) {
             old.setInventoryId(newProduct.getInventoryId());
         }
-
         productRepository.save(old);
-        System.out.println("did it update?");
         return productRepository.findById(old.getId()).orElse(null);
     }
 
@@ -96,7 +94,6 @@ public class ProductServiceImpl implements ProductService {
             product.setDeletedAt(LocalDateTime.now());
             productRepository.save(product);
         }
-        //productRepository.deleteById(id);
     }
 
     private Product getProductFromDto(ProductDto object) {

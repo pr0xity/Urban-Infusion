@@ -59,7 +59,7 @@ public class JwtUtil {
       .parseClaimsJws(token)
       .getBody();
   }
-  //TODO: Sakarias need to have a look at this later :)
+
   private Boolean isTokenExpired(String token) {
     final Date expiration = getExpirationDateFromToken(token);
     return expiration.before(new Date());
