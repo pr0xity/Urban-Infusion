@@ -1,5 +1,10 @@
-<button class="nav-mobile__btn btn--icon" aria-label="open navigation menu"><i class="ph-list"></i></button>
-<button class="nav-mobile__btn btn--icon hidden" aria-label="close navigation menu">
+<button class="nav-mobile__btn btn--icon" aria-label="open navigation menu">
+  <i class="ph-list"></i>
+</button>
+<button
+  class="nav-mobile__btn btn--icon hidden"
+  aria-label="close navigation menu"
+>
   <i class="ph-x"></i>
 </button>
 <a th:href="@{/}" class="logo">
@@ -21,7 +26,7 @@
       <a class="nav__link" th:href="@{/#section-products}">Products</a>
     </li>
   </ul>
-  <div class="nav__link-menu--overlay hidden" id=""></div>
+  <div class="nav__link-menu--overlay hidden"></div>
 
   <div class="nav__btn-box">
     <button
@@ -45,18 +50,16 @@
       class="nav__item"
       aria-label="Go to checkout"
     >
-      <i class="ph-tote-light btn--icon"></i
-      ></button>
+      <i class="ph-tote-light btn--icon"></i>
+    </button>
     <a
       th:if="${permission} == 'user' or ${permission} eq 'owner' or ${permission} eq 'admin'"
       th:href="@{/checkout}"
       class="nav__link nav__item"
       aria-label="Go to checkout"
     >
-      <i class="ph-tote-light btn--icon">
-
-      </i
-    ><div class="nav__checkout--quantity hidden">1</div>
+      <i class="ph-tote-light btn--icon"> </i>
+      <div class="nav__checkout--quantity hidden">1</div>
     </a>
     <button class="nav__item" id="user-menu" aria-label="account menu">
       <i class="ph-user-circle-light btn--icon"></i>

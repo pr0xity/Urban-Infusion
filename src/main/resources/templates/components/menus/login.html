@@ -1,30 +1,31 @@
 <form class="login">
   <p class="login__alert"></p>
-  <div class="login__field">
-    <label for="login-email">Emailaddress</label>
+  <label class="login__field">
+    <span>Email-address</span>
     <input
       class="login__input input"
       id="login-email"
       name="username"
       type="text"
       placeholder="john@example.com"
-    />
-  </div>
-  <div class="login__field">
-    <label for="login-password">Password</label>
+  /></label>
+  <label class="login__field">
+    <span>Password</span>
     <input
       class="login__input input"
       id="login-password"
       name="password"
       type="password"
       placeholder="password"
-    />
-  </div>
-  <button id="login-btn" class="btn--green">Sign in</button>
+  /></label>
+  <input type="submit" id="login-btn" class="btn--green" value="Sign in" />
+  <input
+    type="submit"
+    id="forgotten-password"
+    class="btn--small-text"
+    value="Forgotten password?"
+  />
 </form>
-<form>
-  <input type="submit" value="Forgotten password?" id="forgotten-password" class="btn--small-text"/>
-</form>
-<a href="/signup" class="link"
-  >Not a member yet? <strong>Join here!</strong>
+<a th:href="@{/signup}" class="link">
+  Not a member yet? <strong>Join here!</strong>
 </a>

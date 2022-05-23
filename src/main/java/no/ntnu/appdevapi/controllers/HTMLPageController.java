@@ -7,9 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.charset.StandardCharsets;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * MVC controller for the html pages.
@@ -65,21 +63,9 @@ public class HTMLPageController {
         return "index";
     }
 
-    /**
-     * Displays this users account information.
-     *
-     * @param model model for account.
-     * @return account thymeleaf template.
-     */
-    @GetMapping("/account")
-    public String getAccount(Model model) {
-
-        model.addAttribute("user" , this.getUser());
-        model.addAttribute("address", this.getUser().getAddress());
-        model.addAttribute("orderDetails", orderDetailsService.getOrderDetailsByUser(getUser()));
-
-        this.addPermissionLevelToModel(model);
-        return "account";
+    @GetMapping("products")
+    public String getAllProducts(Model model) {
+        return "products";
     }
 
     /**
@@ -105,6 +91,23 @@ public class HTMLPageController {
         model.addAttribute("comment", ratingService.getRatingFromUserAndProduct(getUser(), product));
         this.addPermissionLevelToModel(model);
         return "product";
+    }
+
+    /**
+     * Displays this users account information.
+     *
+     * @param model model for account.
+     * @return account thymeleaf template.
+     */
+    @GetMapping("/account")
+    public String getAccount(Model model) {
+
+        model.addAttribute("user" , this.getUser());
+        model.addAttribute("address", this.getUser().getAddress());
+        model.addAttribute("orderDetails", orderDetailsService.getOrderDetailsByUser(getUser()));
+
+        this.addPermissionLevelToModel(model);
+        return "account";
     }
 
     /**

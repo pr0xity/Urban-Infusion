@@ -21,7 +21,7 @@ import java.util.List;
  * REST API controller for ratings.
  */
 @RestController
-@RequestMapping("/ratings")
+@RequestMapping("API/ratings")
 public class RatingController {
 
     @Autowired

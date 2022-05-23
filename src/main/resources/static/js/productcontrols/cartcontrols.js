@@ -87,7 +87,7 @@ const setAddToCartButtons = function () {
   document.querySelectorAll(addToCartButtonClass).forEach((button) => {
     button.addEventListener("click", sendAddToCartRequest);
   });
-  if (document.querySelectorAll(addToCartButtonClass)[0].dataset.loggedin === "true") {
+  if (window.location.pathname.includes("checkout") ||window.location.pathname.includes("account") || window.location.pathname.includes("wishlist") || document.querySelectorAll(addToCartButtonClass)[0].dataset.loggedin === "true") {
     setIncrementCounter();
   }
 };

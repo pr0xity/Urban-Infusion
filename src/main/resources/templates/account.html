@@ -28,31 +28,11 @@
       crossorigin=""
     ></script>
     <script src="https://unpkg.com/phosphor-icons"></script>
-    <script
-      defer
-      th:src="@{/js/tools.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/components/caretbutton.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/login.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/general.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/account.js}"
-      type="application/javascript"
-    ></script>
+    <script defer th:src="@{/js/tools.js}"></script>
+    <script defer th:src="@{/js/components/caretbutton.js}"></script>
+    <script defer th:src="@{/js/login.js}"></script>
+    <script defer th:src="@{/js/general.js}"></script>
+    <script defer th:src="@{/js/account.js}"></script>
     <title>Urban Infusion</title>
   </head>
   <body>
@@ -83,10 +63,7 @@
           </p>
           <div class="modal hidden" id="modal_name">
             <div class="modal__window">
-              <button
-                class="btn--close close btn--icon"
-                id="close_name"
-              >
+              <button class="btn--close close btn--icon" id="close_name">
                 <i class="ph-x"></i>
               </button>
               <h3 class="change-heading">Change name</h3>
@@ -102,7 +79,7 @@
                     name="edit_firstName"
                   />
                 </label>
-                <label class="change__field" for="edit_firstName">
+                <label class="change__field" for="edit_lastName">
                   Last name *
                   <input
                     class="input"
@@ -134,10 +111,7 @@
           </address>
           <div class="modal hidden" id="modal_email">
             <div class="modal__window">
-              <button
-                class="btn--close close btn--icon"
-                id="close_email"
-              >
+              <button class="btn--close close btn--icon" id="close_email">
                 <i class="ph-x"></i>
               </button>
               <h3 class="change-heading">Change email-address</h3>
@@ -182,10 +156,7 @@
           </p>
           <div class="modal hidden" id="modal_password">
             <div class="modal__window">
-              <button
-                class="btn--close close btn--icon"
-                id="close_password"
-              >
+              <button class="btn--close close btn--icon" id="close_password">
                 <i class="ph-x"></i>
               </button>
               <h3 class="change-heading">Change password</h3>
@@ -200,7 +171,7 @@
                     name="edit_password"
                   />
                 </label>
-                <label class="change__field" for="edit_password"
+                <label class="change__field" for="edit_newPassword"
                   >New password *
                   <input
                     class="input"
@@ -242,60 +213,6 @@
               <i class="ph-pencil-simple-light btn--icon"></i>
             </button>
           </address>
-          <p class="account-info__row">
-            <span>Member since</span>
-            <time
-              datetime="user.createdAt"
-              th:text="${user.createdAt.toLocalDate()}"
-              >04.02.2022</time
-            >
-          </p>
-          <p class="account-info__row">
-            <span>Updated last</span>
-            <time
-              datetime="user.updatedAt"
-              th:text="${user.updatedAt.toLocalDate()}"
-              >15.03.2022</time
-            >
-          </p>
-          <p class="account-info__row">
-            <button class="account-info__btn--delete">
-              <i class="ph-trash-light btn--icon"></i> Want to delete your
-              account?
-            </button>
-          </p>
-          <div class="modal hidden" id="modal_delete">
-            <div class="modal__window">
-              <button
-                class="btn--close close btn--icon"
-                id="close_delete"
-              >
-                <i class="ph-x"></i>
-              </button>
-              <h3 class="change-heading">
-                Do you wish to delete your account?
-              </h3>
-              <p class="review__alert account__form--alert"></p>
-              <form class="modal__form modal__form--delete">
-                <label class="change__field" for="delete-password">
-                  Password *
-                  <input
-                    type="password"
-                    id="delete-password"
-                    name="delete-account-password"
-                    class="input"
-                  />
-                </label>
-                <input
-                  type="submit"
-                  value="Yes"
-                  name="deleteAccount"
-                  class="btn--green btn--submit btn--delete"
-                />
-                <input type="submit" value="No" class="btn--green btn--submit" />
-              </form>
-            </div>
-          </div>
           <div class="modal hidden" id="modal_address">
             <div class="modal__window modal__window--account-address">
               <button
@@ -365,10 +282,65 @@
               <div class="account__map" id="map"></div>
             </div>
           </div>
+          <p class="account-info__row">
+            <span>Member since</span>
+            <time
+              th:datetime="${user.createdAt.toLocalDate()}"
+              th:text="${user.createdAt.toLocalDate()}"
+              >04.02.2022</time
+            >
+          </p>
+          <p class="account-info__row">
+            <span>Updated last</span>
+            <time
+              th:datetime="${user.updatedAt.toLocalDate()}"
+              th:text="${user.updatedAt.toLocalDate()}"
+              >15.03.2022</time
+            >
+          </p>
+          <p class="account-info__row">
+            <button class="account-info__btn--delete">
+              <i class="ph-trash-light btn--icon"></i> Want to delete your
+              account?
+            </button>
+          </p>
+          <div class="modal hidden" id="modal_delete">
+            <div class="modal__window">
+              <button class="btn--close close btn--icon" id="close_delete">
+                <i class="ph-x"></i>
+              </button>
+              <h3 class="change-heading">
+                Do you wish to delete your account?
+              </h3>
+              <p class="review__alert account__form--alert"></p>
+              <form class="modal__form modal__form--delete">
+                <label class="change__field" for="delete-password">
+                  Password *
+                  <input
+                    type="password"
+                    id="delete-password"
+                    name="delete-account-password"
+                    class="input"
+                  />
+                </label>
+                <input
+                  type="submit"
+                  value="Yes"
+                  name="deleteAccount"
+                  class="btn--green btn--submit btn--delete"
+                />
+                <input
+                  type="submit"
+                  value="No"
+                  class="btn--green btn--submit"
+                />
+              </form>
+            </div>
+          </div>
         </section>
 
         <section
-          th:if="${orderDetails != null}"
+          th:if="${orderDetails != null && !orderDetails.isEmpty()}"
           class="section-purchases container--white"
         >
           <h3>Purchase history</h3>

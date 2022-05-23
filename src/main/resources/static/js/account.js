@@ -78,7 +78,12 @@ function addDeleteAccountListeners(tags) {
 const accountFormAlerts = document.querySelectorAll(".account__form--alert");
 const userId = document.querySelector("#field_userId").innerHTML;
 const userEmail = document.querySelector(`input[name="edit_email"]`).value;
-console.log(userEmail);
+const addressInputs = {
+  addressLine1: document.querySelector(`input[name="addressLine1"]`),
+  city: document.querySelector(`input[name="municipality"]`),
+  postalCode: document.querySelector(`input[name="zipCode"]`),
+  country: document.querySelector(`input[name="country"]`),
+};
 
 /**
  * Sets the alert on the form to the given alert message.
@@ -86,22 +91,22 @@ console.log(userEmail);
  * @param alertMessage the message to set as alert.
  */
 const setAccountFormAlert = function (alertMessage) {
-  accountFormAlerts.forEach(alert => alert.innerHTML = `${alertMessage}`);
+  accountFormAlerts.forEach((alert) => (alert.innerHTML = `${alertMessage}`));
 };
 
 /**
  * Sets the alert on the form to empty.
  */
 const resetAccountFormAlert = function () {
-  accountFormAlerts.forEach(alert => alert.innerHTML = "");
+  accountFormAlerts.forEach((alert) => (alert.innerHTML = ""));
 };
 
 /**
  * Sets alert to notify about wrong credentials.
  */
 const updatePasswordError = function () {
-  setAccountFormAlert("Wrong password")
-}
+  setAccountFormAlert("Wrong password");
+};
 
 /************************************************
  * UPDATING USER'S NAME
@@ -113,7 +118,9 @@ const updatePasswordError = function () {
  * @return {boolean} true if valid, false if not.
  */
 const isNameFormValid = function () {
-  const firstName = document.querySelector(`input[name="edit_firstName"]`).value;
+  const firstName = document.querySelector(
+    `input[name="edit_firstName"]`
+  ).value;
   const lastName = document.querySelector(`input[name="edit_lastName"]`).value;
   return firstName !== "" && lastName !== "";
 };
@@ -124,7 +131,9 @@ const isNameFormValid = function () {
  * @return {{firstName: *, lastName: *}}
  */
 const getUpdatedName = function () {
-  const firstName = document.querySelector(`input[name="edit_firstName"]`).value;
+  const firstName = document.querySelector(
+    `input[name="edit_firstName"]`
+  ).value;
   const lastName = document.querySelector(`input[name="edit_lastName"]`).value;
   return {
     enabled: true,
@@ -139,7 +148,12 @@ const getUpdatedName = function () {
 const updateNameRequest = function (event) {
   event.preventDefault();
   if (isNameFormValid()) {
-    sendApiRequest(`/users/${userId}`, "PUT", getUpdatedName(), reloadCurrentPage);
+    sendApiRequest(
+      `${USERS_API_PATHNAME}/${userId}`,
+      "PUT",
+      getUpdatedName(),
+      reloadCurrentPage
+    );
   } else {
     setAccountFormAlert("All fields need to be filled in");
   }
@@ -158,10 +172,14 @@ submitName.addEventListener("click", updateNameRequest);
  * @return {boolean} true if valid, false if not.
  */
 const isEmailFormValid = function () {
-  const email = document.querySelector(`input[name="edit_email"]`)
-    .value.replaceAll(' ', '').toLowerCase();
-  const password = document.querySelector(`input[name="edit_email_password"]`).value;
-  return isEmailAddressValid(email) && password !== '';
+  const email = document
+    .querySelector(`input[name="edit_email"]`)
+    .value.replaceAll(" ", "")
+    .toLowerCase();
+  const password = document.querySelector(
+    `input[name="edit_email_password"]`
+  ).value;
+  return isEmailAddressValid(email) && password !== "";
 };
 
 /**
@@ -171,7 +189,9 @@ const isEmailFormValid = function () {
  */
 const getUpdateEmailBody = function () {
   const email = document.querySelector(`input[name="edit_email"]`).value;
-  const password = document.querySelector(`input[name="edit_email_password"]`).value;
+  const password = document.querySelector(
+    `input[name="edit_email_password"]`
+  ).value;
   return {
     enabled: true,
     email: email,
@@ -186,11 +206,17 @@ const updateEmailRequest = function (event) {
   event.preventDefault();
 
   const updateEmailError = function () {
-    setAccountFormAlert("Wrong password")
-  }
+    setAccountFormAlert("Wrong password");
+  };
 
   if (isEmailFormValid()) {
-    sendApiRequest(`/users/${userId}`, "PUT", getUpdateEmailBody(), goToFrontpage, updateEmailError);
+    sendApiRequest(
+      `${USERS_API_PATHNAME}/${userId}`,
+      "PUT",
+      getUpdateEmailBody(),
+      goToFrontpage,
+      updateEmailError
+    );
   } else {
     setAccountFormAlert("A valid email and password need to filled in");
   }
@@ -210,7 +236,9 @@ changeEmailButton.addEventListener("click", updateEmailRequest);
  */
 const isPasswordValid = function () {
   const password = document.querySelector(`input[name="edit_password"]`).value;
-  const newPassword = document.querySelector(`input[name="edit_newPassword"]`).value;
+  const newPassword = document.querySelector(
+    `input[name="edit_newPassword"]`
+  ).value;
   return password !== "" && newPassword !== "";
 };
 
@@ -221,7 +249,9 @@ const isPasswordValid = function () {
  */
 const getUpdatedPassword = function () {
   const password = document.querySelector(`input[name="edit_password"]`).value;
-  const newPassword = document.querySelector(`input[name="edit_newPassword"]`).value;
+  const newPassword = document.querySelector(
+    `input[name="edit_newPassword"]`
+  ).value;
 
   return {
     enabled: true,
@@ -239,14 +269,15 @@ const updatePasswordRequest = function (event) {
   event.preventDefault();
   if (isPasswordValid()) {
     sendApiRequest(
-        `/users/${userId}`,
-        "PUT",
-        getUpdatedPassword(),
-        reloadCurrentPage,
-        updatePasswordError, updatePasswordError
+      `${USERS_API_PATHNAME}/${userId}`,
+      "PUT",
+      getUpdatedPassword(),
+      reloadCurrentPage,
+      updatePasswordError,
+      updatePasswordError
     );
   } else {
-    setAccountFormAlert("Please fill in your current and new password")
+    setAccountFormAlert("Please fill in your current and new password");
   }
 };
 
@@ -256,28 +287,6 @@ submitPassword.addEventListener("click", updatePasswordRequest);
 /************************************************
  * UPDATING ADDRESS
  ************************************************/
-
-/**
- * Check if the address form is filled.
- *
- * @return {boolean} true if filled, false if not.
- */
-const isAddressFormValid = function () {
-  const addressLine = document.querySelector(
-    `input[name="addressLine1"]`
-  ).value;
-  const municipality = document.querySelector(
-    `input[name="municipality"]`
-  ).value;
-  const zipCode = document.querySelector(`input[name="zipCode"]`).value;
-  const country = document.querySelector(`input[name="country"]`).value;
-  return (
-    addressLine !== "" &&
-    municipality !== "" &&
-    zipCode !== "" &&
-    country !== ""
-  );
-};
 
 /**
  * Returns an object of the user's updated address values.
@@ -306,20 +315,20 @@ const getUpdatedAddress = function () {
 
 /**
  * Sends request to update address.
- *
- * @return {Promise<void>}
  */
 const updateAddressRequest = async function (event) {
   event.preventDefault();
   resetAccountFormAlert();
 
   const requestBody = getUpdatedAddress();
-  const validAddress = await isAddressValid(createAddressStringFromObject(requestBody));
+  const validAddress = await isAddressValid(
+    createAddressStringFromObject(requestBody)
+  );
 
-  if (isAddressFormValid()) {
+  if (isAddressFormValid(addressInputs)) {
     if (validAddress) {
       sendApiRequest(
-        `/users/${userId}`,
+        `${USERS_API_PATHNAME}/${userId}`,
         "PUT",
         requestBody,
         reloadCurrentPage
@@ -345,27 +354,40 @@ submitAddress.addEventListener("click", updateAddressRequest);
  * @return {{password: *, enabled: boolean}}
  */
 const getDeleteAccountBody = function () {
-  const password = document.querySelector(`input[name="delete-account-password"]`).value;
+  const password = document.querySelector(
+    `input[name="delete-account-password"]`
+  ).value;
   return {
     password: password,
     enabled: false,
     changeEnabled: true,
-  }
-}
+  };
+};
 
 /**
  * Sends request to delete/disable the account.
  *
  * @param event
  */
-const deleteAccountRequest = function(event) {
+const deleteAccountRequest = function (event) {
   event.preventDefault();
-  sendApiRequest(`/users/${userEmail}`, "DELETE", getDeleteAccountBody(), goToFrontpage);
-}
+  sendApiRequest(
+    `${USERS_API_PATHNAME}/${userEmail}`,
+    "DELETE",
+    getDeleteAccountBody(),
+    goToFrontpage
+  );
+};
 
-const deleteAccountButton = document.querySelector(`input[name="deleteAccount"]`);
+const deleteAccountButton = document.querySelector(
+  `input[name="deleteAccount"]`
+);
 deleteAccountButton.addEventListener("click", deleteAccountRequest);
 
-if (isAddressFormValid()) {
-  getAddressInfo(createAddressStringFromObject(getUpdatedAddress())).then((data) => renderMap(data[0], data[1]));
+if (isAddressFormValid(addressInputs)) {
+  getAddressInfo(createAddressStringFromObject(getUpdatedAddress())).then(
+    (data) => {
+      renderMap(data[0], data[1]);
+    }
+  );
 }

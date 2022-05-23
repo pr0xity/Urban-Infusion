@@ -124,7 +124,7 @@ const setCartItemControls = function () {
 const setOrderRequestHandling = function () {
   const completeCheckoutButton = document.querySelector(".checkout__btn--complete");
   const completedCheckoutWindow = document.querySelector(".modal");
-  const closeCompletedWindowButton = document.querySelector(".completed__btn--close");
+  const closeCompletedWindowButton = document.querySelector(".btn--close");
 
   /**
    * Show completed checkout modal if order was successful.
@@ -139,7 +139,8 @@ const setOrderRequestHandling = function () {
   /**
    * Sends an order request.
    */
-  const sendOrderRequest = function () {
+  const sendOrderRequest = function (event) {
+    event.preventDefault();
     sendApiRequest(`${ORDERS_API_PATHNAME}`, "POST", null, orderRequestSuccess, null, null);
 
   }
@@ -150,7 +151,7 @@ const setOrderRequestHandling = function () {
 };
 
 // Initializing page.
-const address = document.querySelector(".checkout__info--address").innerText;
+let address = document.querySelector(".checkout__info--address").innerText;
 getAddressInfo(address).then((data) => renderMap(data[0], data[1]));
 setOrderRequestHandling();
 setCartItemControls();

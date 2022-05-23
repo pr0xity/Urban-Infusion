@@ -15,56 +15,16 @@
     <link th:href="@{/css/queries.css}" type="text/css" rel="stylesheet" />
 
     <script src="https://unpkg.com/phosphor-icons"></script>
-    <script
-      defer
-      th:src="@{/js/tools.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/components/slider.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/components/gallerySlider.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/components/caretbutton.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/login.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/general.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/index.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/product.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/productcontrols/wishlistcontrols.js}"
-      type="application/javascript"
-    ></script>
-    <script
-            defer
-            th:src="@{/js/productcontrols/cartcontrols.js}"
-            type="application/javascript"
-    ></script>
+    <script defer th:src="@{/js/tools.js}"></script>
+    <script defer th:src="@{/js/components/slider.js}"></script>
+    <script defer th:src="@{/js/components/gallerySlider.js}"></script>
+    <script defer th:src="@{/js/components/caretbutton.js}"></script>
+    <script defer th:src="@{/js/login.js}"></script>
+    <script defer th:src="@{/js/general.js}"></script>
+    <script defer th:src="@{/js/index.js}"></script>
+    <script defer th:src="@{/js/product.js}"></script>
+    <script defer th:src="@{/js/productcontrols/wishlistcontrols.js}"></script>
+    <script defer th:src="@{/js/productcontrols/cartcontrols.js}"></script>
     <title>Urban Infusion</title>
   </head>
   <body>
@@ -163,7 +123,7 @@
           >
             <img
               class="featured-card__img"
-              th:src="@{/products/images/{id}(id = ${product.id})}"
+              th:src="@{API/products/images/{id}(id = ${product.id})}"
               th:alt="${product.name}"
             />
             <a
@@ -175,34 +135,40 @@
         </div>
       </section>
 
-      <section class="section-values">
+      <div class="section-values">
         <div class="values">
           <figure class="value">
             <img class="value__icon" src="img/illustrations/tree.svg" alt="" />
-            <figcaption class="decorative-heading">Traditions</figcaption>
             <figcaption>
-              We value the ancient traditions which are brought to modern times
-              through nature.
+              <span class="decorative-heading">Traditions</span>
+              <span>
+                We value the ancient traditions which are brought to modern
+                times through nature.
+              </span>
             </figcaption>
           </figure>
           <figure class="value">
             <img class="value__icon" src="img/illustrations/heart.svg" alt="" />
-            <figcaption class="decorative-heading">Health</figcaption>
             <figcaption>
-              We value your health by offering herbal teas with healing
-              properties made from ancient recipes.
+              <span class="decorative-heading">Health</span>
+              <span
+                >We value your health by offering herbal teas with healing
+                properties made from ancient recipes.</span
+              >
             </figcaption>
           </figure>
           <figure class="value">
             <img class="value__icon" src="img/illustrations/earth.svg" alt="" />
-            <figcaption class="decorative-heading">Sustainability</figcaption>
             <figcaption>
-              We value our earth and it's life. We work with fairtrade to
-              provide you ethically produced herbal teas.
+              <span class="decorative-heading">Sustainability</span>
+              <span>
+                We value our earth and it's life. We work with fairtrade to
+                provide you ethically produced herbal teas.
+              </span>
             </figcaption>
           </figure>
         </div>
-      </section>
+      </div>
 
       <section class="section-company" id="section-company">
         <div class="section__heading-box">

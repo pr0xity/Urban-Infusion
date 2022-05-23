@@ -7,12 +7,12 @@ const setSignUpForm = function () {
   const firstNameInput = document.querySelector(`input[name="firstName"]`);
   const lastNameInput = document.querySelector(`input[name="lastName"]`);
   const emailInput = document.querySelector(`input[name="email"]`);
-  const addressInputs = [
-    document.querySelector(`input[name="addressLine1"]`),
-    document.querySelector(`input[name="postalCode"]`),
-    document.querySelector(`input[name="city"]`),
-    document.querySelector(`input[name="country"]`),
-  ];
+  const addressInputs = {
+    addressLine1: document.querySelector(`input[name="addressLine1"]`),
+    city: document.querySelector(`input[name="city"]`),
+    postalCode: document.querySelector(`input[name="postalCode"]`),
+    country: document.querySelector(`input[name="country"]`),
+  };
   const passwordInput = document.querySelector(
     `input[name="registrationPassword"]`
   );
@@ -26,18 +26,13 @@ const setSignUpForm = function () {
     return {
       firstName: document.querySelector(`input[name="firstName"]`).value,
       lastName: document.querySelector(`input[name="lastName"]`).value,
-      email: document
-        .querySelector(`input[name="email"]`)
-        .value.replaceAll(" ", "")
-        .toLowerCase(),
+      email: document.querySelector(`input[name="email"]`).value,
       addressLine1: document.querySelector(`input[name="addressLine1"]`).value,
       addressLine2: document.querySelector(`input[name="addressLine2"]`).value,
       postalCode: document.querySelector(`input[name="postalCode"]`).value,
       city: document.querySelector(`input[name="city"]`).value,
       country: document.querySelector(`input[name="country"]`).value,
-      password: document
-        .querySelector(`input[name="registrationPassword"]`)
-        .value.trim(),
+      password: document.querySelector(`input[name="registrationPassword"]`).value,
     };
   };
 
@@ -67,7 +62,7 @@ const setSignUpForm = function () {
     firstNameInput.classList.remove("input--error");
     lastNameInput.classList.remove("input--error");
     emailInput.classList.remove("input--error");
-    addressInputs.forEach((input) => input.classList.remove("input--error"));
+    Object.values(addressInputs).forEach((input) => input.classList.remove("input--error"));
     passwordInput.classList.remove("input--error");
   };
 
@@ -85,12 +80,12 @@ const setSignUpForm = function () {
     if (getSignUpRequestBody().lastName === "") {
       setInputError(lastNameInput, "Field cannot be empty");
     }
-    if (isEmailAddressValid(getSignUpRequestBody().email)) {
+    if (!isEmailAddressValid(getSignUpRequestBody().email)) {
       setInputError(emailInput, "Email is not filled or not valid");
     }
-    if (isAddressValid(createAddressStringFromObject(getSignUpRequestBody()))) {
-      addressInputs.forEach((input) =>
-        setInputError(input, "Address is not valid")
+    if (!isAddressValid(createAddressStringFromObject(getSignUpRequestBody())) || !isAddressFormValid(addressInputs)) {
+      Object.values(addressInputs).forEach((input) => {
+        setInputError(input, "Address is not valid")}
       );
     }
     if (getSignUpRequestBody().password === "") {
@@ -111,7 +106,7 @@ const setSignUpForm = function () {
   const sendRegistrationRequestSuccess = function () {
     const completedRegistrationWindow = document.querySelector(".modal");
     const completedCloseButton = completedRegistrationWindow.querySelector(
-      ".completed__btn--close"
+      ".btn--close"
     );
     showElement(completedRegistrationWindow);
 
@@ -119,6 +114,7 @@ const setSignUpForm = function () {
       hideElement(completedRegistrationWindow);
     };
     completedCloseButton.addEventListener("click", closeCompletedWindow);
+    completedRegistrationWindow.addEventListener("click", closeCompletedWindow);
   };
 
   /**

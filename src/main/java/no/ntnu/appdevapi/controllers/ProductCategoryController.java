@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
-@RequestMapping("productCategory")
+@RequestMapping("API/productCategory")
 public class ProductCategoryController {
 
   @Autowired

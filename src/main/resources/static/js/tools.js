@@ -1,16 +1,20 @@
 // For REST API requests
 const URL = "http://localhost:8080";
-const AUTHENTICATION_API_PATHNAME = "/login";
-const REGISTRATION_API_PATHNAME = "/register";
-const WISHLIST_API_PATHNAME = "/wishlist";
-const RATING_API_PATHNAME = "/ratings";
-const PRODUCT_API_PATHNAME = "/products";
-const USERS_API_PATHNAME = "/users";
-const ORDERS_API_PATHNAME = "/orders";
-const IMAGE_API_PATHNAME = "/products/images";
-const CART_API_PATHNAME = "/cart";
+const FORGOTTEN_PASSWORD_API_PATHNAME = "/API/forgottenPassword";
+const AUTHENTICATION_API_PATHNAME = "/API/login";
+const REGISTRATION_API_PATHNAME = "/API/register";
+const WISHLIST_API_PATHNAME = "/API/wishlist";
+const RATING_API_PATHNAME = "/API/ratings";
+const PRODUCT_API_PATHNAME = "/API/products";
+const USERS_API_PATHNAME = "/API/users";
+const ORDERS_API_PATHNAME = "/API/orders";
+const IMAGE_API_PATHNAME = "/API/products/images";
+const CART_API_PATHNAME = "/API/cart";
+
+// Page pathname.
 const HOME_PATHNAME = "/";
 const PRODUCT_PATHNAME = "/product";
+const WISHLIST_PATHNAME = "/wishlist";
 
 let map;
 let marker;
@@ -155,7 +159,13 @@ const getAddressInfo = async function (address) {
   try {
     const latitude = data.lat;
     const longitude = data.lon;
-    const address = data.display_name;
+    const addressLine = data.display_name.split(",");
+    const address = {
+      addressLine1: `${addressLine[1]} ${addressLine[0]}`,
+      city: `${addressLine[2]}`,
+      postalCode: `${addressLine[4]}`,
+      country: `${addressLine[5]}`,
+    }
     return [latitude, longitude, address];
   } catch (e) {
     console.log(e);
@@ -175,6 +185,41 @@ const isAddressValid = async function (address) {
 };
 
 /**
+ * Returns true if all the inputs in the given object is filled, false if not.
+ *
+ * @param addressInputs an object containing the address inputs (name is strict 'addressLine1, city, postalCode, country')
+ * @return {boolean} true if all the inputs are filled, false if not.
+ */
+const isAddressFormValid = function (addressInputs) {
+  const addressLine1 = addressInputs.addressLine1.value;
+  const city = addressInputs.city.value;
+  const postalCode = addressInputs.postalCode.value;
+  const country = addressInputs.country.value;
+
+  return (
+    addressLine1 !== "" && city !== "" && postalCode !== "" && country !== ""
+  );
+};
+
+/**
+ * Finds address info from the given address and injects the info into the given fields.
+ *
+ * @param address the address to find address info from.
+ * @param addressLine1 the address line 1 input field to inject info into,
+ * @param city the city input field to inject info into.
+ * @param postalCode the postal code input field to inject info into.
+ * @param country the country input field to inject info into.
+ */
+const injectAddressIntoInputFields = function(address, addressLine1, city, postalCode, country) {
+  getAddressInfo(address).then(addressInfo => {
+    addressLine1.value = addressInfo[2].addressLine1;
+    city.value = addressInfo[2].city;
+    postalCode.value = addressInfo[2].postalCode;
+    country.value = addressInfo[2].country;
+  });
+}
+
+/**
  * Checks if the given email address has a valid format.
  *
  * @param {*} email the email address to check if it has a valid format.
@@ -182,7 +227,7 @@ const isAddressValid = async function (address) {
  */
 const isEmailAddressValid = function (email) {
   const emailPattern = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
-  return !!email.match(emailPattern) || email !== "";
+  return !!email.match(emailPattern) && email !== "";
 };
 
 /**

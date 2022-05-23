@@ -24,7 +24,7 @@ function initializeProducts() {
 function getProducts() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', host + port + "/products/", true);
+    req.open('GET', host + port + PRODUCT_API_PATHNAME, true);
     req.onload  = function() {
         products = JSON.parse(req.responseText);
         loadProducts(products)

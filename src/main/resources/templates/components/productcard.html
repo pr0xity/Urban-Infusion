@@ -1,6 +1,6 @@
 <img
   class="product-card__img"
-  th:src="@{/products/images/{id}(id = ${product.id})}"
+  th:src="@{API/products/images/{id}(id = ${product.id})}"
   th:alt="${product.name}"
 />
 <div class="product-card__details">
@@ -8,26 +8,32 @@
     th:href="@{/product/{id}#section-reviews(id=${product.id})}"
     class="product__rating"
     th:attr="data-rating=${product.averageRating}"
+    th:attrappend="aria-label='This product has an average rating of '+ ${product.averageRating} +' tea leaves, click to see all reviews'"
   >
     <img
       class="product__rating--img"
       src="../img/icons/leaf.svg"
+      alt=""
       data-rating="1"
     /><img
       class="product__rating--img"
       src="../img/icons/leaf.svg"
+      alt=""
       data-rating="2"
     /><img
       class="product__rating--img"
       src="../img/icons/leaf.svg"
+      alt=""
       data-rating="3"
     /><img
       class="product__rating--img"
       src="../img/icons/leaf.svg"
+      alt=""
       data-rating="4"
     /><img
       class="product__rating--img"
       src="../img/icons/leaf.svg"
+      alt=""
       data-rating="5"
     />
     <p th:text="'(' + ${product.ratings.size()} + ')'">(0)</p>
@@ -51,7 +57,8 @@
       th:attr="data-wishlist=${wishlist == null} ? 'false' : (${#sets.contains(wishlist, product)} ? 'true' : 'false')"
     ></div>
     <button
-      th:attr="data-productid=${product.id}" th:attrappend="data-loggedin=(${permission} == 'NoUser' ? false : true)"
+      th:attr="data-productid=${product.id}"
+      th:attrappend="data-loggedin=(${permission} == 'NoUser' ? false : true)"
       class="product__btn--add-to-cart"
       aria-label="add item to shopping cart"
     >

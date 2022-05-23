@@ -74,7 +74,7 @@ const forgottenPasswordSuccess = function () {
 }
 const sendForgottenPasswordRequest = function (event) {
     event.preventDefault();
-    sendApiRequest(`/forgottenPassword`, "POST", {email: loginEmail.value.toString()}, forgottenPasswordSuccess, forgottenPasswordUnauthorized, forgottenPasswordError);
+    sendApiRequest(`${FORGOTTEN_PASSWORD_API_PATHNAME}`, "POST", {email: loginEmail.value.toString()}, forgottenPasswordSuccess, forgottenPasswordUnauthorized, forgottenPasswordError);
 }
 
 //Adding event listeners if login button is present.

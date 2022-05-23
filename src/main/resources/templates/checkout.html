@@ -24,31 +24,12 @@
       crossorigin=""
     ></script>
     <script src="https://unpkg.com/phosphor-icons"></script>
-    <script
-      defer
-      th:src="@{/js/tools.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/components/caretbutton.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/login.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/general.js}"
-      type="application/javascript"
-    ></script>
-    <script
-      defer
-      th:src="@{/js/checkout.js}"
-      type="application/javascript"
-    ></script>
+    <script defer th:src="@{/js/tools.js}"></script>
+    <script defer th:src="@{/js/components/caretbutton.js}"></script>
+    <script defer th:src="@{/js/login.js}"></script>
+    <script defer th:src="@{/js/general.js}"></script>
+    <script defer th:src="@{/js/checkout.js}"></script>
+    <script defer th:src="@{/js/productcontrols/cartcontrols.js}"></script>
     <title>Urban Infusion</title>
   </head>
   <body>
@@ -58,48 +39,49 @@
         <h1 class="decorative-heading">Checkout</h1>
         <h2 class="section-title">Your shopping bag!</h2>
       </div>
-      <section class="section-bag container--white">
-        <h3 class="heading-tertiary">1. Shopping bag</h3>
+      <form class="checkout__form">
+        <section class="section-bag container--white">
+          <h3 class="heading-tertiary">1. Shopping bag</h3>
 
-        <div class="checkout__list-headings">
-          <span class="checkout__list-heading margin-left--small"
-            >Products</span
-          >
-          <!--          <span class="checkout__list-heading">Size</span>-->
-          <span class="checkout__list-heading">Quantity</span>
-          <span class="checkout__list-heading">Total</span>
-        </div>
-        <ul class="checkout__list">
-          <li th:if="${cart.isEmpty()}">
-            <p class="checkout__list--empty">
-              Your shopping bag is empty!
-              <a th:href="@{/products}" class="link"
-                ><strong>Start shopping here!</strong></a
-              >
-            </p>
-          </li>
-          <li th:each="cartItem : ${cart}" class="checkout__item">
-            <img
-              class="item__img"
-              th:src="@{/products/images/{id}(id = ${cartItem.product.id})}"
-              th:alt="${cartItem.product.name}"
-              alt="greentea"
-            />
-            <p class="item__description margin-left--small">
-              <a
-                class="link"
-                th:href="@{/product/{id}(id=${cartItem.product.id})}"
-                ><span class="item__name" th:text="${cartItem.product.name}"
-                  >Green tea</span
-                ></a
-              >
-              <span
-                class="item__number"
-                th:text="'Art.nr ' + ${cartItem.product.id}"
-                >Art.nr. 43240234</span
-              >
-            </p>
-            <!--
+          <div class="checkout__list-headings">
+            <span class="checkout__list-heading margin-left--small"
+              >Products</span
+            >
+            <!--          <span class="checkout__list-heading">Size</span>-->
+            <span class="checkout__list-heading">Quantity</span>
+            <span class="checkout__list-heading">Total</span>
+          </div>
+          <ul class="checkout__list">
+            <li th:if="${cart.isEmpty()}">
+              <p class="checkout__list--empty">
+                Your shopping bag is empty!
+                <a th:href="@{/products}" class="link"
+                  ><strong>Start shopping here!</strong></a
+                >
+              </p>
+            </li>
+            <li th:each="cartItem : ${cart}" class="checkout__item">
+              <img
+                class="item__img"
+                th:src="@{API/products/images/{id}(id = ${cartItem.product.id})}"
+                th:alt="${cartItem.product.name}"
+                alt="greentea"
+              />
+              <p class="item__description margin-left--small">
+                <a
+                  class="link"
+                  th:href="@{/product/{id}(id=${cartItem.product.id})}"
+                  ><span class="item__name" th:text="${cartItem.product.name}"
+                    >Green tea</span
+                  ></a
+                >
+                <span
+                  class="item__number"
+                  th:text="'Art.nr ' + ${cartItem.product.id}"
+                  >Art.nr. 43240234</span
+                >
+              </p>
+              <!--
             <span
               class="item__size"
               th:if="${cartItem.product.size} != 0"
@@ -112,93 +94,99 @@
               th:text="'&#8211;'"
               >50g</span
             >-->
-            <input
-              class="item__quantity"
-              th:attr="data-quantity=${cartItem.quantity}"
-              th:attrappend="data-productId=${cartItem.product.id}"
-              type="number"
-              name="quantity"
-              aria-label="quantity of this product"
-              min="1"
-              max="100"
-              step="1"
-              th:value="${cartItem.quantity}"
-              value="1"
-            />
-            <span
-              class="item__price"
-              th:attr="data-productId=${cartItem.product.id}"
-              th:text="${cartItem.getTotal()} + ',-'"
-              >200,-</span
-            >
-            <button
-              class="btn--icon item__btn--delete"
-              th:attr="data-productId=${cartItem.product.id}"
-              aria-label="remove item from checkout"
-            >
-              <i class="ph-trash"></i>
-            </button>
-          </li>
-        </ul>
-      </section>
-      <section class="section-info container--white">
-        <h3 class="heading-tertiary">2. Your information</h3>
-        <address class="checkout__customer margin-left--small">
-          <div class="checkout__info">
-            <span class="checkout__label">Name</span>
-            <span
-              class="checkout__info"
-              th:text="${user.firstName} + ' ' + ${user.lastName}"
-              >Leslie Alexander</span
-            >
+              <input
+                class="item__quantity"
+                th:attr="data-quantity=${cartItem.quantity}"
+                th:attrappend="data-productId=${cartItem.product.id}"
+                type="number"
+                name="quantity"
+                aria-label="quantity of this product"
+                min="1"
+                max="100"
+                step="1"
+                th:value="${cartItem.quantity}"
+                value="1"
+              />
+              <span
+                class="item__price"
+                th:attr="data-productId=${cartItem.product.id}"
+                th:text="${cartItem.getTotal()} + ',-'"
+                >200,-</span
+              >
+              <label aria-label="remove item from checkout">
+                <input
+                  type="submit"
+                  name="deleteItem"
+                  class="btn--icon item__btn--delete"
+                  th:attr="data-productId=${cartItem.product.id}"
+                  value=""
+                  hidden
+                />
+                <i class="btn--icon item__btn--delete ph-trash"></i>
+              </label>
+            </li>
+          </ul>
+        </section>
+        <section class="section-info container--white">
+          <h3 class="heading-tertiary">2. Your information</h3>
+          <address class="checkout__customer margin-left--small">
+            <div class="checkout__info">
+              <span class="checkout__label">Name</span>
+              <span
+                class="checkout__info"
+                th:text="${user.firstName} + ' ' + ${user.lastName}"
+                >Leslie Alexander</span
+              >
+            </div>
+            <div class="checkout__info">
+              <span class="checkout__label">Emailaddress</span>
+              <span class="checkout__info" th:text="${user.email}"
+                >leslie.alexander@example.com</span
+              >
+            </div>
+            <div class="checkout__info">
+              <span class="checkout__label"> Address </span>
+              <span
+                class="checkout__info checkout__info--address"
+                th:text="${address == null} ? '' : ${address.addressLine}"
+              >
+                Larsgårdsvegen 2, 6009 Ålesund
+              </span>
+            </div>
+          </address>
+          <span class="checkout__wrong">
+            Wrong information?
+            <a class="link" th:href="@{/account}"> Click here </a>
+          </span>
+        </section>
+        <section class="section-payment-delivery container--white">
+          <h3 class="heading-tertiary">3. Delivery and payment</h3>
+          <h4 class="checkout__heading">
+            <i class="btn--icon ph-truck"></i
+            ><span class="checkout__list-heading">Delivery method</span>
+          </h4>
+          <div class="checkout__plan">
+            <span class="checkout__label">Standard - Home delivery</span>
+            <span class="checkout__info">Delivery within 3 - 7 days</span>
+            <div class="checkout__map" id="map"></div>
           </div>
-          <div class="checkout__info">
-            <span class="checkout__label">Emailaddress</span>
-            <span class="checkout__info" th:text="${user.email}"
-              >leslie.alexander@example.com</span
-            >
+          <h4 class="checkout__heading">
+            <i class="ph-credit-card btn--icon"></i>
+            <span class="checkout__list-heading">Payment method</span>
+          </h4>
+          <div class="checkout__plan">
+            <span class="checkout__label">Coupon</span>
+            <span class="checkout__info">You get a free order from us :)</span>
           </div>
-          <div class="checkout__info">
-            <span class="checkout__label"> Address </span>
-            <span
-              class="checkout__info checkout__info--address"
-              th:text="${address == null} ? '' : ${address.addressLine}"
-            >
-              Larsgårdsvegen 2, 6009 Ålesund
-            </span>
-          </div>
-        </address>
-        <span class="checkout__wrong">
-          Wrong information?
-          <a class="link" th:href="@{/account}"> Click here </a>
-        </span>
-      </section>
-      <section class="section-payment-delivery container--white">
-        <h3 class="heading-tertiary">3. Delivery and payment</h3>
-        <h4 class="checkout__heading">
-          <i class="btn--icon ph-truck"></i
-          ><span class="checkout__list-heading">Delivery method</span>
-        </h4>
-        <div class="checkout__plan">
-          <span class="checkout__label">Standard - Home delivery</span>
-          <span class="checkout__info">Delivery within 3 - 7 days</span>
-          <div class="checkout__map" id="map"></div>
-        </div>
-        <h4 class="checkout__heading">
-          <i class="ph-credit-card btn--icon"></i>
-          <span class="checkout__list-heading">Payment method</span>
-        </h4>
-        <div class="checkout__plan">
-          <span class="checkout__label">Coupon</span>
-          <span class="checkout__info">You get a free order from us :)</span>
-        </div>
-      </section>
-      <button
-        th:unless="${cart.isEmpty()}"
-        class="btn--green checkout__btn--complete"
-      >
-        Complete purchase
-      </button>
+        </section>
+        <input
+          th:unless="${cart.isEmpty()}"
+          type="submit"
+          name="submitOrder"
+          value="Complete purchase"
+          class="btn--green checkout__btn--complete"
+        />
+      </form>
       <div class="modal hidden">
         <div class="completed modal__window">
           <button class="btn--close close btn--icon">

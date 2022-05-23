@@ -59,6 +59,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers(PUT, "/users/**").hasAnyAuthority("admin", "owner")
             .antMatchers(PUT, "/users/**").authenticated()
             .antMatchers("/wishlist").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers("/checkout").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers("/account").hasAnyAuthority("user", "admin", "owner")
             .antMatchers(DELETE, "/ratings/**").hasAnyAuthority("admin", "owner")
             .antMatchers(DELETE, "/ratings/**").authenticated()
             .antMatchers(POST,"/ratings/**").hasAnyAuthority("user", "admin", "owner")

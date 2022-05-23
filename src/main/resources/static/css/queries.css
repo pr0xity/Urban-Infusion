@@ -641,10 +641,6 @@
   /* PRODUCT          */
   /****************************/
 
-  .product__rating {
-    margin-top: 2rem;
-  }
-
   .section-product-info {
     display: flex;
     flex-direction: column;

@@ -20,7 +20,7 @@ function initializeOrders() {
 function getOrders() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', host + port + "/orders/", true);
+    req.open('GET', host + port + ORDERS_API_PATHNAME, true);
     req.onload  = function() {
         orders = JSON.parse(req.responseText);
         loadOrders(orders)

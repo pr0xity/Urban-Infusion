@@ -74,6 +74,7 @@ address {
 }
 
 .decorative-heading {
+  display: block;
   margin: 0;
   padding: 0;
   font-family: "Hurricane", cursive;
@@ -186,11 +187,8 @@ address {
 .btn--icon {
   color: #6d6875;
   font-size: 3.8rem;
+  cursor: pointer;
   transition: all 0.2s ease-out;
-}
-
-.btn--icon:hover {
-  scale: 1.2;
 }
 
 .btn--selected {
@@ -1122,6 +1120,10 @@ address {
 /****************************/
 .checkout {
   padding: 9.6rem 5.6rem 6.4rem 5.6rem;
+
+}
+
+.checkout__form {
   display: flex;
   flex-direction: column;
   gap: 3.6rem;

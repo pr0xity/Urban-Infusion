@@ -68,7 +68,7 @@ public class LoginController {
    * @return ResponseEntity containing the jwt token in a cookie and HttpStatus ok on success,
    * or HttpStatus not found on fail.
    */
-  @RequestMapping(value = "/login", method = RequestMethod.POST)
+  @RequestMapping(value = "API/login", method = RequestMethod.POST)
   public ResponseEntity<?> generateToken(@RequestBody LoginUser loginUser) {
     User user = userService.findOneByEmail(loginUser.getEmail());
     if (user == null) {
@@ -86,7 +86,7 @@ public class LoginController {
    * @return ResponseEntity containing the jwt token in a cookie and HttpStatus ok on success,
    * or HttpStatus not found on fail.
    */
-  @RequestMapping(value = "/register", method = RequestMethod.POST)
+  @RequestMapping(value = "API/register", method = RequestMethod.POST)
   public ResponseEntity<String> registerUser(@RequestBody UserDto nUser) {
     if (null != nUser && (userService.findOneByEmail(nUser.getEmail()) == null)) {
       nUser.setPermissionLevel("user");
@@ -108,7 +108,7 @@ public class LoginController {
    * @param userDto the user who has forgotten password.
    * @return 200 Ok on success, 404 not found if user was not found.
    */
-  @RequestMapping(value = "/forgottenPassword", method = RequestMethod.POST)
+  @RequestMapping(value = "API/forgottenPassword", method = RequestMethod.POST)
   public ResponseEntity<?> forgottenPassword(@RequestBody UserDto userDto) {
     if (userDto == null || userDto.getEmail() == null) {
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -128,7 +128,7 @@ public class LoginController {
    * @param token the verification token.
    * @return redirect user to home page and authenticates the user.
    */
-  @RequestMapping(value = "/confirmRegistration", method = RequestMethod.GET)
+  @RequestMapping(value = "API/confirmRegistration", method = RequestMethod.GET)
   public ResponseEntity<?> confirmRegistration(HttpServletResponse response, @RequestParam("token") String token) throws IOException {
     VerificationToken verificationToken = verificationTokenService.getVerificationTokenByToken(token);
 

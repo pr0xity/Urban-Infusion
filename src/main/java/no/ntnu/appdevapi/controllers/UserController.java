@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 @RestController
-@RequestMapping()
+@RequestMapping("API/users")
 public class UserController {
 
   @Autowired
@@ -39,7 +39,7 @@ public class UserController {
    *
    * @return List of all users.
    */
-  @RequestMapping(value = "/users", method = RequestMethod.GET, produces = "application/json")
+  @RequestMapping(method = RequestMethod.GET, produces = "application/json")
   @ApiOperation(value = "Get all users.")
   @ResponseBody
   public List<User> getAll() {
@@ -51,7 +51,7 @@ public class UserController {
    *
    * @return List of the five newest users.
    */
-  @RequestMapping(value = "/users/new", method = RequestMethod.GET, produces = "application/json")
+  @RequestMapping(value = "/new", method = RequestMethod.GET, produces = "application/json")
   @ApiOperation(value = "Get newly created users.")
   @ResponseBody
   public List<User> getNew() {
@@ -70,7 +70,7 @@ public class UserController {
    * @param email The email of the user.
    * @return The user matching the email, null otherwise.
    */
-  @GetMapping("/users/{email}")
+  @GetMapping("/{email}")
   @ApiOperation(value = "Get a specific user.", notes = "Returns the user or null when email is invalid.")
   public ResponseEntity<User> get(@ApiParam("email of the user.") @PathVariable String email,
                                   @CookieValue(name = "token", defaultValue = "anonymous") String userToken) {
@@ -112,7 +112,7 @@ public class UserController {
    * @param userDto the user dto to update to.
    * @return 200 Ok if updated, 401 if not.
    */
-  @PutMapping("/users/{userId}")
+  @PutMapping("/{userId}")
   public ResponseEntity<?> update(@PathVariable long userId, @RequestBody UserDto userDto, HttpServletResponse response) throws IOException {
     User currentUser = userService.getSessionUser();
     User userToUpdate = userService.findOneByID(userId);
@@ -157,7 +157,7 @@ public class UserController {
    * @param email Email of the user to delete.
    * @return 200 when deleted, 404 if not.
    */
-  @DeleteMapping("/users/{email}")
+  @DeleteMapping("/{email}")
   @ApiIgnore
   public ResponseEntity<?> delete(@PathVariable String email, HttpServletResponse response) {
     User requestedUser = userService.findOneByEmail(email);
