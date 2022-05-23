@@ -12,9 +12,7 @@ public class ProductDto {
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
   private LocalDateTime deletedAt;
-
   private String categoryName;
-  private String categoryDescription;
 
 
   public ProductDto(){
@@ -33,20 +31,6 @@ public class ProductDto {
     this.deletedAt = null;
 
     this.categoryName = category;
-  }
-
-  public ProductDto(String name, String description, String origin, double price, String category, String categoryDescription) {
-    this.name = name;
-    this.description = description;
-    this.origin = origin;
-    this.price = price;
-    this.inventoryId = 0;
-    this.createdAt = LocalDateTime.now();
-    this.updatedAt = null;
-    this.deletedAt = null;
-
-    this.categoryName = category;
-    this.categoryDescription = categoryDescription;
   }
 
   public String getName() {
@@ -83,9 +67,5 @@ public class ProductDto {
 
   public String getCategoryName() {
     return categoryName;
-  }
-
-  public String getCategoryDescription() {
-    return categoryDescription;
   }
 }

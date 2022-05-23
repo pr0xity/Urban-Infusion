@@ -23,10 +23,6 @@ public class ProductCategory {
   @Column(unique = true, name = "name")
   private String name;
 
-  @ApiModelProperty("A description of the category")
-  @Column(unique = true, name = "description")
-  private String description;
-
   @ApiModelProperty("When the category was created")
   @Column(name = "created_at")
   private LocalDateTime createdAt;
@@ -43,16 +39,13 @@ public class ProductCategory {
   @JsonIgnore
   private List<Product> products;
 
-
   /**
    * Creates an instance of ProductCategory.
    *
    * @param name the name of the category of the product
-   * @param description a description of the category
    */
-  public ProductCategory(String name, String description) {
+  public ProductCategory(String name) {
     this.name = name;
-    this.description = description;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = createdAt;
   }
@@ -77,13 +70,6 @@ public class ProductCategory {
     this.name = name;
   }
 
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
 
   public LocalDateTime getCreatedAt() {
     return createdAt;
