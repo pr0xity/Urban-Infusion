@@ -36,8 +36,8 @@ public class ProcessedOrderListener implements ApplicationListener<ProcessedOrde
      * @param event when an order is processed.
      */
     private void sendOrderIsProcessedMail(ProcessedOrderEvent event) {
-        User user = event.getUser();
         OrderDetails orderDetails = event.getOrderDetails();
+        User user = event.getOrderDetails().getUser();
 
         String recipient = user.getEmail();
 

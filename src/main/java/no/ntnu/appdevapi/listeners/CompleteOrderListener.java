@@ -41,7 +41,7 @@ public class CompleteOrderListener implements ApplicationListener<CompleteOrderE
         OrderDetails orderDetails = event.getOrderDetails();
         Iterable<OrderItem> orderItems = event.getOrderItems();
 
-        String recipient = user.getEmail();
+        String recipient = orderDetails.getUser().getEmail();
 
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper = null;
