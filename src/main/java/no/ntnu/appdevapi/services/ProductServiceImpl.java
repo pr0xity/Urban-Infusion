@@ -107,10 +107,7 @@ public class ProductServiceImpl implements ProductService {
         product.setInventoryId(object.getInventoryId());
         product.setCreatedAt(object.getCreatedAt());
         product.setUpdatedAt(object.getUpdatedAt());
-
-        ProductCategory c = new ProductCategory(object.getCategoryName(), object.getCategoryDescription());
-        product.setCategory(c);
-
+        product.setCategory(new ProductCategory(object.getCategoryName()));
         return product;
     }
 }

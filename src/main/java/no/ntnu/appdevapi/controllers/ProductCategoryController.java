@@ -40,7 +40,7 @@ public class ProductCategoryController {
    */
   @GetMapping("/{index}")
   @ApiOperation(value = "Get a specific product category.", notes = "Returns the product category or null when index is invalid.")
-  public ResponseEntity<ProductCategory> get(@ApiParam("Index of the product.") @PathVariable long index) {
+  public ResponseEntity<ProductCategory> get(@ApiParam("Index of the category.") @PathVariable long index) {
     ResponseEntity<ProductCategory> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
     ProductCategory category = productCategoryService.getProductCategory(index);
     if (null != category) {
