@@ -3,6 +3,8 @@ const tableBody = document.getElementById("userTableBody");
 const overlay = document.getElementById("overlay");
 const purchaseHistoryTable = document.getElementById("purchaseHistoryTable");
 const purchaseHistoryTableBody = document.getElementById("purchaseHistoryTableBody");
+const searchInput = document.getElementById("searchInput");
+let users = null;
 const host = "http://localhost";
 const port = ":8080";
 
@@ -11,13 +13,14 @@ function getUsers() {
     req.overrideMimeType("application/json");
     req.open('GET', host + port + USERS_API_PATHNAME, true);
     req.onload  = function() {
-        const jsonResponse = JSON.parse(req.responseText);
-        loadUsers(jsonResponse)
+        users = JSON.parse(req.responseText);
+        loadUsers(users)
     };
     req.send(null);
 }
 
 function loadUsers(users) {
+    tableBody.innerHTML = "";
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
         addUserRow(user);
@@ -141,4 +144,26 @@ function addPurchaseHistoryRow(order) {
     row.appendChild(statusCell);
 
     purchaseHistoryTableBody.appendChild(row);
+}
+
+function filterUsers() {
+    const filteredUsers = [];
+    const searchString = searchInput.value.toLowerCase();
+    for (let i = 0; i < users.length; i++) {
+        const user = users[i];
+        let added = false;
+        if (user["id"].toString().includes(searchString) ||
+            user["firstName"].toString().toLowerCase().includes(searchString) ||
+            user["lastName"].toString().toLowerCase().includes(searchString)) {
+            filteredUsers.push(user);
+            added = true;
+        }
+        if (null !== user["address"] && !added) {
+            if (user["address"]["addressLine"].toString().toLowerCase().includes(searchString)) {
+                filteredUsers.push(user);
+            }
+        }
+    }
+
+    loadUsers(filteredUsers);
 }
