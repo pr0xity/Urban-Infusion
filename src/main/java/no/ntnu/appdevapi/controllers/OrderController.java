@@ -130,7 +130,7 @@ public class OrderController {
      */
     @PutMapping("/{orderId}")
     public ResponseEntity<String> update(@PathVariable long orderId, @RequestBody String orderDetails) {
-        ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.OK);
+        ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         OrderDetails old = orderDetailsService.getOrderDetails(orderId);
 
         if (null != orderDetails && null != old) {
@@ -155,10 +155,8 @@ public class OrderController {
                 old.setUpdatedAt();
             }
 
-
             this.orderDetailsService.update(orderId, old);
-        } else {
-            response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            response = new ResponseEntity<>(HttpStatus.OK);
         }
 
         return response;

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -65,7 +66,8 @@ public class ProductServiceImpl implements ProductService {
             old.setName(newProduct.getName());
         }
         if (null != newProduct.getCategory().getName()) {
-            old.setCategory(productCategoryRepository.findByName(newProduct.getCategory().getName()));
+            ProductCategory dbCat = productCategoryRepository.findByName(newProduct.getCategory().getName());
+            old.setCategory(Objects.requireNonNullElseGet(dbCat, () -> productCategoryRepository.save(newProduct.getCategory())));
         }
         if (0 != newProduct.getPrice()) {
             old.setPrice(newProduct.getPrice());

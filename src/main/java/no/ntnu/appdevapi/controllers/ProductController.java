@@ -127,7 +127,7 @@ public class ProductController {
   @ApiOperation(value = "Update existing product.", notes = "Status 200 when updated, 400 on error.")
   public ResponseEntity<String> update(@PathVariable long id, @RequestBody ProductDto product) {
     ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    if (null != product) {
+    if (null != product && null != productService.getProduct(id)) {
       productService.updateProduct(id, product);
       response = new ResponseEntity<>(HttpStatus.OK);
     }
