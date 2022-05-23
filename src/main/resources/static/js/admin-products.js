@@ -290,5 +290,8 @@ const uploadImage = function (imageFile) {
 }
 
 const uploadToServer = function(data) {
-    sendApiRequest(`${IMAGE_API_PATHNAME}/${button.dataset.productId}`, "PUT", data);
+    xhr = new XMLHttpRequest();
+    xhr.open("PUT", `${IMAGE_API_PATHNAME}/${button.dataset.productId}`, true);
+
+    xhr.send(data);
 }

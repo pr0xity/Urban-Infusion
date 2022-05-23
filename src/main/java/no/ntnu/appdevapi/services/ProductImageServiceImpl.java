@@ -50,17 +50,13 @@ public class ProductImageServiceImpl implements ProductImageService {
     }
 
     @Override
-    public ProductImage updateImage(long productId, MultipartFile imageFile) {
+    public ProductImage updateImage(long productId, ProductImage imageFile) {
         ProductImage existingImage = getImageByProduct(productRepository.findById(productId).orElse(null));
         if (existingImage != null) {
-            try {
-                existingImage.setData(imageFile.getBytes());
-                existingImage.setContentType(imageFile.getContentType());
-                existingImage.setFileExtension(getFileExtension(imageFile));
-                productImageRepository.save(existingImage);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            existingImage.setData(imageFile.getData());
+            existingImage.setContentType(imageFile.getContentType());
+            existingImage.setFileExtension(imageFile.getFileExtension());
+            productImageRepository.save(existingImage);
         }
 
         return existingImage;

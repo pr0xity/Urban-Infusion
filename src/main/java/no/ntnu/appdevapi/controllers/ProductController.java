@@ -156,9 +156,10 @@ public class ProductController {
     if (null != p) {
       //Writing image or file
       String fileName = getFileName(part);
-      part.write("path/to/upload" + File.separator + fileName);
-
-
+      String[] fileArray = fileName.split("\\.");
+      ProductImage image = new ProductImage(part.getInputStream().readAllBytes(), p, fileArray[fileArray.length-1], part.getContentType());
+      productImageService.updateImage(productId, image);
+      response = new ResponseEntity<>(HttpStatus.OK);
     }
       return response;
   }

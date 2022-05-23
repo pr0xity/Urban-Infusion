@@ -41,7 +41,7 @@ public interface ProductImageService {
      * @param imageFile the image to update with.
      * @return the image that was updated.
      */
-    ProductImage updateImage(long productId, MultipartFile imageFile);
+    ProductImage updateImage(long productId, ProductImage imageFile);
 
 
 }
