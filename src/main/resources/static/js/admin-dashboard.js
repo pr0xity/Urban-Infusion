@@ -51,7 +51,7 @@ function addCustomerRow(id, name, email) {
 function getLatestOrders() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', host + port + ORDERS_API_PATHNAME + "/recent", true);
+    req.open('GET', URL + ORDERS_API_PATHNAME + "/recent", true);
     req.onload  = function() {
         const jsonResponse = JSON.parse(req.responseText);
         loadOrders(jsonResponse)
@@ -105,7 +105,7 @@ function addOrderRow(order) {
 function getLatestRatings() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', host + port + RATING_API_PATHNAME + "/recent", true);
+    req.open('GET', URL + RATING_API_PATHNAME + "/recent", true);
     req.onload  = function() {
         const jsonResponse = JSON.parse(req.responseText);
         loadRatings(jsonResponse)

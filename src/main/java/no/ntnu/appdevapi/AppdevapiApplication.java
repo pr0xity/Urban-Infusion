@@ -69,8 +69,8 @@ public class AppdevapiApplication {
         permissionLevelService.savePermissionLevel(new PermissionLevel("admin", null));
         permissionLevelService.savePermissionLevel(new PermissionLevel("owner", null));
 
-        userService.save(new UserDto("Geir", "Otlo", "geo@geo.geo", "1234", "Vika Terrasse 9", "C/O Espen Otlo", "6010", "Ålesund", "Norge", "91887754"));
-        userService.save(new UserDto("Per", "Person", "per@person.geo", "1234", "Gamle Blindheimsveg 72a", "6012", "Ålesund", "Norge", "46537894"));
+        userService.save(new UserDto("Arne", "Arnesen", "arne@arnesen.arn", "1234", "Arneveien 13", "C/O Anette Anettessen", "1440", "Bergen", "Norge", "13647980"));
+        userService.save(new UserDto("Per", "Person", "per@person.per", "1234", "Gamle Persgate 72a", "6011", "Ålesund", "Norge", "46537894"));
         userService.save(new UserDto("user", "user", "user", "1234"));
         userService.save(new UserDto("admin", "admin", "admin", "1234", "admin"));
         userService.save(new UserDto("owner", "owner", "owner", "1234", "owner"));
@@ -124,14 +124,14 @@ public class AppdevapiApplication {
         shoppingSessionService.addShoppingSession(new ShoppingSession(userService.findAll().get(4)));
 
         OrderDetails od1 = new OrderDetails();
-        od1.setUser(userService.findOneByEmail("geo@geo.geo"));
+        od1.setUser(userService.findOneByEmail("arne@arnesen.arn"));
         OrderItem oi1 = new OrderItem(od1, productService.getProductByName("Heather tea"), 2);
         od1.addOrderItem(oi1);
         orderDetailsService.addOrderDetails(od1);
         orderItemService.addOrderItem(oi1);
 
         OrderDetails od2 = new OrderDetails();
-        User user = userService.findOneByEmail("per@person.geo");
+        User user = userService.findOneByEmail("per@person.per");
         od2.setUser(user);
         od2.setProcessed(true);
         OrderItem oi2 = new OrderItem(od2, productService.getProductByName("Sencha 50g"), 2);
