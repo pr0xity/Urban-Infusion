@@ -1,4 +1,5 @@
 <div class="modal__window" id="overlayWindow">
+  <div id="editNameOverlay" class="edit__overlay" th:insert="components/overlays/edit/edit-name"></div>
   <h2>Review information</h2>
   <button
           class="manage__btn--close close btn--icon"
@@ -11,7 +12,10 @@
       <p class="info__row"><span class="info__label">Date</span><span id="dateLabel"></span></p>
       <p class="info__row"><span class="info__label">Review ID</span><span id="ratingIdLabel"></span></p>
       <p class="info__row"><span class="info__label">User ID</span><span id="userIdLabel"></span></p>
-      <p class="info__row"><span class="info__label">Display Name</span><span id="displayNameLabel"></span></p>
+      <p class="info__row"><span class="info__label">Display Name</span><span id="displayNameLabel"></span>
+        <button id="editNameButton" class="account-info__btn">
+          <i class="ph-pencil-simple-light btn--icon"></i>
+        </button></p></p>
       <p class="info__row"><span class="info__label">Product ID</span><span id="productIdLabel"></span></p>
       <p class="info__row"><span class="info__label">Product Name</span><span id="productNameLabel"></span></p>
       <p class="info__row"><span class="info__label">Rating</span><span id="ratingLabel"></span></p>

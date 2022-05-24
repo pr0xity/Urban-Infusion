@@ -1,4 +1,5 @@
 const overlay = document.getElementById("overlay");
+const editOverlay = document.getElementsByClassName("edit__window")[0];
 
 let ratings = null;
 
@@ -54,10 +55,12 @@ const addRatingRow = function(rating) {
     const tableBody = document.getElementById("ratingTableBody");
     const row = document.createElement("tr");
 
-    row.addEventListener("click", () => {
-        manageRating(rating);
-        overlay.classList.toggle("hidden");
-    })
+    if (null != overlay) {
+        row.addEventListener("click", () => {
+            manageRating(rating);
+            overlay.classList.toggle("hidden");
+        });
+    }
 
     const dateCell = document.createElement("td");
     const productIdCell = document.createElement("td");
@@ -126,6 +129,15 @@ const deleteRating = function(rating) {
         getRatings,
         null);
     overlay.classList.toggle("hidden");
+}
+
+const updateRating = function(rating) {
+    sendApiRequest(RATING_API_PATHNAME + "/" + rating["id"],
+        "PUT",
+        convertRatingToDTO(rating),
+        getRatings,
+        null);
+    editOverlay.classList.toggle("display");
 }
 
 const convertRatingToDTO = function(rating) {
