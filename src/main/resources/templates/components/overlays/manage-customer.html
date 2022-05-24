@@ -10,18 +10,21 @@
     <section class="section-info__labels">
       <p class="info__row"><span class="info__label">ID</span><span id="customerIdLabel"></span></p>
       <p class="info__row"><span class="info__label">Name</span><span id="customerNameLabel"></span>
-        <button id="editNameButton" class="info__btn">
+        <button id="editFullNameButton" class="info__btn">
           <i class="ph-pencil-simple-light btn--icon"></i>
         </button></p>
+      <div id="editFullNameOverlay" class="edit__overlay" th:insert="components/overlays/edit/edit-full-name"></div>
       <p class="info__row"><span class="info__label">Email</span><span id="customerEmailLabel"></span>
-        <button id="editEmailButton" class="info__btn">
+      <button id="editEmailButton" class="info__btn">
           <i class="ph-pencil-simple-light btn--icon"></i>
         </button></p>
+      <div id="editEmailOverlay" class="edit__overlay" th:insert="components/overlays/edit/edit-email"></div>
       <p class="info__row"><span class="info__label">Password</span><span id="customerPasswordLabel"></span></p>
       <p class="info__row"><span class="info__label">Address</span><span id="customerAddressLabel"></span>
-        <button id="editAddressButton" class="info__btn">
+      <button id="editAddressButton" class="info__btn">
           <i class="ph-pencil-simple-light btn--icon"></i>
         </button></p>
+      <div id="editAddressOverlay" class="edit__overlay" th:insert="components/overlays/edit/edit-address"></div>
       <p class="info__row"><span class="info__label">Member since</span><span id="createdAtLabel"></span></p>
       <p class="info__row"><span class="info__label">Last login</span><span id="lastLoginLabel"></span></p>
     </section>
