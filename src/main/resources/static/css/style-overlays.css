@@ -21,14 +21,24 @@
     gap: 1.6rem;
 }
 
-.section-info__labels {
-    min-width: 20rem;
+.info__row {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 3fr 1fr;
+    justify-content: space-evenly;
 }
 
-.info__row {
-    display: grid;
-    grid-template-columns: 1fr 3fr 0.1fr;
-    white-space: nowrap;
+.info__row span {
+    word-wrap: break-word;
+    margin-left: 4rem;
+}
+
+.info__row .btn--icon {
+    font-size: 3rem;
+}
+
+.info__btn {
+    justify-self: end;
 }
 
 .info__label {
@@ -47,10 +57,6 @@
 .manage-customer__table {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     border-spacing: 3.2rem;
-}
-
-.manage-customer__table tbody tr {
-
 }
 
 .section-image {
