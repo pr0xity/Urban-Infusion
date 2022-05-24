@@ -3,7 +3,6 @@ const tableBody = document.getElementById("userTableBody");
 const overlay = document.getElementById("overlay");
 const purchaseHistoryTable = document.getElementById("purchaseHistoryTable");
 const purchaseHistoryTableBody = document.getElementById("purchaseHistoryTableBody");
-const searchInput = document.getElementById("searchInput");
 let users = null;
 
 function getUsers() {
@@ -35,19 +34,23 @@ function addUserRow(user) {
 
     const idCell = document.createElement("td");
     const nameCell = document.createElement("td");
+    const emailCell = document.createElement("td");
     const addressCell = document.createElement("td");
 
     const idNode = document.createTextNode(user["id"]);
     const nameNode = document.createTextNode(user["firstName"] + " " + user["lastName"]);
+    const emailNode = document.createTextNode(user["email"]);
     let addressNode = document.createTextNode("");
     if (user["address"]) addressNode = document.createTextNode(user["address"]["addressLine"]);
 
     idCell.appendChild(idNode);
     nameCell.appendChild(nameNode);
+    emailCell.appendChild(emailNode);
     addressCell.appendChild(addressNode);
 
     row.appendChild(idCell);
     row.appendChild(nameCell);
+    row.appendChild(emailCell);
     row.appendChild(addressCell);
     tableBody.appendChild(row);
 }

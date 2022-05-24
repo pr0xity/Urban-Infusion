@@ -9,7 +9,6 @@ const editNameOverlay = document.getElementById("editNameOverlay");
 const editPriceOverlay = document.getElementById("editPriceOverlay");
 const editDescriptionOverlay = document.getElementById("editDescriptionOverlay");
 const editCategoryOverlay = document.getElementById("editCategoryOverlay");
-const searchInput = document.getElementById("searchInput");
 
 let products = null;
 let product = null;
@@ -44,7 +43,6 @@ function addProductRow(product, productNumber) {
     row.dataset.productNumber = productNumber;
     row.onclick = () => {
         manageProduct(product);
-        overlay.classList.remove("hidden");
     };
 
     const idCell = document.createElement("td");
@@ -81,8 +79,6 @@ function manageProduct(product) {
     const priceLabel = document.getElementById("productPriceLabel");
     const categoryLabel = document.getElementById("productCategoryLabel");
     const descriptionLabel = document.getElementById("productDescriptionLabel");
-    const imageLabel = document.getElementById("productImageLabel");
-    const image = document.getElementById("productImage");
     this.product = product;
 
 
@@ -105,6 +101,7 @@ const fetchImage = function(productId) {
         const imageUrl = urlCreator.createObjectURL(this.response);
         const image = document.getElementById("productImage");
         image.src = imageUrl;
+        overlay.classList.remove("hidden");
     };
     req.send(null);
 }
@@ -127,13 +124,6 @@ function setEventListeners() {
         closeButtons[i].addEventListener("click", function() {
             closeButtons[i].parentElement.parentElement.classList.remove("display");
         });
-    }
-
-    searchInput.onkeydown = function(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            return false;
-        }
     }
 }
 

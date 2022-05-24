@@ -35,7 +35,8 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
 
 .sidenav {
     height: 100%;
-    box-shadow: 1rem 0.2rem 2rem rgb(0 0 0 / 15%);
+    min-height: 50rem;
+    box-shadow: 1rem 1rem 2rem rgb(0 0 0 / 15%);
 }
 
 .sidenav__item {
@@ -59,10 +60,11 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
     flex-direction: column;
     align-items: center;
     padding: 2.4rem;
-    max-height: 50rem;
 }
 
 .searchbar {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     min-width: 30%;
 }
 
@@ -98,7 +100,7 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
 
 .section-dashboard {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     flex-basis: 50%;
     flex-wrap: wrap;
     padding: 2.4rem;
@@ -112,6 +114,16 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
 .dashboard__label:hover {
     transition: all 0.2s ease-out;
     transform: scale(1.1);
+}
+
+th {
+    text-align: left;
+}
+
+.dashboard__table {
+    margin-right: 4rem;
+    box-shadow: 0rem 1rem 2rem rgb(0 0 0 / 15%);
+    padding: 0rem 1.2rem 1.2rem 1.2rem;
 }
 
 .dashboard__table tr {
@@ -131,12 +143,6 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
     cursor: pointer;
 }
 
-.user-table tbody tr:hover {
-    background-color: #dae4e8;
-    outline: none;
-    cursor: pointer;
-}
-
 .dashboard__table--customers tr {
     grid-template-columns: 1fr 4fr 5fr;
 }
@@ -146,19 +152,39 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
 }
 
 .dashboard__table--ratings tr {
-    grid-template-columns: 2fr 2fr 2fr 1fr 4fr;
+    grid-template-columns: 2fr 2fr 2fr 2fr 1fr 5fr;
+}
+
+.user__table {
+    box-shadow: none;
+}
+
+.user__table tr {
+    grid-template-columns: 1fr 2fr 2fr 6fr;
+}
+
+.order__table {
+    box-shadow: none;
 }
 
 .order__table tr {
     grid-template-columns: 1fr 1fr 1fr 4fr 1fr;
 }
 
+.products__table {
+    box-shadow: none;
+}
+
 .products__table tr {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 
-th {
-    text-align: left;
+.ratings__table {
+    box-shadow: none;
+}
+
+.ratings__table tr {
+    grid-template-columns: 2fr 2fr 2fr 2fr 1fr 5fr;
 }
 
 .dashboard__label {
@@ -182,7 +208,7 @@ th {
     padding: 1.6rem 2.4rem 1.6rem 2.4rem;
     background-color: rgba(218, 215, 205, 1);
     transition: all 0.2s ease-out;
-    box-shadow: 1rem 0.2rem 2rem rgb(0 0 0 / 15%);
+    box-shadow: 0rem 1rem 2rem rgb(0 0 0 / 30%);
 }
 
 .admin__nav-box {

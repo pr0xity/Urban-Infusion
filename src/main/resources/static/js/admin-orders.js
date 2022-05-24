@@ -1,5 +1,4 @@
 let orders = null;
-const searchInput = document.getElementById("searchInput");
 const tableBody = document.getElementById("orderTableBody");
 const manageOrderTableBody = document.getElementById("manageOrderTableBody");
 const overlay = document.getElementById("overlay");

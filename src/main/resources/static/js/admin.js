@@ -1,11 +1,17 @@
 const userMenuButton = document.querySelector("#user-menu");
 const userMenuElement = document.querySelector(".nav__user-menu");
+const searchInput = document.getElementById("searchInput");
 
 userMenuButton.addEventListener("click", function () {
     userMenuElement.classList.toggle("hidden");
+    window.addEventListener('mouseup', function(event) {
+        if (!userMenuElement.contains(event.target)){
+            userMenuElement.classList.add("hidden");
+        }
+    });
 });
 
-if (document.getElementsByClassName("overlay")) {
+if (document.getElementsByClassName("overlay").length > 0) {
     const overlay = document.getElementById("overlay");
     const closeButton = document.getElementById("closeButton")
     closeButton.onclick = function () {
@@ -16,4 +22,13 @@ if (document.getElementsByClassName("overlay")) {
             overlay.classList.add("hidden");
         }
     });
+}
+
+if (null != searchInput) {
+    searchInput.onkeydown = function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            return false;
+        }
+    }
 }
