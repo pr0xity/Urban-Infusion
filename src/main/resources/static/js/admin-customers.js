@@ -3,9 +3,23 @@ const tableBody = document.getElementById("userTableBody");
 const overlay = document.getElementById("overlay");
 const purchaseHistoryTable = document.getElementById("purchaseHistoryTable");
 const purchaseHistoryTableBody = document.getElementById("purchaseHistoryTableBody");
-let users = null;
 
-function getUsers() {
+const editFullNameButton = document.getElementById("editFullNameButton");
+const editEmailButton = document.getElementById("editEmailButton");
+const editAddressButton = document.getElementById("editAddressButton");
+const editFullNameOverlay = document.getElementById("editFullNameOverlay");
+const editEmailOverlay = document.getElementById("editEmailOverlay");
+const editAddressOverlay = document.getElementById("editAddressOverlay");
+
+let users = null;
+let user = null;
+
+const initialCustomers = function() {
+    getUsers();
+    setEventListeners();
+}
+
+const getUsers = function() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
     req.open('GET', URL + USERS_API_PATHNAME, true);
@@ -16,7 +30,7 @@ function getUsers() {
     req.send(null);
 }
 
-function loadUsers(users) {
+const loadUsers = function(users) {
     tableBody.innerHTML = "";
     for (let i = 0; i < users.length; i++) {
         const user = users[i];
@@ -24,7 +38,7 @@ function loadUsers(users) {
     }
 }
 
-function addUserRow(user) {
+const addUserRow = function(user) {
     if (!document.getElementById("userTable")) return;
     const row = document.createElement("tr");
     row.addEventListener("click", () => {
@@ -55,7 +69,8 @@ function addUserRow(user) {
     tableBody.appendChild(row);
 }
 
-function manageUser(user) {
+const manageUser = function(managedUser) {
+    user = managedUser;
     const idLabel = document.getElementById("customerIdLabel");
     const nameLabel = document.getElementById("customerNameLabel");
     const emailLabel = document.getElementById("customerEmailLabel");
@@ -64,19 +79,19 @@ function manageUser(user) {
     const createdAtLabel = document.getElementById("createdAtLabel");
     const lastLoginLabel = document.getElementById("lastLoginLabel");
 
-    idLabel.textContent = user["id"];
-    nameLabel.textContent = user["firstName"] + " " + user["lastName"];
-    emailLabel.textContent = user["email"];
+    idLabel.textContent = managedUser["id"];
+    nameLabel.textContent = managedUser["firstName"] + " " + managedUser["lastName"];
+    emailLabel.textContent = managedUser["email"];
     passwordLabel.textContent = "*******";
-    if (user["address"]) addressLabel.textContent = user["address"]["addressLine"];
-    createdAtLabel.textContent = user["createdAt"].substring(0,10);
+    if (managedUser["address"]) addressLabel.textContent = managedUser["address"]["addressLine"];
+    createdAtLabel.textContent = managedUser["createdAt"].substring(0,10);
     // todo: delete or implement last login.
     lastLoginLabel.textContent = "yesterday";
 
-    fetchOrders(user);
+    fetchOrders(managedUser);
 }
 
-function fetchOrders(user) {
+const fetchOrders = function(user) {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
     req.open('GET', URL + ORDERS_API_PATHNAME, true);
@@ -87,7 +102,7 @@ function fetchOrders(user) {
     req.send(null);
 }
 
-function populatePurchaseHistory(user, allOrders) {
+const populatePurchaseHistory = function(user, allOrders) {
     purchaseHistoryTableBody.innerHTML = "";
     const orders = [];
     for (let i = 0; i < allOrders.length; i++) {
@@ -101,7 +116,7 @@ function populatePurchaseHistory(user, allOrders) {
     }
 }
 
-function addPurchaseHistoryRow(order) {
+const addPurchaseHistoryRow = function(order) {
     const row = document.createElement("tr");
     const dateCell = document.createElement("td");
     const idCell = document.createElement("td");
@@ -147,7 +162,7 @@ function addPurchaseHistoryRow(order) {
     purchaseHistoryTableBody.appendChild(row);
 }
 
-function filterUsers() {
+const filterUsers = function() {
     const filteredUsers = [];
     const searchString = searchInput.value.toLowerCase();
     for (let i = 0; i < users.length; i++) {
@@ -167,4 +182,92 @@ function filterUsers() {
     }
 
     loadUsers(filteredUsers);
+}
+
+
+const setEventListeners = function () {
+    editFullNameButton.addEventListener("click", editFullName);
+    editEmailButton.addEventListener("click",editEmail);
+    editAddressButton.addEventListener("click", editAddress);
+
+    const closeButtons = document.getElementsByClassName("btn--close");
+    for (let i = 0; i < closeButtons.length; i++) {
+        closeButtons[i].addEventListener("click", function() {
+            closeButtons[i].parentElement.parentElement.classList.remove("display");
+        });
+    }
+}
+
+const editCustomerSuccess = async function() {
+    manageUser(user);
+    await getUsers();
+}
+
+const editFullName = function() {
+    document.getElementById("newFirstName").value = "";
+    document.getElementById("newLastName").value = "";
+    editFullNameOverlay.classList.add("display");
+    document.getElementById("updateFullNameButton").addEventListener("click", updateFullName);
+}
+const updateFullName = function(event) {
+    event.preventDefault();
+    user["firstName"] = document.getElementById("newFirstName").value;
+    user["lastName"] = document.getElementById("newLastName").value;
+    sendApiRequest(USERS_API_PATHNAME + "/" + user["id"], "PUT",
+        {firstName: user["firstName"], lastName: user["lastName"]},
+        editCustomerSuccess, null);
+    editFullNameOverlay.classList.remove("display");
+}
+
+
+const editEmail = function() {
+    document.getElementById("newEmail").value = "";
+    editEmailOverlay.classList.add("display");
+    document.getElementById("updateEmailButton").addEventListener("click", updateEmail);
+}
+
+const updateEmail = function(event) {
+    event.preventDefault();
+    user["email"] = document.getElementById("newEmail").value;
+    sendApiRequest(USERS_API_PATHNAME + "/" + user["id"], "PUT",
+        {email: user["email"]},
+        editCustomerSuccess, null);
+    editEmailOverlay.classList.remove("display");
+}
+
+const editAddress = function() {
+    document.getElementById("newAddress1").value = "";
+    document.getElementById("newAddress2").value = "";
+    document.getElementById("newPostalCode").value = "";
+    document.getElementById("newCity").value = "";
+    document.getElementById("newCountry").value = "";
+    editAddressOverlay.classList.add("display");
+    document.getElementById("updateAddressButton").addEventListener("click", updateAddress);
+}
+
+const updateAddress = function(event) {
+    event.preventDefault();
+    user["address"]["addressLine1"] = document.getElementById("newAddress1").value;
+    user["address"]["addressLine2"] = document.getElementById("newAddress2").value;
+    user["address"]["postalCode"] = document.getElementById("newPostalCode").value;
+    user["address"]["city"] = document.getElementById("newCity").value;
+    user["address"]["country"] = document.getElementById("newCountry").value;
+    user["address"]["addressLine"] = buildAddressLine(user["address"]);
+    sendApiRequest(USERS_API_PATHNAME + "/" + user["id"], "PUT",
+        {addressLine1: user["address"]["addressLine1"],
+            addressLine2: user["address"]["addressLine2"],
+            city: user["address"]["city"],
+            postalCode: user["address"]["postalCode"],
+            country: user["address"]["country"]},
+        editCustomerSuccess, null);
+    editAddressOverlay.classList.remove("display");
+}
+
+const buildAddressLine = function(address) {
+    let line = address["addressLine1"] + ", ";
+    if (address["addressLine2"].length > 0) {
+        line += address["addressLine2"] + ", ";
+    }
+    line += address["postalCode"] + " " + address["city"] + ", " + address["country"];
+    return line;
 }
