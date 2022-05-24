@@ -144,9 +144,10 @@ const setSignUpForm = function () {
    *
    * @param event
    */
-  const sendRegistrationRequest = function (event) {
+  const sendRegistrationRequest = async function (event) {
     event.preventDefault();
-    if (isSignUpFormValid()) {
+    const signUpValid = await isSignUpFormValid();
+    if (signUpValid) {
       displayLoadingAnimation();
       sendApiRequest(
         `${REGISTRATION_API_PATHNAME}`,
