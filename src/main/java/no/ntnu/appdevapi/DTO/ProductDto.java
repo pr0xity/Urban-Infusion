@@ -8,29 +8,25 @@ public class ProductDto {
   private String description;
   private String origin;
   private double price;
-  private int inventoryId;
+  private int inventory;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
   private LocalDateTime deletedAt;
-  private String categoryName;
+  private String category;
 
 
-  public ProductDto(){
-    this.price = 0;
-    this.inventoryId = 0;
-  }
+  public ProductDto(){}
 
-  public ProductDto(String name, String description, String origin, double price, String category) {
+  public ProductDto(String name, String description, String origin, double price, int inventory, String category) {
     this.name = name;
     this.description = description;
     this.origin = origin;
     this.price = price;
-    this.inventoryId = 0;
+    this.inventory = inventory;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
     this.deletedAt = null;
-
-    this.categoryName = category;
+    this.category = category;
   }
 
   public String getName() {
@@ -49,8 +45,8 @@ public class ProductDto {
     return price;
   }
 
-  public int getInventoryId() {
-    return inventoryId;
+  public int getInventory() {
+    return inventory;
   }
 
   public LocalDateTime getCreatedAt() {
@@ -65,7 +61,7 @@ public class ProductDto {
     return deletedAt;
   }
 
-  public String getCategoryName() {
-    return categoryName;
+  public String getCategory() {
+    return category;
   }
 }

@@ -2,8 +2,6 @@ package no.ntnu.appdevapi.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
@@ -28,8 +26,8 @@ public class Product {
   @ApiModelProperty("Price of the product, decimal in NOK.")
   private double price;
   @ApiModelProperty("Inventory id of the product.")
-  @Column(name = "fk_inventory_id")
-  private int inventoryId;
+  @Column(name = "inventory")
+  private int inventory;
 
   @OneToOne(mappedBy = "product")
   @JsonIgnore
@@ -63,12 +61,12 @@ public class Product {
     this.category = category;
   }
 
-  public int getInventoryId() {
-    return inventoryId;
+  public int getInventory() {
+    return inventory;
   }
 
-  public void setInventoryId(int inventoryId) {
-    this.inventoryId = inventoryId;
+  public void setInventory(int inventoryId) {
+    this.inventory = inventoryId;
   }
 
   public void setCreatedAt(LocalDateTime createdAt) {

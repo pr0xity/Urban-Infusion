@@ -80,8 +80,9 @@ public class ProductServiceImpl implements ProductService {
         if (null != newProduct.getOrigin()) {
             old.setOrigin(newProduct.getOrigin());
         }
-        if (0 != newProduct.getInventoryId()) {
-            old.setInventoryId(newProduct.getInventoryId());
+        //todo: inventory can be 0
+        if (0 != newProduct.getInventory()) {
+            old.setInventory(newProduct.getInventory());
         }
         productRepository.save(old);
         return productRepository.findById(old.getId()).orElse(null);
@@ -101,12 +102,12 @@ public class ProductServiceImpl implements ProductService {
         product.setDescription(object.getDescription());
         product.setOrigin(object.getOrigin());
         product.setPrice(object.getPrice());
-        product.setInventoryId(object.getInventoryId());
+        product.setInventory(object.getInventory());
         product.setCreatedAt(object.getCreatedAt());
         product.setUpdatedAt(object.getUpdatedAt());
 
-        if (null != object.getCategoryName()) {
-            String[] cName = object.getCategoryName().split(" ");
+        if (null != object.getCategory()) {
+            String[] cName = object.getCategory().split(" ");
             StringBuilder categoryName = new StringBuilder();
             for (int i = 0; i < cName.length; i++) {
                 categoryName.append(cName[i].substring(0, 1).toUpperCase(Locale.ROOT));

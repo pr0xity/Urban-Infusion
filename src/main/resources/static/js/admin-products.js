@@ -57,10 +57,7 @@ function addProductRow(product, productNumber) {
     const nameNode = document.createTextNode(product["name"]);
     const categoryNode = document.createTextNode(product["category"]["name"]);
     const priceNode = document.createTextNode(product["price"]);
-    /*
-    todo: implement productInventoryStuff here
-     */
-    const stockNode = document.createTextNode("-");
+    const stockNode = document.createTextNode(product["inventory"]);
 
     idCell.appendChild(idNode);
     nameCell.appendChild(nameNode);
@@ -92,14 +89,10 @@ function manageProduct(product) {
 
     idLabel.textContent = product["id"];
     nameLabel.textContent = product["name"];
-    /* todo: implement stock field to product */
-    stockLabel.textContent = "-";
+    stockLabel.textContent = product["inventory"];
     priceLabel.textContent = product["price"];
     categoryLabel.textContent = product["category"]["name"];
     descriptionLabel.innerHTML = product["description"].replaceAll(".", ".&ZeroWidthSpace;");
-    /*
-    todo: implement image controller
-     */
     fetchImage(product["id"]);
 }
 
@@ -158,7 +151,6 @@ const updateProductPrice = function(event) {
     event.preventDefault();
     const newPrice = document.getElementById("newPrice").value;
     if (newPrice.length > 0) {
-        /*todo: this does not work. all fields are null.*/
         sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { price: newPrice }, editProductSuccess);
     }
 }
@@ -167,7 +159,6 @@ const updateProductDescription = function(event) {
     event.preventDefault();
     const newDescription = document.getElementById("newDescription").value;
     if (newDescription.length > 0) {
-        /*todo: this does not work. all fields are null.*/
         sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { description: newDescription }, editProductSuccess);
     }
 }
@@ -176,7 +167,6 @@ const updateProductCategory = function(event) {
     event.preventDefault();
     const newCategory = document.getElementById("newCategory").value;
     if (newCategory.length > 0) {
-        /*todo: this does not work. all fields are null.*/
         sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { categoryName: newCategory }, editProductSuccess);
     }
 }

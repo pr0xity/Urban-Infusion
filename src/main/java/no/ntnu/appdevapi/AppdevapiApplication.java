@@ -81,11 +81,11 @@ public class AppdevapiApplication {
           userService.saveUserObject(user);
         });
 
-        productService.addProductFromDto(new ProductDto("Heather tea", "From Norwegian mountains. Gathered carefully before the bees to hold the honey taste. Rich in vitamins. Local produce", "Norwegian mountains", 200, "Tea"));
-        productService.addProductFromDto(new ProductDto("Linden blossom tea", "Classic Latvian tea. Helps against laziness. Use 100C water (not typical for herbal teas). Gathered in summer 2021", "Classic Latvian tea", 200, "Tea"));
-        productService.addProductFromDto(new ProductDto("Sencha 50g", "Japanese green tea. Green leaves. Available in Aug-Sep season only", "Japanese green tea", 100, "Tea"));
-        productService.addProductFromDto(new ProductDto("Sencha 500g", "Japanese green tea. Green leaves. Available in Aug-Sep season only", "Japanese green tea", 800, "Tea"));
-        productService.addProductFromDto(new ProductDto("Mug", "Classic mug. Made from Brazilian clay. Hot-friendly - comfortable to hold even when the water is hot. Handy handle", "Brazilian clay", 120, "Accessories"));
+        productService.addProductFromDto(new ProductDto("Heather tea", "From Norwegian mountains. Gathered carefully before the bees to hold the honey taste. Rich in vitamins. Local produce", "Norwegian mountains", 200, 10, "Tea"));
+        productService.addProductFromDto(new ProductDto("Linden blossom tea", "Classic Latvian tea. Helps against laziness. Use 100C water (not typical for herbal teas). Gathered in summer 2021", "Classic Latvian tea", 200, 5, "Tea"));
+        productService.addProductFromDto(new ProductDto("Sencha 50g", "Japanese green tea. Green leaves. Available in Aug-Sep season only", "Japanese green tea", 100, 20, "Tea"));
+        productService.addProductFromDto(new ProductDto("Sencha 500g", "Japanese green tea. Green leaves. Available in Aug-Sep season only", "Japanese green tea", 800, 36, "Tea"));
+        productService.addProductFromDto(new ProductDto("Mug", "Classic mug. Made from Brazilian clay. Hot-friendly - comfortable to hold even when the water is hot. Handy handle", "Brazilian clay", 120, 70, "Accessories"));
 
         //Adding image to products
         int index = 1;
