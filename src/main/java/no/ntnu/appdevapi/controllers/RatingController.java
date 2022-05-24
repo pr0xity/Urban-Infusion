@@ -134,7 +134,7 @@ public class RatingController {
         Product product = productService.getProduct(productId);
         User user = userService.findOneByEmail(ratingDto.getEmail());
 
-        if (user.getEmail().equals(getUser().getEmail())) {
+        if (user.getEmail().equals(getUser().getEmail()) || isAdmin(getUser())) {
             if (doesRatingAlreadyExist(productId, user)) {
                 Rating rating = this.ratingService.getRatingFromUserAndProduct(user, product);
                 rating.setDisplayName(ratingDto.getDisplayName());
@@ -202,5 +202,10 @@ public class RatingController {
      */
     private User getUser() {
         return this.userService.getSessionUser();
+    }
+
+    private boolean isAdmin(User user) {
+        return user.getPermissionLevel().getAdminType().equals("admin") ||
+                user.getPermissionLevel().getAdminType().equals("owner");
     }
 }

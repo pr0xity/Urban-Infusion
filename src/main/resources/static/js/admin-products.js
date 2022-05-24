@@ -13,12 +13,12 @@ const editCategoryOverlay = document.getElementById("editCategoryOverlay");
 let products = null;
 let product = null;
 
-function initializeProducts() {
+const initializeProducts = function() {
     getProducts();
     setEventListeners();
 }
 
-function getProducts() {
+const getProducts = function() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
     req.open('GET', URL + PRODUCT_API_PATHNAME, true);
@@ -29,7 +29,7 @@ function getProducts() {
     req.send(null);
 }
 
-function loadProducts(products) {
+const loadProducts = function(products) {
     tableBody.innerHTML = "";
     for (let i = 0; i < products.length; i++) {
         const product = products[i];
@@ -37,7 +37,7 @@ function loadProducts(products) {
     }
 }
 
-function addProductRow(product, productNumber) {
+const addProductRow = function(product, productNumber) {
     if (!document.getElementById("productTable")) return;
     const row = document.createElement("tr");
     row.dataset.productNumber = productNumber;
@@ -75,7 +75,7 @@ function addProductRow(product, productNumber) {
 }
 
 const manageProduct = function(product) {
-    document.getElementById("updateProductNameButton").dataset.productId = product.id;
+    document.getElementById("updateNameButton").dataset.productId = product.id;
     const idLabel = document.getElementById("productIdLabel");
     const nameLabel = document.getElementById("productNameLabel");
     const stockLabel = document.getElementById("productStockLabel");
@@ -109,7 +109,7 @@ const fetchImage = function(productId) {
     req.send(null);
 }
 
-function setEventListeners() {
+const setEventListeners = function() {
     editNameButton.addEventListener("click",function() {
         editName();
     });
@@ -130,7 +130,7 @@ function setEventListeners() {
     }
 }
 
-const button = document.getElementById("updateProductNameButton");
+const button = document.getElementById("updateNameButton");
 
 const updateProductName = function(event) {
     event.preventDefault();
@@ -192,22 +192,22 @@ const editProductSuccess = function() {
     }
 }
 
-function editName() {
+const editName = function() {
     overlay.querySelector("[data-product-id]").addEventListener("click", updateProductName);
     editNameOverlay.classList.add("display");
 }
 
-function editDescription() {
+const editDescription = function() {
     document.getElementById("updateDescriptionButton").addEventListener("click", updateProductDescription);
     editDescriptionOverlay.classList.add("display");
 }
 
-function editPrice() {
+const editPrice = function() {
     document.getElementById("updatePriceButton").addEventListener("click", updateProductPrice);
     editPriceOverlay.classList.add("display");
 }
 
-function editCategory() {
+const editCategory = function() {
     document.getElementById("updateCategoryButton").addEventListener("click", updateProductCategory);
     editCategoryOverlay.classList.add("display");
 }
@@ -225,15 +225,7 @@ if (document.getElementsByClassName("edit__window")) {
     });
 }
 
-const hideEditOverlays = function(event) {
-    const editOverlays = document.getElementsByClassName("edit__window");
-
-    for (let i= 0; i < editOverlays.length; i++) {
-        editOverlays[i].parentElement.classList.remove("display");
-    }
-}
-
-function filterProducts() {
+const filterProducts = function() {
     const filteredProducts = [];
     const searchString = searchInput.value.toLowerCase();
     for (let i = 0; i < products.length; i++) {
@@ -254,7 +246,7 @@ fileSelector.addEventListener('change', (event) => {
     uploadImage(file);
 });
 
-function readImage(file) {
+const readImage = function(file) {
     const reader = new FileReader();
     reader.addEventListener('load', (event) => {
         document.getElementById("productImage").src = event.target.result;
@@ -262,7 +254,7 @@ function readImage(file) {
     reader.readAsDataURL(file);
 }
 
-const uploadImage = function (imageFile) {
+const uploadImage = function(imageFile) {
     let data = new FormData();
     data.append("file", imageFile);
     uploadToServer(data);

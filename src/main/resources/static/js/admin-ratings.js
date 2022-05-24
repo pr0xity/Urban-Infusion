@@ -1,7 +1,14 @@
 const overlay = document.getElementById("overlay");
-const editOverlay = document.getElementsByClassName("edit__window")[0];
+const editNameOverlay = document.getElementById("editNameOverlay");
+const editNameButton = document.getElementById("editNameButton");
 
 let ratings = null;
+let rating = null;
+
+const initializeRatings = function() {
+    getRatings();
+    setEventListeners();
+}
 
 const getRatings = function() {
     const req = new XMLHttpRequest();
@@ -94,7 +101,8 @@ const addRatingRow = function(rating) {
     tableBody.appendChild(row);
 }
 
-const manageRating = function(rating) {
+const manageRating = function(managedRating) {
+    rating = managedRating;
     const dateLabel = document.getElementById("dateLabel");
     const ratingIdLabel = document.getElementById("ratingIdLabel");
     const userIdLabel = document.getElementById("userIdLabel");
@@ -131,13 +139,26 @@ const deleteRating = function(rating) {
     overlay.classList.toggle("hidden");
 }
 
-const updateRating = function(rating) {
-    sendApiRequest(RATING_API_PATHNAME + "/" + rating["id"],
+const editName = function() {
+    document.getElementById("updateNameButton").addEventListener("click", updateRating);
+    document.getElementById("newName").value ="";
+    editNameOverlay.classList.add("display");
+}
+
+const updateRating = function(event) {
+    event.preventDefault();
+    rating["displayName"] = document.getElementById("newName").value;
+    sendApiRequest(RATING_API_PATHNAME + "/" + rating["product"]["id"],
         "PUT",
         convertRatingToDTO(rating),
-        getRatings,
+        updateRatingSuccess,
         null);
-    editOverlay.classList.toggle("display");
+    editNameOverlay.classList.remove("display");
+}
+
+const updateRatingSuccess = function() {
+    manageRating(rating);
+    getRatings();
 }
 
 const convertRatingToDTO = function(rating) {
@@ -147,4 +168,10 @@ const convertRatingToDTO = function(rating) {
     dto["rating"] = rating["rating"];
     dto["comment"] = rating["comment"];
     return dto;
+}
+
+const setEventListeners = function() {
+    editNameButton.addEventListener("click",function() {
+        editName();
+    });
 }

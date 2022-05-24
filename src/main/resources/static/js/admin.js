@@ -32,3 +32,11 @@ if (null != searchInput) {
         }
     }
 }
+
+const hideEditOverlays = function() {
+    const editOverlays = document.getElementsByClassName("edit__window");
+
+    for (let i= 0; i < editOverlays.length; i++) {
+        editOverlays[i].parentElement.classList.remove("display");
+    }
+}
