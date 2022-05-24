@@ -164,7 +164,7 @@ public class UserController {
     User requestedUser = userService.findOneByEmail(email);
     if (requestedUser != null && requestedUser == userService.getSessionUser()) {
       userService.disableUser(email);
-      if (isAdmin(userService.getSessionUser())) {
+      if (!isAdmin(userService.getSessionUser())) {
         Cookie cookie = deleteCookie();
         response.addCookie(cookie);
       }
