@@ -171,7 +171,5 @@ const convertRatingToDTO = function(rating) {
 }
 
 const setEventListeners = function() {
-    editNameButton.addEventListener("click",function() {
-        editName();
-    });
+    editNameButton.addEventListener("click",editName);
 }

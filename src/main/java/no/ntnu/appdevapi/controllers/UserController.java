@@ -117,11 +117,7 @@ public class UserController {
     User currentUser = userService.getSessionUser();
     User userToUpdate = userService.findOneByID(userId);
 
-    Predicate<PermissionLevel> isAdmin = pl -> pl.getAdminType().equals("admin");
-    Predicate<PermissionLevel> isOwner = pl -> pl.getAdminType().equals("owner");
-    boolean adminLevelAuth = currentUser.getPermissionLevels().stream().anyMatch(isAdmin.or(isOwner));
-
-    if ((currentUser.getId() == userId  || adminLevelAuth) && userToUpdate != null) {
+    if ((currentUser.getId() == userId  || isAdmin(currentUser)) && userToUpdate != null) {
       if (userDto.getNewPassword() != null && !bCryptPasswordEncoder.matches(userDto.getPassword(), userToUpdate.getPassword())) {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
       }
@@ -129,17 +125,22 @@ public class UserController {
         if (bCryptPasswordEncoder.matches(userDto.getPassword(), currentUser.getPassword())) {
 
           userService.updateWithUserDto(userToUpdate.getId(), userDto);
-          Cookie cookie = deleteCookie();
-          response.addCookie(cookie);
+          if (!isAdmin(currentUser)) {
+            Cookie cookie = deleteCookie();
+            response.addCookie(cookie);
+          }
           return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
       }
       if (!userDto.isEnabled()) {
-        if (adminLevelAuth || (currentUser.getId() == userId && bCryptPasswordEncoder.matches(userDto.getPassword(), currentUser.getPassword()))) {
+        if (isAdmin(currentUser) || (currentUser.getId() == userId && bCryptPasswordEncoder.matches(userDto.getPassword(), currentUser.getPassword()))) {
           userService.updateWithUserDto(userToUpdate.getId(), userDto);
-          Cookie cookie = deleteCookie();
-          response.addCookie(cookie);
+
+          if (!isAdmin(currentUser)) {
+            Cookie cookie = deleteCookie();
+            response.addCookie(cookie);
+          }
           return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
@@ -163,8 +164,10 @@ public class UserController {
     User requestedUser = userService.findOneByEmail(email);
     if (requestedUser != null && requestedUser == userService.getSessionUser()) {
       userService.disableUser(email);
-      Cookie cookie = deleteCookie();
-      response.addCookie(cookie);
+      if (isAdmin(userService.getSessionUser())) {
+        Cookie cookie = deleteCookie();
+        response.addCookie(cookie);
+      }
       return new ResponseEntity<>(HttpStatus.OK);
     }
     if (null != requestedUser) {
@@ -187,5 +190,11 @@ public class UserController {
     cookie.setPath("/");
 
     return cookie;
+  }
+
+  private boolean isAdmin(User user) {
+    Predicate<PermissionLevel> isAdmin = pl -> pl.getAdminType().equals("admin");
+    Predicate<PermissionLevel> isOwner = pl -> pl.getAdminType().equals("owner");
+    return user.getPermissionLevels().stream().anyMatch(isAdmin.or(isOwner));
   }
 }

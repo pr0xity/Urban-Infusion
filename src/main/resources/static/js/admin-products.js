@@ -122,12 +122,6 @@ const setEventListeners = function() {
     editCategoryButton.addEventListener("click",function() {
         editCategory();
     });
-    const closeButtons = document.getElementsByClassName("btn--close");
-    for (let i = 0; i < closeButtons.length; i++) {
-        closeButtons[i].addEventListener("click", function() {
-            closeButtons[i].parentElement.parentElement.classList.remove("display");
-        });
-    }
 }
 
 const button = document.getElementById("updateNameButton");
