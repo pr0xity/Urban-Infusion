@@ -17,6 +17,9 @@ const setSignUpForm = function () {
     `input[name="registrationPassword"]`
   );
 
+  const buttonText = document.querySelector("#signup-btn");
+  const loadingAnimation = document.querySelector(".loading");
+
   /**
    * Returns the sign-up form as an object for request body.
    *
@@ -94,12 +97,6 @@ const setSignUpForm = function () {
       setInputError(passwordInput, "Field cannot be empty");
     }
 
-    console.log(!!(getSignUpRequestBody().firstName !== "" &&
-      getSignUpRequestBody().lastName !== "" &&
-      isEmailAddressValid(getSignUpRequestBody().email) &&
-      validAddress &&
-      getSignUpRequestBody().password !== ""));
-
     return !!(getSignUpRequestBody().firstName !== "" &&
       getSignUpRequestBody().lastName !== "" &&
       isEmailAddressValid(getSignUpRequestBody().email) &&
@@ -108,9 +105,26 @@ const setSignUpForm = function () {
   };
 
   /**
+   * Displays the loading animation and hides the text from the button.
+   */
+  const displayLoadingAnimation = function () {
+    showElement(loadingAnimation);
+    hideElement(buttonText);
+  }
+
+  /**
+   * Hides the loading animation and displays the text in the button.
+   */
+  const hideLoadingAnimation = function () {
+    hideElement(loadingAnimation);
+    showElement(buttonText);
+  }
+
+  /**
    * Shows the completed registration window.
    */
   const sendRegistrationRequestSuccess = function () {
+    hideLoadingAnimation();
     resetInputError();
     const completedRegistrationWindow = document.querySelector(".modal");
     const completedCloseButton = completedRegistrationWindow.querySelector(
@@ -132,21 +146,23 @@ const setSignUpForm = function () {
    */
   const sendRegistrationRequest = function (event) {
     event.preventDefault();
-    if (isSignUpFormValid() === true) {
+    if (isSignUpFormValid()) {
+      displayLoadingAnimation();
       sendApiRequest(
         `${REGISTRATION_API_PATHNAME}`,
         "POST",
         getSignUpRequestBody(),
         sendRegistrationRequestSuccess,
-        null,
-        null
+        hideLoadingAnimation,
+        hideLoadingAnimation
       );
     }
   };
 
   document
-    .querySelector(`input[name="submitRegistration"]`)
+    .querySelector(`.signup__btn--complete`)
     .addEventListener("click", sendRegistrationRequest);
+  document.querySelector(".signup__form").addEventListener("submit", event => event.preventDefault());
 };
 
 setSignUpForm();

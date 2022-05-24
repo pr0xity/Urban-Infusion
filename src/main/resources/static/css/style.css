@@ -1293,11 +1293,15 @@ address {
   overflow: hidden;
 }
 
-.checkout .btn--green {
+.checkout .btn--green,
+.signup .btn--green {
   padding: 1.6rem 3.2rem;
   font-size: 2rem;
   margin: 2.4rem auto 0;
   line-height: 1;
+  position: relative;
+  min-width: 14rem;
+  min-height: 5rem;
 }
 
 /* .section-payment-delivery {
@@ -1480,6 +1484,10 @@ address {
   cursor: pointer;
 }
 
+.disabled .product__rating--img {
+  cursor: initial;
+}
+
 .review__form .product__rating--review input[type="radio"] {
   /* To take out of flow */
   position: absolute;
@@ -1574,12 +1582,6 @@ address {
 
 .signup__input--password {
   width: 50rem;
-}
-
-.signup .btn--green {
-  padding: 1rem 3rem;
-  margin-top: 3rem;
-  font-size: 1.6rem;
 }
 
 .signup__img {
@@ -1814,4 +1816,65 @@ thead tr {
   justify-items: center;
   max-width: 160rem;
   margin: 0 auto;
+}
+
+/************************************************/
+/* Spinner animation from https://loading.io/css/
+/**********************************************/
+.loading {
+  position: absolute;
+  top: 0;
+}
+
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+}
+.lds-ellipsis div {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
 }

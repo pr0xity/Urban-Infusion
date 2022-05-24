@@ -125,11 +125,30 @@ const setOrderRequestHandling = function () {
   const completeCheckoutButton = document.querySelector(".checkout__btn--complete");
   const completedCheckoutWindow = document.querySelector(".modal");
   const closeCompletedWindowButton = document.querySelector(".btn--close");
+  const buttonText = document.querySelector("#complete-btn");
+  const loadingAnimation = document.querySelector(".loading");
+
+  /**
+   * Displays the loading animation and hides the text from the button.
+   */
+  const displayLoadingAnimation = function () {
+    showElement(loadingAnimation);
+    hideElement(buttonText);
+  }
+
+  /**
+   * Hides the loading animation and displays the text in the button.
+   */
+  const hideLoadingAnimation = function () {
+    hideElement(loadingAnimation);
+    showElement(buttonText);
+  }
 
   /**
    * Show completed checkout modal if order was successful.
    */
   const orderRequestSuccess = function() {
+    hideLoadingAnimation();
     showElement(completedCheckoutWindow);
     closeCompletedWindowButton.addEventListener("click", () => {
       hideElement(completedCheckoutWindow);
@@ -141,7 +160,8 @@ const setOrderRequestHandling = function () {
    */
   const sendOrderRequest = function (event) {
     event.preventDefault();
-    sendApiRequest(`${ORDERS_API_PATHNAME}`, "POST", null, orderRequestSuccess, null, null);
+    displayLoadingAnimation();
+    sendApiRequest(`${ORDERS_API_PATHNAME}`, "POST", null, orderRequestSuccess, hideLoadingAnimation, hideLoadingAnimation);
 
   }
 

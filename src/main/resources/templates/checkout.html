@@ -179,13 +179,22 @@
             <span class="checkout__info">You get a free order from us :)</span>
           </div>
         </section>
-        <input
+        <button
           th:unless="${cart.isEmpty()}"
           type="submit"
           name="submitOrder"
           value="Complete purchase"
           class="btn--green checkout__btn--complete"
-        />
+        ><span id="complete-btn">Complete purchase</span>
+          <div class="loading hidden">
+            <div class="lds-ellipsis">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
+            </div>
+          </div>
+        </button>
       </form>
       <div class="modal hidden">
         <div class="completed modal__window">

@@ -116,12 +116,18 @@
             />
           </label>
 
-          <input
-            type="submit"
-            class="btn--green btn--submit"
-            name="submitRegistration"
-            value="Sign up"
-          />
+          <button
+            class="btn--green signup__btn--complete"
+          ><span id="signup-btn">Signup</span>
+            <div class="loading hidden">
+              <div class="lds-ellipsis">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </div>
+          </button>
         </form>
         <div class="signup signup--images">
           <picture class="signup__picture">
