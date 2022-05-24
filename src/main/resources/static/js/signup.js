@@ -72,8 +72,10 @@ const setSignUpForm = function () {
    *
    * @return {boolean} true if all required fields are valid, false if not.
    */
-  const isSignUpFormValid = function () {
+  const isSignUpFormValid = async function () {
     resetInputError();
+    const validAddress = await isAddressValid(createAddressStringFromObject(getSignUpRequestBody()));
+
     if (getSignUpRequestBody().firstName === "") {
       setInputError(firstNameInput, "Field cannot be empty");
     }
@@ -83,7 +85,7 @@ const setSignUpForm = function () {
     if (!isEmailAddressValid(getSignUpRequestBody().email)) {
       setInputError(emailInput, "Email is not filled or not valid");
     }
-    if (!isAddressValid(createAddressStringFromObject(getSignUpRequestBody())) || !isAddressFormValid(addressInputs)) {
+    if (validAddress === false || !isAddressFormValid(addressInputs)) {
       Object.values(addressInputs).forEach((input) => {
         setInputError(input, "Address is not valid")}
       );
@@ -91,19 +93,25 @@ const setSignUpForm = function () {
     if (getSignUpRequestBody().password === "") {
       setInputError(passwordInput, "Field cannot be empty");
     }
-    return !!(
-      getSignUpRequestBody().firstName !== "" &&
+
+    console.log(!!(getSignUpRequestBody().firstName !== "" &&
       getSignUpRequestBody().lastName !== "" &&
       isEmailAddressValid(getSignUpRequestBody().email) &&
-      isAddressValid(createAddressStringFromObject(getSignUpRequestBody())) &&
-      getSignUpRequestBody().password !== ""
-    );
+      validAddress &&
+      getSignUpRequestBody().password !== ""));
+
+    return !!(getSignUpRequestBody().firstName !== "" &&
+      getSignUpRequestBody().lastName !== "" &&
+      isEmailAddressValid(getSignUpRequestBody().email) &&
+      validAddress &&
+      getSignUpRequestBody().password !== "");
   };
 
   /**
    * Shows the completed registration window.
    */
   const sendRegistrationRequestSuccess = function () {
+    resetInputError();
     const completedRegistrationWindow = document.querySelector(".modal");
     const completedCloseButton = completedRegistrationWindow.querySelector(
       ".btn--close"
@@ -124,8 +132,7 @@ const setSignUpForm = function () {
    */
   const sendRegistrationRequest = function (event) {
     event.preventDefault();
-    if (isSignUpFormValid()) {
-      resetInputError();
+    if (isSignUpFormValid() === true) {
       sendApiRequest(
         `${REGISTRATION_API_PATHNAME}`,
         "POST",

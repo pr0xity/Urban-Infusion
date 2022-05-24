@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta
+      content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
+    through nature."
+      name="description"
+    />
+    <link th:replace="components/designelements/favicon" />
+    <link th:replace="components/designelements/font" />
+    <link rel="stylesheet" type="text/css" href="../css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../css/queries.css" />
+
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <script defer th:src="@{/js/tools.js}"></script>
+    <script defer th:src="@{/js/components/caretbutton.js}"></script>
+    <script defer th:src="@{/js/login.js}"></script>
+    <script defer th:src="@{/js/general.js}"></script>
+    <script defer th:src="@{/js/product.js}"></script>
+    <script defer th:src="@{/js/productcontrols/cartcontrols.js}"></script>
+    <script defer th:src="@{/js/productcontrols/wishlistcontrols.js}"></script>
+    <script defer src="../js/products.js"></script>
+    <title>Urban Infusion</title>
+  </head>
+  <body>
+    <header th:include="components/header" class="header"></header>
+    <section class="section-products container--beige" id="section-products">
+      <div class="section__heading-box">
+        <h2 class="decorative-heading">Products</h2>
+        <h3 class="section-title">Find your herbal friend!</h3>
+      </div>
+
+      <div class="products">
+        <div class="products-filter">
+          <form class="products__form--search">
+            <label>
+              <input
+                class="input products__input--search"
+                name="searchBar"
+                placeholder="Search.."
+                type="text"
+              />
+            </label>
+            <button id="btn-search">
+              <i class="ph-magnifying-glass btn--icon search"></i>
+            </button>
+          </form>
+        </div>
+        <div class="product-cards"></div>
+      </div>
+    </section>
+
+    <footer th:include="components/footer" class="footer"></footer>
+  </body>
+</html>

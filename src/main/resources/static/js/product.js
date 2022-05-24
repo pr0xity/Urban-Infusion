@@ -283,7 +283,7 @@ const setProductPage =  function () {
 }
 
 // Only on a products page.
-if (window.location.pathname.includes(PRODUCT_PATHNAME)) {
+if (window.location.pathname.includes(PRODUCT_PATHNAME) && window.location.pathname !== "/products") {
   mobileLayoutSize.addEventListener("change", setProductPage);
   setProductPage();
   setReviewHandling();

@@ -87,6 +87,11 @@ public class RatingController {
         return response;
     }
 
+    @GetMapping("/product/{productId}")
+    public List<Rating> getRatingFromProductId(@PathVariable long productId) {
+        return ratingService.getRatingsFromProduct(productService.getProduct(productId));
+    }
+
     /**
      * Adds the given rating to the product with the given product id.
      *
@@ -155,7 +160,7 @@ public class RatingController {
      */
     @DeleteMapping("/{productId}")
     public ResponseEntity<String> delete(@PathVariable long productId, @RequestBody RatingDto ratingDto) {
-        ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);;
+        ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
         Product product = productService.getProduct(productId);
         User user = userService.findOneByEmail(ratingDto.getEmail());

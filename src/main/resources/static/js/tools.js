@@ -6,6 +6,7 @@ const REGISTRATION_API_PATHNAME = "/API/register";
 const WISHLIST_API_PATHNAME = "/API/wishlist";
 const RATING_API_PATHNAME = "/API/ratings";
 const PRODUCT_API_PATHNAME = "/API/products";
+const PRODUCT_CATEGORY_API_PATHNAME = "/API/productCategory";
 const USERS_API_PATHNAME = "/API/users";
 const ORDERS_API_PATHNAME = "/API/orders";
 const IMAGE_API_PATHNAME = "/API/products/images";

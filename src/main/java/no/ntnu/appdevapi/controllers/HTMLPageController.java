@@ -65,6 +65,7 @@ public class HTMLPageController {
 
     @GetMapping("products")
     public String getAllProducts(Model model) {
+        addPermissionLevelToModel(model);
         return "products";
     }
 

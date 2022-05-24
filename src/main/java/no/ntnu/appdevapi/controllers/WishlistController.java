@@ -27,6 +27,17 @@ public class WishlistController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping(method = RequestMethod.GET)
+    public ResponseEntity<?> getWishlist() {
+        User user = userService.getSessionUser();
+        if (user != null) {
+            Wishlist wishlist = wishlistService.getWishlistByUser(user);
+            return new ResponseEntity<>(wishlist, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
     /**
      * Adds the product with the given id to the current user's wishlist.
      *

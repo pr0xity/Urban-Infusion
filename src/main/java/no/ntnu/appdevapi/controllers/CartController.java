@@ -66,7 +66,9 @@ public class CartController {
     public ResponseEntity<?> addOrUpdateProductToCart(@PathVariable long productId, @RequestBody Optional<CartItemDto> cartItemDto) {
         CartItem cartItem = getCartItem(productId);
 
-        if (!canCartItemBeModified(productId, cartItem) && getProduct(productId) != null) {
+        if (getUser() == null) {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        } else if (!canCartItemBeModified(productId, cartItem) && getProduct(productId) != null) {
             CartItem newCartItem = new CartItem(getShoppingSession(), getProduct(productId));
             cartItemService.addCartItem(newCartItem);
             updateShoppingSession();
@@ -83,8 +85,6 @@ public class CartController {
             updateShoppingSession();
 
             return new ResponseEntity<>(HttpStatus.OK);
-        } else if (getUser() == null) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
 
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

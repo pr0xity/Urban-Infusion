@@ -226,7 +226,8 @@ const setWishlistButtons = function () {
   // Setting the buttons on the page
   if (
     window.location.pathname === HOME_PATHNAME ||
-    window.location.pathname === WISHLIST_PATHNAME
+    window.location.pathname === WISHLIST_PATHNAME ||
+    window.location.pathname === "/products"
   ) {
     setWishlistButtonsOnMultipleProducts();
   } else if (window.location.pathname.includes(PRODUCT_PATHNAME)) {
