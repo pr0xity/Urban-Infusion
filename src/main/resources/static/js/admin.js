@@ -32,6 +32,31 @@ if (null != searchInput) {
         }
     }
 }
+const closeButtons = document.getElementsByClassName("btn--close close");
+if (closeButtons.length > 0) {
+    for (let i = 0; i < closeButtons.length; i++) {
+        const button = closeButtons[i];
+        button.addEventListener("click", function() {
+            hideEditOverlays();
+        })
+    }
+}
+
+const editOverlays = document.getElementsByClassName("edit__window");
+if (editOverlays.length > 0) {
+    window.addEventListener('mouseup', function(event) {
+        let inWindow = false;
+        for (let i = 0; i < editOverlays.length; i++) {
+            const editOverlay = editOverlays[i];
+            if (editOverlay.contains(event.target)) {
+                inWindow = true;
+            }
+        }
+        if (!inWindow) {
+            hideEditOverlays();
+        }
+    });
+}
 
 const hideEditOverlays = function() {
     const editOverlays = document.getElementsByClassName("edit__window");
