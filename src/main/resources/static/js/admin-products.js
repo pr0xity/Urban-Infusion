@@ -41,9 +41,12 @@ function addProductRow(product, productNumber) {
     if (!document.getElementById("productTable")) return;
     const row = document.createElement("tr");
     row.dataset.productNumber = productNumber;
-    row.onclick = () => {
-        manageProduct(product);
-    };
+
+    if (null != overlay) {
+        row.onclick = () => {
+            manageProduct(product);
+        };
+    }
 
     const idCell = document.createElement("td");
     const nameCell = document.createElement("td");
@@ -71,7 +74,7 @@ function addProductRow(product, productNumber) {
     tableBody.appendChild(row);
 }
 
-function manageProduct(product) {
+const manageProduct = function(product) {
     document.getElementById("updateProductNameButton").dataset.productId = product.id;
     const idLabel = document.getElementById("productIdLabel");
     const nameLabel = document.getElementById("productNameLabel");
