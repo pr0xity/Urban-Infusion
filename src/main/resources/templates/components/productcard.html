@@ -5,7 +5,7 @@
 />
 <div class="product-card__details">
   <a
-    th:href="@{/product/{id}#section-reviews(id=${product.id})}"
+    th:href="@{/products/{id}#section-reviews(id=${product.id})}"
     class="product__rating"
     th:attr="data-rating=${product.averageRating}"
     th:attrappend="aria-label='This product has an average rating of '+ ${product.averageRating} +' tea leaves, click to see all reviews'"
@@ -38,7 +38,7 @@
     />
     <p th:text="'(' + ${product.ratings.size()} + ')'">(0)</p>
   </a>
-  <a th:href="@{/product/{id}(id=${product.id})}" class="link">
+  <a th:href="@{/products/{id}(id=${product.id})}" class="link">
     <h4 class="product-card__heading" th:text="${product.name}">Heather tea</h4>
   </a>
   <ul class="product-card__list">

@@ -20,7 +20,6 @@ class Slider {
     this.sliderContainer = slides[0].parentNode;
     this.numberOfSlides = slides.length;
     this.currentSlide = Math.floor(this.numberOfSlides / 2);
-    this.goToSlideReference = this.goToSlide.bind(this);
     this.touchStartHandlerReference = this.touchStartHandler.bind(this);
     this.touchEndHandlerReference = this.touchEndHandler.bind(this);
     this.formattingClasses = [
@@ -40,8 +39,8 @@ class Slider {
     this.implementSliderController(this.sliderContainer);
     this.formatSlides();
     this.slides.forEach((slide) => {
-      slide.addEventListener("click", this.goToSlideReference);
-      this.addTouchEventsToSlider(slide);
+      slide.addEventListener("click", this.goToSlide);
+      this.addTouchEventsToSlide(slide);
     });
   };
 
@@ -53,8 +52,8 @@ class Slider {
     this.removeSlideController();
 
     this.slides.forEach((slide) => {
-      slide.removeEventListener("click", this.goToSlideReference);
-      this.removeTouchEventsFromSlider(slide);
+      slide.removeEventListener("click", this.goToSlide);
+      this.removeTouchEventsFromSlide(slide);
     });
   }
 
@@ -242,28 +241,19 @@ class Slider {
   touchend = 0;
 
   /**
-   * Adds touchend and touchstart event listeners to the slider container.
+   * Adds touchend and touchstart event listeners to the slide given.
    */
-  addTouchEventsToSlider (sliderContainer) {
-    sliderContainer.addEventListener(
-      "touchstart",
-      this.touchStartHandlerReference
-    );
-    sliderContainer.addEventListener("touchend", this.touchEndHandlerReference);
+  addTouchEventsToSlide (slide) {
+    slide.addEventListener("touchstart", this.touchStartHandlerReference);
+    slide.addEventListener("touchend", this.touchEndHandlerReference);
   };
 
   /**
-   * Removes the touchend and touchstart event listeners from the slider container.
+   * Removes the touchend and touchstart event listeners from the slide given.
    */
-  removeTouchEventsFromSlider (sliderContainer) {
-    sliderContainer.removeEventListener(
-      "touchstart",
-      this.touchStartHandlerReference
-    );
-    sliderContainer.removeEventListener(
-      "touchend",
-      this.touchEndHandlerReference
-    );
+  removeTouchEventsFromSlide (slide) {
+    slide.removeEventListener("touchstart", this.touchStartHandlerReference);
+    slide.removeEventListener("touchend", this.touchEndHandlerReference);
   };
 
   /**
@@ -284,6 +274,7 @@ class Slider {
   touchEndHandler (event) {
     this.touchend = event.changedTouches[0].screenX;
 
+    console.log(this);
     if (this.swipedRight()) {
       this.sliderNext();
     }

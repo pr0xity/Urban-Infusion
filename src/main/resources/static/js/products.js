@@ -1,5 +1,5 @@
 const setProductsPage = function () {
-  const productsContainer = document.querySelector(".product-cards");
+  const productsContainer = document.querySelector(".products__container");
 
   /**
    * Empties the product container.
@@ -139,7 +139,7 @@ const setProductsPage = function () {
     />
     <div class="product-card__details">
         <a
-          href="/product/${product.id}"
+          href="/products/${product.id}"
           class="product__rating"
           data-rating=${product.averageRating}
           aria-label="This product has an average rating of ${
@@ -173,7 +173,7 @@ const setProductsPage = function () {
         />
         <p></p>
         </a>
-        <a href="/product/${product.id}" class="link">
+        <a href="/products/${product.id}" class="link">
             <h4 class="product-card__heading">${product.name}</h4>
         </a>
         <ul class="product-card__list">
@@ -212,7 +212,7 @@ const setProductsPage = function () {
    * Gets the categories from the tea shop and formats and places them on the site.
    */
   const setCategoryButton = function () {
-    const filterSection = document.querySelector(".products-filter");
+    const filterSection = document.querySelector(".products__box--search");
     filterSection.insertAdjacentHTML(
       "beforeend",
       `<button class="btn btn--text filter" id="All">All products</button>`

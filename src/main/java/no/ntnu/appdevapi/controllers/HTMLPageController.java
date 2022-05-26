@@ -25,12 +25,6 @@ public class HTMLPageController {
     private UserService userService;
 
     @Autowired
-    private VerificationTokenService verificationTokenService;
-
-    @Autowired
-    private UserAddressService userAddressService;
-
-    @Autowired
     private WishlistService wishlistService;
 
     @Autowired
@@ -76,7 +70,7 @@ public class HTMLPageController {
      * @param model model for product.
      * @return product thymeleaf template.
      */
-    @GetMapping("product/{id}")
+    @GetMapping("products/{id}")
     public String getProduct(@PathVariable long id, Model model) {
         Product product = productService.getProduct(id);
         Wishlist wishlist = this.wishlistService.getWishlistByUser(this.getUser());

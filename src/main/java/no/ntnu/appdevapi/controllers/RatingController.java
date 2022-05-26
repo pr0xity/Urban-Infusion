@@ -87,7 +87,7 @@ public class RatingController {
         return response;
     }
 
-    @GetMapping("/product/{productId}")
+    @GetMapping("/products/{productId}")
     public List<Rating> getRatingFromProductId(@PathVariable long productId) {
         return ratingService.getRatingsFromProduct(productService.getProduct(productId));
     }

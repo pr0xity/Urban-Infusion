@@ -241,14 +241,11 @@ function setReviewHandling() {
   }
 }
 
-/**
- * Sets the products page, implements changes when screen size changes.
- */
-const setProductPage =  function () {
-  const footer = document.querySelector(".footer");
+// Only on a products page.
+if (window.location.pathname.includes(PRODUCT_PATHNAME) && window.location.pathname !== "/products") {
+
   const productCta = document.querySelector(".product__price-cta");
   const productCtaHeight = productCta.getBoundingClientRect().height;
-
 
   const stickyCta = function (entries) {
     const [entry] = entries;
@@ -270,20 +267,23 @@ const setProductPage =  function () {
     rootMargin: `${productCtaHeight}px`,
   });
 
+  /**
+   * Sets the products page, implements changes when screen size changes.
+   */
+  const setProductPage =  function () {
+    const footer = document.querySelector(".footer");
 
-  if (mobileLayoutSize.matches) {
-    footerObserver.observe(footer);
-  } else {
-    footerObserver.unobserve(footer);
-    productCta.classList.remove("product__price-cta--sticky");
-    productCta.classList.remove("product__price-cta--absolute");
-    document.querySelector(".section-product-info").appendChild(productCta);
+
+    if (mobileLayoutSize.matches) {
+      footerObserver.observe(footer);
+    } else {
+      productCta.classList.remove("product__price-cta--sticky");
+      productCta.classList.remove("product__price-cta--absolute");
+      document.querySelector(".section-product-info").appendChild(productCta);
+      footerObserver.unobserve(footer);
+    }
+
   }
-
-}
-
-// Only on a products page.
-if (window.location.pathname.includes(PRODUCT_PATHNAME) && window.location.pathname !== "/products") {
   mobileLayoutSize.addEventListener("change", setProductPage);
   setProductPage();
   setReviewHandling();

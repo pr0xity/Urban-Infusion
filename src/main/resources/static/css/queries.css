@@ -619,6 +619,7 @@
 
   .signup__form {
     padding: 0 2rem 0 0;
+    width: initial;
   }
 
   .signup__input {

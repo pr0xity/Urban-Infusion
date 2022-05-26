@@ -27,14 +27,20 @@
   </head>
   <body>
     <header th:include="components/header" class="header"></header>
-    <section class="section-products container--beige" id="section-products">
+    <main class="products__main container--beige" id="products">
+      <nav class="breadcrumbs">
+        <ul class="breadcrumbs__list">
+          <li class="breadcrumbs__item"><a class="breadcrumbs__link" th:href="@{/}">Home</a></li>
+          <li class="breadcrumbs__item"><i class="ph-caret-right-light"></i>Products</li>
+        </ul>
+      </nav>
       <div class="section__heading-box">
         <h2 class="decorative-heading">Products</h2>
         <h3 class="section-title">Find your herbal friend!</h3>
       </div>
 
-      <div class="products">
-        <div class="products-filter">
+      <div class="">
+        <div class="products__box--search">
           <form class="products__form--search">
             <label>
               <input
@@ -49,10 +55,9 @@
             </button>
           </form>
         </div>
-        <div class="product-cards"></div>
+        <div class="products__container"></div>
       </div>
-    </section>
-
+    </main>
     <footer th:include="components/footer" class="footer"></footer>
   </body>
 </html>

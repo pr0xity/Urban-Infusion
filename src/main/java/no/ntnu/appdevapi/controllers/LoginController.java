@@ -26,6 +26,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -80,6 +81,19 @@ public class LoginController {
     return authenticate(loginUser.getEmail(), loginUser.getPassword());
   }
 
+  @RequestMapping(value = "API/logout", method = RequestMethod.GET)
+  public ResponseEntity<?> deleteTokenCookie(HttpServletResponse response) throws IOException {
+    Cookie cookie = new Cookie("token", null);
+    cookie.setMaxAge(0);
+    cookie.setSecure(true);
+    cookie.setHttpOnly(true);
+    cookie.setPath("/");
+    cookie.setDomain(host);
+    response.addCookie(cookie);
+    response.sendRedirect("/");
+    return new ResponseEntity<>(HttpStatus.OK);
+  }
+
   /**
    * Registers and authenticates a new user.
    * @param nUser UserDto DTO containing necessary information about the new user
@@ -108,7 +122,7 @@ public class LoginController {
    * @param userDto the user who has forgotten password.
    * @return 200 Ok on success, 404 not found if user was not found.
    */
-  @RequestMapping(value = "API/forgottenPassword", method = RequestMethod.POST)
+  @RequestMapping(value = "API/forgotten-password", method = RequestMethod.POST)
   public ResponseEntity<?> forgottenPassword(@RequestBody UserDto userDto) {
     if (userDto == null || userDto.getEmail() == null) {
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -128,7 +142,7 @@ public class LoginController {
    * @param token the verification token.
    * @return redirect user to home page and authenticates the user.
    */
-  @RequestMapping(value = "API/confirmRegistration", method = RequestMethod.GET)
+  @RequestMapping(value = "API/confirm-registration", method = RequestMethod.GET)
   public ResponseEntity<?> confirmRegistration(HttpServletResponse response, @RequestParam("token") String token) throws IOException {
     VerificationToken verificationToken = verificationTokenService.getVerificationTokenByToken(token);
 

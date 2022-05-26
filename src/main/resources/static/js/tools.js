@@ -1,20 +1,20 @@
 // For REST API requests
 const URL = "http://localhost:8080";
-const FORGOTTEN_PASSWORD_API_PATHNAME = "/API/forgottenPassword";
+const FORGOTTEN_PASSWORD_API_PATHNAME = "/API/forgotten-password";
 const AUTHENTICATION_API_PATHNAME = "/API/login";
 const REGISTRATION_API_PATHNAME = "/API/register";
-const WISHLIST_API_PATHNAME = "/API/wishlist";
+const WISHLIST_API_PATHNAME = "/API/wishlists";
 const RATING_API_PATHNAME = "/API/ratings";
 const PRODUCT_API_PATHNAME = "/API/products";
-const PRODUCT_CATEGORY_API_PATHNAME = "/API/productCategory";
+const PRODUCT_CATEGORY_API_PATHNAME = "/API/product-categories";
 const USERS_API_PATHNAME = "/API/users";
 const ORDERS_API_PATHNAME = "/API/orders";
 const IMAGE_API_PATHNAME = "/API/products/images";
-const CART_API_PATHNAME = "/API/cart";
+const CART_API_PATHNAME = "/API/carts";
 
 // Page pathname.
 const HOME_PATHNAME = "/";
-const PRODUCT_PATHNAME = "/product";
+const PRODUCT_PATHNAME = "/products";
 const WISHLIST_PATHNAME = "/wishlist";
 
 let map;

@@ -86,8 +86,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers(POST, "/orders").hasAnyAuthority("user", "admin", "owner")
             .antMatchers(GET,"/user").authenticated()
             .antMatchers(POST,"/users").permitAll()
-            .antMatchers("/","/login","/register", "/products/**" ).permitAll()
-            .and().logout().logoutUrl("/logout").logoutSuccessUrl("/").deleteCookies("token").clearAuthentication(true).invalidateHttpSession(true);
+            .antMatchers("/","/login","/register", "/products/**" ).permitAll();
     http.authorizeRequests().and().exceptionHandling()
             .authenticationEntryPoint(unauthorizedEntryPoint);
     http.addFilterBefore(authenticationTokenFilterBean(),

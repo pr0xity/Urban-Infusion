@@ -31,6 +31,14 @@
       th:attr="data-productId=${product.id}"
       th:attrappend="data-wishlist=${wishlist == null} ? 'false' : (${#sets.contains(wishlist, product)} ? 'true' : 'false')"
     >
+      <nav class="breadcrumbs">
+        <ul class="breadcrumbs__list">
+          <li class="breadcrumbs__item"><a class="breadcrumbs__link" th:href="@{/}">Home</a></li>
+          <li class="breadcrumbs__item"><i class="ph-caret-right-light"></i> <a class="breadcrumbs__link" th:href="@{/products}">Products</a></li>
+          <li class="breadcrumbs__item"><i class="ph-caret-right-light"></i> <a class="breadcrumbs__link breadcrumbs__link--category" th:data-categoryid="${product.category.id}" href="#" th:text="${product.category.name}"></a></li>
+          <li class="breadcrumbs__item"><i class="ph-caret-right-light"></i> <span th:text="${product.name}"></span></li>
+        </ul>
+      </nav>
       <section class="section-product-info">
         <h1 class="section-title" th:text="${product.name}">Heather tea</h1>
         <img

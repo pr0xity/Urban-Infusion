@@ -34,13 +34,12 @@
         <picture>
           <source
             type="image/webp"
-            sizes="100vw"
             srcset="
-              img/hero/heroimg-400.webp   400w,
-              img/hero/heroimg-800.webp   800w,
-              img/hero/heroimg-1600.webp 1600w,
-              img/hero/heroimg-3200.webp 3200w,
-              img/hero/heroimg-4800.webp 4800w
+              img/hero/heroimg-400.webp  0.25x,
+              img/hero/heroimg-800.webp  0.5x,
+              img/hero/heroimg-1600.webp ,
+              img/hero/heroimg-3200.webp 2x,
+              img/hero/heroimg-4800.webp 3x
             "
           />
           <source
@@ -127,7 +126,7 @@
               th:alt="${product.name}"
             />
             <a
-              th:href="@{/product/{id}(id=${product.id})}"
+              th:href="@{/products/{id}(id=${product.id})}"
               class="btn btn--text"
               >View more</a
             >
@@ -214,18 +213,20 @@
             <picture class="gallery__picture">
               <source
                 type="image/webp"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-1-390w.webp,
-                  img/gallery/pic-1-780w.webp  2x,
-                  img/gallery/pic-1-1200w.webp 3x
+                  img/gallery/pic-1-390w.jpg  390w,
+                  img/gallery/pic-1-780w.webp  780w,
+                  img/gallery/pic-1-1200w.webp 1200w
                 "
               />
               <source
                 type="image/jpeg"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-1-390w.jpg,
+                  img/gallery/pic-1-390w.jpg 390w,
                   img/gallery/pic-1-780w.jpg  2x,
-                  img/gallery/pic-1-1200w.jpg 3x
+                  img/gallery/pic-1-1200w.jpg  1200w
                 "
               />
               <img
@@ -237,19 +238,20 @@
             <picture class="gallery__picture">
               <source
                 type="image/webp"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-2-390w.webp,
-                  img/gallery/pic-2-780w.webp  2x,
-                  img/gallery/pic-2-1200w.webp 3x
-                "
+                  img/gallery/pic-2-390w.webp  390w,
+                  img/gallery/pic-2-780w.webp  780w,
+                  img/gallery/pic-2-1200w.webp 1200w"
               />
+              <source type="image/jpeg" media="(max-width: 32em)" srcset="img/gallery/pic-2-390w.jpg">
               <source
                 type="image/jpeg"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-2-390w.jpg,
-                  img/gallery/pic-2-780w.jpg  2x,
-                  img/gallery/pic-2-1200w.jpg 3x
-                "
+                  img/gallery/pic-2-390w.jpg 390w,
+                  img/gallery/pic-2-780w.jpg  780w,
+                  img/gallery/pic-2-1200w.jpg  1200w"
               />
               <img
                 class="gallery__img"
@@ -260,18 +262,20 @@
             <picture class="gallery__picture">
               <source
                 type="image/webp"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-3-390w.webp,
-                  img/gallery/pic-3-780w.webp  2x,
-                  img/gallery/pic-3-1200w.webp 3x
+                  img/gallery/pic-3-390w.jpg  390w,
+                  img/gallery/pic-3-780w.webp  780w,
+                  img/gallery/pic-3-1200w.webp 1200w
                 "
               />
               <source
                 type="image/jpeg"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-3-390w.jpg,
-                  img/gallery/pic-3-780w.jpg  2x,
-                  img/gallery/pic-3-1200w.jpg 3x
+                  img/gallery/pic-3-390w.jpg 390w,
+                  img/gallery/pic-3-780w.jpg  780w,
+                  img/gallery/pic-3-1200w.jpg  1200w
                 "
               />
               <img
@@ -290,18 +294,20 @@
             <picture class="gallery__picture">
               <source
                 type="image/webp"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-4-390w.webp,
-                  img/gallery/pic-4-780w.webp  2x,
-                  img/gallery/pic-4-1200w.webp 3x
+                  img/gallery/pic-4-390w.jpg  390w,
+                  img/gallery/pic-4-780w.webp  780w,
+                  img/gallery/pic-4-1200w.webp 1200w
                 "
               />
               <source
                 type="image/jpeg"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-4-390w.jpg,
-                  img/gallery/pic-4-780w.jpg  2x,
-                  img/gallery/pic-4-1200w.jpg 3x
+                  img/gallery/pic-4-390w.jpg 390w,
+                  img/gallery/pic-4-780w.jpg  780w,
+                  img/gallery/pic-4-1200w.jpg  1200w
                 "
               />
               <img
@@ -313,18 +319,20 @@
             <picture class="gallery__picture">
               <source
                 type="image/webp"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-5-390w.webp,
-                  img/gallery/pic-5-780w.webp  2x,
-                  img/gallery/pic-5-1200w.webp 3x
+                  img/gallery/pic-5-390w.jpg  390w,
+                  img/gallery/pic-5-780w.webp  780w,
+                  img/gallery/pic-5-1200w.webp 1200w
                 "
               />
               <source
                 type="image/jpeg"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-5-390w.jpg,
-                  img/gallery/pic-5-780w.jpg  2x,
-                  img/gallery/pic-5-1200w.jpg 3x
+                  img/gallery/pic-5-390w.jpg 390w,
+                  img/gallery/pic-5-780w.jpg  780w,
+                  img/gallery/pic-5-1200w.jpg  1200w
                 "
               />
               <img
@@ -336,18 +344,20 @@
             <picture class="gallery__picture">
               <source
                 type="image/webp"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-6-390w.webp,
-                  img/gallery/pic-6-780w.webp  2x,
-                  img/gallery/pic-6-1200w.webp 3x
+                  img/gallery/pic-6-390w.jpg  390w,
+                  img/gallery/pic-6-780w.webp  780w,
+                  img/gallery/pic-6-1200w.webp 1200w
                 "
               />
               <source
                 type="image/jpeg"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-6-390w.jpg,
-                  img/gallery/pic-6-780w.jpg  2x,
-                  img/gallery/pic-6-1200w.jpg 3x
+                  img/gallery/pic-6-390w.jpg 390w,
+                  img/gallery/pic-6-780w.jpg  780w,
+                  img/gallery/pic-6-1200w.jpg  1200w
                 "
               />
               <img
@@ -366,18 +376,20 @@
             <picture class="gallery__picture">
               <source
                 type="image/webp"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-7-390w.webp,
-                  img/gallery/pic-7-780w.webp  2x,
-                  img/gallery/pic-7-1200w.webp 3x
+                  img/gallery/pic-7-390w.jpg  390w,
+                  img/gallery/pic-7-780w.webp  780w,
+                  img/gallery/pic-7-1200w.webp 1200w
                 "
               />
               <source
                 type="image/jpeg"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-7-390w.jpg,
-                  img/gallery/pic-7-780w.jpg  2x,
-                  img/gallery/pic-7-1200w.jpg 3x
+                  img/gallery/pic-7-390w.jpg 390w,
+                  img/gallery/pic-7-780w.jpg  780w,
+                  img/gallery/pic-7-1200w.jpg  1200w
                 "
               />
               <img
@@ -389,18 +401,20 @@
             <picture class="gallery__picture">
               <source
                 type="image/webp"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-8-390w.webp,
-                  img/gallery/pic-8-780w.webp  2x,
-                  img/gallery/pic-8-1200w.webp 3x
+                  img/gallery/pic-8-390w.jpg  390w,
+                  img/gallery/pic-8-780w.webp  780w,
+                  img/gallery/pic-8-1200w.webp 1200w
                 "
               />
               <source
                 type="image/jpeg"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-8-390w.jpg,
-                  img/gallery/pic-8-780w.jpg  2x,
-                  img/gallery/pic-8-1200w.jpg 3x
+                  img/gallery/pic-8-390w.jpg 390w,
+                  img/gallery/pic-8-780w.jpg  780w,
+                  img/gallery/pic-8-1200w.jpg  1200w
                 "
               />
               <img
@@ -412,18 +426,20 @@
             <picture class="gallery__picture">
               <source
                 type="image/webp"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-9-390w.webp,
-                  img/gallery/pic-9-780w.webp  2x,
-                  img/gallery/pic-9-1200w.webp 3x
+                  img/gallery/pic-9-390w.jpg  390w,
+                  img/gallery/pic-9-780w.webp  780w,
+                  img/gallery/pic-9-1200w.webp 1200w
                 "
               />
               <source
                 type="image/jpeg"
+                sizes="(max-width: 32em) 40vw, 30rem"
                 srcset="
-                  img/gallery/pic-9-390w.jpg,
-                  img/gallery/pic-9-780w.jpg  2x,
-                  img/gallery/pic-9-1200w.jpg 3x
+                  img/gallery/pic-9-390w.jpg 390w,
+                  img/gallery/pic-9-780w.jpg  780w,
+                  img/gallery/pic-9-1200w.jpg  1200w
                 "
               />
               <img

@@ -29,7 +29,7 @@ class GallerySlider extends Slider {
     this.appendListItemsToElement(galleries, this.sliderContainer);
     hideElement(galleries[0]);
     hideElement(galleries[2]);
-    this.addTouchEventsToSlider(this.sliderContainer);
+    this.addTouchEventsToSlide(this.sliderContainer);
   };
 
   /**
@@ -42,7 +42,7 @@ class GallerySlider extends Slider {
       this.appendListItemsToElement(galleries, this.companyGridElement);
       this.companyGridElement.removeChild(this.sliderContainer);
       galleries.forEach((gallery) => showElement(gallery));
-      this.removeTouchEventsFromSlider(this.sliderContainer);
+      this.removeTouchEventsFromSlide(this.sliderContainer);
     }
     this.removeSlideController();
   };

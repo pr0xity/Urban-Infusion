@@ -8,6 +8,7 @@ import no.ntnu.appdevapi.entities.User;
 import no.ntnu.appdevapi.security.JwtUtil;
 import no.ntnu.appdevapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -24,6 +25,9 @@ import java.util.function.Predicate;
 @RestController
 @RequestMapping("API/users")
 public class UserController {
+
+  @Value("${domain.name}")
+  private String host;
 
   @Autowired
   private JwtUtil jwtUtil;
@@ -188,6 +192,7 @@ public class UserController {
     cookie.setSecure(true);
     cookie.setHttpOnly(true);
     cookie.setPath("/");
+    cookie.setDomain(host);
 
     return cookie;
   }

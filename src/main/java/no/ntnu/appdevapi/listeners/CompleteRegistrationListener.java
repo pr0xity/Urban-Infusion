@@ -69,7 +69,7 @@ public class CompleteRegistrationListener implements ApplicationListener<Complet
      * @return html content of the registration confirmation mail.
      */
     private String createConfirmRegistrationMailContent(User user) {
-        String confirmationUrl = "/API/confirmRegistration?token=" + verificationTokenService.getTokenFromUser(user);
+        String confirmationUrl = "/API/confirm-registration?token=" + verificationTokenService.getTokenFromUser(user);
         String link = ("http://localhost:8080" + confirmationUrl);
 
 

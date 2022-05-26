@@ -18,7 +18,7 @@ import java.util.Optional;
  * REST API controller for cart/shopping sessions.
  */
 @RestController
-@RequestMapping("API/cart")
+@RequestMapping("API/carts")
 public class CartController {
 
     @Autowired
