@@ -27,6 +27,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
@@ -81,8 +82,14 @@ public class LoginController {
     return authenticate(loginUser.getEmail(), loginUser.getPassword());
   }
 
+  /**
+   * Logs off the user.
+   *
+   * @param response response with cookie which expires instantly and redirects user to frontpage.
+   * @throws IOException
+   */
   @RequestMapping(value = "API/logout", method = RequestMethod.GET)
-  public ResponseEntity<?> deleteTokenCookie(HttpServletResponse response) throws IOException {
+  public void deleteTokenCookie(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Cookie cookie = new Cookie("token", null);
     cookie.setMaxAge(0);
     cookie.setSecure(true);
@@ -91,7 +98,6 @@ public class LoginController {
     cookie.setDomain(host);
     response.addCookie(cookie);
     response.sendRedirect("/");
-    return new ResponseEntity<>(HttpStatus.OK);
   }
 
   /**
@@ -170,7 +176,8 @@ public class LoginController {
 
     ResponseCookie springCookie = ResponseCookie.from(cookie, token)
             .httpOnly(true)
-            .secure(false)
+            .secure(true)
+            .sameSite("None")
             .path("/")
             .maxAge(12000)
             .domain(host)

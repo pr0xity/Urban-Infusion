@@ -274,7 +274,6 @@ class Slider {
   touchEndHandler (event) {
     this.touchend = event.changedTouches[0].screenX;
 
-    console.log(this);
     if (this.swipedRight()) {
       this.sliderNext();
     }

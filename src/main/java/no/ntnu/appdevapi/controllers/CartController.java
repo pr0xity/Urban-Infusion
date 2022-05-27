@@ -78,6 +78,7 @@ public class CartController {
             if (cartItemDto.isPresent()) {
                 cartItem.setQuantity(cartItemDto.get().getQuantity());
                 cartItemService.update(cartItem.getId(), cartItem);
+                updateShoppingSession();
                 return new ResponseEntity<>(HttpStatus.OK);
             }
             cartItem.increaseQuantity();

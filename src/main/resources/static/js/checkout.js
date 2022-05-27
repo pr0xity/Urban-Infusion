@@ -27,8 +27,8 @@ const setCartItemControls = function () {
   /**
    * Retrieves and updates the new price for the cart item.
    */
-  const updateCartItemSuccess = function () {
-    getJSON(`${URL}${CART_API_PATHNAME}`).then((cartInfo) => {
+  const updateCartItemSuccess = async function () {
+    await sendApiRequest(`${CART_API_PATHNAME}`, "GET", null, setIncrementCounter, null, null).then((cartInfo) => {
       const cartItems = cartInfo.cart;
       cartItems.forEach((item) => {
         if (item.product.id === Number(productId)) {

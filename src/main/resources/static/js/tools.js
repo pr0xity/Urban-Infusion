@@ -64,6 +64,7 @@ const sendApiRequest = function (
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
+
     });
   };
 
@@ -92,12 +93,14 @@ const sendApiRequest = function (
   };
 
   // send request and handle it.
-  getFetchRequest().then((response) => {
+  return getFetchRequest().then((response) => {
     if (response.ok) {
       if (successCallback !== null) {
         successCallback();
+        return response.json();
       } else {
         console.log("Request was successful");
+        return response.json();
       }
     } else if (response.status === 401) {
       if (unauthorizedCallback !== null) unauthorizedCallback();

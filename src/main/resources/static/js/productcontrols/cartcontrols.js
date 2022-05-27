@@ -9,22 +9,6 @@ const navCheckoutQuantity = document.querySelector(".nav__checkout--quantity");
 const setAddToCartButtons = function () {
 
   /**
-   * Gets the quantity of the shopping cart and display the
-   * increment counter on the checkout button accordingly.
-   */
-  const setIncrementCounter = function () {
-    getJSON(`${URL}${CART_API_PATHNAME}`).then((cartInfo) => {
-      const cartQuantity = cartInfo.quantity;
-      if (cartQuantity > 0) {
-        showElement(navCheckoutQuantity);
-        navCheckoutQuantity.innerHTML = cartQuantity;
-      } else {
-        hideElement(navCheckoutQuantity);
-      }
-    });
-  };
-
-  /**
    * Displays message to user to log in.
    */
   const addToCartUnauthorized = function () {
@@ -90,6 +74,23 @@ const setAddToCartButtons = function () {
   if (window.location.pathname === "products" || window.location.pathname.includes("checkout") ||window.location.pathname.includes("account") || window.location.pathname.includes("wishlist") || window.location.pathname.includes("product") || document.querySelectorAll(addToCartButtonClass)[0].dataset.loggedin === "true") {
     setIncrementCounter();
   }
+};
+
+/**
+ * Gets the quantity of the shopping cart and display the
+ * increment counter on the checkout button accordingly.
+ */
+const setIncrementCounter = async function () {
+  await sendApiRequest(`${CART_API_PATHNAME}`, "GET", null, null, null, null)
+    .then((cartInfo) => {
+    const cartQuantity = cartInfo.quantity;
+    if (cartQuantity > 0) {
+      showElement(navCheckoutQuantity);
+      navCheckoutQuantity.innerHTML = cartQuantity;
+    } else {
+      hideElement(navCheckoutQuantity);
+    }
+  });
 };
 
 setAddToCartButtons();

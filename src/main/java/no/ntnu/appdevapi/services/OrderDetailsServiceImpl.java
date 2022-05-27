@@ -46,7 +46,6 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     public void update(long id, OrderDetails OrderDetails) {
         if (OrderDetails != null && OrderDetails.getId() == id && getOrderDetails(id) != null) {
             this.orderDetailsRepository.save(OrderDetails);
-            System.out.println("did it save?");
         }
     }
 

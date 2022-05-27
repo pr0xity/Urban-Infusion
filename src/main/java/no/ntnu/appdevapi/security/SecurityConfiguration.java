@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,7 +16,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -47,50 +53,69 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
    */
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.cors().and().csrf().disable();
+    http.csrf().disable();
+    http.cors(Customizer.withDefaults());
     //TODO: This need to be be updated with correct paths
     http.sessionManagement().sessionCreationPolicy(STATELESS);
     http.authorizeRequests()
             //.antMatchers("/resources/**").permitAll()
             // NB: Deleting product from wishlist does not work with this:
             //.antMatchers(DELETE).hasAuthority("owner")
-            .antMatchers("/admin/?*").hasAnyAuthority("admin", "owner")
-            .antMatchers(GET, "/users").hasAnyAuthority("admin", "owner")
-            .antMatchers(PUT, "/users/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(PUT, "/users/**").authenticated()
+            .antMatchers("API/admin/?*").hasAnyAuthority("admin", "owner")
+            .antMatchers(GET, "API/users").hasAnyAuthority("admin", "owner")
+            .antMatchers(PUT, "API/users/**").hasAnyAuthority("admin", "owner")
+            .antMatchers(PUT, "API/users/**").authenticated()
+            .antMatchers(POST, "API/wishlists").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers(DELETE, "API/wishlists").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers(GET, "API/wishlists").authenticated()
             .antMatchers("/wishlist").hasAnyAuthority("user", "admin", "owner")
             .antMatchers("/checkout").hasAnyAuthority("user", "admin", "owner")
             .antMatchers("/account").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers(DELETE, "/ratings/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(DELETE, "/ratings/**").authenticated()
-            .antMatchers(POST,"/ratings/**").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers(GET,"/ratings").permitAll()
-            .antMatchers(DELETE, "/cart/**").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers(PUT, "/cart/**").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers(GET, "/cart/**").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers(GET, "/cart").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers(POST, "/products").hasAnyAuthority("admin", "owner")
-            .antMatchers(GET, "/products").permitAll()
-            .antMatchers(DELETE, "/products/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(PUT, "/products/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(POST, "/products/images/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(PUT, "/products/images/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(DELETE, "/products/images/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(GET, "/products/images/**").permitAll()
-            .antMatchers(GET, "/productCategory/**").hasAnyAuthority("admin","owner")
-            .antMatchers(PUT, "/productCategory/**").hasAnyAuthority("admin","owner")
-            .antMatchers(DELETE, "/productCategory/**").hasAnyAuthority("admin","owner")
-            .antMatchers(DELETE, "/orders/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(GET, "/orders/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(GET, "/orders").hasAnyAuthority("admin", "owner")
-            .antMatchers(POST, "/orders").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers(GET,"/user").authenticated()
-            .antMatchers(POST,"/users").permitAll()
-            .antMatchers("/","/login","/register", "/products/**" ).permitAll();
+            .antMatchers(DELETE, "API/ratings/**").hasAnyAuthority("admin", "owner")
+            .antMatchers(DELETE, "API/ratings/**").authenticated()
+            .antMatchers(POST,"API/ratings/**").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers(GET,"API/ratings").permitAll()
+            .antMatchers(DELETE, "API/carts/**").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers(PUT, "API/carts/**").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers(GET, "API/carts/**").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers(GET, "API/cart").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers(POST, "API/products").hasAnyAuthority("admin", "owner")
+            .antMatchers(GET, "API/products").permitAll()
+            .antMatchers(DELETE, "API/products/**").hasAnyAuthority("admin", "owner")
+            .antMatchers(PUT, "API/products/**").hasAnyAuthority("admin", "owner")
+            .antMatchers(POST, "API/products/images/**").hasAnyAuthority("admin", "owner")
+            .antMatchers(PUT, "API/products/images/**").hasAnyAuthority("admin", "owner")
+            .antMatchers(DELETE, "API/products/images/**").hasAnyAuthority("admin", "owner")
+            .antMatchers(GET, "API/products/images/**").permitAll()
+            .antMatchers(GET, "API/product-categories/**").hasAnyAuthority("admin","owner")
+            .antMatchers(PUT, "API/product-categories/**").hasAnyAuthority("admin","owner")
+            .antMatchers(DELETE, "API/product-categories/**").hasAnyAuthority("admin","owner")
+            .antMatchers(DELETE, "API/orders/**").hasAnyAuthority("admin", "owner")
+            .antMatchers(GET, "API/orders/**").hasAnyAuthority("admin", "owner")
+            .antMatchers(GET, "API/orders").hasAnyAuthority("admin", "owner")
+            .antMatchers(POST, "API/orders").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers(GET,"API/user").authenticated()
+            .antMatchers(POST,"API/users").permitAll()
+            .antMatchers("/","API/login", "API/logout", "API/register", "/products/**" ).permitAll();
     http.authorizeRequests().and().exceptionHandling()
             .authenticationEntryPoint(unauthorizedEntryPoint);
     http.addFilterBefore(authenticationTokenFilterBean(),
             UsernamePasswordAuthenticationFilter.class);
+  }
+
+  /**
+   * Configures Spring application to allow requests from another origin.
+   */
+  @Bean
+  CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(List.of("https://gr03.appdev.cloudns.ph/"));
+    configuration.setAllowedMethods(Arrays.asList("HEAD", "GET","POST", "DELETE", "PUT"));
+    configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type", "Set-Cookie"));
+    configuration.setAllowCredentials(true);
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
   }
 
   /**

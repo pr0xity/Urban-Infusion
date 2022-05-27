@@ -1,6 +1,7 @@
 /**********************************************
  * Initializing common features for all pages *
  **********************************************/
+
 // Size for when to render mobile layout.
 const mobileLayoutSize = window.matchMedia("(max-width: 54em)");
 // Menu and close button for mobile layout.
