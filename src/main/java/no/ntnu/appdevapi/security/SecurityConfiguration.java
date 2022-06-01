@@ -38,6 +38,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Autowired
   private UnauthorizedEntryPoint unauthorizedEntryPoint;
 
+  private String admin = "admin";
+  private String user = "user";
+  private String owner = "owner";
+
 
   @Override
   public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -55,48 +59,43 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     http.csrf().disable();
     http.cors(Customizer.withDefaults());
-    //TODO: This need to be be updated with correct paths
     http.sessionManagement().sessionCreationPolicy(STATELESS);
     http.authorizeRequests()
-            //.antMatchers("/resources/**").permitAll()
-            // NB: Deleting product from wishlist does not work with this:
-            //.antMatchers(DELETE).hasAuthority("owner")
-            .antMatchers("api/admin/?*").hasAnyAuthority("admin", "owner")
-            .antMatchers(GET, "api/users").hasAnyAuthority("admin", "owner")
-            .antMatchers(PUT, "api/users/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(PUT, "api/users/**").authenticated()
-            .antMatchers(POST, "api/wishlists").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers(DELETE, "api/wishlists").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers(GET, "api/wishlists").authenticated()
-            .antMatchers("/wishlist").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers("/checkout").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers("/account").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers(DELETE, "api/ratings/**").hasAnyAuthority("admin", "owner")
+
+            .antMatchers("/admin").hasAnyAuthority(admin, owner)
+            .antMatchers("/admin/**").hasAnyAuthority(admin, owner)
+            .antMatchers("api/admin/*").hasAnyAuthority(admin, owner)
+            .antMatchers(GET, "api/users").hasAnyAuthority(admin, owner)
+            .antMatchers(PUT, "api/users/**").hasAnyAuthority(admin, owner)
+            .antMatchers(POST, "api/products").hasAnyAuthority(admin, owner)
+            .antMatchers(PUT, "api/products/**").hasAnyAuthority(admin, owner)
+            .antMatchers(DELETE, "api/products/**").hasAnyAuthority(admin, owner)
+            .antMatchers(POST, "api/products/images/**").hasAnyAuthority(admin, owner)
+            .antMatchers(PUT, "api/products/images/**").hasAnyAuthority(admin, owner)
+            .antMatchers(DELETE, "api/products/images/**").hasAnyAuthority(admin, owner)
+            .antMatchers(GET, "api/product-categories/**").hasAnyAuthority(admin,owner)
+            .antMatchers(PUT, "api/product-categories/**").hasAnyAuthority(admin,owner)
+            .antMatchers(DELETE, "api/product-categories/**").hasAnyAuthority(admin,owner)
+            .antMatchers(GET, "api/orders").hasAnyAuthority(admin, owner)
+            .antMatchers(GET, "api/orders/**").hasAnyAuthority(admin, owner)
+            .antMatchers(DELETE, "api/orders/**").hasAnyAuthority(admin, owner)
+            .antMatchers("/wishlist").authenticated()
+            .antMatchers("/checkout").authenticated()
+            .antMatchers("/account").authenticated()
+            .antMatchers( "api/carts/**").authenticated()
+            .antMatchers(GET, "api/cart").authenticated()
+            .antMatchers(POST, "api/orders").authenticated()
+            .antMatchers(POST,"api/ratings/**").authenticated()
+            .antMatchers(PUT,"api/ratings/**").authenticated()
             .antMatchers(DELETE, "api/ratings/**").authenticated()
-            .antMatchers(POST,"api/ratings/**").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers(GET,"api/ratings").permitAll()
-            .antMatchers(DELETE, "api/carts/**").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers(PUT, "api/carts/**").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers(GET, "api/carts/**").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers(GET, "api/cart").hasAnyAuthority("user", "admin", "owner")
-            .antMatchers(POST, "api/products").hasAnyAuthority("admin", "owner")
-            .antMatchers(GET, "api/products").permitAll()
-            .antMatchers(DELETE, "api/products/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(PUT, "api/products/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(POST, "api/products/images/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(PUT, "api/products/images/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(DELETE, "api/products/images/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(GET, "api/products/images/**").permitAll()
-            .antMatchers(GET, "api/product-categories/**").hasAnyAuthority("admin","owner")
-            .antMatchers(PUT, "api/product-categories/**").hasAnyAuthority("admin","owner")
-            .antMatchers(DELETE, "api/product-categories/**").hasAnyAuthority("admin","owner")
-            .antMatchers(DELETE, "api/orders/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(GET, "api/orders/**").hasAnyAuthority("admin", "owner")
-            .antMatchers(GET, "api/orders").hasAnyAuthority("admin", "owner")
-            .antMatchers(POST, "api/orders").hasAnyAuthority("user", "admin", "owner")
+            .antMatchers(GET, "api/wishlists").authenticated()
+            .antMatchers(PUT, "api/users/**").authenticated()
             .antMatchers(GET,"api/user").authenticated()
+            .antMatchers(GET,"api/ratings").permitAll()
+            .antMatchers(GET, "api/products").permitAll()
+            .antMatchers(GET, "api/products/images/**").permitAll()
             .antMatchers(POST,"api/users").permitAll()
-            .antMatchers("/","api/login", "api/logout", "api/register", "/products/**" ).permitAll();
+            .antMatchers("/", "/products/**", "api/logout", "api/register", "api/login" ).permitAll();
     http.authorizeRequests().and().exceptionHandling()
             .authenticationEntryPoint(unauthorizedEntryPoint);
     http.addFilterBefore(authenticationTokenFilterBean(),
