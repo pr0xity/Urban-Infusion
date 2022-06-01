@@ -23,12 +23,21 @@
 </head>
 <body onload = initializeProducts()>
 <header class="admin__header" th:insert="components/admin-header"></header>
-
 <main class="admin__main">
   <div class="modal overlay hidden" id="overlay" th:insert="components/overlays/manage-product"></div>
-  <aside class="sidenav" th:insert="components/admin-sidenav"></aside>
 
+
+
+  <div class="modal overlay hidden" id="addProductOverlay" th:insert="components/overlays/add-product"></div>
+
+
+
+  <aside class="sidenav" th:insert="components/admin-sidenav"></aside>
   <section class="section-content">
+
+
+
+    <button class = "btn--green" id="addNewProductButton">Add new product</button>
 
     <form class="searchbar">
       <label class="searchbar__label">

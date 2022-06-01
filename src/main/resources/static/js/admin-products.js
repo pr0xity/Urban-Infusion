@@ -1,6 +1,8 @@
 const productTable = document.getElementById("productTable");
 const tableBody = document.getElementById("productTableBody");
 const overlay = document.getElementById("overlay");
+const addProductOverlay = document.getElementById("addProductOverlay")
+const addProductButton = document.getElementById("addNewProductButton")
 const editNameButton = document.getElementById("editNameButton");
 const editDescriptionButton = document.getElementById("editDescriptionButton");
 const editPriceButton = document.getElementById("editPriceButton");
@@ -73,6 +75,21 @@ const addProductRow = function(product, productNumber) {
     row.appendChild(stockCell);
     tableBody.appendChild(row);
 }
+
+
+
+if (null != overlay) {
+    addProductButton.onclick = () => {
+        addProductOverlay.classList.remove("hidden");
+
+    };
+}
+
+
+/*const addProduct = function ()*/
+
+
+
 
 const manageProduct = function(product) {
     document.getElementById("updateNameButton").dataset.productId = product.id;
