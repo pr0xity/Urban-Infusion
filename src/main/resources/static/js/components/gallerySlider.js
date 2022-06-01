@@ -1,7 +1,9 @@
+import Slider from "./slider.js";
+
 /**
  * Slider gallery for the static gallery on the landing page.
  */
-class GallerySlider extends Slider {
+export default class GallerySlider extends Slider {
   companyGridElement;
 
   /**

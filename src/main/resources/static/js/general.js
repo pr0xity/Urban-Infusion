@@ -1,9 +1,9 @@
+import CaretButtons from "./components/caretbutton.js";
+
 /**********************************************
- * Initializing common features for all pages *
+ * Sets header and footer for customer pages *
  **********************************************/
 
-// Size for when to render mobile layout.
-const mobileLayoutSize = window.matchMedia("(max-width: 54em)");
 // Menu and close button for mobile layout.
 const navMobileButtons = document.querySelectorAll(".nav-mobile__btn");
 const mobileMenuButtonOpen = navMobileButtons[0];

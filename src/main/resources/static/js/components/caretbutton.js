@@ -2,7 +2,7 @@
  * Buttons to toggle between hide and display for the heading underneath
  * a heading.
  */
-class CaretButtons {
+export default class CaretButtons {
   buttonClass;
   headingClass;
   headings;

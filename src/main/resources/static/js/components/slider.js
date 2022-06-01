@@ -1,7 +1,8 @@
+"use strict";
 /**
  * Represents a slider
  */
-class Slider {
+export default class Slider {
   slides;
   sliderContainer;
   currentSlide;
@@ -20,6 +21,7 @@ class Slider {
     this.sliderContainer = slides[0].parentNode;
     this.numberOfSlides = slides.length;
     this.currentSlide = Math.floor(this.numberOfSlides / 2);
+    this.goToSlideReference = this.goToSlide.bind(this);
     this.touchStartHandlerReference = this.touchStartHandler.bind(this);
     this.touchEndHandlerReference = this.touchEndHandler.bind(this);
     this.formattingClasses = [
@@ -39,7 +41,7 @@ class Slider {
     this.implementSliderController(this.sliderContainer);
     this.formatSlides();
     this.slides.forEach((slide) => {
-      slide.addEventListener("click", this.goToSlide);
+      slide.addEventListener("click", this.goToSlideReference);
       this.addTouchEventsToSlide(slide);
     });
   };
@@ -52,7 +54,7 @@ class Slider {
     this.removeSlideController();
 
     this.slides.forEach((slide) => {
-      slide.removeEventListener("click", this.goToSlide);
+      slide.removeEventListener("click", this.goToSlideReference);
       this.removeTouchEventsFromSlide(slide);
     });
   }
@@ -97,7 +99,7 @@ class Slider {
    * @param {*} event event used in this handler (only needed for dot)
    */
   goToSlide (event) {
-    if (event !== undefined) {
+    if (event !== undefined && event.target.classList[0] !== undefined) {
       if (this.isEventFromSlide(event)) {
         this.currentSlide = Number(this.getSlideIndexFromSlide(event));
       } else if (this.isEventFromDot(event)) {

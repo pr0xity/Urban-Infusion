@@ -18,7 +18,7 @@
     <script defer th:src="@{/js/tools.js}"></script>
     <script defer th:src="@{/js/components/caretbutton.js}"></script>
     <script defer th:src="@{/js/login.js}"></script>
-    <script defer th:src="@{/js/general.js}"></script>
+    <script type="module" defer th:src="@{/js/general.js}"></script>
     <script defer th:src="@{/js/product.js}"></script>
     <script defer th:src="@{/js/productcontrols/cartcontrols.js}"></script>
     <script defer th:src="@{/js/productcontrols/wishlistcontrols.js}"></script>
@@ -30,8 +30,12 @@
     <main class="products__main container--beige" id="products">
       <nav class="breadcrumbs">
         <ul class="breadcrumbs__list">
-          <li class="breadcrumbs__item"><a class="breadcrumbs__link" th:href="@{/}">Home</a></li>
-          <li class="breadcrumbs__item"><i class="ph-caret-right-light"></i>Products</li>
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" th:href="@{/}">Home</a>
+          </li>
+          <li class="breadcrumbs__item">
+            <i class="ph-caret-right-light"></i>Products
+          </li>
         </ul>
       </nav>
       <div class="section__heading-box">

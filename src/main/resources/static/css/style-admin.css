@@ -12,6 +12,12 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
 /* ADMIN */
 /****************************/
 
+.dashboard__chart--customers {
+    width: 50rem;
+    height: 35rem;
+    aspect-ratio: auto 800/400;
+}
+
 .currentpage {
     color: #588157;
     font-weight: 600;

@@ -1525,6 +1525,11 @@ address {
   border-bottom: 0.1rem solid rgb(109, 104, 117, 0.2);
 }
 
+.review__author {
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+
 .review__text {
   font-size: 1.6rem;
 }

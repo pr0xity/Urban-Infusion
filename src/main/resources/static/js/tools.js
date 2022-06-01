@@ -17,6 +17,8 @@ const HOME_PATHNAME = "/";
 const PRODUCT_PATHNAME = "/products";
 const WISHLIST_PATHNAME = "/wishlist";
 
+// Size for when to render mobile layout.
+const mobileLayoutSize = window.matchMedia("(max-width: 54em)");
 let map;
 let marker;
 
@@ -35,23 +37,17 @@ const reloadCurrentPage = function () {
 };
 
 /**
- * Sends an API request to the sites API URL.
+ * Sends an API request to the tea shops backend API.
  *
- * @param pathname the request mapping to send request to.
+ * @param pathname the request mapping (pathname not whole url) to send request to.
  * @param method request method.
  * @param body the request body to be sent, set as null if not needed.
  * @param successCallback method to do on status Ok.
  * @param unauthorizedCallback method to do on status 401 unauthorized, set as null if not needed.
  * @param errorCallback method to do on error.
  */
-const sendApiRequest = function (
-  pathname,
-  method,
-  body,
-  successCallback,
-  unauthorizedCallback,
-  errorCallback
-) {
+const sendApiRequest = function (pathname, method, body = null, successCallback = null, unauthorizedCallback = null, errorCallback = null) {
+
   /**
    * Returns fetch request with body and headers defined.
    *
@@ -64,7 +60,6 @@ const sendApiRequest = function (
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-
     });
   };
 
@@ -95,12 +90,17 @@ const sendApiRequest = function (
   // send request and handle it.
   return getFetchRequest().then((response) => {
     if (response.ok) {
+      const headers = response.headers.get("content-type");
       if (successCallback !== null) {
         successCallback();
-        return response.json();
+        if (headers !== null && headers.includes("application/json")) {
+          return response.json();
+        }
       } else {
         console.log("Request was successful");
-        return response.json();
+        if (headers !== null && headers.includes("application/json")) {
+          return response.json();
+        }
       }
     } else if (response.status === 401) {
       if (unauthorizedCallback !== null) unauthorizedCallback();

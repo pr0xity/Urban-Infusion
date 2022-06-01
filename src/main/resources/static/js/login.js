@@ -7,6 +7,7 @@ const loginEmail = document.querySelector("#login-email");
 const loginPassword = document.querySelector("#login-password");
 const loginAlert = document.querySelector(".login__alert");
 const forgottenPasswordButton = document.querySelector("#forgotten-password");
+const userMenuButton = document.querySelector("#user-menu");
 
 /**
  * Sets the login alert to the given message.

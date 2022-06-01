@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/queries.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style-admin.css}"/>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script defer th:src="@{/js/tools.js}"></script>
     <script defer th:src="@{/js/admin.js}"></script>
@@ -44,6 +44,11 @@
                 </table>
                 <a class="dashboard__label" th:href="@{/admin/customers}">See all customers</a>
             </section>
+
+            <div >
+                <h2 class="change-heading">Sales last 6 months</h2>
+                <canvas class="dashboard__chart--customers" id="myChart"></canvas>
+            </div>
 
             <section class="dashboard__grid">
                 <h2 class="dashboard__header"> Latest orders: </h2>

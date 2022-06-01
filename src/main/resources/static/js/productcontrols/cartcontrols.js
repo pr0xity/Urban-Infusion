@@ -83,13 +83,15 @@ const setAddToCartButtons = function () {
 const setIncrementCounter = async function () {
   await sendApiRequest(`${CART_API_PATHNAME}`, "GET", null, null, null, null)
     .then((cartInfo) => {
-    const cartQuantity = cartInfo.quantity;
-    if (cartQuantity > 0) {
-      showElement(navCheckoutQuantity);
-      navCheckoutQuantity.innerHTML = cartQuantity;
-    } else {
-      hideElement(navCheckoutQuantity);
-    }
+      if (cartInfo !== undefined) {
+        const cartQuantity = cartInfo.quantity;
+        if (cartQuantity > 0) {
+          showElement(navCheckoutQuantity);
+          navCheckoutQuantity.innerHTML = cartQuantity;
+        } else {
+          hideElement(navCheckoutQuantity);
+        }
+      }
   });
 };
 

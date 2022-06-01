@@ -1,8 +1,14 @@
+import CaretButtons from "./components/caretbutton.js";
+import Slider from "./components/slider.js";
+import GallerySlider from "./components/gallerySlider.js";
+
 /**
  * Initializes components and features of the front page.
  */
 const setFrontPage = function () {
   const sectionHeroEl = document.querySelector(".section-hero");
+  const linkToAboutSection = document.querySelector("#about-link");
+  const aboutSection = document.querySelector(".section-company");
   const featuredSlides = document.querySelectorAll(".featured-card");
   const featuredSlider = new Slider(featuredSlides);
   const gallerySlides = document.querySelectorAll(".gallery");
@@ -36,6 +42,11 @@ const setFrontPage = function () {
     threshold: 0,
     rootMargin: "190px",
   });
+
+  linkToAboutSection.addEventListener("click", (event) => {
+    event.preventDefault();
+    aboutSection.scrollIntoView({behavior: "smooth"})
+  })
 
   /**
    * Checks screen size and changes layout accordingly for index page.

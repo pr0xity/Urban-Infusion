@@ -25,11 +25,9 @@
     ></script>
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script defer th:src="@{/js/tools.js}"></script>
-    <script defer th:src="@{/js/components/caretbutton.js}"></script>
     <script defer th:src="@{/js/login.js}"></script>
-    <script defer th:src="@{/js/general.js}"></script>
-    <script defer th:src="@{/js/productcontrols/cartcontrols.js}"></script>
-    <script defer th:src="@{/js/checkout.js}"></script>
+    <script type="module" defer th:src="@{/js/general.js}"></script>
+    <script type="module" defer th:src="@{/js/checkout.js}"></script>
     <title>Urban Infusion</title>
   </head>
   <body>
@@ -97,7 +95,7 @@
               <input
                 class="item__quantity"
                 th:attr="data-quantity=${cartItem.quantity}"
-                th:attrappend="data-productId=${cartItem.product.id}"
+                th:attrappend="data-productid=${cartItem.product.id}"
                 type="number"
                 name="quantity"
                 aria-label="quantity of this product"
@@ -109,7 +107,7 @@
               />
               <span
                 class="item__price"
-                th:attr="data-productId=${cartItem.product.id}"
+                th:attr="data-productid=${cartItem.product.id}"
                 th:text="${cartItem.getTotal()} + ',-'"
                 >200,-</span
               >
@@ -118,7 +116,7 @@
                   type="submit"
                   name="deleteItem"
                   class="btn--icon item__btn--delete"
-                  th:attr="data-productId=${cartItem.product.id}"
+                  th:attr="data-productid=${cartItem.product.id}"
                   value=""
                   hidden
                 />
@@ -185,7 +183,8 @@
           name="submitOrder"
           value="Complete purchase"
           class="btn--green checkout__btn--complete"
-        ><span id="complete-btn">Complete purchase</span>
+        >
+          <span id="complete-btn">Complete purchase</span>
           <div class="loading hidden">
             <div class="lds-ellipsis">
               <div></div>

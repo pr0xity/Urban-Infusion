@@ -1,4 +1,5 @@
 "use strict";
+import {sendUpdateCartRequest, sendDeleteFromCartRequest, setIncrementCounter} from "./cartService.js";
 
 /**
  * Implements listeners to input fields buttons and updates shopping session accordingly.
@@ -59,16 +60,10 @@ const setCartItemControls = function () {
   const sendUpdateCartItemRequest = function (event) {
     const cartItemRequestBody = getCartItemRequestBody(event.target);
     if (quantity <= 0) {
-      sendCartItemDeleteRequest(productId);
+      sendDeleteFromCartRequest(event)
+    } else {
+      sendUpdateCartRequest(event, cartItemRequestBody)
     }
-    sendApiRequest(
-      `${CART_API_PATHNAME}/${productId}`,
-      "PUT",
-      cartItemRequestBody,
-      updateCartItemSuccess,
-      null,
-      null
-    );
   };
 
   /**
@@ -78,14 +73,15 @@ const setCartItemControls = function () {
     const cartItemRequestBody = getCartItemRequestBody(
       event.target.closest(".item__btn--delete")
     );
-    sendApiRequest(
+    sendDeleteFromCartRequest(event)
+    /*sendApiRequest(
       `${CART_API_PATHNAME}/${cartItemRequestBody.productId}`,
       "DELETE",
       null,
       reloadCurrentPage,
       null,
       null
-    );
+    );*/
   };
 
   /**
@@ -175,3 +171,4 @@ let address = document.querySelector(".checkout__info--address").innerText;
 getAddressInfo(address).then((data) => renderMap(data[0], data[1]));
 setOrderRequestHandling();
 setCartItemControls();
+setIncrementCounter().finally();

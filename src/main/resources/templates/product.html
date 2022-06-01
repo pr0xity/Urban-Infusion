@@ -16,9 +16,8 @@
 
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script defer th:src="@{/js/tools.js}"></script>
-    <script defer th:src="@{/js/components/caretbutton.js}"></script>
     <script defer th:src="@{/js/login.js}"></script>
-    <script defer th:src="@{/js/general.js}"></script>
+    <script type="module" defer th:src="@{/js/general.js}"></script>
     <script defer th:src="@{/js/product.js}"></script>
     <script defer th:src="@{/js/productcontrols/cartcontrols.js}"></script>
     <script defer th:src="@{/js/productcontrols/wishlistcontrols.js}"></script>
@@ -33,10 +32,26 @@
     >
       <nav class="breadcrumbs">
         <ul class="breadcrumbs__list">
-          <li class="breadcrumbs__item"><a class="breadcrumbs__link" th:href="@{/}">Home</a></li>
-          <li class="breadcrumbs__item"><i class="ph-caret-right-light"></i> <a class="breadcrumbs__link" th:href="@{/products}">Products</a></li>
-          <li class="breadcrumbs__item"><i class="ph-caret-right-light"></i> <a class="breadcrumbs__link breadcrumbs__link--category" th:data-categoryid="${product.category.id}" href="#" th:text="${product.category.name}"></a></li>
-          <li class="breadcrumbs__item"><i class="ph-caret-right-light"></i> <span th:text="${product.name}"></span></li>
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" th:href="@{/}">Home</a>
+          </li>
+          <li class="breadcrumbs__item">
+            <i class="ph-caret-right-light"></i>
+            <a class="breadcrumbs__link" th:href="@{/products}">Products</a>
+          </li>
+          <li class="breadcrumbs__item">
+            <i class="ph-caret-right-light"></i>
+            <a
+              class="breadcrumbs__link breadcrumbs__link--category"
+              th:data-categoryid="${product.category.id}"
+              href="#"
+              th:text="${product.category.name}"
+            ></a>
+          </li>
+          <li class="breadcrumbs__item">
+            <i class="ph-caret-right-light"></i>
+            <span th:text="${product.name}"></span>
+          </li>
         </ul>
       </nav>
       <section class="section-product-info">
@@ -250,7 +265,7 @@
               maxlength="250"
               aria-label="Write your review here"
             ></textarea>
-            <div class="product__rating--review" id="review__rating">
+            <div role="radiogroup" class="product__rating--review" id="review__rating">
               <p>Rating</p>
               <label>
                 <img
@@ -263,7 +278,7 @@
                   name="rating"
                   type="radio"
                   value="1"
-                  aria-label="select 1 star rating"
+                  aria-roledescription="select 1 star rating"
                 />
               </label>
               <label>
@@ -462,11 +477,13 @@
           <p th:if="${comments == null or comments.isEmpty()}">
             No reviews yet...
           </p>
-          <div class="review__comment" th:each="comment : ${comments}">
-            <div class="review__comment-info">
-              <div
+          <article class="review__comment" th:each="comment : ${comments}">
+            <header class="review__comment-info">
+              <span
                 class="product__rating"
-                th:attr="data-rating=${comment.rating}"
+                aria-roledescription="'This rating has ' + ${comment.rating} + ' out of five leaves'"
+                th:title="'This rating has ' + ${comment.rating} + 'out of five leaves'"
+                th:attr="data-rating=${comment.rating}, aria-roledescription='This rating has ' + ${comment.rating} + ' out of five leaves' ,aria-label='This rating has ' + ${comment.rating} + ' out of five leaves'"
               >
                 <img
                   alt=""
@@ -494,16 +511,15 @@
                   src="../img/icons/leaf.svg"
                   data-rating="5"
                 />
-              </div>
-              <p th:text="${comment.displayName}">Miranda</p>
-              <p th:text="${comment.updatedAt.toLocalDate()}">04.02.2022</p>
-            </div>
-            <div>
-              <div class="review__text" th:text="${comment.comment}">
-                <p>The tea was ok. Could have more flavour</p>
-              </div>
-            </div>
-          </div>
+              </span>
+              <h3 class="review__author" th:text="${comment.displayName}"></h3>
+              <time
+                th:datetime="${comment.updatedAt.toLocalDate()}"
+                th:text="${comment.updatedAt.toLocalDate()}"
+              ></time>
+            </header>
+            <p class="review__text" th:text="${comment.comment}"></p>
+          </article>
         </section>
       </div>
     </main>
