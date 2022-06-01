@@ -15,7 +15,7 @@ public class AdminController {
   @Autowired
   private UserService userService;
 
-  @GetMapping("/")
+  @GetMapping("")
   String getDashboard(Model model) {
     model.addAttribute("user", userService.getSessionUser());
     return "admin/dashboard";
