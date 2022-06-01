@@ -134,7 +134,7 @@ const setProductsPage = function () {
     }
     ><img 
       class="product-card__img"
-      src="/API/products/images/${product.id}"
+      src="/api/products/images/${product.id}"
       alt="${product.name}"
     />
     <div class="product-card__details">

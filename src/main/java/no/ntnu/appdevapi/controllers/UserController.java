@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 @RestController
-@RequestMapping("API/users")
+@RequestMapping("api/users")
 public class UserController {
 
   @Value("${domain.name}")

@@ -22,7 +22,7 @@ import java.io.IOException;
 
 
 @RestController
-@RequestMapping("API/products")
+@RequestMapping("api/products")
 public class ProductController {
 
   @Autowired

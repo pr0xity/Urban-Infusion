@@ -20,7 +20,7 @@ import java.util.*;
  * REST API controller for orders.
  */
 @RestController
-@RequestMapping("API/orders")
+@RequestMapping("api/orders")
 public class OrderController {
     
     @Autowired

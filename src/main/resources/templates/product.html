@@ -43,7 +43,7 @@
         <h1 class="section-title" th:text="${product.name}">Heather tea</h1>
         <img
           class="product__img"
-          th:src="@{/API/products/images/{id}(id = ${product.id})}"
+          th:src="@{/api/products/images/{id}(id = ${product.id})}"
           alt="Green tea in a cup"
         />
         <a href="#section-reviews">

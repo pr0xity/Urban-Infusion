@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  * REST API controller for wishlists.
  */
 @RestController
-@RequestMapping("API/wishlists")
+@RequestMapping("api/wishlists")
 public class WishlistController {
 
     @Autowired

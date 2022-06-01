@@ -63,7 +63,7 @@
             <li th:each="cartItem : ${cart}" class="checkout__item">
               <img
                 class="item__img"
-                th:src="@{API/products/images/{id}(id = ${cartItem.product.id})}"
+                th:src="@{api/products/images/{id}(id = ${cartItem.product.id})}"
                 th:alt="${cartItem.product.name}"
                 alt="greentea"
               />

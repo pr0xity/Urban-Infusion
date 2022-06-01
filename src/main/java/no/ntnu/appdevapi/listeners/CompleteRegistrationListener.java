@@ -20,10 +20,10 @@ import javax.mail.internet.MimeMessage;
 public class CompleteRegistrationListener implements ApplicationListener<CompleteRegistrationEvent> {
 
     @Value("${spring.mail.username}")
-    public String SENDER;
+    public String sender;
 
     @Value("${domain.name}")
-    private String HOST;
+    private String host;
 
     @Autowired
     private VerificationTokenService verificationTokenService;
@@ -48,11 +48,11 @@ public class CompleteRegistrationListener implements ApplicationListener<Complet
         String recipient = user.getEmail();
 
         MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper messageHelper = null;
+        MimeMessageHelper messageHelper;
         try {
             messageHelper = new MimeMessageHelper(message, true);
             messageHelper.setSubject("Registration Confirmation - Urban Infusion");
-            messageHelper.setFrom(SENDER);
+            messageHelper.setFrom(sender);
             messageHelper.setTo(recipient);
 
             String content = createConfirmRegistrationMailContent(user);
@@ -72,8 +72,8 @@ public class CompleteRegistrationListener implements ApplicationListener<Complet
      * @return html content of the registration confirmation mail.
      */
     private String createConfirmRegistrationMailContent(User user) {
-        String confirmationUrl = "/API/confirm-registration?token=" + verificationTokenService.getTokenFromUser(user);
-        String link = (HOST + confirmationUrl);
+        String confirmationUrl = "/api/confirm-registration?token=" + verificationTokenService.getTokenFromUser(user);
+        String link = (host + confirmationUrl);
 
 
         return "<h1 style='text-align: center;  color: #6d6875; font-family: Montserrat, sans-serif; font-size: 24px'>Hi " + user.getFirstName() +"! Welcome to Urban Infusion!</h1>" +
