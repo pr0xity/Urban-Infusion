@@ -121,6 +121,19 @@
     transform: scale(1.07);
 }
 
+.btn--product-submit{
+    padding: 1rem 1.6rem;
+    margin-left: 59%;
+    margin-top: 3rem;
+}
+
+.product--alert{
+    font-weight: bold;
+    margin-top: 3rem;
+    margin-left: 50%;
+    color: #ad5b58;
+}
+
 .setAsDeleted {
     color: darkred;
 }

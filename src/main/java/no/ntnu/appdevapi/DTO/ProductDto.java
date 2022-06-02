@@ -16,7 +16,10 @@ public class ProductDto {
   private String category;
 
 
-  public ProductDto(){}
+  public ProductDto(){
+    this.createdAt = LocalDateTime.now();
+
+  }
 
   public ProductDto(String name, String description, String origin, double price, int inventory, String category) {
     this.name = name;

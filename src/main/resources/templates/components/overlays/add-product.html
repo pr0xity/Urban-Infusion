@@ -7,23 +7,27 @@
         <i class="ph-x"></i>
     </button>
     <section class="section-manage-overlay section-info">
-        <section class="section-image">
-            <img src="../../../../img/icons/favicon/android-chrome-192x192.png" id="productImage" alt="Urban Infucion logo">
+        <section class="section-image  addProductImage">
+            <img src="../../../../img/icons/leaf.svg" id="productImage" alt="Urban Infucion logo">
             <label id="addImageButton">
-                <p class= "btn--green"> Add image </p>
+                <p class= "btn--green btn--changeImage"> Add image </p>
                 <input id="file-selector" type="file" accept=".jpg, .jpeg, .png, webp, svg" hidden/>
             </label>
         </section>
 
         <section class="section-info__labels">
             <form>
-                <p class="info__row"><span class="info__label">Name</span><span id="productNameLabel"> <input class="input signup__input" type="text" name="productName"></span>
-                <p class="info__row"><span class="info__label">Category</span><span id="productCategoryLabel"><input class="input signup__input" type="text" name="productCategory"></span>
-                <p class="info__row"><span class="info__label">Price</span><span id="productPriceLabel"><input class="input signup__input" type="text" name="productPrice"></span>
-                <p class="info__row"><span class="info__label">Description</span><span id="productDescriptionLabel"><input class="input signup__input" type="text" name="productDescription"></span>
-                <p class="info__row"><span class="info__label">Stock</span><span id="productStockLabel"><input class="input signup__input" type="text" name="productStock" value="0"></span></p>
+                <p class="info__row"><label class="info__label" for="productName">Name</label>  <input class="input signup__input" type="text" id="productName" name="productName"></p>
+                <p class="info__row"><label class="info__label" for="productCategory">Category</label><input class="input signup__input" type="text" id="productCategory" name="productCategory"></p>
+                <p class="info__row"><label class="info__label" for="productPrice">Price</label><input class="input signup__input" type="text" id="productPrice" name="productPrice"></p>
+                <p class="info__row"><label class="info__label" for="productDescription">Description</label><input class="input signup__input" type="text" id="productDescription" name="productDescription"></p>
+                <p class="info__row"><label class="info__label" for="productStock">Stock</label> <input class="input signup__input" type="text" id="productStock" name="productStock"></p>
 
-                <button class="btn--green" id="submitNewProductButton" >Submit</button>
+                <p class ="product--alert account__form--alert"></p>
+
+
+                <button class="btn--green btn--changeImage btn--product-submit" id="submitNewProductButton" >Submit</button>
+
             </form>
         </section>
     </section>

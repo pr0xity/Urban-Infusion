@@ -87,6 +87,18 @@ const addProductRow = function(product, productNumber) {
 
 
 
+const accountFormAlerts = document.querySelectorAll(".account__form--alert");
+
+/**
+ * Sets the alert on the form to the given alert message.
+ *
+ * @param alertMessage the message to set as alert.
+ */
+const setAccountFormAlert = function (alertMessage) {
+    accountFormAlerts.forEach((alert) => (alert.innerHTML = `${alertMessage}`));
+};
+
+
 if (null != overlay) {
     addProductButton.onclick = () => {
         addProductOverlay.classList.remove("hidden");
@@ -94,9 +106,70 @@ if (null != overlay) {
     };
 }
 
+const getProductData = function () {
+    const name = document.querySelector(`input[name="productName"]`).value;
+    const category = document.querySelector(`input[name="productCategory"]`).value;
+    const price = document.querySelector(`input[name="productPrice"]`).value;
+    const description = document.querySelector(`input[name="productDescription"]`).value;
+    const inventory = document.querySelector(`input[name="productStock"]`).value;
+    return {
+        name: name,
+        description: description,
+        price: price,
+        inventory: inventory,
+        category: category,
+    };
+};
 
-/*const addProduct = function ()*/
+const isFormValid = function (){
+    const name = document.querySelector(`input[name="productName"]`).value;
+    const category = document.querySelector(`input[name="productCategory"]`).value;
+    const price = document.querySelector(`input[name="productPrice"]`).value;
+    const description = document.querySelector(`input[name="productDescription"]`).value;
+    const inventory = document.querySelector(`input[name="productStock"]`).value;
 
+    if(name === "" || category === "" || description === "" ){
+        return false;
+    }
+    return !(isNaN(price) || isNaN(inventory));
+}
+
+
+const getAlertMessage = function (){
+    const name = document.querySelector(`input[name="productName"]`).value;
+    const category = document.querySelector(`input[name="productCategory"]`).value;
+    const price = document.querySelector(`input[name="productPrice"]`).value;
+    const description = document.querySelector(`input[name="productDescription"]`).value;
+    const inventory = document.querySelector(`input[name="productStock"]`).value;
+
+    let alertMessage="";
+    if(name === "" || category === "" || description === "" ){ alertMessage = "All fields need to be filled in"}
+    if(isNaN(price)){ alertMessage = "The price must be a number"}
+    if(isNaN(inventory)){ alertMessage = "Stock must be a number"}
+
+    return alertMessage;
+}
+
+const addProductRequest = function (event){
+    event.preventDefault();
+    if (isFormValid()) {
+        sendApiRequest(
+            `${PRODUCT_API_PATHNAME}`,
+            "POST",
+            getProductData(),
+            reloadCurrentPage
+        );
+    } else {
+        setAccountFormAlert(getAlertMessage())
+    }
+    /*TODO: images*/
+    /*TODO: stock image is not added*/
+    /*TODO: make overlay disappear when clicking outside it or the x-mark*/
+};
+
+
+const submitNewProductButton = document.getElementById("submitNewProductButton")
+submitNewProductButton.addEventListener("click", addProductRequest)
 
 
 
@@ -109,8 +182,6 @@ const manageProduct = function(product) {
     const categoryLabel = document.getElementById("productCategoryLabel");
     const descriptionLabel = document.getElementById("productDescriptionLabel");
     this.product = product;
-
-
 
     idLabel.textContent = product["id"];
     nameLabel.textContent = product["name"];
@@ -136,7 +207,6 @@ const manageProduct = function(product) {
 }
 
 const updateActiveStatus = function() {
-
     if (activeStatusCheckBox.checked ) {
         sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`,
             "PUT", { inactive: true }, editProductSuccess);
@@ -309,6 +379,5 @@ const uploadImage = function(imageFile) {
 const uploadToServer = function(data) {
     xhr = new XMLHttpRequest();
     xhr.open("PUT", `${IMAGE_API_PATHNAME}/${button.dataset.productId}`, true);
-
     xhr.send(data);
 }
