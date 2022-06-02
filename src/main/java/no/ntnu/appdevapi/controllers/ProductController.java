@@ -39,6 +39,12 @@ public class ProductController {
    */
   @GetMapping
   @ApiOperation(value = "Get all products.")
+  public Iterable<Product> getAllNotDeleted() {
+    return productService.getAllProductsNotDeleted();
+  }
+
+  @GetMapping("/all")
+  @ApiOperation(value = "Get all products for admin page")
   public Iterable<Product> getAll() {
     return productService.getAllProducts();
   }

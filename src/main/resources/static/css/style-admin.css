@@ -182,7 +182,7 @@ th {
 }
 
 .products__table tr {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.5fr;
 }
 
 .ratings__table {

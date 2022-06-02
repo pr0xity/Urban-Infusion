@@ -42,6 +42,8 @@ public class Product {
   @ApiModelProperty("When the product was deleted.")
   @Column(name = "deleted_at")
   private LocalDateTime deletedAt;
+  @ApiModelProperty("Show if product is inactive or active")
+  private boolean inactive;
 
   @OneToMany(mappedBy = "product")
   @JsonIgnore
@@ -111,6 +113,14 @@ public class Product {
 
   public void setPrice(double price) {
     this.price = price;
+  }
+
+  public boolean isInactive() {
+    return inactive;
+  }
+
+  public void setInactive(boolean inactive) {
+    this.inactive = inactive;
   }
 
   /**

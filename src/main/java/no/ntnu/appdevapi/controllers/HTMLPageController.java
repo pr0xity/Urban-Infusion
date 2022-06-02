@@ -45,7 +45,7 @@ public class HTMLPageController {
     @GetMapping("/")
     public String getHome(Model model) {
         model.addAttribute("user", this.getUser());
-        model.addAttribute("products", productService.getAllProducts());
+        model.addAttribute("products", productService.getAllProductsNotDeleted());
         model.addAttribute("topSellingProducts", getTop3SellingProducts());
         Wishlist wishlist = this.wishlistService.getWishlistByUser(this.getUser());
         if (wishlist != null) {

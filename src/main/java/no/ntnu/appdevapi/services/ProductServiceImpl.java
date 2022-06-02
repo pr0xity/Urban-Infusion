@@ -24,6 +24,14 @@ public class ProductServiceImpl implements ProductService {
     public Iterable<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
         productRepository.findAll().forEach(products::add);
+
+        return products;
+    }
+
+    public Iterable<Product> getAllProductsNotDeleted() {
+        List<Product> products = new ArrayList<>();
+        productRepository.findAll().forEach(products::add);
+
         return products.stream().filter(product -> product.getDeletedAt() == null).collect(Collectors.toList());
     }
 
@@ -84,6 +92,8 @@ public class ProductServiceImpl implements ProductService {
         if (0 != newProduct.getInventory()) {
             old.setInventory(newProduct.getInventory());
         }
+        old.setInactive(newProduct.isInactive());
+
         productRepository.save(old);
         return productRepository.findById(old.getId()).orElse(null);
     }
@@ -105,6 +115,7 @@ public class ProductServiceImpl implements ProductService {
         product.setInventory(object.getInventory());
         product.setCreatedAt(object.getCreatedAt());
         product.setUpdatedAt(object.getUpdatedAt());
+        product.setInactive(object.isInactive());
 
         if (null != object.getCategory()) {
             String[] cName = object.getCategory().split(" ");

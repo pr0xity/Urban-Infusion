@@ -12,6 +12,7 @@ public class ProductDto {
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;
   private LocalDateTime deletedAt;
+  private boolean inactive;
   private String category;
 
 
@@ -26,6 +27,7 @@ public class ProductDto {
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
     this.deletedAt = null;
+    this.inactive = false;
     this.category = category;
   }
 
@@ -63,5 +65,13 @@ public class ProductDto {
 
   public String getCategory() {
     return category;
+  }
+
+  public boolean isInactive() {
+    return inactive;
+  }
+
+  public void setInactive(boolean inactive) {
+    this.inactive = inactive;
   }
 }

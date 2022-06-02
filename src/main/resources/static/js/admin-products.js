@@ -11,6 +11,7 @@ const editNameOverlay = document.getElementById("editNameOverlay");
 const editPriceOverlay = document.getElementById("editPriceOverlay");
 const editDescriptionOverlay = document.getElementById("editDescriptionOverlay");
 const editCategoryOverlay = document.getElementById("editCategoryOverlay");
+const activeStatusCheckBox = document.getElementById("setAsInactive");
 
 let products = null;
 let product = null;
@@ -23,7 +24,7 @@ const initializeProducts = function() {
 const getProducts = function() {
     const req = new XMLHttpRequest();
     req.overrideMimeType("application/json");
-    req.open('GET', URL + PRODUCT_API_PATHNAME, true);
+    req.open('GET', URL + PRODUCT_API_PATHNAME + "/all", true);
     req.onload  = function() {
         products = JSON.parse(req.responseText);
         loadProducts(products)
@@ -55,6 +56,7 @@ const addProductRow = function(product, productNumber) {
     const categoryCell = document.createElement("td");
     const priceCell = document.createElement("td");
     const stockCell = document.createElement("td");
+    const statusCell = document.createElement("td");
 
     const idNode = document.createTextNode(product["id"]);
     const nameNode = document.createTextNode(product["name"]);
@@ -62,17 +64,24 @@ const addProductRow = function(product, productNumber) {
     const priceNode = document.createTextNode(product["price"]);
     const stockNode = document.createTextNode(product["inventory"]);
 
+    let statusNode = document.createTextNode("Active");
+    if (product["inactive"] === true) {
+        statusNode = document.createTextNode("Inactive");
+    }
+
     idCell.appendChild(idNode);
     nameCell.appendChild(nameNode);
     categoryCell.appendChild(categoryNode);
     priceCell.appendChild(priceNode);
     stockCell.appendChild(stockNode);
+    statusCell.appendChild(statusNode);
 
     row.appendChild(idCell);
     row.appendChild(nameCell);
     row.appendChild(categoryCell);
     row.appendChild(priceCell);
     row.appendChild(stockCell);
+    row.appendChild(statusCell)
     tableBody.appendChild(row);
 }
 
@@ -110,6 +119,32 @@ const manageProduct = function(product) {
     categoryLabel.textContent = product["category"]["name"];
     descriptionLabel.innerHTML = product["description"].replaceAll(".", ".&ZeroWidthSpace;");
     fetchImage(product["id"]);
+
+    activeStatusCheckBox.onclick = function(){
+        console.log(product);
+        if (!overlay.classList.contains("hidden")) {
+            updateActiveStatus();
+        }
+    };
+
+    //    loadProducts(product)
+    activeStatusCheckBox.checked = product["inactive"] === true;
+
+    // yyyy-MM-dd-HH-mm-ss
+    // "2022-06-02T11:29:58.086926"
+
+}
+
+const updateActiveStatus = function() {
+
+    if (activeStatusCheckBox.checked ) {
+        sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`,
+            "PUT", { inactive: true }, editProductSuccess);
+    } else {
+
+        sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`,
+            "PUT", { inactive: false }, editProductSuccess);
+    }
 }
 
 const fetchImage = function(productId) {

@@ -120,3 +120,7 @@
 .btn--changeImage:hover {
     transform: scale(1.07);
 }
+
+.setAsDeleted {
+    color: darkred;
+}

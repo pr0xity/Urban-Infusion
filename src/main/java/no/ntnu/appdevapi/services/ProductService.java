@@ -6,6 +6,8 @@ import no.ntnu.appdevapi.entities.Product;
 public interface ProductService {
   Iterable<Product> getAllProducts();
 
+  Iterable<Product> getAllProductsNotDeleted();
+
   Product getProduct(long id);
 
   Product getProductByName(String name);
