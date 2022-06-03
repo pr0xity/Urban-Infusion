@@ -1,3 +1,9 @@
+import {sendGetNewUsersRequest} from "./controllers/userController.js";
+import {sendGetRecentOrdersRequest} from "./controllers/orderController.js";
+import {getRecentRatings} from "./admin-ratings.js";
+
+window.addEventListener("DOMContentLoaded", getTableContent);
+
 function getTableContent() {
     getNewCustomers();
     getLatestOrders();
@@ -5,14 +11,7 @@ function getTableContent() {
 }
 
 function getNewCustomers() {
-    const req = new XMLHttpRequest();
-    req.overrideMimeType("application/json");
-    req.open('GET', URL + USERS_API_PATHNAME + "/new", true);
-    req.onload  = function() {
-        const jsonResponse = JSON.parse(req.responseText);
-        loadCustomers(jsonResponse)
-    };
-    req.send(null);
+    sendGetNewUsersRequest().then(response => loadCustomers(response));
 }
 
 function loadCustomers(users) {
@@ -26,10 +25,6 @@ function addCustomerRow(id, name, email) {
     if (!document.getElementById("customerTable")) return;
     const tableBody = document.getElementById("customerTableBody");
     const row = document.createElement("tr");
-
-    // row.addEventListener("click", () => {
-    //     window.location.href = "/users/" + email;
-    // })
 
     const idCell = document.createElement("td");
     const nameCell = document.createElement("td");
@@ -50,14 +45,7 @@ function addCustomerRow(id, name, email) {
 }
 
 function getLatestOrders() {
-    const req = new XMLHttpRequest();
-    req.overrideMimeType("application/json");
-    req.open('GET', URL + ORDERS_API_PATHNAME + "/recent", true);
-    req.onload  = function() {
-        const jsonResponse = JSON.parse(req.responseText);
-        loadOrders(jsonResponse)
-    };
-    req.send(null);
+    sendGetRecentOrdersRequest().then(response => loadOrders(response));
 }
 
 function loadOrders(orders) {
@@ -71,10 +59,6 @@ function addOrderRow(order) {
     if (!document.getElementById("orderTable")) return;
     const tableBody = document.getElementById("orderTableBody");
     const row = document.createElement("tr");
-
-    // row.addEventListener("click", () => {
-    //     window.location.href = ORDERS_API_PATHNAME + order["id"];
-    // })
 
     const dateCell = document.createElement("td");
     const orderIdCell = document.createElement("td");

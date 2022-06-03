@@ -1,3 +1,7 @@
+import {sendGetAllUsersRequest, sendUpdateUserRequest} from "./controllers/userController.js";
+import {sendGetAllOrdersRequest} from "./controllers/orderController.js";
+import {hideElement} from "./tools.js";
+
 const customerTable = document.getElementById("userTable");
 const tableBody = document.getElementById("userTableBody");
 const overlay = document.getElementById("overlay");
@@ -19,15 +23,11 @@ const initialCustomers = function() {
     setEventListeners();
 }
 
-const getUsers = function() {
-    const req = new XMLHttpRequest();
-    req.overrideMimeType("application/json");
-    req.open('GET', URL + USERS_API_PATHNAME, true);
-    req.onload  = function() {
-        users = JSON.parse(req.responseText);
-        loadUsers(users)
-    };
-    req.send(null);
+window.addEventListener("DOMContentLoaded", initialCustomers);
+
+const getUsers = async function() {
+    users = await sendGetAllUsersRequest();
+    loadUsers(users);
 }
 
 const loadUsers = function(users) {
@@ -92,14 +92,7 @@ const manageUser = function(managedUser) {
 }
 
 const fetchOrders = function(user) {
-    const req = new XMLHttpRequest();
-    req.overrideMimeType("application/json");
-    req.open('GET', URL + ORDERS_API_PATHNAME, true);
-    req.onload  = function() {
-        const allOrders = JSON.parse(req.responseText);
-        populatePurchaseHistory(user, allOrders);
-    };
-    req.send(null);
+    sendGetAllOrdersRequest().then(response => populatePurchaseHistory(user, response));
 }
 
 const populatePurchaseHistory = function(user, allOrders) {
@@ -184,6 +177,8 @@ const filterUsers = function() {
     loadUsers(filteredUsers);
 }
 
+document.querySelector("#searchInput").addEventListener("input", filterUsers);
+
 
 const setEventListeners = function () {
     editFullNameButton.addEventListener("click", editFullName);
@@ -209,14 +204,13 @@ const editFullName = function() {
     editFullNameOverlay.classList.add("display");
     document.getElementById("updateFullNameButton").addEventListener("click", updateFullName);
 }
+
 const updateFullName = function(event) {
     event.preventDefault();
     user["firstName"] = document.getElementById("newFirstName").value;
     user["lastName"] = document.getElementById("newLastName").value;
-    sendApiRequest(USERS_API_PATHNAME + "/" + user["id"], "PUT",
-        {firstName: user["firstName"], lastName: user["lastName"]},
-        editCustomerSuccess, null);
-    editFullNameOverlay.classList.remove("display");
+    sendUpdateUserRequest(user["id"], {firstName: user["firstName"], lastName: user["lastName"]}, editCustomerSuccess)
+      .finally(() => hideElement(editFullNameOverlay))
 }
 
 
@@ -229,10 +223,8 @@ const editEmail = function() {
 const updateEmail = function(event) {
     event.preventDefault();
     user["email"] = document.getElementById("newEmail").value;
-    sendApiRequest(USERS_API_PATHNAME + "/" + user["id"], "PUT",
-        {email: user["email"]},
-        editCustomerSuccess, null);
-    editEmailOverlay.classList.remove("display");
+    sendUpdateUserRequest(user["id"], {email: user["email"]}, editCustomerSuccess)
+      .finally(() => hideElement(editEmailOverlay));
 }
 
 const editAddress = function() {
@@ -253,14 +245,14 @@ const updateAddress = function(event) {
     user["address"]["city"] = document.getElementById("newCity").value;
     user["address"]["country"] = document.getElementById("newCountry").value;
     user["address"]["addressLine"] = buildAddressLine(user["address"]);
-    sendApiRequest(USERS_API_PATHNAME + "/" + user["id"], "PUT",
-        {addressLine1: user["address"]["addressLine1"],
-            addressLine2: user["address"]["addressLine2"],
-            city: user["address"]["city"],
-            postalCode: user["address"]["postalCode"],
-            country: user["address"]["country"]},
-        editCustomerSuccess, null);
-    editAddressOverlay.classList.remove("display");
+    sendUpdateUserRequest(user["id"],
+      {addressLine1: user["address"]["addressLine1"],
+          addressLine2: user["address"]["addressLine2"],
+          city: user["address"]["city"],
+          postalCode: user["address"]["postalCode"],
+          country: user["address"]["country"]},
+      editCustomerSuccess)
+      .finally(() => hideElement(editAddressOverlay));
 }
 
 const buildAddressLine = function(address) {

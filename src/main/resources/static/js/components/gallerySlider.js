@@ -1,4 +1,5 @@
 import Slider from "./slider.js";
+import {hideElement, showElement} from "../tools.js";
 
 /**
  * Slider gallery for the static gallery on the landing page.

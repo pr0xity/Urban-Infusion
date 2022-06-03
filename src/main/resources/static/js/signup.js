@@ -1,4 +1,8 @@
-"use strict";
+import {REGISTRATION_API_PATHNAME,
+  isAddressFormValid,
+  isAddressValid,
+  isEmailAddressValid,
+  createAddressStringFromObject, hideElement, showElement, sendApiRequest} from "./tools.js";
 
 /**
  * Initializes the sign-up form.

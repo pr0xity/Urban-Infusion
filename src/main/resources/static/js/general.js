@@ -1,9 +1,11 @@
 import CaretButtons from "./components/caretbutton.js";
+import {mobileLayoutSize, showElement, hideElement, isElementHidden} from "./tools.js";
+import {sendForgottenPasswordRequest, sendLoginRequest, setLoginAlert, resetLoginAlert} from "./login.js";
 
 /**********************************************
  * Sets header and footer for customer pages *
  **********************************************/
-
+const loginEmail = document.querySelector("#login-email");
 // Menu and close button for mobile layout.
 const navMobileButtons = document.querySelectorAll(".nav-mobile__btn");
 const mobileMenuButtonOpen = navMobileButtons[0];
@@ -141,12 +143,20 @@ const generalInitialize = function () {
   /**
    * Checks if screen size warrants mobile or desktop layout and changes accordingly.
    */
-  const dynamicallyChangeSize = function() {
+  const dynamicallyChangeSize = function () {
     if (mobileLayoutSize.matches) {
       setMobileLayout();
     } else {
       setDesktopLayout();
     }
+  }
+  const loginButton = document.querySelector("#login-btn");
+  const forgottenPasswordButton = document.querySelector("#forgotten-password");
+
+  //Adding event listeners if login button is present.
+  if (loginButton !== null) {
+    loginButton.addEventListener("click", sendLoginRequest);
+    forgottenPasswordButton.addEventListener("click", sendForgottenPasswordRequest);
   }
 
   // initial call to set mobile layout upon loading the site.

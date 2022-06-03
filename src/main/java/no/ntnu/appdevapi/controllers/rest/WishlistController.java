@@ -1,4 +1,4 @@
-package no.ntnu.appdevapi.controllers;
+package no.ntnu.appdevapi.controllers.rest;
 
 import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.User;

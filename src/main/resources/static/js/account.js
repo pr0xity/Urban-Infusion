@@ -1,3 +1,18 @@
+import {
+  getAddressInfo,
+  isAddressValid,
+  renderMap,
+  createAddressStringFromObject,
+  isAddressFormValid,
+  goToFrontpage,
+  sendApiRequest,
+  reloadCurrentPage,
+  isEmailAddressValid,
+  hideElement,
+  showElement,
+  USERS_API_PATHNAME,
+} from "./tools.js";
+
 const tag_types = ["name", "email", "password", "address"];
 const tags_array = ["modal", "open", "close", "field", "edit"];
 const tags_map = createTagsMap();
@@ -153,7 +168,7 @@ const updateNameRequest = function (event) {
       "PUT",
       getUpdatedName(),
       reloadCurrentPage
-    );
+    ).finally();
   } else {
     setAccountFormAlert("All fields need to be filled in");
   }
@@ -216,7 +231,7 @@ const updateEmailRequest = function (event) {
       getUpdateEmailBody(),
       goToFrontpage,
       updateEmailError
-    );
+    ).finally();
   } else {
     setAccountFormAlert("A valid email and password need to filled in");
   }
@@ -275,7 +290,7 @@ const updatePasswordRequest = function (event) {
       reloadCurrentPage,
       updatePasswordError,
       updatePasswordError
-    );
+    ).finally();
   } else {
     setAccountFormAlert("Please fill in your current and new password");
   }
@@ -332,7 +347,7 @@ const updateAddressRequest = async function (event) {
         "PUT",
         requestBody,
         reloadCurrentPage
-      );
+      ).finally();
     } else {
       setAccountFormAlert("Address doesn't exist");
     }

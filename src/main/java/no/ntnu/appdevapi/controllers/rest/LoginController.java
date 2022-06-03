@@ -1,4 +1,4 @@
-package no.ntnu.appdevapi.controllers;
+package no.ntnu.appdevapi.controllers.rest;
 
 import no.ntnu.appdevapi.DTO.LoginUser;
 import no.ntnu.appdevapi.DTO.UserDto;

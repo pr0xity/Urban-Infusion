@@ -1,3 +1,13 @@
+import {
+    sendAddProductImageRequest,
+    sendAddProductRequest,
+    sendGetAllProductsRequest,
+    sendGetProductImageRequest,
+    sendUpdateProductImageRequest, sendUpdateProductRequest
+} from "./controllers/productController.js";
+import {hideEditOverlays} from "./admin.js";
+import {getProductIdFromElement, reloadCurrentPage, showElement} from "./tools.js";
+
 const productTable = document.getElementById("productTable");
 const tableBody = document.getElementById("productTableBody");
 const overlay = document.getElementById("overlay");
@@ -21,15 +31,11 @@ const initializeProducts = function() {
     setEventListeners();
 }
 
-const getProducts = function() {
-    const req = new XMLHttpRequest();
-    req.overrideMimeType("application/json");
-    req.open('GET', URL + PRODUCT_API_PATHNAME + "/all", true);
-    req.onload  = function() {
-        products = JSON.parse(req.responseText);
-        loadProducts(products)
-    };
-    req.send(null);
+document.addEventListener("DOMContentLoaded", initializeProducts);
+
+const getProducts = async function () {
+    products = await sendGetAllProductsRequest().finally();
+    loadProducts(products)
 }
 
 const loadProducts = function(products) {
@@ -150,16 +156,13 @@ const getAlertMessage = function (){
     return alertMessage;
 }
 
-const addProductRequest = function (event){
+const addProductRequest = async function (event){
     event.preventDefault();
     if (isFormValid()) {
-        sendApiRequest(
-            `${PRODUCT_API_PATHNAME}`,
-            "POST",
-            getProductData(),
-            reloadCurrentPage
-        );
-    } else {
+        const product = await sendAddProductRequest(getProductData());
+        console.log(product);
+        sendAddProductImageRequest(product.id, data)
+
         setAccountFormAlert(getAlertMessage())
     }
     /*TODO: images*/
@@ -174,14 +177,14 @@ submitNewProductButton.addEventListener("click", addProductRequest)
 
 
 const manageProduct = function(product) {
-    document.getElementById("updateNameButton").dataset.productId = product.id;
+    document.getElementById("updateNameButton").dataset.productid = product.id;
     const idLabel = document.getElementById("productIdLabel");
     const nameLabel = document.getElementById("productNameLabel");
     const stockLabel = document.getElementById("productStockLabel");
     const priceLabel = document.getElementById("productPriceLabel");
     const categoryLabel = document.getElementById("productCategoryLabel");
     const descriptionLabel = document.getElementById("productDescriptionLabel");
-    this.product = product;
+    //this.product = product;
 
     idLabel.textContent = product["id"];
     nameLabel.textContent = product["name"];
@@ -207,76 +210,66 @@ const manageProduct = function(product) {
 }
 
 const updateActiveStatus = function() {
+    const productId = getProductIdFromElement(button);
     if (activeStatusCheckBox.checked ) {
-        sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`,
-            "PUT", { inactive: true }, editProductSuccess);
+        sendUpdateProductRequest(productId, { inactive: true }, editProductSuccess).finally();
     } else {
-
-        sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`,
-            "PUT", { inactive: false }, editProductSuccess);
+        sendUpdateProductRequest(productId, { inactive: false }, editProductSuccess).finally();
     }
 }
 
 const fetchImage = function(productId) {
-    const req = new XMLHttpRequest();
-    req.open('GET', URL + IMAGE_API_PATHNAME + "/" + productId, true);
-    req.responseType = "blob";
-    req.onload  = function() {
+    sendGetProductImageRequest(productId).then(response => {
         const urlCreator = window.URL || window.webkitURL;
-        const imageUrl = urlCreator.createObjectURL(this.response);
+        const imageUrl = urlCreator.createObjectURL(response);
         const image = document.getElementById("productImage");
         image.src = imageUrl;
-        overlay.classList.remove("hidden");
-    };
-    req.send(null);
+        showElement(overlay);
+    })
 }
 
 const setEventListeners = function() {
-    editNameButton.addEventListener("click",function() {
-        editName();
-    });
-    editDescriptionButton.addEventListener("click",function() {
-        editDescription();
-    });
-    editPriceButton.addEventListener("click",function() {
-        editPrice();
-    });
-    editCategoryButton.addEventListener("click",function() {
-        editCategory();
-    });
+    editNameButton.addEventListener("click", editName);
+    editDescriptionButton.addEventListener("click",editDescription);
+    editPriceButton.addEventListener("click",editPrice);
+    editCategoryButton.addEventListener("click",editCategory);
 }
 
 const button = document.getElementById("updateNameButton");
 
 const updateProductName = function(event) {
     event.preventDefault();
+    const productId = getProductIdFromElement(button);
     const newName = document.getElementById("newName").value;
     if (newName.length > 0) {
-        sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { name: newName }, editProductSuccess);
+        sendUpdateProductRequest(productId, { name: newName }, editProductSuccess).finally();
     }
 }
 
 const updateProductPrice = function(event) {
     event.preventDefault();
+    const productId = getProductIdFromElement(button);
     const newPrice = document.getElementById("newPrice").value;
     if (newPrice.length > 0) {
-        sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { price: newPrice }, editProductSuccess);
+        sendUpdateProductRequest(productId,{ price: newPrice }, editProductSuccess).finally();
     }
 }
 
 const updateProductDescription = function(event) {
     event.preventDefault();
+    const productId = getProductIdFromElement(button);
     const newDescription = document.getElementById("newDescription").value;
     if (newDescription.length > 0) {
-        sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { description: newDescription }, editProductSuccess);
+        sendUpdateProductRequest(productId,{ description: newDescription }, editProductSuccess).finally();
     }
 }
 
 const updateProductCategory = function(event) {
     event.preventDefault();
+    const productId = getProductIdFromElement(button);
     const newCategory = document.getElementById("newCategory").value;
     if (newCategory.length > 0) {
-        sendApiRequest(`${PRODUCT_API_PATHNAME}/${button.dataset.productId}`, "PUT", { categoryName: newCategory }, editProductSuccess);
+        sendUpdateProductRequest(productId,{ categoryName: newCategory }, editProductSuccess).finally();
     }
 }
 
@@ -309,7 +302,7 @@ const editProductSuccess = function() {
 }
 
 const editName = function() {
-    overlay.querySelector("[data-product-id]").addEventListener("click", updateProductName);
+    document.getElementById("updateNameButton").addEventListener("click", updateProductName);
     editNameOverlay.classList.add("display");
 }
 
@@ -343,7 +336,7 @@ if (document.getElementsByClassName("edit__window")) {
 
 const filterProducts = function() {
     const filteredProducts = [];
-    const searchString = searchInput.value.toLowerCase();
+    const searchString = this.value.toLowerCase();
     for (let i = 0; i < products.length; i++) {
         const product = products[i];
         if (product["id"].toString().includes(searchString) ||
@@ -354,6 +347,7 @@ const filterProducts = function() {
     }
     loadProducts(filteredProducts);
 }
+document.querySelector("#searchInput").addEventListener("input", filterProducts);
 
 const fileSelector = document.getElementById('file-selector');
 fileSelector.addEventListener('change', (event) => {
@@ -377,7 +371,6 @@ const uploadImage = function(imageFile) {
 }
 
 const uploadToServer = function(data) {
-    xhr = new XMLHttpRequest();
-    xhr.open("PUT", `${IMAGE_API_PATHNAME}/${button.dataset.productId}`, true);
-    xhr.send(data);
+    const productId = getProductIdFromElement(button);
+    sendUpdateProductImageRequest(productId, data).finally();
 }

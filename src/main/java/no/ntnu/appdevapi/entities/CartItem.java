@@ -68,7 +68,7 @@ public class CartItem {
      * @return this cart items id.
      */
     public long getId() {
-        return id;
+        return this.id;
     }
 
     /**
@@ -174,6 +174,7 @@ public class CartItem {
         return createdAt;
     }
 
+    /*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -185,5 +186,5 @@ public class CartItem {
     @Override
     public int hashCode() {
         return Objects.hash(shoppingSession, product);
-    }
+    }*/
 }

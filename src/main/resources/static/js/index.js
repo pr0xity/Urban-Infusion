@@ -1,6 +1,9 @@
 import CaretButtons from "./components/caretbutton.js";
 import Slider from "./components/slider.js";
 import GallerySlider from "./components/gallerySlider.js";
+import {mobileLayoutSize} from "./tools.js";
+import {implementProductCardFunctionality} from "./views/productCardView.js";
+import {setIncrementCounter} from "./controllers/cartController.js";
 
 /**
  * Initializes components and features of the front page.
@@ -72,3 +75,5 @@ const setFrontPage = function () {
   dynamicallyChangeLayout();
 }
 setFrontPage();
+implementProductCardFunctionality();
+setIncrementCounter().finally();

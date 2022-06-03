@@ -1,5 +1,6 @@
-"use strict";
-import {sendUpdateCartRequest, sendDeleteFromCartRequest, setIncrementCounter} from "./cartService.js";
+import {sendUpdateCartRequest, sendDeleteFromCartRequest, setIncrementCounter,} from "./controllers/cartcontroller.js";
+import {getAddressInfo, getProductIdFromElement, hideElement, renderMap, showElement,} from "./tools.js";
+import {sendPostNewOrderRequest} from "./controllers/orderController.js";
 
 /**
  * Implements listeners to input fields buttons and updates shopping session accordingly.
@@ -7,37 +8,6 @@ import {sendUpdateCartRequest, sendDeleteFromCartRequest, setIncrementCounter} f
 const setCartItemControls = function () {
   let productId;
   let quantity;
-
-  /**
-   * Sets the total field of the product with the given product id to the given total value.
-   *
-   * @param productId the product id of the product to update total price for.
-   * @param total the total value to set for the current product id.
-   */
-  const setTotalFieldForCartItem = function (productId, total) {
-    const totalFields = document.querySelectorAll(`.item__price`);
-    let totalField;
-    totalFields.forEach((field) => {
-      if (getProductIdFromElement(field) === productId) {
-        totalField = field;
-      }
-    });
-    totalField.innerHTML = `${total}.0,-`;
-  };
-
-  /**
-   * Retrieves and updates the new price for the cart item.
-   */
-  const updateCartItemSuccess = async function () {
-    await sendApiRequest(`${CART_API_PATHNAME}`, "GET", null, setIncrementCounter, null, null).then((cartInfo) => {
-      const cartItems = cartInfo.cart;
-      cartItems.forEach((item) => {
-        if (item.product.id === Number(productId)) {
-          setTotalFieldForCartItem(productId, item.total);
-        }
-      });
-    });
-  };
 
   /**
    * Returns a request body for cart item requests.
@@ -60,9 +30,9 @@ const setCartItemControls = function () {
   const sendUpdateCartItemRequest = function (event) {
     const cartItemRequestBody = getCartItemRequestBody(event.target);
     if (quantity <= 0) {
-      sendDeleteFromCartRequest(event)
+      sendDeleteFromCartRequest(event);
     } else {
-      sendUpdateCartRequest(event, cartItemRequestBody)
+      sendUpdateCartRequest(event, cartItemRequestBody);
     }
   };
 
@@ -70,18 +40,7 @@ const setCartItemControls = function () {
    * Sends a delete request to delete the item with the given id from the shopping bag.
    */
   const sendCartItemDeleteRequest = function (event) {
-    const cartItemRequestBody = getCartItemRequestBody(
-      event.target.closest(".item__btn--delete")
-    );
-    sendDeleteFromCartRequest(event)
-    /*sendApiRequest(
-      `${CART_API_PATHNAME}/${cartItemRequestBody.productId}`,
-      "DELETE",
-      null,
-      reloadCurrentPage,
-      null,
-      null
-    );*/
+    sendDeleteFromCartRequest(event);
   };
 
   /**
@@ -118,7 +77,9 @@ const setCartItemControls = function () {
  * Initializes functionality to send order requests.
  */
 const setOrderRequestHandling = function () {
-  const completeCheckoutButton = document.querySelector(".checkout__btn--complete");
+  const completeCheckoutButton = document.querySelector(
+    ".checkout__btn--complete"
+  );
   const completedCheckoutWindow = document.querySelector(".modal");
   const closeCompletedWindowButton = document.querySelector(".btn--close");
   const buttonText = document.querySelector("#complete-btn");
@@ -130,7 +91,7 @@ const setOrderRequestHandling = function () {
   const displayLoadingAnimation = function () {
     showElement(loadingAnimation);
     hideElement(buttonText);
-  }
+  };
 
   /**
    * Hides the loading animation and displays the text in the button.
@@ -138,18 +99,20 @@ const setOrderRequestHandling = function () {
   const hideLoadingAnimation = function () {
     hideElement(loadingAnimation);
     showElement(buttonText);
-  }
+  };
 
   /**
    * Show completed checkout modal if order was successful.
    */
-  const orderRequestSuccess = function() {
+  const orderRequestSuccess = function () {
     hideLoadingAnimation();
+    document.querySelector(".checkout__list").replaceChildren();
+    hideElement(completeCheckoutButton);
     showElement(completedCheckoutWindow);
     closeCompletedWindowButton.addEventListener("click", () => {
       hideElement(completedCheckoutWindow);
     });
-  }
+  };
 
   /**
    * Sends an order request.
@@ -157,9 +120,8 @@ const setOrderRequestHandling = function () {
   const sendOrderRequest = function (event) {
     event.preventDefault();
     displayLoadingAnimation();
-    sendApiRequest(`${ORDERS_API_PATHNAME}`, "POST", null, orderRequestSuccess, hideLoadingAnimation, hideLoadingAnimation);
-
-  }
+    sendPostNewOrderRequest(orderRequestSuccess, hideLoadingAnimation, hideLoadingAnimation);
+  };
 
   if (completeCheckoutButton !== null) {
     completeCheckoutButton.addEventListener("click", sendOrderRequest);

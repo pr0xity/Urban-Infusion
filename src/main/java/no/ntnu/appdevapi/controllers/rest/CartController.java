@@ -1,4 +1,4 @@
-package no.ntnu.appdevapi.controllers;
+package no.ntnu.appdevapi.controllers.rest;
 
 import no.ntnu.appdevapi.DTO.CartItemDto;
 import no.ntnu.appdevapi.entities.*;

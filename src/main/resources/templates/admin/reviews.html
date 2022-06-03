@@ -16,12 +16,11 @@
   <link rel="stylesheet" type="text/css" th:href="@{/css/style-overlays.css}"/>
 
   <script src="https://unpkg.com/phosphor-icons"></script>
-  <script defer th:src="@{/js/tools.js}"></script>
-  <script defer th:src="@{/js/admin.js}"></script>
-  <script defer th:src="@{/js/admin-ratings.js}"></script>
+  <script type="module" th:src="@{/js/admin.js}"></script>
+  <script type="module" th:src="@{/js/admin-ratings.js}"></script>
   <title>Urban Infusion</title>
 </head>
-<body onload="initializeRatings()">
+<body>
 <header class="admin__header" th:insert="components/admin-header"></header>
 
 <main class="admin__main">
@@ -32,7 +31,7 @@
 
     <form class="searchbar">
       <label class="searchbar__label">
-        <input class="searchbar__input" aria-label="Search bar" placeholder="Search" id="searchInput" onkeyup="filterRatings()">
+        <input class="searchbar__input" aria-label="Search bar" placeholder="Search" id="searchInput">
         <i class="ph-magnifying-glass searchbar__icon"></i>
       </label>
     </form>

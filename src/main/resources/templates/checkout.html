@@ -24,10 +24,8 @@
       crossorigin=""
     ></script>
     <script src="https://unpkg.com/phosphor-icons"></script>
-    <script defer th:src="@{/js/tools.js}"></script>
-    <script defer th:src="@{/js/login.js}"></script>
-    <script type="module" defer th:src="@{/js/general.js}"></script>
-    <script type="module" defer th:src="@{/js/checkout.js}"></script>
+    <script type="module" th:src="@{/js/general.js}"></script>
+    <script type="module" th:src="@{/js/checkout.js}"></script>
     <title>Urban Infusion</title>
   </head>
   <body>
@@ -45,7 +43,6 @@
             <span class="checkout__list-heading margin-left--small"
               >Products</span
             >
-            <!--          <span class="checkout__list-heading">Size</span>-->
             <span class="checkout__list-heading">Quantity</span>
             <span class="checkout__list-heading">Total</span>
           </div>
@@ -79,19 +76,6 @@
                   >Art.nr. 43240234</span
                 >
               </p>
-              <!--
-            <span
-              class="item__size"
-              th:if="${cartItem.product.size} != 0"
-              th:text="${cartItem.product.size} + 'g'"
-              >50g</span
-            >
-            <span
-              class="item__size"
-              th:unless="${cartItem.product.size} != 0"
-              th:text="'&#8211;'"
-              >50g</span
-            >-->
               <input
                 class="item__quantity"
                 th:attr="data-quantity=${cartItem.quantity}"
@@ -120,7 +104,7 @@
                   value=""
                   hidden
                 />
-                <i class="btn--icon item__btn--delete ph-trash"></i>
+                <i class="btn--icon ph-trash"></i>
               </label>
             </li>
           </ul>

@@ -1,4 +1,4 @@
-package no.ntnu.appdevapi.controllers;
+package no.ntnu.appdevapi.controllers.rest;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -99,13 +99,12 @@ public class ProductController {
    */
   @PostMapping
   @ApiOperation(value = "Add a new product.", notes = "Status 200 when added, 400 on error.")
-  public ResponseEntity<String> add(@RequestBody ProductDto product) {
-    ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+  public ResponseEntity<?> add(@RequestBody ProductDto product) {
     if (null != product) {
-      productService.addProductFromDto(product);
-      response = new ResponseEntity<>(HttpStatus.OK);
+      Product product1 = productService.addProductFromDto(product);
+      return new ResponseEntity<>(product1, HttpStatus.OK);
     }
-    return response;
+    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
   }
 
   /**

@@ -1,4 +1,4 @@
-package no.ntnu.appdevapi.controllers;
+package no.ntnu.appdevapi.controllers.rest;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

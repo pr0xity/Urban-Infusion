@@ -1,3 +1,5 @@
+import {sendApiRequest, reloadCurrentPage, AUTHENTICATION_API_PATHNAME, FORGOTTEN_PASSWORD_API_PATHNAME} from "./tools.js";
+
 /**********************************************
  * Login handling *
  **********************************************/
@@ -14,7 +16,7 @@ const userMenuButton = document.querySelector("#user-menu");
  *
  * @param alertMessage message to be set.
  */
-const setLoginAlert = function (alertMessage) {
+export const setLoginAlert = function (alertMessage) {
     if (loginButton !== null) {
         loginAlert.innerHTML = `${alertMessage}`;
     }
@@ -23,7 +25,7 @@ const setLoginAlert = function (alertMessage) {
 /**
  * Sets the login alert to empty.
  */
-const resetLoginAlert = function () {
+export const resetLoginAlert = function () {
     if (loginButton !== null) {
         loginAlert.innerHTML = "";
     }
@@ -32,7 +34,7 @@ const resetLoginAlert = function () {
 /**
  * If login successful, reload page.
  */
-const loginSuccess = function () {
+export const loginSuccess = function () {
     userMenuButton.click();
     reloadCurrentPage();
 }
@@ -40,7 +42,7 @@ const loginSuccess = function () {
 /**
  * If error logging in set login alert accordingly.
  */
-const loginError = function () {
+export const loginError = function () {
     setLoginAlert("Wrong username or password");
 }
 
@@ -49,7 +51,7 @@ const loginError = function () {
  *
  * @return {{password: string, email: string}} the login object.
  */
-const getLoginRequestBody = function () {
+export const getLoginRequestBody = function () {
     return {
         email: loginEmail.value.toString(),
         password: loginPassword.value.toString(),
@@ -59,27 +61,21 @@ const getLoginRequestBody = function () {
 /**
  * Sends a POST request for log in.
  */
-const sendLoginRequest = function (event) {
+export const sendLoginRequest = function (event) {
     event.preventDefault();
-    sendApiRequest(`${AUTHENTICATION_API_PATHNAME}`, "POST", getLoginRequestBody(), loginSuccess, loginError, loginError)
+    sendApiRequest(`${AUTHENTICATION_API_PATHNAME}`, "POST", getLoginRequestBody(), loginSuccess, loginError, loginError).finally();
 };
 
-const forgottenPasswordError = function () {
+export const forgottenPasswordError = function () {
     setLoginAlert("Did you type in email?")
 }
-const forgottenPasswordUnauthorized = function () {
+export const forgottenPasswordUnauthorized = function () {
     setLoginAlert("Could not find user with this email")
 }
-const forgottenPasswordSuccess = function () {
+export const forgottenPasswordSuccess = function () {
     setLoginAlert("A new password has been sent to you email")
 }
-const sendForgottenPasswordRequest = function (event) {
+export const sendForgottenPasswordRequest = function (event) {
     event.preventDefault();
-    sendApiRequest(`${FORGOTTEN_PASSWORD_API_PATHNAME}`, "POST", {email: loginEmail.value.toString()}, forgottenPasswordSuccess, forgottenPasswordUnauthorized, forgottenPasswordError);
-}
-
-//Adding event listeners if login button is present.
-if (loginButton !== null) {
-    loginButton.addEventListener("click", sendLoginRequest);
-    forgottenPasswordButton.addEventListener("click", sendForgottenPasswordRequest);
+    sendApiRequest(`${FORGOTTEN_PASSWORD_API_PATHNAME}`, "POST", {email: loginEmail.value.toString()}, forgottenPasswordSuccess, forgottenPasswordUnauthorized, forgottenPasswordError).finally();
 }

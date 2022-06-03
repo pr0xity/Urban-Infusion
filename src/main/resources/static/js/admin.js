@@ -1,3 +1,5 @@
+
+
 const userMenuButton = document.querySelector("#user-menu");
 const userMenuElement = document.querySelector(".nav__user-menu");
 const searchInput = document.getElementById("searchInput");
@@ -58,7 +60,7 @@ if (editOverlays.length > 0) {
     });
 }
 
-const hideEditOverlays = function() {
+export const hideEditOverlays = function() {
     const editOverlays = document.getElementsByClassName("edit__window");
 
     for (let i= 0; i < editOverlays.length; i++) {

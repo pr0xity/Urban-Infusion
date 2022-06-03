@@ -1,4 +1,5 @@
-"use strict";
+import {hideElement, showElement} from "../tools.js";
+
 /**
  * Represents a slider
  */

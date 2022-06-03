@@ -1,4 +1,4 @@
-package no.ntnu.appdevapi.controllers;
+package no.ntnu.appdevapi.controllers.mvc;
 
 import no.ntnu.appdevapi.entities.*;
 import no.ntnu.appdevapi.services.*;

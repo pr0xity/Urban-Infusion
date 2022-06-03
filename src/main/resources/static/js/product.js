@@ -1,3 +1,11 @@
+import {
+  mobileLayoutSize,
+  getProductIdFromElement,
+  reloadCurrentPage,
+  sendApiRequest,
+  RATING_API_PATHNAME
+} from "./tools.js";
+
 const LEAF_SELECTED = "../img/icons/leaf-fill.svg";
 const LEAF_UNSELECTED = "../img/icons/leaf.svg";
 
@@ -178,7 +186,7 @@ function setReviewHandling() {
         getBodyForReviewRequest(),
         reviewRequestSuccess,
         reviewRequestUnauthorized
-      );
+      ).finally();
     } else {
       setReviewAlert("Email and a selected rating is required for a review");
     }
@@ -197,7 +205,7 @@ function setReviewHandling() {
         reviewRequestSuccess,
         reviewRequestUnauthorized,
         reviewRequestError
-      );
+      ).finally();
     } else {
       setReviewAlert("Email and a selected rating is required for a review");
     }
@@ -215,7 +223,7 @@ function setReviewHandling() {
         getBodyForReviewRequest(),
         reviewRequestSuccess,
         reviewRequestUnauthorized
-      );
+      ).finally();
     } else {
       setReviewAlert("Please fill in your email to delete your review");
     }
@@ -270,7 +278,7 @@ if (window.location.pathname.includes(PRODUCT_PATHNAME) && window.location.pathn
   /**
    * Sets the products page, implements changes when screen size changes.
    */
-  const setProductPage =  function () {
+  const setProductPage = function () {
     const footer = document.querySelector(".footer");
 
 
