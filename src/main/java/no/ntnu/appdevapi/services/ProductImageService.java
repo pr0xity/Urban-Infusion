@@ -18,6 +18,8 @@ public interface ProductImageService {
      */
     ProductImage addImage(MultipartFile imageFile, Product product);
 
+    ProductImage addProductImage(ProductImage imageFile, Product product);
+
     /**
      * Finds and returns the image containing the given id.
      *

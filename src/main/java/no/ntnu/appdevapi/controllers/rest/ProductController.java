@@ -12,13 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.Part;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 
 
 @RestController
@@ -107,30 +110,6 @@ public class ProductController {
     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
   }
 
-  /**
-   * Adds the given image file to the product with the given id.
-   *
-   * @param productId the product id to add image to.
-   * @param imageFile the image file to add.
-   * @return 200 OK on success, 400 bad request on error, 404 not found if product was not found.
-   */
-  @PostMapping("/images/{productId}")
-  @ApiOperation(value = "Add an image to product", notes = "Status 200 when added, 404 if product not found, 400 on error.")
-  public ResponseEntity<String> addImage(@PathVariable long productId, @RequestParam("imageFile") MultipartFile imageFile) {
-    Product product = productService.getProduct(productId);
-    ProductImage image = productImageService.getImageByProduct(product);
-
-    if (product != null) {
-
-      if (image == null && imageFile != null) {
-        productImageService.addImage(imageFile, product);
-        return new ResponseEntity<>(HttpStatus.OK);
-      }
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-
-    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-  }
 
   @PutMapping("/{id}")
   @ApiOperation(value = "Update existing product.", notes = "Status 200 when updated, 400 on error.")
@@ -145,6 +124,33 @@ public class ProductController {
     }
     return response;
   }
+
+  /**
+   * Adds the given image file to the product with the given id.
+   *
+   * @param productId the product id to add image to.
+   * @param part the image file to add.
+   * @return 200 OK on success, 400 bad request on error, 404 not found if product was not found.
+   */
+  @PostMapping("/images/{productId}")
+  @ApiOperation(value = "Add an image to product", notes = "Status 200 when added, 404 if product not found, 400 on error.")
+  public ResponseEntity<String> addImage(@PathVariable long productId, @RequestPart("file") Part part) throws IOException{
+    Product p = productService.getProduct(productId);
+    ProductImage image = productImageService.getImageByProduct(p);
+
+    if (p != null) {
+      if (image == null && part != null) {
+        String fileName = getFileName(part);
+        String[] fileArray = fileName.split("\\.");
+        ProductImage newImage = new ProductImage(part.getInputStream().readAllBytes(), p, fileArray[fileArray.length-1], part.getContentType());
+        productImageService.addProductImage(newImage, p);
+        return new ResponseEntity<>(HttpStatus.OK);
+      }
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+  }
+
 
   /**
    * Updates the given image file to the product with the given id.

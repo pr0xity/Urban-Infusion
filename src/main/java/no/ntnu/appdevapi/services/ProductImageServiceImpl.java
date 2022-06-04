@@ -40,6 +40,15 @@ public class ProductImageServiceImpl implements ProductImageService {
     }
 
     @Override
+    public ProductImage addProductImage(ProductImage imageFile, Product product) {
+        ProductImage existingImage = getImageByProduct(product);
+        if(existingImage == null){
+            productImageRepository.save(imageFile);
+        }
+        return imageFile;
+    }
+
+    @Override
     public ProductImage getImageById(long id) {
         return productImageRepository.findById(id).orElse(null);
     }

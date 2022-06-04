@@ -105,77 +105,6 @@ const setAccountFormAlert = function (alertMessage) {
 };
 
 
-if (null != overlay) {
-    addProductButton.onclick = () => {
-        addProductOverlay.classList.remove("hidden");
-
-    };
-}
-
-const getProductData = function () {
-    const name = document.querySelector(`input[name="productName"]`).value;
-    const category = document.querySelector(`input[name="productCategory"]`).value;
-    const price = document.querySelector(`input[name="productPrice"]`).value;
-    const description = document.querySelector(`input[name="productDescription"]`).value;
-    const inventory = document.querySelector(`input[name="productStock"]`).value;
-    return {
-        name: name,
-        description: description,
-        price: price,
-        inventory: inventory,
-        category: category,
-    };
-};
-
-const isFormValid = function (){
-    const name = document.querySelector(`input[name="productName"]`).value;
-    const category = document.querySelector(`input[name="productCategory"]`).value;
-    const price = document.querySelector(`input[name="productPrice"]`).value;
-    const description = document.querySelector(`input[name="productDescription"]`).value;
-    const inventory = document.querySelector(`input[name="productStock"]`).value;
-
-    if(name === "" || category === "" || description === "" ){
-        return false;
-    }
-    return !(isNaN(price) || isNaN(inventory));
-}
-
-
-const getAlertMessage = function (){
-    const name = document.querySelector(`input[name="productName"]`).value;
-    const category = document.querySelector(`input[name="productCategory"]`).value;
-    const price = document.querySelector(`input[name="productPrice"]`).value;
-    const description = document.querySelector(`input[name="productDescription"]`).value;
-    const inventory = document.querySelector(`input[name="productStock"]`).value;
-
-    let alertMessage="";
-    if(name === "" || category === "" || description === "" ){ alertMessage = "All fields need to be filled in"}
-    if(isNaN(price)){ alertMessage = "The price must be a number"}
-    if(isNaN(inventory)){ alertMessage = "Stock must be a number"}
-
-    return alertMessage;
-}
-
-const addProductRequest = async function (event){
-    event.preventDefault();
-    if (isFormValid()) {
-        const product = await sendAddProductRequest(getProductData());
-        console.log(product);
-        sendAddProductImageRequest(product.id, data)
-
-        setAccountFormAlert(getAlertMessage())
-    }
-    /*TODO: images*/
-    /*TODO: stock image is not added*/
-    /*TODO: make overlay disappear when clicking outside it or the x-mark*/
-};
-
-
-const submitNewProductButton = document.getElementById("submitNewProductButton")
-submitNewProductButton.addEventListener("click", addProductRequest)
-
-
-
 const manageProduct = function(product) {
     document.getElementById("updateNameButton").dataset.productid = product.id;
     const idLabel = document.getElementById("productIdLabel");
@@ -350,6 +279,7 @@ const filterProducts = function() {
 document.querySelector("#searchInput").addEventListener("input", filterProducts);
 
 const fileSelector = document.getElementById('file-selector');
+
 fileSelector.addEventListener('change', (event) => {
     const file = event.target.files[0];
     readImage(file);
@@ -374,3 +304,104 @@ const uploadToServer = function(data) {
     const productId = getProductIdFromElement(button);
     sendUpdateProductImageRequest(productId, data).finally();
 }
+
+
+if (null != overlay) {
+    addProductButton.onclick = () => {
+        addProductOverlay.classList.remove("hidden");
+
+    };
+}
+
+
+const getProductData = function () {
+    const name = document.querySelector(`input[name="productName"]`).value;
+    const category = document.querySelector(`input[name="productCategory"]`).value;
+    const price = document.querySelector(`input[name="productPrice"]`).value;
+    const description = document.querySelector(`input[name="productDescription"]`).value;
+    const inventory = document.querySelector(`input[name="productStock"]`).value;
+    return {
+        name: name,
+        description: description,
+        price: price,
+        inventory: inventory,
+        category: category,
+    };
+};
+
+const isFormValid = function (){
+    const name = document.querySelector(`input[name="productName"]`).value;
+    const category = document.querySelector(`input[name="productCategory"]`).value;
+    const price = document.querySelector(`input[name="productPrice"]`).value;
+    const description = document.querySelector(`input[name="productDescription"]`).value;
+    const inventory = document.querySelector(`input[name="productStock"]`).value;
+
+    if(name === "" || category === "" || description === "" ){
+        return false;
+    }
+    return !(isNaN(price) || isNaN(inventory));
+}
+
+
+const getAlertMessage = function (){
+    const name = document.querySelector(`input[name="productName"]`).value;
+    const category = document.querySelector(`input[name="productCategory"]`).value;
+    const price = document.querySelector(`input[name="productPrice"]`).value;
+    const description = document.querySelector(`input[name="productDescription"]`).value;
+    const inventory = document.querySelector(`input[name="productStock"]`).value;
+
+    let alertMessage="";
+    if(name === "" || category === "" || description === "" ){ alertMessage = "All fields need to be filled in"}
+    if(isNaN(price)){ alertMessage = "The price must be a number"}
+    if(isNaN(inventory)){ alertMessage = "Stock must be a number"}
+
+    return alertMessage;
+}
+
+
+
+
+const imageSelector = document.getElementById('image-selector');
+let image2 = document.getElementById("addProductImage");
+let file = "";
+
+imageSelector.addEventListener(
+    'change', (event) => {
+        file = event.target.files[0];
+        readImage2(file);
+    });
+
+
+const readImage2 = function(file) {
+    const reader = new FileReader();
+    reader.addEventListener('load', (event) => {
+        image2.src = event.target.result;
+    });
+    reader.readAsDataURL(file);
+}
+
+const addProductRequest = async function (event){
+    event.preventDefault();
+    if (isFormValid()) {
+        const product = await sendAddProductRequest(getProductData());
+        console.log(product);
+        console.log(image2);
+
+
+        let data = new FormData();
+        data.append("file", file);
+        await sendAddProductImageRequest(product.id, data).finally();
+
+
+    } else{
+        setAccountFormAlert(getAlertMessage())
+    }
+};
+
+
+/*TODO: unsure if placeholder image is added*/
+/*TODO: make overlay disappear when clicking outside it or the x-mark*/
+
+const submitNewProductButton = document.getElementById("submitNewProductButton")
+submitNewProductButton.addEventListener("click", addProductRequest)
+
