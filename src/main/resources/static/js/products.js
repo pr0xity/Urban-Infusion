@@ -1,3 +1,5 @@
+import {setRatingLeavesOnProductsAndReviews} from "views/reviewLeavesView.js";
+
 const setProductsPage = function () {
   const productsContainer = document.querySelector(".products__container");
 

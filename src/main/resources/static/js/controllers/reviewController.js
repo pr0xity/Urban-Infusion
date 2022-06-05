@@ -8,16 +8,16 @@ export function sendGetRecentReviewsRequest() {
   return sendReviewRequest("recent", "GET");
 }
 
-export function sendAddNewReviewRequest(){
-  return null;
+export function sendAddNewReviewRequest(productId, body, successCallback, unauthorizedCallback){
+  return sendReviewRequest(productId, "POST", body, successCallback, unauthorizedCallback)
 }
 
-export function sendUpdateReviewRequest(productId, body, successCallback) {
-  return sendReviewRequest(productId, "PUT", body, successCallback);
+export function sendUpdateReviewRequest(productId, body, successCallback, unauthorizedCallback, errorCallback) {
+  return sendReviewRequest(productId, "PUT", body, successCallback, unauthorizedCallback, errorCallback);
 }
 
-export function sendDeleteReviewRequest(productId, body = null, successCallback) {
-  return sendReviewRequest(productId, "DELETE", body, successCallback);
+export function sendDeleteReviewRequest(productId, body = null, successCallback, unauthorizedCallback) {
+  return sendReviewRequest(productId, "DELETE", body, successCallback, unauthorizedCallback);
 }
 
 function sendReviewRequest(pathVariable, method, body = null, successCallback = null, unauthorizedCallback = null, errorCallback = null) {
