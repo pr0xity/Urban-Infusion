@@ -67,7 +67,7 @@ public class ProcessedOrderListener implements ApplicationListener<ProcessedOrde
      * @return the formatted mail content of an order is processed mail.
      */
     private String createOrderIsProcessedMailContent(User user, OrderDetails orderDetails) {
-        return "<h1 style='text-align: center;  color: #6d6875; font-family: Montserrat, sans-serif; font-size: 24px'>Your order has been processed!</h1>" +
+        return "<h1 style='text-align: center;  color: #58555F; font-family: Montserrat, sans-serif; font-size: 24px'>Your order has been processed!</h1>" +
                 "<br>" +
                 "<p style='text-align:center;'>Hi " + user.getFirstName() + "! Your order (order nr. " + orderDetails.getId() +") has been processed and is on its way</p>" +
                 "<p style='text-align:center;'>Your order should arrive between 3-4 business days.</p>" +

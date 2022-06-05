@@ -70,7 +70,7 @@ public class ForgottenPasswordListeners implements ApplicationListener<Forgotten
      * @return content of a forgotten email.
      */
     private String createForgottenPasswordMailContent(User user) {
-        return "<h1 style='text-align: center;  color: #6d6875; font-family: Montserrat, sans-serif; font-size: 24px'>Forgotten password</h1>" +
+        return "<h1 style='text-align: center;  color: #58555F; font-family: Montserrat, sans-serif; font-size: 24px'>Forgotten password</h1>" +
                 "<br>" +
                 "<p style='text-align:center;'>We have generated a password for you: " + generateAndSaveRandomPassword(user) + "</p>" +
                 "<p style='text-align:center;'>Use this password and then change to another when you log in</p>" +

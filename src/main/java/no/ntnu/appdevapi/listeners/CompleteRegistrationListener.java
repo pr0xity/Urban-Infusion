@@ -76,13 +76,13 @@ public class CompleteRegistrationListener implements ApplicationListener<Complet
         String link = (host + confirmationUrl);
 
 
-        return "<h1 style='text-align: center;  color: #6d6875; font-family: Montserrat, sans-serif; font-size: 24px'>Hi " + user.getFirstName() +"! Welcome to Urban Infusion!</h1>" +
+        return "<h1 style='text-align: center;  color: #58555F; font-family: Montserrat, sans-serif; font-size: 24px'>Hi " + user.getFirstName() +"! Welcome to Urban Infusion!</h1>" +
                 "<br>" +
                 "<p style='text-align:center;'>Thank you for joining our quest to fuse ancient traditions and modern times</p>" +
                 "<p style='text-align:center;'>Before you continue you need to active your account.</p>" +
                 "<br>" +
                 "<p style='text-align:center;'><a href='" + link + "' style='padding: 8px 16px; color: #fff; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);" +
-                "background-color: #588157; border-radius: 100px; border: 2px solid white; width: fit-content;" +
+                "background-color: #4F744E; border-radius: 100px; border: 2px solid white; width: fit-content;" +
                 "font-family: Montserrat, sans-serif; font-size: 16px; font-weight: 500; text-decoration: none; transition: all 0.4s ease-out;" +
                 "cursor: pointer;'>Activate your account</a></p>";
     }

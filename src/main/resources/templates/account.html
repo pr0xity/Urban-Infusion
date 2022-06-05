@@ -56,13 +56,13 @@
               /
               <span th:text=" ${user.id}" id="field_userId">&#8203; 85329</span>
             </span>
-            <button id="open_name" class="account-info__btn">
+            <button id="open_name" class="account-info__btn" aria-label="edit name">
               <i class="ph-pencil-simple-light btn--icon"></i>
             </button>
           </p>
           <div class="modal hidden" id="modal_name">
             <div class="modal__window">
-              <button class="btn--close close btn--icon" id="close_name">
+              <button class="btn--close close btn--icon" id="close_name" aria-label="close window">
                 <i class="ph-x"></i>
               </button>
               <h3 class="change-heading">Change name</h3>
@@ -104,13 +104,13 @@
               id="field_email"
               >esther.&#8203;howard@&#8203;example.&#8203;com</span
             >
-            <button id="open_email" class="account-info__btn">
+            <button id="open_email" class="account-info__btn" aria-label="edit email">
               <i class="ph-pencil-simple-light btn--icon"></i>
             </button>
           </address>
           <div class="modal hidden" id="modal_email">
             <div class="modal__window">
-              <button class="btn--close close btn--icon" id="close_email">
+              <button class="btn--close close btn--icon" id="close_email" aria-label="close window">
                 <i class="ph-x"></i>
               </button>
               <h3 class="change-heading">Change email-address</h3>
@@ -149,13 +149,13 @@
           <p class="account-info__row">
             <span>Password</span>
             <span id="field_password">********</span>
-            <button id="open_password" class="account-info__btn">
+            <button id="open_password" class="account-info__btn" aria-label="edit password">
               <i class="ph-pencil-simple-light btn--icon"></i>
             </button>
           </p>
           <div class="modal hidden" id="modal_password">
             <div class="modal__window">
-              <button class="btn--close close btn--icon" id="close_password">
+              <button class="btn--close close btn--icon" id="close_password" aria-label="close window">
                 <i class="ph-x"></i>
               </button>
               <h3 class="change-heading">Change password</h3>
@@ -208,7 +208,7 @@
               <span th:text="${address.country}" id="field_country"></span>
             </span>
             <span th:unless="${address != null}">No address</span>
-            <button id="open_address" class="account-info__btn">
+            <button id="open_address" class="account-info__btn" aria-label="edit address">
               <i class="ph-pencil-simple-light btn--icon"></i>
             </button>
           </address>
@@ -216,7 +216,7 @@
             <div class="modal__window modal__window--account-address">
               <button
                 class="change__btn--close close btn--icon"
-                id="close_address"
+                id="close_address" aria-label="close window"
               >
                 <i class="ph-x"></i>
               </button>
@@ -298,14 +298,14 @@
             >
           </p>
           <p class="account-info__row">
-            <button class="account-info__btn--delete">
+            <button class="account-info__btn--delete" aria-label="delete account">
               <i class="ph-trash-light btn--icon"></i> Want to delete your
               account?
             </button>
           </p>
           <div class="modal hidden" id="modal_delete">
             <div class="modal__window">
-              <button class="btn--close close btn--icon" id="close_delete">
+              <button class="btn--close close btn--icon" id="close_delete" aria-label="close window">
                 <i class="ph-x"></i>
               </button>
               <h3 class="change-heading">

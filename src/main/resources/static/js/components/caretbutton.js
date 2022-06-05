@@ -20,6 +20,7 @@ export default class CaretButtons {
     this.buttonClass = buttonClass;
     this.headingClass = headingClass;
     this.headings = document.body.querySelectorAll(`.${headingClass}`);
+    this.ariaLabel = "show more";
   }
 
   /**
@@ -30,7 +31,7 @@ export default class CaretButtons {
     this.headings.forEach((heading) => {
       heading.insertAdjacentHTML(
         "beforeend",
-        `<button class="${this.buttonClass}" data-item="${index}"><i class="ph-caret-left"></i></button>`
+        `<button class="${this.buttonClass}" aria-label="${this.ariaLabel}" data-item="${index}"><i class="ph-caret-left"></i></button>`
       );
       this.setCaretButtonToClosed(this.getButtonFromHeading(heading));
       index++;

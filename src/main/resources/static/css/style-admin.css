@@ -1,7 +1,7 @@
 /*
 Primary color: #dad7cd;
-Secondary color: #588157;
-Text color: #6d6875;
+Secondary color: #4F744E;
+Text color: #58555F;
 
 Spacing: 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128 / 160
 Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
@@ -19,7 +19,7 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
 }
 
 .currentpage {
-    color: #588157;
+    color: #4F744E;
     font-weight: 600;
 }
 
@@ -35,7 +35,7 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
     font-size: 1.8rem;
     font-weight: 400;
     line-height: 1.8;
-    color: #6d6875;
+    color: #58555F;
     margin: 0 auto;
 }
 
@@ -82,13 +82,13 @@ Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 
     padding: 0.8rem;
     width: 100%;
     border-radius: 50px;
-    border: 0.15rem solid #588157;
+    border: 0.15rem solid #4F744E;
     font-family: "Montserrat", sans-serif;
     box-shadow: inset 0.1rem 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
 }
 
 .searchbar__icon {
-    color: #588157;
+    color: #4F744E;
     font-size: 2rem;
     position: absolute;
     top: 50%;

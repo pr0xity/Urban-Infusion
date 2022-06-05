@@ -1,8 +1,7 @@
 /*
 Primary color: #dad7cd;
 Secondary color: #4f744e;
-Text color: #6d6875;
-Darker text color: ##58555F;
+Text color: ##58555F;
 
 Spacing: 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128 / 160
 Font-sizes: 10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
@@ -30,7 +29,7 @@ body {
   font-size: 1.8rem;
   font-weight: 400;
   line-height: 1.8;
-  color: #6d6875;
+  color: #58555F;
   margin: 0 auto;
 }
 
@@ -162,7 +161,7 @@ address {
 
 .btn:hover,
 .btn:focus-visible {
-  color: #6d6875;
+  color: #58555F;
   background-color: #fff;
 }
 
@@ -186,7 +185,7 @@ address {
 }
 
 .btn--icon {
-  color: #6d6875;
+  color: #58555F;
   font-size: 3.8rem;
   cursor: pointer;
   transition: all 0.2s ease-out;
@@ -219,7 +218,7 @@ address {
 
 .slider__btn {
   font-size: 3rem;
-  color: #6d6875;
+  color: #58555F;
 }
 
 .slider-controls {
@@ -335,7 +334,7 @@ address {
 
 .product__rating p,
 .product__rating--review p {
-  color: #6d6875;
+  color: #58555F;
   font-size: 1.8rem;
 }
 
@@ -549,7 +548,7 @@ address {
   align-items: center;
   gap: 0.4rem;
   font-family: "Montserrat", sans-serif;
-  color: #6d6875;
+  color: #58555F;
   font-size: 1.4rem;
 }
 
@@ -721,7 +720,7 @@ address {
 
 .value__icon {
   margin-bottom: 1.2rem;
-  color: #6d6875;
+  color: #58555F;
   padding: 3.2rem;
   position: relative;
   border-radius: 50%;
@@ -1098,7 +1097,7 @@ address {
   text-decoration: none;
   font-size: 1.6rem;
   line-height: 2.4;
-  color: #6d6875;
+  color: #58555F;
 }
 
 .footer__logo {
@@ -1242,7 +1241,7 @@ address {
   font-size: 1.8rem;
   border-radius: 0;
   border: none;
-  color: #6d6875;
+  color: #58555F;
 }
 .item__quantity::-webkit-inner-spin-button {
   opacity: 1;
@@ -1723,7 +1722,7 @@ address {
   margin-right: 8rem;
   width: 60rem;
   height: 40rem;
-  border: 0.2rem solid #6d6875;
+  border: 0.2rem solid #58555F;
   border-radius: 50px;
   box-shadow: 2rem 2rem 3rem rgba(0, 0, 0, 0.15);
 }

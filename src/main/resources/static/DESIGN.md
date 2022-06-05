@@ -16,9 +16,9 @@ Urban Infusion have not provided a colour scheme. Looking at other tea shops we 
 
 Main colour: #EEEDE8 (Beige)
 
-Accent colour: #588157 (Green)
+Accent colour: #4F744E (Green)
 
-Text colour: #6D6875 (Dark purple)
+Text colour: #58555F (Dark purple)
 
 <br>
 
