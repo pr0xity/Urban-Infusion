@@ -13,9 +13,8 @@ import javax.transaction.Transactional;
 @Repository
 public interface ProductImageRepository extends CrudRepository<ProductImage, Long> {
 
-    ProductImage findByProduct(Product product);
+    ProductImage findByData(byte[] data);
 
     @Transactional
-    ProductImage deleteByProduct(Product product);
-
+    ProductImage deleteById(long id);
 }

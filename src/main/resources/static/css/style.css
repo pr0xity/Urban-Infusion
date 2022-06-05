@@ -1,6 +1,6 @@
 /*
 Primary color: #dad7cd;
-Secondary color: #588157;
+Secondary color: #4f744e;
 Text color: #6d6875;
 Darker text color: ##58555F;
 
@@ -82,7 +82,7 @@ address {
   font-weight: 500;
   letter-spacing: 0.4rem;
   text-transform: capitalize;
-  color: #588157;
+  color: #4f744e;
 }
 
 .section-title {
@@ -119,7 +119,7 @@ address {
   padding: 0.4rem 1.6rem;
   color: #fff;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-  background-color: #588157;
+  background-color: #4f744e;
   border-radius: 100px;
   border: 0.2rem solid white;
   width: fit-content;
@@ -197,7 +197,7 @@ address {
 }
 
 .btn--selected {
-  color: #588157;
+  color: #4f744e;
 }
 
 .dots {
@@ -330,7 +330,7 @@ address {
   display: flex;
   align-items: center;
   font-size: 2.4rem;
-  color: #588157;
+  color: #4f744e;
 }
 
 .product__rating p,
@@ -505,7 +505,7 @@ address {
   width: 2rem;
   height: 2rem;
   border-radius: 100px;
-  background-color: #588157;
+  background-color: #4f744e;
   color: #ffffff;
   text-align: center;
 }
@@ -612,7 +612,7 @@ address {
 
 .btn:hover .decorative-text--light,
 .btn:focus-visible .decorative-text--light {
-  color: #588157;
+  color: #4f744e;
 }
 
 /****************************/
@@ -687,7 +687,7 @@ address {
 
 .section-featured .btn:hover {
   transform: translate(-50%, -50%) scale(1.1);
-  color: #588157;
+  color: #4f744e;
 }
 
 .section-featured .btn:active {
@@ -905,7 +905,7 @@ address {
   margin-right: auto;
   margin-left: 2rem;
   justify-self: start;
-  color: #588157;
+  color: #4f744e;
   font-size: 2.4rem;
   font-weight: 500;
 }
@@ -1296,7 +1296,7 @@ address {
 
 .checkout__plan {
   position: relative;
-  border: 0.2rem solid #588157;
+  border: 0.2rem solid #4f744e;
   border-radius: 70px;
   padding: 0.8rem 2.4rem;
 }
@@ -1423,7 +1423,7 @@ address {
 }
 
 .product__price {
-  color: #588157;
+  color: #4f744e;
   font-size: 2.4rem;
   font-weight: 500;
 }
@@ -1817,7 +1817,7 @@ thead tr {
 }
 
 .filter--active {
-  background-color: #588157;;
+  background-color: #4f744e;;
 }
 
 .products__main {

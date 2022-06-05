@@ -13,6 +13,7 @@ public class ProductDto {
   private LocalDateTime updatedAt;
   private LocalDateTime deletedAt;
   private boolean inactive;
+  private long imageId;
   private String category;
 
 
@@ -21,7 +22,7 @@ public class ProductDto {
 
   }
 
-  public ProductDto(String name, String description, String origin, double price, int inventory, String category) {
+  public ProductDto(String name, String description, String origin, double price, int inventory, long imageId, String category) {
     this.name = name;
     this.description = description;
     this.origin = origin;
@@ -31,6 +32,7 @@ public class ProductDto {
     this.updatedAt = null;
     this.deletedAt = null;
     this.inactive = false;
+    this.imageId = imageId;
     this.category = category;
   }
 
@@ -65,6 +67,13 @@ public class ProductDto {
   public LocalDateTime getDeletedAt() {
     return deletedAt;
   }
+
+  /**
+   * Returns this product's image id.
+   *
+   * @return this product's image id.
+   */
+  public long getImageId() { return imageId; }
 
   public String getCategory() {
     return category;

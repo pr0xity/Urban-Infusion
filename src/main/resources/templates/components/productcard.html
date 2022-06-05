@@ -1,6 +1,6 @@
 <img
   class="product-card__img"
-  th:src="@{api/products/images/{id}(id = ${product.id})}"
+  th:src="@{api/products/images/{id}(id = ${product.getImageId()})}"
   th:alt="${product.name}"
 />
 <div class="product-card__details">

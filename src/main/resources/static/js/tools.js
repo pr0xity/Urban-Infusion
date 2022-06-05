@@ -123,9 +123,10 @@ export const sendApiRequest = function (pathname, method, body = null, successCa
  * @param pathname the request mappings pathname.
  * @param method the method to use for this request.
  * @param data the data to send.
+ * @param successCallback function to invoke upon success.
  * @return {Promise<Response>}
  */
-export const sendFormDataRequest = function (pathname, method, data) {
+export const sendFormDataRequest = function (pathname, method, data, successCallback) {
   if (data !== null) {
     return fetch(`${URL}${pathname}`, {
       method: method,
@@ -133,7 +134,16 @@ export const sendFormDataRequest = function (pathname, method, data) {
       credentials: "include",
     }).then(response => {
       if (response.ok) {
-        return response.blob();
+        if (successCallback != null) {
+          successCallback(response);
+        }
+        const contentType = response.headers.get("content-type");
+        if (contentType.includes("text/plain")) {
+          return response.text();
+
+        } else {
+          return response.blob();
+        }
       } else {
         console.error("something went wrong");
       }
@@ -144,7 +154,12 @@ export const sendFormDataRequest = function (pathname, method, data) {
       credentials: "include",
     }).then(response => {
       if (response.ok) {
-        return response.blob();
+        const contentType = response.headers.get("content-type");
+        if (contentType.includes("text/plain")) {
+          return response.text();
+        } else {
+          return response.blob();
+        }
       } else {
         console.error("something went wrong");
       }

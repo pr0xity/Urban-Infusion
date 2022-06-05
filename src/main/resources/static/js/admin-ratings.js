@@ -49,7 +49,7 @@ const filterRatings = function () {
 
 document.querySelector("#searchInput").addEventListener("input", filterRatings);
 
-const loadRatings = function (ratings) {
+function loadRatings (ratings) {
   document.getElementById("ratingTableBody").innerHTML = "";
   for (let i = 0; i < ratings.length; i++) {
     const rating = ratings[i];
@@ -57,7 +57,7 @@ const loadRatings = function (ratings) {
   }
 };
 
-const addRatingRow = function (rating) {
+function addRatingRow  (rating) {
   if (!document.getElementById("ratingTable")) return;
   const tableBody = document.getElementById("ratingTableBody");
   const row = document.createElement("tr");
@@ -161,6 +161,6 @@ const convertRatingToDTO = function (rating) {
   return dto;
 };
 
-const setEventListeners = function () {
+function setEventListeners () {
   editNameButton.addEventListener("click", editName);
-};
+}

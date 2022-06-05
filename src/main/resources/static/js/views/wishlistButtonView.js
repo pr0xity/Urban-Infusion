@@ -151,7 +151,7 @@ const replaceWishlistButton = function (wishlistButton, dataProductId) {
 /**
  * Sets wishlist button on a product page.
  */
-export const setWishlistButtonsOnSingleProduct = function (product) {
+export const setWishlistButtonsOnProduct = function (product) {
   const wishlistButton = product.querySelector(".product__btn--wishlist");
   const dataProductId = getProductIdFromElement(product);
   replaceWishlistButton(wishlistButton, dataProductId);
@@ -186,7 +186,7 @@ export const sendWishlistRequest = function (event) {
   const productId = getProductIdFromElement(currentButton);
 
   if (isProductInWishlist(currentButton)) {
-    sendDeleteFromWishlistRequest(productId, wishlistRemoveSuccessCallback)
+    sendDeleteFromWishlistRequest(productId, wishlistRemoveSuccessCallback).finally();
   } else if (!isProductInWishlist(currentButton)) {
     sendAddToWishlistRequest(productId, wishlistAddSuccessCallback);
   }

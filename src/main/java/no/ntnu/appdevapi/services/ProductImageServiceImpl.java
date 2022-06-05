@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Objects;
 
 @Service
 public class ProductImageServiceImpl implements ProductImageService {
@@ -17,21 +18,18 @@ public class ProductImageServiceImpl implements ProductImageService {
     @Autowired
     private ProductImageRepository productImageRepository;
 
-    @Autowired
-    private ProductRepository productRepository;
-
     private final String[] FILE_EXTENSIONS = {"jpeg", "jpg", "png", "webp", "svg"};
     private final String[] CONTENT_TYPES = {"image/jpeg", "image/jpg", "image/png",  "image/webp", "image/svg+xml"};
 
     @Override
-    public ProductImage addImage(MultipartFile imageFile, Product product) {
+    public ProductImage addImage(MultipartFile imageFile) {
         ProductImage productImage = null;
         try {
             if (isImageFileValid(imageFile)) {
                 byte[] data = imageFile.getBytes();
                 String fileExtension = getFileExtension(imageFile);
                 String contentType = imageFile.getContentType();
-                productImage = productImageRepository.save(new ProductImage(data, product, fileExtension, contentType));
+                productImage = productImageRepository.save(new ProductImage(data, fileExtension, contentType));
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -40,35 +38,26 @@ public class ProductImageServiceImpl implements ProductImageService {
     }
 
     @Override
-    public ProductImage addProductImage(ProductImage imageFile, Product product) {
-        ProductImage existingImage = getImageByProduct(product);
-        if(existingImage == null){
-            productImageRepository.save(imageFile);
-        }
-        return imageFile;
-    }
-
-    @Override
     public ProductImage getImageById(long id) {
         return productImageRepository.findById(id).orElse(null);
     }
 
     @Override
-    public ProductImage getImageByProduct(Product product) {
-        return productImageRepository.findByProduct(product);
-    }
-
-    @Override
-    public ProductImage updateImage(long productId, ProductImage imageFile) {
-        ProductImage existingImage = getImageByProduct(productRepository.findById(productId).orElse(null));
-        if (existingImage != null) {
-            existingImage.setData(imageFile.getData());
-            existingImage.setContentType(imageFile.getContentType());
-            existingImage.setFileExtension(imageFile.getFileExtension());
-            productImageRepository.save(existingImage);
+    public ProductImage updateImage(long imageId, MultipartFile imageFile) {
+        ProductImage productImage = productImageRepository.findById(imageId).orElse(null);
+        if (productImage != null) {
+            try {
+                if (isImageFileValid(imageFile)) {
+                    productImage.setData(imageFile.getBytes());
+                    productImage.setFileExtension(getFileExtension(imageFile));
+                    productImage.setContentType(imageFile.getContentType());
+                    productImageRepository.save(productImage);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
-        return existingImage;
+        return productImage;
     }
 
     /**

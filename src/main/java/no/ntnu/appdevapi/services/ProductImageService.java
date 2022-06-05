@@ -1,6 +1,5 @@
 package no.ntnu.appdevapi.services;
 
-import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.ProductImage;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,15 +9,12 @@ import org.springframework.web.multipart.MultipartFile;
 public interface ProductImageService {
 
     /**
-     * Adds the given image file to the given product.
+     * Adds the given image file.
      *
-     * @param imageFile the image file to add for the product.
-     * @param product the product to add the image for.
-     * @return the image added.
+     * @param imageFile the image file to add.
+     * @return the product image added.
      */
-    ProductImage addImage(MultipartFile imageFile, Product product);
-
-    ProductImage addProductImage(ProductImage imageFile, Product product);
+    ProductImage addImage(MultipartFile imageFile);
 
     /**
      * Finds and returns the image containing the given id.
@@ -29,21 +25,11 @@ public interface ProductImageService {
     ProductImage getImageById(long id);
 
     /**
-     * Finds and returns the image belonging to the given product.
+     * Updates the product image with the given id to the given image file.
      *
-     * @param product the product to find image of.
-     * @return the image belonging to the given product, null if not found.
+     * @param imageId id of the product image to update.
+     * @param imageFile the image file to update the product image to.
+     * @return the updated product image.
      */
-    ProductImage getImageByProduct(Product product);
-
-    /**
-     * Updates the product image for the product with the given id.
-     *
-     * @param productId the id of the product to update image for.
-     * @param imageFile the image to update with.
-     * @return the image that was updated.
-     */
-    ProductImage updateImage(long productId, ProductImage imageFile);
-
-
+    ProductImage updateImage(long imageId, MultipartFile imageFile);
 }

@@ -13,6 +13,7 @@ export function sendAddProductRequest(body, successCallback) {
   return sendProductsRequest("", "POST", body, successCallback);
 }
 
+
 /**
  * Sends a request to update the product with the given product id.
  *
@@ -31,8 +32,8 @@ export function sendUpdateProductRequest(productId, body, successCallback) {
  * @param productId the id of the product to retrieve product for.
  * @return {Promise<Response>} Promise for request to retrieve a products image.
  */
-export function sendGetProductImageRequest(productId) {
-  return sendProductImageRequest(productId, "GET");
+export function sendGetProductImageRequest(productId, successCallback) {
+  return sendProductImageRequest(productId, "GET", successCallback);
 }
 
 /**
@@ -42,19 +43,13 @@ export function sendGetProductImageRequest(productId) {
  * @param data the data of the image to update to.
  * @return {Promise<Response>} Promise for the request to update image.
  */
-export function sendAddProductImageRequest(productId, data) {
-  return sendProductImageRequest(productId, "POST", data);
+export function sendAddProductImageRequest(data) {
+  return sendProductImageRequest("", "POST", data);
 }
 
-/**
- * Sends request to update the image of the product with the given product id.
- *
- * @param productId if of the product to update image for.
- * @param data the data of the image to update to.
- * @return {Promise<Response>} Promise for the request to update image.
- */
-export function sendUpdateProductImageRequest(productId, data) {
-  return sendProductImageRequest(productId, "PUT", data);
+// TODO: update JavaScript Doc.
+export function sendUpdateProductImageRequest(productId, data, successCallback = null) {
+  return sendProductImageRequest(productId, "PUT", data, successCallback);
 }
 
 /**
@@ -78,8 +73,9 @@ function sendProductsRequest(pathVariable, method, body = null, successCallback 
  * @param pathVariable path variable for the request to the products image endpoint, set as "" if not needed.
  * @param method the method of the request to send to the products image endpoint.
  * @param data data to send for the request to the products image endpoint.
+ * @param successCallback
  * @return {Promise<Response>} Promise for the request sent to the products image endpoint.
  */
-function sendProductImageRequest(pathVariable, method, data = null) {
-  return sendFormDataRequest(`${IMAGE_API_PATHNAME}/${pathVariable}`, method, data)
+function sendProductImageRequest(pathVariable, method, data = null, successCallback = null) {
+  return sendFormDataRequest(`${IMAGE_API_PATHNAME}/${pathVariable}`, method, data, successCallback)
 }

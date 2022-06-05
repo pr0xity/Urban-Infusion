@@ -1,5 +1,12 @@
 import {sendUpdateCartRequest, sendDeleteFromCartRequest, setIncrementCounter,} from "./controllers/cartcontroller.js";
-import {getAddressInfo, getProductIdFromElement, hideElement, renderMap, showElement,} from "./tools.js";
+import {
+  getAddressInfo,
+  getProductIdFromElement,
+  hideElement,
+  reloadCurrentPage,
+  renderMap,
+  showElement,
+} from "./tools.js";
 import {sendPostNewOrderRequest} from "./controllers/orderController.js";
 
 /**
@@ -28,11 +35,12 @@ const setCartItemControls = function () {
    * Sends request to update cart item to the new quantity.
    */
   const sendUpdateCartItemRequest = function (event) {
+    event.preventDefault();
     const cartItemRequestBody = getCartItemRequestBody(event.target);
     if (quantity <= 0) {
-      sendDeleteFromCartRequest(event);
+      sendDeleteFromCartRequest(cartItemRequestBody.productId);
     } else {
-      sendUpdateCartRequest(event, cartItemRequestBody);
+      sendUpdateCartRequest(cartItemRequestBody);
     }
   };
 
@@ -40,7 +48,9 @@ const setCartItemControls = function () {
    * Sends a delete request to delete the item with the given id from the shopping bag.
    */
   const sendCartItemDeleteRequest = function (event) {
-    sendDeleteFromCartRequest(event);
+    event.preventDefault();
+    const productId = getProductIdFromElement(event.target.closest(".item__btn--delete"));
+    sendDeleteFromCartRequest(productId).then(() => reloadCurrentPage());
   };
 
   /**

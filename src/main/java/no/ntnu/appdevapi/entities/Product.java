@@ -29,9 +29,9 @@ public class Product {
   @Column(name = "inventory")
   private int inventory;
 
-  @OneToOne(mappedBy = "product")
-  @JsonIgnore
-  private ProductImage image;
+  @ApiModelProperty("Id of the image connected to this product")
+  @Column(name = "product_image_id")
+  private long imageId;
 
   @ApiModelProperty("When the product was created.")
   @Column(name = "created_at")
@@ -123,25 +123,6 @@ public class Product {
     this.inactive = inactive;
   }
 
-  /**
-   * Returns the image of this product.
-   *
-   * @return image of this product.
-   */
-  @Transactional
-  public ProductImage getImage() {
-    return image;
-  }
-
-  /**
-   * Sets the image of this product.
-   *
-   * @param image new image of this product.
-   */
-  public void setImage(ProductImage image) {
-    this.image = image;
-  }
-
   public String getOrigin() {
     return origin;
   }
@@ -156,6 +137,24 @@ public class Product {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  /**
+   * Returns the id of the product image connected to this product.
+   *
+   * @return id of the product image connected to this product
+   */
+  public long getImageId() {
+    return imageId;
+  }
+
+  /**
+   * Sets the id for what product image is to be connected to this product.
+   *
+   * @param imageId id for the product image to be connected to this product.
+   */
+  public void setImageId(long imageId) {
+    this.imageId = imageId;
   }
 
   /**

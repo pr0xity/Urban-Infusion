@@ -13,42 +13,20 @@ import {setLoginAlert} from "../login.js";
 
 let currentProductId;
 
-/**
- * Sends a request to add the product of the add-to-cart button clicked.
- *
- * @param event add to cart button clicked for the product to add to cart.
- */
-export const sendAddToCartRequest = function (event) {
-  event.preventDefault();
-  currentProductId = getProductIdFromElement(
-    event.target.closest(".product__btn--add-to-cart")
-  );
-  sendCartRequest(currentProductId, "PUT", null, updateCartItemSuccess);
+
+export const sendAddToCartRequest = function (productId) {
+  currentProductId = productId;
+  return sendCartRequest(currentProductId, "PUT", null, updateCartItemSuccess);
 };
 
-/**
- * Sends a request to update the product in the body given.
- *
- * @param event .
- * @param body body of the product to update.
- */
-export const sendUpdateCartRequest = function (event, body) {
-  event.preventDefault();
+export const sendUpdateCartRequest = function (body) {
   currentProductId = body.productId;
   sendCartRequest(currentProductId, "PUT", body, updateCartItemSuccess);
 };
 
-/**
- * Sends a delete request to remove product of the event from cart.
- *
- * @param event delete button click for the product to be removed.
- */
-export const sendDeleteFromCartRequest = function (event) {
-  event.preventDefault();
-  currentProductId = getProductIdFromElement(
-    event.target.closest(".item__btn--delete")
-  );
-  sendCartRequest(currentProductId, "DELETE", null, reloadCurrentPage);
+export const sendDeleteFromCartRequest = function (productId) {
+  currentProductId = productId;
+  return sendCartRequest(currentProductId, "DELETE", null);
 };
 
 /**
@@ -61,19 +39,19 @@ export const sendDeleteFromCartRequest = function (event) {
  */
 function sendCartRequest(productId, method, body = null, successCallback) {
   if (body !== null) {
-    sendApiRequest(
+    return sendApiRequest(
       `${CART_API_PATHNAME}/${productId}`,
       `${method}`,
       body,
       successCallback, addToCartUnauthorized
     ).then(() => setIncrementCounter());
   } else {
-    sendApiRequest(
+    return sendApiRequest(
       `${CART_API_PATHNAME}/${productId}`,
       `${method}`,
       null,
       null, addToCartUnauthorized
-    ).finally(() => setIncrementCounter());
+    ).then(() => setIncrementCounter());
   }
 }
 

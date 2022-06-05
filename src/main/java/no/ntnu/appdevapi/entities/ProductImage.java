@@ -20,12 +20,6 @@ public class ProductImage {
     @Lob
     private byte [] data;
 
-    @ApiModelProperty("The product this image belongs to.")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @OneToOne(cascade = CascadeType.DETACH)
-    @JoinColumn(name = "product_id")
-    private Product product;
-
     @ApiModelProperty("The file extension if the image (.jpg, .png etc.)")
     private String fileExtension;
 
@@ -36,13 +30,11 @@ public class ProductImage {
      * Creates an instance of product image.
      *
      * @param data they array of bytes of an image.
-     * @param product the product this image belongs to.
      * @param extension the file extension of this image (.jpg, png, etc.)
      * @param contentType the content type of this image (image/jpeg, image/png, .etc)
      */
-    public ProductImage(byte[] data, Product product, String extension, String contentType) {
+    public ProductImage(byte[] data, String extension, String contentType) {
         this.data = data;
-        this.product = product;
         this.fileExtension = extension;
         this.contentType = contentType;
     }
@@ -88,24 +80,6 @@ public class ProductImage {
      */
     public void setData(byte[] data) {
         this.data = data;
-    }
-
-    /**
-     * Returns the product belonging to this image.
-     *
-     * @return returns the product belonging to this image.
-     */
-    public Product getProduct() {
-        return product;
-    }
-
-    /**
-     * Sets the product belonging to this image.
-     *
-     * @param product the product to be set to this image.
-     */
-    public void setProduct(Product product) {
-        this.product = product;
     }
 
     /**

@@ -70,27 +70,21 @@ public class ProductController {
   }
 
   /**
-   * Gets the image for of the product with the given product id.
+   * Returns the image with the given image id.
    *
-   * @param productId the product id of the product to find image for.
-   * @return 200 OK on success (with image), 404 not found if product or image was not found.
+   * @param imageId id of the image to return.
+   * @return 200 ok with the image with the given image id, or 404 not found if not found.
    */
-  @GetMapping("/images/{productId}")
+  @GetMapping("/images/{imageId}")
   @ApiOperation(value = "Gets image of product", notes = "Status 200 and image if found, 404 if product or image not found")
-  public ResponseEntity<byte[]> getImage(@PathVariable long productId) {
-    Product product = productService.getProduct(productId);
+  public ResponseEntity<byte[]> getImage(@PathVariable long imageId) {
+    ProductImage image = productImageService.getImageById(imageId);
 
-    if (product != null) {
-      ProductImage image = productImageService.getImageByProduct(product);
-
-      if (image != null) {
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_TYPE, image.getContentType())
-                .body(image.getData());
-      }
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    if (image != null) {
+      return ResponseEntity.ok()
+              .header(HttpHeaders.CONTENT_TYPE, image.getContentType())
+              .body(image.getData());
     }
-
     return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
 
@@ -104,8 +98,8 @@ public class ProductController {
   @ApiOperation(value = "Add a new product.", notes = "Status 200 when added, 400 on error.")
   public ResponseEntity<?> add(@RequestBody ProductDto product) {
     if (null != product) {
-      Product product1 = productService.addProductFromDto(product);
-      return new ResponseEntity<>(product1, HttpStatus.OK);
+      productService.addProductFromDto(product);
+      return new ResponseEntity<>(HttpStatus.OK);
     }
     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
   }
@@ -126,66 +120,46 @@ public class ProductController {
   }
 
   /**
-   * Adds the given image file to the product with the given id.
+   * Adds a product image.
    *
-   * @param productId the product id to add image to.
-   * @param part the image file to add.
-   * @return 200 OK on success, 400 bad request on error, 404 not found if product was not found.
+   * @param imageFile the image file to add.
+   * @return 200 ok with the image id on success, 400 bad request on error.
    */
-  @PostMapping("/images/{productId}")
-  @ApiOperation(value = "Add an image to product", notes = "Status 200 when added, 404 if product not found, 400 on error.")
-  public ResponseEntity<String> addImage(@PathVariable long productId, @RequestPart("file") Part part) throws IOException{
-    Product p = productService.getProduct(productId);
-    ProductImage image = productImageService.getImageByProduct(p);
-
-    if (p != null) {
-      if (image == null && part != null) {
-        String fileName = getFileName(part);
-        String[] fileArray = fileName.split("\\.");
-        ProductImage newImage = new ProductImage(part.getInputStream().readAllBytes(), p, fileArray[fileArray.length-1], part.getContentType());
-        productImageService.addProductImage(newImage, p);
-        return new ResponseEntity<>(HttpStatus.OK);
+  @PostMapping("/images")
+  @ApiOperation(value = "Adds a product image", notes = "Status 200 when added, 400 on error.")
+  public ResponseEntity<?> addImage(@RequestParam("imageFile") MultipartFile imageFile) {
+      if (imageFile != null) {
+        ProductImage imageAdded = productImageService.addImage(imageFile);
+        long imageId = imageAdded.getId();
+        return new ResponseEntity<>("" + imageId, HttpStatus.OK);
       }
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-    }
-    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
 
 
   /**
-   * Updates the given image file to the product with the given id.
+   * Updates the product image of the product with the given id.
    *
-   * @param productId the product id to update image of.
-   * @param part the new image of the product.
-   * @return 200 OK on success, 400 bad request on error, 404 not found if product was not found.
+   * @param productId id of the product whose image is to be updated.
+   * @param imageFile the image file to update to.
+   * @return 200 ok if the image was added, 404 not found if a product with the product id was not found.
    */
   @PutMapping("/images/{productId}")
   @ApiOperation(value = "Update image of product", notes = "Status 200 when successfully updated, 404 if product not found, 400 on error.")
-  public ResponseEntity<String> updateImage(@PathVariable long productId, @RequestPart("file") Part part) throws IOException {
-    ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    Product p = productService.getProduct(productId);
-    if (null != p) {
-      //Writing image or file
-      String fileName = getFileName(part);
-      String[] fileArray = fileName.split("\\.");
-      ProductImage image = new ProductImage(part.getInputStream().readAllBytes(), p, fileArray[fileArray.length-1], part.getContentType());
-      productImageService.updateImage(productId, image);
-      response = new ResponseEntity<>(HttpStatus.OK);
-    }
-      return response;
-  }
+  public ResponseEntity<String> updateImage(@PathVariable long productId, @RequestParam("imageFile") MultipartFile imageFile) {
+    Product product = productService.getProduct(productId);
+    if (product == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
-  private String getFileName(Part part) {
-    String contentDisp = part.getHeader("content-disposition");
-    System.out.println("content-disposition header= " + contentDisp);
-    String[] tokens = contentDisp.split(";");
-    for (String token : tokens) {
-      if (token.trim().startsWith("filename")) {
-        return token.substring(token.indexOf("=") + 2,
-                token.length() - 1);
-      }
+    ProductImage productImage = productImageService.getImageById(product.getImageId());
+    if (productImage != null) {
+      productImageService.updateImage(product.getImageId(), imageFile);
+      return new ResponseEntity<>(HttpStatus.OK);
+    } else {
+      ProductImage addedImage = productImageService.addImage(imageFile);
+      product.setImageId(addedImage.getId());
+      productService.updateProductWithProductObject(productId, product);
+      return new ResponseEntity<>("" + addedImage.getId(), HttpStatus.OK);
     }
-    return "";
   }
 
   /**

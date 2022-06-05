@@ -92,10 +92,22 @@ public class ProductServiceImpl implements ProductService {
         if (0 != newProduct.getInventory()) {
             old.setInventory(newProduct.getInventory());
         }
+        if (newProduct.getImageId() != 0) {
+            old.setImageId(newProduct.getImageId());
+        }
         old.setInactive(newProduct.isInactive());
 
         productRepository.save(old);
         return productRepository.findById(old.getId()).orElse(null);
+    }
+
+    @Override
+    public Product updateProductWithProductObject(long productId, Product product) {
+        Product existingProduct = productRepository.findById(productId).orElse(null);
+        if (existingProduct != null && product.getId() == productId) {
+            return productRepository.save(product);
+        }
+        return null;
     }
 
     public void deleteProduct(long id) {
@@ -115,6 +127,7 @@ public class ProductServiceImpl implements ProductService {
         product.setInventory(object.getInventory());
         product.setCreatedAt(object.getCreatedAt());
         product.setUpdatedAt(object.getUpdatedAt());
+        product.setImageId(object.getImageId());
         product.setInactive(object.isInactive());
 
         if (null != object.getCategory()) {

@@ -1,57 +1,16 @@
-import {
-  mobileLayoutSize,
-  getProductIdFromElement,
-  reloadCurrentPage,
-  sendApiRequest,
-  RATING_API_PATHNAME
-} from "./tools.js";
+import {mobileLayoutSize, getProductIdFromElement, reloadCurrentPage} from "./tools.js";
+import {sendAddNewReviewRequest, sendDeleteReviewRequest, sendUpdateReviewRequest,} from "./controllers/reviewController.js";
+import {getRatingFromElement, LEAF_UNSELECTED, setLeavesToSelected, setRatingLeavesOnProductsAndReviews,} from "./views/reviewLeavesView.js";
+import {sendWishlistRequest, setWishlistButtonsOnProduct} from "./views/wishlistButtonView.js";
+import {sendAddToCartRequest, setIncrementCounter} from "./controllers/cartController.js";
 
-const LEAF_SELECTED = "../img/icons/leaf-fill.svg";
-const LEAF_UNSELECTED = "../img/icons/leaf.svg";
-
-/**
- * Returns the rounded rating from dataset of the given element.
- *
- * @param element the element to retrieve rating from.
- * @returns {number} the rounded rating.
- */
-function getRatingFromElement(element) {
-  return Math.round(Number(element.dataset.rating));
-}
-
-/**
- * Makes the leaves which has a data rating attribute less than
- * or equal the given rating to selected.
- *
- * @param leaves the leaves to check and set as selected.
- * @param {*} rating the rating to make leaves selected for.
- */
-function setLeavesToSelected(leaves, rating) {
-  leaves.forEach((leaf) => {
-    if (getRatingFromElement(leaf) <= rating) {
-      leaf.src = LEAF_SELECTED;
-    } else {
-      leaf.src = LEAF_UNSELECTED;
-    }
-  });
-}
-
-/**
- * Sets the rating leaves to filled on the various product(s) and reviews.
- */
-function setRatingLeavesOnProductsAndReviews() {
-  const ratings = document.querySelectorAll(".product__rating");
-  ratings.forEach((rating) => {
-    const leaves = rating.querySelectorAll(".product__rating--img");
-    setLeavesToSelected(leaves, getRatingFromElement(rating));
-  });
-}
+const product = document.querySelector(".product");
+const productId = getProductIdFromElement(document.querySelector(".product"));
 
 /**
  * Sets functionality and request handling on the review form on a products page.
  */
 function setReviewHandling() {
-  const productId = getProductIdFromElement(document.querySelector(".product"));
   const ratingReview = document.querySelector("#review__rating");
   const reviewRatingLeaves = ratingReview.querySelectorAll(
     ".product__rating--img"
@@ -180,9 +139,8 @@ function setReviewHandling() {
   const sendReviewRequest = function (event) {
     event.preventDefault();
     if (isReviewFormValid()) {
-      sendApiRequest(
-        `${RATING_API_PATHNAME}/${productId}`,
-        "POST",
+      sendAddNewReviewRequest(
+        productId,
         getBodyForReviewRequest(),
         reviewRequestSuccess,
         reviewRequestUnauthorized
@@ -198,9 +156,8 @@ function setReviewHandling() {
   const updateReviewRequest = function (event) {
     event.preventDefault();
     if (isReviewFormValid()) {
-      sendApiRequest(
-        `${RATING_API_PATHNAME}/${productId}`,
-        "PUT",
+      sendUpdateReviewRequest(
+        productId,
         getBodyForReviewRequest(),
         reviewRequestSuccess,
         reviewRequestUnauthorized,
@@ -217,9 +174,8 @@ function setReviewHandling() {
   const deleteReviewRequest = function (event) {
     event.preventDefault();
     if (isReviewFormValid()) {
-      sendApiRequest(
-        `${RATING_API_PATHNAME}/${productId}`,
-        "DELETE",
+      sendDeleteReviewRequest(
+        productId,
         getBodyForReviewRequest(),
         reviewRequestSuccess,
         reviewRequestUnauthorized
@@ -249,51 +205,60 @@ function setReviewHandling() {
   }
 }
 
-// Only on a products page.
-if (window.location.pathname.includes(PRODUCT_PATHNAME) && window.location.pathname !== "/products") {
+const productCta = document.querySelector(".product__price-cta");
+const productCtaHeight = productCta.getBoundingClientRect().height;
 
-  const productCta = document.querySelector(".product__price-cta");
-  const productCtaHeight = productCta.getBoundingClientRect().height;
+const stickyCta = function (entries) {
+  const [entry] = entries;
 
-  const stickyCta = function (entries) {
-    const [entry] = entries;
-
-    if (entry.isIntersecting) {
-      productCta.classList.add("product__price-cta--absolute");
-      productCta.classList.remove("product__price-cta--sticky");
-      document.querySelector("main").appendChild(productCta);
-    } else {
-      productCta.classList.add("product__price-cta--sticky");
-      productCta.classList.remove("product__price-cta--absolute");
-      document.querySelector(".section-product-info").appendChild(productCta);
-    }
-  };
-
-  const footerObserver = new IntersectionObserver(stickyCta, {
-    root: null,
-    threshold: 0,
-    rootMargin: `${productCtaHeight}px`,
-  });
-
-  /**
-   * Sets the products page, implements changes when screen size changes.
-   */
-  const setProductPage = function () {
-    const footer = document.querySelector(".footer");
-
-
-    if (mobileLayoutSize.matches) {
-      footerObserver.observe(footer);
-    } else {
-      productCta.classList.remove("product__price-cta--sticky");
-      productCta.classList.remove("product__price-cta--absolute");
-      document.querySelector(".section-product-info").appendChild(productCta);
-      footerObserver.unobserve(footer);
-    }
-
+  if (entry.isIntersecting) {
+    productCta.classList.add("product__price-cta--absolute");
+    productCta.classList.remove("product__price-cta--sticky");
+    document.querySelector("main").appendChild(productCta);
+  } else {
+    productCta.classList.add("product__price-cta--sticky");
+    productCta.classList.remove("product__price-cta--absolute");
+    document.querySelector(".section-product-info").appendChild(productCta);
   }
-  mobileLayoutSize.addEventListener("change", setProductPage);
-  setProductPage();
-  setReviewHandling();
-}
+};
+
+const footerObserver = new IntersectionObserver(stickyCta, {
+  root: null,
+  threshold: 0,
+  rootMargin: `${productCtaHeight}px`,
+});
+
+/**
+ * Sets the products page, implements changes when screen size changes.
+ */
+const responsiveProductPage = function () {
+  const footer = document.querySelector(".footer");
+
+  if (mobileLayoutSize.matches) {
+    footerObserver.observe(footer);
+  } else {
+    productCta.classList.remove("product__price-cta--sticky");
+    productCta.classList.remove("product__price-cta--absolute");
+    document.querySelector(".section-product-info").appendChild(productCta);
+    footerObserver.unobserve(footer);
+  }
+};
+
 setRatingLeavesOnProductsAndReviews();
+setWishlistButtonsOnProduct(product);
+setIncrementCounter().finally();
+(function implementProductFunctionality() {
+  function addToCartEvent(event) {
+    event.preventDefault();
+    sendAddToCartRequest(productId);
+  }
+  
+  const addToCartButton = document.querySelector(".product__btn--add-to-cart");
+  const wishlistButton = document.querySelector(".product__btn--wishlist");
+  addToCartButton.addEventListener("click", addToCartEvent);
+  wishlistButton.addEventListener("click", sendWishlistRequest)
+
+})()
+mobileLayoutSize.addEventListener("change", responsiveProductPage);
+responsiveProductPage();
+setReviewHandling();

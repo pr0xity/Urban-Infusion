@@ -7,6 +7,7 @@ import {
 } from "./controllers/productController.js";
 import {hideEditOverlays} from "./admin.js";
 import {getProductIdFromElement, reloadCurrentPage, showElement} from "./tools.js";
+import {LEAF_UNSELECTED} from "./views/reviewLeavesView.js";
 
 const productTable = document.getElementById("productTable");
 const tableBody = document.getElementById("productTableBody");
@@ -121,7 +122,7 @@ const manageProduct = function(product) {
     priceLabel.textContent = product["price"];
     categoryLabel.textContent = product["category"]["name"];
     descriptionLabel.innerHTML = product["description"].replaceAll(".", ".&ZeroWidthSpace;");
-    fetchImage(product["id"]);
+    fetchImage(product["imageId"]);
 
     activeStatusCheckBox.onclick = function(){
         console.log(product);
@@ -147,14 +148,26 @@ const updateActiveStatus = function() {
     }
 }
 
-const fetchImage = function(productId) {
-    sendGetProductImageRequest(productId).then(response => {
+const fetchImage = function(imageId) {
+    if (imageId !== 0) {
+
+    sendGetProductImageRequest(imageId).then(response => {
+        if (response !== undefined) {
         const urlCreator = window.URL || window.webkitURL;
         const imageUrl = urlCreator.createObjectURL(response);
         const image = document.getElementById("productImage");
         image.src = imageUrl;
+        } else {
+            const image = document.getElementById("productImage");
+            image.src = LEAF_UNSELECTED;
+        }
         showElement(overlay);
-    })
+    });
+    } else {
+        const image = document.getElementById("productImage");
+        image.src = LEAF_UNSELECTED;
+        showElement(overlay)
+    }
 }
 
 const setEventListeners = function() {
@@ -296,13 +309,15 @@ const readImage = function(file) {
 
 const uploadImage = function(imageFile) {
     let data = new FormData();
-    data.append("file", imageFile);
+    data.append("imageFile", imageFile);
     uploadToServer(data);
 }
 
 const uploadToServer = function(data) {
     const productId = getProductIdFromElement(button);
-    sendUpdateProductImageRequest(productId, data).finally();
+    sendUpdateProductImageRequest(productId, data, editProductSuccess).finally();/*.then(response => {
+        sendUpdateProductRequest(productId, {imageId: response}, editProductSuccess).finally();
+    })*/
 }
 
 
@@ -364,12 +379,16 @@ const getAlertMessage = function (){
 const imageSelector = document.getElementById('image-selector');
 let image2 = document.getElementById("addProductImage");
 let file = "";
+let imageId;
 
 imageSelector.addEventListener(
-    'change', (event) => {
-        file = event.target.files[0];
-        readImage2(file);
-    });
+    'change', async (event) => {
+      file = event.target.files[0];
+      readImage2(file);
+      let data = new FormData();
+      data.append("imageFile", file);
+      imageId = await sendAddProductImageRequest(data).finally();
+  });
 
 
 const readImage2 = function(file) {
@@ -380,20 +399,15 @@ const readImage2 = function(file) {
     reader.readAsDataURL(file);
 }
 
-const addProductRequest = async function (event){
+const addProductRequest = async function (event) {
     event.preventDefault();
     if (isFormValid()) {
-        const product = await sendAddProductRequest(getProductData());
-        console.log(product);
-        console.log(image2);
-
-
-        let data = new FormData();
-        data.append("file", file);
-        await sendAddProductImageRequest(product.id, data).finally();
-
-
-    } else{
+        const productData = getProductData();
+        if (imageId !== 0) {
+            productData.imageId = imageId;
+        }
+        sendAddProductRequest(productData).finally();
+    } else {
         setAccountFormAlert(getAlertMessage())
     }
 };

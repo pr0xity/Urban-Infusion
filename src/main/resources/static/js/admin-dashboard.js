@@ -1,13 +1,13 @@
 import {sendGetNewUsersRequest} from "./controllers/userController.js";
 import {sendGetRecentOrdersRequest} from "./controllers/orderController.js";
-import {getRecentRatings} from "./admin-ratings.js";
+import {sendGetRecentReviewsRequest} from "./controllers/reviewController.js";
 
 window.addEventListener("DOMContentLoaded", getTableContent);
 
 function getTableContent() {
     getNewCustomers();
     getLatestOrders();
-    getRecentRatings();
+    getRecentReviews();
 }
 
 function getNewCustomers() {
@@ -85,4 +85,41 @@ function addOrderRow(order) {
     row.appendChild(customerIdCell);
     row.appendChild(statusCell);
     tableBody.appendChild(row);
+}
+
+/**
+ * Sends request to get the recent reviews and loads them in the review table.
+ */
+function getRecentReviews() {
+    sendGetRecentReviewsRequest().then(response => loadReviews(response));
+}
+
+/**
+ * Displays the given reviews in the review table.
+ *
+ * @param reviews reviews to display.
+ */
+function loadReviews(reviews) {
+  const reviewTable = document.querySelector("#ratingTable");
+  reviews.forEach(review => {
+    reviewTable.insertAdjacentHTML("beforeend", createReviewRow(review));
+  })
+}
+
+/**
+ * Formats and returns a html row of the given review.
+ *
+ * @param review the review to create html row of.
+ * @return {string} html of the review in a table row.
+ */
+function createReviewRow(review) {
+    return (`
+      <tr>
+        <td>${review.updatedAt.substring(0,10)}</td>
+        <td>${review.product.id}</td>
+        <td>${review.user.id}</td>
+        <td>${review.displayName}</td>
+        <td>${review.rating}</td>
+        <td>${review.comment}</td>
+      </tr>`);
 }
