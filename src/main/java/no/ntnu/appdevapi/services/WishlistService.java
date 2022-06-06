@@ -35,6 +35,14 @@ public interface WishlistService {
   Wishlist getWishlistByUser(User user);
 
   /**
+   * Returns the wishlist which has the given sharing token.
+   *
+   * @param sharingToken the token to find wishlist for.
+   * @return wishlist with the given sharing token, null if not found.
+   */
+  Wishlist getWishlistBySharingToken(String sharingToken);
+
+  /**
    * Adds a wishlist.
    *
    * @param wishlist the wishlist to be added.

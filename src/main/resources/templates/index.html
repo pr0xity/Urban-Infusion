@@ -103,9 +103,11 @@
         </div>
       </section>
       <section class="section-featured">
-        <div class="section__heading-box">
-          <h2 class="decorative-heading">Top sellers</h2>
-          <h3 class="section-title">Featured</h3>
+        <div class="header__headings">
+          <h2>
+            <span class="decorative-heading">Top sellers</span>
+            <span class="section-title">Featured</span>
+          </h2>
         </div>
         <div class="featured-products">
           <div
@@ -115,7 +117,7 @@
           >
             <img
               class="featured-card__img"
-              th:src="@{api/products/images/{id}(id = ${product.id})}"
+              th:src="@{api/products/images/{id}(id = ${product.imageId})}"
               th:alt="${product.name}"
             />
             <a
@@ -163,11 +165,13 @@
       </div>
 
       <section class="section-company" id="section-company">
-        <div class="section__heading-box">
-          <h2 class="decorative-heading">Urban Infusion</h2>
-          <h3 class="section-title">
-            Fusing ancient traditions and modern times
-          </h3>
+        <div class="header__headings">
+          <h2>
+            <span class="decorative-heading">Urban Infusion</span>
+            <span class="section-title">
+              Fusing ancient traditions and modern times
+            </span>
+          </h2>
         </div>
 
         <div class="company-grid">
@@ -452,9 +456,11 @@
       </section>
 
       <section class="section-products container--beige" id="section-products">
-        <div class="section__heading-box">
-          <h2 class="decorative-heading">Products</h2>
-          <h3 class="section-title">Find your herbal friend!</h3>
+        <div class="header__headings">
+          <h2>
+            <span class="decorative-heading">Products</span>
+            <span class="section-title">Find your herbal friend!</span>
+          </h2>
         </div>
 
         <div class="product-slider">
@@ -468,9 +474,11 @@
       </section>
 
       <section class="section-testimonials">
-        <div class="section__heading-box">
-          <h2 class="decorative-heading">Testimonials</h2>
-          <h3 class="section-title">Still not convinced?</h3>
+        <div class="header__headings">
+          <h2>
+            <span class="decorative-heading">Testimonials</span>
+            <span class="section-title">Still not convinced?</span>
+          </h2>
         </div>
         <div class="testimonials">
           <div class="testimonial">

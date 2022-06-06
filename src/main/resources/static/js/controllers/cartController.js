@@ -8,22 +8,41 @@ import {
   showElement,
   hideElement,
 } from "../tools.js";
-import {sendDeleteFromWishlistRequest} from "./wishlistController.js";
-import {setLoginAlert} from "../login.js";
+import { sendDeleteFromWishlistRequest } from "./wishlistController.js";
+import {setLoginAlert} from "../views/loginMenuView.js";
 
 let currentProductId;
 
-
+/**
+ * Sends request to add the product with the given product id to the current user's
+ * shopping session.
+ *
+ * @param productId id of the product to add to the shopping session.
+ * @return {Promise<void>} Promise for request to add a product to the shopping session.
+ */
 export const sendAddToCartRequest = function (productId) {
   currentProductId = productId;
   return sendCartRequest(currentProductId, "PUT", null, updateCartItemSuccess);
 };
 
+/**
+ * Sends a request to update a cart item.
+ *
+ * @param body the body containing the updated cart item.
+ * @return {Promise<void>} Promise for request to update cart item.
+ */
 export const sendUpdateCartRequest = function (body) {
   currentProductId = body.productId;
-  sendCartRequest(currentProductId, "PUT", body, updateCartItemSuccess);
+  return sendCartRequest(currentProductId, "PUT", body, updateCartItemSuccess);
 };
 
+/**
+ * Sends a request to delete the product with the given product id from the
+ * current user's shopping session.
+ *
+ * @param productId id of the product to remove from shopping session.
+ * @return {Promise<void>} Promise for request to remove the id from shopping session.
+ */
 export const sendDeleteFromCartRequest = function (productId) {
   currentProductId = productId;
   return sendCartRequest(currentProductId, "DELETE", null);
@@ -39,19 +58,9 @@ export const sendDeleteFromCartRequest = function (productId) {
  */
 function sendCartRequest(productId, method, body = null, successCallback) {
   if (body !== null) {
-    return sendApiRequest(
-      `${CART_API_PATHNAME}/${productId}`,
-      `${method}`,
-      body,
-      successCallback, addToCartUnauthorized
-    ).then(() => setIncrementCounter());
+    return sendApiRequest(`${CART_API_PATHNAME}/${productId}`, `${method}`, body, successCallback, addToCartUnauthorized).then(() => setIncrementCounter());
   } else {
-    return sendApiRequest(
-      `${CART_API_PATHNAME}/${productId}`,
-      `${method}`,
-      null,
-      null, addToCartUnauthorized
-    ).then(() => setIncrementCounter());
+    return sendApiRequest(`${CART_API_PATHNAME}/${productId}`, `${method}`, null, null, addToCartUnauthorized).then(() => setIncrementCounter());
   }
 }
 
@@ -59,12 +68,7 @@ function sendCartRequest(productId, method, body = null, successCallback) {
  * Retrieves and updates the new price for the cart item.
  */
 const updateCartItemSuccess = async function () {
-  await sendApiRequest(
-    `${CART_API_PATHNAME}`,
-    "GET",
-    null,
-    setIncrementCounter
-  ).then((cartInfo) => {
+  await sendApiRequest(`${CART_API_PATHNAME}`, "GET", null, setIncrementCounter).then((cartInfo) => {
     const cartItems = cartInfo.cart;
     cartItems.forEach((item) => {
       if (window.location.pathname.includes(CHECKOUT_PATHNAME) && item.product.id === Number(currentProductId)) {
@@ -108,11 +112,8 @@ const addToCartUnauthorized = function () {
  * increment counter on the checkout button accordingly.
  */
 export async function setIncrementCounter() {
-  const navCheckoutQuantity = document.querySelector(
-    ".nav__checkout--quantity"
-  );
-  await sendApiRequest(`${CART_API_PATHNAME}`, "GET")
-    .then((cartInfo) => {
+  const navCheckoutQuantity = document.querySelector(".nav__checkout--quantity");
+  await sendApiRequest(`${CART_API_PATHNAME}`, "GET").then((cartInfo) => {
       const cartQuantity = cartInfo.quantity;
       if (cartQuantity > 0) {
         showElement(navCheckoutQuantity);

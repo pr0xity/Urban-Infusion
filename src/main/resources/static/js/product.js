@@ -1,8 +1,27 @@
-import {mobileLayoutSize, getProductIdFromElement, reloadCurrentPage} from "./tools.js";
-import {sendAddNewReviewRequest, sendDeleteReviewRequest, sendUpdateReviewRequest,} from "./controllers/reviewController.js";
-import {getRatingFromElement, LEAF_UNSELECTED, setLeavesToSelected, setRatingLeavesOnProductsAndReviews,} from "./views/reviewLeavesView.js";
-import {sendWishlistRequest, setWishlistButtonsOnProduct} from "./views/wishlistButtonView.js";
-import {sendAddToCartRequest, setIncrementCounter} from "./controllers/cartController.js";
+import {
+  mobileLayoutSize,
+  getProductIdFromElement,
+  reloadCurrentPage,
+} from "./tools.js";
+import {
+  sendAddNewReviewRequest,
+  sendDeleteReviewRequest,
+  sendUpdateReviewRequest,
+} from "./controllers/reviewController.js";
+import {
+  getRatingFromElement,
+  LEAF_UNSELECTED,
+  setLeavesToSelected,
+  setRatingLeavesOnProductsAndReviews,
+} from "./views/reviewLeavesView.js";
+import {
+  sendWishlistRequest,
+  setWishlistButtonsOnProduct,
+} from "./views/wishlistButtonView.js";
+import {
+  sendAddToCartRequest,
+  setIncrementCounter,
+} from "./controllers/cartController.js";
 
 const product = document.querySelector(".product");
 const productId = getProductIdFromElement(document.querySelector(".product"));
@@ -208,6 +227,10 @@ function setReviewHandling() {
 const productCta = document.querySelector(".product__price-cta");
 const productCtaHeight = productCta.getBoundingClientRect().height;
 
+/**
+ * Adds the CTA section of the product page as a sticky when the footer is not
+ * intersecting, otherwise it is added at the bottom of the page.
+ */
 const stickyCta = function (entries) {
   const [entry] = entries;
 
@@ -221,12 +244,6 @@ const stickyCta = function (entries) {
     document.querySelector(".section-product-info").appendChild(productCta);
   }
 };
-
-const footerObserver = new IntersectionObserver(stickyCta, {
-  root: null,
-  threshold: 0,
-  rootMargin: `${productCtaHeight}px`,
-});
 
 /**
  * Sets the products page, implements changes when screen size changes.
@@ -244,21 +261,35 @@ const responsiveProductPage = function () {
   }
 };
 
+const footerObserver = new IntersectionObserver(stickyCta, {
+  root: null,
+  threshold: 0,
+  rootMargin: `${productCtaHeight}px`,
+});
 setRatingLeavesOnProductsAndReviews();
 setWishlistButtonsOnProduct(product);
 setIncrementCounter().finally();
-(function implementProductFunctionality() {
-  function addToCartEvent(event) {
-    event.preventDefault();
-    sendAddToCartRequest(productId);
-  }
-  
-  const addToCartButton = document.querySelector(".product__btn--add-to-cart");
-  const wishlistButton = document.querySelector(".product__btn--wishlist");
-  addToCartButton.addEventListener("click", addToCartEvent);
-  wishlistButton.addEventListener("click", sendWishlistRequest)
-
-})()
 mobileLayoutSize.addEventListener("change", responsiveProductPage);
 responsiveProductPage();
 setReviewHandling();
+
+/**
+ * Implements action and functionality related to the product.
+ */
+(function implementProductFunctionality() {
+
+  /**
+   * Handles add to cart event.
+   *
+   * @param event click event on add to cart button.
+   */
+  function addToCartEvent(event) {
+    event.preventDefault();
+    sendAddToCartRequest(productId).finally();
+  }
+
+  const addToCartButton = document.querySelector(".product__btn--add-to-cart");
+  const wishlistButton = document.querySelector(".product__btn--wishlist");
+  addToCartButton.addEventListener("click", addToCartEvent);
+  wishlistButton.addEventListener("click", sendWishlistRequest);
+})();

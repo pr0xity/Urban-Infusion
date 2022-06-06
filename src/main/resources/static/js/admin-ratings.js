@@ -1,9 +1,10 @@
 import {
-    sendDeleteReviewRequest,
-    sendGetAllReviewsRequest,
-    sendGetRecentReviewsRequest, sendUpdateReviewRequest,
+  sendDeleteReviewRequest,
+  sendGetAllReviewsRequest,
+  sendGetRecentReviewsRequest,
+  sendUpdateReviewRequest,
 } from "./controllers/reviewController.js";
-import {hideElement} from "./tools.js";
+import { hideElement } from "./tools.js";
 
 const overlay = document.getElementById("overlay");
 const editNameOverlay = document.getElementById("editNameOverlay");
@@ -49,15 +50,15 @@ const filterRatings = function () {
 
 document.querySelector("#searchInput").addEventListener("input", filterRatings);
 
-function loadRatings (ratings) {
+function loadRatings(ratings) {
   document.getElementById("ratingTableBody").innerHTML = "";
   for (let i = 0; i < ratings.length; i++) {
     const rating = ratings[i];
     addRatingRow(rating);
   }
-};
+}
 
-function addRatingRow  (rating) {
+function addRatingRow(rating) {
   if (!document.getElementById("ratingTable")) return;
   const tableBody = document.getElementById("ratingTableBody");
   const row = document.createElement("tr");
@@ -99,7 +100,7 @@ function addRatingRow  (rating) {
   row.appendChild(ratingCell);
   row.appendChild(commentCell);
   tableBody.appendChild(row);
-};
+}
 
 const manageRating = function (managedRating) {
   rating = managedRating;
@@ -130,12 +131,17 @@ const manageRating = function (managedRating) {
 };
 
 const deleteRating = function (rating) {
-  sendDeleteReviewRequest(rating["product"]["id"], convertRatingToDTO(rating), getRatings)
-    .finally(() => hideElement(overlay));
+  sendDeleteReviewRequest(
+    rating["product"]["id"],
+    convertRatingToDTO(rating),
+    getRatings
+  ).finally(() => hideElement(overlay));
 };
 
 const editName = function () {
-  document.getElementById("updateNameButton").addEventListener("click", updateRating);
+  document
+    .getElementById("updateNameButton")
+    .addEventListener("click", updateRating);
   document.getElementById("newName").value = "";
   editNameOverlay.classList.add("display");
 };
@@ -143,8 +149,11 @@ const editName = function () {
 const updateRating = function (event) {
   event.preventDefault();
   rating["displayName"] = document.getElementById("newName").value;
-  sendUpdateReviewRequest(rating["product"]["id"], convertRatingToDTO(rating), updateRatingSuccess)
-    .finally(() => hideElement(editNameOverlay));
+  sendUpdateReviewRequest(
+    rating["product"]["id"],
+    convertRatingToDTO(rating),
+    updateRatingSuccess
+  ).finally(() => hideElement(editNameOverlay));
 };
 
 const updateRatingSuccess = function () {
@@ -161,6 +170,6 @@ const convertRatingToDTO = function (rating) {
   return dto;
 };
 
-function setEventListeners () {
+function setEventListeners() {
   editNameButton.addEventListener("click", editName);
 }

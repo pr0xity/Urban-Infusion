@@ -1,4 +1,4 @@
-import {hideElement, showElement} from "../tools.js";
+import { hideElement, showElement } from "../tools.js";
 
 /**
  * Represents a slider
@@ -45,7 +45,7 @@ export default class Slider {
       slide.addEventListener("click", this.goToSlideReference);
       this.addTouchEventsToSlide(slide);
     });
-  };
+  }
 
   /**
    * Remove slide formatting, controller and events.
@@ -69,7 +69,7 @@ export default class Slider {
    *
    * @param {*} event event used for this handler
    */
-  sliderNext (event) {
+  sliderNext(event) {
     if (+this.currentSlide === this.numberOfSlides - 1) {
       this.currentSlide = 0;
     } else {
@@ -77,14 +77,14 @@ export default class Slider {
     }
 
     this.goToSlide();
-  };
+  }
 
   /**
    * Goes to the previous slide.
    *
    * @param {*} event event used for this handler
    */
-  sliderPrev (event) {
+  sliderPrev(event) {
     if (+this.currentSlide === 0) {
       this.currentSlide = this.numberOfSlides - 1;
     } else {
@@ -92,14 +92,14 @@ export default class Slider {
     }
 
     this.goToSlide();
-  };
+  }
 
   /**
    * Changes position for the slide.
    *
    * @param {*} event event used in this handler (only needed for dot)
    */
-  goToSlide (event) {
+  goToSlide(event) {
     if (event !== undefined && event.target.classList[0] !== undefined) {
       if (this.isEventFromSlide(event)) {
         this.currentSlide = Number(this.getSlideIndexFromSlide(event));
@@ -120,7 +120,7 @@ export default class Slider {
       hideElement(this.slides[previousSlide]);
     }
     this.setActiveDot();
-  };
+  }
 
   /**
    * Checks if the event target has a class from slides, returns true
@@ -129,9 +129,9 @@ export default class Slider {
    * @param {*} event event to check the target for.
    * @returns true if event target is a slide, false if not.
    */
-  isEventFromSlide (event) {
+  isEventFromSlide(event) {
     return event.target.classList[0].includes(this.slides[0].classList[0]);
-  };
+  }
 
   /**
    * Gets the slide index from an event target which is a slide.
@@ -139,10 +139,10 @@ export default class Slider {
    * @param {*} event event to retrieve the slide index from
    * @returns slide index from slide.
    */
-  getSlideIndexFromSlide (event) {
+  getSlideIndexFromSlide(event) {
     return event.target.closest(`.${this.slides[0].classList[0]}`).dataset
       .slide;
-  };
+  }
 
   /************************************************************
    * SLIDER CONTROLLER
@@ -151,7 +151,7 @@ export default class Slider {
   /**
    * Adds slider controller to slider container and sets event listeners on the buttons.
    */
-  implementSliderController () {
+  implementSliderController() {
     this.sliderContainer.insertAdjacentHTML(
       "afterbegin",
       this.createSliderControllerHtml()
@@ -169,14 +169,14 @@ export default class Slider {
     this.dots.forEach((dot) => {
       dot.addEventListener("click", this.goToSlide.bind(this));
     });
-  };
+  }
 
   /**
    * Creates the html for the slider controller
    *
    * @return {string} the html for slider controller as string
    */
-  createSliderControllerHtml () {
+  createSliderControllerHtml() {
     let controllerHtml = `<div class="slider-controls">
                 <button aria-label="go to previous slide" class="slider__btn slider__btn--prev">
                 <i class="ph-caret-left"></i>
@@ -191,12 +191,12 @@ export default class Slider {
                 <button aria-label="go to next slide" class="slider__btn slider__btn--next"><i class="ph-caret-right"></i></button>
                 </div>`;
     return controllerHtml;
-  };
+  }
 
   /**
    * Removes the slider controllers from the slider
    */
-  removeSlideController () {
+  removeSlideController() {
     const slideController =
       this.sliderContainer.querySelectorAll(".slider-controls");
     slideController.forEach((controller) => {
@@ -204,16 +204,16 @@ export default class Slider {
         controller.parentNode.removeChild(controller);
       }
     });
-  };
+  }
 
   /**
    * Sets the current slide to the active dot.
    */
-  setActiveDot () {
+  setActiveDot() {
     this.dots = this.sliderContainer.querySelectorAll(".dots__dot");
     this.dots.forEach((dot) => dot.classList.remove("dots__dot--active"));
     this.dots[this.currentSlide].classList.add("dots__dot--active");
-  };
+  }
 
   /**
    * Checks if the event target has a class from dots, returns true
@@ -222,9 +222,9 @@ export default class Slider {
    * @param {*} event event to check the target for.
    * @returns true if event target is a dot, false if not.
    */
-  isEventFromDot (event) {
+  isEventFromDot(event) {
     return event.target.classList[0].includes("dots__dot");
-  };
+  }
 
   /**
    * Gets the slide index from the corresponding dot.
@@ -232,9 +232,9 @@ export default class Slider {
    * @param {*} event event to retrieve slide index for.
    * @returns slide index from dot.
    */
-  getSlideIndexFromDot (event) {
+  getSlideIndexFromDot(event) {
     return event.target.dataset.slide;
-  };
+  }
 
   /************************************************************
    * TOUCH EVENTS ON SLIDER.
@@ -246,27 +246,27 @@ export default class Slider {
   /**
    * Adds touchend and touchstart event listeners to the slide given.
    */
-  addTouchEventsToSlide (slide) {
+  addTouchEventsToSlide(slide) {
     slide.addEventListener("touchstart", this.touchStartHandlerReference);
     slide.addEventListener("touchend", this.touchEndHandlerReference);
-  };
+  }
 
   /**
    * Removes the touchend and touchstart event listeners from the slide given.
    */
-  removeTouchEventsFromSlide (slide) {
+  removeTouchEventsFromSlide(slide) {
     slide.removeEventListener("touchstart", this.touchStartHandlerReference);
     slide.removeEventListener("touchend", this.touchEndHandlerReference);
-  };
+  }
 
   /**
    * Sets the touchstart position to the touchstart variable.
    *
    * @param event touchstart event.
    */
-  touchStartHandler (event) {
+  touchStartHandler(event) {
     this.touchstart = event.changedTouches[0].screenX;
-  };
+  }
 
   /**
    * Figures out the direction of a touch event and
@@ -274,7 +274,7 @@ export default class Slider {
    *
    * @param event the touchend event.
    */
-  touchEndHandler (event) {
+  touchEndHandler(event) {
     this.touchend = event.changedTouches[0].screenX;
 
     if (this.swipedRight()) {
@@ -283,25 +283,25 @@ export default class Slider {
     if (this.swipedLeft()) {
       this.sliderPrev();
     }
-  };
+  }
 
   /**
    * Returns true if the touch event went right, false if not.
    *
    * @return {boolean} true if the touch event went right, false if not.
    */
-  swipedRight  () {
+  swipedRight() {
     return this.touchend < this.touchstart + 50;
-  };
+  }
 
   /***
    * Returns true if the touch event went left, false if not.
    *
    * @return {boolean} true if the touch event went left, false if not.
    */
-  swipedLeft () {
+  swipedLeft() {
     return 50 + this.touchend > this.touchstart;
-  };
+  }
 
   /************************************************************
    * SLIDES FORMATTING
@@ -310,7 +310,7 @@ export default class Slider {
   /**
    * Formats the slides
    */
-  formatSlides () {
+  formatSlides() {
     this.slides[this.currentSlide].classList.add("product-card__slide--active");
     if (this.numberOfSlides < 4) {
       this.formatThreeSlides();
@@ -320,34 +320,34 @@ export default class Slider {
       this.formatFiveOrMoreSlides();
     }
     this.isFormatted = true;
-  };
+  }
 
   /**
    * Removes format from the slides
    */
-  removeFormat () {
+  removeFormat() {
     this.slides.forEach((slide) => {
       this.formattingClasses.forEach((formatClass) => {
         slide.classList.remove(formatClass);
       });
     });
-  };
+  }
 
   /**
    * Formats the slides for three slides.
    */
-  formatThreeSlides () {
+  formatThreeSlides() {
     const previousSlide = (+this.currentSlide + 2) % this.numberOfSlides;
     const nextSlide = (+this.currentSlide + 1) % this.numberOfSlides;
 
     this.slides[previousSlide].classList.add(this.formattingClasses[0]);
     this.slides[nextSlide].classList.add(this.formattingClasses[2]);
-  };
+  }
 
   /**
    * Formats the slides for four slides, where one is hidden.
    */
-  formatFourSlides () {
+  formatFourSlides() {
     const previousSlide = (+this.currentSlide + 3) % this.numberOfSlides;
     const nextSlide = (+this.currentSlide + 1) % this.numberOfSlides;
     const hiddenSlide = (+this.currentSlide + 2) % this.numberOfSlides;
@@ -355,12 +355,12 @@ export default class Slider {
     this.slides[previousSlide].classList.add(this.formattingClasses[0]);
     this.slides[nextSlide].classList.add(this.formattingClasses[2]);
     hideElement(this.slides[hiddenSlide]);
-  };
+  }
 
   /**
    * Formats the slides for five or more slides.
    */
-  formatFiveOrMoreSlides () {
+  formatFiveOrMoreSlides() {
     this.slides.forEach((slide) => hideElement(slide));
     showElement(this.slides[this.currentSlide]);
 
@@ -377,5 +377,5 @@ export default class Slider {
       showElement(this.slides[slidePosition]);
       i++;
     });
-  };
+  }
 }

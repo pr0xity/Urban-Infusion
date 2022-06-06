@@ -327,7 +327,7 @@
     grid-template-columns: 1fr;
   }
 
-  .section-company .section__heading-box {
+  .section-company .header__headings {
     margin: 0 auto 2rem auto;
   }
 
@@ -661,6 +661,14 @@
   .review__form {
     width: 85vw;
   }
+
+  /****************************/
+  /* WISHLIST          */
+  /****************************/
+  .wishlist__btn--share {
+    top: 10rem;
+    right: 1%;
+  }
 }
 
 /**************************/
@@ -695,7 +703,7 @@
   }
 
   .logo__img {
-    content: url(../img/icons/favicon/favicon.png);
+    content: url(../img/icons/logo-small.png);
   }
 
   .nav__list {
@@ -950,6 +958,16 @@
   .account .container--white {
     padding: 0.8rem;
     width: 95vw;
+  }
+
+  /********************************************************/
+
+  /****************************/
+  /* PRODUCTS          */
+  /****************************/
+
+  .products__main {
+    padding: 12.8rem 3.2rem 9.6rem 3.2rem;
   }
 
   /********************************************************/

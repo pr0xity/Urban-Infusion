@@ -27,6 +27,11 @@ public class WishlistController {
     @Autowired
     private UserService userService;
 
+    /**
+     * Returns the current users wishlist.
+     *
+     * @return current users wishlist.
+     */
     @RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<?> getWishlist() {
         User user = userService.getSessionUser();

@@ -15,14 +15,8 @@
     <link rel="stylesheet" type="text/css" href="../css/queries.css" />
 
     <script src="https://unpkg.com/phosphor-icons"></script>
-    <script defer th:src="@{/js/tools.js}"></script>
-    <script defer th:src="@{/js/components/caretbutton.js}"></script>
-    <script defer th:src="@{/js/login.js}"></script>
-    <script type="module" defer th:src="@{/js/general.js}"></script>
-    <script defer th:src="@{/js/product.js}"></script>
-    <script defer th:src="@{/js/productcontrols/cartcontrols.js}"></script>
-    <script defer th:src="@{/js/productcontrols/wishlistButtonView.js}"></script>
-    <script defer src="../js/products.js"></script>
+    <script type="module" th:src="@{/js/general.js}"></script>
+    <script type="module" th:src="@{/js/products.js}"></script>
     <title>Urban Infusion</title>
   </head>
   <body>
@@ -38,29 +32,29 @@
           </li>
         </ul>
       </nav>
-      <div class="section__heading-box">
-        <h2 class="decorative-heading">Products</h2>
-        <h3 class="section-title">Find your herbal friend!</h3>
-      </div>
+      <header class="section__heading-box">
+        <h1>
+          <span class="decorative-heading">Products</span>
+          <span class="section-title">Find your herbal friend!</span>
+        </h1>
+      </header>
 
-      <div class="">
-        <div class="products__box--search">
-          <form class="products__form--search">
-            <label>
-              <input
-                class="input products__input--search"
-                name="searchBar"
-                placeholder="Search.."
-                type="text"
-              />
-            </label>
-            <button id="btn-search">
-              <i class="ph-magnifying-glass btn--icon search"></i>
-            </button>
-          </form>
-        </div>
-        <div class="products__container"></div>
+      <div class="products__box--search">
+        <form class="products__form--search">
+          <label>
+            <input
+              class="input products__input--search"
+              name="searchBar"
+              placeholder="Search.."
+              type="text"
+            />
+          </label>
+          <button id="btn-search">
+            <i class="ph-magnifying-glass btn--icon products__btn--search"></i>
+          </button>
+        </form>
       </div>
+      <div class="products__container"></div>
     </main>
     <footer th:include="components/footer" class="footer"></footer>
   </body>

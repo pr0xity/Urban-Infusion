@@ -1,4 +1,7 @@
-import {sendGetAllOrdersRequest, sendUpdateOrderRequest} from "./controllers/orderController.js";
+import {
+  sendGetAllOrdersRequest,
+  sendUpdateOrderRequest,
+} from "./controllers/orderController.js";
 
 let orders = null;
 const tableBody = document.getElementById("orderTableBody");
@@ -18,7 +21,7 @@ function initializeOrders() {
 
 async function getOrders() {
   orders = await sendGetAllOrdersRequest();
-  loadOrders(orders)
+  loadOrders(orders);
 }
 
 function filterOrders() {

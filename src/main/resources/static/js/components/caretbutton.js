@@ -1,4 +1,4 @@
-import {hideElement, showElement, isElementHidden} from "../tools.js";
+import { hideElement, showElement, isElementHidden } from "../tools.js";
 
 /**
  * Buttons to toggle between hide and display for the heading underneath
@@ -26,7 +26,7 @@ export default class CaretButtons {
   /**
    * Creates caret buttons for the given list of headings.
    */
-  createCaretButtons () {
+  createCaretButtons() {
     let index = 0;
     this.headings.forEach((heading) => {
       heading.insertAdjacentHTML(
@@ -37,12 +37,12 @@ export default class CaretButtons {
       index++;
     });
     this.addCaretButtonListeners();
-  };
+  }
 
   /**
    * Iterates over buttons and adds event listeners to the buttons.
    */
-  addCaretButtonListeners () {
+  addCaretButtonListeners() {
     const caretButtons = document.body.querySelectorAll(`.${this.buttonClass}`);
     caretButtons.forEach((button) => {
       button.addEventListener("click", () => {
@@ -53,19 +53,19 @@ export default class CaretButtons {
         }
       });
     });
-  };
+  }
 
   /**
    * Removes the caret buttons from list of headings.
    */
-  removeCaretButtons  () {
+  removeCaretButtons() {
     this.headings.forEach((heading) => {
       if (this.buttonExists(heading)) {
         showElement(this.getContentNodeFromHeading(heading));
         heading.removeChild(this.getButtonFromHeading(heading));
       }
     });
-  };
+  }
 
   /**
    * Sets the given caret button to close, hiding the content node it represents
@@ -73,10 +73,10 @@ export default class CaretButtons {
    *
    * @param button the caret button to set as closed.
    */
-  setCaretButtonToClosed (button) {
+  setCaretButtonToClosed(button) {
     hideElement(this.getContentNodeFromButton(button));
     button.classList.remove("btn--rotated");
-  };
+  }
 
   /**
    * Sets the given caret button to open, displaying the content node it represents
@@ -84,10 +84,10 @@ export default class CaretButtons {
    *
    * @param button the caret button to set as open.
    */
-  setCaretButtonToOpen (button) {
+  setCaretButtonToOpen(button) {
     showElement(this.getContentNodeFromButton(button));
     button.classList.add("btn--rotated");
-  };
+  }
 
   /**
    * Checks if the caret buttons exists with the given heading.
@@ -96,9 +96,9 @@ export default class CaretButtons {
    * @param heading the heading to check if contains a caret button.
    * @returns true if button exist, false if not.
    */
-  buttonExists (heading) {
+  buttonExists(heading) {
     return heading.childNodes[1] !== undefined;
-  };
+  }
 
   /**
    * Retrieves the node which the given heading represents.
@@ -106,9 +106,9 @@ export default class CaretButtons {
    * @param heading the heading to find content node of.
    * @returns the node the given heading represents.
    */
-  getContentNodeFromHeading (heading) {
+  getContentNodeFromHeading(heading) {
     return heading.parentNode.querySelector("[data-content]");
-  };
+  }
 
   /**
    * Retrieves the node which the given caret button represents.
@@ -116,9 +116,9 @@ export default class CaretButtons {
    * @param button the caret button to find content node of,
    * @returns {Element} the node the given caret button represents.
    */
-  getContentNodeFromButton (button) {
+  getContentNodeFromButton(button) {
     return button.parentNode.parentNode.querySelector("[data-content]");
-  };
+  }
 
   /**
    * Retrieves the button belonging to the given heading.
@@ -126,7 +126,7 @@ export default class CaretButtons {
    * @param heading heading to find the button of.
    * @returns the button of the given heading, undefined if not.
    */
-  getButtonFromHeading (heading) {
+  getButtonFromHeading(heading) {
     return heading.querySelector(`.${this.buttonClass}`);
-  };
+  }
 }

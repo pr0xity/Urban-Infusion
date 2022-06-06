@@ -1,8 +1,12 @@
-import {REGISTRATION_API_PATHNAME,
+import {
   isAddressFormValid,
   isAddressValid,
   isEmailAddressValid,
-  createAddressStringFromObject, hideElement, showElement, sendApiRequest} from "./tools.js";
+  createAddressStringFromObject,
+  hideElement,
+  showElement
+} from "./tools.js";
+import {sendRegistrationRequest} from "./controllers/authenticationController.js";
 
 /**
  * Initializes the sign-up form.
@@ -39,7 +43,8 @@ const setSignUpForm = function () {
       postalCode: document.querySelector(`input[name="postalCode"]`).value,
       city: document.querySelector(`input[name="city"]`).value,
       country: document.querySelector(`input[name="country"]`).value,
-      password: document.querySelector(`input[name="registrationPassword"]`).value,
+      password: document.querySelector(`input[name="registrationPassword"]`)
+        .value,
     };
   };
 
@@ -69,7 +74,9 @@ const setSignUpForm = function () {
     firstNameInput.classList.remove("input--error");
     lastNameInput.classList.remove("input--error");
     emailInput.classList.remove("input--error");
-    Object.values(addressInputs).forEach((input) => input.classList.remove("input--error"));
+    Object.values(addressInputs).forEach((input) =>
+      input.classList.remove("input--error")
+    );
     passwordInput.classList.remove("input--error");
   };
 
@@ -81,7 +88,9 @@ const setSignUpForm = function () {
    */
   const isSignUpFormValid = async function () {
     resetInputError();
-    const validAddress = await isAddressValid(createAddressStringFromObject(getSignUpRequestBody()));
+    const validAddress = await isAddressValid(
+      createAddressStringFromObject(getSignUpRequestBody())
+    );
 
     if (getSignUpRequestBody().firstName === "") {
       setInputError(firstNameInput, "Field cannot be empty");
@@ -94,18 +103,20 @@ const setSignUpForm = function () {
     }
     if (validAddress === false || !isAddressFormValid(addressInputs)) {
       Object.values(addressInputs).forEach((input) => {
-        setInputError(input, "Address is not valid")}
-      );
+        setInputError(input, "Address is not valid");
+      });
     }
     if (getSignUpRequestBody().password === "") {
       setInputError(passwordInput, "Field cannot be empty");
     }
 
-    return !!(getSignUpRequestBody().firstName !== "" &&
+    return !!(
+      getSignUpRequestBody().firstName !== "" &&
       getSignUpRequestBody().lastName !== "" &&
       isEmailAddressValid(getSignUpRequestBody().email) &&
       validAddress &&
-      getSignUpRequestBody().password !== "");
+      getSignUpRequestBody().password !== ""
+    );
   };
 
   /**
@@ -114,7 +125,7 @@ const setSignUpForm = function () {
   const displayLoadingAnimation = function () {
     showElement(loadingAnimation);
     hideElement(buttonText);
-  }
+  };
 
   /**
    * Hides the loading animation and displays the text in the button.
@@ -122,7 +133,7 @@ const setSignUpForm = function () {
   const hideLoadingAnimation = function () {
     hideElement(loadingAnimation);
     showElement(buttonText);
-  }
+  };
 
   /**
    * Shows the completed registration window.
@@ -131,9 +142,8 @@ const setSignUpForm = function () {
     hideLoadingAnimation();
     resetInputError();
     const completedRegistrationWindow = document.querySelector(".modal");
-    const completedCloseButton = completedRegistrationWindow.querySelector(
-      ".btn--close"
-    );
+    const completedCloseButton =
+      completedRegistrationWindow.querySelector(".btn--close");
     showElement(completedRegistrationWindow);
 
     const closeCompletedWindow = function () {
@@ -148,26 +158,21 @@ const setSignUpForm = function () {
    *
    * @param event
    */
-  const sendRegistrationRequest = async function (event) {
+  const sendRegistrationForm = async function (event) {
     event.preventDefault();
     const signUpValid = await isSignUpFormValid();
     if (signUpValid) {
       displayLoadingAnimation();
-      sendApiRequest(
-        `${REGISTRATION_API_PATHNAME}`,
-        "POST",
-        getSignUpRequestBody(),
-        sendRegistrationRequestSuccess,
-        hideLoadingAnimation,
-        hideLoadingAnimation
-      );
+      sendRegistrationRequest(getSignUpRequestBody(), sendRegistrationRequestSuccess).finally(() => hideLoadingAnimation());
     }
   };
 
   document
     .querySelector(`.signup__btn--complete`)
-    .addEventListener("click", sendRegistrationRequest);
-  document.querySelector(".signup__form").addEventListener("submit", event => event.preventDefault());
+    .addEventListener("click", sendRegistrationForm);
+  document
+    .querySelector(".signup__form")
+    .addEventListener("submit", (event) => event.preventDefault());
 };
 
 setSignUpForm();

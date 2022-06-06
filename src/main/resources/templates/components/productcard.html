@@ -1,6 +1,6 @@
 <img
   class="product-card__img"
-  th:src="@{api/products/images/{id}(id = ${product.getImageId()})}"
+  th:src="@{/api/products/images/{id}(id = ${product.imageId})}"
   th:alt="${product.name}"
 />
 <div class="product-card__details">
@@ -39,7 +39,7 @@
     <p th:text="'(' + ${product.ratings.size()} + ')'">(0)</p>
   </a>
   <a th:href="@{/products/{id}(id=${product.id})}" class="link">
-    <h4 class="product-card__heading" th:text="${product.name}">Heather tea</h4>
+    <h3 class="product-card__heading" th:text="${product.name}">Heather tea</h3>
   </a>
   <ul class="product-card__list">
     <li
@@ -54,7 +54,7 @@
     <p class="product-card__price" th:text="${product.price} + ',-'">200,-</p>
     <div
       class="product__btn--wishlist"
-      th:attr="data-wishlist=${wishlist == null} ? 'false' : (${#sets.contains(wishlist, product)} ? 'true' : 'false')"
+      th:attr="data-wishlist=${wishlist == null} ? 'false' : (${#sets.contains(wishlist.products, product)} ? 'true' : 'false')"
     ></div>
     <button
       th:attr="data-productid=${product.id}"

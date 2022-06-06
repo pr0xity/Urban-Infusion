@@ -91,6 +91,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers(GET, "api/wishlists").authenticated()
             .antMatchers(PUT, "api/users/**").authenticated()
             .antMatchers(GET,"api/user").authenticated()
+            .antMatchers(GET, "/wishlist/shared/**").permitAll()
             .antMatchers(GET,"api/ratings").permitAll()
             .antMatchers(GET, "api/products").permitAll()
             .antMatchers(GET, "api/products/images/**").permitAll()

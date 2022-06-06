@@ -1,6 +1,6 @@
 import CaretButtons from "./components/caretbutton.js";
-import {mobileLayoutSize, showElement, hideElement, isElementHidden} from "./tools.js";
-import {sendForgottenPasswordRequest, sendLoginRequest, setLoginAlert, resetLoginAlert} from "./login.js";
+import { mobileLayoutSize, showElement, hideElement, isElementHidden } from "./tools.js";
+import {forgottenPasswordEvent, loginEvent, resetLoginAlert, setLoginAlert} from "./views/loginMenuView.js";
 
 /**********************************************
  * Sets header and footer for customer pages *
@@ -18,7 +18,12 @@ const overlayNavUserMenu = document.querySelector(".nav__user-menu--overlay");
 const navListElement = document.querySelector(".nav__list");
 const navLinks = navListElement.querySelectorAll(".nav__link");
 const overlayNavLinkMenu = document.querySelector(".nav__link-menu--overlay");
-const navMobileElements = [mobileMenuButtonClose, mobileMenuButtonOpen, overlayNavLinkMenu, navListElement];
+const navMobileElements = [
+  mobileMenuButtonClose,
+  mobileMenuButtonOpen,
+  overlayNavLinkMenu,
+  navListElement,
+];
 // Links for wishlist and checkout which doesn't work when unauthorized.
 const wishlistLink = document.querySelector("#wishlist-link");
 const checkoutLink = document.querySelector("#checkout-link");
@@ -97,7 +102,7 @@ const generalInitialize = function () {
    * Displays and/or hides certain elements when navigation menu is clicked.
    */
   const navMobileButtonHandler = function () {
-    navMobileElements.forEach(element => element.classList.toggle("hidden"));
+    navMobileElements.forEach((element) => element.classList.toggle("hidden"));
     hideElement(userMenuElement);
     hideElement(overlayNavUserMenu);
   };
@@ -124,8 +129,7 @@ const generalInitialize = function () {
     footerCaretButtons.createCaretButtons();
     hideElement(navListElement);
     addClickEventListenersToList(navLinks, clickMenuButtonClose);
-
-  }
+  };
 
   /**
    * Sets/changes the element for desktop layout.
@@ -137,8 +141,7 @@ const generalInitialize = function () {
     hideElement(overlayNavLinkMenu);
     showElement(navListElement);
     removeClickEventListenersFromList(navLinks, clickMenuButtonClose);
-
-  }
+  };
 
   /**
    * Checks if screen size warrants mobile or desktop layout and changes accordingly.
@@ -149,20 +152,19 @@ const generalInitialize = function () {
     } else {
       setDesktopLayout();
     }
-  }
+  };
   const loginButton = document.querySelector("#login-btn");
   const forgottenPasswordButton = document.querySelector("#forgotten-password");
 
   //Adding event listeners if login button is present.
   if (loginButton !== null) {
-    loginButton.addEventListener("click", sendLoginRequest);
-    forgottenPasswordButton.addEventListener("click", sendForgottenPasswordRequest);
+    loginButton.addEventListener("click", loginEvent);
+    forgottenPasswordButton.addEventListener("click", forgottenPasswordEvent);
   }
 
   // initial call to set mobile layout upon loading the site.
   dynamicallyChangeSize();
   mobileLayoutSize.addEventListener("change", dynamicallyChangeSize);
-
 
   document.body.classList.add("sticky");
   addClickEventListenersToList(navMobileButtons, navMobileButtonHandler);

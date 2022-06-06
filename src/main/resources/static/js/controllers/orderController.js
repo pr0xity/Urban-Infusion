@@ -1,4 +1,4 @@
-import {ORDERS_API_PATHNAME, sendApiRequest} from "../tools.js";
+import { ORDERS_API_PATHNAME, sendApiRequest } from "../tools.js";
 
 /**
  * Sends request to retrieve all orders.

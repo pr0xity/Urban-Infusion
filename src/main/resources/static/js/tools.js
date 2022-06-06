@@ -21,7 +21,6 @@ export const CHECKOUT_PATHNAME = "/checkout";
 // Size for when to render mobile layout.
 export const mobileLayoutSize = window.matchMedia("(max-width: 54em)");
 
-
 let map;
 let marker;
 
@@ -49,8 +48,14 @@ export const reloadCurrentPage = function () {
  * @param unauthorizedCallback method to do on status 401 unauthorized, set as null if not needed.
  * @param errorCallback method to do on error.
  */
-export const sendApiRequest = function (pathname, method, body = null, successCallback = null, unauthorizedCallback = null, errorCallback = null) {
-
+export const sendApiRequest = function (
+  pathname,
+  method,
+  body = null,
+  successCallback = null,
+  unauthorizedCallback = null,
+  errorCallback = null
+) {
   /**
    * Returns fetch request with body and headers defined.
    *
@@ -126,13 +131,18 @@ export const sendApiRequest = function (pathname, method, body = null, successCa
  * @param successCallback function to invoke upon success.
  * @return {Promise<Response>}
  */
-export const sendFormDataRequest = function (pathname, method, data, successCallback) {
+export const sendFormDataRequest = function (
+  pathname,
+  method,
+  data,
+  successCallback
+) {
   if (data !== null) {
     return fetch(`${URL}${pathname}`, {
       method: method,
       body: data,
       credentials: "include",
-    }).then(response => {
+    }).then((response) => {
       if (response.ok) {
         if (successCallback != null) {
           successCallback(response);
@@ -140,7 +150,6 @@ export const sendFormDataRequest = function (pathname, method, data, successCall
         const contentType = response.headers.get("content-type");
         if (contentType.includes("text/plain")) {
           return response.text();
-
         } else {
           return response.blob();
         }
@@ -152,7 +161,7 @@ export const sendFormDataRequest = function (pathname, method, data, successCall
     return fetch(`${URL}${pathname}`, {
       method: method,
       credentials: "include",
-    }).then(response => {
+    }).then((response) => {
       if (response.ok) {
         const contentType = response.headers.get("content-type");
         if (contentType.includes("text/plain")) {
@@ -224,7 +233,7 @@ export const getAddressInfo = async function (address) {
       city: `${addressLine[2]}`,
       postalCode: `${addressLine[4]}`,
       country: `${addressLine[5]}`,
-    }
+    };
     return [latitude, longitude, address];
   } catch (e) {
     console.log(e);
@@ -267,7 +276,8 @@ export const isAddressFormValid = function (addressInputs) {
  * @returns through if the email address is a valid format, false if not.
  */
 export const isEmailAddressValid = function (email) {
-  const emailPattern = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+  const emailPattern =
+    /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
   return !!email.match(emailPattern) && email !== "";
 };
 

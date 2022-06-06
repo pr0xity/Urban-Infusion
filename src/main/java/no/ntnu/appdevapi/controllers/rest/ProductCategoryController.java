@@ -3,15 +3,12 @@ package no.ntnu.appdevapi.controllers.rest;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.ProductCategory;
-import no.ntnu.appdevapi.services.ProductCategoryService;
 import no.ntnu.appdevapi.services.ProductCategoryServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.annotations.ApiIgnore;
 
 @RestController
 @RequestMapping("api/product-categories")
@@ -28,7 +25,9 @@ public class ProductCategoryController {
    */
   @GetMapping
   @ApiOperation(value = "Get all product categories")
-  public Iterable<ProductCategory> getAll(){return productCategoryService.getAllProductCategories();}
+  public Iterable<ProductCategory> getAll() {
+    return productCategoryService.getAllProductCategories();
+  }
 
 
 

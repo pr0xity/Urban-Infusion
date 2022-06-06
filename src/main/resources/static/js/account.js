@@ -5,13 +5,12 @@ import {
   createAddressStringFromObject,
   isAddressFormValid,
   goToFrontpage,
-  sendApiRequest,
   reloadCurrentPage,
   isEmailAddressValid,
   hideElement,
   showElement,
-  USERS_API_PATHNAME,
 } from "./tools.js";
+import { sendDeleteUserRequest, sendUpdateUserRequest } from "./controllers/userController.js";
 
 const tag_types = ["name", "email", "password", "address"];
 const tags_array = ["modal", "open", "close", "field", "edit"];
@@ -163,12 +162,7 @@ const getUpdatedName = function () {
 const updateNameRequest = function (event) {
   event.preventDefault();
   if (isNameFormValid()) {
-    sendApiRequest(
-      `${USERS_API_PATHNAME}/${userId}`,
-      "PUT",
-      getUpdatedName(),
-      reloadCurrentPage
-    ).finally();
+    sendUpdateUserRequest(userId, getUpdatedName(), reloadCurrentPage).finally();
   } else {
     setAccountFormAlert("All fields need to be filled in");
   }
@@ -225,13 +219,7 @@ const updateEmailRequest = function (event) {
   };
 
   if (isEmailFormValid()) {
-    sendApiRequest(
-      `${USERS_API_PATHNAME}/${userId}`,
-      "PUT",
-      getUpdateEmailBody(),
-      goToFrontpage,
-      updateEmailError
-    ).finally();
+    sendUpdateUserRequest(userId, getUpdateEmailBody(), goToFrontpage, updateEmailError).finally();
   } else {
     setAccountFormAlert("A valid email and password need to filled in");
   }
@@ -283,14 +271,7 @@ const getUpdatedPassword = function () {
 const updatePasswordRequest = function (event) {
   event.preventDefault();
   if (isPasswordValid()) {
-    sendApiRequest(
-      `${USERS_API_PATHNAME}/${userId}`,
-      "PUT",
-      getUpdatedPassword(),
-      reloadCurrentPage,
-      updatePasswordError,
-      updatePasswordError
-    ).finally();
+    sendUpdateUserRequest(userId, getUpdatedPassword(), reloadCurrentPage, updatePasswordError, updatePasswordError).finally();
   } else {
     setAccountFormAlert("Please fill in your current and new password");
   }
@@ -336,18 +317,11 @@ const updateAddressRequest = async function (event) {
   resetAccountFormAlert();
 
   const requestBody = getUpdatedAddress();
-  const validAddress = await isAddressValid(
-    createAddressStringFromObject(requestBody)
-  );
+  const validAddress = await isAddressValid(createAddressStringFromObject(requestBody));
 
   if (isAddressFormValid(addressInputs)) {
     if (validAddress) {
-      sendApiRequest(
-        `${USERS_API_PATHNAME}/${userId}`,
-        "PUT",
-        requestBody,
-        reloadCurrentPage
-      ).finally();
+      sendUpdateUserRequest(userId, requestBody, reloadCurrentPage).finally();
     } else {
       setAccountFormAlert("Address doesn't exist");
     }
@@ -386,23 +360,12 @@ const getDeleteAccountBody = function () {
  */
 const deleteAccountRequest = function (event) {
   event.preventDefault();
-  sendApiRequest(
-    `${USERS_API_PATHNAME}/${userEmail}`,
-    "DELETE",
-    getDeleteAccountBody(),
-    goToFrontpage
-  );
+  sendDeleteUserRequest(userEmail, getDeleteAccountBody(), goToFrontpage).finally();
 };
 
-const deleteAccountButton = document.querySelector(
-  `input[name="deleteAccount"]`
-);
+const deleteAccountButton = document.querySelector(`input[name="deleteAccount"]`);
 deleteAccountButton.addEventListener("click", deleteAccountRequest);
 
 if (isAddressFormValid(addressInputs)) {
-  getAddressInfo(createAddressStringFromObject(getUpdatedAddress())).then(
-    (data) => {
-      renderMap(data[0], data[1]);
-    }
-  );
+  getAddressInfo(createAddressStringFromObject(getUpdatedAddress())).then(data => renderMap(data[0], data[1]));
 }

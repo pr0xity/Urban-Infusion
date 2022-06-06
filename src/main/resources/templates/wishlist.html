@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link th:replace="components/designelements/favicon" />
     <link th:replace="components/designelements/font" />
-    <link rel="stylesheet" type="text/css" href="../css/style.css" />
-    <link rel="stylesheet" type="text/css" href="../css/queries.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/queries.css}" />
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script type="module" th:src="@{/js/general.js}"></script>
     <script type="module" th:src="@{/js/wishlist.js}"></script>
@@ -16,17 +16,29 @@
   <body>
     <header th:include="components/header" class="header"></header>
     <main class="wishlist container--beige">
-      <div class="section__heading-box">
-        <h1 class="decorative-heading">Wishlist</h1>
-        <h2 class="section-title">Your favourites!</h2>
+      <header class="header__headings">
+        <h1>
+          <span class="decorative-heading">Wishlist</span>
+          <span class="section-title" th:text="${wishlist.user == user} ? 'Your favourites!' : ${wishlist.user.firstName} + '\'s favourites!'">Your favourites!</span>
+        </h1>
+      </header>
+      <button th:attr="data-token=${wishlist.sharingToken}" class="wishlist__btn--share btn--small-text">Share this wishlist <i class="ph-share-light btn--icon-small"></i></button>
+      <div class="wishlist__modal modal hidden">
+        <div class="modal__window">
+          <button class="btn--close close btn--icon" id="close_email" aria-label="close window">
+            <i class="ph-x"></i>
+          </button>
+          <h2 class="heading--thin">Link for sharing wishlist</h2>
+          <p class="text--small"><strong class="wishlist__link--share"></strong> has been copied to your clipboard. Send it to however you wish to share your favourites with</p>
+        </div>
       </div>
       <div class="wishlist-grid">
         <article
           class="product-card container--white"
           th:insert="components/productcard"
-          th:each="product : ${wishlist}"
+          th:each="product : ${wishlist.products}"
           th:attr="data-productid=${product.id}"
-          th:attrappend="data-wishlist=${wishlist == null} ? 'false' : (${#sets.contains(wishlist, product)} ? 'true' : 'false')"
+          th:attrappend="data-wishlist=${wishlist == null} ? 'false' : (${#sets.contains(wishlist.products, product)} ? 'true' : 'false')"
         ></article>
       </div>
     </main>

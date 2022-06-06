@@ -42,6 +42,11 @@ public class WishlistServiceImpl implements WishlistService {
     }
 
     @Override
+    public Wishlist getWishlistBySharingToken(String sharingToken) {
+        return this.wishlistRepository.findBySharingToken(sharingToken).orElse(null);
+    }
+
+    @Override
     public void addWishlist(Wishlist wishlist) {
         if (this.wishlistRepository.findById(wishlist.getId()).isEmpty()) {
             this.wishlistRepository.save(wishlist);

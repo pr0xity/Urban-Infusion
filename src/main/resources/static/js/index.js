@@ -1,9 +1,9 @@
 import CaretButtons from "./components/caretbutton.js";
 import Slider from "./components/slider.js";
 import GallerySlider from "./components/gallerySlider.js";
-import {mobileLayoutSize} from "./tools.js";
-import {implementProductCardFunctionality} from "./views/productCardView.js";
-import {setIncrementCounter} from "./controllers/cartController.js";
+import { mobileLayoutSize } from "./tools.js";
+import { implementProductCardFunctionality } from "./views/productCardView.js";
+import { setIncrementCounter } from "./controllers/cartController.js";
 
 /**
  * Initializes components and features of the front page.
@@ -48,8 +48,8 @@ const setFrontPage = function () {
 
   linkToAboutSection.addEventListener("click", (event) => {
     event.preventDefault();
-    aboutSection.scrollIntoView({behavior: "smooth"})
-  })
+    aboutSection.scrollIntoView({ behavior: "smooth" });
+  });
 
   /**
    * Checks screen size and changes layout accordingly for index page.
@@ -68,12 +68,12 @@ const setFrontPage = function () {
     }
   };
 
-// Update when the window is resized
+  // Update when the window is resized
   mobileLayoutSize.addEventListener("change", dynamicallyChangeLayout);
 
-// Initial check when browser is opened
+  // Initial check when browser is opened
   dynamicallyChangeLayout();
-}
+};
 setFrontPage();
 implementProductCardFunctionality();
 setIncrementCounter().finally();

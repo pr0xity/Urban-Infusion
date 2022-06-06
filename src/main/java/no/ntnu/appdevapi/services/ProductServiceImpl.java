@@ -32,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = new ArrayList<>();
         productRepository.findAll().forEach(products::add);
 
-        return products.stream().filter(product -> product.getDeletedAt() == null).collect(Collectors.toList());
+        return products.stream().filter(product -> !product.isInactive()).collect(Collectors.toList());
     }
 
     public Product getProduct(long id) {

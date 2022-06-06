@@ -99,6 +99,10 @@ address {
   opacity: 0.4;
 }
 
+.text--small {
+  font-size: 1.4rem;
+}
+
 .btn {
   padding: 0.6rem 2.4rem;
   color: #fff;
@@ -189,6 +193,10 @@ address {
   font-size: 3.8rem;
   cursor: pointer;
   transition: all 0.2s ease-out;
+}
+
+.btn--icon-small {
+  font-size: 2.4rem;
 }
 
 .btn--rotated {
@@ -648,7 +656,7 @@ address {
   padding: 6.4rem 9.6rem;
 }
 
-.section-featured .section__heading-box {
+.section-featured .header__headings {
   margin-bottom: 2.4rem;
 }
 
@@ -740,7 +748,7 @@ address {
   padding: 9.6rem 4.8rem;
 }
 
-.section-company .section__heading-box {
+.section-company .header__headings {
   max-width: 80rem;
   margin: 0 auto 8rem auto;
   /* margin: 0 auto;
@@ -828,7 +836,7 @@ address {
   overflow: hidden;
 }
 
-.section-products .section__heading-box {
+.section-products .header__headings {
   max-width: 160rem;
   margin: 0 auto 3.2rem;
 }
@@ -1004,7 +1012,7 @@ address {
   text-align: center;
 }
 
-.section-testimonials .section__heading-box {
+.section-testimonials .header__headings {
   margin-bottom: 4.8rem;
 }
 
@@ -1118,11 +1126,12 @@ address {
 /* WISHLIST           */
 /****************************/
 .wishlist {
+  position: relative;
   padding: 9.6rem 5.6rem 6.4rem 5.6rem;
   min-height: 50vh;
 }
 
-.wishlist .section__heading-box {
+.wishlist .header__headings {
   max-width: 160rem;
   width: 100%;
   margin: 0 auto 2.4rem;
@@ -1136,6 +1145,15 @@ address {
   justify-items: center;
   max-width: 160rem;
   margin: 0 auto;
+}
+
+.wishlist__btn--share {
+  position: absolute;
+  top: 19rem;
+  right: 10%;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
 }
 
 /********************************************************/
@@ -1154,7 +1172,7 @@ address {
   gap: 3.6rem;
 }
 
-.checkout .section__heading-box {
+.checkout .header__headings {
   max-width: 160rem;
   width: 100%;
   margin: 0 auto;
@@ -1649,7 +1667,7 @@ address {
   font-size: 1.6rem;
 }
 
-.account .section__heading-box {
+.account .header__headings {
   max-width: 160rem;
   margin: 0 auto;
 }
@@ -1727,7 +1745,7 @@ address {
   box-shadow: 2rem 2rem 3rem rgba(0, 0, 0, 0.15);
 }
 
-.change-heading {
+.heading--thin {
   font-size: 2.4rem;
   font-weight: 500;
 }
@@ -1779,25 +1797,17 @@ thead tr {
 /****************************/
 
 .products__form--search {
+  margin: 0 auto;
   position: relative;
   height: 4rem;
+  max-width: 45rem;
+  width: 100%;
 }
 
-.search-bar {
-  width: 25rem;
-  margin: 2rem auto;
-  height: 3rem;
-  background-color: white;
-  border-radius: 6.2rem;
-  display: flex;
-  align-items: center;
-  padding: 0.6rem;
-}
-
-.search {
+.products__btn--search {
   position: absolute;
   right: 2%;
-  top: 25%;
+  top: 40%;
   transform: translateY(-50%) scale(0.6);
 }
 

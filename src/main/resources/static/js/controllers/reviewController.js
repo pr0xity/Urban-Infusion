@@ -1,4 +1,4 @@
-import {RATING_API_PATHNAME, sendApiRequest} from "../tools.js";
+import { RATING_API_PATHNAME, sendApiRequest } from "../tools.js";
 
 export function sendGetAllReviewsRequest() {
   return sendReviewRequest("", "GET");
@@ -8,8 +8,12 @@ export function sendGetRecentReviewsRequest() {
   return sendReviewRequest("recent", "GET");
 }
 
-export function sendAddNewReviewRequest(productId, body, successCallback, unauthorizedCallback){
-  return sendReviewRequest(productId, "POST", body, successCallback, unauthorizedCallback)
+export function sendGetReviewsOfProduct(productId) {
+  return sendReviewRequest(`products/${productId}`, "GET");
+}
+
+export function sendAddNewReviewRequest(productId, body, successCallback, unauthorizedCallback) {
+  return sendReviewRequest(productId, "POST", body, successCallback, unauthorizedCallback);
 }
 
 export function sendUpdateReviewRequest(productId, body, successCallback, unauthorizedCallback, errorCallback) {

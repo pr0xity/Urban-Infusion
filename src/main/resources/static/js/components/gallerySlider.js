@@ -1,5 +1,5 @@
 import Slider from "./slider.js";
-import {hideElement, showElement} from "../tools.js";
+import { hideElement, showElement } from "../tools.js";
 
 /**
  * Slider gallery for the static gallery on the landing page.
@@ -21,7 +21,7 @@ export default class GallerySlider extends Slider {
   /**
    * Creates a slider out of the gallery.
    */
-  createSlides () {
+  createSlides() {
     const galleries = document.querySelectorAll(".gallery");
     galleries[0].insertAdjacentHTML(
       "beforebegin",
@@ -33,13 +33,13 @@ export default class GallerySlider extends Slider {
     hideElement(galleries[0]);
     hideElement(galleries[2]);
     this.addTouchEventsToSlide(this.sliderContainer);
-  };
+  }
 
   /**
    * Appends gallery back to company section and removes
    * slide container.
    */
-  removeSlides () {
+  removeSlides() {
     const galleries = document.querySelectorAll(".gallery");
     if (this.sliderContainer !== null) {
       this.appendListItemsToElement(galleries, this.companyGridElement);
@@ -48,12 +48,12 @@ export default class GallerySlider extends Slider {
       this.removeTouchEventsFromSlide(this.sliderContainer);
     }
     this.removeSlideController();
-  };
+  }
 
   /**
    * Removes the slider controllers from the slider
    */
-  removeSlideController () {
+  removeSlideController() {
     const slideController =
       this.companyGridElement.querySelectorAll(".slider-controls");
     slideController.forEach((controller) => {
@@ -61,7 +61,7 @@ export default class GallerySlider extends Slider {
         this.companyGridElement.removeChild(controller);
       }
     });
-  };
+  }
 
   /**
    * Appends the elements in the list to the given element as children.
@@ -69,7 +69,7 @@ export default class GallerySlider extends Slider {
    * @param list list of elements to append as children.
    * @param element the element to become their parent.
    */
-  appendListItemsToElement (list, element) {
+  appendListItemsToElement(list, element) {
     list.forEach((item) => element.appendChild(item));
-  };
+  }
 }

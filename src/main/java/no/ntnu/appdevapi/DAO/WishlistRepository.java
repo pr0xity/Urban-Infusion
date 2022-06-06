@@ -13,4 +13,6 @@ import java.util.Optional;
 @Repository
 public interface WishlistRepository extends CrudRepository<Wishlist, Long> {
     Optional<Wishlist> findByUser(User user);
+
+    Optional<Wishlist> findBySharingToken(String sharingToken);
 }

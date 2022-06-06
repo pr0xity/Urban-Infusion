@@ -1,4 +1,8 @@
-import {sendUpdateCartRequest, sendDeleteFromCartRequest, setIncrementCounter,} from "./controllers/cartcontroller.js";
+import {
+  sendUpdateCartRequest,
+  sendDeleteFromCartRequest,
+  setIncrementCounter,
+} from "./controllers/cartcontroller.js";
 import {
   getAddressInfo,
   getProductIdFromElement,
@@ -7,7 +11,7 @@ import {
   renderMap,
   showElement,
 } from "./tools.js";
-import {sendPostNewOrderRequest} from "./controllers/orderController.js";
+import { sendPostNewOrderRequest } from "./controllers/orderController.js";
 
 /**
  * Implements listeners to input fields buttons and updates shopping session accordingly.
@@ -49,7 +53,9 @@ const setCartItemControls = function () {
    */
   const sendCartItemDeleteRequest = function (event) {
     event.preventDefault();
-    const productId = getProductIdFromElement(event.target.closest(".item__btn--delete"));
+    const productId = getProductIdFromElement(
+      event.target.closest(".item__btn--delete")
+    );
     sendDeleteFromCartRequest(productId).then(() => reloadCurrentPage());
   };
 
@@ -130,7 +136,11 @@ const setOrderRequestHandling = function () {
   const sendOrderRequest = function (event) {
     event.preventDefault();
     displayLoadingAnimation();
-    sendPostNewOrderRequest(orderRequestSuccess, hideLoadingAnimation, hideLoadingAnimation);
+    sendPostNewOrderRequest(
+      orderRequestSuccess,
+      hideLoadingAnimation,
+      hideLoadingAnimation
+    ).finally(() => setIncrementCounter());
   };
 
   if (completeCheckoutButton !== null) {

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -49,7 +51,7 @@ public class HTMLPageController {
         model.addAttribute("topSellingProducts", getTop3SellingProducts());
         Wishlist wishlist = this.wishlistService.getWishlistByUser(this.getUser());
         if (wishlist != null) {
-            model.addAttribute("wishlist", wishlist.getProducts());
+            model.addAttribute("wishlist", wishlist);
         }
 
         this.addPermissionLevelToModel(model);
@@ -116,11 +118,31 @@ public class HTMLPageController {
         Wishlist wishlist = this.wishlistService.getWishlistByUser(this.getUser());
 
         if (wishlist != null){
-            model.addAttribute("wishlist", this.getUser().getWishlist().getProducts());
+            model.addAttribute("wishlist", wishlist);
         }
 
         this.addPermissionLevelToModel(model);
+        return "wishlist";
+    }
 
+    /**
+     * Displays the wishlist contents of the wishlist which has the given
+     * sharing token.
+     *
+     * @param sharingToken sharing token to find shared wishlist for.
+     * @return wishlist thymeleaf template with the shared wishlist.
+     */
+    @GetMapping("wishlist/shared/{sharingToken}")
+    public String getSharedWishlist(@PathVariable String sharingToken, HttpServletResponse response, Model model) throws IOException {
+        model.addAttribute("user", this.getUser());
+        Wishlist wishlist = this.wishlistService.getWishlistBySharingToken(sharingToken);
+
+        if (wishlist != null){
+            if (wishlist.getUser() == this.getUser()) response.sendRedirect("/wishlist");
+            model.addAttribute("wishlist", wishlist);
+        }
+
+        this.addPermissionLevelToModel(model);
         return "wishlist";
     }
 

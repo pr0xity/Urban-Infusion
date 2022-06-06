@@ -1,5 +1,6 @@
 package no.ntnu.appdevapi.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 /**
  * Represents a wishlist owned by a user.
@@ -35,6 +37,10 @@ public class Wishlist {
     )
     private Set<Product> products = new HashSet<>();
 
+    @ApiModelProperty("Unique id used for sharing this specific wishlist")
+    @Column(name = "sharing_token")
+    private String sharingToken;
+
     @ApiModelProperty("When the wishlist was last updated.")
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
@@ -51,6 +57,7 @@ public class Wishlist {
     public Wishlist(User user) {
         this.user = user;
         this.user.setWishlist(this);
+        this.sharingToken = UUID.randomUUID().toString();
         this.updatedAt = LocalDateTime.now();
         this.createdAt = LocalDateTime.now();
     }
@@ -134,6 +141,24 @@ public class Wishlist {
     public void deleteProduct(Product product) {
         this.products.remove(product);
         this.updatedAt = LocalDateTime.now();
+    }
+
+    /**
+     * Returns the unique token used for sharing this wishlist.
+     *
+     * @return the unique token used for sharing this wishlist.
+     */
+    public String getSharingToken() {
+        return sharingToken;
+    }
+
+    /**
+     * Sets the token which is used for sharing this wishlist.
+     *
+     * @param sharingToken the unique token used for sharing this wishlist.
+     */
+    public void setSharingToken(String sharingToken) {
+        this.sharingToken = sharingToken;
     }
 
     /**

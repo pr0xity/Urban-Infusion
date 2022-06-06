@@ -37,15 +37,6 @@
           </li>
           <li class="breadcrumbs__item">
             <i class="ph-caret-right-light"></i>
-            <a
-              class="breadcrumbs__link breadcrumbs__link--category"
-              th:data-categoryid="${product.category.id}"
-              href="#"
-              th:text="${product.category.name}"
-            ></a>
-          </li>
-          <li class="breadcrumbs__item">
-            <i class="ph-caret-right-light"></i>
             <span th:text="${product.name}"></span>
           </li>
         </ul>
@@ -54,7 +45,7 @@
         <h1 class="section-title" th:text="${product.name}">Heather tea</h1>
         <img
           class="product__img"
-          th:src="@{/api/products/images/{id}(id = ${product.id})}"
+          th:src="@{/api/products/images/{id}(id = ${product.imageId})}"
           alt="Green tea in a cup"
         />
         <a href="#section-reviews">
@@ -261,7 +252,11 @@
               maxlength="250"
               aria-label="Write your review here"
             ></textarea>
-            <div role="radiogroup" class="product__rating--review" id="review__rating">
+            <div
+              role="radiogroup"
+              class="product__rating--review"
+              id="review__rating"
+            >
               <p>Rating</p>
               <label>
                 <img

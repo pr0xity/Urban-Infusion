@@ -3,7 +3,8 @@
  **********************************************/
 
 import { getProductIdFromElement } from "../tools.js";
-import { sendAddToWishlistRequest, sendDeleteFromWishlistRequest } from "../controllers/wishlistController.js";
+import {sendAddToWishlistRequest, sendDeleteFromWishlistRequest,} from "../controllers/wishlistController.js";
+import {setLoginAlert} from "./loginMenuView.js";
 
 const filledHeartIcon = `<i class="ph-heart-fill btn--icon btn--selected"></i>`;
 const outlinedHeartIcon = `<i class="ph-heart-light btn--icon"></i>`;
@@ -137,18 +138,6 @@ const replaceWishlistButton = function (wishlistButton, dataProductId) {
 };
 
 /**
- * Sets wishlist buttons on pages with multiple productions.
- */
-/*export const setWishlistButtonsOnMultipleProducts = function () {
-  const products = document.querySelectorAll(".product-card");
-  products.forEach((product) => {
-    const wishlistButton = product.querySelector(".product__btn--wishlist");
-    const dataProductId = getProductIdFromElement(product);
-    replaceWishlistButton(wishlistButton, dataProductId);
-  });
-};*/
-
-/**
  * Sets wishlist button on a product page.
  */
 export const setWishlistButtonsOnProduct = function (product) {
@@ -176,6 +165,15 @@ const wishlistRemoveSuccessCallback = function () {
 };
 
 /**
+ * Displays login menu with an alert.
+ */
+const wishlistUnauthorizedCallback = function () {
+  const userMenuButton = document.querySelector("#user-menu");
+  userMenuButton.click();
+  setLoginAlert("Log in to save your favourites");
+};
+
+/**
  * Sends either a DELETE request or a POST request to add or remove a
  * product to or from the wishlist.
  *
@@ -186,9 +184,12 @@ export const sendWishlistRequest = function (event) {
   const productId = getProductIdFromElement(currentButton);
 
   if (isProductInWishlist(currentButton)) {
-    sendDeleteFromWishlistRequest(productId, wishlistRemoveSuccessCallback).finally();
+    sendDeleteFromWishlistRequest(
+      productId,
+      wishlistRemoveSuccessCallback, wishlistUnauthorizedCallback
+    ).finally();
   } else if (!isProductInWishlist(currentButton)) {
-    sendAddToWishlistRequest(productId, wishlistAddSuccessCallback);
+    sendAddToWishlistRequest(productId, wishlistAddSuccessCallback, wishlistUnauthorizedCallback);
   }
 };
 
