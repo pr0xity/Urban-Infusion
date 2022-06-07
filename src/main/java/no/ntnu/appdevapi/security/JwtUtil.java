@@ -36,6 +36,11 @@ public class JwtUtil {
   @Value("${jwt.authorities.key}")
   public String AUTHORITIES_KEY;
 
+  /**
+   * Gets the username from the JWT token.
+   * @param token the JWT token
+   * @return the username as {@code String}
+   */
   public String getUsernameFromToken(String token) {
     return getClaimFromToken(token, Claims::getSubject);
   }
@@ -44,9 +49,15 @@ public class JwtUtil {
     return getClaimFromToken(token, Claims::getSubject);
   }
 
+  /**
+   * Gets the expiration date from the JWT token.
+   * @param token the JWT token
+   * @return a date object with the expiration date
+   */
   public Date getExpirationDateFromToken(String token) {
     return getClaimFromToken(token, Claims::getExpiration);
   }
+
 
   public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
     final Claims claims = getAllClaimsFromToken(token);
@@ -79,6 +90,12 @@ public class JwtUtil {
       .compact();
   }
 
+  /**
+   * Validate the given token with the given user.
+   * @param token the JWT token to validate.
+   * @param userDetails the details of the user.
+   * @return {@code true} if the token is valid and matches the user.
+   */
   public Boolean validateToken(String token, UserDetails userDetails) {
     final String username = getUsernameFromToken(token);
     return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
