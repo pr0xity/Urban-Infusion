@@ -30,9 +30,11 @@ public class RatingServiceImpl implements RatingService {
     private UserRepository userRepository;
 
     /**
-     * Returns a list over all ratings.
+     * Returns a list of all ratings,
+     * sorted first by update date (newest first),
+     * then by comment (empty comments last).
      *
-     * @return list over all ratings.
+     * @return sorted {@code List<Rating>} of all ratings.
      */
     public List<Rating> getAllRatings() {
         List<Rating> ratings = new ArrayList<>();
@@ -44,19 +46,32 @@ public class RatingServiceImpl implements RatingService {
     }
 
     /**
-     * Returns the rating containing the specified product id.
+     * Gets a list of all ratings of the product with the given id.
      *
-     * @param product the product id to retrieve ratings for.
-     * @return returns the rating for the product with the given product id.
+     * @param product the product ID to retrieve ratings for.
+     * @return {@code List<Rating} of all ratings of the product with the given id.
      */
     public List<Rating> getRatingsFromProduct(Product product) {
         return new ArrayList<>(ratingRepository.findByProduct(product));
     }
 
+    /**
+     * Gets the rating of given product by given user.
+     *
+     * @param user the author of the rating.
+     * @param product the product rated.
+     * @return {@code Rating} of given product by given user.
+     */
     public Rating getRatingFromUserAndProduct(User user, Product product) {
         return ratingRepository.findByUserAndProduct(user, product).orElse(null);
     }
 
+    /**
+     * Gets the average rating of the given product.
+     *
+     * @param product the product to find the average rating for.
+     * @return {@code Double} average rating of the product.
+     */
     @Override
     public double getAverageRatingFromProduct(Product product) {
         List<Rating> ratings = getRatingsFromProduct(product);
@@ -64,9 +79,9 @@ public class RatingServiceImpl implements RatingService {
     }
 
     /**
-     * Returns the rating with the given id.
+     * Returns the rating with the given ID.
      *
-     * @param id id of the rating to find.
+     * @param id ID of the rating to find.
      * @return the rating with the given id or null if not found.
      */
     public Rating getRating(long id) {

@@ -21,6 +21,11 @@ public class ProductImageServiceImpl implements ProductImageService {
     private final String[] FILE_EXTENSIONS = {"jpeg", "jpg", "png", "webp", "svg"};
     private final String[] CONTENT_TYPES = {"image/jpeg", "image/jpg", "image/png",  "image/webp", "image/svg+xml"};
 
+    /**
+     * Adds the given image file to the database if valid.
+     * @param imageFile {@code MultipartFile} to be added.
+     * @return {@code ProductImage} of the image that was added.
+     */
     @Override
     public ProductImage addImage(MultipartFile imageFile) {
         ProductImage productImage = null;
@@ -37,11 +42,24 @@ public class ProductImageServiceImpl implements ProductImageService {
         return productImage;
     }
 
+    /**
+     * Gets the product image with the given ID.
+     *
+     * @param id the id of the image to find.
+     * @return {@code ProductImage} with given ID, or null if no match found.
+     */
     @Override
     public ProductImage getImageById(long id) {
         return productImageRepository.findById(id).orElse(null);
     }
 
+    /**
+     * Updates the product image with the given ID.
+     *
+     * @param imageId id of the product image to update.
+     * @param imageFile the image file to update the product image to.
+     * @return the updated {@code ProductImage}.
+     */
     @Override
     public ProductImage updateImage(long imageId, MultipartFile imageFile) {
         ProductImage productImage = productImageRepository.findById(imageId).orElse(null);

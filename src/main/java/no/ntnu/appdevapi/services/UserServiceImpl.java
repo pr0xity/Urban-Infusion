@@ -36,6 +36,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private BCryptPasswordEncoder bcryptEncoder;
 
+    /**
+     * Gets a Set of all rights owned by the given user.
+     * @param user the user to fetch the authorities of.
+     * @return {@code Set<SimpleGrantedAuthority>} of authorities held by given user.
+     */
     private Set<SimpleGrantedAuthority> getAuthority(User user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
         user.getPermissionLevels().forEach(permissionLevel -> {
@@ -44,6 +49,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return authorities;
     }
 
+    /**
+     * Saves a user to the database from DTO.
+     *
+     * @param user the userDTO to save.
+     * @return {@code User} that was saved.
+     */
     @Override
     public User save(UserDto user) {
         User nUser = user.getUserFromDto();
@@ -68,11 +79,22 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.findByEmail(nUser.getEmail());
     }
 
+    /**
+     * Saves a user to the database.
+     *
+     * @param user the user to save.
+     * @return {@code User} that was saved.
+     */
     @Override
     public User saveUserObject(User user) {
         return this.userRepository.save(user);
     }
 
+    /**
+     * Gets a list of all users, sorted by ID (ascending).
+     *
+     * @return sorted {@List<User>} of all users.
+     */
     @Override
     public List<User> findAll() {
         List<User> list = new ArrayList<>();
@@ -80,16 +102,33 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return list.stream().sorted(Comparator.comparingLong(User::getId)).collect(Collectors.toList());
     }
 
+    /**
+     * Gets the user with given email.
+     *
+     * @param email email of the user.
+     * @return {@code User} with given email, or null if no match.
+     */
     @Override
     public User findOneByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
+    /**
+     * Gets the user with the given ID.
+     * @param id ID of the user.
+     * @return {@code User} with given ID, or null if no match.
+     */
     @Override
     public User findOneByID(long id) {
         return userRepository.findById(id);
     }
 
+    /**
+     * Updates the user with the given ID.
+     *
+     * @param id id of the user to update.
+     * @param user the user object to update to.
+     */
     @Override
     public void updateWithUser(long id, User user) {
         User existingUser = findOneByID(id);
@@ -103,6 +142,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
     }
 
+    /**
+     * Updates the user with the given ID from DTO.
+     *
+     * @param id id of the user to update.
+     * @param userDto the user dto to update to.
+     */
     @Override
     public void updateWithUserDto(long id, UserDto userDto) {
         User updatedUser = userDto.getUserFromDto();
@@ -145,11 +190,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         }
     }
 
+    /**
+     * Deletes the user with the given email.
+     *
+     * @param email email of the user to be deleted.
+     */
     @Override
     public void deleteUser(String email) {
         userRepository.delete(userRepository.findByEmail(email));
     }
 
+    /**
+     * Disables the user with the given email.
+     *
+     * @param email email of the user to set as disabled.
+     */
     @Override
     public void disableUser(String email) {
         User user = findOneByEmail(email);
@@ -157,6 +212,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.save(user);
     }
 
+    /**
+     * Returns the user with the given email as a userDetails object.
+     *
+     * @param email the email of the user.
+     * @return {@code UserDetails} of the user with the given email.
+     * @throws UsernameNotFoundException if no user with given email exists.
+     */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email);
@@ -166,6 +228,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), getAuthority(user));
     }
 
+    /**
+     * Returns the currently authenticated user.
+     * @return the {@code User} of the current session.
+     */
     @Override
     public User getSessionUser() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
@@ -173,5 +239,4 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         String email = authentication.getName();
         return userRepository.findByEmail(email);
     }
-
 }

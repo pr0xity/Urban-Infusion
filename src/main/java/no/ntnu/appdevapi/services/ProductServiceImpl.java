@@ -168,6 +168,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * Deletes the product with the given ID.
+     *
      * @param id the ID of the product.
      */
     public void deleteProduct(long id) {
@@ -180,6 +181,7 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * Converts a ProductDTO object to a Product object.
+     *
      * @param object the object to be converted.
      * @return the converted {@code Product}.
      */
