@@ -40,8 +40,8 @@ public class OrderDetailsDto {
         this.processed = processed;
     }
 
+    //Empty constructor
     public OrderDetailsDto() {
-
     }
 
     /**
