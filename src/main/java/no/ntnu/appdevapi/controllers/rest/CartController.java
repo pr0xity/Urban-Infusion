@@ -34,16 +34,10 @@ public class CartController {
     private ShoppingSessionService shoppingSessionService;
 
     /**
-     * Get all shopping sessions.
+     * Returns the current user's shopping session.
      *
-     * @return list of all shopping sessions.
+     * @return current user's shopping session.
      */
-    @GetMapping("all")
-    public List<ShoppingSession> getAll() {
-        return this.shoppingSessionService.getAllShoppingSessions();
-    }
-
-
     @GetMapping()
     public ResponseEntity<ShoppingSession> get() {
         ShoppingSession shoppingSession = this.getShoppingSession();
