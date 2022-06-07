@@ -6,31 +6,76 @@ import no.ntnu.appdevapi.entities.UserAddress;
 
 import java.time.LocalDateTime;
 
+/**
+ * Data transfer object for a user
+ */
 public class UserDto {
 
+  //The first name of a user
   private String firstName;
+  //The last name of a user
   private String lastName;
+  //The email of a user
   private String email;
+  //The users password
   private String password;
+  //The new password of a user
   private String newPassword;
+  //A users permission-level
   private String permissionLevel;
+  //When the user was created
   private LocalDateTime createdAt;
+  //The last time the user information was updated
   private LocalDateTime updatedAt;
+  //Whether the user is enabled or not
   private boolean enabled;
-
+  //The users main address
   private String addressLine1;
+  //The users secondary address
   private String addressLine2;
+  //The users postal code
   private int postalCode;
+  //The users city of residence
   private String city;
+  //The users country of residence
   private String country;
+  //The users phone number
   private String phone;
 
+  //Empty constructor
   public UserDto() {
   }
 
-  public UserDto(String email, boolean enabled) {
+  /**
+   * Creates an instance of a UserDto. Several constructors are provided for when different data is available.
+   *
+   * @param firstName The first name of a user
+   * @param lastName The last name of a user
+   * @param email The email of a user
+   * @param password The users password
+   * @param addressLine1 The users main address
+   * @param addressLine2 The users secondary address
+   * @param postalCode The users postal code
+   * @param city The users city of residence
+   * @param country The users country of residence
+   * @param phone The users phone number
+   */
+  public UserDto(String firstName, String lastName, String email,
+                 String password, String addressLine1, String addressLine2,
+                 String postalCode, String city, String country, String phone) {
+    this.firstName = firstName;
+    this.lastName = lastName;
     this.email = email;
-    this.enabled = enabled;
+    this.password = password;
+    this.createdAt = LocalDateTime.now();
+    this.updatedAt = null;
+    this.permissionLevel = "user";
+    this.addressLine1 = addressLine1;
+    this.addressLine2 = addressLine2;
+    this.postalCode = Integer.parseInt(postalCode);
+    this.city = city;
+    this.country = country;
+    this.phone = phone;
   }
 
   public UserDto(String firstName, String lastName, String email,
@@ -42,30 +87,9 @@ public class UserDto {
     this.password = password;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
-    //this.enabled = true;
     this.permissionLevel = "user";
-
     this.addressLine1 = addressLine1;
     this.addressLine2 = null;
-    this.postalCode = Integer.parseInt(postalCode);
-    this.city = city;
-    this.country = country;
-    this.phone = phone;
-  }
-  public UserDto(String firstName, String lastName, String email,
-                 String password, String addressLine1, String addressLine2,
-                 String postalCode, String city, String country, String phone) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.password = password;
-    this.createdAt = LocalDateTime.now();
-    this.updatedAt = null;
-    //this.enabled = true;
-    this.permissionLevel = "user";
-
-    this.addressLine1 = addressLine1;
-    this.addressLine2 = addressLine2;
     this.postalCode = Integer.parseInt(postalCode);
     this.city = city;
     this.country = country;
@@ -79,7 +103,6 @@ public class UserDto {
     this.password = password;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
-    //this.enabled = true;
     this.permissionLevel = permissionLevel;
   }
 
@@ -90,10 +113,13 @@ public class UserDto {
     this.password = password;
     this.createdAt = LocalDateTime.now();
     this.updatedAt = null;
-    //this.enabled = true;
     this.permissionLevel = "user";
   }
 
+  /**
+   * Creates and returns a User-object from the DTO
+   * @return a User-object
+   */
   public User getUserFromDto() {
     User user = new User();
     user.setFirstName(firstName);
@@ -102,8 +128,6 @@ public class UserDto {
     user.setPassword(password);
     user.setCreatedAt(createdAt);
     user.setUpdatedAt(updatedAt);
-    //user.setEnabled(enabled);
-
 
     PermissionLevel p = new PermissionLevel(permissionLevel, updatedAt);
     user.setPermissionLevel(p);
@@ -111,6 +135,10 @@ public class UserDto {
     return user;
   }
 
+  /**
+   * Creates and returns a UserAddress-Object containing information about a user's residency.
+   * @return a UserAddress-object
+   */
   public UserAddress getAddressFromDto() {
     if (null != addressLine1) {
       UserAddress address = new UserAddress();
@@ -124,6 +152,8 @@ public class UserDto {
     }
     return null;
   }
+
+  //Getters and setters:
 
   public String getFirstName() {
     return firstName;

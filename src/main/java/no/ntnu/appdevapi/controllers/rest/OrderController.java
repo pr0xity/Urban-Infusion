@@ -87,7 +87,7 @@ public class OrderController {
     }
 
     /**
-     * Creates an adds an order of the existing shopping session.
+     * Creates an order of the existing shopping session.
      *
      * @return 201 Created on success, 400 Bad request on failure.
      */
