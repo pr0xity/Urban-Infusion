@@ -17,6 +17,13 @@ public interface OrderDetailsService {
     List<OrderDetails> getAllOrderDetails();
 
     /**
+     * Returns a list of the (up to) five most recent orders.
+     *
+     * @return list of the five most recent orders.
+     */
+    List<OrderDetails> getRecentOrderDetails();
+
+    /**
      * Returns the order details with the given id.
      *
      * @param id id of the order details to find.

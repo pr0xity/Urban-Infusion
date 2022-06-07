@@ -63,13 +63,7 @@ public class OrderController {
     @ApiOperation(value = "Get the five most recent orders.")
     @ResponseBody
     public List<OrderDetails> getRecent() {
-        List<OrderDetails> orders = orderDetailsService.getAllOrderDetails();
-        orders.sort(Comparator.comparing(OrderDetails::getCreatedAt).reversed());
-        int k = orders.size();
-        if (k > 5) {
-            orders.subList(5,k).clear();
-        }
-        return orders;
+        return orderDetailsService.getRecentOrderDetails();
     }
 
     /**

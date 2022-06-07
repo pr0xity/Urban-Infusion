@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Business logic for order items.
@@ -21,9 +23,27 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
 
     @Override
     public List<OrderDetails> getAllOrderDetails() {
-        List<OrderDetails> OrderDetailss = new ArrayList<>();
-        orderDetailsRepository.findAll().forEach(OrderDetailss::add);
-        return OrderDetailss;
+        List<OrderDetails> orderDetails = new ArrayList<>();
+        orderDetailsRepository.findAll().forEach(orderDetails::add);
+        return orderDetails.stream()
+                .sorted(Comparator
+                        .comparing(OrderDetails::getCreatedAt).reversed()
+                        .thenComparing(OrderDetails::isProcessed).reversed())
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<OrderDetails> getRecentOrderDetails() {
+        List<OrderDetails> orderDetails = new ArrayList<>();
+        orderDetailsRepository.findAll().forEach(orderDetails::add);
+        int k = orderDetails.size();
+        if (k > 5) {
+            orderDetails.subList(5,k).clear();
+        }
+        return orderDetails.stream()
+                .sorted(Comparator
+                        .comparing(OrderDetails::getCreatedAt).reversed())
+                .collect(Collectors.toList());
     }
 
     @Override

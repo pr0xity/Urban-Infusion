@@ -3,6 +3,7 @@ package no.ntnu.appdevapi.services;
 import no.ntnu.appdevapi.DAO.UserRepository;
 import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.PermissionLevel;
+import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.User;
 import no.ntnu.appdevapi.entities.UserAddress;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service(value = "userService")
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -78,7 +77,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public List<User> findAll() {
         List<User> list = new ArrayList<>();
         userRepository.findAll().iterator().forEachRemaining(list::add);
-        return list;
+        return list.stream().sorted(Comparator.comparingLong(User::getId)).collect(Collectors.toList());
     }
 
     @Override

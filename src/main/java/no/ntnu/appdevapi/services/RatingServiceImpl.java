@@ -9,8 +9,10 @@ import no.ntnu.appdevapi.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Business logic for ratings.
@@ -35,7 +37,8 @@ public class RatingServiceImpl implements RatingService {
     public List<Rating> getAllRatings() {
         List<Rating> ratings = new ArrayList<>();
         ratingRepository.findAll().forEach(ratings::add);
-        return ratings;
+
+        return ratings.stream().sorted(Comparator.comparing(Rating::getUpdatedAt)).sorted(Comparator.comparing(Rating::getComment)).collect(Collectors.toList());
     }
 
     /**
