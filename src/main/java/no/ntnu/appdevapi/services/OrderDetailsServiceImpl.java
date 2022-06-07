@@ -27,8 +27,8 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
         orderDetailsRepository.findAll().forEach(orderDetails::add);
         return orderDetails.stream()
                 .sorted(Comparator
-                        .comparing(OrderDetails::getCreatedAt).reversed()
-                        .thenComparing(OrderDetails::isProcessed).reversed())
+                        .comparing(OrderDetails::isProcessed)
+                        .thenComparing(OrderDetails::getCreatedAt).reversed())
                 .collect(Collectors.toList());
     }
 
