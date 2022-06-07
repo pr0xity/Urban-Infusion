@@ -110,7 +110,7 @@ public class CartItem {
     /**
      * Returns the quantity of the product in this cart item.
      *
-     * @return quanitty of the product in this cart item.
+     * @return quantity of the product in this cart item.
      */
     public Integer getQuantity() {
         return quantity;
@@ -130,13 +130,6 @@ public class CartItem {
      */
     public void increaseQuantity() {
         this.quantity += 1;
-    }
-
-    /**
-     * Decreases the quantity by one.
-     */
-    public void decreaseQuantity() {
-        this.quantity -= 1;
     }
 
 
@@ -173,18 +166,4 @@ public class CartItem {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
-
-    /*
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CartItem cartItem = (CartItem) o;
-        return shoppingSession.equals(cartItem.shoppingSession) && product.equals(cartItem.product);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(shoppingSession, product);
-    }*/
 }

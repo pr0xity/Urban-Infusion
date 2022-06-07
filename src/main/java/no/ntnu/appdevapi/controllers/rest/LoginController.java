@@ -86,10 +86,9 @@ public class LoginController {
    * Logs off the user.
    *
    * @param response response with cookie which expires instantly and redirects user to frontpage.
-   * @throws IOException
    */
   @RequestMapping(value = "api/logout", method = RequestMethod.GET)
-  public void deleteTokenCookie(HttpServletRequest request, HttpServletResponse response) throws IOException {
+  public void deleteTokenCookie(HttpServletResponse response) throws IOException {
     Cookie cookie = new Cookie("token", null);
     cookie.setMaxAge(0);
     cookie.setSecure(true);
@@ -107,7 +106,7 @@ public class LoginController {
    * @return ResponseEntity containing the jwt token in a cookie and HttpStatus ok on success,
    * or HttpStatus not found on fail.
    */
-  @RequestMapping(value = "api/register", method = RequestMethod.POST)
+  @RequestMapping(value = "/api/register", method = RequestMethod.POST)
   public ResponseEntity<String> registerUser(@RequestBody UserDto nUser) {
     // If registration data is missing.
     if (nUser == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

@@ -25,7 +25,7 @@ import java.net.URL;
 
 
 @RestController
-@RequestMapping("api/products")
+@RequestMapping("/api/products")
 public class ProductController {
 
   @Autowired

@@ -5,6 +5,9 @@ import no.ntnu.appdevapi.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 
+/**
+ * Abstract class for general methods used in page controllers.
+ */
 public abstract class PageController {
 
     @Autowired

@@ -204,6 +204,12 @@ public class RatingController {
         return this.userService.getSessionUser();
     }
 
+    /**
+     * Checks if the given user has admin/owner authority or not.
+     *
+     * @param user the user to check authority of.
+     * @return true if the given user has admin/owner authority, false if not.
+     */
     private boolean isAdmin(User user) {
         return user.getPermissionLevel().getAdminType().equals("admin") ||
                 user.getPermissionLevel().getAdminType().equals("owner");
