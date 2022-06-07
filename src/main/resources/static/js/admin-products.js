@@ -238,7 +238,7 @@ const updateProductCategory = function (event) {
   if (newCategory.length > 0) {
     sendUpdateProductRequest(
       productId,
-      { categoryName: newCategory },
+      { category: newCategory },
       editProductSuccess
     ).finally();
   }
