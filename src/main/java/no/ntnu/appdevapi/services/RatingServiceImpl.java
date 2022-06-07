@@ -38,7 +38,9 @@ public class RatingServiceImpl implements RatingService {
         List<Rating> ratings = new ArrayList<>();
         ratingRepository.findAll().forEach(ratings::add);
 
-        return ratings.stream().sorted(Comparator.comparing(Rating::getUpdatedAt)).sorted(Comparator.comparing(Rating::getComment)).collect(Collectors.toList());
+        return ratings.stream()
+                .sorted(Comparator.comparing(Rating::getUpdatedAt))
+                .sorted(Comparator.comparing(Rating::getComment).reversed()).collect(Collectors.toList());
     }
 
     /**
