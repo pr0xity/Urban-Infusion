@@ -132,7 +132,6 @@ const manageProduct = function (product) {
   fetchImage(product["imageId"]);
 
   activeStatusCheckBox.onclick = function () {
-    console.log(product);
     if (!overlay.classList.contains("hidden")) {
       updateActiveStatus();
     }

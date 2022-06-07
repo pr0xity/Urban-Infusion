@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = new ArrayList<>();
         productRepository.findAll().forEach(products::add);
 
-        return products;
+        return products.stream().sorted(Comparator.comparingLong(Product::getId)).collect(Collectors.toList());
     }
 
     public Iterable<Product> getAllProductsNotDeleted() {
@@ -62,17 +62,21 @@ public class ProductServiceImpl implements ProductService {
 
     public Product updateProduct(long id, ProductDto product) {
         Product newProduct = getProductFromDto(product);
-
         Product old = productRepository.findById(id).orElse(null);
+
         if (null == old) {
             return null;
         }
+        ProductCategory oldCategory = old.getCategory();
+        boolean changedCat = false;
+
         if (null != newProduct.getName()) {
             old.setName(newProduct.getName());
         }
         if (null != newProduct.getCategory()) {
             ProductCategory dbCat = productCategoryRepository.findByName(newProduct.getCategory().getName());
             old.setCategory(Objects.requireNonNullElseGet(dbCat, () -> productCategoryRepository.save(newProduct.getCategory())));
+            changedCat = true;
         }
         if (0 != newProduct.getPrice()) {
             old.setPrice(newProduct.getPrice());
@@ -98,6 +102,17 @@ public class ProductServiceImpl implements ProductService {
         old.setInactive(newProduct.isInactive());
 
         productRepository.save(old);
+        if (changedCat) {
+            List<Product> catProducts = new ArrayList<>();
+            productRepository.findAll().forEach(p -> {
+                if (p.getCategory().getName().equals(oldCategory.getName())) {
+                    catProducts.add(p);
+                }
+            });
+            if (catProducts.isEmpty()) {
+                productCategoryRepository.delete(oldCategory);
+            }
+        }
         return productRepository.findById(old.getId()).orElse(null);
     }
 
