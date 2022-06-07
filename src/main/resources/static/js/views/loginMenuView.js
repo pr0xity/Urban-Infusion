@@ -1,7 +1,11 @@
-import { reloadCurrentPage } from "../tools.js";
+import {hideElement, reloadCurrentPage, showElement} from "../tools.js";
 import { sendForgottenPasswordRequest, sendLoginRequest } from "../controllers/authenticationController.js";
 
+
+const loginMenu = document.querySelector(".login");
 const loginButton = document.querySelector("#login-btn");
+const loginLoading = document.querySelector(".login .loading");
+const loginButtonText = document.querySelector(".login__btn--text");
 const loginEmail = document.querySelector("#login-email");
 const loginPassword = document.querySelector("#login-password");
 const loginAlert = document.querySelector(".login__alert");
@@ -59,7 +63,12 @@ export const getLoginRequestBody = function () {
  */
 export const loginEvent = function (event) {
   event.preventDefault();
-  sendLoginRequest(getLoginRequestBody(), loginSuccess, loginError, loginError).finally();
+  showElement(loginLoading);
+  hideElement(loginButtonText);
+  sendLoginRequest(getLoginRequestBody(), loginSuccess, loginError, loginError).finally(() => {
+    hideElement(loginLoading);
+    showElement(loginButtonText);
+  });
 };
 
 /**
@@ -90,5 +99,10 @@ export const forgottenPasswordSuccess = function () {
  */
 export const forgottenPasswordEvent = function (event) {
   event.preventDefault();
-  sendForgottenPasswordRequest({ email: loginEmail.value.toString() }, forgottenPasswordSuccess, forgottenPasswordUnauthorized, forgottenPasswordError).finally();
+  showElement(loginLoading);
+  hideElement(loginButtonText);
+  sendForgottenPasswordRequest({ email: loginEmail.value.toString() }, forgottenPasswordSuccess, forgottenPasswordUnauthorized, forgottenPasswordError).finally(() => {
+    hideElement(loginLoading);
+    showElement(loginButtonText);
+  });
 };

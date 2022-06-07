@@ -3,8 +3,8 @@
  **********************************************/
 
 import { getProductIdFromElement } from "../tools.js";
-import {sendAddToWishlistRequest, sendDeleteFromWishlistRequest,} from "../controllers/wishlistController.js";
-import {setLoginAlert} from "./loginMenuView.js";
+import { sendAddToWishlistRequest, sendDeleteFromWishlistRequest } from "../controllers/wishlistController.js";
+import { setLoginAlert } from "./loginMenuView.js";
 
 const filledHeartIcon = `<i class="ph-heart-fill btn--icon btn--selected"></i>`;
 const outlinedHeartIcon = `<i class="ph-heart-light btn--icon"></i>`;
@@ -75,7 +75,7 @@ const addBrokenHeartIcon = function (button) {
  * @param button the button to change icon of.
  */
 const addHeartIcon = function (button) {
-  if (isProductInWishlist(button) && window.location.pathname === "/wishlist") {
+  if (isProductInWishlist(button) && window.location.pathname.includes("/wishlist")) {
     addBrokenHeartIcon(button);
   } else if (isProductInWishlist(button)) {
     addFilledHeartIcon(button);
@@ -91,11 +91,7 @@ const addHeartIcon = function (button) {
  * @returns {HTMLButtonElement} the remove from wishlist button element.
  */
 const createRemoveFromWishlistButton = function (dataProductId) {
-  const removeButton = createWishlistButton(
-    "true",
-    dataProductId,
-    "Remove this item from your favourites"
-  );
+  const removeButton = createWishlistButton("true", dataProductId, "Remove this item from your favourites");
   addHeartIcon(removeButton);
   return removeButton;
 };

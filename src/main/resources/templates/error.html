@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
+    through nature."
+    />
+    <link th:replace="components/designelements/favicon" />
+    <link th:replace="components/designelements/font" />
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet" />
+    <link th:href="@{/css/queries.css}" type="text/css" rel="stylesheet" />
+
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <script src="https://unpkg.com/smoothscroll-polyfill@0.4.4/dist/smoothscroll.min.js"></script>
+    <script type="module" th:src="@{/js/general.js}"></script>
+    <script type="module" th:src="@{/js/index.js}"></script>
+    <title>Urban Infusion</title>
+  </head>
+  <body>
+    <header th:insert="components/header" class="header"></header>
+    <main class="error container--beige" th:if="${status == 404}">
+      <h1 class="heading--thin">Could not find the page you were looking for</h1>
+      <a class="link" th:href="@{/}">&larr; Go back to frontpage</a>
+      <img class="error__img--logo" th:src="@{/img/icons/logo-small.png}" alt="Urban-Infusion logo">
+    </main>
+    <main class="error container--beige" th:if="${status == 403 or status == 401}">
+      <h1 class="heading--thin">You're not authorized to view this page</h1>
+      <a class="link" th:href="@{/}">&larr; Go back to frontpage</a>
+      <img class="error__img--logo" th:src="@{/img/icons/logo-small.png}" alt="Urban-Infusion logo">
+    </main>
+    <main class="error container--beige" th:if="${status == 500}">
+      <h1 class="heading--thin">Something went very wrong, contact customer service if issue persists</h1>
+      <a class="link" th:href="@{/}">&larr; Go back to frontpage</a>
+      <img class="error__img--logo" th:src="@{/img/icons/logo-small.png}" alt="Urban-Infusion logo">
+    </main>
+    <main class="error container--beige" th:unless="${status == 404 or status == 401 or status == 403 or status == 500}">
+      <h1 class="heading--thin">This is an error page, if something went wrong please contact customer service</h1>
+      <a class="link" th:href="@{/}">&larr; Go back to frontpage</a>
+      <img class="error__img--logo" th:src="@{/img/icons/logo-small.png}" alt="Urban-Infusion logo">
+    </main>
+    <footer th:insert="components/footer" class="footer"></footer>
+  </body>
+</html>

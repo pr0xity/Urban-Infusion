@@ -269,6 +269,15 @@
     align-items: center;
   }
 
+  .login .loading {
+    left: 15px;
+  }
+
+  .login .btn--green {
+    width: 14.2rem;
+    height: 5.2rem;
+  }
+
   .login__input {
     padding: 0.8rem;
     width: 42rem;
@@ -532,6 +541,10 @@
   .signup__img:nth-child(3) {
     top: 37%;
   }
+
+  .signup .loading {
+    left: 15px;
+  }
 }
 
 /**************************/
@@ -690,7 +703,7 @@
     right: 40vw;
   }
 
-  .section-title {
+  .heading--section {
     padding: 0;
     font-size: 3rem;
     font-weight: 600;
@@ -737,7 +750,7 @@
     transform: translate(-50%, -50%) scale(1.08);
   }
 
-  .heading-primary {
+  .heading--primary {
     margin-left: 1.2rem;
     margin-bottom: 0.4rem;
   }
@@ -990,11 +1003,11 @@
 /* LESS THAN 384px (Medium phone) */
 /**************************/
 @media (max-width: 24em) {
-  .section-title {
+  .heading--section {
     font-size: 2.4rem;
   }
 
-  .decorative-heading {
+  .heading--decorative {
     font-size: 3rem;
   }
 

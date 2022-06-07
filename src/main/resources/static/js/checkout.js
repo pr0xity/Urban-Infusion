@@ -42,9 +42,9 @@ const setCartItemControls = function () {
     event.preventDefault();
     const cartItemRequestBody = getCartItemRequestBody(event.target);
     if (quantity <= 0) {
-      sendDeleteFromCartRequest(cartItemRequestBody.productId);
+      sendDeleteFromCartRequest(cartItemRequestBody.productId).finally(reloadCurrentPage);
     } else {
-      sendUpdateCartRequest(cartItemRequestBody);
+      sendUpdateCartRequest(cartItemRequestBody).finally();
     }
   };
 
@@ -69,6 +69,20 @@ const setCartItemControls = function () {
   };
 
   /**
+   * Adds keypress event listener for enter key on the input fields to send update cart item request.
+   *
+   * @param input the input field to add event listener to.
+   */
+  const addKeyEventListenerToInputFields = function (input) {
+    input.addEventListener("keypress", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        sendUpdateCartItemRequest(event)
+      }
+    });
+  };
+
+  /**
    * Adds click event listener to the given button to send delete request.
    *
    * @param button the button to add event listener to.
@@ -81,6 +95,8 @@ const setCartItemControls = function () {
   const itemQuantityInputs = document.querySelectorAll(".item__quantity");
   itemQuantityInputs.forEach((input) => {
     addClickEventListenerToInputFields(input);
+    addKeyEventListenerToInputFields(input);
+    input.addEventListener("submit", event => event.preventDefault());
   });
 
   const deleteButtons = document.querySelectorAll(".item__btn--delete");
@@ -136,16 +152,13 @@ const setOrderRequestHandling = function () {
   const sendOrderRequest = function (event) {
     event.preventDefault();
     displayLoadingAnimation();
-    sendPostNewOrderRequest(
-      orderRequestSuccess,
-      hideLoadingAnimation,
-      hideLoadingAnimation
-    ).finally(() => setIncrementCounter());
+    sendPostNewOrderRequest(orderRequestSuccess, hideLoadingAnimation, hideLoadingAnimation).finally(() => setIncrementCounter());
   };
 
   if (completeCheckoutButton !== null) {
     completeCheckoutButton.addEventListener("click", sendOrderRequest);
   }
+  document.querySelector(".checkout__form").addEventListener("submit", event => event.preventDefault());
 };
 
 // Initializing page.

@@ -15,16 +15,13 @@ import java.util.*;
  * MVC controller for the html pages.
  */
 @Controller
-public class HTMLPageController {
+public class CustomerPagesController extends PageController {
 
     @Autowired
     private ProductService productService;
 
     @Autowired
     private RatingService ratingService;
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private WishlistService wishlistService;
@@ -59,6 +56,12 @@ public class HTMLPageController {
         return "index";
     }
 
+    /**
+     * Gets and displays the template for products page.
+     *
+     * @param model model for products.
+     * @return thymeleaf template for products page.
+     */
     @GetMapping("products")
     public String getAllProducts(Model model) {
         addPermissionLevelToModel(model);
@@ -175,28 +178,6 @@ public class HTMLPageController {
     public String getSignup(Model model) {
         this.addPermissionLevelToModel(model);
         return "signup";
-    }
-
-    /**
-     * Retrieves permission level and adds to the given model.
-     *
-     * @param model model to add permission level to.
-     */
-    private void addPermissionLevelToModel(Model model) {
-        if(this.getUser() != null) {
-            model.addAttribute("permission", this.getUser().getPermissionLevel().getAdminType());
-        } else {
-            model.addAttribute("permission", "NoUser");
-        }
-    }
-
-    /**
-     * Returns the user of this session.
-     *
-     * @return user of this session.
-     */
-    private User getUser() {
-        return this.userService.getSessionUser();
     }
 
     /**

@@ -64,7 +64,7 @@ address {
   font-style: normal;
 }
 
-.heading-primary {
+.heading--primary {
   font-weight: 500;
   font-size: 1.8rem;
   letter-spacing: 0.8rem;
@@ -72,7 +72,7 @@ address {
   text-transform: uppercase;
 }
 
-.decorative-heading {
+.heading--decorative {
   display: block;
   margin: 0;
   padding: 0;
@@ -84,11 +84,16 @@ address {
   color: #4f744e;
 }
 
-.section-title {
+.heading--section {
   padding: 0;
   font-size: 3.6rem;
   font-weight: 600;
   margin: 0 0 0.4rem;
+}
+
+.heading--thin {
+  font-size: 2.4rem;
+  font-weight: 500;
 }
 
 .heading--small {
@@ -538,6 +543,10 @@ address {
   align-items: center;
 }
 
+.login .loading {
+  left: 10px;
+}
+
 .login__field {
   display: flex;
   flex-direction: column;
@@ -549,6 +558,9 @@ address {
 
 .login .btn--green {
   padding: 0.8rem 1.6rem;
+  position: relative;
+  width: 10.2rem;
+  height: 4.2rem;
 }
 
 .user-menu__item {
@@ -1137,7 +1149,7 @@ address {
   margin: 0 auto 2.4rem;
 }
 
-.wishlist-grid {
+.wishlist__grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(35rem, 1fr));
   row-gap: 4.8rem;
@@ -1422,7 +1434,7 @@ address {
   box-shadow: -1rem 2rem 3rem rgba(0, 0, 0, 0.1);
 }
 
-.product__description-box {
+.product__container--description {
   padding-top: 3.2rem;
 }
 
@@ -1566,27 +1578,24 @@ address {
 /****************************/
 
 .signup {
-  padding: 12.8rem 6.4rem 0 6.4rem;
+  padding: 12.8rem 6.4rem 6.4rem 6.4rem;
   max-width: 160rem;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  flex-flow: wrap;
-}
-
-.section-create-account {
   position: relative;
   width: 100vw;
   margin: auto;
 }
 
-.signup .heading-signup {
+.signup .heading__field {
   font-size: 1.6rem;
   font-weight: 500;
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
+}
+
+.signup__alert {
+  color: darkred;
+  font-size: 1.6rem;
 }
 
 .signup__form {
@@ -1643,17 +1652,17 @@ address {
 }
 
 .signup__picture:first-child {
-  top: 10%;
+  top: 20%;
   right: 4%;
 }
 
 .signup__picture:nth-child(2) {
-  top: 25%;
+  top: 35%;
   right: 14%;
 }
 
 .signup__picture:nth-child(3) {
-  top: 45%;
+  top: 55%;
   right: 2%;
 }
 
@@ -1745,11 +1754,6 @@ address {
   box-shadow: 2rem 2rem 3rem rgba(0, 0, 0, 0.15);
 }
 
-.heading--thin {
-  font-size: 2.4rem;
-  font-weight: 500;
-}
-
 .change__field {
   display: flex;
   flex-direction: column;
@@ -1771,17 +1775,11 @@ address {
   gap: 8rem;
 }
 
-.change__btn--close {
-  position: absolute;
-  top: 3%;
-  right: 3%;
-}
-
-thead tr {
+.purchases__tr--thead {
   border-bottom: 0.1rem solid rgba(109, 104, 117, 0.3);
 }
 
-.section-purchases tr {
+.purchases__tr {
   display: grid;
   grid-template-columns: repeat(3, 1fr) 10rem;
   text-align: left;
@@ -1820,12 +1818,12 @@ thead tr {
   margin: 2.4rem auto 3.6rem auto;
 }
 
-.filter {
+.category__btn {
   margin: 1rem;
   transform: scale(0.9);
 }
 
-.filter--active {
+.category__btn--active {
   background-color: #4f744e;;
 }
 
@@ -1849,6 +1847,23 @@ thead tr {
   justify-items: center;
   max-width: 160rem;
   margin: 0 auto;
+}
+
+/********************************************************/
+
+/****************************/
+/* ERROR PAGE          */
+/****************************/
+
+.error {
+  padding: 19.2rem 9.6rem 9.6rem 9.6rem;
+  text-align: center;
+}
+
+.error__img--logo {
+  margin: 5.6rem auto 0;
+  width: 10rem;
+  height: auto;
 }
 
 /************************************************/

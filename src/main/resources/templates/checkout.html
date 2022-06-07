@@ -31,28 +31,25 @@
   <body>
     <header th:insert="components/header" class="header"></header>
     <main class="checkout container--beige">
-      <div class="header__headings">
-        <h1 class="decorative-heading">Checkout</h1>
-        <h2 class="section-title">Your shopping bag!</h2>
-      </div>
+      <header class="header__headings">
+        <h1>
+          <span class="heading--decorative">Checkout</span>
+          <span class="heading--section">Your shopping bag!</span>
+        </h1>
+      </header>
       <form class="checkout__form">
         <section class="section-bag container--white">
           <h3 class="heading-tertiary">1. Shopping bag</h3>
 
-          <div class="checkout__list-headings">
-            <span class="checkout__list-heading margin-left--small"
-              >Products</span
-            >
-            <span class="checkout__list-heading">Quantity</span>
-            <span class="checkout__list-heading">Total</span>
-          </div>
+          <header class="checkout__list-headings">
+            <h4 class="checkout__list-heading margin-left--small">Products</h4>
+            <h4 class="checkout__list-heading">Quantity</h4>
+            <h4 class="checkout__list-heading">Total</h4>
+          </header>
           <ul class="checkout__list">
             <li th:if="${cart.isEmpty()}">
-              <p class="checkout__list--empty">
-                Your shopping bag is empty!
-                <a th:href="@{/products}" class="link"
-                  ><strong>Start shopping here!</strong></a
-                >
+              <p class="checkout__list--empty">Your shopping bag is empty!
+                <a th:href="@{/products}" class="link"><strong> Start shopping here!</strong></a>
               </p>
             </li>
             <li th:each="cartItem : ${cart}" class="checkout__item">

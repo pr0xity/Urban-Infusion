@@ -42,16 +42,16 @@
         </ul>
       </nav>
       <section class="section-product-info">
-        <h1 class="section-title" th:text="${product.name}">Heather tea</h1>
+        <h1 class="heading--section" th:text="${product.name}">Heather tea</h1>
         <img
           class="product__img"
           th:src="@{/api/products/images/{id}(id = ${product.imageId})}"
           alt="Green tea in a cup"
         />
-        <a href="#section-reviews">
+        <a href="#section-reviews" th:attr="aria-label='Click to see all reviews'">
           <div
             class="product__rating"
-            th:attr="data-rating=${product.averageRating}"
+            th:attr="data-rating=${product.averageRating}, aria-description=${product.name} + ' has an average rating of ' + ${product.averageRating} + ' out of five leaves rating'"
           >
             <img
               alt=""
@@ -82,7 +82,7 @@
             <p th:text="'(' + ${product.ratings.size()} + ')'">(0)</p>
           </div>
         </a>
-        <div class="product__description-box">
+        <div class="product__container--description">
           <h2 class="heading-secondary">Description</h2>
           <ul class="product__list" th:each="line : ${description}">
             <li><i class="ph-check"></i><span th:text="${line}"></span></li>
@@ -269,7 +269,7 @@
                   name="rating"
                   type="radio"
                   value="1"
-                  aria-roledescription="select 1 star rating"
+                  aria-label="select 1 star rating"
                 />
               </label>
               <label>
@@ -472,9 +472,8 @@
             <header class="review__comment-info">
               <span
                 class="product__rating"
-                aria-roledescription="'This rating has ' + ${comment.rating} + ' out of five leaves'"
-                th:title="'This rating has ' + ${comment.rating} + 'out of five leaves'"
-                th:attr="data-rating=${comment.rating}, aria-roledescription='This rating has ' + ${comment.rating} + ' out of five leaves' ,aria-label='This rating has ' + ${comment.rating} + ' out of five leaves'"
+                th:title="'This rating has ' + ${comment.rating} +  ' out of five leaves'"
+                th:attrappend="data-rating=${comment.rating}, aria-description=${comment.displayName} + ' has given this product a ' + ${comment.rating} + ' out of five leaves rating'"
               >
                 <img
                   alt=""

@@ -22,8 +22,8 @@ const emptyProductContainer = function () {
  */
 const getAndSetFromCategory = function (event) {
   event.preventDefault();
-  document.querySelectorAll(".filter").forEach((button) => button.classList.remove("filter--active"));
-  event.target.classList.add("filter--active");
+  document.querySelectorAll(".category__btn").forEach((button) => button.classList.remove("category__btn--active"));
+  event.target.classList.add("category__btn--active");
   const categoryId = event.target.dataset.categoryid;
   const productsList = [];
 
@@ -46,9 +46,9 @@ const getAndSetFromCategory = function (event) {
 const getAndSetAllProducts = function (event) {
   event.preventDefault();
   document
-    .querySelectorAll(".filter")
-    .forEach((button) => button.classList.remove("filter--active"));
-  event.target.classList.add("filter--active");
+    .querySelectorAll(".category__btn")
+    .forEach((button) => button.classList.remove("category__btn--active"));
+  event.target.classList.add("category__btn--active");
   setProductsToProductCards(allProducts)
   allProductCards = document.querySelectorAll(".product-card");
   implementProductCardFunctionality();
@@ -88,17 +88,17 @@ const addProductCardToPage = function (productCard) {
  * Gets the categories from the tea shop and formats and places them on the site.
  */
 const setCategoryButton = function () {
-  const filterSection = document.querySelector(".products__box--search");
-  filterSection.insertAdjacentHTML(
+  const searchSection = document.querySelector(".products__box--search");
+  searchSection.insertAdjacentHTML(
     "beforeend",
-    `<button class="btn btn--text filter" id="All">All products</button>`
+    `<button class="btn btn--text category__btn" id="All">All products</button>`
   );
 
   sendGetProductCategoriesRequest().then(categories => {
     categories.forEach(category => {
-      filterSection.insertAdjacentHTML("beforeend", createCategoryButton(category));
+      searchSection.insertAdjacentHTML("beforeend", createCategoryButton(category));
     });
-    const categoryButtons = document.querySelectorAll(".filter");
+    const categoryButtons = document.querySelectorAll(".category__btn");
     addEventListenerToCategoryButtons(categoryButtons);
   });
 };
@@ -110,7 +110,7 @@ const setCategoryButton = function () {
  * @return {string} the html of the category button.
  */
 const createCategoryButton = function (category) {
-  return `<button class="btn btn--text filter" data-categoryid="${category.id}" id="${category.name}">${category.name}</button>`;
+  return `<button class="btn btn--text category__btn" data-categoryid="${category.id}" id="${category.name}">${category.name}</button>`;
 };
 
 /**

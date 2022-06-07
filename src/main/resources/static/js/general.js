@@ -94,7 +94,8 @@ const generalInitialize = function () {
   /**
    * Clicks on the user menu button.
    */
-  const clickUserMenuButton = function () {
+  const clickUserMenuButton = function (event) {
+    event.preventDefault();
     userMenuButton.click();
   };
 
@@ -165,7 +166,7 @@ const generalInitialize = function () {
   // initial call to set mobile layout upon loading the site.
   dynamicallyChangeSize();
   mobileLayoutSize.addEventListener("change", dynamicallyChangeSize);
-
+  document.querySelector("#sign-in-link").addEventListener("click", clickUserMenuButton);
   document.body.classList.add("sticky");
   addClickEventListenersToList(navMobileButtons, navMobileButtonHandler);
   overlayNavLinkMenu.addEventListener("click", clickMenuButtonClose);

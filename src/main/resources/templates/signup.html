@@ -22,201 +22,198 @@
   <body>
     <header th:insert="components/header" class="header"></header>
     <main class="signup">
-      <section class="section-create-account">
-        <h1 class="section-title">Create an account</h1>
-        <form class="signup__form">
-          <label class="heading-signup"
-            ><span class="signup__label">First name </span
-            ><input
-              class="input signup__input signup__input--first-name"
-              name="firstName"
-              type="text"
-              placeholder=""
-            />
-          </label>
-          <label class="heading-signup"
-            ><span class="signup__label">Last name </span
-            ><input
-              class="input signup__input"
-              name="lastName"
-              type="text"
-              placeholder=""
-            />
-          </label>
-          <label class="heading-signup"
-            ><span class="signup__label">Email address </span
-            ><input
-              class="input signup__input signup__input--email-address"
-              name="email"
-              type="text"
-              placeholder=""
-            />
-          </label>
+      <h1 class="heading--section">Create an account</h1>
+      <p class="signup__alert"></p>
+      <form class="signup__form">
+        <label class="heading__field"
+          ><span class="signup__label">First name </span
+          ><input
+            class="input signup__input signup__input--first-name"
+            name="firstName"
+            type="text"
+            placeholder=""
+          />
+        </label>
+        <label class="heading__field"
+          ><span class="signup__label">Last name </span
+          ><input
+            class="input signup__input"
+            name="lastName"
+            type="text"
+            placeholder=""
+          />
+        </label>
+        <label class="heading__field"
+          ><span class="signup__label">Email address </span
+          ><input
+            class="input signup__input signup__input--email-address"
+            name="email"
+            type="text"
+            placeholder=""
+          />
+        </label>
 
-          <label class="heading-signup"
-            ><span class="signup__label">Address line 1 </span
-            ><input
-              class="input signup__input signup__input--address"
-              name="addressLine1"
-              type="text"
-              placeholder=""
-            />
-          </label>
+        <label class="heading__field"
+          ><span class="signup__label">Address line 1 </span
+          ><input
+            class="input signup__input signup__input--address"
+            name="addressLine1"
+            type="text"
+            placeholder=""
+          />
+        </label>
 
-          <label class="heading-signup"
-            ><span class="signup__label">Address line 2 (optional) </span
-            ><input
-              class="input signup__input signup__input--address"
-              name="addressLine2"
-              type="text"
-              placeholder=""
-            />
-          </label>
+        <label class="heading__field"
+          ><span class="signup__label">Address line 2 (optional) </span
+          ><input
+            class="input signup__input signup__input--address"
+            name="addressLine2"
+            type="text"
+            placeholder=""
+          />
+        </label>
 
-          <label class="heading-signup"
-            ><span class="signup__label">Municipality </span
-            ><input
-              class="input signup__input"
-              name="city"
-              type="text"
-              placeholder=""
-            />
-          </label>
+        <label class="heading__field"
+          ><span class="signup__label">Municipality </span
+          ><input
+            class="input signup__input"
+            name="city"
+            type="text"
+            placeholder=""
+          />
+        </label>
 
-          <label class="heading-signup"
-            ><span class="signup__label">Zip-code </span
-            ><input
-              class="input signup__input signup__input--zip-code"
-              type="text"
-              name="postalCode"
-              placeholder=""
-            />
-          </label>
+        <label class="heading__field"
+          ><span class="signup__label">Zip-code </span
+          ><input
+            class="input signup__input signup__input--zip-code"
+            type="text"
+            name="postalCode"
+            placeholder=""
+          />
+        </label>
 
-          <label class="heading-signup"
-            ><span class="signup__label">Country </span
-            ><input
-              class="input signup__input"
-              type="text"
-              name="country"
-              placeholder=""
-            />
-          </label>
+        <label class="heading__field"
+          ><span class="signup__label">Country </span
+          ><input
+            class="input signup__input"
+            type="text"
+            name="country"
+            placeholder=""
+          />
+        </label>
 
-          <label class="heading-signup"
-            ><span class="signup__label">Password </span
-            ><input
-              class="input signup__input signup__input--password"
-              type="password"
-              name="registrationPassword"
-              placeholder=""
-            />
-          </label>
+        <label class="heading__field"
+          ><span class="signup__label">Password </span
+          ><input
+            class="input signup__input signup__input--password"
+            type="password"
+            name="registrationPassword"
+            placeholder=""
+          />
+        </label>
 
-          <button class="btn--green signup__btn--complete">
-            <span id="signup-btn">Signup</span>
-            <div class="loading hidden">
-              <div class="lds-ellipsis">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-              </div>
+        <button class="btn--green signup__btn--complete">
+          <span id="signup-btn">Signup</span>
+          <div class="loading hidden">
+            <div class="lds-ellipsis">
+              <div></div>
+              <div></div>
+              <div></div>
+              <div></div>
             </div>
-          </button>
-        </form>
-        <div class="signup signup--images">
-          <picture class="signup__picture">
-            <source
-              type="image/webp"
-              srcset="
-                img/gallery/pic-1-390w.webp,
-                img/gallery/pic-1-780w.webp  2x,
-                img/gallery/pic-1-1200w.webp 3x
-              "
-            />
-            <source
-              type="image/jpeg"
-              srcset="
-                img/gallery/pic-1-390w.jpg,
-                img/gallery/pic-1-780w.jpg  2x,
-                img/gallery/pic-1-1200w.jpg 3x
-              "
-            />
-            <img
-              class="signup__img"
-              src="img/gallery/pic-1-390w.jpg"
-              alt="herbal tea in a teapot"
-            />
-          </picture>
-          <picture class="signup__picture">
-            <source
-              type="image/webp"
-              srcset="
-                img/gallery/pic-2-390w.webp,
-                img/gallery/pic-2-780w.webp  2x,
-                img/gallery/pic-2-1200w.webp 3x
-              "
-            />
-            <source
-              type="image/jpeg"
-              srcset="
-                img/gallery/pic-2-390w.jpg,
-                img/gallery/pic-2-780w.jpg  2x,
-                img/gallery/pic-2-1200w.jpg 3x
-              "
-            />
-            <img
-              class="signup__img"
-              src="img/gallery/pic-2-390w.jpg"
-              alt="herbal tea in a teacup"
-            />
-          </picture>
-          <picture class="signup__picture">
-            <source
-              type="image/webp"
-              srcset="
-                img/gallery/pic-3-390w.webp,
-                img/gallery/pic-3-780w.webp  2x,
-                img/gallery/pic-3-1200w.webp 3x
-              "
-            />
-            <source
-              type="image/jpeg"
-              srcset="
-                img/gallery/pic-3-390w.jpg,
-                img/gallery/pic-3-780w.jpg  2x,
-                img/gallery/pic-3-1200w.jpg 3x
-              "
-            />
-            <img
-              class="signup__img"
-              src="img/gallery/pic-3-390w.jpg"
-              alt="herbal tea ready to be served"
-            />
-          </picture>
-        </div>
-        <div class="modal hidden">
-          <div class="completed modal__window">
-            <button class="btn--close btn--icon">
-              <i class="ph-x"></i>
-            </button>
-            <img
-              class="completed__logo"
-              th:src="@{/img/icons/favicon/favicon.png}"
-              alt="urban infusion logo"
-            />
-            <p class="completed-heading">
-              Thank you for joining Urban Infusion!
-            </p>
-            <p>
-              Registration confirmation will soon be sent to your email (Check
-              spam).
-            </p>
-            <a class="btn--green" th:href="@{/}">Go back to homepage</a>
           </div>
+        </button>
+      </form>
+      <div class="signup--images">
+        <picture class="signup__picture">
+          <source
+            type="image/webp"
+            srcset="
+              img/gallery/pic-1-390w.webp,
+              img/gallery/pic-1-780w.webp  2x,
+              img/gallery/pic-1-1200w.webp 3x
+            "
+          />
+          <source
+            type="image/jpeg"
+            srcset="
+              img/gallery/pic-1-390w.jpg,
+              img/gallery/pic-1-780w.jpg  2x,
+              img/gallery/pic-1-1200w.jpg 3x
+            "
+          />
+          <img
+            class="signup__img"
+            src="img/gallery/pic-1-390w.jpg"
+            alt="herbal tea in a teapot"
+          />
+        </picture>
+        <picture class="signup__picture">
+          <source
+            type="image/webp"
+            srcset="
+              img/gallery/pic-2-390w.webp,
+              img/gallery/pic-2-780w.webp  2x,
+              img/gallery/pic-2-1200w.webp 3x
+            "
+          />
+          <source
+            type="image/jpeg"
+            srcset="
+              img/gallery/pic-2-390w.jpg,
+              img/gallery/pic-2-780w.jpg  2x,
+              img/gallery/pic-2-1200w.jpg 3x
+            "
+          />
+          <img
+            class="signup__img"
+            src="img/gallery/pic-2-390w.jpg"
+            alt="herbal tea in a teacup"
+          />
+        </picture>
+        <picture class="signup__picture">
+          <source
+            type="image/webp"
+            srcset="
+              img/gallery/pic-3-390w.webp,
+              img/gallery/pic-3-780w.webp  2x,
+              img/gallery/pic-3-1200w.webp 3x
+            "
+          />
+          <source
+            type="image/jpeg"
+            srcset="
+              img/gallery/pic-3-390w.jpg,
+              img/gallery/pic-3-780w.jpg  2x,
+              img/gallery/pic-3-1200w.jpg 3x
+            "
+          />
+          <img
+            class="signup__img"
+            src="img/gallery/pic-3-390w.jpg"
+            alt="herbal tea ready to be served"
+          />
+        </picture>
+      </div>
+      <div class="modal hidden">
+        <div class="completed modal__window">
+          <button class="btn--close btn--icon">
+            <i class="ph-x"></i>
+          </button>
+          <img
+            class="completed__logo"
+            th:src="@{/img/icons/favicon/favicon.png}"
+            alt="urban infusion logo"
+          />
+          <p class="completed-heading">Thank you for joining Urban Infusion!</p>
+          <p>
+            Registration confirmation will soon be sent to your email (Check
+            spam).
+          </p>
+          <a class="btn--green" th:href="@{/}">Go back to homepage</a>
         </div>
-      </section>
+      </div>
     </main>
     <footer th:insert="components/footer" class="footer"></footer>
   </body>

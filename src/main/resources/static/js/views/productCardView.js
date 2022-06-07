@@ -54,7 +54,7 @@ export const addProductToProductCard = function (product) {
     />
     <div class="product-card__details">
       <a
-        href="/products/${product.id}"
+        href="/products/${product.id}#section-reviews"
         class="product__rating"
         data-rating=${product.averageRating}
         aria-label="This product has an average rating of ${product.averageRating} tea leaves, click to see all reviews'"
@@ -93,7 +93,7 @@ export const addProductToProductCard = function (product) {
         ${formatDescriptionList(product.description)}
       </ul>
       <div class="product-card__cta">
-        <p class="product-card__price">${product.price},-</p>
+        <p class="product-card__price">${product.price}.0,-</p>
           <div class="product__btn--wishlist" data-wishlist="false"></div>
             <button
               data-productid=${product.id}

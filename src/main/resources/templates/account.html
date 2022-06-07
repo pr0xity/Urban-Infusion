@@ -37,8 +37,8 @@
     <main class="account container--beige">
       <header class="header__headings">
         <h1>
-          <span class="decorative-heading">Customer</span>
-          <span class="section-title">Your account!</span>
+          <span class="heading--decorative">Customer</span>
+          <span class="heading--section">Your account!</span>
         </h1>
       </header>
       <div class="account-sections">
@@ -215,7 +215,7 @@
           <div class="modal hidden" id="modal_address">
             <div class="modal__window modal__window--account-address">
               <button
-                class="change__btn--close close btn--icon"
+                class="btn--close close btn--icon"
                 id="close_address" aria-label="close window"
               >
                 <i class="ph-x"></i>
@@ -345,7 +345,7 @@
           <h3>Purchase history</h3>
           <table>
             <thead>
-              <tr>
+              <tr class="purchases__tr purchases__tr--thead">
                 <th>Purchased</th>
                 <th>Order nr.</th>
                 <th>Items</th>
@@ -353,7 +353,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr th:each="orderDetail : ${orderDetails}">
+              <tr class="purchases__tr" th:each="orderDetail : ${orderDetails}">
                 <td th:text="${orderDetail.getCreatedAt().toLocalDate()}">
                   04.02.2022
                 </td>

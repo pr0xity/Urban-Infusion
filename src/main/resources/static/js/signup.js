@@ -26,7 +26,7 @@ const setSignUpForm = function () {
   );
 
   const buttonText = document.querySelector("#signup-btn");
-  const loadingAnimation = document.querySelector(".loading");
+  const loadingAnimation = document.querySelector(".signup .loading");
 
   /**
    * Returns the sign-up form as an object for request body.
@@ -119,6 +119,11 @@ const setSignUpForm = function () {
     );
   };
 
+  const setSignupErrorAlert = function (errorMessage) {
+    const signupAlert = document.querySelector(".signup__alert");
+    signupAlert.innerHTML = `${errorMessage}`;
+  }
+
   /**
    * Displays the loading animation and hides the text from the button.
    */
@@ -153,6 +158,17 @@ const setSignUpForm = function () {
     completedRegistrationWindow.addEventListener("click", closeCompletedWindow);
   };
 
+  const sendRegistrationRequestError = function(response) {
+    hideLoadingAnimation();
+    if (response.status === 409) {
+      window.scrollTo(0, 0);
+      setSignupErrorAlert("User already exist. If you've already had an account with us please contact customer service to reactivate");
+    } else {
+      window.scrollTo(0, 0);
+      setSignupErrorAlert("Something went wrong, try again or contact customer service");
+    }
+  }
+
   /**
    * Sends an registration request.
    *
@@ -163,16 +179,12 @@ const setSignUpForm = function () {
     const signUpValid = await isSignUpFormValid();
     if (signUpValid) {
       displayLoadingAnimation();
-      sendRegistrationRequest(getSignUpRequestBody(), sendRegistrationRequestSuccess).finally(() => hideLoadingAnimation());
+      sendRegistrationRequest(getSignUpRequestBody(), sendRegistrationRequestSuccess, null, sendRegistrationRequestError).finally(() => hideLoadingAnimation());
     }
   };
 
-  document
-    .querySelector(`.signup__btn--complete`)
-    .addEventListener("click", sendRegistrationForm);
-  document
-    .querySelector(".signup__form")
-    .addEventListener("submit", (event) => event.preventDefault());
+  document.querySelector(`.signup__btn--complete`).addEventListener("click", sendRegistrationForm);
+  document.querySelector(".signup__form").addEventListener("submit", (event) => event.preventDefault());
 };
 
 setSignUpForm();

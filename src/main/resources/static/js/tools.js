@@ -113,9 +113,9 @@ export const sendApiRequest = function (
         }
       }
     } else if (response.status === 401) {
-      if (unauthorizedCallback !== null) unauthorizedCallback();
+      if (unauthorizedCallback !== null) unauthorizedCallback(response);
     } else if (errorCallback !== null) {
-      errorCallback();
+      errorCallback(response);
     } else {
       console.error("An error occurred, contact customer service.");
     }

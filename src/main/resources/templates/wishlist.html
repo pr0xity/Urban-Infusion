@@ -18,8 +18,8 @@
     <main class="wishlist container--beige">
       <header class="header__headings">
         <h1>
-          <span class="decorative-heading">Wishlist</span>
-          <span class="section-title" th:text="${wishlist.user == user} ? 'Your favourites!' : ${wishlist.user.firstName} + '\'s favourites!'">Your favourites!</span>
+          <span class="heading--decorative">Wishlist</span>
+          <span class="heading--section" th:text="${wishlist.user == user} ? 'Your favourites!' : ${wishlist.user.firstName} + '\'s favourites!'">Your favourites!</span>
         </h1>
       </header>
       <button th:attr="data-token=${wishlist.sharingToken}" class="wishlist__btn--share btn--small-text">Share this wishlist <i class="ph-share-light btn--icon-small"></i></button>
@@ -32,7 +32,7 @@
           <p class="text--small"><strong class="wishlist__link--share"></strong> has been copied to your clipboard. Send it to however you wish to share your favourites with</p>
         </div>
       </div>
-      <div class="wishlist-grid">
+      <div class="wishlist__grid">
         <article
           class="product-card container--white"
           th:insert="components/productcard"

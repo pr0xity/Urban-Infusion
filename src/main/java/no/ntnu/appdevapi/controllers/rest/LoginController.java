@@ -101,25 +101,29 @@ public class LoginController {
   }
 
   /**
-   * Registers and authenticates a new user.
-   * @param nUser UserDto DTO containing necessary information about the new user
+   * Registers and send registration confirmation email to the registered user.
+   *
+   * @param nUser UserDto DTO containing necessary information about the new user.
    * @return ResponseEntity containing the jwt token in a cookie and HttpStatus ok on success,
    * or HttpStatus not found on fail.
    */
   @RequestMapping(value = "api/register", method = RequestMethod.POST)
   public ResponseEntity<String> registerUser(@RequestBody UserDto nUser) {
-    if (null != nUser && (userService.findOneByEmail(nUser.getEmail()) == null)) {
-      nUser.setPermissionLevel("user");
-      nUser.setEnabled(false);
-      User user = userService.save(nUser);
-      shoppingSessionService.addShoppingSession(new ShoppingSession(user));
-      wishlistService.addWishlist(new Wishlist(user));
-      applicationEventPublisher.publishEvent(new CompleteRegistrationEvent(user));
+    // If registration data is missing.
+    if (nUser == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 
-      //verification token is only placed here for testing outside of email. Will be removed.
-      return new ResponseEntity<>(verificationTokenService.getTokenFromUser(user), HttpStatus.OK);
-    }
-    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    // If user already exists.
+    if (userService.findOneByEmail(nUser.getEmail()) != null) return new ResponseEntity<>(HttpStatus.CONFLICT);
+
+    nUser.setPermissionLevel("user");
+    nUser.setEnabled(false);
+    User user = userService.save(nUser);
+    shoppingSessionService.addShoppingSession(new ShoppingSession(user));
+    wishlistService.addWishlist(new Wishlist(user));
+    applicationEventPublisher.publishEvent(new CompleteRegistrationEvent(user));
+
+    //verification token is only placed here for testing outside of email
+    return new ResponseEntity<>(verificationTokenService.getTokenFromUser(user), HttpStatus.OK);
   }
 
   /**
