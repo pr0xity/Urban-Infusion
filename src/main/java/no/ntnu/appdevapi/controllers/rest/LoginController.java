@@ -170,6 +170,13 @@ public class LoginController {
     return new ResponseEntity<>(HttpStatus.OK);
   }
 
+  /**
+   * Authenticates a user with given credentials.
+   *
+   * @param email the email of the user.
+   * @param password the password of the user.
+   * @return HttpResponseCode OK with jwt cookie included if successful.
+   */
   private ResponseEntity<?> authenticate(String email, String password) {
     final Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(

@@ -21,6 +21,11 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductCategoryRepository productCategoryRepository;
 
+    /**
+     * Gets a list of all products sorted by ID.
+     *
+     * @return {@code List<Product>} of all products sorted by ID.
+     */
     public Iterable<Product> getAllProducts() {
         List<Product> products = new ArrayList<>();
         productRepository.findAll().forEach(products::add);
@@ -28,6 +33,11 @@ public class ProductServiceImpl implements ProductService {
         return products.stream().sorted(Comparator.comparingLong(Product::getId)).collect(Collectors.toList());
     }
 
+    /**
+     * Gets a list of all currently active products.
+     *
+     * @return {@code List<Product>} of currently active products.
+     */
     public Iterable<Product> getAllProductsNotDeleted() {
         List<Product> products = new ArrayList<>();
         productRepository.findAll().forEach(products::add);
@@ -35,16 +45,33 @@ public class ProductServiceImpl implements ProductService {
         return products.stream().sorted(Comparator.comparingLong(Product::getId)).filter(product -> !product.isInactive()).collect(Collectors.toList());
     }
 
+    /**
+     * Gets a single product by ID.
+     *
+     * @param id the ID of the product.
+     * @return {@code Product} with the given ID.
+     */
     public Product getProduct(long id) {
         Optional<Product> p = productRepository.findById(id);
         return p.orElse(null);
     }
 
+    /**
+     * Gets a single product by name.
+     *
+     * @param name the name of the product.
+     * @return {@code Product} with the given name.
+     */
     public Product getProductByName(String name) {
         return productRepository.findByName(name);
     }
 
-
+    /**
+     * Adds a product to the database.
+     *
+     * @param product the product as a {@code ProductDTO}.
+     * @return {@code Product} that was added.
+     */
     public Product addProductFromDto(ProductDto product) {
         Product nProduct = getProductFromDto(product);
         if (productRepository.findByName(nProduct.getName()) == null){
@@ -60,6 +87,13 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findByName(nProduct.getName());
     }
 
+    /**
+     * Updates the product with the given ID from DTO.
+     *
+     * @param id the ID of the product.
+     * @param product the updated product as {@code ProductDTO}
+     * @return the updated {@code Product}, or null if error.
+     */
     public Product updateProduct(long id, ProductDto product) {
         Product newProduct = getProductFromDto(product);
         Product old = productRepository.findById(id).orElse(null);
@@ -116,6 +150,13 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findById(old.getId()).orElse(null);
     }
 
+    /**
+     * Updates a product with the given id.
+     *
+     * @param productId ID of the product to update.
+     * @param product the product object to update to.
+     * @return the updated {@code Product}, or null if error.
+     */
     @Override
     public Product updateProductWithProductObject(long productId, Product product) {
         Product existingProduct = productRepository.findById(productId).orElse(null);
@@ -125,6 +166,10 @@ public class ProductServiceImpl implements ProductService {
         return null;
     }
 
+    /**
+     * Deletes the product with the given ID.
+     * @param id the ID of the product.
+     */
     public void deleteProduct(long id) {
         Product product = getProduct(id);
         if (product != null) {
@@ -133,6 +178,11 @@ public class ProductServiceImpl implements ProductService {
         }
     }
 
+    /**
+     * Converts a ProductDTO object to a Product object.
+     * @param object the object to be converted.
+     * @return the converted {@code Product}.
+     */
     private Product getProductFromDto(ProductDto object) {
         Product product = new Product();
         product.setName(object.getName());
