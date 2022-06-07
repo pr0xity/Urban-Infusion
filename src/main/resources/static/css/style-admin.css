@@ -143,12 +143,6 @@ th {
     background: none;
 }
 
-.dashboard__table tbody tr:hover {
-    background-color: #dae4e8;
-    outline: none;
-    cursor: pointer;
-}
-
 .dashboard__table--customers tr {
     grid-template-columns: 1fr 4fr 5fr;
 }
@@ -165,12 +159,24 @@ th {
     box-shadow: none;
 }
 
+.user__table tbody tr:hover {
+    background-color: #dae4e8;
+    outline: none;
+    cursor: pointer;
+}
+
 .user__table tr {
     grid-template-columns: 1fr 2fr 2fr 6fr;
 }
 
 .order__table {
     box-shadow: none;
+}
+
+.order__table tbody tr:hover {
+    background-color: #dae4e8;
+    outline: none;
+    cursor: pointer;
 }
 
 .order__table tr {
@@ -181,12 +187,24 @@ th {
     box-shadow: none;
 }
 
+.products__table tbody tr:hover {
+    background-color: #dae4e8;
+    outline: none;
+    cursor: pointer;
+}
+
 .products__table tr {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 0.5fr;
 }
 
 .ratings__table {
     box-shadow: none;
+}
+
+.ratings__table tbody tr:hover {
+    background-color: #dae4e8;
+    outline: none;
+    cursor: pointer;
 }
 
 .ratings__table tr {
