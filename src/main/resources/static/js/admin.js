@@ -11,17 +11,36 @@ userMenuButton.addEventListener("click", function () {
   });
 });
 
-if (document.getElementsByClassName("overlay").length > 0) {
-  const overlay = document.getElementById("overlay");
-  const closeButton = document.getElementById("closeButton");
-  closeButton.onclick = function () {
-    overlay.classList.add("hidden");
-  };
+const overlays = document.getElementsByClassName("overlay");
+if (overlays.length > 0) {
+  const closeButtons = document.getElementsByClassName("manage__btn--close");
+  for (let i = 0; i < closeButtons.length; i++) {
+    closeButtons[i].onclick = function () {
+      hideOverlays();
+    };
+  }
   window.addEventListener("mouseup", function (event) {
-    if (!document.getElementById("overlayWindow").contains(event.target)) {
-      overlay.classList.add("hidden");
+    if (outsideOverlays(event)) {
+      hideOverlays();
     }
   });
+}
+
+const outsideOverlays = function (event) {
+  const windows = document.getElementsByClassName("modal__window");
+  let outside = true;
+  for (let i = 0; i < windows.length; i++) {
+    if (windows[i].contains(event.target)) {
+      outside = false;
+    }
+  }
+  return outside;
+}
+
+const hideOverlays = function () {
+  for (let i = 0; i < overlays.length; i++) {
+    overlays[i].classList.add("hidden");
+  }
 }
 
 if (null != searchInput) {
