@@ -22,6 +22,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
 
+@CrossOrigin
 @RestController
 @RequestMapping("api/users")
 public class UserController {

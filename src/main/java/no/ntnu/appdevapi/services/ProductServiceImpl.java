@@ -175,6 +175,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = getProduct(id);
         if (product != null) {
             product.setDeletedAt(LocalDateTime.now());
+            product.setInactive(true);
             productRepository.save(product);
         }
     }

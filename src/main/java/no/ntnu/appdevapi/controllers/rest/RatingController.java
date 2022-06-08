@@ -20,6 +20,7 @@ import java.util.List;
 /**
  * REST API controller for ratings.
  */
+@CrossOrigin
 @RestController
 @RequestMapping("api/ratings")
 public class RatingController {

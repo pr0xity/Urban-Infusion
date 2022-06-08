@@ -19,6 +19,7 @@ import java.util.*;
 /**
  * REST API controller for orders.
  */
+@CrossOrigin
 @RestController
 @RequestMapping("api/orders")
 public class OrderController {

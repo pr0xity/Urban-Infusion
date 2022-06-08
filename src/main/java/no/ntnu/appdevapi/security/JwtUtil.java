@@ -64,6 +64,11 @@ public class JwtUtil {
     return claimsResolver.apply(claims);
   }
 
+  /**
+   * Returns all claims in a JWT token
+   * @param token the JWT token to get claims from
+   * @return all claims in the token
+   */
   private Claims getAllClaimsFromToken(String token) {
     return Jwts.parser()
       .setSigningKey(SIGNING_KEY)
@@ -71,6 +76,11 @@ public class JwtUtil {
       .getBody();
   }
 
+  /**
+   * Checks if a JWT token is expired.
+   * @param token the JWT token to check.
+   * @return {@code true} if token has expired, {@code false} if not.
+   */
   private Boolean isTokenExpired(String token) {
     final Date expiration = getExpirationDateFromToken(token);
     return expiration.before(new Date());
@@ -101,7 +111,7 @@ public class JwtUtil {
     return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
   }
 
-  UsernamePasswordAuthenticationToken getAuthenticationToken(final String token,
+  public UsernamePasswordAuthenticationToken getAuthenticationToken(final String token,
                                                              final Authentication existingAuth,
                                                              final UserDetails userDetails) {
 

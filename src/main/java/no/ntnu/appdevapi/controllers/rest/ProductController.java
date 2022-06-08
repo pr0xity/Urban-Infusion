@@ -23,7 +23,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 
-
+@CrossOrigin
 @RestController
 @RequestMapping("/api/products")
 public class ProductController {
@@ -104,7 +104,13 @@ public class ProductController {
     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
   }
 
-
+  /**
+   * Update existing product.
+   *
+   * @param id the id of the product to update.
+   * @param product the {@code ProductDto} to update to.
+   * @return 200 Ok if updated, 400 if {@code ProductDto} iis {@code null} or 404 if not found.
+   */
   @PutMapping("/{id}")
   @ApiOperation(value = "Update existing product.", notes = "Status 200 when updated, 400 on error.")
   public ResponseEntity<String> update(@PathVariable long id, @RequestBody ProductDto product) {
