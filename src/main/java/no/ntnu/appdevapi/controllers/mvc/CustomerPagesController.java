@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * MVC controller for the html pages.
+ * MVC controller for html pages of home page and other customer pages.
  */
 @Controller
 public class CustomerPagesController extends PageController {

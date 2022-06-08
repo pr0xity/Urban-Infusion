@@ -17,6 +17,7 @@ import java.util.Optional;
 /**
  * REST API controller for cart/shopping sessions.
  */
+@CrossOrigin
 @RestController
 @RequestMapping("api/carts")
 public class CartController {

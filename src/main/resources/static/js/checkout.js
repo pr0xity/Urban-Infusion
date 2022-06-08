@@ -2,7 +2,7 @@ import {
   sendUpdateCartRequest,
   sendDeleteFromCartRequest,
   setIncrementCounter,
-} from "./controllers/cartcontroller.js";
+} from "./controllers/cartController.js";
 import {
   getAddressInfo,
   getProductIdFromElement,

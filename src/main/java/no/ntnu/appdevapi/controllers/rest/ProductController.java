@@ -23,9 +23,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 
-
+@CrossOrigin
 @RestController
-@RequestMapping("api/products")
+@RequestMapping("/api/products")
 public class ProductController {
 
   @Autowired
@@ -98,13 +98,19 @@ public class ProductController {
   @ApiOperation(value = "Add a new product.", notes = "Status 200 when added, 400 on error.")
   public ResponseEntity<?> add(@RequestBody ProductDto product) {
     if (null != product) {
-      productService.addProductFromDto(product);
-      return new ResponseEntity<>(HttpStatus.OK);
+      Product productAdded = productService.addProductFromDto(product);
+      return new ResponseEntity<>("" + productAdded.getId(), HttpStatus.OK);
     }
     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
   }
 
-
+  /**
+   * Update existing product.
+   *
+   * @param id the id of the product to update.
+   * @param product the {@code ProductDto} to update to.
+   * @return 200 Ok if updated, 400 if {@code ProductDto} iis {@code null} or 404 if not found.
+   */
   @PutMapping("/{id}")
   @ApiOperation(value = "Update existing product.", notes = "Status 200 when updated, 400 on error.")
   public ResponseEntity<String> update(@PathVariable long id, @RequestBody ProductDto product) {

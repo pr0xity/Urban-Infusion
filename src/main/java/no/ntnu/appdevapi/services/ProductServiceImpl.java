@@ -167,18 +167,21 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * Deletes the product with the given ID.
+     *
      * @param id the ID of the product.
      */
     public void deleteProduct(long id) {
         Product product = getProduct(id);
         if (product != null) {
             product.setDeletedAt(LocalDateTime.now());
+            product.setInactive(true);
             productRepository.save(product);
         }
     }
 
     /**
      * Converts a ProductDTO object to a Product object.
+     *
      * @param object the object to be converted.
      * @return the converted {@code Product}.
      */
