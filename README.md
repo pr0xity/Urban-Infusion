@@ -70,6 +70,8 @@ TBA
 <h4>Deployment</h4>
 TBA
 
+<p align="right"><a href="#top">back to top</a></p>
+
 <h3>Functionality</h3>
 
 <table>
