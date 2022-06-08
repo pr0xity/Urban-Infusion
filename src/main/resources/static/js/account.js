@@ -265,8 +265,6 @@ const getUpdatedPassword = function () {
 
 /**
  * Sends request to update password.
- *
- * @param event
  */
 const updatePasswordRequest = function (event) {
   event.preventDefault();

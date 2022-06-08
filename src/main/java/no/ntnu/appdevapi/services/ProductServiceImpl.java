@@ -126,7 +126,6 @@ public class ProductServiceImpl implements ProductService {
         if (null != newProduct.getOrigin()) {
             old.setOrigin(newProduct.getOrigin());
         }
-        //todo: inventory can be 0
         if (0 != newProduct.getInventory()) {
             old.setInventory(newProduct.getInventory());
         }

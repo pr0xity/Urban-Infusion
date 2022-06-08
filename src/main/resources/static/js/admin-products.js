@@ -34,6 +34,9 @@ const activeStatusCheckBox = document.getElementById("setAsInactive");
 let products = null;
 let product = null;
 
+/**
+ * Retrieves the current products in the database and adds event listeners to buttons on the page
+ */
 const initializeProducts = function () {
   getProducts();
   setEventListeners();
@@ -41,11 +44,17 @@ const initializeProducts = function () {
 
 document.addEventListener("DOMContentLoaded", initializeProducts);
 
+/**
+ * Retrieves the current products in the database and loads them into the table
+ */
 const getProducts = async function () {
   products = await sendGetAllProductsRequest().finally();
   loadProducts(products);
 };
 
+/**
+ * Loads products into the table
+ */
 const loadProducts = function (products) {
   tableBody.innerHTML = "";
   for (let i = 0; i < products.length; i++) {
@@ -54,6 +63,11 @@ const loadProducts = function (products) {
   }
 };
 
+/**
+ * Creates a new table row and inserts a given product to the row
+ * @param product the product to add
+ * @param productNumber the index of the row
+ */
 const addProductRow = function (product, productNumber) {
   if (!document.getElementById("productTable")) return;
   const row = document.createElement("tr");
@@ -110,6 +124,10 @@ const setAccountFormAlert = function (alertMessage) {
   accountFormAlerts.forEach((alert) => (alert.innerHTML = `${alertMessage}`));
 };
 
+/**
+ * When a product row is clicked on, this method initializes the information from the clicked product into the overlay
+ * @param product the product that was clicked
+ */
 const manageProduct = function (product) {
   document.getElementById("updateNameButton").dataset.productid = product.id;
   const idLabel = document.getElementById("productIdLabel");
@@ -118,7 +136,6 @@ const manageProduct = function (product) {
   const priceLabel = document.getElementById("productPriceLabel");
   const categoryLabel = document.getElementById("productCategoryLabel");
   const descriptionLabel = document.getElementById("productDescriptionLabel");
-  //this.product = product;
 
   idLabel.textContent = product["id"];
   nameLabel.textContent = product["name"];
@@ -136,14 +153,12 @@ const manageProduct = function (product) {
       updateActiveStatus();
     }
   };
-
-  //    loadProducts(product)
   activeStatusCheckBox.checked = product["inactive"] === true;
-
-  // yyyy-MM-dd-HH-mm-ss
-  // "2022-06-02T11:29:58.086926"
 };
 
+/**
+ * Changes the active status for a product
+ */
 const updateActiveStatus = function () {
   const productId = getProductIdFromElement(button);
   if (activeStatusCheckBox.checked) {
@@ -161,6 +176,10 @@ const updateActiveStatus = function () {
   }
 };
 
+/**
+ * Gets an image from the database with a given id
+ * @param imageId the id of the image
+ */
 const fetchImage = function (imageId) {
   if (imageId !== 0) {
     sendGetProductImageRequest(imageId).then((response) => {
@@ -182,6 +201,9 @@ const fetchImage = function (imageId) {
   }
 };
 
+/**
+ * Adds event listeners to buttons on the page
+ */
 const setEventListeners = function () {
   editNameButton.addEventListener("click", editName);
   editDescriptionButton.addEventListener("click", editDescription);
@@ -191,6 +213,9 @@ const setEventListeners = function () {
 
 const button = document.getElementById("updateNameButton");
 
+/**
+ * Changes the name of a product
+ */
 const updateProductName = function (event) {
   event.preventDefault();
   const productId = getProductIdFromElement(button);
@@ -204,6 +229,9 @@ const updateProductName = function (event) {
   }
 };
 
+/**
+ * Changes the price of a product
+ */
 const updateProductPrice = function (event) {
   event.preventDefault();
   const productId = getProductIdFromElement(button);
@@ -217,6 +245,9 @@ const updateProductPrice = function (event) {
   }
 };
 
+/**
+ * Changes the description of a product
+ */
 const updateProductDescription = function (event) {
   event.preventDefault();
   const productId = getProductIdFromElement(button);
@@ -230,6 +261,9 @@ const updateProductDescription = function (event) {
   }
 };
 
+/**
+ * Changes the category of a product
+ */
 const updateProductCategory = function (event) {
   event.preventDefault();
   const productId = getProductIdFromElement(button);
@@ -243,6 +277,9 @@ const updateProductCategory = function (event) {
   }
 };
 
+/**
+ * This method is called when a product has been successfully updated
+ */
 const editProductSuccess = function () {
   hideEditOverlays();
   getProducts();
@@ -271,6 +308,9 @@ const editProductSuccess = function () {
   }
 };
 
+/**
+ * Shows the edit name-overlay when the edit name-button is clicked in the edit product-overlay
+ */
 const editName = function () {
   document
     .getElementById("updateNameButton")
@@ -278,6 +318,9 @@ const editName = function () {
   editNameOverlay.classList.add("display");
 };
 
+/**
+ * Shows the edit description-overlay when the edit description-button is clicked in the edit product-overlay
+ */
 const editDescription = function () {
   document
     .getElementById("updateDescriptionButton")
@@ -285,6 +328,9 @@ const editDescription = function () {
   editDescriptionOverlay.classList.add("display");
 };
 
+/**
+ * Shows the edit price-overlay when the edit price-button is clicked in the edit product-overlay
+ */
 const editPrice = function () {
   document
     .getElementById("updatePriceButton")
@@ -292,6 +338,9 @@ const editPrice = function () {
   editPriceOverlay.classList.add("display");
 };
 
+/**
+ * Shows the edit category-overlay when the edit category-button is clicked in the edit product-overlay
+ */
 const editCategory = function () {
   document
     .getElementById("updateCategoryButton")
@@ -311,6 +360,9 @@ if (document.getElementsByClassName("edit__window")) {
   });
 }
 
+/**
+ * Filters the products in the table when a user types something in the search-field.
+ */
 const filterProducts = function () {
   const filteredProducts = [];
   const searchString = this.value.toLowerCase();
@@ -338,6 +390,10 @@ fileSelector.addEventListener("change", (event) => {
   uploadImage(file);
 });
 
+/**
+ * Gets a file's data as a base64 encoded string
+ * @param file the file to read
+ */
 const readImage = function (file) {
   const reader = new FileReader();
   reader.addEventListener("load", (event) => {
@@ -346,21 +402,27 @@ const readImage = function (file) {
   reader.readAsDataURL(file);
 };
 
+/**
+ * Creates a Form and pushes it to the server
+ * @param imageFile the file to push
+ */
 const uploadImage = function (imageFile) {
   let data = new FormData();
   data.append("imageFile", imageFile);
   uploadToServer(data);
 };
 
+/**
+ * Uploads an image to the database
+ * @param data the image to upload
+ */
 const uploadToServer = function (data) {
   const productId = getProductIdFromElement(button);
   sendUpdateProductImageRequest(
     productId,
     data,
     editProductSuccess
-  ).finally(); /*.then(response => {
-        sendUpdateProductRequest(productId, {imageId: response}, editProductSuccess).finally();
-    })*/
+  ).finally();
 };
 
 if (null != overlay) {
@@ -369,6 +431,10 @@ if (null != overlay) {
   };
 }
 
+/**
+ * Gets data from a specific product
+ * @returns {{price: *, name: *, description: *, inventory: *, category: *}}
+ */
 const getProductData = function () {
   const name = document.querySelector(`input[name="productName"]`).value;
   const category = document.querySelector(
@@ -388,6 +454,10 @@ const getProductData = function () {
   };
 };
 
+/**
+ * Checks whether the form in the add-product-overlay is correctly filled in
+ * @returns true if it's correct, false if not
+ */
 const isFormValid = function () {
   const name = document.querySelector(`input[name="productName"]`).value;
   const category = document.querySelector(
@@ -405,6 +475,10 @@ const isFormValid = function () {
   return !(isNaN(price) || isNaN(inventory));
 };
 
+/**
+ * Gets the correct alert message if the form is invalid
+ * @returns a string with the alert message
+ */
 const getAlertMessage = function () {
   const name = document.querySelector(`input[name="productName"]`).value;
   const category = document.querySelector(
@@ -443,6 +517,10 @@ imageSelector.addEventListener("change", async (event) => {
   imageId = await sendAddProductImageRequest(data).finally();
 });
 
+/**
+ * Gets a file's data as a base64 encoded string
+ * @param file the file to read
+ */
 const readImage2 = function (file) {
   const reader = new FileReader();
   reader.addEventListener("load", (event) => {
@@ -451,6 +529,9 @@ const readImage2 = function (file) {
   reader.readAsDataURL(file);
 };
 
+/**
+ * Adds a product to the databse
+ */
 const addProductRequest = async function (event) {
   event.preventDefault();
   if (isFormValid()) {
@@ -464,8 +545,7 @@ const addProductRequest = async function (event) {
   }
 };
 
-/*TODO: unsure if placeholder image is added*/
-/*TODO: make overlay disappear when clicking outside it or the x-mark*/
+/*TODO: add-product-overlayen skal lukkes når submit blir trykket på */
 
 const submitNewProductButton = document.getElementById(
   "submitNewProductButton"

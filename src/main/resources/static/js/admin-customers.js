@@ -23,6 +23,7 @@ const editAddressOverlay = document.getElementById("editAddressOverlay");
 let users = null;
 let user = null;
 
+
 const initialCustomers = function () {
   getUsers();
   setEventListeners();
@@ -85,7 +86,7 @@ const manageUser = function (managedUser) {
   const passwordLabel = document.getElementById("customerPasswordLabel");
   const addressLabel = document.getElementById("customerAddressLabel");
   const createdAtLabel = document.getElementById("createdAtLabel");
-  const lastLoginLabel = document.getElementById("lastLoginLabel");
+  const updatedAtLabel = document.getElementById("updatedAtLabel");
 
   idLabel.textContent = managedUser["id"];
   nameLabel.textContent =
@@ -95,8 +96,7 @@ const manageUser = function (managedUser) {
   if (managedUser["address"])
     addressLabel.textContent = managedUser["address"]["addressLine"];
   createdAtLabel.textContent = managedUser["createdAt"].substring(0, 10);
-  // todo: delete or implement last login.
-  lastLoginLabel.textContent = "yesterday";
+  updatedAtLabel.textContent = managedUser["updatedAt"].substring(0, 10);
 
   fetchOrders(managedUser);
 };
