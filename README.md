@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/pr0xity/Urban-Infusion">
-    <img src="/src/main/resources/static/img/icons/logo-big.png" alt="Logo" height="80">
+    <img src="src/main/resources/static/img/icons/logo-big.png" alt="Logo" height="80">
   </a>
 
 <h3 align="center">Urban Infusion</h3>
@@ -64,11 +64,97 @@ This project was created using the following:
 <p align="right"><a href="#top">back to top</a></p>
 
 <h3>Getting Started</h3>
-<h4>Development<h4>
-TBA
+<h4>Prerequisites</h4>
+
+- [Docker](https://www.docker.com/)
+- [Java (17)](https://jdk.java.net/archive/)
+- [Maven (4.0.0)](https://maven.apache.org/)
+
+<h4>Development</h4>
+
+1. Start Postgres container in docker
+
+   ```sh
+   docker run -d --name PostgresDB -e POSTGRES_PASSWORD=YourPassword -p 6000:5432 postgres:14.2
+   ```
+
+2. Clone the repo
+
+   ```sh
+   git clone https://github.com/pr0xity/Urban-Infusion.git
+   ```
+
+3. Update application.properties
+
+   - `spring.profiles.active` to match prod or dev
+   - `spring.mail.username` to match email to use for mailing
+
+4. Update application-dev.properties
+
+   - `jwt.token.validity`
+   - `jwt.signing.key`
+   - `jwt.authorities.key`
+   - `spring.datasource.url`
+   - `spring.datasource.username`
+   - `spring.datasource.password`
+
+5. Package the java application
+
+   ```sh
+   mvn clean && mvn package
+   ```
+
+6. run the java application
+   ```sh
+   mvn spring-boot:run
+   ```
 
 <h4>Deployment</h4>
-TBA
+
+1. Start Postgres container in docker
+
+   ```sh
+   docker run -d --name PostgresDB -e POSTGRES_PASSWORD=YourPassword -p 6000:5432 postgres:14.2
+   ```
+
+2. Clone the repo
+
+   ```sh
+   git clone https://github.com/pr0xity/Urban-Infusion.git
+   ```
+
+3. Update application.properties
+
+   - `spring.profiles.active` to match prod or dev
+   - `spring.mail.username` to match email to use for mailing
+
+4. create application-prod.properties
+
+   - `jwt.token.validity`
+   - `jwt.signing.key`
+   - `jwt.authorities.key`
+   - `jwt.header.string`
+   - `jwt.cookie.name`
+   - `domain.name`
+   - `domain.port`
+   - `spring.mail.username`
+   - `spring.mail.password`
+   - `spring.datasource.url`
+   - `spring.datasource.username`
+   - `spring.datasource.password`  
+   To make the application run on https use this guide
+https://web-tek.ninja/cookbook/https-spring-boot/  
+Remember to put the lines in application-prod.properties  
+5. Package the java application
+
+   ```sh
+   mvn clean && mvn package
+   ```
+
+6. run the java application
+   ```sh
+   nohup java -jar target/appdevapi-0.0.1-SNAPSHOT.war &
+   ```
 
 <p align="right"><a href="#top">back to top</a></p>
 
@@ -172,14 +258,11 @@ Distributed under NTNU. For educational purposes only
 
 <h3>Contact</h3>
   
-Didrik Eilertsen - didrikei@stud.ntnu.no
+Sakarias Sæterstøl - sakariks@stud.ntnu.no  
+Janita Røyseth - janital@stud.ntnu.no  
+Didrik Eilertsen - didrikei@stud.ntnu.no  
+Nina Blindheim - ninavma@stud.ntnu.no  
+Espen Otlo - espenotl@stud.ntnu.no  
 
-Espen Otlo - espenotl@stud.ntnu.no
-
-Janita Røyseth - janital@stud.ntnu.no
-
-Nina Blindheim - ninavma@stud.ntnu.no
-
-Sakarias Sæterstøl - sakariks@stud.ntnu.no
 
 <p align="right"><a href="#top">back to top</a></p>
