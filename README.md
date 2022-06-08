@@ -142,9 +142,10 @@ This project was created using the following:
    - `spring.datasource.url`
    - `spring.datasource.username`
    - `spring.datasource.password`  
-   To make the application run on https use this guide
-https://web-tek.ninja/cookbook/https-spring-boot/  
-Remember to put the lines in application-prod.properties  
+      To make the application run on https use this guide
+     https://web-tek.ninja/cookbook/https-spring-boot/  
+     Remember to put the lines in application-prod.properties
+
 5. Package the java application
 
    ```sh
@@ -262,7 +263,21 @@ Sakarias Sæterstøl - sakariks@stud.ntnu.no
 Janita Røyseth - janital@stud.ntnu.no  
 Didrik Eilertsen - didrikei@stud.ntnu.no  
 Nina Blindheim - ninavma@stud.ntnu.no  
-Espen Otlo - espenotl@stud.ntnu.no  
+Espen Otlo - espenotl@stud.ntnu.no
 
+<p align="right"><a href="#top">back to top</a></p>
+
+<h3>Acknowledgments</h3>
+Special thanks to the following libraries, tools and resources.
+
+- [Google fonts](https://fonts.google.com/)
+- [Phosphor icons](https://phosphoricons.com/)
+- [BEM](http://getbem.com/)
+- [Unsplash](https://unsplash.com/)
+- [Pexels](https://www.pexels.com/)
+- [Leaflet.js](https://leafletjs.com/)
+- [Stadia Maps](https://stadiamaps.com/)
+- [Openstreetmap](https://www.openstreetmap.org/)
+- [Nominatim](https://nominatim.org/)
 
 <p align="right"><a href="#top">back to top</a></p>

@@ -503,7 +503,6 @@ address {
   height: 100vh;
   width: 100vw;
   background-color: transparent;
-  /* z-index: 1; */
 }
 
 .nav__checkout--quantity {
@@ -619,7 +618,7 @@ address {
   transform: translate(-50%, -50%) scale(1.08);
 }
 
-.decorative-text--light {
+.heading--decorative--light {
   font-family: "Hurricane", sans-serif;
   text-transform: capitalize;
   color: #a7f0a4;
@@ -629,8 +628,8 @@ address {
   transition: all 0.2s ease-out;
 }
 
-.btn:hover .decorative-text--light,
-.btn:focus-visible .decorative-text--light {
+.btn:hover .heading--decorative--light,
+.btn:focus-visible .heading--decorative--light {
   color: #4f744e;
 }
 
@@ -650,7 +649,7 @@ address {
   gap: 12.8rem;
 }
 
-.cooperation-logo {
+.cooperation__img {
   filter: grayscale(1);
   opacity: 0.3;
   max-height: 12rem;
@@ -716,14 +715,10 @@ address {
 /****************************/
 /* COMPANY VALUES SECTION */
 /****************************/
-.section-values {
+.values {
   max-width: 160rem;
   margin: 0 auto;
   padding: 9.6rem 2.4rem;
-}
-
-.values {
-  margin: 0 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-content: space-evenly;
@@ -756,30 +751,27 @@ address {
 .section-company {
   max-width: 160rem;
   margin: 0 auto;
-  /*padding: 6.8rem 4.8rem 0 4.8rem;*/
   padding: 9.6rem 4.8rem;
 }
 
 .section-company .header__headings {
   max-width: 80rem;
   margin: 0 auto 8rem auto;
-  /* margin: 0 auto;
-  padding-bottom: 10rem; */
 }
 
-.company-grid {
+.company__grid {
   padding: 2rem 4.8rem 0 4.8rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   row-gap: 5rem;
 }
 
-.company-grid__text:nth-of-type(2) {
+.company__text:nth-of-type(2) {
   grid-column: 2 / 3;
   grid-row: 2 / 3;
 }
 
-.company-grid__text:nth-of-type(3) {
+.company__text:nth-of-type(3) {
   grid-column: 1 / 2;
   grid-row: 3 / 4;
 }
@@ -853,14 +845,14 @@ address {
   margin: 0 auto 3.2rem;
 }
 
-.product-slider {
+.products__slider {
   max-width: 160rem;
   margin: 0 auto;
   position: relative;
   height: 60rem;
 }
 
-.product-slider .slider-controls {
+.products__slider .slider-controls {
   position: absolute;
   bottom: 0;
   left: 50%;

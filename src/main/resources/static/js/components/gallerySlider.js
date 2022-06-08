@@ -14,7 +14,7 @@ export default class GallerySlider extends Slider {
    */
   constructor(slides) {
     super(slides);
-    this.companyGridElement = document.querySelector(".company-grid");
+    this.companyGridElement = document.querySelector(".company__grid");
     this.sliderContainer = document.querySelector(".slider-container");
   }
 

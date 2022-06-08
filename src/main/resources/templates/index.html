@@ -54,7 +54,7 @@
         <a href="#section-products" class="btn">
           <h1 class="heading--primary">
             Find your
-            <span class="decorative-text--light">herbal </span> friend
+            <span class="heading--decorative--light">herbal </span> friend
           </h1></a
         >
       </section>
@@ -66,35 +66,35 @@
             target="_blank"
           >
             <img
-              class="cooperation-logo"
+              class="cooperation__img"
               src="img/cooperations/yogi-tea.svg"
               alt="yogi tea logo"
             />
           </a>
           <a href="https://www.ahmadtea.com/" target="_blank">
             <img
-              class="cooperation-logo"
+              class="cooperation__img"
               src="img/cooperations/ahmad-tea.png"
               alt="ahmad tea logo"
             />
           </a>
           <a href="https://www.pukkaherbs.com/no/no" target="_blank">
             <img
-              class="cooperation-logo"
+              class="cooperation__img"
               src="img/cooperations/pukka.webp"
               alt="pukka tea logo"
             />
           </a>
           <a href="https://www.clipper-teas.com/" target="_blank">
             <img
-              class="cooperation-logo"
+              class="cooperation__img"
               src="img/cooperations/clipper-tea.svg"
               alt="clipper tea logo"
             />
           </a>
           <a href="https://www.fairtrade.no/" target="_blank">
             <img
-              class="cooperation-logo"
+              class="cooperation__img"
               src="img/cooperations/fairtrade.svg"
               alt="fairtrade logo"
             />
@@ -128,53 +128,51 @@
         </div>
       </section>
 
-      <div class="section-values">
-        <div class="values">
-          <figure class="value">
-            <img class="value__icon" src="img/illustrations/tree.svg" alt="" />
-            <figcaption>
-              <span class="heading--decorative">Traditions</span>
-              <span>
-                We value the ancient traditions which are brought to modern
-                times through nature.
-              </span>
-            </figcaption>
-          </figure>
-          <figure class="value">
-            <img class="value__icon" src="img/illustrations/heart.svg" alt="" />
-            <figcaption>
-              <span class="heading--decorative">Health</span>
-              <span
-                >We value your health by offering herbal teas with healing
-                properties made from ancient recipes.</span
-              >
-            </figcaption>
-          </figure>
-          <figure class="value">
-            <img class="value__icon" src="img/illustrations/earth.svg" alt="" />
-            <figcaption>
-              <span class="heading--decorative">Sustainability</span>
-              <span>
-                We value our earth and it's life. We work with fairtrade to
-                provide you ethically produced herbal teas.
-              </span>
-            </figcaption>
-          </figure>
-        </div>
+      <div class="values">
+        <figure class="value">
+          <img class="value__icon" src="img/illustrations/tree.svg" alt="" />
+          <figcaption>
+            <span class="heading--decorative">Traditions</span>
+            <span>
+              We value the ancient traditions which are brought to modern
+              times through nature.
+            </span>
+          </figcaption>
+        </figure>
+        <figure class="value">
+          <img class="value__icon" src="img/illustrations/heart.svg" alt="" />
+          <figcaption>
+            <span class="heading--decorative">Health</span>
+            <span
+            >We value your health by offering herbal teas with healing
+              properties made from ancient recipes.</span
+            >
+          </figcaption>
+        </figure>
+        <figure class="value">
+          <img class="value__icon" src="img/illustrations/earth.svg" alt="" />
+          <figcaption>
+            <span class="heading--decorative">Sustainability</span>
+            <span>
+              We value our earth and it's life. We work with fairtrade to
+              provide you ethically produced herbal teas.
+            </span>
+          </figcaption>
+        </figure>
       </div>
 
       <section class="section-company" id="section-company">
-        <div class="header__headings">
+        <header class="header__headings">
           <h2>
             <span class="heading--decorative">Urban Infusion</span>
             <span class="heading--section">
               Fusing ancient traditions and modern times
             </span>
           </h2>
-        </div>
+        </header>
 
-        <div class="company-grid">
-          <div class="company-grid__text">
+        <div class="company__grid">
+          <div class="company__text">
             <p>
               Humans have been enjoying herbal teas for millennia. We are
               passionate for natural teas, nurtured by our ancestors. Our
@@ -183,7 +181,7 @@
             </p>
           </div>
 
-          <div class="company-grid__text">
+          <div class="company__text">
             <p>
               We are passionate about ancient traditions of tea ceremony.
               Therefore our employees can help you find what you need for you
@@ -192,14 +190,12 @@
             </p>
           </div>
 
-          <div class="company-grid__text">
-            <p>
+            <p class="company__text">
               We have carefully created a collection of more than 600 different
               teas from 140 different countries. Come visit us at our office in
               Amfi Moa, we have 62 most popular teas available here! Our shop is
               maskfree (just don't tell it to municipality's chief physician.)
             </p>
-          </div>
 
           <div
             class="gallery gallery--right"
@@ -455,14 +451,14 @@
       </section>
 
       <section class="section-products container--beige" id="section-products">
-        <div class="header__headings">
+        <header class="header__headings">
           <h2>
             <span class="heading--decorative">Products</span>
             <span class="heading--section">Find your herbal friend!</span>
           </h2>
-        </div>
+        </header>
 
-        <div class="product-slider">
+        <div class="products__slider">
           <article
             th:insert="components/productcard"
             class="product-card container--white product-card__slide--tertiary-prev"
@@ -473,14 +469,14 @@
       </section>
 
       <section class="section-testimonials">
-        <div class="header__headings">
+        <header class="header__headings">
           <h2>
             <span class="heading--decorative">Testimonials</span>
             <span class="heading--section">Still not convinced?</span>
           </h2>
-        </div>
+        </header>
         <div class="testimonials">
-          <div class="testimonial">
+          <figure class="testimonial">
             <h4 class="testimonial__heading">" Best Sencha tea! "</h4>
             <blockquote class="testimonial__text" data-content="0">
               Tea is the necessary component for my busy days at the office. It
@@ -493,10 +489,10 @@
                 src="img/testimonials/testimonial-1.jpeg"
                 alt="john cliff"
               />
-              <span class="testimonial__name">- John Cliff</span>
+              <p class="testimonial__name">- John Cliff</p>
             </div>
-          </div>
-          <div class="testimonial">
+          </figure>
+          <figure class="testimonial">
             <h4 class="testimonial__heading">" Great selection of tea! "</h4>
             <blockquote class="testimonial__text" data-content="1">
               I love the great selection Urban Infusion have! I try a new tea
@@ -508,10 +504,10 @@
                 src="img/testimonials/testimonial-2.jpeg"
                 alt="purple floyd"
               />
-              <span class="testimonial__name">- Purple Floyd</span>
+              <p class="testimonial__author">- Purple Floyd</p>
             </div>
-          </div>
-          <div class="testimonial">
+          </figure>
+          <figure class="testimonial">
             <h4 class="testimonial__heading">" These teas are dope! "</h4>
             <blockquote class="testimonial__text" data-content="2">
               Man, their teas are dope! P.S. You can also smoke them, just don't
@@ -523,9 +519,9 @@
                 src="img/testimonials/testimonial-3.jpeg"
                 alt="james jagger"
               />
-              <span class="testimonial__name">- James Jagger</span>
+              <p class="testimonial__name">- James Jagger</p>
             </div>
-          </div>
+          </figure>
         </div>
       </section>
     </main>
