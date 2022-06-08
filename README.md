@@ -59,6 +59,7 @@ This project was created using the following:
 - [PostgreSQL](https://www.postgresql.org/)
 - [NginX](https://www.nginx.com/)
 - [Docker](https://www.docker.com/)
+- [Postman](https://www.postman.com/)
 
 <p align="right"><a href="#top">back to top</a></p>
 
