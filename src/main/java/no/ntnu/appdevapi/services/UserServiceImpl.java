@@ -3,7 +3,6 @@ package no.ntnu.appdevapi.services;
 import no.ntnu.appdevapi.DAO.UserRepository;
 import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.PermissionLevel;
-import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.User;
 import no.ntnu.appdevapi.entities.UserAddress;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,9 +42,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
      */
     private Set<SimpleGrantedAuthority> getAuthority(User user) {
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-        user.getPermissionLevels().forEach(permissionLevel -> {
-            authorities.add(new SimpleGrantedAuthority(permissionLevel.getAdminType()));
-        });
+        user.getPermissionLevels().forEach(permissionLevel ->
+                authorities.add(new SimpleGrantedAuthority(permissionLevel.getAdminType())));
         return authorities;
     }
 
@@ -93,7 +91,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     /**
      * Gets a list of all users, sorted by ID (ascending).
      *
-     * @return sorted {@List<User>} of all users.
+     * @return sorted {@code List<User>} of all users.
      */
     @Override
     public List<User> findAll() {

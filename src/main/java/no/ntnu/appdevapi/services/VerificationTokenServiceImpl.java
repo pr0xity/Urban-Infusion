@@ -37,7 +37,7 @@ public class VerificationTokenServiceImpl implements VerificationTokenService {
      * Gets the VerificationToken object with the given token string.
      *
      * @param verificationToken {@code String} to search for.
-     * @return {@code VerificationToekn} with given token string, or null if no match is found.
+     * @return {@code VerificationToken} with given token string, or null if no match is found.
      */
     @Override
     public VerificationToken getVerificationTokenByToken(String verificationToken) {

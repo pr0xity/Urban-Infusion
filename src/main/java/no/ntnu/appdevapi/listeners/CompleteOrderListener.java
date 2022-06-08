@@ -44,7 +44,7 @@ public class CompleteOrderListener implements ApplicationListener<CompleteOrderE
         String recipient = orderDetails.getUser().getEmail();
 
         MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper messageHelper = null;
+        MimeMessageHelper messageHelper;
         try {
             messageHelper = new MimeMessageHelper(message, true);
             messageHelper.setSubject("Order Confirmation - Urban Infusion");

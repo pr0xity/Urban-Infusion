@@ -20,7 +20,7 @@ public class CartItemServiceImpl implements CartItemService{
      * Gets the cart item with the given ID.
      *
      * @param id id of the cart item to find.
-     * @return {@Code CartItem} with given ID, or {@code null} if none found.
+     * @return {@code CartItem} with given ID, or {@code null} if none found.
      */
     @Override
     public CartItem getCartItem(long id) {

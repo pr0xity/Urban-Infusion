@@ -31,7 +31,7 @@ public class RatingServiceImpl implements RatingService {
 
     /**
      * Returns a list of all ratings,
-     * sorted first by update date (newest first),
+     * sorted first by update date (the newest first),
      * then by comment (empty comments last).
      *
      * @return sorted {@code List<Rating>} of all ratings.

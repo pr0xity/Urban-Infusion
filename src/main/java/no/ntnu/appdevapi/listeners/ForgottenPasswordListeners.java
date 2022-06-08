@@ -46,7 +46,7 @@ public class ForgottenPasswordListeners implements ApplicationListener<Forgotten
         String recipient = user.getEmail();
 
         MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper messageHelper = null;
+        MimeMessageHelper messageHelper;
         try {
             messageHelper = new MimeMessageHelper(message, true);
             messageHelper.setSubject("Forgotten password - Urban Infusion");

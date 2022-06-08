@@ -24,7 +24,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     /**
      * Gets all orders in the database
      * sorted first by processed status (unprocessed first),
-     * then by creation date (newest first).
+     * then by creation date (the newest first).
      *
      * @return sorted {@code List<OrderDetails>} of all orders in the database.
      */
@@ -40,7 +40,7 @@ public class OrderDetailsServiceImpl implements OrderDetailsService {
     }
 
     /**
-     * Gets the (up to) five most recent orders, sorted by creation date (newest first).
+     * Gets the (up to) five most recent orders, sorted by creation date (the newest first).
      *
      * @return sorted {@code List<OrderDetails>} of the (up to) five most recent orders.
      */

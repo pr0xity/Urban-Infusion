@@ -1,8 +1,6 @@
 package no.ntnu.appdevapi.services;
 
 import no.ntnu.appdevapi.DAO.ProductImageRepository;
-import no.ntnu.appdevapi.DAO.ProductRepository;
-import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.ProductImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Objects;
 
 @Service
 public class ProductImageServiceImpl implements ProductImageService {

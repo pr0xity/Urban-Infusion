@@ -150,18 +150,18 @@ public class User {
   }
 
   /**
-   * Returns this users wishlist.
+   * Returns this user's wishlist.
    *
-   * @return this users wishlist.
+   * @return this user's wishlist.
    */
   public Wishlist getWishlist() {
     return this.wishlist;
   }
 
   /**
-   * Sets this users wishlist to the given wishlist.
+   * Sets this user's wishlist to the given wishlist.
    *
-   * @param wishlist the wishlist to be set as this users wishlist.
+   * @param wishlist the wishlist to be set as this user's wishlist.
    */
   public void setWishlist(Wishlist wishlist) {
     this.wishlist = wishlist;

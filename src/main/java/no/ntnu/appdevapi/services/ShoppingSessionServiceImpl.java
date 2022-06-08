@@ -32,7 +32,7 @@ public class ShoppingSessionServiceImpl implements ShoppingSessionService {
     }
 
     /**
-     * Gets the shopping sessino with the given ID.
+     * Gets the shopping session with the given ID.
      *
      * @param id id of the shopping session to find.
      * @return {@code ShoppingSession} matching the given ID, or {@code null} if no match found.

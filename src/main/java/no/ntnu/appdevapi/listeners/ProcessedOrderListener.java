@@ -42,7 +42,7 @@ public class ProcessedOrderListener implements ApplicationListener<ProcessedOrde
         String recipient = user.getEmail();
 
         MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper messageHelper = null;
+        MimeMessageHelper messageHelper;
         try {
             messageHelper = new MimeMessageHelper(message, true);
             messageHelper.setSubject("Your order has been processed - Urban Infusion");

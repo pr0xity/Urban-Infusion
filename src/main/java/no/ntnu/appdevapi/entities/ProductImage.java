@@ -1,8 +1,6 @@
 package no.ntnu.appdevapi.entities;
 
 import io.swagger.annotations.ApiModelProperty;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -103,7 +101,7 @@ public class ProductImage {
     /**
      * Returns the content-type of this image.
      *
-     * @return content-tupe fo this image.
+     * @return content-type of this image.
      */
     public String getContentType() {
         return contentType;

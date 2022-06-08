@@ -4,7 +4,6 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -92,18 +91,18 @@ public class PermissionLevel {
 
 
     /**
-     * Returns the date and time the premission level was created.
+     * Returns the date and time the permission level was created.
      *
-     * @return the date and time the premission was created.
+     * @return the date and time the permission was created.
      */
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
     /**
+     * Sets the time of creation of the permission level.
      *
-     *
-     * @param createdAt
+     * @param createdAt time and date of creation.
      */
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
