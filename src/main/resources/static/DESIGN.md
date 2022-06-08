@@ -89,7 +89,7 @@ No packs chosen for illustrations yet.
 
 ### Typography
 
-Because Urban Infusion is a mix of modern and traditional we will use a Sans-Serif font as the main, portraying the modern side of the company values, and a cursive font for accents portraying the traditional side. We want don't want an overly bold look, and will use a font with hard egdes.
+Because Urban Infusion is a mix of modern and traditional we will use a Sans-Serif font as the main, portraying the modern side of the company values, and a cursive font for accents portraying the traditional side.
 
 Main font: Montserrat
 
