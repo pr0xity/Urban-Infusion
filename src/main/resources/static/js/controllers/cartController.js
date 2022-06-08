@@ -60,7 +60,7 @@ function sendCartRequest(productId, method, body = null, successCallback) {
   if (body !== null) {
     return sendApiRequest(`${CART_API_PATHNAME}/${productId}`, `${method}`, body, successCallback, addToCartUnauthorized).then(() => setIncrementCounter());
   } else {
-    return sendApiRequest(`${CART_API_PATHNAME}/${productId}`, `${method}`, null, null, addToCartUnauthorized).then(() => setIncrementCounter());
+    return sendApiRequest(`${CART_API_PATHNAME}/${productId}`, `${method}`, null, null, addToCartUnauthorized, addToCartUnauthorized).then(() => setIncrementCounter());
   }
 }
 
