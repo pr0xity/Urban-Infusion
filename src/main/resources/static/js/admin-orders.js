@@ -9,24 +9,29 @@ const manageOrderTableBody = document.getElementById("manageOrderTableBody");
 const overlay = document.getElementById("overlay");
 const processedCheckBox = document.getElementById("orderProcessed");
 
+/**
+ * Initializes the page content.
+ */
 function initializeOrders() {
   getOrders();
-  searchInput.onkeydown = function (event) {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      return false;
-    }
-  };
 }
 
+/**
+ * Fetches all orders from the server and displays them in the order table.
+ *
+ * @returns {Promise<void>}
+ */
 async function getOrders() {
   orders = await sendGetAllOrdersRequest();
   loadOrders(orders);
 }
 
+/**
+ * Filters the order table to display only orders that match the input in the search bar.
+ */
 function filterOrders() {
   const filteredOrders = [];
-  const searchString = searchInput.value.toLowerCase();
+  const searchString = document.getElementById("searchInput").value.toLowerCase();
   for (let i = 0; i < orders.length; i++) {
     const order = orders[i];
     let added = false;
@@ -51,8 +56,14 @@ function filterOrders() {
   loadOrders(filteredOrders);
 }
 
+// Adds functionality to the search bar.
 document.querySelector("#searchInput").addEventListener("input", filterOrders);
 
+/**
+ * Populates the order table with given orders.
+ *
+ * @param orders orders to be added to table.
+ */
 function loadOrders(orders) {
   tableBody.innerHTML = "";
   for (let i = 0; i < orders.length; i++) {
@@ -61,6 +72,11 @@ function loadOrders(orders) {
   }
 }
 
+/**
+ * Shows an order as a row in the order table.
+ *
+ * @param order the order to be shown.
+ */
 function addOrderRow(order) {
   if (!document.getElementById("orderTable")) return;
   const row = document.createElement("tr");
@@ -112,6 +128,11 @@ function addOrderRow(order) {
   tableBody.appendChild(row);
 }
 
+/**
+ * Sets the information in the manage overlay and shows it to the user.
+ *
+ * @param order the order to be managed.
+ */
 function manageOrder(order) {
   const orderNameLabel = document.getElementById("orderNameLabel");
   const orderEmailLabel = document.getElementById("orderEmailLabel");
@@ -139,6 +160,11 @@ function manageOrder(order) {
   processedCheckBox.checked = order["processed"] === true;
 }
 
+/**
+ * Sends an update order request to the server and repopulates the order table with the updated orders.
+ *
+ * @param order the order to be updated.
+ */
 function updateOrder(order) {
   let dto = {};
   let itemIds = [];
@@ -155,6 +181,10 @@ function updateOrder(order) {
   sendUpdateOrderRequest(`${order.id}`, dto, getOrders).finally();
 }
 
+/**
+ * Populates the order items table with the items in the given order.
+ * @param order order to show the order items for.
+ */
 function loadOrderItems(order) {
   const items = order["orderItems"];
   manageOrderTableBody.innerHTML = "";
@@ -164,6 +194,11 @@ function loadOrderItems(order) {
   }
 }
 
+/**
+ * Shows an order item as a row in the order items table.
+ *
+ * @param item the item to be shown.
+ */
 function addOrderItemRow(item) {
   if (!document.getElementById("manageOrderTable")) return;
   const row = document.createElement("tr");

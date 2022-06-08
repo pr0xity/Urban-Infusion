@@ -5,10 +5,8 @@ import {
 import { sendGetAllOrdersRequest } from "./controllers/orderController.js";
 import { hideElement } from "./tools.js";
 
-const customerTable = document.getElementById("userTable");
 const tableBody = document.getElementById("userTableBody");
 const overlay = document.getElementById("overlay");
-const purchaseHistoryTable = document.getElementById("purchaseHistoryTable");
 const purchaseHistoryTableBody = document.getElementById(
   "purchaseHistoryTableBody"
 );
@@ -23,7 +21,9 @@ const editAddressOverlay = document.getElementById("editAddressOverlay");
 let users = null;
 let user = null;
 
-
+/**
+ * Initializes the page content, and sets event listeners.
+ */
 const initialCustomers = function () {
   getUsers();
   setEventListeners();
@@ -31,11 +31,19 @@ const initialCustomers = function () {
 
 window.addEventListener("DOMContentLoaded", initialCustomers);
 
+/**
+ * Fetches all users from the server and shows them in the user table.
+ */
 const getUsers = async function () {
   users = await sendGetAllUsersRequest();
   loadUsers(users);
 };
 
+/**
+ * Shows given users in the user table.
+ *
+ * @param users the users to be shown.
+ */
 const loadUsers = function (users) {
   tableBody.innerHTML = "";
   for (let i = 0; i < users.length; i++) {
@@ -44,6 +52,11 @@ const loadUsers = function (users) {
   }
 };
 
+/**
+ * Adds the given user as a row to the user table.
+ *
+ * @param user the user to be shown.
+ */
 const addUserRow = function (user) {
   if (!document.getElementById("userTable")) return;
   const row = document.createElement("tr");
@@ -78,6 +91,11 @@ const addUserRow = function (user) {
   tableBody.appendChild(row);
 };
 
+/**
+ * Sets the information in the manage overlay, and shows it to the user.
+ *
+ * @param managedUser the user to be managed.
+ */
 const manageUser = function (managedUser) {
   user = managedUser;
   const idLabel = document.getElementById("customerIdLabel");
@@ -101,12 +119,24 @@ const manageUser = function (managedUser) {
   fetchOrders(managedUser);
 };
 
+/**
+ * Fetches all orders from the server,
+ * and displays those belonging to given user in the purchase history table.
+ *
+ * @param user the user to find the orders for.
+ */
 const fetchOrders = function (user) {
   sendGetAllOrdersRequest().then((response) =>
     populatePurchaseHistory(user, response)
   );
 };
 
+/**
+ * Populates the purchase history table with all orders made by given user.
+ *
+ * @param user the user to display orders of.
+ * @param allOrders all orders in the database.
+ */
 const populatePurchaseHistory = function (user, allOrders) {
   purchaseHistoryTableBody.innerHTML = "";
   const orders = [];
@@ -121,6 +151,11 @@ const populatePurchaseHistory = function (user, allOrders) {
   }
 };
 
+/**
+ * Shows an order as a row in the purchase history table.
+ *
+ * @param order the order to be shown.
+ */
 const addPurchaseHistoryRow = function (order) {
   const row = document.createElement("tr");
   const dateCell = document.createElement("td");
@@ -166,9 +201,12 @@ const addPurchaseHistoryRow = function (order) {
   purchaseHistoryTableBody.appendChild(row);
 };
 
+/**
+ * Filters the user table to display only users that match the input in the search bar.
+ */
 const filterUsers = function () {
   const filteredUsers = [];
-  const searchString = searchInput.value.toLowerCase();
+  const searchString = document.getElementById("searchInput").value.toLowerCase();
   for (let i = 0; i < users.length; i++) {
     const user = users[i];
     let added = false;
@@ -195,12 +233,15 @@ const filterUsers = function () {
   loadUsers(filteredUsers);
 };
 
-document.querySelector("#searchInput").addEventListener("input", filterUsers);
-
+/**
+ * Adds event listeners.
+ */
 const setEventListeners = function () {
   editFullNameButton.addEventListener("click", editFullName);
   editEmailButton.addEventListener("click", editEmail);
   editAddressButton.addEventListener("click", editAddress);
+
+  document.querySelector("#searchInput").addEventListener("input", filterUsers);
 
   const closeButtons = document.getElementsByClassName("btn--close");
   for (let i = 0; i < closeButtons.length; i++) {
@@ -210,11 +251,19 @@ const setEventListeners = function () {
   }
 };
 
+/**
+ * Upon successful editing of customer,
+ * update the information in the manage overlay,
+ * and repopulate the user table with the updated users.
+ */
 const editCustomerSuccess = async function () {
   manageUser(user);
   await getUsers();
 };
 
+/**
+ * Updates the name of the user being managed.
+ */
 const editFullName = function () {
   document.getElementById("newFirstName").value = "";
   document.getElementById("newLastName").value = "";
@@ -224,6 +273,11 @@ const editFullName = function () {
     .addEventListener("click", updateFullName);
 };
 
+/**
+ * Sends an update user request to the server, to update the name of the user being managed.
+ *
+ * @param event the submit event.
+ */
 const updateFullName = function (event) {
   event.preventDefault();
   user["firstName"] = document.getElementById("newFirstName").value;
@@ -235,6 +289,9 @@ const updateFullName = function (event) {
   ).finally(() => hideElement(editFullNameOverlay));
 };
 
+/**
+ * Updates the email address of the user being managed.
+ */
 const editEmail = function () {
   document.getElementById("newEmail").value = "";
   editEmailOverlay.classList.add("display");
@@ -243,6 +300,11 @@ const editEmail = function () {
     .addEventListener("click", updateEmail);
 };
 
+/**
+ * Sends an update user request to the server, to update the email of the user being managed.
+ *
+ * @param event the submit event.
+ */
 const updateEmail = function (event) {
   event.preventDefault();
   user["email"] = document.getElementById("newEmail").value;
@@ -253,6 +315,9 @@ const updateEmail = function (event) {
   ).finally(() => hideElement(editEmailOverlay));
 };
 
+/**
+ * Updates the address of the user being managed.
+ */
 const editAddress = function () {
   document.getElementById("newAddress1").value = "";
   document.getElementById("newAddress2").value = "";
@@ -265,6 +330,11 @@ const editAddress = function () {
     .addEventListener("click", updateAddress);
 };
 
+/**
+ * Sends an update user request to the server, to update the address of the user being managed.
+ *
+ * @param event the submit event.
+ */
 const updateAddress = function (event) {
   event.preventDefault();
   user["address"]["addressLine1"] =
@@ -289,6 +359,11 @@ const updateAddress = function (event) {
   ).finally(() => hideElement(editAddressOverlay));
 };
 
+/**
+ * Builds a full address line from the given address object.
+ * @param address the address object to build the address line for.
+ * @returns {string} full address line.
+ */
 const buildAddressLine = function (address) {
   let line = address["addressLine1"] + ", ";
   if (address["addressLine2"].length > 0) {

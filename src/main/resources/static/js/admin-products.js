@@ -9,7 +9,6 @@ import {
 import { hideEditOverlays } from "./admin.js";
 import {
   getProductIdFromElement,
-  reloadCurrentPage,
   showElement,
 } from "./tools.js";
 import { LEAF_UNSELECTED } from "./views/reviewLeavesView.js";
@@ -40,6 +39,7 @@ const initializeProducts = function () {
   setEventListeners();
 };
 
+// Calls the initialize function upon successful loading of dom.
 document.addEventListener("DOMContentLoaded", initializeProducts);
 
 /**

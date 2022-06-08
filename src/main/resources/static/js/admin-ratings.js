@@ -1,7 +1,6 @@
 import {
   sendDeleteReviewRequest,
   sendGetAllReviewsRequest,
-  sendGetRecentReviewsRequest,
   sendUpdateReviewRequest,
 } from "./controllers/reviewController.js";
 import { hideElement } from "./tools.js";
@@ -13,21 +12,27 @@ const editNameButton = document.getElementById("editNameButton");
 let ratings = null;
 let rating = null;
 
+/**
+ * Initializes the page.
+ */
 const initializeRatings = function () {
   getRatings();
   setEventListeners();
 };
 document.addEventListener("DOMContentLoaded", initializeRatings);
 
+/**
+ * Fetches the reviews from the server and displays them in the ratings table.
+ * @returns {Promise<void>}
+ */
 const getRatings = async function () {
   ratings = await sendGetAllReviewsRequest().finally();
   loadRatings(ratings);
 };
 
-export const getRecentRatings = function () {
-  sendGetRecentReviewsRequest().then((response) => loadRatings(response));
-};
-
+/**
+ * Filters the rating table to display only ratings that match the input in the search bar.
+ */
 const filterRatings = function () {
   const filteredRatings = [];
   const searchString = this.value.toLowerCase();
@@ -48,8 +53,14 @@ const filterRatings = function () {
   loadRatings(filteredRatings);
 };
 
+// Adds functionality to the search bar.
 document.querySelector("#searchInput").addEventListener("input", filterRatings);
 
+/**
+ * Displays given ratings in the ratings table.
+ *
+ * @param ratings the ratings to be shown.
+ */
 function loadRatings(ratings) {
   document.getElementById("ratingTableBody").innerHTML = "";
   for (let i = 0; i < ratings.length; i++) {
@@ -58,6 +69,11 @@ function loadRatings(ratings) {
   }
 }
 
+/**
+ * Shows the given rating as a row in the ratings table.
+ *
+ * @param rating the rating to be shown.
+ */
 function addRatingRow(rating) {
   if (!document.getElementById("ratingTable")) return;
   const tableBody = document.getElementById("ratingTableBody");
@@ -102,6 +118,11 @@ function addRatingRow(rating) {
   tableBody.appendChild(row);
 }
 
+/**
+ * Sets the information in the manage rating overlay and shows it to the user.
+ *
+ * @param managedRating the rating to be managed.
+ */
 const manageRating = function (managedRating) {
   rating = managedRating;
   const dateLabel = document.getElementById("dateLabel");
@@ -130,6 +151,11 @@ const manageRating = function (managedRating) {
   };
 };
 
+/**
+ * Sends a delete rating request to the server, and hides the manage rating overlay.
+ *
+ * @param rating the rating to be deleted.
+ */
 const deleteRating = function (rating) {
   sendDeleteReviewRequest(
     rating["product"]["id"],
@@ -138,6 +164,9 @@ const deleteRating = function (rating) {
   ).finally(() => hideElement(overlay));
 };
 
+/**
+ * Edits the display name of the rating being managed.
+ */
 const editName = function () {
   document
     .getElementById("updateNameButton")
@@ -146,6 +175,9 @@ const editName = function () {
   editNameOverlay.classList.add("display");
 };
 
+/**
+ * Sends an update rating request to the server.
+ */
 const updateRating = function (event) {
   event.preventDefault();
   rating["displayName"] = document.getElementById("newName").value;
@@ -156,11 +188,21 @@ const updateRating = function (event) {
   ).finally(() => hideElement(editNameOverlay));
 };
 
+/**
+ * Upon successful update response from server,
+ * update the information in the manage overlay,
+ * and repopulate the rating table with the updated ratings.
+ */
 const updateRatingSuccess = function () {
   manageRating(rating);
   getRatings();
 };
 
+/**
+ * Converts a rating to a ratingDTO object.
+ * @param rating
+ * @returns {{displayName: *, email: *, rating: *, comment: *}}
+ */
 const convertRatingToDTO = function (rating) {
   const dto = {};
   dto["displayName"] = rating["displayName"];

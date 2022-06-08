@@ -30,7 +30,12 @@ if (manageOverlays.length > 0) {
   });
 }
 
-// Checks whether given event targets an element outside a modal window or not.
+/**
+ * Checks whether given event targets an element outside a modal window or not.
+ *
+ * @param event the event to check the target of.
+ * @returns {boolean} true if target was outside any overlays.
+ */
 const outsideOverlays = function (event) {
   const windows = document.getElementsByClassName("modal__window");
   let outside = true;
@@ -42,14 +47,18 @@ const outsideOverlays = function (event) {
   return outside;
 }
 
-// Hides all manage overlays.
+/**
+ * Hides all manage overlays.
+ */
 const hideManageOverlays = function () {
   for (let i = 0; i < manageOverlays.length; i++) {
     manageOverlays[i].classList.add("hidden");
   }
 }
 
-// Disables page reload if enter is clicked in a search bar.
+/**
+ * Disables page reload if enter is clicked in a search bar.
+ */
 if (null != searchInput) {
   searchInput.onkeydown = function (event) {
     if (event.key === "Enter") {
@@ -59,7 +68,9 @@ if (null != searchInput) {
   };
 }
 
-// Adds click event to close buttons on edit modal windows.
+/**
+ * Adds click event to close buttons on edit modal windows.
+ */
 const closeButtons = document.getElementsByClassName("btn--close close");
 if (closeButtons.length > 0) {
   for (let i = 0; i < closeButtons.length; i++) {
@@ -70,7 +81,9 @@ if (closeButtons.length > 0) {
   }
 }
 
-// Hides all edit overlays if mouse is clicked outside an edit overlay.
+/**
+ * Hides all edit overlays if mouse is clicked outside an edit overlay.
+ */
 if (editOverlays.length > 0) {
   window.addEventListener("mouseup", function (event) {
     let inWindow = false;
@@ -86,7 +99,9 @@ if (editOverlays.length > 0) {
   });
 }
 
-// Hides all edit overlays.
+/**
+ * Hides all edit overlays.
+ */
 export const hideEditOverlays = function () {
   for (let i = 0; i < editOverlays.length; i++) {
     editOverlays[i].parentElement.classList.remove("display");
