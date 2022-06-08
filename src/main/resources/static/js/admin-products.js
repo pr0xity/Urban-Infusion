@@ -541,7 +541,7 @@ const addProductRequest = async function (event) {
     if (imageId !== 0) {
       productData.imageId = imageId;
     }
-    sendAddProductRequest(productData, hideAddProductOverlay()).finally();
+    sendAddProductRequest(productData, AddProductSuccess()).finally(getProducts);
   } else {
     setAccountFormAlert(getAlertMessage());
   }
@@ -554,8 +554,14 @@ const submitNewProductButton = document.getElementById(
 submitNewProductButton.addEventListener("click", addProductRequest);
 
 /**
- * Hides the add product overlay.
+ * Hides the add product overlay and empty the content of its input fields.
  */
-const hideAddProductOverlay = function() {
+const AddProductSuccess = function() {
   addProductOverlay.classList.add("hidden");
+
+  document.getElementById("productName").value = "";
+  document.getElementById("productCategory").value = "";
+  document.getElementById("productPrice").value = "";
+  document.getElementById("productDescription").value = "";
+  document.getElementById("productStock").value = "";
 }
