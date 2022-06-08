@@ -547,7 +547,7 @@ const addProductRequest = async function (event) {
   }
 };
 
-// Adds click event listener to the submit new project button.
+// Adds click event listener to the 'submit new project' button.
 const submitNewProductButton = document.getElementById(
   "submitNewProductButton"
 );

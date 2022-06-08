@@ -152,7 +152,7 @@ const manageRating = function (managedRating) {
 };
 
 /**
- * Sends a delete rating request to the server, and hides the manage rating overlay.
+ * Sends a 'delete rating request' to the server, and hides the manage rating overlay.
  *
  * @param rating the rating to be deleted.
  */
