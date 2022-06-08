@@ -15,7 +15,7 @@
     <a href="https://github.com/pr0xity/Urban-Infusion"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/pr0xity/Urban-Infusion">View Demo</a>
+    <a href="https://gr03.appdev.cloudns.ph/">View Demo</a>
     ·
     <a href="https://github.com/pr0xity/Urban-Infusion/issues">Report Bug</a>
     ·
