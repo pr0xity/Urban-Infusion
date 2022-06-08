@@ -34,5 +34,4 @@ public abstract class PageController {
     protected User getUser() {
         return this.userService.getSessionUser();
     }
-
 }
