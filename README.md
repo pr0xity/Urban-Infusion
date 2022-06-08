@@ -168,6 +168,7 @@ Distributed under NTNU. For educational purposes only
 <p align="right"><a href="#top">back to top</a></p>
 
 <h3>Contact</h3>
+  
 Didrik Eilertsen - didrikei@stud.ntnu.no
 
 Espen Otlo - espenotl@stud.ntnu.no
