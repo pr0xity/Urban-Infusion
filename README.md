@@ -40,7 +40,7 @@
         <li><a href="#deployment">Deployment</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#functionality">Functionality</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
   </ol>
@@ -69,7 +69,7 @@ TBA
 <h4>Deployment</h4>
 TBA
 
-<h3>Usage</h3>
+<h3>Functionality</h3>
 
 <table>
     <thead>
