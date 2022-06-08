@@ -1189,7 +1189,7 @@ address {
   margin: 0 auto;
 }
 
-.checkout__list-headings {
+.checkout__header--list {
   display: grid;
   grid-template-columns: 2fr 2fr repeat(3, 1fr) 0.5fr;
   column-gap: 1.6rem;
@@ -1198,13 +1198,13 @@ address {
   border-bottom: 0.1rem solid rgba(109, 104, 117, 0.3);
 }
 
-.checkout__list-headings:first-of-type::before {
+.checkout__header--list:first-of-type::before {
   content: " ";
   width: 20rem;
   height: 0.1rem;
 }
 
-.checkout__list-heading {
+.checkout__heading--list {
   font-weight: 600;
 }
 
@@ -1577,7 +1577,7 @@ address {
   margin: auto;
 }
 
-.signup .heading__field {
+.signup .signup__field {
   font-size: 1.6rem;
   font-weight: 500;
   margin-top: 2rem;

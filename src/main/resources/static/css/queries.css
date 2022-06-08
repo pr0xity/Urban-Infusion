@@ -464,7 +464,7 @@
     font-size: 2rem;
     transition: all 0.2s ease-out;
   }
-  .checkout__list-headings {
+  .checkout__header--list {
     grid-template-columns: 2fr 3fr repeat(3, 1fr) 0.5fr;
   }
 
@@ -578,11 +578,11 @@
     padding: 1.2rem 1.6rem 3.2rem 1.6rem;
   }
 
-  .checkout__list-headings {
+  .checkout__header--list {
     grid-template-columns: 15rem 3fr repeat(3, 1fr) 0.5fr;
   }
 
-  .checkout__list-heading {
+  .checkout__heading--list {
     font-size: 1.6rem;
   }
 
@@ -862,7 +862,7 @@
   /****************************/
   /* CHECKOUT           */
   /****************************/
-  .checkout__list-headings {
+  .checkout__header--list {
     display: none;
   }
 
@@ -1085,7 +1085,7 @@
     padding: 0.8rem 0.8rem 1.6rem 0.8rem;
   }
 
-  .checkout__list-headings {
+  .checkout__header--list {
     display: none;
   }
 

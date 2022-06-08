@@ -22,9 +22,6 @@ public class CompleteRegistrationListener implements ApplicationListener<Complet
     @Value("${spring.mail.username}")
     public String sender;
 
-    @Value("${domain.name}")
-    private String host;
-
     @Autowired
     private VerificationTokenService verificationTokenService;
 
@@ -73,7 +70,7 @@ public class CompleteRegistrationListener implements ApplicationListener<Complet
      */
     private String createConfirmRegistrationMailContent(User user) {
         String confirmationUrl = "/api/confirm-registration?token=" + verificationTokenService.getTokenFromUser(user);
-        String link = (host + confirmationUrl);
+        String link = ("localhost:8080" + confirmationUrl);
 
 
         return "<h1 style='text-align: center;  color: #58555F; font-family: Montserrat, sans-serif; font-size: 24px'>Hi " + user.getFirstName() +"! Welcome to Urban Infusion!</h1>" +

@@ -12,14 +12,13 @@ const setFrontPage = function () {
   const sectionHeroEl = document.querySelector(".section-hero");
   const linkToAboutSection = document.querySelector("#about-link");
   const aboutSection = document.querySelector(".section-company");
+  const linkToProductsSection = document.querySelector(".section-hero a");
+  const productsSection = document.querySelector(".products__slider");
   const featuredSlides = document.querySelectorAll(".featured-card");
   const featuredSlider = new Slider(featuredSlides);
   const gallerySlides = document.querySelectorAll(".gallery");
   const gallerySlider = new GallerySlider(gallerySlides);
-  const testimonialCaretButtons = new CaretButtons(
-    "testimonial__btn",
-    "testimonial__heading"
-  );
+  const testimonialCaretButtons = new CaretButtons("testimonial__btn", "testimonial__heading");
   const productsSlides = document.querySelectorAll(".product-card");
   const productsSlider = new Slider(productsSlides);
   productsSlider.removeFormat();
@@ -46,10 +45,20 @@ const setFrontPage = function () {
     rootMargin: "190px",
   });
 
-  linkToAboutSection.addEventListener("click", (event) => {
-    event.preventDefault();
-    aboutSection.scrollIntoView({ behavior: "smooth" });
-  });
+  /**
+   * Sets smooth scrolling on about and cta button on front-page
+   */
+  (function setSmoothScrolling() {
+    linkToAboutSection.addEventListener("click", (event) => {
+      event.preventDefault();
+      aboutSection.scrollIntoView({ behavior: "smooth" });
+    });
+
+    linkToProductsSection.addEventListener("click", (event) => {
+      event.preventDefault();
+      productsSection.scrollIntoView({ behavior: "smooth" });
+    });
+  })();
 
   /**
    * Checks screen size and changes layout accordingly for index page.

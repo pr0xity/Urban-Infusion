@@ -1,8 +1,7 @@
 import { hideElement, showElement, isElementHidden } from "../tools.js";
 
 /**
- * Buttons to toggle between hide and display for the heading underneath
- * a heading.
+ * Buttons to toggle between hide and display for the data-content beneath a heading.
  */
 export default class CaretButtons {
   buttonClass;

@@ -39,12 +39,12 @@
       </header>
       <form class="checkout__form">
         <section class="section-bag container--white">
-          <h3 class="heading-tertiary">1. Shopping bag</h3>
+          <h2 class="heading-tertiary">1. Shopping bag</h2>
 
-          <header class="checkout__list-headings">
-            <h4 class="checkout__list-heading margin-left--small">Products</h4>
-            <h4 class="checkout__list-heading">Quantity</h4>
-            <h4 class="checkout__list-heading">Total</h4>
+          <header class="checkout__header--list">
+            <h3 class="checkout__heading--list margin-left--small">Products</h3>
+            <h3 class="checkout__heading--list">Quantity</h3>
+            <h3 class="checkout__heading--list">Total</h3>
           </header>
           <ul class="checkout__list">
             <li th:if="${cart.isEmpty()}">
@@ -139,20 +139,20 @@
           </span>
         </section>
         <section class="section-payment-delivery container--white">
-          <h3 class="heading-tertiary">3. Delivery and payment</h3>
-          <h4 class="checkout__heading">
+          <h2 class="heading-tertiary">3. Delivery and payment</h2>
+          <h3 class="checkout__heading">
             <i class="btn--icon ph-truck"></i
-            ><span class="checkout__list-heading">Delivery method</span>
-          </h4>
+            ><span class="checkout__heading--list">Delivery method</span>
+          </h3>
           <div class="checkout__plan">
             <span class="checkout__label">Standard - Home delivery</span>
             <span class="checkout__info">Delivery within 3 - 7 days</span>
             <div class="checkout__map" id="map"></div>
           </div>
-          <h4 class="checkout__heading">
+          <h3 class="checkout__heading">
             <i class="ph-credit-card btn--icon"></i>
-            <span class="checkout__list-heading">Payment method</span>
-          </h4>
+            <span class="checkout__heading--list">Payment method</span>
+          </h3>
           <div class="checkout__plan">
             <span class="checkout__label">Coupon</span>
             <span class="checkout__info">You get a free order from us :)</span>
