@@ -1,6 +1,8 @@
 const userMenuButton = document.querySelector("#user-menu");
 const userMenuElement = document.querySelector(".nav__user-menu");
 const searchInput = document.getElementById("searchInput");
+const manageOverlays = document.getElementsByClassName("overlay");
+const editOverlays = document.getElementsByClassName("edit__window");
 
 userMenuButton.addEventListener("click", function () {
   userMenuElement.classList.toggle("hidden");
@@ -11,21 +13,24 @@ userMenuButton.addEventListener("click", function () {
   });
 });
 
-const overlays = document.getElementsByClassName("overlay");
-if (overlays.length > 0) {
+// Adds functionality for hiding modal windows.
+if (manageOverlays.length > 0) {
+  // Adds click event to close buttons on manage overlays, if any manage overlays exist in current dom.
   const closeButtons = document.getElementsByClassName("manage__btn--close");
   for (let i = 0; i < closeButtons.length; i++) {
     closeButtons[i].onclick = function () {
-      hideOverlays();
+      hideManageOverlays();
     };
   }
+  // Hides all manage overlays if mouse is clicked outside a manage overlay.
   window.addEventListener("mouseup", function (event) {
     if (outsideOverlays(event)) {
-      hideOverlays();
+      hideManageOverlays();
     }
   });
 }
 
+// Checks whether given event targets an element outside a modal window or not.
 const outsideOverlays = function (event) {
   const windows = document.getElementsByClassName("modal__window");
   let outside = true;
@@ -37,12 +42,14 @@ const outsideOverlays = function (event) {
   return outside;
 }
 
-const hideOverlays = function () {
-  for (let i = 0; i < overlays.length; i++) {
-    overlays[i].classList.add("hidden");
+// Hides all manage overlays.
+const hideManageOverlays = function () {
+  for (let i = 0; i < manageOverlays.length; i++) {
+    manageOverlays[i].classList.add("hidden");
   }
 }
 
+// Disables page reload if enter is clicked in a search bar.
 if (null != searchInput) {
   searchInput.onkeydown = function (event) {
     if (event.key === "Enter") {
@@ -51,6 +58,8 @@ if (null != searchInput) {
     }
   };
 }
+
+// Adds click event to close buttons on edit modal windows.
 const closeButtons = document.getElementsByClassName("btn--close close");
 if (closeButtons.length > 0) {
   for (let i = 0; i < closeButtons.length; i++) {
@@ -61,7 +70,7 @@ if (closeButtons.length > 0) {
   }
 }
 
-const editOverlays = document.getElementsByClassName("edit__window");
+// Hides all edit overlays if mouse is clicked outside an edit overlay.
 if (editOverlays.length > 0) {
   window.addEventListener("mouseup", function (event) {
     let inWindow = false;
@@ -77,9 +86,8 @@ if (editOverlays.length > 0) {
   });
 }
 
+// Hides all edit overlays.
 export const hideEditOverlays = function () {
-  const editOverlays = document.getElementsByClassName("edit__window");
-
   for (let i = 0; i < editOverlays.length; i++) {
     editOverlays[i].parentElement.classList.remove("display");
   }

@@ -14,7 +14,6 @@ import {
 } from "./tools.js";
 import { LEAF_UNSELECTED } from "./views/reviewLeavesView.js";
 
-const productTable = document.getElementById("productTable");
 const tableBody = document.getElementById("productTableBody");
 const overlay = document.getElementById("overlay");
 const addProductOverlay = document.getElementById("addProductOverlay");
@@ -32,7 +31,6 @@ const editCategoryOverlay = document.getElementById("editCategoryOverlay");
 const activeStatusCheckBox = document.getElementById("setAsInactive");
 
 let products = null;
-let product = null;
 
 /**
  * Retrieves the current products in the database and adds event listeners to buttons on the page
@@ -278,7 +276,9 @@ const updateProductCategory = function (event) {
 };
 
 /**
- * This method is called when a product has been successfully updated
+ * This method is called when a product has been successfully updated,
+ * Hides the edit overlays, updates the labels in the manage overlay,
+ * and repopulates the product table with the updated products.
  */
 const editProductSuccess = function () {
   hideEditOverlays();
@@ -504,11 +504,13 @@ const getAlertMessage = function () {
   return alertMessage;
 };
 
+
 const imageSelector = document.getElementById("image-selector");
 let image2 = document.getElementById("addProductImage");
 let file = "";
 let imageId;
 
+// Adds event listener to the image file chooser.
 imageSelector.addEventListener("change", async (event) => {
   file = event.target.files[0];
   readImage2(file);
@@ -530,7 +532,7 @@ const readImage2 = function (file) {
 };
 
 /**
- * Adds a product to the databse
+ * Sends a request to add a new product to the database, and hides the add product overlay.
  */
 const addProductRequest = async function (event) {
   event.preventDefault();
@@ -539,15 +541,21 @@ const addProductRequest = async function (event) {
     if (imageId !== 0) {
       productData.imageId = imageId;
     }
-    sendAddProductRequest(productData).finally();
+    sendAddProductRequest(productData, hideAddProductOverlay()).finally();
   } else {
     setAccountFormAlert(getAlertMessage());
   }
 };
 
-/*TODO: add-product-overlayen skal lukkes når submit blir trykket på */
-
+// Adds click event listener to the submit new project button.
 const submitNewProductButton = document.getElementById(
   "submitNewProductButton"
 );
 submitNewProductButton.addEventListener("click", addProductRequest);
+
+/**
+ * Hides the add product overlay.
+ */
+const hideAddProductOverlay = function() {
+  addProductOverlay.classList.add("hidden");
+}

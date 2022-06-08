@@ -2,30 +2,44 @@ import { sendGetNewUsersRequest } from "./controllers/userController.js";
 import { sendGetRecentOrdersRequest } from "./controllers/orderController.js";
 import { sendGetRecentReviewsRequest } from "./controllers/reviewController.js";
 
+/**
+ * Initializes the page content.
+ */
 window.addEventListener("DOMContentLoaded", getTableContent);
 
+/**
+ * Populates all tables.
+ */
 function getTableContent() {
   getNewCustomers();
   getLatestOrders();
   getRecentReviews();
 }
 
+/**
+ * Fetches new customers from server and populates the new customers table.
+ */
 function getNewCustomers() {
   sendGetNewUsersRequest().then((response) => loadCustomers(response));
 }
 
+/**
+ * Populates the new customers table.
+ *
+ * @param users the users to be added to the table.
+ */
 function loadCustomers(users) {
   for (let i = 0; i < users.length; i++) {
-    const user = users[i];
-    addCustomerRow(
-      user["id"],
-      user["firstName"] + " " + user["lastName"],
-      user["email"]
-    );
+    addCustomerRow(users[i]);
   }
 }
 
-function addCustomerRow(id, name, email) {
+/**
+ * Shows a new customer as a row and adds it to the new customers table.
+ *
+ * @param user the user to be shown.
+ */
+function addCustomerRow(user) {
   if (!document.getElementById("customerTable")) return;
   const tableBody = document.getElementById("customerTableBody");
   const row = document.createElement("tr");
@@ -34,9 +48,9 @@ function addCustomerRow(id, name, email) {
   const nameCell = document.createElement("td");
   const emailCell = document.createElement("td");
 
-  const idNode = document.createTextNode(id);
-  const nameNode = document.createTextNode(name);
-  const emailNode = document.createTextNode(email);
+  const idNode = document.createTextNode(user["id"]);
+  const nameNode = document.createTextNode(user["firstName"] + " " + user["lastName"]);
+  const emailNode = document.createTextNode(user["email"]);
 
   idCell.appendChild(idNode);
   nameCell.appendChild(nameNode);
@@ -48,10 +62,16 @@ function addCustomerRow(id, name, email) {
   tableBody.appendChild(row);
 }
 
+/**
+ * Fetches the latest orders from server and populates the recent orders table.
+ */
 function getLatestOrders() {
   sendGetRecentOrdersRequest().then((response) => loadOrders(response));
 }
 
+/**
+ * Populates the recent orders table.
+ */
 function loadOrders(orders) {
   for (let i = 0; i < orders.length; i++) {
     const order = orders[i];
@@ -59,6 +79,11 @@ function loadOrders(orders) {
   }
 }
 
+/**
+ * Shows a recent order as a row and adds it to the recent orders table.
+ *
+ * @param order the order to be shown.
+ */
 function addOrderRow(order) {
   if (!document.getElementById("orderTable")) return;
   const tableBody = document.getElementById("orderTableBody");
