@@ -4,13 +4,13 @@
 
 ### Theme
 
-Urban Infusion is a mix of modern and traditional, and the theme will reflect that. Because it is tea we will want a earth'y natural theme that is modern and a bit traditional, and also calm.
+Urban Infusion is a mix of modern and traditional, and the theme will reflect that. Because it is tea we will want an earthy natural theme that is modern and a bit traditional, and also calm.
 
 <br>
 
 ### Colour scheme
 
-Urban Infusion have not provided a colour scheme. Looking at other tea shops we have seen that beige/brown and green are consistent on those sites. These colours represents the calmness of nature and warmth this e-shop wants to reflect to it's customers. To clearly communicate Urban Infusion's main values, the suggested colour scheme for the site is:
+Urban Infusion have not provided a colour scheme. Looking at other tea shops we have seen that beige/brown and green are consistent on those sites. These colours represent the calmness of nature and warmth this e-shop wants to reflect to its customers. To clearly communicate Urban Infusion's main values, the suggested colour scheme for the site is:
 
 <br>
 
@@ -22,7 +22,7 @@ Text colour: #58555F (Dark purple)
 
 <br>
 
-### Hierachy and layout
+### Hierarchy and layout
 
 The most important message on the site is the products and what they represent. Our goal with the site is to draw customers and create interest.
 
@@ -32,13 +32,13 @@ The buttons, in combination with descriptive images, are the most important elem
 
 <br>
 
-The different sections we will have on our landing page is hero, other cooperations, featured, values, about, products and testimonials.
+The different sections we will have on our landing page is hero, other cooperation, featured, values, about, products and testimonials.
 
 <br>
 
 Sections layout of the landing page:
 
-- The "hero" section will contain a slider with different images to communicate some of the companies values, as well as a CTA (Call to Action) button.
+- The "hero" section will contain a slider with different images to communicate some of the company's values, as well as a CTA (Call to Action) button.
 
 - The companies that Urban Infusion cooperates with will be displayed in a row underneath the header to highlight the validity of Urban Infusion as a company and e-shop that customers can trust.
 
@@ -71,7 +71,7 @@ Sections layout of the landing page:
 ![Green tea](https://images.pexels.com/photos/1793035/pexels-photo-1793035.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=100)
 ![Herbal tea in a pot](https://images.unsplash.com/photo-1602603412313-ab713536e288?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mzh8fGhlcmJhbCUyMHRlYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=200&q=60)
 
-We will have some text on images when it comes to buttons, but we will use colour overlay and blur to improve the readability inside the the button, but not on the image as a whole.
+We will have some text on images in the form of buttons, but we will use colour overlay and blur to improve the readability inside the button, but not on the image as a whole.
 
 <br>
 
@@ -107,7 +107,7 @@ Spacings: 2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
 
 ### Border rounding
 
-Montserrat, the main font of the site is very hard, we will therefore use no border rounding for the elements, but will use full rounding on buttons. The stark contrast between a hard enviroment created by general elements and soft edge of the buttons will draw in the users attention.
+Montserrat, the main font of the site is very hard, we will therefore use no border rounding for the elements, but will use full rounding on buttons. The stark contrast between a hard environment created by general elements and soft edge of the buttons will draw in the user's attention.
 
 <br>
 
