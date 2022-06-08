@@ -98,8 +98,8 @@ public class ProductController {
   @ApiOperation(value = "Add a new product.", notes = "Status 200 when added, 400 on error.")
   public ResponseEntity<?> add(@RequestBody ProductDto product) {
     if (null != product) {
-      productService.addProductFromDto(product);
-      return new ResponseEntity<>(HttpStatus.OK);
+      Product productAdded = productService.addProductFromDto(product);
+      return new ResponseEntity<>("" + productAdded.getId(), HttpStatus.OK);
     }
     return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
   }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +16,12 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -53,7 +60,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     http.cors().and().csrf().disable();
     http.sessionManagement().sessionCreationPolicy(STATELESS);
     http.authorizeRequests()
-            .antMatchers("/admin", "/admin/**", "/api/admin/*", "/api/product-categories/**", "/api/orders", "/api/orders/**").hasAnyAuthority(admin, owner)
+            .antMatchers("/admin", "/admin/**", "/api/admin/*", "/api/product-categories/**").hasAnyAuthority(admin, owner)
             .antMatchers(GET, "/api/users").hasAnyAuthority(admin, owner)
             .antMatchers(PUT, "/api/users/**").hasAnyAuthority(admin, owner)
             .antMatchers(POST, "/api/products").hasAnyAuthority(admin, owner)
@@ -62,10 +69,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers(POST, "/api/products/images/**").hasAnyAuthority(admin, owner)
             .antMatchers(PUT, "/api/products/images/**").hasAnyAuthority(admin, owner)
             .antMatchers(DELETE, "/api/products/images/**").hasAnyAuthority(admin, owner)
+            .antMatchers(PUT, "/api/orders").hasAnyAuthority(admin, owner)
+            .antMatchers(DELETE, "/api/orders").hasAnyAuthority(admin, owner)
+            .antMatchers(GET, "/api/orders").hasAnyAuthority(admin, owner)
+            .antMatchers(GET, "/api/orders/**").hasAnyAuthority(admin, owner)
+            .antMatchers(PUT, "/api/orders/**").hasAnyAuthority(admin, owner)
+            .antMatchers(DELETE, "/api/orders/**").hasAnyAuthority(admin, owner)
             .antMatchers("/wishlist", "/account", "/checkout").authenticated()
             .antMatchers( "/api/carts/**").authenticated()
             .antMatchers(GET, "/api/carts").authenticated()
             .antMatchers(POST, "/api/orders").authenticated()
+            .antMatchers(POST, "/api/orders/**").authenticated()
             .antMatchers(POST,"/api/ratings/**").authenticated()
             .antMatchers(PUT,"/api/ratings/**").authenticated()
             .antMatchers(DELETE, "/api/ratings/**").authenticated()
@@ -75,6 +89,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers(GET, "/wishlist/shared/**").permitAll()
             .antMatchers(GET,"/api/ratings").permitAll()
             .antMatchers(GET, "/api/products").permitAll()
+            .antMatchers(GET, "/api/product-categories").permitAll()
             .antMatchers(GET, "/api/products/images/**").permitAll()
             .antMatchers(POST,"/api/users").permitAll()
             .antMatchers("/", "/products/**", "/api/logout", "/api/register", "/api/login" ).permitAll();
