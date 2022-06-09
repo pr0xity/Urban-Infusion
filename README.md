@@ -4,7 +4,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/pr0xity/Urban-Infusion">
-    <img src="src/main/resources/static/img/icons/logo-big.png" alt="Logo" height="80">
+    <img src="src/main/resources/static/img/icons/logo-small.png" alt="Logo" height="80">
   </a>
 
 <h3 align="center">Urban Infusion</h3>
@@ -46,12 +46,12 @@
   </ol>
 </details>
 
-<h3>Description</h3>
+## Description  
 Our project consists of developing a web store for a fictional herbal tea retail company called UrbanInfusion.
 
 <p align="right"><a href="#top">back to top</a></p>
 
-<h4>Frameworks and Tools</h4>
+### Frameworks and Tools
 This project was created using the following:
 
 - [Spring boot](https://spring.io/)
@@ -63,14 +63,14 @@ This project was created using the following:
 
 <p align="right"><a href="#top">back to top</a></p>
 
-<h3>Getting Started</h3>
-<h4>Prerequisites</h4>
+## Getting Started
+### Prerequisites
 
 - [Docker](https://www.docker.com/)
 - [Java (17)](https://jdk.java.net/archive/)
 - [Maven (4.0.0)](https://maven.apache.org/)
 
-<h4>Development</h4>
+### Development
 
 1. Start Postgres container in docker
 
@@ -109,7 +109,7 @@ This project was created using the following:
    mvn spring-boot:run
    ```
 
-<h4>Deployment</h4>
+### Deployment
 
 1. Start Postgres container in docker
 
@@ -159,7 +159,7 @@ This project was created using the following:
 
 <p align="right"><a href="#top">back to top</a></p>
 
-<h3>Functionality</h3>
+## Functionality
 
 <table>
     <thead>
@@ -252,22 +252,22 @@ This project was created using the following:
 
 <p align="right"><a href="#top">back to top</a></p>
 
-<h3>License</h3>
+## License
 Distributed under NTNU. For educational purposes only
 
 <p align="right"><a href="#top">back to top</a></p>
 
-<h3>Contact</h3>
+## Contact
   
-Sakarias Sæterstøl - sakariks@stud.ntnu.no  
-Janita Røyseth - janital@stud.ntnu.no  
-Didrik Eilertsen - didrikei@stud.ntnu.no  
-Nina Blindheim - ninavma@stud.ntnu.no  
-Espen Otlo - espenotl@stud.ntnu.no
+[Sakarias Sæterstøl](https://github.com/pr0xity) - sakariks@stud.ntnu.no  
+[Janita Røyseth](https://github.com/janital) - janital@stud.ntnu.no  
+[Didrik Eilertsen](https://github.com/didrikeilertsen) - didrikei@stud.ntnu.no  
+[Nina Blindheim](https://github.com/ninablindheim) - ninavma@stud.ntnu.no  
+[Espen Otlo](https://github.com/espenotlo) - espenotl@stud.ntnu.no
 
 <p align="right"><a href="#top">back to top</a></p>
 
-<h3>Acknowledgments</h3>
+## Acknowledgments
 Special thanks to the following libraries, tools and resources.
 
 - [Google fonts](https://fonts.google.com/)
