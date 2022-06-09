@@ -1,8 +1,7 @@
 package no.ntnu.appdevapi.services;
 
-import no.ntnu.appdevapi.entities.UserAddress;
-
 import java.util.List;
+import no.ntnu.appdevapi.entities.UserAddress;
 
 public interface UserAddressService {
   List<UserAddress> getAllAddresses();

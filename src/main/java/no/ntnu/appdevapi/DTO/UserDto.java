@@ -1,10 +1,9 @@
 package no.ntnu.appdevapi.DTO;
 
+import java.time.LocalDateTime;
 import no.ntnu.appdevapi.entities.PermissionLevel;
 import no.ntnu.appdevapi.entities.User;
 import no.ntnu.appdevapi.entities.UserAddress;
-
-import java.time.LocalDateTime;
 
 /**
  * Data transfer object for a user
@@ -49,16 +48,16 @@ public class UserDto {
   /**
    * Creates an instance of a UserDto. Several constructors are provided for when different data is available.
    *
-   * @param firstName The first name of a user
-   * @param lastName The last name of a user
-   * @param email The email of a user
-   * @param password The users password
+   * @param firstName    The first name of a user
+   * @param lastName     The last name of a user
+   * @param email        The email of a user
+   * @param password     The users password
    * @param addressLine1 The users main address
    * @param addressLine2 The users secondary address
-   * @param postalCode The users postal code
-   * @param city The users city of residence
-   * @param country The users country of residence
-   * @param phone The users phone number
+   * @param postalCode   The users postal code
+   * @param city         The users city of residence
+   * @param country      The users country of residence
+   * @param phone        The users phone number
    */
   public UserDto(String firstName, String lastName, String email,
                  String password, String addressLine1, String addressLine2,
@@ -96,7 +95,8 @@ public class UserDto {
     this.phone = phone;
   }
 
-  public UserDto(String firstName, String lastName, String email, String password, String permissionLevel) {
+  public UserDto(String firstName, String lastName, String email, String password,
+                 String permissionLevel) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -118,6 +118,7 @@ public class UserDto {
 
   /**
    * Creates and returns a User-object from the DTO
+   *
    * @return a User-object
    */
   public User getUserFromDto() {
@@ -137,6 +138,7 @@ public class UserDto {
 
   /**
    * Creates and returns a UserAddress-Object containing information about a user's residency.
+   *
    * @return a UserAddress-object
    */
   public UserAddress getAddressFromDto() {

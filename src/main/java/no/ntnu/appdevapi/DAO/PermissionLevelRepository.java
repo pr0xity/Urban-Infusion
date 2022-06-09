@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface PermissionLevelRepository extends CrudRepository<PermissionLevel, Long> {
-    PermissionLevel findPermissionLevelByAdminType(String adminType);
+  PermissionLevel findPermissionLevelByAdminType(String adminType);
 }

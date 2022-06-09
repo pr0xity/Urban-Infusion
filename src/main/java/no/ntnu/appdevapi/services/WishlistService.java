@@ -1,10 +1,9 @@
 package no.ntnu.appdevapi.services;
 
+import java.util.List;
 import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.User;
 import no.ntnu.appdevapi.entities.Wishlist;
-
-import java.util.List;
 
 /**
  * Business logic for wishlist.
@@ -53,7 +52,7 @@ public interface WishlistService {
    * Adds the given product to the wishlist.
    *
    * @param wishlist wishlist to add product to.
-   * @param product product to add to wishlist.
+   * @param product  product to add to wishlist.
    */
   void addProductToWishlist(Wishlist wishlist, Product product);
 
@@ -61,14 +60,14 @@ public interface WishlistService {
    * Deletes the given product from the wishlist.
    *
    * @param wishlist wishlist to delete product from.
-   * @param product product to delete from wishlist.
+   * @param product  product to delete from wishlist.
    */
   void deleteProductFromWishlist(Wishlist wishlist, Product product);
 
   /**
    * Updates the wishlist with the given id.
    *
-   * @param id the id of the wishlist to update.
+   * @param id       the id of the wishlist to update.
    * @param wishlist the wishlist to update to.
    */
   void updateWishlist(long id, Wishlist wishlist);

@@ -33,7 +33,8 @@ public class SecurityServletFilter extends OncePerRequestFilter {
   private JwtUtil jwtTokenUtil;
 
   @Override
-  protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
+  protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res,
+                                  FilterChain chain) throws IOException, ServletException {
     String token = null;
     if (null != req.getCookies()) {
       //Attempt to extract jwt token from cookie:
@@ -48,7 +49,7 @@ public class SecurityServletFilter extends OncePerRequestFilter {
         logger.error("An error occurred while fetching Username from Token", e);
       } catch (ExpiredJwtException e) {
         logger.warn("The token has expired", e);
-      } catch(SignatureException e){
+      } catch (SignatureException e) {
         logger.error("Authentication Failed. Username or Password not valid.");
       }
     } else {
@@ -67,7 +68,8 @@ public class SecurityServletFilter extends OncePerRequestFilter {
         logger.info("authenticated user " + username + ", setting security context");
         logger.info("email: " + userDetails.getUsername());
         logger.info("password: " + userDetails.getPassword());
-        userDetails.getAuthorities().forEach(authority -> logger.info("Permission level: " + authority));
+        userDetails.getAuthorities()
+                .forEach(authority -> logger.info("Permission level: " + authority));
         SecurityContextHolder.getContext().setAuthentication(authentication);
       }
     }
@@ -75,7 +77,9 @@ public class SecurityServletFilter extends OncePerRequestFilter {
   }
 
   private String extractToken(HttpServletRequest request) {
-    Optional<String> optionalToken = Arrays.stream(request.getCookies()).filter(cookie -> TOKEN.equals(cookie.getName())).map(Cookie::getValue).findAny();
+    Optional<String> optionalToken =
+            Arrays.stream(request.getCookies()).filter(cookie -> TOKEN.equals(cookie.getName()))
+                    .map(Cookie::getValue).findAny();
     return optionalToken.orElse(null);
   }
 }

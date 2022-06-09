@@ -9,43 +9,43 @@ import org.springframework.context.ApplicationEvent;
  */
 public class ProcessedOrderEvent extends ApplicationEvent {
 
-    /**
-     * The user whose order is processed.
-     */
-    private User user;
+  /**
+   * The user whose order is processed.
+   */
+  private final User user;
 
-    /**
-     * The details of the order that was processed.
-     */
-    private OrderDetails orderDetails;
+  /**
+   * The details of the order that was processed.
+   */
+  private final OrderDetails orderDetails;
 
-    /**
-     * Creates an instance of processed order event.
-     *
-     * @param user the user whose order is processed.
-     * @param orderDetails the details of the order.
-     */
-    public ProcessedOrderEvent(User user, OrderDetails orderDetails) {
-        super(orderDetails);
-        this.user = user;
-        this.orderDetails = orderDetails;
-    }
+  /**
+   * Creates an instance of processed order event.
+   *
+   * @param user         the user whose order is processed.
+   * @param orderDetails the details of the order.
+   */
+  public ProcessedOrderEvent(User user, OrderDetails orderDetails) {
+    super(orderDetails);
+    this.user = user;
+    this.orderDetails = orderDetails;
+  }
 
-    /**
-     * Returns the user whose order is processed.
-     *
-     * @return the user whose order is processed.
-     */
-    public User getUser() {
-        return user;
-    }
+  /**
+   * Returns the user whose order is processed.
+   *
+   * @return the user whose order is processed.
+   */
+  public User getUser() {
+    return user;
+  }
 
-    /**
-     * Returns the details of the order that got processed.
-     *
-     * @return the details of the order that got processed.
-     */
-    public OrderDetails getOrderDetails() {
-        return orderDetails;
-    }
+  /**
+   * Returns the details of the order that got processed.
+   *
+   * @return the details of the order that got processed.
+   */
+  public OrderDetails getOrderDetails() {
+    return orderDetails;
+  }
 }

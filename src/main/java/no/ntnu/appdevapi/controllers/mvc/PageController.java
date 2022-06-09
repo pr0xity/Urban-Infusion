@@ -10,28 +10,28 @@ import org.springframework.ui.Model;
  */
 public abstract class PageController {
 
-    @Autowired
-    private UserService userService;
+  @Autowired
+  private UserService userService;
 
-    /**
-     * Retrieves permission level and adds to the given model.
-     *
-     * @param model model to add permission level to.
-     */
-    protected void addPermissionLevelToModel(Model model) {
-        if(this.getUser() != null) {
-            model.addAttribute("permission", this.getUser().getPermissionLevel().getAdminType());
-        } else {
-            model.addAttribute("permission", "NoUser");
-        }
+  /**
+   * Retrieves permission level and adds to the given model.
+   *
+   * @param model model to add permission level to.
+   */
+  protected void addPermissionLevelToModel(Model model) {
+    if (this.getUser() != null) {
+      model.addAttribute("permission", this.getUser().getPermissionLevel().getAdminType());
+    } else {
+      model.addAttribute("permission", "NoUser");
     }
+  }
 
-    /**
-     * Returns the user of this session.
-     *
-     * @return user of this session.
-     */
-    protected User getUser() {
-        return this.userService.getSessionUser();
-    }
+  /**
+   * Returns the user of this session.
+   *
+   * @return user of this session.
+   */
+  protected User getUser() {
+    return this.userService.getSessionUser();
+  }
 }

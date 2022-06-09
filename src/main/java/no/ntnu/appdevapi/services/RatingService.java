@@ -1,10 +1,9 @@
 package no.ntnu.appdevapi.services;
 
+import java.util.List;
 import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.Rating;
 import no.ntnu.appdevapi.entities.User;
-
-import java.util.List;
 
 public interface RatingService {
   List<Rating> getAllRatings();

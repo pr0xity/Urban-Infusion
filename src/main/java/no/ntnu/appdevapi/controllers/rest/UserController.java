@@ -2,6 +2,12 @@ package no.ntnu.appdevapi.controllers.rest;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import java.io.IOException;
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Predicate;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.PermissionLevel;
 import no.ntnu.appdevapi.entities.User;
@@ -12,15 +18,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Comparator;
-import java.util.List;
-import java.util.function.Predicate;
 
 @CrossOrigin
 @RestController
@@ -64,7 +73,7 @@ public class UserController {
     users.sort(Comparator.comparing(User::getCreatedAt).reversed());
     int k = users.size();
     if (k > 5) {
-      users.subList(5,k).clear();
+      users.subList(5, k).clear();
     }
     return users;
   }
@@ -78,7 +87,8 @@ public class UserController {
   @GetMapping("/{email}")
   @ApiOperation(value = "Get a specific user.", notes = "Returns the user or null when email is invalid.")
   public ResponseEntity<User> get(@ApiParam("email of the user.") @PathVariable String email,
-                                  @CookieValue(name = "token", defaultValue = "anonymous") String userToken) {
+                                  @CookieValue(name = "token", defaultValue = "anonymous")
+                                          String userToken) {
 
     // The default response when not logged in or attempting to view another user as a regular user.
     ResponseEntity<User> response = new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
@@ -92,7 +102,8 @@ public class UserController {
         Predicate<PermissionLevel> isAdmin = pl -> pl.getAdminType().equals("admin");
         Predicate<PermissionLevel> isOwner = pl -> pl.getAdminType().equals("owner");
 
-        boolean adminLevelAuth = actingUser.getPermissionLevels().stream().anyMatch(isAdmin.or(isOwner));
+        boolean adminLevelAuth =
+                actingUser.getPermissionLevels().stream().anyMatch(isAdmin.or(isOwner));
 
         if (actingUser.getEmail().equals(email) || adminLevelAuth) {
           // Searches the database for the requested user:
@@ -113,17 +124,19 @@ public class UserController {
   /**
    * Updates the user with the given user id with the given user dto object.
    *
-   * @param userId the user id of the user to be updated.
+   * @param userId  the user id of the user to be updated.
    * @param userDto the user dto to update to.
    * @return 200 Ok if updated, 401 if not.
    */
   @PutMapping("/{userId}")
-  public ResponseEntity<?> update(@PathVariable long userId, @RequestBody UserDto userDto, HttpServletResponse response) throws IOException {
+  public ResponseEntity<?> update(@PathVariable long userId, @RequestBody UserDto userDto,
+                                  HttpServletResponse response) throws IOException {
     User currentUser = userService.getSessionUser();
     User userToUpdate = userService.findOneByID(userId);
 
-    if ((currentUser.getId() == userId  || isAdmin(currentUser)) && userToUpdate != null) {
-      if (userDto.getNewPassword() != null && !bCryptPasswordEncoder.matches(userDto.getPassword(), userToUpdate.getPassword())) {
+    if ((currentUser.getId() == userId || isAdmin(currentUser)) && userToUpdate != null) {
+      if (userDto.getNewPassword() != null &&
+              !bCryptPasswordEncoder.matches(userDto.getPassword(), userToUpdate.getPassword())) {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
       }
       if (userDto.getEmail() != null && userToUpdate.getId() == currentUser.getId()) {
@@ -139,7 +152,8 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
       }
       if (!userDto.isEnabled()) {
-        if (isAdmin(currentUser) || (currentUser.getId() == userId && bCryptPasswordEncoder.matches(userDto.getPassword(), currentUser.getPassword()))) {
+        if (isAdmin(currentUser) || (currentUser.getId() == userId &&
+                bCryptPasswordEncoder.matches(userDto.getPassword(), currentUser.getPassword()))) {
           userService.updateWithUserDto(userToUpdate.getId(), userDto);
 
           if (!isAdmin(currentUser)) {

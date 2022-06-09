@@ -1,5 +1,8 @@
 package no.ntnu.appdevapi.controllers.rest;
 
+import java.io.IOException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import no.ntnu.appdevapi.DTO.LoginUser;
 import no.ntnu.appdevapi.DTO.UserDto;
 import no.ntnu.appdevapi.entities.ShoppingSession;
@@ -24,11 +27,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Endpoint controller for user authentication.
@@ -66,6 +70,7 @@ public class LoginController {
 
   /**
    * Authenticates existing user
+   *
    * @param loginUser LoginUser DTO containing login info (email & password)
    * @return ResponseEntity containing the jwt token in a cookie and HttpStatus ok on success,
    * or HttpStatus not found on fail.
@@ -109,10 +114,14 @@ public class LoginController {
   @RequestMapping(value = "/api/register", method = RequestMethod.POST)
   public ResponseEntity<String> registerUser(@RequestBody UserDto nUser) {
     // If registration data is missing.
-    if (nUser == null) return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    if (nUser == null) {
+      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
 
     // If user already exists.
-    if (userService.findOneByEmail(nUser.getEmail()) != null) return new ResponseEntity<>(HttpStatus.CONFLICT);
+    if (userService.findOneByEmail(nUser.getEmail()) != null) {
+      return new ResponseEntity<>(HttpStatus.CONFLICT);
+    }
 
     nUser.setPermissionLevel("user");
     nUser.setEnabled(false);
@@ -152,8 +161,11 @@ public class LoginController {
    * @return redirect user to home page and authenticates the user.
    */
   @RequestMapping(value = "api/confirm-registration", method = RequestMethod.GET)
-  public ResponseEntity<?> confirmRegistration(HttpServletResponse response, @RequestParam("token") String token) throws IOException {
-    VerificationToken verificationToken = verificationTokenService.getVerificationTokenByToken(token);
+  public ResponseEntity<?> confirmRegistration(HttpServletResponse response,
+                                               @RequestParam("token") String token)
+          throws IOException {
+    VerificationToken verificationToken =
+            verificationTokenService.getVerificationTokenByToken(token);
 
     if (verificationToken == null) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -172,7 +184,7 @@ public class LoginController {
   /**
    * Authenticates a user with given credentials.
    *
-   * @param email the email of the user.
+   * @param email    the email of the user.
    * @param password the password of the user.
    * @return HttpResponseCode OK with jwt cookie included if successful.
    */

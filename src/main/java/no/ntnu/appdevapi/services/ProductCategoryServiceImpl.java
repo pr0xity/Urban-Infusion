@@ -1,14 +1,13 @@
 package no.ntnu.appdevapi.services;
 
+import java.util.Optional;
 import no.ntnu.appdevapi.DAO.ProductCategoryRepository;
 import no.ntnu.appdevapi.entities.ProductCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
-public class ProductCategoryServiceImpl implements ProductCategoryService{
+public class ProductCategoryServiceImpl implements ProductCategoryService {
 
   @Autowired
   private ProductCategoryRepository productCategoryRepository;
@@ -18,7 +17,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService{
    *
    * @return {@code Iterable<ProductCategory>} of all product categories.
    */
-  public Iterable<ProductCategory> getAllProductCategories(){
+  public Iterable<ProductCategory> getAllProductCategories() {
     return productCategoryRepository.findAll();
   }
 
@@ -28,7 +27,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService{
    * @param id ID of the product category to search for.
    * @return {@code ProductCategory} with given ID, or {@code null} if no match found.
    */
-  public ProductCategory getProductCategory(long id){
+  public ProductCategory getProductCategory(long id) {
     Optional<ProductCategory> category = productCategoryRepository.findById(id);
     return category.orElse(null);
   }
@@ -38,7 +37,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService{
    *
    * @param productCategory {@code ProductCategory} to be added.
    */
-  public void addProductCategory(ProductCategory productCategory){
+  public void addProductCategory(ProductCategory productCategory) {
     if (!productCategoryRepository.existsById(productCategory.getId())) {
       productCategoryRepository.save(productCategory);
     }
@@ -49,8 +48,8 @@ public class ProductCategoryServiceImpl implements ProductCategoryService{
    *
    * @param id ID of the category to be deleted.
    */
-  public void deleteProductCategory(long id){
-    if(productCategoryRepository.existsById(id)){
+  public void deleteProductCategory(long id) {
+    if (productCategoryRepository.existsById(id)) {
       productCategoryRepository.deleteById(id);
     }
   }

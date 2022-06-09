@@ -17,7 +17,7 @@ public class ProductDto {
   //The inventory amount of the product
   private int inventory;
   //When the product was added to the database
-  private LocalDateTime createdAt;
+  private final LocalDateTime createdAt;
   //When the product was last updated in the database
   private LocalDateTime updatedAt;
   //When the product was marked as inactive
@@ -30,22 +30,23 @@ public class ProductDto {
   private String category;
 
   //Empty constructor
-  public ProductDto(){
+  public ProductDto() {
     this.createdAt = LocalDateTime.now();
   }
 
   /**
    * Creates an instance of a ProductDTO
    *
-   * @param name Name of the product
+   * @param name        Name of the product
    * @param description Description of the product
-   * @param origin The products country/place of origin
-   * @param price Price of the product
-   * @param inventory The inventory amount of the product
-   * @param imageId The id of the image associated with the product
-   * @param category The category of the product
+   * @param origin      The products country/place of origin
+   * @param price       Price of the product
+   * @param inventory   The inventory amount of the product
+   * @param imageId     The id of the image associated with the product
+   * @param category    The category of the product
    */
-  public ProductDto(String name, String description, String origin, double price, int inventory, long imageId, String category) {
+  public ProductDto(String name, String description, String origin, double price, int inventory,
+                    long imageId, String category) {
     this.name = name;
     this.description = description;
     this.origin = origin;
@@ -58,7 +59,6 @@ public class ProductDto {
     this.imageId = imageId;
     this.category = category;
   }
-
 
 
   //Getters and setters:
@@ -105,6 +105,7 @@ public class ProductDto {
 
   /**
    * Checks whether product is inactive or not
+   *
    * @return true if product is inactive, false if not
    */
   public boolean isInactive() {

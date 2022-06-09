@@ -2,10 +2,23 @@ package no.ntnu.appdevapi.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
@@ -36,11 +49,11 @@ public class User {
   private boolean enabled;
 
   @ManyToOne(fetch = FetchType.EAGER)
-  @JoinColumn(name="pl_id")
+  @JoinColumn(name = "pl_id")
   private PermissionLevel permissionLevel;
 
   @OneToOne(cascade = CascadeType.MERGE)
-  @JoinColumn(name="address_id")
+  @JoinColumn(name = "address_id")
   private UserAddress address;
 
   @OneToMany(mappedBy = "user")

@@ -2,11 +2,19 @@ package no.ntnu.appdevapi.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
-
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "product")
@@ -49,8 +57,8 @@ public class Product {
   List<Rating> ratings;
 
   @ApiModelProperty("Category id of the product.")
-  @ManyToOne (cascade = CascadeType.DETACH)
-  @JoinColumn(name= "category_id")
+  @ManyToOne(cascade = CascadeType.DETACH)
+  @JoinColumn(name = "category_id")
   private ProductCategory category;
 
 
@@ -171,8 +179,12 @@ public class Product {
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     Product product = (Product) o;
     return id == product.id;
   }

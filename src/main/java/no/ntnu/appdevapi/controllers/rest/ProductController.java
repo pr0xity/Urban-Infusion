@@ -2,7 +2,6 @@ package no.ntnu.appdevapi.controllers.rest;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-
 import no.ntnu.appdevapi.DTO.ProductDto;
 import no.ntnu.appdevapi.entities.Product;
 import no.ntnu.appdevapi.entities.ProductImage;
@@ -12,7 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -100,7 +108,7 @@ public class ProductController {
   /**
    * Update existing product.
    *
-   * @param id the id of the product to update.
+   * @param id      the id of the product to update.
    * @param product the {@code ProductDto} to update to.
    * @return 200 Ok if updated, 400 if {@code ProductDto} iis {@code null} or 404 if not found.
    */
@@ -127,12 +135,12 @@ public class ProductController {
   @PostMapping("/images")
   @ApiOperation(value = "Adds a product image", notes = "Status 200 when added, 400 on error.")
   public ResponseEntity<?> addImage(@RequestParam("imageFile") MultipartFile imageFile) {
-      if (imageFile != null) {
-        ProductImage imageAdded = productImageService.addImage(imageFile);
-        long imageId = imageAdded.getId();
-        return new ResponseEntity<>("" + imageId, HttpStatus.OK);
-      }
-      return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    if (imageFile != null) {
+      ProductImage imageAdded = productImageService.addImage(imageFile);
+      long imageId = imageAdded.getId();
+      return new ResponseEntity<>("" + imageId, HttpStatus.OK);
+    }
+    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
   }
 
 
@@ -145,9 +153,12 @@ public class ProductController {
    */
   @PutMapping("/images/{productId}")
   @ApiOperation(value = "Update image of product", notes = "Status 200 when successfully updated, 404 if product not found, 400 on error.")
-  public ResponseEntity<String> updateImage(@PathVariable long productId, @RequestParam("imageFile") MultipartFile imageFile) {
+  public ResponseEntity<String> updateImage(@PathVariable long productId,
+                                            @RequestParam("imageFile") MultipartFile imageFile) {
     Product product = productService.getProduct(productId);
-    if (product == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    if (product == null) {
+      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
     ProductImage productImage = productImageService.getImageById(product.getImageId());
     if (productImage != null) {

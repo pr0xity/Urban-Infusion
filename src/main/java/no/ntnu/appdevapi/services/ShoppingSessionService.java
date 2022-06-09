@@ -1,9 +1,8 @@
 package no.ntnu.appdevapi.services;
 
+import java.util.List;
 import no.ntnu.appdevapi.entities.ShoppingSession;
 import no.ntnu.appdevapi.entities.User;
-
-import java.util.List;
 
 /**
  * Business logic for shopping sessions.
@@ -43,7 +42,7 @@ public interface ShoppingSessionService {
   /**
    * Updates the shopping sessions with the given id.
    *
-   * @param id the id of the shopping session to update.
+   * @param id              the id of the shopping session to update.
    * @param shoppingSession the shopping session to update to.
    */
   void update(long id, ShoppingSession shoppingSession);

@@ -6,6 +6,11 @@ import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -13,12 +18,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Date;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 
 /**
@@ -38,6 +37,7 @@ public class JwtUtil {
 
   /**
    * Gets the username from the JWT token.
+   *
    * @param token the JWT token
    * @return the username as {@code String}
    */
@@ -51,6 +51,7 @@ public class JwtUtil {
 
   /**
    * Gets the expiration date from the JWT token.
+   *
    * @param token the JWT token
    * @return a date object with the expiration date
    */
@@ -66,18 +67,20 @@ public class JwtUtil {
 
   /**
    * Returns all claims in a JWT token
+   *
    * @param token the JWT token to get claims from
    * @return all claims in the token
    */
   private Claims getAllClaimsFromToken(String token) {
     return Jwts.parser()
-      .setSigningKey(SIGNING_KEY)
-      .parseClaimsJws(token)
-      .getBody();
+            .setSigningKey(SIGNING_KEY)
+            .parseClaimsJws(token)
+            .getBody();
   }
 
   /**
    * Checks if a JWT token is expired.
+   *
    * @param token the JWT token to check.
    * @return {@code true} if token has expired, {@code false} if not.
    */
@@ -88,21 +91,22 @@ public class JwtUtil {
 
   public String generateToken(Authentication authentication) {
     String authorities = authentication.getAuthorities().stream()
-      .map(GrantedAuthority::getAuthority)
-      .collect(Collectors.joining(","));
+            .map(GrantedAuthority::getAuthority)
+            .collect(Collectors.joining(","));
 
     return Jwts.builder()
-      .setSubject(authentication.getName())
-      .claim(AUTHORITIES_KEY, authorities)
-      .setIssuedAt(new Date(System.currentTimeMillis()))
-      .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY*1000))
-      .signWith(SignatureAlgorithm.HS256, SIGNING_KEY)
-      .compact();
+            .setSubject(authentication.getName())
+            .claim(AUTHORITIES_KEY, authorities)
+            .setIssuedAt(new Date(System.currentTimeMillis()))
+            .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY * 1000))
+            .signWith(SignatureAlgorithm.HS256, SIGNING_KEY)
+            .compact();
   }
 
   /**
    * Validate the given token with the given user.
-   * @param token the JWT token to validate.
+   *
+   * @param token       the JWT token to validate.
    * @param userDetails the details of the user.
    * @return {@code true} if the token is valid and matches the user.
    */
@@ -112,8 +116,8 @@ public class JwtUtil {
   }
 
   public UsernamePasswordAuthenticationToken getAuthenticationToken(final String token,
-                                                             final Authentication existingAuth,
-                                                             final UserDetails userDetails) {
+                                                                    final Authentication existingAuth,
+                                                                    final UserDetails userDetails) {
 
     final JwtParser jwtParser = Jwts.parser().setSigningKey(SIGNING_KEY);
 
@@ -122,9 +126,9 @@ public class JwtUtil {
     final Claims claims = claimsJws.getBody();
 
     final Collection<? extends GrantedAuthority> authorities =
-        Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
-          .map(SimpleGrantedAuthority::new)
-          .collect(Collectors.toList());
+            Arrays.stream(claims.get(AUTHORITIES_KEY).toString().split(","))
+                    .map(SimpleGrantedAuthority::new)
+                    .collect(Collectors.toList());
 
     return new UsernamePasswordAuthenticationToken(userDetails, "", authorities);
   }

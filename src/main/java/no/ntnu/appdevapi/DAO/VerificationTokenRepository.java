@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface VerificationTokenRepository extends CrudRepository<VerificationToken, Long> {
-    VerificationToken findByToken(String token);
+  VerificationToken findByToken(String token);
 
-    VerificationToken findFirstByUser(User user);
+  VerificationToken findFirstByUser(User user);
 }
