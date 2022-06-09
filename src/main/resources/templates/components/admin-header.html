@@ -6,8 +6,13 @@
   />
 </a>
 <div class="admin__nav-box">
-  <label class="nav__username" id="username" aria-label="user name"
-         th:text="${user.firstName} + ' ' + ${user.lastName}">Ola Olsen</label>
+  <label
+    class="nav__username"
+    id="username"
+    aria-label="user name"
+    th:text="${user.firstName} + ' ' + ${user.lastName}"
+    >Ola Olsen</label
+  >
   <button class="nav__item nav__link" id="user-menu" aria-label="account menu">
     <i class="ph-user-circle-light btn--icon"></i>
   </button>

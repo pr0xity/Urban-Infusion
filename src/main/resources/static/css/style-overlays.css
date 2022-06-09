@@ -1,139 +1,136 @@
 .overlay {
-    z-index: 50000;
+  z-index: 50000;
 }
 
 .manage__btn--close {
-    position: absolute;
-    top: 3%;
-    right: 3%;
+  position: absolute;
+  top: 3%;
+  right: 3%;
 }
 
 .section-manage-overlay {
-    padding: 1.6rem;
+  padding: 1.6rem;
 }
 
 .section-mark-processed {
-
 }
 
 .section-info {
-    display: flex;
-    gap: 1.6rem;
+  display: flex;
+  gap: 1.6rem;
 }
 
 .info__row {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 3fr 3fr 1fr;
-    justify-content: space-evenly;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3fr 3fr 1fr;
+  justify-content: space-evenly;
 }
 
 .info__row span {
-    word-wrap: break-word;
-    margin-left: 4rem;
+  word-wrap: break-word;
+  margin-left: 4rem;
 }
 
 .info__row .btn--icon {
-    font-size: 3rem;
+  font-size: 3rem;
 }
 
 .info__btn {
-    justify-self: end;
+  justify-self: end;
 }
 
 .info__label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .manage-order__table {
-    grid-template-columns: 8fr 1fr 1fr;
-    border-spacing: 1.6rem;
+  grid-template-columns: 8fr 1fr 1fr;
+  border-spacing: 1.6rem;
 }
 
 .manage-customer__window {
-    width: 80%;
+  width: 80%;
 }
 
 .manage-customer__table {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    border-spacing: 3.2rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  border-spacing: 3.2rem;
 }
 
 .section-image {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50rem;
-    height: 50rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50rem;
+  height: 50rem;
 }
 
 .manage-product__overlay {
-    width: 80%;
+  width: 80%;
 }
 
 .edit__overlay {
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 100%;
-    width: 100%;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.3);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
 }
 
 .edit__overlay.display {
-    pointer-events: auto;
-    opacity: 1;
+  pointer-events: auto;
+  opacity: 1;
 }
 
 .section-image img {
-    width: 30rem;
-    height: 30rem;
-    box-shadow: 2rem 2rem 3rem rgba(0, 0, 0, 0.1);
+  width: 30rem;
+  height: 30rem;
+  box-shadow: 2rem 2rem 3rem rgba(0, 0, 0, 0.1);
 }
 
-.btn--changeImage{
+.btn--changeImage {
+  padding: 0.4rem 1.6rem;
+  margin-top: 1.5rem;
 
-    padding: 0.4rem 1.6rem;
-    margin-top: 1.5rem;
-
-    color: #fff;
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    background-color: #4F744E;
-    border-radius: 100px;
-    border: 0.2rem solid white;
-    width: fit-content;
-    font-family: "Montserrat", sans-serif;
-    font-size: 1.6rem;
-    transition: all 0.4s ease-out;
-    z-index: 11;
-    cursor: pointer;
-
+  color: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  background-color: #4f744e;
+  border-radius: 100px;
+  border: 0.2rem solid white;
+  width: fit-content;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.6rem;
+  transition: all 0.4s ease-out;
+  z-index: 11;
+  cursor: pointer;
 }
 
 .btn--changeImage:hover {
-    transform: scale(1.07);
+  transform: scale(1.07);
 }
 
-.btn--product-submit{
-    padding: 1rem 1.6rem;
-    margin-left: 59%;
-    margin-top: 3rem;
+.btn--product-submit {
+  padding: 1rem 1.6rem;
+  margin-left: 59%;
+  margin-top: 3rem;
 }
 
-.product--alert{
-    font-weight: bold;
-    margin-top: 3rem;
-    margin-left: 50%;
-    color: #ad5b58;
+.product--alert {
+  font-weight: bold;
+  margin-top: 3rem;
+  margin-left: 50%;
+  color: #ad5b58;
 }
 
 .setAsDeleted {
-    color: darkred;
+  color: darkred;
 }

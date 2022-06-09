@@ -1,85 +1,98 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
-    through nature." />
-    <link th:replace="components/designelements/favicon">
-    <link th:replace="components/designelements/font">
+    <meta
+      name="description"
+      content="Urban Infusion is an online tea shop which values the ancient traditions which are brought to modern times
+    through nature."
+    />
+    <link th:replace="components/designelements/favicon" />
+    <link th:replace="components/designelements/font" />
 
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/queries.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style-admin.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/queries.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style-admin.css}" />
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script type="module" th:src="@{/js/admin.js}"></script>
     <script type="module" th:src="@{/js/admin-dashboard.js}"></script>
     <title>Urban Infusion</title>
-</head>
+  </head>
 
-<body>
-    <header class="admin__header" th:insert="components/admin-header">
-    </header>
+  <body>
+    <header class="admin__header" th:insert="components/admin-header"></header>
 
     <main class="admin__main">
-        <aside class="sidenav" th:insert="components/admin-sidenav"></aside>
+      <aside class="sidenav" th:insert="components/admin-sidenav"></aside>
 
-        <section class="section-dashboard">
-            <section class="dashboard__grid">
-                <h2 class="dashboard__header"> New customers: </h2>
-                <table class="dashboard__table dashboard__table--customers" id="customerTable">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Email</th>
-                        </tr>
-                    </thead>
-                    <tbody id="customerTableBody"></tbody>
-                </table>
-                <a class="dashboard__label" th:href="@{/admin/customers}">See all customers</a>
-            </section>
-            <section class="dashboard__grid">
-                <h2 class="dashboard__header"> Latest orders: </h2>
-                <table class="dashboard__table dashboard__table--orders" id="orderTable">
-                    <thead>
-                        <tr>
-                            <th>Order date</th>
-                            <th>Order no.</th>
-                            <th>Customer ID</th>
-                            <th>Processing status </th>
-                        </tr>
-                    </thead>
-                    <tbody id="orderTableBody"></tbody>
-                </table>
-                <a class="dashboard__label" th:href="@{/admin/orders}">See all orders</a>
-            </section>
-
-            <section class="dashboard__grid">
-                <h2 class="dashboard__header"> Latest reviews: </h2>
-                <table class="dashboard__table dashboard__table--ratings" id="ratingTable">
-                    <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Product ID</th>
-                        <th>Customer ID</th>
-                        <th>Display name</th>
-                        <th>Rating</th>
-                        <th>Comment</th>
-                    </tr>
-                    </thead>
-                    <tbody id="ratingTableBody">
-                    </tbody>
-                </table>
-                <a class="dashboard__label" th:href="@{/admin/reviews}">See all reviews</a>
-            </section>
+      <section class="section-dashboard">
+        <section class="dashboard__grid">
+          <h2 class="dashboard__header">New customers:</h2>
+          <table
+            class="dashboard__table dashboard__table--customers"
+            id="customerTable"
+          >
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+              </tr>
+            </thead>
+            <tbody id="customerTableBody"></tbody>
+          </table>
+          <a class="dashboard__label" th:href="@{/admin/customers}"
+            >See all customers</a
+          >
         </section>
+        <section class="dashboard__grid">
+          <h2 class="dashboard__header">Latest orders:</h2>
+          <table
+            class="dashboard__table dashboard__table--orders"
+            id="orderTable"
+          >
+            <thead>
+              <tr>
+                <th>Order date</th>
+                <th>Order no.</th>
+                <th>Customer ID</th>
+                <th>Processing status</th>
+              </tr>
+            </thead>
+            <tbody id="orderTableBody"></tbody>
+          </table>
+          <a class="dashboard__label" th:href="@{/admin/orders}"
+            >See all orders</a
+          >
+        </section>
+
+        <section class="dashboard__grid">
+          <h2 class="dashboard__header">Latest reviews:</h2>
+          <table
+            class="dashboard__table dashboard__table--ratings"
+            id="ratingTable"
+          >
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Product ID</th>
+                <th>Customer ID</th>
+                <th>Display name</th>
+                <th>Rating</th>
+                <th>Comment</th>
+              </tr>
+            </thead>
+            <tbody id="ratingTableBody"></tbody>
+          </table>
+          <a class="dashboard__label" th:href="@{/admin/reviews}"
+            >See all reviews</a
+          >
+        </section>
+      </section>
     </main>
 
     <footer class="footer" th:include="components/footer"></footer>
-
-</body>
-
+  </body>
 </html>

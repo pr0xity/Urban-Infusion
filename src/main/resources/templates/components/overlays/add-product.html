@@ -1,35 +1,84 @@
 <div class="modal__window manage-product__overlay">
-    <h2>Product information</h2>
-    <button
-            class="manage__btn--close close btn--icon"
-    >
-        <i class="ph-x"></i>
-    </button>
-    <section class="section-manage-overlay section-info">
-        <section class="section-image  addProductImage">
-            <img src= "../../../../img/icons/leaf.svg" id="addProductImage" alt="Urban Infusion logo">
+  <h2>Product information</h2>
+  <button class="manage__btn--close close btn--icon">
+    <i class="ph-x"></i>
+  </button>
+  <section class="section-manage-overlay section-info">
+    <section class="section-image addProductImage">
+      <img
+        src="../../../../img/icons/leaf.svg"
+        id="addProductImage"
+        alt="Urban Infusion logo"
+      />
 
-            <label id="addImageButton" class= "btn--green btn--changeImage">
-                Add image
-                <input id="image-selector" type="file" accept=".jpg, .jpeg, .png, webp, svg" hidden/>
-            </label>
-
-        </section>
-
-        <section class="section-info__labels">
-            <form>
-                <p class="info__row"><label class="info__label" for="productName">Name</label>  <input class="input signup__input" type="text" id="productName" name="productName"></p>
-                <p class="info__row"><label class="info__label" for="productCategory">Category</label><input class="input signup__input" type="text" id="productCategory" name="productCategory"></p>
-                <p class="info__row"><label class="info__label" for="productPrice">Price</label><input class="input signup__input" type="text" id="productPrice" name="productPrice"></p>
-                <p class="info__row"><label class="info__label" for="productDescription">Description</label><input class="input signup__input" type="text" id="productDescription" name="productDescription"></p>
-                <p class="info__row"><label class="info__label" for="productStock">Stock</label> <input class="input signup__input" type="text" id="productStock" name="productStock"></p>
-
-                <p class ="product--alert account__form--alert"></p>
-
-
-                <button class="btn--green btn--changeImage btn--product-submit" id="submitNewProductButton" >Submit</button>
-
-            </form>
-        </section>
+      <label id="addImageButton" class="btn--green btn--changeImage">
+        Add image
+        <input
+          id="image-selector"
+          type="file"
+          accept=".jpg, .jpeg, .png, webp, svg"
+          hidden
+        />
+      </label>
     </section>
+
+    <section class="section-info__labels">
+      <form>
+        <p class="info__row">
+          <label class="info__label" for="productName">Name</label>
+          <input
+            class="input signup__input"
+            type="text"
+            id="productName"
+            name="productName"
+          />
+        </p>
+        <p class="info__row">
+          <label class="info__label" for="productCategory">Category</label
+          ><input
+            class="input signup__input"
+            type="text"
+            id="productCategory"
+            name="productCategory"
+          />
+        </p>
+        <p class="info__row">
+          <label class="info__label" for="productPrice">Price</label
+          ><input
+            class="input signup__input"
+            type="text"
+            id="productPrice"
+            name="productPrice"
+          />
+        </p>
+        <p class="info__row">
+          <label class="info__label" for="productDescription">Description</label
+          ><input
+            class="input signup__input"
+            type="text"
+            id="productDescription"
+            name="productDescription"
+          />
+        </p>
+        <p class="info__row">
+          <label class="info__label" for="productStock">Stock</label>
+          <input
+            class="input signup__input"
+            type="text"
+            id="productStock"
+            name="productStock"
+          />
+        </p>
+
+        <p class="product--alert account__form--alert"></p>
+
+        <button
+          class="btn--green btn--changeImage btn--product-submit"
+          id="submitNewProductButton"
+        >
+          Submit
+        </button>
+      </form>
+    </section>
+  </section>
 </div>
