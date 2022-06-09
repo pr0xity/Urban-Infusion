@@ -48,7 +48,7 @@
 
 ## Description  
 
-![Front Page Screen Shot](documentation\img\front-page.jpg)
+![Front Page Screen Shot](documentation/img/front-page.jpg)
 Our project consists of developing a web store for a fictional herbal tea retail company called UrbanInfusion.
 
 <p align="right"><a href="#top">back to top</a></p>
